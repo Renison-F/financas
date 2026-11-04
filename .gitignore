@@ -1,0 +1,15 @@
+node_modules/
+.expo/
+dist/
+web-build/
+coverage/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+apps/mobile/ios/
+apps/mobile/android/
+.impeccable/screenshots/
+.impeccable/cache/
+.impeccable/config.local.json
