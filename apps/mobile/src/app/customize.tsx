@@ -23,7 +23,7 @@ export default function CustomizeScreen() {
     <View style={{ flex: 1, backgroundColor: c.bg, paddingTop: insets.top }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: spacing.md, paddingVertical: spacing.sm }}>
         <Button title="Cancelar" variant="ghost" onPress={() => router.back()} />
-        <Text role="title">Minha tela inicial</Text>
+        <Text role="title">Tela inicial</Text>
         <Button title="Salvar" variant="ghost" onPress={() => void save()} testID="save-layout" />
       </View>
       <ScrollView contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xxl + insets.bottom, gap: spacing.lg }}>
@@ -42,7 +42,7 @@ export default function CustomizeScreen() {
             renderItem={(id, index, dragHandle) => (
               <Card key={id} style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm, padding: spacing.sm, marginBottom: 8 }}>
                 {dragHandle}
-                <View style={{ flex: 1 }}><Text role="body">{widgetById(id).title}</Text><Text role="caption" color="textMuted" numberOfLines={1}>{widgetById(id).description}</Text></View>
+                <View style={{ flex: 1, minWidth: 0 }}><Text role="body" numberOfLines={1}>{widgetById(id).title}</Text></View>
                 <IconButton name="chevron-up" label={`Mover ${widgetById(id).title} para cima`} disabled={index === 0} onPress={() => setLocal(moveWidgetBy(layout, id, -1))} />
                 <IconButton name="chevron-down" label={`Mover ${widgetById(id).title} para baixo`} disabled={index === layout.order.length - 1} onPress={() => setLocal(moveWidgetBy(layout, id, 1))} />
                 <IconButton name="eye-off" label={`Ocultar ${widgetById(id).title}`} onPress={() => setLocal(hideWidget(layout, id))} />
@@ -52,7 +52,7 @@ export default function CustomizeScreen() {
         </View>
         {hidden.length ? <View>
           <Text role="label" color="textMuted" style={{ marginBottom: 8 }}>Ocultos</Text>
-          {hidden.map((id) => <Card key={id} style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm, padding: spacing.sm, marginBottom: 8 }}><View style={{ flex: 1 }}><Text role="body">{widgetById(id).title}</Text><Text role="caption" color="textMuted" numberOfLines={1}>{WIDGETS.find((w) => w.id === id)?.description}</Text></View><IconButton name="plus" label={`Mostrar ${widgetById(id).title}`} onPress={() => setLocal(showWidget(layout, id as WidgetId))} /></Card>)}
+          {hidden.map((id) => <Card key={id} style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm, padding: spacing.sm, marginBottom: 8 }}><View style={{ flex: 1, minWidth: 0 }}><Text role="body" numberOfLines={1}>{widgetById(id).title}</Text><Text role="caption" color="textMuted" numberOfLines={1}>{WIDGETS.find((w) => w.id === id)?.description}</Text></View><IconButton name="plus" label={`Mostrar ${widgetById(id).title}`} onPress={() => setLocal(showWidget(layout, id as WidgetId))} /></Card>)}
         </View> : null}
         <View>
           <Text role="label" color="textMuted" style={{ marginBottom: 8 }}>Período dos indicadores</Text>
@@ -75,5 +75,5 @@ export default function CustomizeScreen() {
 
 function IconButton({ name, label, onPress, disabled }: { name: 'chevron-up' | 'chevron-down' | 'eye-off' | 'plus'; label: string; onPress: () => void; disabled?: boolean }) {
   const c = useColors();
-  return <Pressable accessibilityRole="button" accessibilityLabel={label} accessibilityState={{ disabled: !!disabled }} disabled={disabled} onPress={onPress} style={{ width: touch.min, height: touch.min, alignItems: 'center', justifyContent: 'center', borderRadius: radius.sm, opacity: disabled ? 0.3 : 1 }}><Icon name={name} size={20} color={c.primary} /></Pressable>;
+  return <Pressable accessibilityRole="button" accessibilityLabel={label} accessibilityState={{ disabled: !!disabled }} disabled={disabled} onPress={onPress} hitSlop={6} style={{ width: 36, height: touch.min, alignItems: 'center', justifyContent: 'center', borderRadius: radius.sm, opacity: disabled ? 0.3 : 1 }}><Icon name={name} size={20} color={c.primary} /></Pressable>;
 }
