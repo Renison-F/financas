@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Platform } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
+import { ensureNotificationPermission } from '../services/notifications';
 import { Screen, Card, CardHeader, Text, Chip, spacing } from '../design';
 import { useAppStore } from '../state/appStore';
 import { StackHeader } from '../features/shared/ScreenHeader';
@@ -10,6 +11,7 @@ export default function SettingsScreen() {
   const { ledger, setPrefs } = useAppStore();
   const p = ledger.prefs;
   const [bioAvailable, setBioAvailable] = useState(false);
+  const [notif, setNotif] = useState<string>('');
   useEffect(() => { if (Platform.OS !== 'web') LocalAuthentication.hasHardwareAsync().then(async (hw) => setBioAvailable(hw && (await LocalAuthentication.isEnrolledAsync()))).catch(() => setBioAvailable(false)); }, []);
   return (
     <View style={{ flex: 1 }}>
@@ -34,6 +36,12 @@ export default function SettingsScreen() {
           <CardHeader title="Segurança" />
           <Toggle label="Pedir biometria ao abrir" value={p.biometricLock} onChange={(v) => void setPrefs({ biometricLock: v })} help={bioAvailable ? 'Face ID / impressão digital do aparelho.' : 'Nenhuma biometria configurada neste aparelho (ou não disponível na web).'} />
           <Text role="caption" color="textMuted">Seus dados ficam só neste aparelho. Faça backups em Mais → Exportar.</Text>
+        </Card>
+        <Card style={{ marginTop: spacing.sm, gap: spacing.sm }}>
+          <CardHeader title="Lembretes" />
+          <Text role="bodySmall" color="textMuted">Aviso local no dia anterior e no dia do vencimento das contas previstas (próximos 7 dias). Nada sai do aparelho.</Text>
+          <Chip label="Ativar lembretes de vencimento" onPress={async () => setNotif((await ensureNotificationPermission()) ? 'Lembretes ativados.' : 'Permissão de notificação negada ou indisponível (web/Expo Go limitado).')} />
+          {notif ? <Text role="caption" color="textMuted">{notif}</Text> : null}
         </Card>
       </Screen>
     </View>

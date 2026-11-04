@@ -12,6 +12,8 @@ import { useAppStore } from '../state/appStore';
 import { DataStore } from '../data/store';
 import { SQLiteDatabase } from '../data/sqliteDatabase';
 import { UndoToast } from '../features/shared/UndoToast';
+import { BiometricGate } from '../features/shared/BiometricGate';
+import { scheduleBillReminders } from '../services/notifications';
 
 void SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -64,12 +66,21 @@ export default function RootLayout() {
   );
 }
 
+/** Re-schedules local bill reminders whenever the ledger changes (cheap: ≤ 40 notifications). */
+function Reminders() {
+  const ledger = useAppStore((s) => s.ledger);
+  const today = useAppStore((s) => s.today);
+  useEffect(() => { scheduleBillReminders(ledger, today()).catch(() => {}); }, [ledger, today]);
+  return null;
+}
+
 function Shell({ dbError }: { dbError: string | null }) {
   const { scheme, colors } = useTheme();
   return (
     <>
       <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <Gate>
+        <BiometricGate>
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }}>
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="onboarding" options={{ animation: 'fade' }} />
@@ -77,6 +88,8 @@ function Shell({ dbError }: { dbError: string | null }) {
           <Stack.Screen name="customize" options={{ presentation: 'modal' }} />
           <Stack.Screen name="available" options={{ presentation: 'modal' }} />
         </Stack>
+        </BiometricGate>
+        <Reminders />
       </Gate>
       <UndoToast />
       {dbError ? <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 16, backgroundColor: palette.light.negativeContainer }} /> : null}
