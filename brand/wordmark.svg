@@ -1,9 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" width="340" height="80" role="img" aria-label="Prumo">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 80" width="440" height="80" role="img" aria-label="SerenaCash">
   <style>@font-face{font-family:'Bricolage Grotesque';src:url('file:///home/user/financas/node_modules/@expo-google-fonts/bricolage-grotesque/700Bold/BricolageGrotesque_700Bold.ttf') format('truetype');font-weight:700;} text{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:700;}</style>
   <g transform="translate(8,8)">
-    <circle cx="32" cy="9" r="4" fill="none" stroke="#24477A" stroke-width="3.5"/>
-    <path d="M32 13 V30" stroke="#24477A" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M21 32 H43 C44.1 32 45 32.9 45 34 V41.5 L34.4 56.4 C33.2 58.1 30.8 58.1 29.6 56.4 L19 41.5 V34 C19 32.9 19.9 32 21 32 Z" fill="#B07A1E"/>
+    <circle cx="32" cy="24" r="13" fill="none" stroke="#0B5563" stroke-width="5"/>
+    <path d="M8 50 C16 42 24 42 32 50 S48 58 56 50" fill="none" stroke="#C0703E" stroke-width="5" stroke-linecap="round"/>
   </g>
-  <text x="82" y="60" font-size="58" fill="#1B1F24" letter-spacing="-1.5">prumo</text>
+  <text x="80" y="58" font-size="54" letter-spacing="-1.2"><tspan fill="#162022">Serena</tspan><tspan fill="#0B5563">Cash</tspan></text>
 </svg>

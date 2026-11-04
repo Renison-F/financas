@@ -1,65 +1,49 @@
 # Fase 2 — Naming, posicionamento e escolha da marca
 
-Data: 2026-11-04. Responsável: direção criativa (esta sessão). Status: **nome recomendado (rodada 2), pendente de verificação formal no INPI e de registro de domínios**.
+Data: 2026-11-04. Status: **nome definido pelo cliente: SerenaCash**. Pendente: verificação formal no INPI e registro de domínios.
 
 ## 0. Histórico de decisões
 
 | Rodada | Resultado |
 |---|---|
-| 1 | Recomendado "Cabe" (verbo "cabe no bolso"). **Rejeitado pelo cliente** em 04/11/2026 ("não gostei da marca"). Alternativas da rodada: Folga, Sobra, Nítido, Lastro (conflito com fintech), Tenho. |
-| 2 | Nova rodada com direção diferente: substantivos concretos com imagem própria, em vez de verbos do cotidiano. **Recomendado: Prumo.** |
+| 1 | Proposta "Cabe" (verbo "cabe no bolso", identidade verde-mata, conceito "o encaixe"). **Rejeitada pelo cliente.** Alternativas avaliadas: Folga, Sobra, Nítido, Lastro (conflito com fintech), Tenho. |
+| 2 | Proposta "Prumo" (ferramenta de alinhamento, identidade índigo/latão). **Rejeitada pelo cliente.** Alternativas: Tino, Rédea, Zelo, Folga, Sobra. Eliminados por conflito: Rumo, Clara, Lastro, Vero, Norte. |
+| 3 | Consulta direta ao cliente sobre direção de nome e clima visual. **Resposta: nome "SerenaCash"; visual "combinando com a marca", com modo claro, escuro e automático pelo sistema.** |
 
-## 1. Critérios de avaliação (pesos)
+Os critérios e as tabelas das rodadas 1 e 2 ficam registrados no histórico do git (commits `432d38e` e `feat: nova marca Prumo`) como evidência do processo; não são repetidos aqui para não confundir a marca vigente.
 
-| Critério | Peso | Por quê |
-|---|---|---|
-| Associação com o propósito (ordem, clareza, "quanto posso gastar") | 25% | Promessa central do produto |
-| Pronúncia e memorização (≤ 3 sílabas, grafia única) | 20% | Boca a boca e busca na loja |
-| Originalidade e ausência de conflitos em finanças | 20% | Risco jurídico e de confusão |
-| Imagem visual própria (símbolo não genérico) | 15% | Diferenciação frente a fintechs de "folha/moeda/gráfico" |
-| Expansão internacional (pronunciável em ES/EN) | 10% | Arquitetura preparada para i18n |
-| Uso na interface (vira linguagem do produto) | 10% | Marca que vira vocabulário |
+## 1. Leitura do nome escolhido
 
-## 2. Alternativas da rodada 2 (6)
+**SerenaCash** junta duas ideias: *serena* (calma, tranquila, sem sobressalto) e *cash* (dinheiro, no sentido direto e internacional). A promessa que o nome carrega: **ter dinheiro sem ansiedade**, saber o que pode gastar e dormir tranquilo.
 
-| Nome | Conceito | Prós | Contras | Conflitos encontrados (preliminar, busca web) | Nota |
-|---|---|---|---|---|---|
-| **Prumo** | "Seu dinheiro no prumo." O fio de prumo é a ferramenta que mostra se algo está alinhado; "estar no prumo" = estar em ordem | Imagem visual própria (fio + peso); expressão brasileira positiva; 2 sílabas; vira status na interface ("mês no prumo" / "fora do prumo"); sem significado negativo em ES/EN | Pouco conhecido fora do PT; existe Prumo Logística (portos, classe 39, não financeira) | Nenhum app financeiro; empresa de logística homônima em classe distinta | **8,4** |
-| **Tino** | "Dinheiro com tino" (ter tino = ter bom senso) | Mesmo sentido em espanhol (puntería/juicio); curto e simpático | É nome próprio comum (menos registrável); sem imagem visual natural | Vários produtos e pessoas com o nome | 7,2 |
-| **Rédea** | "Tome as rédeas do seu dinheiro" | Ideia forte de controle | Acento complica domínio/handles; imagem equestre pouco afim | Nenhum em finanças | 6,6 |
-| **Zelo** | "Cuide do dinheiro com zelo" | Tom caloroso; 2 sílabas | Genérico (cuidado), sem imagem; muitos homônimos | Diversos (serviços, apps) | 6,0 |
-| **Folga** (rodada 1) | "Sua folga do mês" | Quente e brasileira | Sentido dominante "dia de folga"; em galego "greve" | App de vida noturna (Goa) | 7,0 |
-| **Sobra** (rodada 1) | "O que sobra" | Direto ao número central | Conotação de resto; "de sobra" = dispensável em ES | Nenhum exato | 6,4 |
+| Critério | Avaliação |
+|---|---|
+| Associação com o propósito | Forte: fala do resultado emocional que o leigo quer ("paz com o dinheiro"), e "cash" ancora no tema |
+| Pronúncia e memorização | Boa: 4 sílabas, grafia previsível; "cash" é universalmente lido; recomendamos a grafia **SerenaCash** (CamelCase) em texto e **serenacash** em domínios e handles |
+| Originalidade / conflitos | A verificar: "Serena" é nome próprio comum e há marcas "Serena" em outros segmentos (ex.: Serena Energia, no Brasil, classe de energia). A composição "SerenaCash" reduz colisão, mas a busca no INPI nas classes 36 e 9/42 é obrigatória |
+| Expansão internacional | Boa: "serena" existe em espanhol e italiano com o mesmo sentido; "cash" é inglês; o nome é lido sem tradução em toda a América Latina |
+| Uso na interface | A marca vira estado: "Mês sereno" (gastos dentro do ritmo), "Atenção", "Mês agitado"; e assinatura "Respire. Seu dinheiro está em dia." |
+| Risco de ambiguidade | "Cash" pode sugerir empréstimo/crédito rápido (muitos apps "XCash" são de crédito). A comunicação deve deixar claro que é organização financeira e compras, sem oferta de crédito |
 
-Eliminados antes da tabela por conflito direto: **Rumo** (Rumo S.A., logística, marca de alta notoriedade), **Clara** (fintech de cartões corporativos atuante no Brasil), **Lastro** (fintech de crédito), **Vero** (meios de pagamento), **Norte** (bancos/energia).
+## 2. Assinaturas
 
-## 3. Escolha: **Prumo**
+- Assinatura verbal: **SerenaCash — seu dinheiro em paz.**
+- Loja (curta): **SerenaCash: finanças e compras sem ansiedade.**
+- Microcopy de estado: **sereno** · **atenção** · **agitado**.
 
-Razões explícitas:
-1. **Diz o que o produto faz em uma palavra brasileira.** "Estar no prumo" é estar em ordem, alinhado, firme. O produto existe para colocar o dinheiro no prumo e mostrar, todo dia, se continua lá.
-2. **Tem um símbolo próprio.** O fio de prumo (cordão + peso) é uma imagem reconhecível, nunca usada por apps de finanças, que escapa das moedas, folhas e gráficos de pizza genéricos. Funciona em 16 px e em 1024 px.
-3. **Vira linguagem de interface honesta.** Status do mês: "no prumo" (gastos dentro do previsto), "quase fora do prumo", "fora do prumo", sempre com a explicação. O marcador do prumo (linha vertical com o peso) mostra "onde você deveria estar hoje" em cada barra de orçamento.
-4. **Sem conflito em finanças.** A homônima conhecida (logística portuária) está em classe de serviço distinta e não atende consumidores; o risco deve ser confirmado no INPI, mas é baixo para a classe 36/9/42.
-5. **Curto, grafia única, pronunciável.** Duas sílabas, sem acento, sem ambiguidade fonética.
-
-Assinatura verbal: **Prumo — seu dinheiro no prumo.**
-Versão curta para a loja: **Prumo: finanças e compras em ordem, sem complicação.**
-
-Plano B (se o INPI apontar colisão): **Tino**, assinatura "Tino — dinheiro com bom senso".
-
-## 4. Verificações formais pendentes (não realizadas nesta sessão)
+## 3. Verificações formais pendentes (não realizadas nesta sessão)
 
 | Verificação | Status | Como fazer |
 |---|---|---|
-| Busca de anterioridade no INPI, classes 36 (serviços financeiros) e 9/42 (software) | **Pendente** | https://busca.inpi.gov.br — buscar "PRUMO" e variantes fonéticas |
-| Domínios prumo.app, prumoapp.com.br, prumo.com.br, prumoapp.com | **Não verificável nesta sessão** (RDAP/registro.br bloqueados pela rede) | `whois`/RDAP em máquina sem restrição; registro.br para .com.br |
-| Handles @prumoapp (Instagram, X, TikTok) | **Não verificável** | Consulta manual |
-| Nome na Google Play e App Store | Parcial: nenhum app financeiro "Prumo" encontrado via busca web | Confirmar no console de cada loja |
-| Identificador de pacote | Proposta: `br.com.prumoapp.mobile` (Android e iOS) | Definir após registrar o domínio |
+| INPI, classes 36 (serviços financeiros) e 9/42 (software): "SERENACASH", "SERENA CASH", "SERENA" | **Pendente** | https://busca.inpi.gov.br |
+| Domínios serenacash.app, serenacash.com.br, serenacash.com | **Não verificável nesta sessão** (RDAP/registro.br bloqueados pela rede) | `whois`/RDAP; registro.br |
+| Handles @serenacash (Instagram, X, TikTok) | **Não verificável** | Consulta manual |
+| Nome na Google Play e App Store | **Pendente** | Conferir no console ao criar o registro |
+| Identificador de pacote | Proposta: `br.com.serenacash.mobile` (Android e iOS) | Definir após registrar o domínio |
 
-## 5. Posicionamento
+## 4. Posicionamento
 
-- **Para quem:** pessoas que querem saber, em segundos, quanto podem gastar sem comprometer as contas, e que não querem aprender contabilidade para isso. Também para quem gosta de controle detalhado: a profundidade existe, mas nunca na frente do número principal.
-- **Promessa:** um número honesto ("pode gastar"), explicado; um estado claro do mês ("no prumo" ou não); e um ajudante no supermercado que mostra quanto ainda cabe no orçamento da compra antes do caixa.
-- **Mecanismo que o vizinho não copia com honestidade:** o "pode gastar" é calculado com o que está registrado (saldos − contas até o fim do mês − fatura atual − reservas) e sempre mostra a conta; nunca é apresentado como saldo garantido; funciona sem internet e sem conexão bancária.
-- **Tom de voz:** direto, caloroso, sem jargão; verbos no presente ("vence", "falta", "sobra"); nunca culpabiliza: informa e sugere.
+- **Para quem:** pessoas que querem saber, em segundos, quanto podem gastar sem comprometer as contas, sem aprender contabilidade; e usuários avançados que querem profundidade (cartões, parcelas, empréstimos, relatórios), revelada progressivamente.
+- **Promessa:** um número honesto ("pode gastar"), explicado; um estado do mês em uma palavra ("sereno", "atenção", "agitado"); e um ajudante no supermercado que mostra quanto ainda cabe no orçamento da compra antes do caixa.
+- **Mecanismo que o vizinho não copia com honestidade:** o "pode gastar" usa só o que está registrado (saldos − contas até o fim do mês − fatura atual − reservas), sempre com a conta exposta, nunca como saldo garantido; funciona sem internet e sem conexão bancária.
+- **Tom de voz:** calmo, direto, sem jargão; nunca alarmista nem culpabilizante. Em vez de "você estourou o orçamento": "Lazer passou R$ 40 do previsto; dá para equilibrar reduzindo delivery esta semana".

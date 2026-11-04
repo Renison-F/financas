@@ -20,7 +20,7 @@ Cenários de uso factuais: tela inicial consultada várias vezes por dia; cadast
 
 ## Product Purpose
 
-Prumo é um aplicativo de gestão financeira pessoal, mobile-first, offline-first, para Android e iOS, com dois módulos independentes e integráveis: listas de compras e assistente de supermercado (câmera, leitura de etiquetas de preço e códigos de barras, carrinho com total corrente e orçamento). Existe para transformar o gerenciamento do dinheiro em uma experiência clara, confiável e agradável para quem não entende de finanças, sem abrir mão da profundidade para quem entende.
+SerenaCash é um aplicativo de gestão financeira pessoal, mobile-first, offline-first, para Android e iOS, com dois módulos independentes e integráveis: listas de compras e assistente de supermercado (câmera, leitura de etiquetas de preço e códigos de barras, carrinho com total corrente e orçamento). Existe para transformar o gerenciamento do dinheiro em uma experiência clara, confiável e agradável para quem não entende de finanças, sem abrir mão da profundidade para quem entende.
 
 Sucesso: o usuário entende sua situação em poucos segundos ao abrir o app; registra o dia a dia sem fricção; sai do supermercado sem surpresa no caixa; e paga por um plano Premium (mensal, anual ou vitalício) porque o produto se prova útil no plano gratuito.
 
@@ -53,13 +53,13 @@ Restrições e decisões explícitas:
 - Nenhum preço fictício como se fosse real; preços no app vêm do usuário, da etiqueta lida ou do histórico do próprio usuário.
 - Recursos nativos (câmera, OCR, compras, notificações) só são considerados validados em dispositivo/emulador, não em navegador.
 
-Terminologia do produto: "Pode gastar" (dinheiro disponível), "No prumo / fora do prumo" (ritmo de gastos em relação ao previsto), "Contas" (carteiras/contas bancárias), "Lançamento" (transação), "Fatura", "Parcela", "Reserva" (meta/dinheiro separado), "Lista", "Compra" (sessão no supermercado), "Carrinho".
+Terminologia do produto: "Pode gastar" (dinheiro disponível), "Sereno / atenção / agitado" (ritmo de gastos em relação ao previsto), "Contas" (carteiras/contas bancárias), "Lançamento" (transação), "Fatura", "Parcela", "Reserva" (meta/dinheiro separado), "Lista", "Compra" (sessão no supermercado), "Carrinho".
 
 Indefinido (não inventar): preços finais dos planos (serão definidos nos consoles das lojas); provedor de sincronização entre dispositivos (arquitetura preparada, serviço não escolhido); provedor de IA para o assistente opcional.
 
 ## Brand Commitments
 
-Nome comercial: **Prumo** (recomendado na rodada 2 de `docs/03-marca-naming.md` após rejeição de "Cabe" pelo cliente; pendente de busca no INPI). O nome é também vocabulário da interface ("mês no prumo", "fora do prumo"). Símbolo: fio de prumo (cordão + peso de latão). Voz: direta, calorosa, sem jargão, verbos no presente, nunca culpabiliza. Não herdar nome, cores, fontes, emojis ou layout do app legado "Pouso/Finanças POP!" nem da marca rejeitada "Cabe". Identidade visual própria em `DESIGN.md` e `docs/04-identidade-visual.md`; ativos em `brand/`.
+Nome comercial: **SerenaCash**, definido pelo cliente em 04/11/2026 após rejeitar as propostas "Cabe" e "Prumo" (histórico em `docs/03-marca-naming.md`; pendente de busca no INPI). O nome vira vocabulário da interface ("mês sereno", "atenção", "agitado"). Símbolo: moeda-lua sobre linha d'água. Temas claro, escuro e automático pelo sistema são exigência do cliente. Voz: direta, calorosa, sem jargão, verbos no presente, nunca culpabiliza. Não herdar nome, cores, fontes, emojis ou layout do app legado "Pouso/Finanças POP!" nem das marcas rejeitadas "Cabe" e "Prumo". Identidade visual própria em `DESIGN.md` e `docs/04-identidade-visual.md`; ativos em `brand/`.
 
 ## Evidence on Hand
 

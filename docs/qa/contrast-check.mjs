@@ -1,10 +1,10 @@
-// WCAG contrast check for the DESIGN.md palette (Prumo). Run: node docs/qa/contrast-check.mjs
+// WCAG contrast check for the DESIGN.md palette (SerenaCash). Run: node docs/qa/contrast-check.mjs
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
 const L = (h) => { const [r, g, b] = hex(h); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
 const cr = (a, b) => { const x = L(a), y = L(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
-const themes = {
-  light: { bg: '#F6F3EC', surface: '#FFFFFF', inset: '#EEEAE0', text: '#1B1F24', muted: '#5B6670', primary: '#24477A', onPrimary: '#FFFFFF', primaryContainer: '#D9E4F4', onPrimaryContainer: '#14294A', accent: '#B07A1E', positive: '#176B4E', negative: '#A3362A', negativeContainer: '#F7DDD6', warning: '#8A5200', warningContainer: '#F6E3BE', borderStrong: '#78857D' },
-  dark: { bg: '#0F1419', surface: '#181E26', inset: '#222A34', text: '#ECEDE8', muted: '#A6ADB6', primary: '#8FB4F0', onPrimary: '#0F1419', primaryContainer: '#1C3356', onPrimaryContainer: '#CFE0FA', accent: '#E3B35A', positive: '#6FD3A8', negative: '#F0907F', negativeContainer: '#4A1F18', warning: '#F2B86B', warningContainer: '#4A3410', borderStrong: '#6C7784' },
+export const themes = {
+  light: { bg: '#F3F6F5', surface: '#FFFFFF', inset: '#E6ECEA', text: '#162022', muted: '#4F5E61', primary: '#0B5563', onPrimary: '#FFFFFF', primaryContainer: '#D4ECEF', onPrimaryContainer: '#083E48', accent: '#C0703E', positive: '#176B4E', negative: '#A93A29', negativeContainer: '#F7DDD6', warning: '#8A5200', warningContainer: '#F6E3BE', borderStrong: '#74848A' },
+  dark: { bg: '#0C1517', surface: '#152022', inset: '#1E2B2E', text: '#E8EEEC', muted: '#A3B1B3', primary: '#6FC8D6', onPrimary: '#0C1517', primaryContainer: '#123F48', onPrimaryContainer: '#C8ECF2', accent: '#F0B48A', positive: '#6FD3A8', negative: '#F0907F', negativeContainer: '#4A1F18', warning: '#F2B86B', warningContainer: '#4A3410', borderStrong: '#71818A' },
 };
 let failures = 0;
 for (const [name, t] of Object.entries(themes)) {

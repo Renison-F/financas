@@ -9,7 +9,7 @@ Base: `PRODUCT.md`, `DESIGN.md`, pesquisa (`docs/02`). Persona principal: pessoa
 | **Início** | "Como estou e o que faço agora?" | Dashboard de widgets personalizável; ação principal "+" (novo lançamento) |
 | **Lançamentos** | "Para onde foi / de onde veio?" | Lista por período com busca e filtros; previsto × efetivado; "+" |
 | **Compras** | "O que preciso comprar e quanto vai dar?" | Listas de compras e botão "Iniciar compra" (assistente de supermercado) |
-| **Planejar** | "Está no prumo?" | Orçamentos, metas/reservas, cartões e faturas, empréstimos, projeções |
+| **Planejar** | "Está sereno?" | Orçamentos, metas/reservas, cartões e faturas, empréstimos, projeções |
 | **Mais** | tudo o que é ocasional | Contas, categorias, tags, relatórios e exportação, calendário, importação, assistente, assinatura, configurações, privacidade, ajuda |
 
 Decisões: cinco destinos são o máximo recomendado por iOS HIG e Material 3; "Compras" ganha aba própria porque é diferencial comercial e uso situacional (no mercado, com uma mão). Cartões ficam em "Planejar" porque a pergunta do usuário sobre cartão é "quanto vai vir na fatura?", não "listar compras".
@@ -46,7 +46,7 @@ Tela do cartão: fatura atual (aberta/fechada) com total, vencimento, limite dis
 Selecionar arquivo → pré-visualização em tabela → mapeamento de colunas (CSV) → detecção de duplicidades (mesma data, valor e descrição semelhante ou mesmo FITID no OFX) com marcação → escolher conta → confirmar. Nada é gravado antes da confirmação.
 
 ### 3.6 Assinatura
-Paywall acessível por "Mais → Prumo Mais" e por bloqueios suaves em recursos Premium (ex.: 2º cartão, OCR ilimitado, relatórios PDF). Comparação de planos em tabela; botões de compra; "Restaurar compras"; links de privacidade e termos; texto claro do que o vitalício cobre.
+Paywall acessível por "Mais → SerenaCash Plus" e por bloqueios suaves em recursos Premium (ex.: 2º cartão, OCR ilimitado, relatórios PDF). Comparação de planos em tabela; botões de compra; "Restaurar compras"; links de privacidade e termos; texto claro do que o vitalício cobre.
 
 ## 4. Estados e prevenção de erros
 - Vazio: sempre com uma ação ("Adicionar primeira conta").

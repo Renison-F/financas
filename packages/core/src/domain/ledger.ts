@@ -27,15 +27,15 @@ export function accountEffect(t: Transaction, accountId: string, cents: Cents = 
   switch (t.kind) {
     case 'income':
     case 'loan_disbursement':
-    case 'goal_withdrawal':
       return t.accountId === accountId ? cents : 0;
     case 'expense':
     case 'card_payment':
-    case 'goal_deposit':
     case 'loan_payment':
       return t.accountId === accountId ? negate(cents) : 0;
     case 'transfer':
-      return t.accountId === accountId ? negate(cents) : t.toAccountId === accountId ? cents : 0;
+    case 'goal_deposit':     // accountId = source, toAccountId = account where the goal money sits (optional)
+    case 'goal_withdrawal':  // accountId = account where the goal money sits (optional), toAccountId = destination
+      return (t.accountId === accountId ? negate(cents) : 0) + (t.toAccountId === accountId ? cents : 0);
     case 'balance_adjustment':
       // amountCents is positive; direction encoded by toAccountId (credit) vs accountId (debit)
       if (t.toAccountId === accountId) return cents;

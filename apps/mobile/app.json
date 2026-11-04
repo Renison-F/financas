@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Prumo",
-    "slug": "prumo",
-    "scheme": "prumo",
+    "name": "SerenaCash",
+    "slug": "serenacash",
+    "scheme": "serenacash",
     "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,9 +10,9 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "br.com.prumoapp.mobile",
+      "bundleIdentifier": "br.com.serenacash.mobile",
       "infoPlist": {
-        "NSCameraUsageDescription": "O Prumo usa a câmera para ler etiquetas de preço e códigos de barras durante as compras.",
+        "NSCameraUsageDescription": "O SerenaCash usa a câmera para ler etiquetas de preço e códigos de barras durante as compras.",
         "NSFaceIDUsageDescription": "Proteja seus dados financeiros com Face ID.",
         "NSPhotoLibraryUsageDescription": "Anexe comprovantes às suas despesas.",
         "ITSAppUsesNonExemptEncryption": false,
@@ -20,9 +20,9 @@
       }
     },
     "android": {
-      "package": "br.com.prumoapp.mobile",
+      "package": "br.com.serenacash.mobile",
       "adaptiveIcon": {
-        "backgroundColor": "#24477A",
+        "backgroundColor": "#0B5563",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -50,14 +50,14 @@
           "image": "./assets/splash-icon.png",
           "imageWidth": 160,
           "resizeMode": "contain",
-          "backgroundColor": "#F6F3EC",
-          "dark": { "backgroundColor": "#0F1419" }
+          "backgroundColor": "#F3F6F5",
+          "dark": { "backgroundColor": "#0C1517" }
         }
       ],
       [
         "expo-camera",
         {
-          "cameraPermission": "O Prumo usa a câmera para ler etiquetas de preço e códigos de barras durante as compras.",
+          "cameraPermission": "O SerenaCash usa a câmera para ler etiquetas de preço e códigos de barras durante as compras.",
           "recordAudioAndroid": false
         }
       ],
@@ -67,7 +67,7 @@
       ],
       [
         "expo-notifications",
-        { "color": "#24477A" }
+        { "color": "#0B5563" }
       ]
     ],
     "experiments": { "typedRoutes": true }
