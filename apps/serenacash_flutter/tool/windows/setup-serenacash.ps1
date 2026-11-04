@@ -126,9 +126,11 @@ if ($existing['flutter'] -and -not (Test-Path $flutterBat)) {
   $FlutterDir = Split-Path (Split-Path $existing['flutter'] -Parent) -Parent; $flutterBat = Join-Path $FlutterDir 'bin\flutter.bat'
 }
 if (-not (Test-Path $flutterBat)) {
-  $zip = Get-ChildItem $DownloadsDir -File -Filter 'flutter_windows_*.zip' -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-  $extracted = Join-Path $DownloadsDir 'flutter'
-  if (-not $zip -and -not (Test-Path (Join-Path $extracted 'bin\flutter.bat'))) { throw "Nao encontrei flutter_windows_*.zip nem a pasta flutter\ em $DownloadsDir. Baixe em https://docs.flutter.dev/get-started/install/windows" }
+  # Pasta ja extraida (E:\flutter ou E:\flutter_windows_<versao>\flutter) tem prioridade sobre o zip: evita extrair 1,9 GB de novo.
+  $extracted = @((Join-Path $DownloadsDir 'flutter')) + @(Get-ChildItem $DownloadsDir -Directory -Filter 'flutter_windows_*' -ErrorAction SilentlyContinue | ForEach-Object { Join-Path $_.FullName 'flutter' }) |
+    Where-Object { Test-Path (Join-Path $_ 'bin\flutter.bat') } | Select-Object -First 1
+  $zip = if ($extracted) { $null } else { Get-ChildItem $DownloadsDir -File -Filter 'flutter_windows_*.zip' -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1 }
+  if (-not $zip -and -not $extracted) { throw "Nao encontrei flutter_windows_*.zip nem uma pasta flutter\ extraida em $DownloadsDir. Baixe em https://docs.flutter.dev/get-started/install/windows" }
   if (Approve "instalar o Flutter SDK em $FlutterDir a partir de $(if ($zip) { $zip.FullName } else { $extracted })") {
     New-Item -ItemType Directory -Path (Split-Path $FlutterDir -Parent) -Force | Out-Null
     if ($zip) {
