@@ -11,7 +11,7 @@
 | Export web (`expo export --platform web`) | **compila** (3,3 MB) |
 
 ## 2. Fluxos verificados no preview web (Playwright, 390×844, claro e escuro)
-Onboarding completo (conta, conta fixa recorrente, cartão) · tela inicial com "pode gastar" correto (R$ 2.500 − R$ 1.500 = R$ 1.000) · explicação do cálculo · novo lançamento (despesa com categoria) · compra no cartão em 3× · personalização da tela inicial (modelos, ocultar, mover) · abas Lançamentos, Compras, Planejar, Mais · orçamento com marca de hoje · tema escuro.
+Onboarding completo (conta, conta fixa recorrente, cartão) · tela inicial com "pode gastar" correto (R$ 2.500 − R$ 1.500 = R$ 1.000) · explicação do cálculo · novo lançamento (despesa com categoria) · compra no cartão em 3× e detalhe do cartão (fatura 11/2026 R$ 300, futuras R$ 600, limite livre R$ 4.100) · orçamento criado e exibido com marca de hoje · personalização da tela inicial (modelos, ocultar, mover) · abas Lançamentos, Compras, Planejar, Mais · **compras**: criar lista com orçamento, itens (un/kg), iniciar sessão, adicionar manual com quantidade, item da lista com preço, total R$ 41,37 e "ainda cabe R$ 258,63", finalizar com planejado × realizado, registrar despesa única · relatórios (fluxo de caixa), assistente ("quanto posso gastar?"), paywall, importação, configurações, calendário · tema escuro.
 Sem erros de página após a correção dos seletores instáveis do zustand (loop de renderização, corrigido).
 
 Capturas de referência (não versionadas) foram geradas no scratch da sessão; capturas oficiais para as lojas devem vir de builds reais.
