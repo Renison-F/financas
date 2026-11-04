@@ -536,7 +536,7 @@
             "currency": "BRL",
             "openingBalanceCents": 1010,
             "openingDate": "1970-01-01",
-            "color": "#24477A",
+            "color": "#0B5563",
             "archived": false,
             "includeInAvailability": true,
             "sortOrder": 0
@@ -549,7 +549,7 @@
             "limitCents": 150000,
             "closingDay": 20,
             "dueDay": 27,
-            "color": "#24477A",
+            "color": "#0B5563",
             "archived": false,
             "currency": "BRL"
           }
