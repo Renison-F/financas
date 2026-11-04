@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Cabe",
-    "slug": "cabe",
-    "scheme": "cabe",
+    "name": "Prumo",
+    "slug": "prumo",
+    "scheme": "prumo",
     "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,9 +10,9 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "br.com.cabeapp.mobile",
+      "bundleIdentifier": "br.com.prumoapp.mobile",
       "infoPlist": {
-        "NSCameraUsageDescription": "O Cabe usa a câmera para ler etiquetas de preço e códigos de barras durante as compras.",
+        "NSCameraUsageDescription": "O Prumo usa a câmera para ler etiquetas de preço e códigos de barras durante as compras.",
         "NSFaceIDUsageDescription": "Proteja seus dados financeiros com Face ID.",
         "NSPhotoLibraryUsageDescription": "Anexe comprovantes às suas despesas.",
         "ITSAppUsesNonExemptEncryption": false,
@@ -20,9 +20,9 @@
       }
     },
     "android": {
-      "package": "br.com.cabeapp.mobile",
+      "package": "br.com.prumoapp.mobile",
       "adaptiveIcon": {
-        "backgroundColor": "#0F5C45",
+        "backgroundColor": "#24477A",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -51,13 +51,13 @@
           "imageWidth": 160,
           "resizeMode": "contain",
           "backgroundColor": "#F6F3EC",
-          "dark": { "backgroundColor": "#0E1311" }
+          "dark": { "backgroundColor": "#0F1419" }
         }
       ],
       [
         "expo-camera",
         {
-          "cameraPermission": "O Cabe usa a câmera para ler etiquetas de preço e códigos de barras durante as compras.",
+          "cameraPermission": "O Prumo usa a câmera para ler etiquetas de preço e códigos de barras durante as compras.",
           "recordAudioAndroid": false
         }
       ],
@@ -67,7 +67,7 @@
       ],
       [
         "expo-notifications",
-        { "color": "#0F5C45" }
+        { "color": "#24477A" }
       ]
     ],
     "experiments": { "typedRoutes": true }

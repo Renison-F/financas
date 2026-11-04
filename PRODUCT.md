@@ -20,13 +20,13 @@ Cenários de uso factuais: tela inicial consultada várias vezes por dia; cadast
 
 ## Product Purpose
 
-Cabe é um aplicativo de gestão financeira pessoal, mobile-first, offline-first, para Android e iOS, com dois módulos independentes e integráveis: listas de compras e assistente de supermercado (câmera, leitura de etiquetas de preço e códigos de barras, carrinho com total corrente e orçamento). Existe para transformar o gerenciamento do dinheiro em uma experiência clara, confiável e agradável para quem não entende de finanças, sem abrir mão da profundidade para quem entende.
+Prumo é um aplicativo de gestão financeira pessoal, mobile-first, offline-first, para Android e iOS, com dois módulos independentes e integráveis: listas de compras e assistente de supermercado (câmera, leitura de etiquetas de preço e códigos de barras, carrinho com total corrente e orçamento). Existe para transformar o gerenciamento do dinheiro em uma experiência clara, confiável e agradável para quem não entende de finanças, sem abrir mão da profundidade para quem entende.
 
 Sucesso: o usuário entende sua situação em poucos segundos ao abrir o app; registra o dia a dia sem fricção; sai do supermercado sem surpresa no caixa; e paga por um plano Premium (mensal, anual ou vitalício) porque o produto se prova útil no plano gratuito.
 
 ## Positioning
 
-"Cabe" é o número-herói: quanto cabe gastar hoje, calculado só com o que está registrado (saldos − contas até o fim do mês − fatura atual − reservas), sempre com a conta exposta e nunca apresentado como saldo garantido. Nenhum app brasileiro independente entrega esse número explicado, e nenhum app de finanças pessoais analisado conecta esse número ao momento da compra: o assistente de supermercado mostra quanto ainda cabe no orçamento da compra enquanto o carrinho cresce. Tudo funciona sem internet e sem conexão bancária, o que elimina a maior causa de reclamações dos concorrentes (sincronização quebrada e suporte ausente).
+"Pode gastar" é o número-herói: quanto dá para gastar hoje, calculado só com o que está registrado (saldos − contas até o fim do mês − fatura atual − reservas), sempre com a conta exposta e nunca apresentado como saldo garantido. Nenhum app brasileiro independente entrega esse número explicado, e nenhum app de finanças pessoais analisado conecta esse número ao momento da compra: o assistente de supermercado mostra quanto ainda cabe no orçamento da compra enquanto o carrinho cresce. Tudo funciona sem internet e sem conexão bancária, o que elimina a maior causa de reclamações dos concorrentes (sincronização quebrada e suporte ausente).
 
 ## Operating Context
 
@@ -48,18 +48,18 @@ Confirmado para construir (ver `docs/07-matriz-funcionalidades.md` para o estado
 
 Restrições e decisões explícitas:
 - Dinheiro nunca em ponto flutuante: inteiros de centavos; arredondamento só em fronteiras explícitas (peso, juros, parcelas) e documentado.
-- "Cabe gastar" é uma estimativa com decomposição visível; nunca um saldo garantido.
+- "Pode gastar" é uma estimativa com decomposição visível; nunca um saldo garantido.
 - Nenhuma tela falsa: funcionalidade não implementada não aparece como pronta.
 - Nenhum preço fictício como se fosse real; preços no app vêm do usuário, da etiqueta lida ou do histórico do próprio usuário.
 - Recursos nativos (câmera, OCR, compras, notificações) só são considerados validados em dispositivo/emulador, não em navegador.
 
-Terminologia do produto: "Cabe gastar" (dinheiro disponível), "Contas" (carteiras/contas bancárias), "Lançamento" (transação), "Fatura", "Parcela", "Reserva" (meta/dinheiro separado), "Lista", "Compra" (sessão no supermercado), "Carrinho".
+Terminologia do produto: "Pode gastar" (dinheiro disponível), "No prumo / fora do prumo" (ritmo de gastos em relação ao previsto), "Contas" (carteiras/contas bancárias), "Lançamento" (transação), "Fatura", "Parcela", "Reserva" (meta/dinheiro separado), "Lista", "Compra" (sessão no supermercado), "Carrinho".
 
 Indefinido (não inventar): preços finais dos planos (serão definidos nos consoles das lojas); provedor de sincronização entre dispositivos (arquitetura preparada, serviço não escolhido); provedor de IA para o assistente opcional.
 
 ## Brand Commitments
 
-Nome comercial: **Cabe** (recomendado em `docs/03-marca-naming.md`; pendente de busca no INPI). O nome é também vocabulário da interface ("Cabe gastar", "Cabe no orçamento", "Não cabe"). Voz: direta, calorosa, sem jargão, verbos no presente, nunca culpabiliza. Não herdar nome, cores, fontes, emojis ou layout do app legado "Pouso/Finanças POP!". Identidade visual própria em `DESIGN.md` e `docs/04-identidade-visual.md`; ativos em `brand/`.
+Nome comercial: **Prumo** (recomendado na rodada 2 de `docs/03-marca-naming.md` após rejeição de "Cabe" pelo cliente; pendente de busca no INPI). O nome é também vocabulário da interface ("mês no prumo", "fora do prumo"). Símbolo: fio de prumo (cordão + peso de latão). Voz: direta, calorosa, sem jargão, verbos no presente, nunca culpabiliza. Não herdar nome, cores, fontes, emojis ou layout do app legado "Pouso/Finanças POP!" nem da marca rejeitada "Cabe". Identidade visual própria em `DESIGN.md` e `docs/04-identidade-visual.md`; ativos em `brand/`.
 
 ## Evidence on Hand
 

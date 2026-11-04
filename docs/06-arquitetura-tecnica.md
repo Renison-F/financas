@@ -37,7 +37,7 @@ Regra de dependência: `apps/mobile → packages/*`; `packages/shopping → pack
 - **Lançamento (Transaction)**: `kind ∈ income | expense | transfer | card_purchase | card_payment | goal_deposit | goal_withdrawal | loan_disbursement | loan_payment | balance_adjustment`; `status ∈ planned | settled | partially_paid | cancelled`; `paidCents` para pagamento parcial; `seriesId` para recorrência; `installment {n, of, groupId}` para parcelas; `transferGroupId` para evitar dupla contagem.
 - **Regra de não dupla contagem**: `card_purchase` é despesa na competência da compra; `card_payment` apenas move dinheiro da conta para o cartão (reduz dívida). Transferência é neutra no consolidado.
 - **Fatura**: competência pela regra de fechamento (compra após o dia de fechamento → fatura seguinte); vencimento no mês da fatura; parcelas distribuídas uma por fatura.
-- **Cabe gastar**: ver `docs/05` §2; implementado em `availability.ts` retornando a decomposição, não só o número.
+- **Pode gastar**: ver `docs/05` §2; implementado em `availability.ts` retornando a decomposição, não só o número.
 - **Empréstimos**: Price (PMT) e SAC; amortização extraordinária reduz prazo ou parcela (escolha explícita); simulação de quitação por valor presente das parcelas restantes à taxa contratual (hipótese documentada).
 
 ## 4. Persistência (SQLite, offline-first)

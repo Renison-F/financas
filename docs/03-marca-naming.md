@@ -1,56 +1,65 @@
 # Fase 2 — Naming, posicionamento e escolha da marca
 
-Data: 2026-11-04. Responsável: direção criativa (esta sessão). Status: **nome recomendado, pendente de verificação formal no INPI e de registro de domínios**.
+Data: 2026-11-04. Responsável: direção criativa (esta sessão). Status: **nome recomendado (rodada 2), pendente de verificação formal no INPI e de registro de domínios**.
+
+## 0. Histórico de decisões
+
+| Rodada | Resultado |
+|---|---|
+| 1 | Recomendado "Cabe" (verbo "cabe no bolso"). **Rejeitado pelo cliente** em 04/11/2026 ("não gostei da marca"). Alternativas da rodada: Folga, Sobra, Nítido, Lastro (conflito com fintech), Tenho. |
+| 2 | Nova rodada com direção diferente: substantivos concretos com imagem própria, em vez de verbos do cotidiano. **Recomendado: Prumo.** |
 
 ## 1. Critérios de avaliação (pesos)
 
 | Critério | Peso | Por quê |
 |---|---|---|
-| Associação com o propósito (clareza sobre "quanto posso gastar") | 25% | É a promessa central do produto |
-| Pronúncia e memorização (≤ 3 sílabas, sem ambiguidade fonética) | 20% | Boca a boca e busca na loja |
-| Originalidade e ausência de conflitos conhecidos em finanças | 20% | Risco jurídico e de confusão |
-| Expansão internacional (funciona em espanhol/inglês) | 15% | Arquitetura preparada para i18n |
-| Uso na interface (serve como verbo/linguagem do produto) | 10% | Marca que vira vocabulário |
-| Disponibilidade de identificadores (domínio, handles) | 10% | Não verificável nesta sessão; peso reduzido |
+| Associação com o propósito (ordem, clareza, "quanto posso gastar") | 25% | Promessa central do produto |
+| Pronúncia e memorização (≤ 3 sílabas, grafia única) | 20% | Boca a boca e busca na loja |
+| Originalidade e ausência de conflitos em finanças | 20% | Risco jurídico e de confusão |
+| Imagem visual própria (símbolo não genérico) | 15% | Diferenciação frente a fintechs de "folha/moeda/gráfico" |
+| Expansão internacional (pronunciável em ES/EN) | 10% | Arquitetura preparada para i18n |
+| Uso na interface (vira linguagem do produto) | 10% | Marca que vira vocabulário |
 
-## 2. Alternativas (6)
+## 2. Alternativas da rodada 2 (6)
 
-| Nome | Conceito | Prós | Contras | Conflitos encontrados (preliminar) | Nota |
+| Nome | Conceito | Prós | Contras | Conflitos encontrados (preliminar, busca web) | Nota |
 |---|---|---|---|---|---|
-| **Cabe** | "Cabe no bolso?" — o produto responde se a compra, a conta, o carrinho cabem no seu dinheiro | 2 sílabas; verbo que vira linguagem da UI ("Cabe gastar hoje", "Cabe no orçamento"); mesmo sentido em espanhol | Gíria depreciativa na Indonésia (irrelevante para o mercado-alvo); apps homônimos em categorias não relacionadas (engenharia civil UK, self-storage ES) | Nenhum app financeiro/fintech encontrado | **8,6** |
-| **Folga** | "Sua folga do mês" — a sobra segura | Palavra quente, brasileira; evoca alívio | Sentido dominante é "dia de folga" (RH); em galego significa "greve" | App de vida noturna (Goa, 2019); nenhum fintech | 7,4 |
-| **Sobra** | "O que sobra" | Direto ao número central | Conotação de "resto/sobras"; em espanhol "estar de sobra" = ser dispensável | Nenhum app exato | 6,8 |
-| **Nítido** | Clareza sobre o dinheiro | Positivo em PT/ES; sonoro | Acento complica domínios/handles; 3 sílabas; não fala de dinheiro | Nenhum fintech | 6,9 |
-| **Lastro** | Segurança/apoio financeiro | Muito financeiro | **Conflito direto**: Lastro (lastro.co), fintech brasileira de infraestrutura de crédito, Série A em 2025 — classes 36/42 | Alto risco INPI | 3,5 (eliminado) |
-| **Tenho** | "Quanto tenho?" | Pergunta real do usuário | Verbo em 1ª pessoa soa estranho como marca ("abre o Tenho"); sem sentido em ES/EN | Nenhum | 6,2 |
+| **Prumo** | "Seu dinheiro no prumo." O fio de prumo é a ferramenta que mostra se algo está alinhado; "estar no prumo" = estar em ordem | Imagem visual própria (fio + peso); expressão brasileira positiva; 2 sílabas; vira status na interface ("mês no prumo" / "fora do prumo"); sem significado negativo em ES/EN | Pouco conhecido fora do PT; existe Prumo Logística (portos, classe 39, não financeira) | Nenhum app financeiro; empresa de logística homônima em classe distinta | **8,4** |
+| **Tino** | "Dinheiro com tino" (ter tino = ter bom senso) | Mesmo sentido em espanhol (puntería/juicio); curto e simpático | É nome próprio comum (menos registrável); sem imagem visual natural | Vários produtos e pessoas com o nome | 7,2 |
+| **Rédea** | "Tome as rédeas do seu dinheiro" | Ideia forte de controle | Acento complica domínio/handles; imagem equestre pouco afim | Nenhum em finanças | 6,6 |
+| **Zelo** | "Cuide do dinheiro com zelo" | Tom caloroso; 2 sílabas | Genérico (cuidado), sem imagem; muitos homônimos | Diversos (serviços, apps) | 6,0 |
+| **Folga** (rodada 1) | "Sua folga do mês" | Quente e brasileira | Sentido dominante "dia de folga"; em galego "greve" | App de vida noturna (Goa) | 7,0 |
+| **Sobra** (rodada 1) | "O que sobra" | Direto ao número central | Conotação de resto; "de sobra" = dispensável em ES | Nenhum exato | 6,4 |
 
-## 3. Escolha: **Cabe**
+Eliminados antes da tabela por conflito direto: **Rumo** (Rumo S.A., logística, marca de alta notoriedade), **Clara** (fintech de cartões corporativos atuante no Brasil), **Lastro** (fintech de crédito), **Vero** (meios de pagamento), **Norte** (bancos/energia).
+
+## 3. Escolha: **Prumo**
 
 Razões explícitas:
-1. **Responde à pergunta do usuário na própria marca.** O número-herói da tela inicial se chama "Cabe gastar" e a simulação de compra termina com "Cabe" ou "Não cabe". Nenhum concorrente tem um nome que vire interface.
-2. **Une os dois módulos diferenciais.** No supermercado, o carrinho mostra "ainda cabe R$ X no seu orçamento". O nome funciona nas finanças e nas compras sem metáfora extra.
-3. **Internacional sem tradução.** "Cabe" significa a mesma coisa em espanhol (mercados vizinhos); em inglês é pronunciável ("KAH-beh") e curto.
-4. **Sem conflito conhecido em finanças.** As pesquisas preliminares não encontraram fintech, banco ou app de orçamento com o nome.
-5. **Curto para ícone, loja e boca a boca.** Quatro letras, duas sílabas, grafia única.
+1. **Diz o que o produto faz em uma palavra brasileira.** "Estar no prumo" é estar em ordem, alinhado, firme. O produto existe para colocar o dinheiro no prumo e mostrar, todo dia, se continua lá.
+2. **Tem um símbolo próprio.** O fio de prumo (cordão + peso) é uma imagem reconhecível, nunca usada por apps de finanças, que escapa das moedas, folhas e gráficos de pizza genéricos. Funciona em 16 px e em 1024 px.
+3. **Vira linguagem de interface honesta.** Status do mês: "no prumo" (gastos dentro do previsto), "quase fora do prumo", "fora do prumo", sempre com a explicação. O marcador do prumo (linha vertical com o peso) mostra "onde você deveria estar hoje" em cada barra de orçamento.
+4. **Sem conflito em finanças.** A homônima conhecida (logística portuária) está em classe de serviço distinta e não atende consumidores; o risco deve ser confirmado no INPI, mas é baixo para a classe 36/9/42.
+5. **Curto, grafia única, pronunciável.** Duas sílabas, sem acento, sem ambiguidade fonética.
 
-Assinatura verbal: **Cabe — o que cabe no seu dinheiro.**
-Versão curta para a loja: **Cabe: finanças e compras que cabem no bolso.**
+Assinatura verbal: **Prumo — seu dinheiro no prumo.**
+Versão curta para a loja: **Prumo: finanças e compras em ordem, sem complicação.**
+
+Plano B (se o INPI apontar colisão): **Tino**, assinatura "Tino — dinheiro com bom senso".
 
 ## 4. Verificações formais pendentes (não realizadas nesta sessão)
 
 | Verificação | Status | Como fazer |
 |---|---|---|
-| Busca de anterioridade no INPI, classes 36 (serviços financeiros) e 9/42 (software) | **Pendente** | https://busca.inpi.gov.br — buscar "CABE" e variantes fonéticas (KABE, CABÊ) |
-| Domínios cabe.app, cabe.com.br, cabeapp.com.br, cabe.com | **Não verificável nesta sessão** (RDAP/registro.br bloqueados pela rede) | `whois`/RDAP em máquina sem restrição; registro.br para .com.br |
-| Handles @cabeapp / @cabe.app (Instagram, X, TikTok) | **Não verificável** | Consulta manual |
-| Nome na Google Play e App Store (título de 30 caracteres) | Parcial: nenhum app financeiro "Cabe" encontrado via busca web | Confirmar no console de cada loja ao criar o registro |
-| Identificador de pacote | Proposta: `br.com.cabeapp.mobile` (Android) e `br.com.cabeapp.mobile` (iOS) | Definir após registrar o domínio |
-
-Se o INPI apontar colisão em classe 36/9/42, o plano B é **Folga** (segundo colocado), com a assinatura "Folga — a sua sobra segura".
+| Busca de anterioridade no INPI, classes 36 (serviços financeiros) e 9/42 (software) | **Pendente** | https://busca.inpi.gov.br — buscar "PRUMO" e variantes fonéticas |
+| Domínios prumo.app, prumoapp.com.br, prumo.com.br, prumoapp.com | **Não verificável nesta sessão** (RDAP/registro.br bloqueados pela rede) | `whois`/RDAP em máquina sem restrição; registro.br para .com.br |
+| Handles @prumoapp (Instagram, X, TikTok) | **Não verificável** | Consulta manual |
+| Nome na Google Play e App Store | Parcial: nenhum app financeiro "Prumo" encontrado via busca web | Confirmar no console de cada loja |
+| Identificador de pacote | Proposta: `br.com.prumoapp.mobile` (Android e iOS) | Definir após registrar o domínio |
 
 ## 5. Posicionamento
 
-- **Para quem:** pessoas que querem saber, em segundos, quanto podem gastar sem comprometer as contas, e que não querem aprender contabilidade para isso. Também para quem gosta de controle detalhado — a profundidade está disponível, mas nunca na frente.
-- **Promessa:** um número honesto ("cabe gastar"), explicado, e um ajudante no supermercado que mostra quanto ainda cabe antes de chegar ao caixa.
-- **Mecanismo que o vizinho não copia com honestidade:** o "cabe" é calculado com o que está registrado (saldos, contas até o fim do mês, fatura atual, reservas) e sempre mostra a conta; nunca é apresentado como saldo garantido, e funciona sem internet e sem conexão bancária.
-- **Tom de voz:** direto, caloroso, sem jargão; verbos no presente ("cabe", "falta", "vence"); nunca culpabiliza ("você estourou") — informa e sugere ("passou R$ 40 do limite de Lazer; dá para compensar reduzindo delivery").
+- **Para quem:** pessoas que querem saber, em segundos, quanto podem gastar sem comprometer as contas, e que não querem aprender contabilidade para isso. Também para quem gosta de controle detalhado: a profundidade existe, mas nunca na frente do número principal.
+- **Promessa:** um número honesto ("pode gastar"), explicado; um estado claro do mês ("no prumo" ou não); e um ajudante no supermercado que mostra quanto ainda cabe no orçamento da compra antes do caixa.
+- **Mecanismo que o vizinho não copia com honestidade:** o "pode gastar" é calculado com o que está registrado (saldos − contas até o fim do mês − fatura atual − reservas) e sempre mostra a conta; nunca é apresentado como saldo garantido; funciona sem internet e sem conexão bancária.
+- **Tom de voz:** direto, caloroso, sem jargão; verbos no presente ("vence", "falta", "sobra"); nunca culpabiliza: informa e sugere.

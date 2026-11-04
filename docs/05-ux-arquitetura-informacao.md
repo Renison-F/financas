@@ -9,7 +9,7 @@ Base: `PRODUCT.md`, `DESIGN.md`, pesquisa (`docs/02`). Persona principal: pessoa
 | **Início** | "Como estou e o que faço agora?" | Dashboard de widgets personalizável; ação principal "+" (novo lançamento) |
 | **Lançamentos** | "Para onde foi / de onde veio?" | Lista por período com busca e filtros; previsto × efetivado; "+" |
 | **Compras** | "O que preciso comprar e quanto vai dar?" | Listas de compras e botão "Iniciar compra" (assistente de supermercado) |
-| **Planejar** | "Cabe no mês?" | Orçamentos, metas/reservas, cartões e faturas, empréstimos, projeções |
+| **Planejar** | "Está no prumo?" | Orçamentos, metas/reservas, cartões e faturas, empréstimos, projeções |
 | **Mais** | tudo o que é ocasional | Contas, categorias, tags, relatórios e exportação, calendário, importação, assistente, assinatura, configurações, privacidade, ajuda |
 
 Decisões: cinco destinos são o máximo recomendado por iOS HIG e Material 3; "Compras" ganha aba própria porque é diferencial comercial e uso situacional (no mercado, com uma mão). Cartões ficam em "Planejar" porque a pergunta do usuário sobre cartão é "quanto vai vir na fatura?", não "listar compras".
@@ -20,9 +20,9 @@ Lista vertical de widgets, cada um com estados **carregando / vazio (com ação)
 
 - Mostrar/ocultar; reordenar por arrastar e soltar (`react-native-reanimated` + `gesture-handler`) e por botões "mover para cima/baixo" (acessível por leitor de tela); modelos ("Essencial", "Só o mais importante", "Completo", "Supermercado"); restaurar padrão; período (mês atual, últimos 30 dias, mês selecionado); contas consideradas; modo privacidade (ocultar valores, persistido); preferências salvas em SQLite (`user_prefs`) e incluídas na sincronização.
 
-Widget **Cabe gastar** (herói): valor + decomposição em folha "Como calculamos": saldos das contas consideradas − contas a pagar até o fim do período − fatura atual dos cartões (fechada ou em aberto até o vencimento no período) − reservas marcadas como intocáveis − colchão definido pelo usuário. Receitas previstas **não** entram por padrão (há um toggle "considerar receitas previstas", que muda o rótulo para "estimativa otimista"). O número nunca é chamado de saldo.
+Widget **Pode gastar** (herói): valor + decomposição em folha "Como calculamos": saldos das contas consideradas − contas a pagar até o fim do período − fatura atual dos cartões (fechada ou em aberto até o vencimento no período) − reservas marcadas como intocáveis − colchão definido pelo usuário. Receitas previstas **não** entram por padrão (há um toggle "considerar receitas previstas", que muda o rótulo para "estimativa otimista"). O número nunca é chamado de saldo.
 
-Catálogo completo de widgets (24) em `packages/core/src/dashboard/widgets.ts`: cabe gastar, saldo consolidado, saldos por conta, receitas, despesas, contas a pagar, contas vencidas, próximos vencimentos, cartões e faturas, compras parceladas, orçamento do mês, gastos por categoria, evolução, metas, reservas, economia mensal, assinaturas recorrentes, empréstimos, calendário, últimas movimentações, recomendações, listas de compras, assistente de supermercado (última compra / iniciar), indicadores avançados.
+Catálogo completo de widgets (24) em `packages/core/src/dashboard/widgets.ts`: pode gastar, saldo consolidado, saldos por conta, receitas, despesas, contas a pagar, contas vencidas, próximos vencimentos, cartões e faturas, compras parceladas, orçamento do mês, gastos por categoria, evolução, metas, reservas, economia mensal, assinaturas recorrentes, empréstimos, calendário, últimas movimentações, recomendações, listas de compras, assistente de supermercado (última compra / iniciar), indicadores avançados.
 
 ## 3. Fluxos principais
 
@@ -31,7 +31,7 @@ Catálogo completo de widgets (24) em `packages/core/src/dashboard/widgets.ts`: 
 2. "Quanto você tem agora?" → cria a primeira conta (tipo + saldo). Pode pular.
 3. "Alguma conta fixa que vence este mês?" → cria 0–3 despesas previstas (modelos: aluguel, luz, internet, celular). Pode pular.
 4. "Você usa cartão de crédito?" → cria cartão com fechamento/vencimento. Pode pular.
-5. Chega ao Início já com "Cabe gastar" explicável. Sem cadastro de e-mail, sem permissões pedidas aqui (câmera e notificações são pedidas em contexto).
+5. Chega ao Início já com "Pode gastar" explicável. Sem cadastro de e-mail, sem permissões pedidas aqui (câmera e notificações são pedidas em contexto).
 
 ### 3.2 Novo lançamento (3 toques)
 Folha com segmentos **Despesa / Receita / Transferência / Cartão**; teclado numérico aberto com valor selecionado; descrição; categoria em chips com busca; conta ou cartão; data (hoje por padrão); avançado (recolhido): previsto/efetivado, recorrência (mensal/semanal/anual, até cancelar ou N vezes), parcelamento (N× no cartão), tags, anexo, observação. Salvar dá feedback tátil e toast com "Desfazer" (10 s).
@@ -46,7 +46,7 @@ Tela do cartão: fatura atual (aberta/fechada) com total, vencimento, limite dis
 Selecionar arquivo → pré-visualização em tabela → mapeamento de colunas (CSV) → detecção de duplicidades (mesma data, valor e descrição semelhante ou mesmo FITID no OFX) com marcação → escolher conta → confirmar. Nada é gravado antes da confirmação.
 
 ### 3.6 Assinatura
-Paywall acessível por "Mais → Cabe Mais" e por bloqueios suaves em recursos Premium (ex.: 2º cartão, OCR ilimitado, relatórios PDF). Comparação de planos em tabela; botões de compra; "Restaurar compras"; links de privacidade e termos; texto claro do que o vitalício cobre.
+Paywall acessível por "Mais → Prumo Mais" e por bloqueios suaves em recursos Premium (ex.: 2º cartão, OCR ilimitado, relatórios PDF). Comparação de planos em tabela; botões de compra; "Restaurar compras"; links de privacidade e termos; texto claro do que o vitalício cobre.
 
 ## 4. Estados e prevenção de erros
 - Vazio: sempre com uma ação ("Adicionar primeira conta").
