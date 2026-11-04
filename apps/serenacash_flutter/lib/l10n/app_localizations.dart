@@ -4759,6 +4759,978 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Não encontrado'**
   String get notFound;
+
+  /// No description provided for @attachmentsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Anexos e comprovantes'**
+  String get attachmentsTitle;
+
+  /// No description provided for @addPhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tirar foto'**
+  String get addPhoto;
+
+  /// No description provided for @addFile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolher arquivo'**
+  String get addFile;
+
+  /// No description provided for @attachmentTooBig.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivo acima de 10 MB.'**
+  String get attachmentTooBig;
+
+  /// No description provided for @removeAttachment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Remover anexo'**
+  String get removeAttachment;
+
+  /// No description provided for @attachmentCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} anexo(s)'**
+  String attachmentCount(int n);
+
+  /// No description provided for @openAttachment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Abrir'**
+  String get openAttachment;
+
+  /// No description provided for @attachmentsPlusHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Anexos fazem parte do SerenaCash Plus.'**
+  String get attachmentsPlusHint;
+
+  /// No description provided for @changeHistory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Histórico de alterações'**
+  String get changeHistory;
+
+  /// No description provided for @changeHistoryDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Registro de mudanças e estado de sincronização'**
+  String get changeHistoryDesc;
+
+  /// No description provided for @syncStatus.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sincronização'**
+  String get syncStatus;
+
+  /// No description provided for @syncLocalOnly.
+  ///
+  /// In pt, this message translates to:
+  /// **'Somente neste aparelho. A sincronização entre aparelhos chega como serviço de assinatura; enquanto isso, todas as mudanças ficam registradas para envio futuro.'**
+  String get syncLocalOnly;
+
+  /// No description provided for @pendingChanges.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} alteração(ões) registrada(s) e pendente(s) de envio'**
+  String pendingChanges(int n);
+
+  /// No description provided for @deviceLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aparelho {id}'**
+  String deviceLabel(String id);
+
+  /// No description provided for @recentChanges.
+  ///
+  /// In pt, this message translates to:
+  /// **'Alterações recentes'**
+  String get recentChanges;
+
+  /// No description provided for @opUpsert.
+  ///
+  /// In pt, this message translates to:
+  /// **'salvo'**
+  String get opUpsert;
+
+  /// No description provided for @opDelete.
+  ///
+  /// In pt, this message translates to:
+  /// **'excluído'**
+  String get opDelete;
+
+  /// No description provided for @opRestore.
+  ///
+  /// In pt, this message translates to:
+  /// **'restaurado'**
+  String get opRestore;
+
+  /// No description provided for @versionN.
+  ///
+  /// In pt, this message translates to:
+  /// **'v{n}'**
+  String versionN(int n);
+
+  /// No description provided for @noChangesYet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma alteração registrada ainda.'**
+  String get noChangesYet;
+
+  /// No description provided for @entityAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta'**
+  String get entityAccount;
+
+  /// No description provided for @entityCategory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categoria'**
+  String get entityCategory;
+
+  /// No description provided for @entityTag.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tag'**
+  String get entityTag;
+
+  /// No description provided for @entityCard.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cartão'**
+  String get entityCard;
+
+  /// No description provided for @entityTransaction.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lançamento'**
+  String get entityTransaction;
+
+  /// No description provided for @entityBudget.
+  ///
+  /// In pt, this message translates to:
+  /// **'Orçamento'**
+  String get entityBudget;
+
+  /// No description provided for @entityGoal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meta'**
+  String get entityGoal;
+
+  /// No description provided for @entityLoan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Empréstimo'**
+  String get entityLoan;
+
+  /// No description provided for @entityRecurrence.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recorrência'**
+  String get entityRecurrence;
+
+  /// No description provided for @entityPrefs.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preferências'**
+  String get entityPrefs;
+
+  /// No description provided for @entityList.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lista de compras'**
+  String get entityList;
+
+  /// No description provided for @entitySession.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compra'**
+  String get entitySession;
+
+  /// No description provided for @entityProduct.
+  ///
+  /// In pt, this message translates to:
+  /// **'Produto'**
+  String get entityProduct;
+
+  /// No description provided for @entityObservation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preço observado'**
+  String get entityObservation;
+
+  /// No description provided for @entityLedger.
+  ///
+  /// In pt, this message translates to:
+  /// **'Restauração'**
+  String get entityLedger;
+
+  /// No description provided for @conflicts.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conflitos'**
+  String get conflicts;
+
+  /// No description provided for @noConflicts.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum conflito. Campos monetários nunca são resolvidos automaticamente.'**
+  String get noConflicts;
+
+  /// No description provided for @annualPlanning.
+  ///
+  /// In pt, this message translates to:
+  /// **'Planejamento anual'**
+  String get annualPlanning;
+
+  /// No description provided for @annualDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Visão do ano: resultado por mês, orçamento e metas'**
+  String get annualDesc;
+
+  /// No description provided for @previousYear.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ano anterior'**
+  String get previousYear;
+
+  /// No description provided for @nextYear.
+  ///
+  /// In pt, this message translates to:
+  /// **'Próximo ano'**
+  String get nextYear;
+
+  /// No description provided for @yearResult.
+  ///
+  /// In pt, this message translates to:
+  /// **'Resultado do ano'**
+  String get yearResult;
+
+  /// No description provided for @monthCol.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mês'**
+  String get monthCol;
+
+  /// No description provided for @budgetCol.
+  ///
+  /// In pt, this message translates to:
+  /// **'Orçamento'**
+  String get budgetCol;
+
+  /// No description provided for @annualGoals.
+  ///
+  /// In pt, this message translates to:
+  /// **'Metas até o fim do ano'**
+  String get annualGoals;
+
+  /// No description provided for @goalNeedPerMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name}: faltam {remaining} · {value}/mês'**
+  String goalNeedPerMonth(String name, String remaining, String value);
+
+  /// No description provided for @annualBudgetNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Orçamento do mês = limite geral vigente no mês. Meses futuros mostram o previsto já registrado.'**
+  String get annualBudgetNote;
+
+  /// No description provided for @plannedShort.
+  ///
+  /// In pt, this message translates to:
+  /// **'prev.'**
+  String get plannedShort;
+
+  /// No description provided for @newList.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova lista'**
+  String get newList;
+
+  /// No description provided for @create.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar'**
+  String get create;
+
+  /// No description provided for @listNameHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Compra do mês'**
+  String get listNameHint;
+
+  /// No description provided for @storeOptional.
+  ///
+  /// In pt, this message translates to:
+  /// **'Supermercado (opcional)'**
+  String get storeOptional;
+
+  /// No description provided for @storeHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Mercado Bom'**
+  String get storeHint;
+
+  /// No description provided for @listBudgetLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Orçamento para esta compra (opcional)'**
+  String get listBudgetLabel;
+
+  /// No description provided for @listBudgetHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'No mercado, o carrinho mostra quanto ainda cabe.'**
+  String get listBudgetHelp;
+
+  /// No description provided for @freeLimitLists.
+  ///
+  /// In pt, this message translates to:
+  /// **'Plano gratuito: até {n} listas.'**
+  String freeLimitLists(int n);
+
+  /// No description provided for @defaultListName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compra do mês'**
+  String get defaultListName;
+
+  /// No description provided for @listNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lista não encontrada'**
+  String get listNotFound;
+
+  /// No description provided for @buy.
+  ///
+  /// In pt, this message translates to:
+  /// **'Comprar'**
+  String get buy;
+
+  /// No description provided for @estimateWithPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Estimativa ({known} de {total} com preço)'**
+  String estimateWithPrice(int known, int total);
+
+  /// No description provided for @budget.
+  ///
+  /// In pt, this message translates to:
+  /// **'Orçamento'**
+  String get budget;
+
+  /// No description provided for @estimateVsBudget.
+  ///
+  /// In pt, this message translates to:
+  /// **'Estimativa contra o orçamento'**
+  String get estimateVsBudget;
+
+  /// No description provided for @checkedCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{checked}/{total} marcados'**
+  String checkedCount(int checked, int total);
+
+  /// No description provided for @unpricedItems.
+  ///
+  /// In pt, this message translates to:
+  /// **' · {n} item(ns) sem preço (não estimados)'**
+  String unpricedItems(int n);
+
+  /// No description provided for @addItem.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar item'**
+  String get addItem;
+
+  /// No description provided for @itemNameHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Arroz 5kg'**
+  String get itemNameHint;
+
+  /// No description provided for @itemName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome do item'**
+  String get itemName;
+
+  /// No description provided for @qty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Qtd'**
+  String get qty;
+
+  /// No description provided for @unit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Unidade'**
+  String get unit;
+
+  /// No description provided for @categoryAndPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categoria e preço estimado'**
+  String get categoryAndPrice;
+
+  /// No description provided for @estimatedUnitPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preço estimado por unidade (opcional)'**
+  String get estimatedUnitPrice;
+
+  /// No description provided for @estimatedPriceHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem preço, o item entra na lista mas não na estimativa. Se já comprou antes, o histórico preenche sozinho.'**
+  String get estimatedPriceHelp;
+
+  /// No description provided for @editItem.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar {name}'**
+  String editItem(String name);
+
+  /// No description provided for @historySuffix.
+  ///
+  /// In pt, this message translates to:
+  /// **' (histórico)'**
+  String get historySuffix;
+
+  /// No description provided for @noPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **' · sem preço'**
+  String get noPrice;
+
+  /// No description provided for @emptyList.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lista vazia'**
+  String get emptyList;
+
+  /// No description provided for @emptyListText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicione os itens acima. Unidades: un, kg, g, L, mL, pacote, dúzia, caixa.'**
+  String get emptyListText;
+
+  /// No description provided for @startWithList.
+  ///
+  /// In pt, this message translates to:
+  /// **'Iniciar compra com esta lista'**
+  String get startWithList;
+
+  /// No description provided for @uncheckAll.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desmarcar tudo'**
+  String get uncheckAll;
+
+  /// No description provided for @duplicate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Duplicar'**
+  String get duplicate;
+
+  /// No description provided for @deleteListQ.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir lista?'**
+  String get deleteListQ;
+
+  /// No description provided for @deleteListText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Os itens serão removidos. Compras finalizadas não são afetadas.'**
+  String get deleteListText;
+
+  /// No description provided for @editItemTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar item'**
+  String get editItemTitle;
+
+  /// No description provided for @removeItem.
+  ///
+  /// In pt, this message translates to:
+  /// **'Remover item'**
+  String get removeItem;
+
+  /// No description provided for @newPurchase2.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova compra'**
+  String get newPurchase2;
+
+  /// No description provided for @fromList.
+  ///
+  /// In pt, this message translates to:
+  /// **'A partir da lista \"{name}\" ({n} itens).'**
+  String fromList(String name, int n);
+
+  /// No description provided for @noListSession.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem lista: adicione itens pela câmera ou manualmente.'**
+  String get noListSession;
+
+  /// No description provided for @sessionBudgetLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Orçamento desta compra (opcional)'**
+  String get sessionBudgetLabel;
+
+  /// No description provided for @sessionBudgetHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'O carrinho mostra quanto ainda cabe.'**
+  String get sessionBudgetHelp;
+
+  /// No description provided for @start.
+  ///
+  /// In pt, this message translates to:
+  /// **'Começar'**
+  String get start;
+
+  /// No description provided for @orChooseList.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ou escolha uma lista'**
+  String get orChooseList;
+
+  /// No description provided for @finishedOn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Finalizada em {date}'**
+  String finishedOn(String date);
+
+  /// No description provided for @itemsInCart.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} item(ns) no carrinho'**
+  String itemsInCart(int n);
+
+  /// No description provided for @exit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sair'**
+  String get exit;
+
+  /// No description provided for @cartTotal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Total do carrinho'**
+  String get cartTotal;
+
+  /// No description provided for @stillFits.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ainda cabe {remaining} de {budget}'**
+  String stillFits(String remaining, String budget);
+
+  /// No description provided for @overBudgetBy.
+  ///
+  /// In pt, this message translates to:
+  /// **'{over} acima do orçamento de {budget}'**
+  String overBudgetBy(String over, String budget);
+
+  /// No description provided for @cartVsBudget.
+  ///
+  /// In pt, this message translates to:
+  /// **'Carrinho contra o orçamento'**
+  String get cartVsBudget;
+
+  /// No description provided for @noBudgetSession.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem orçamento definido para esta compra.'**
+  String get noBudgetSession;
+
+  /// No description provided for @lowConfidenceItems.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} item(ns) com leitura de baixa confiança.'**
+  String lowConfidenceItems(int n);
+
+  /// No description provided for @discountLine.
+  ///
+  /// In pt, this message translates to:
+  /// **' · desconto {value}'**
+  String discountLine(String value);
+
+  /// No description provided for @checkSuffix.
+  ///
+  /// In pt, this message translates to:
+  /// **' · confira'**
+  String get checkSuffix;
+
+  /// No description provided for @removeLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Remover {name}'**
+  String removeLine(String name);
+
+  /// No description provided for @emptyCart.
+  ///
+  /// In pt, this message translates to:
+  /// **'Carrinho vazio'**
+  String get emptyCart;
+
+  /// No description provided for @emptyCartText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Leia a etiqueta de preço ou o código de barras, ou adicione manualmente.'**
+  String get emptyCartText;
+
+  /// No description provided for @fromListMissing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Da lista ({n} faltando)'**
+  String fromListMissing(int n);
+
+  /// No description provided for @summary.
+  ///
+  /// In pt, this message translates to:
+  /// **'Resumo'**
+  String get summary;
+
+  /// No description provided for @plannedVsActualLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Planejado (com preço): {planned} · Realizado: {actual} · Diferença: {diff}'**
+  String plannedVsActualLine(String planned, String actual, String diff);
+
+  /// No description provided for @boughtLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'{bought} da lista comprados · {notBought} não comprados · {extra} extras'**
+  String boughtLine(int bought, int notBought, int extra);
+
+  /// No description provided for @receiptRead.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cupom fiscal lido: chave …{key} (consulta à SEFAZ não disponível offline).'**
+  String receiptRead(String key);
+
+  /// No description provided for @expenseRegistered.
+  ///
+  /// In pt, this message translates to:
+  /// **'Despesa registrada nas finanças.'**
+  String get expenseRegistered;
+
+  /// No description provided for @registerAsExpense.
+  ///
+  /// In pt, this message translates to:
+  /// **'Registrar {value} como despesa'**
+  String registerAsExpense(String value);
+
+  /// No description provided for @registerOnceHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cria um único lançamento em Supermercado. Nunca é registrado duas vezes.'**
+  String get registerOnceHelp;
+
+  /// No description provided for @tagBtn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Etiqueta'**
+  String get tagBtn;
+
+  /// No description provided for @codeBtn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Código'**
+  String get codeBtn;
+
+  /// No description provided for @manualBtn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Manual'**
+  String get manualBtn;
+
+  /// No description provided for @finishPurchase.
+  ///
+  /// In pt, this message translates to:
+  /// **'Finalizar compra'**
+  String get finishPurchase;
+
+  /// No description provided for @confirmItem.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirmar item'**
+  String get confirmItem;
+
+  /// No description provided for @readingConfidence.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confiança da leitura: {percent}%'**
+  String readingConfidence(int percent);
+
+  /// No description provided for @product.
+  ///
+  /// In pt, this message translates to:
+  /// **'Produto'**
+  String get product;
+
+  /// No description provided for @productNameHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome do produto'**
+  String get productNameHint;
+
+  /// No description provided for @pricePer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preço por {unit}'**
+  String pricePer(String unit);
+
+  /// No description provided for @unitPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preço unitário'**
+  String get unitPrice;
+
+  /// No description provided for @previousTagPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preço anterior na etiqueta: {value}'**
+  String previousTagPrice(String value);
+
+  /// No description provided for @quantityUnit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quantidade ({unit})'**
+  String quantityUnit(String unit);
+
+  /// No description provided for @quantity.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quantidade'**
+  String get quantity;
+
+  /// No description provided for @promotion.
+  ///
+  /// In pt, this message translates to:
+  /// **'Promoção'**
+  String get promotion;
+
+  /// No description provided for @take3pay2.
+  ///
+  /// In pt, this message translates to:
+  /// **'Leve 3 pague 2'**
+  String get take3pay2;
+
+  /// No description provided for @take2pay1.
+  ///
+  /// In pt, this message translates to:
+  /// **'Leve 2 pague 1'**
+  String get take2pay1;
+
+  /// No description provided for @off10.
+  ///
+  /// In pt, this message translates to:
+  /// **'10% off'**
+  String get off10;
+
+  /// No description provided for @off20.
+  ///
+  /// In pt, this message translates to:
+  /// **'20% off'**
+  String get off20;
+
+  /// No description provided for @subtotal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Subtotal: {value}'**
+  String subtotal(String value);
+
+  /// No description provided for @addToCart.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar ao carrinho'**
+  String get addToCart;
+
+  /// No description provided for @leavePurchaseQ.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sair da compra?'**
+  String get leavePurchaseQ;
+
+  /// No description provided for @leavePurchaseText.
+  ///
+  /// In pt, this message translates to:
+  /// **'O carrinho fica salvo e você pode continuar depois pela aba Compras.'**
+  String get leavePurchaseText;
+
+  /// No description provided for @leaveKeep.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sair e manter'**
+  String get leaveKeep;
+
+  /// No description provided for @newProductWarn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Produto novo: informe o nome e o preço da etiqueta.'**
+  String get newProductWarn;
+
+  /// No description provided for @scaleCodeWarn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Código de balança: o valor embutido pode ser peso ou preço; confirme.'**
+  String get scaleCodeWarn;
+
+  /// No description provided for @ocrUnavailableWarn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Leitura indisponível: informe manualmente.'**
+  String get ocrUnavailableWarn;
+
+  /// No description provided for @variationWarn.
+  ///
+  /// In pt, this message translates to:
+  /// **'{percent}% em relação ao último preço ({value}).'**
+  String variationWarn(String percent, String value);
+
+  /// No description provided for @lowConfidenceWarn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Leitura com baixa confiança: confira nome e preço.'**
+  String get lowConfidenceWarn;
+
+  /// No description provided for @noPriceInListWarn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem preço na lista: informe o preço da etiqueta.'**
+  String get noPriceInListWarn;
+
+  /// No description provided for @groceriesCategory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Supermercado'**
+  String get groceriesCategory;
+
+  /// No description provided for @camera.
+  ///
+  /// In pt, this message translates to:
+  /// **'Câmera'**
+  String get camera;
+
+  /// No description provided for @cameraPermissionText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Para ler etiquetas de preço e códigos de barras, o SerenaCash precisa da câmera. As imagens não são guardadas nem enviadas.'**
+  String get cameraPermissionText;
+
+  /// No description provided for @allowCamera.
+  ///
+  /// In pt, this message translates to:
+  /// **'Permitir câmera'**
+  String get allowCamera;
+
+  /// No description provided for @enterManually.
+  ///
+  /// In pt, this message translates to:
+  /// **'Informar manualmente'**
+  String get enterManually;
+
+  /// No description provided for @back.
+  ///
+  /// In pt, this message translates to:
+  /// **'Voltar'**
+  String get back;
+
+  /// No description provided for @cameraUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Câmera indisponível'**
+  String get cameraUnavailable;
+
+  /// No description provided for @frameTag.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enquadre a etiqueta inteira, sem reflexo, e toque em Ler'**
+  String get frameTag;
+
+  /// No description provided for @pointBarcode.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aponte para o código de barras ou QR do cupom'**
+  String get pointBarcode;
+
+  /// No description provided for @closeCamera.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fechar câmera'**
+  String get closeCamera;
+
+  /// No description provided for @torchOn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ligar lanterna'**
+  String get torchOn;
+
+  /// No description provided for @torchOff.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desligar lanterna'**
+  String get torchOff;
+
+  /// No description provided for @readTag.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ler etiqueta'**
+  String get readTag;
+
+  /// No description provided for @readingTag.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lendo a etiqueta…'**
+  String get readingTag;
+
+  /// No description provided for @scanningAuto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lendo automaticamente…'**
+  String get scanningAuto;
+
+  /// No description provided for @qrNotReceipt.
+  ///
+  /// In pt, this message translates to:
+  /// **'QR lido, mas não é um cupom fiscal (NFC-e).'**
+  String get qrNotReceipt;
+
+  /// No description provided for @invalidCode.
+  ///
+  /// In pt, this message translates to:
+  /// **'Código inválido; tente de novo.'**
+  String get invalidCode;
+
+  /// No description provided for @readFailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Falha na leitura. Tente de novo.'**
+  String get readFailed;
+
+  /// No description provided for @ocrUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Leitura de texto indisponível neste aparelho/versão. Informe o preço manualmente.'**
+  String get ocrUnavailable;
+
+  /// No description provided for @photoFailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não foi possível capturar a foto.'**
+  String get photoFailed;
 }
 
 class _AppLocalizationsDelegate

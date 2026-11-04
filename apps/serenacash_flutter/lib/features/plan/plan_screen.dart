@@ -191,6 +191,26 @@ class PlanScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CardHeader(
+                title: l.annualPlanning,
+                action: SButton(
+                  label: l.see,
+                  variant: SButtonVariant.ghost,
+                  compact: true,
+                  onPressed: () => context.push('/plan/annual'),
+                ),
+              ),
+              Text(
+                l.annualDesc,
+                style: Type.bodySmall.copyWith(color: c.textMuted),
+              ),
+            ],
+          ),
+        ),
+        SCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CardHeader(
                 title: l.balanceProjection,
                 action: SButton(
                   label: l.see,

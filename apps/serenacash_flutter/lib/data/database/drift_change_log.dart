@@ -52,6 +52,16 @@ class DriftChangeLog implements ChangeLog {
   }
 
   @override
+  Future<List<ChangeRecord>> recent({int limit = 100}) async {
+    final rows =
+        await (db.select(db.changeLogEntries)
+              ..orderBy([(t) => OrderingTerm.desc(t.at)])
+              ..limit(limit))
+            .get();
+    return rows.map(changeFromRow).toList();
+  }
+
+  @override
   Future<int> count() async {
     final n = db.changeLogEntries.id.count();
     final row = await (db.selectOnly(

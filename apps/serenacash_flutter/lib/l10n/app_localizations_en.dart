@@ -2653,4 +2653,561 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notFound => 'Not found';
+
+  @override
+  String get attachmentsTitle => 'Attachments and receipts';
+
+  @override
+  String get addPhoto => 'Take photo';
+
+  @override
+  String get addFile => 'Choose file';
+
+  @override
+  String get attachmentTooBig => 'File larger than 10 MB.';
+
+  @override
+  String get removeAttachment => 'Remove attachment';
+
+  @override
+  String attachmentCount(int n) {
+    return '$n attachment(s)';
+  }
+
+  @override
+  String get openAttachment => 'Open';
+
+  @override
+  String get attachmentsPlusHint => 'Attachments are part of SerenaCash Plus.';
+
+  @override
+  String get changeHistory => 'Change history';
+
+  @override
+  String get changeHistoryDesc => 'Change log and sync state';
+
+  @override
+  String get syncStatus => 'Sync';
+
+  @override
+  String get syncLocalOnly =>
+      'On this device only. Cross-device sync arrives as a subscription service; meanwhile every change is recorded for future upload.';
+
+  @override
+  String pendingChanges(int n) {
+    return '$n change(s) recorded and pending upload';
+  }
+
+  @override
+  String deviceLabel(String id) {
+    return 'Device $id';
+  }
+
+  @override
+  String get recentChanges => 'Recent changes';
+
+  @override
+  String get opUpsert => 'saved';
+
+  @override
+  String get opDelete => 'deleted';
+
+  @override
+  String get opRestore => 'restored';
+
+  @override
+  String versionN(int n) {
+    return 'v$n';
+  }
+
+  @override
+  String get noChangesYet => 'No change recorded yet.';
+
+  @override
+  String get entityAccount => 'Account';
+
+  @override
+  String get entityCategory => 'Category';
+
+  @override
+  String get entityTag => 'Tag';
+
+  @override
+  String get entityCard => 'Card';
+
+  @override
+  String get entityTransaction => 'Transaction';
+
+  @override
+  String get entityBudget => 'Budget';
+
+  @override
+  String get entityGoal => 'Goal';
+
+  @override
+  String get entityLoan => 'Loan';
+
+  @override
+  String get entityRecurrence => 'Recurrence';
+
+  @override
+  String get entityPrefs => 'Preferences';
+
+  @override
+  String get entityList => 'Shopping list';
+
+  @override
+  String get entitySession => 'Shopping session';
+
+  @override
+  String get entityProduct => 'Product';
+
+  @override
+  String get entityObservation => 'Price observation';
+
+  @override
+  String get entityLedger => 'Restore';
+
+  @override
+  String get conflicts => 'Conflicts';
+
+  @override
+  String get noConflicts =>
+      'No conflicts. Monetary fields are never resolved automatically.';
+
+  @override
+  String get annualPlanning => 'Annual planning';
+
+  @override
+  String get annualDesc => 'Year view: result per month, budget and goals';
+
+  @override
+  String get previousYear => 'Previous year';
+
+  @override
+  String get nextYear => 'Next year';
+
+  @override
+  String get yearResult => 'Year result';
+
+  @override
+  String get monthCol => 'Month';
+
+  @override
+  String get budgetCol => 'Budget';
+
+  @override
+  String get annualGoals => 'Goals by year end';
+
+  @override
+  String goalNeedPerMonth(String name, String remaining, String value) {
+    return '$name: $remaining to go · $value/month';
+  }
+
+  @override
+  String get annualBudgetNote =>
+      'Monthly budget = general limit in force that month. Future months show what is already planned.';
+
+  @override
+  String get plannedShort => 'plan.';
+
+  @override
+  String get newList => 'New list';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get listNameHint => 'E.g. Monthly shopping';
+
+  @override
+  String get storeOptional => 'Supermarket (optional)';
+
+  @override
+  String get storeHint => 'E.g. Good Market';
+
+  @override
+  String get listBudgetLabel => 'Budget for this purchase (optional)';
+
+  @override
+  String get listBudgetHelp =>
+      'At the store, the cart shows how much still fits.';
+
+  @override
+  String freeLimitLists(int n) {
+    return 'Free plan: up to $n lists.';
+  }
+
+  @override
+  String get defaultListName => 'Monthly shopping';
+
+  @override
+  String get listNotFound => 'List not found';
+
+  @override
+  String get buy => 'Shop';
+
+  @override
+  String estimateWithPrice(int known, int total) {
+    return 'Estimate ($known of $total priced)';
+  }
+
+  @override
+  String get budget => 'Budget';
+
+  @override
+  String get estimateVsBudget => 'Estimate against budget';
+
+  @override
+  String checkedCount(int checked, int total) {
+    return '$checked/$total checked';
+  }
+
+  @override
+  String unpricedItems(int n) {
+    return ' · $n item(s) without price (not estimated)';
+  }
+
+  @override
+  String get addItem => 'Add item';
+
+  @override
+  String get itemNameHint => 'E.g. Rice 5kg';
+
+  @override
+  String get itemName => 'Item name';
+
+  @override
+  String get qty => 'Qty';
+
+  @override
+  String get unit => 'Unit';
+
+  @override
+  String get categoryAndPrice => 'Category and estimated price';
+
+  @override
+  String get estimatedUnitPrice => 'Estimated unit price (optional)';
+
+  @override
+  String get estimatedPriceHelp =>
+      'Without a price the item joins the list but not the estimate. If bought before, history fills it in.';
+
+  @override
+  String editItem(String name) {
+    return 'Edit $name';
+  }
+
+  @override
+  String get historySuffix => ' (history)';
+
+  @override
+  String get noPrice => ' · no price';
+
+  @override
+  String get emptyList => 'Empty list';
+
+  @override
+  String get emptyListText =>
+      'Add items above. Units: un, kg, g, L, mL, pack, dozen, box.';
+
+  @override
+  String get startWithList => 'Start shopping with this list';
+
+  @override
+  String get uncheckAll => 'Uncheck all';
+
+  @override
+  String get duplicate => 'Duplicate';
+
+  @override
+  String get deleteListQ => 'Delete list?';
+
+  @override
+  String get deleteListText =>
+      'Items will be removed. Finished purchases are not affected.';
+
+  @override
+  String get editItemTitle => 'Edit item';
+
+  @override
+  String get removeItem => 'Remove item';
+
+  @override
+  String get newPurchase2 => 'New purchase';
+
+  @override
+  String fromList(String name, int n) {
+    return 'From the list \"$name\" ($n items).';
+  }
+
+  @override
+  String get noListSession => 'No list: add items by camera or manually.';
+
+  @override
+  String get sessionBudgetLabel => 'Budget for this purchase (optional)';
+
+  @override
+  String get sessionBudgetHelp => 'The cart shows how much still fits.';
+
+  @override
+  String get start => 'Start';
+
+  @override
+  String get orChooseList => 'Or choose a list';
+
+  @override
+  String finishedOn(String date) {
+    return 'Finished on $date';
+  }
+
+  @override
+  String itemsInCart(int n) {
+    return '$n item(s) in the cart';
+  }
+
+  @override
+  String get exit => 'Leave';
+
+  @override
+  String get cartTotal => 'Cart total';
+
+  @override
+  String stillFits(String remaining, String budget) {
+    return '$remaining of $budget still fits';
+  }
+
+  @override
+  String overBudgetBy(String over, String budget) {
+    return '$over over the budget of $budget';
+  }
+
+  @override
+  String get cartVsBudget => 'Cart against budget';
+
+  @override
+  String get noBudgetSession => 'No budget set for this purchase.';
+
+  @override
+  String lowConfidenceItems(int n) {
+    return '$n item(s) with low-confidence reading.';
+  }
+
+  @override
+  String discountLine(String value) {
+    return ' · discount $value';
+  }
+
+  @override
+  String get checkSuffix => ' · check';
+
+  @override
+  String removeLine(String name) {
+    return 'Remove $name';
+  }
+
+  @override
+  String get emptyCart => 'Empty cart';
+
+  @override
+  String get emptyCartText => 'Read the price tag or barcode, or add manually.';
+
+  @override
+  String fromListMissing(int n) {
+    return 'From the list ($n missing)';
+  }
+
+  @override
+  String get summary => 'Summary';
+
+  @override
+  String plannedVsActualLine(String planned, String actual, String diff) {
+    return 'Planned (priced): $planned · Actual: $actual · Difference: $diff';
+  }
+
+  @override
+  String boughtLine(int bought, int notBought, int extra) {
+    return '$bought from the list bought · $notBought not bought · $extra extras';
+  }
+
+  @override
+  String receiptRead(String key) {
+    return 'Receipt read: key …$key (tax authority lookup not available offline).';
+  }
+
+  @override
+  String get expenseRegistered => 'Expense recorded in finances.';
+
+  @override
+  String registerAsExpense(String value) {
+    return 'Record $value as expense';
+  }
+
+  @override
+  String get registerOnceHelp =>
+      'Creates a single transaction in Groceries. It is never recorded twice.';
+
+  @override
+  String get tagBtn => 'Tag';
+
+  @override
+  String get codeBtn => 'Code';
+
+  @override
+  String get manualBtn => 'Manual';
+
+  @override
+  String get finishPurchase => 'Finish purchase';
+
+  @override
+  String get confirmItem => 'Confirm item';
+
+  @override
+  String readingConfidence(int percent) {
+    return 'Reading confidence: $percent%';
+  }
+
+  @override
+  String get product => 'Product';
+
+  @override
+  String get productNameHint => 'Product name';
+
+  @override
+  String pricePer(String unit) {
+    return 'Price per $unit';
+  }
+
+  @override
+  String get unitPrice => 'Unit price';
+
+  @override
+  String previousTagPrice(String value) {
+    return 'Previous tag price: $value';
+  }
+
+  @override
+  String quantityUnit(String unit) {
+    return 'Quantity ($unit)';
+  }
+
+  @override
+  String get quantity => 'Quantity';
+
+  @override
+  String get promotion => 'Promotion';
+
+  @override
+  String get take3pay2 => 'Buy 3 pay 2';
+
+  @override
+  String get take2pay1 => 'Buy 2 pay 1';
+
+  @override
+  String get off10 => '10% off';
+
+  @override
+  String get off20 => '20% off';
+
+  @override
+  String subtotal(String value) {
+    return 'Subtotal: $value';
+  }
+
+  @override
+  String get addToCart => 'Add to cart';
+
+  @override
+  String get leavePurchaseQ => 'Leave the purchase?';
+
+  @override
+  String get leavePurchaseText =>
+      'The cart stays saved and you can continue later from the Shopping tab.';
+
+  @override
+  String get leaveKeep => 'Leave and keep';
+
+  @override
+  String get newProductWarn => 'New product: enter the name and the tag price.';
+
+  @override
+  String get scaleCodeWarn =>
+      'Scale code: the embedded value may be weight or price; confirm.';
+
+  @override
+  String get ocrUnavailableWarn => 'Reading unavailable: enter manually.';
+
+  @override
+  String variationWarn(String percent, String value) {
+    return '$percent% vs the last price ($value).';
+  }
+
+  @override
+  String get lowConfidenceWarn =>
+      'Low-confidence reading: check name and price.';
+
+  @override
+  String get noPriceInListWarn => 'No price in the list: enter the tag price.';
+
+  @override
+  String get groceriesCategory => 'Groceries';
+
+  @override
+  String get camera => 'Camera';
+
+  @override
+  String get cameraPermissionText =>
+      'To read price tags and barcodes, SerenaCash needs the camera. Images are not kept or sent.';
+
+  @override
+  String get allowCamera => 'Allow camera';
+
+  @override
+  String get enterManually => 'Enter manually';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get cameraUnavailable => 'Camera unavailable';
+
+  @override
+  String get frameTag => 'Frame the whole tag, without glare, and tap Read';
+
+  @override
+  String get pointBarcode => 'Point at the barcode or the receipt QR';
+
+  @override
+  String get closeCamera => 'Close camera';
+
+  @override
+  String get torchOn => 'Turn torch on';
+
+  @override
+  String get torchOff => 'Turn torch off';
+
+  @override
+  String get readTag => 'Read tag';
+
+  @override
+  String get readingTag => 'Reading the tag…';
+
+  @override
+  String get scanningAuto => 'Scanning automatically…';
+
+  @override
+  String get qrNotReceipt => 'QR read, but it is not a tax receipt (NFC-e).';
+
+  @override
+  String get invalidCode => 'Invalid code; try again.';
+
+  @override
+  String get readFailed => 'Reading failed. Try again.';
+
+  @override
+  String get ocrUnavailable =>
+      'Text reading unavailable on this device/version. Enter the price manually.';
+
+  @override
+  String get photoFailed => 'Could not capture the photo.';
 }

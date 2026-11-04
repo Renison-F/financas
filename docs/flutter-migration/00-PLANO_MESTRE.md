@@ -11,8 +11,8 @@ Decisão aprovada pelo cliente em 2026-11-04. Origem congelada em `ae2c229c4977d
 | M3 | Drift/SQLite relacional, migrações, criptografia, backup autenticado | concluído: 23 tabelas, SQLCipher validado, 26 testes de dados (`05`, `06`, auditoria parcial) |
 | M4 | design system Flutter, temas, navegação (GoRouter), onboarding | concluído: tema claro/escuro/sistema, DI Riverpod, GoRouter 5 abas, onboarding, bloqueio PIN/biometria, i18n pt-BR/en, lembretes locais |
 | M5 | núcleo funcional + dashboard 24 widgets | concluído: contas, categorias/tags, cartões (faturas, parcelas, pagamento), orçamentos, metas, empréstimos, calendário, contas a pagar, relatórios, assistente, importação/exportação (CSV/OFX/backup cifrado/PDF), privacidade, ajuda, paywall |
-| M6 | relatórios, calendário, projeções, assistente, import/export, configurações | pendente |
-| M7 | listas, sessão, câmera (mobile_scanner), OCR (ML Kit), histórico de preços | pendente |
+| M6 | relatórios, calendário, projeções, assistente, import/export, configurações | concluído: anexos no lançamento (bytes no banco cifrado), histórico de alterações + estado de sincronização, planejamento anual |
+| M7 | listas, sessão, câmera (mobile_scanner), OCR (ML Kit), histórico de preços | concluído: listas, sessão de compra com confirmação obrigatória, mobile_scanner (EAN/UPC/QR NFC-e), OCR ML Kit via port (fallback manual), histórico de preços, despesa idempotente |
 | M8 | RevenueCat Flutter, paywall, direitos | pendente |
 | M9 | segurança (MASVS), integração, performance | pendente |
 | M10 | builds, assinatura, lojas, release candidate | pendente |

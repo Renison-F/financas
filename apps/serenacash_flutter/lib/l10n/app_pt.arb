@@ -1698,5 +1698,406 @@
     }
   },
   "stayFree": "Continuar no gratuito",
-  "notFound": "Não encontrado"
+  "notFound": "Não encontrado",
+  "attachmentsTitle": "Anexos e comprovantes",
+  "addPhoto": "Tirar foto",
+  "addFile": "Escolher arquivo",
+  "attachmentTooBig": "Arquivo acima de 10 MB.",
+  "removeAttachment": "Remover anexo",
+  "attachmentCount": "{n} anexo(s)",
+  "@attachmentCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "openAttachment": "Abrir",
+  "attachmentsPlusHint": "Anexos fazem parte do SerenaCash Plus.",
+  "changeHistory": "Histórico de alterações",
+  "changeHistoryDesc": "Registro de mudanças e estado de sincronização",
+  "syncStatus": "Sincronização",
+  "syncLocalOnly": "Somente neste aparelho. A sincronização entre aparelhos chega como serviço de assinatura; enquanto isso, todas as mudanças ficam registradas para envio futuro.",
+  "pendingChanges": "{n} alteração(ões) registrada(s) e pendente(s) de envio",
+  "@pendingChanges": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "deviceLabel": "Aparelho {id}",
+  "@deviceLabel": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "recentChanges": "Alterações recentes",
+  "opUpsert": "salvo",
+  "opDelete": "excluído",
+  "opRestore": "restaurado",
+  "versionN": "v{n}",
+  "@versionN": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "noChangesYet": "Nenhuma alteração registrada ainda.",
+  "entityAccount": "Conta",
+  "entityCategory": "Categoria",
+  "entityTag": "Tag",
+  "entityCard": "Cartão",
+  "entityTransaction": "Lançamento",
+  "entityBudget": "Orçamento",
+  "entityGoal": "Meta",
+  "entityLoan": "Empréstimo",
+  "entityRecurrence": "Recorrência",
+  "entityPrefs": "Preferências",
+  "entityList": "Lista de compras",
+  "entitySession": "Compra",
+  "entityProduct": "Produto",
+  "entityObservation": "Preço observado",
+  "entityLedger": "Restauração",
+  "conflicts": "Conflitos",
+  "noConflicts": "Nenhum conflito. Campos monetários nunca são resolvidos automaticamente.",
+  "annualPlanning": "Planejamento anual",
+  "annualDesc": "Visão do ano: resultado por mês, orçamento e metas",
+  "previousYear": "Ano anterior",
+  "nextYear": "Próximo ano",
+  "yearResult": "Resultado do ano",
+  "monthCol": "Mês",
+  "budgetCol": "Orçamento",
+  "annualGoals": "Metas até o fim do ano",
+  "goalNeedPerMonth": "{name}: faltam {remaining} · {value}/mês",
+  "@goalNeedPerMonth": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "remaining": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "annualBudgetNote": "Orçamento do mês = limite geral vigente no mês. Meses futuros mostram o previsto já registrado.",
+  "plannedShort": "prev.",
+  "newList": "Nova lista",
+  "create": "Criar",
+  "listNameHint": "Ex.: Compra do mês",
+  "storeOptional": "Supermercado (opcional)",
+  "storeHint": "Ex.: Mercado Bom",
+  "listBudgetLabel": "Orçamento para esta compra (opcional)",
+  "listBudgetHelp": "No mercado, o carrinho mostra quanto ainda cabe.",
+  "freeLimitLists": "Plano gratuito: até {n} listas.",
+  "@freeLimitLists": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "defaultListName": "Compra do mês",
+  "listNotFound": "Lista não encontrada",
+  "buy": "Comprar",
+  "estimateWithPrice": "Estimativa ({known} de {total} com preço)",
+  "@estimateWithPrice": {
+    "placeholders": {
+      "known": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "budget": "Orçamento",
+  "estimateVsBudget": "Estimativa contra o orçamento",
+  "checkedCount": "{checked}/{total} marcados",
+  "@checkedCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "unpricedItems": " · {n} item(ns) sem preço (não estimados)",
+  "@unpricedItems": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "addItem": "Adicionar item",
+  "itemNameHint": "Ex.: Arroz 5kg",
+  "itemName": "Nome do item",
+  "qty": "Qtd",
+  "unit": "Unidade",
+  "categoryAndPrice": "Categoria e preço estimado",
+  "estimatedUnitPrice": "Preço estimado por unidade (opcional)",
+  "estimatedPriceHelp": "Sem preço, o item entra na lista mas não na estimativa. Se já comprou antes, o histórico preenche sozinho.",
+  "editItem": "Editar {name}",
+  "@editItem": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "historySuffix": " (histórico)",
+  "noPrice": " · sem preço",
+  "emptyList": "Lista vazia",
+  "emptyListText": "Adicione os itens acima. Unidades: un, kg, g, L, mL, pacote, dúzia, caixa.",
+  "startWithList": "Iniciar compra com esta lista",
+  "uncheckAll": "Desmarcar tudo",
+  "duplicate": "Duplicar",
+  "deleteListQ": "Excluir lista?",
+  "deleteListText": "Os itens serão removidos. Compras finalizadas não são afetadas.",
+  "editItemTitle": "Editar item",
+  "removeItem": "Remover item",
+  "newPurchase2": "Nova compra",
+  "fromList": "A partir da lista \"{name}\" ({n} itens).",
+  "@fromList": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "noListSession": "Sem lista: adicione itens pela câmera ou manualmente.",
+  "sessionBudgetLabel": "Orçamento desta compra (opcional)",
+  "sessionBudgetHelp": "O carrinho mostra quanto ainda cabe.",
+  "start": "Começar",
+  "orChooseList": "Ou escolha uma lista",
+  "finishedOn": "Finalizada em {date}",
+  "@finishedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "itemsInCart": "{n} item(ns) no carrinho",
+  "@itemsInCart": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "exit": "Sair",
+  "cartTotal": "Total do carrinho",
+  "stillFits": "Ainda cabe {remaining} de {budget}",
+  "@stillFits": {
+    "placeholders": {
+      "remaining": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "overBudgetBy": "{over} acima do orçamento de {budget}",
+  "@overBudgetBy": {
+    "placeholders": {
+      "over": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "cartVsBudget": "Carrinho contra o orçamento",
+  "noBudgetSession": "Sem orçamento definido para esta compra.",
+  "lowConfidenceItems": "{n} item(ns) com leitura de baixa confiança.",
+  "@lowConfidenceItems": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "discountLine": " · desconto {value}",
+  "@discountLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "checkSuffix": " · confira",
+  "removeLine": "Remover {name}",
+  "@removeLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "emptyCart": "Carrinho vazio",
+  "emptyCartText": "Leia a etiqueta de preço ou o código de barras, ou adicione manualmente.",
+  "fromListMissing": "Da lista ({n} faltando)",
+  "@fromListMissing": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "summary": "Resumo",
+  "plannedVsActualLine": "Planejado (com preço): {planned} · Realizado: {actual} · Diferença: {diff}",
+  "@plannedVsActualLine": {
+    "placeholders": {
+      "planned": {
+        "type": "String"
+      },
+      "actual": {
+        "type": "String"
+      },
+      "diff": {
+        "type": "String"
+      }
+    }
+  },
+  "boughtLine": "{bought} da lista comprados · {notBought} não comprados · {extra} extras",
+  "@boughtLine": {
+    "placeholders": {
+      "bought": {
+        "type": "int"
+      },
+      "notBought": {
+        "type": "int"
+      },
+      "extra": {
+        "type": "int"
+      }
+    }
+  },
+  "receiptRead": "Cupom fiscal lido: chave …{key} (consulta à SEFAZ não disponível offline).",
+  "@receiptRead": {
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  },
+  "expenseRegistered": "Despesa registrada nas finanças.",
+  "registerAsExpense": "Registrar {value} como despesa",
+  "@registerAsExpense": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "registerOnceHelp": "Cria um único lançamento em Supermercado. Nunca é registrado duas vezes.",
+  "tagBtn": "Etiqueta",
+  "codeBtn": "Código",
+  "manualBtn": "Manual",
+  "finishPurchase": "Finalizar compra",
+  "confirmItem": "Confirmar item",
+  "readingConfidence": "Confiança da leitura: {percent}%",
+  "@readingConfidence": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "product": "Produto",
+  "productNameHint": "Nome do produto",
+  "pricePer": "Preço por {unit}",
+  "@pricePer": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "unitPrice": "Preço unitário",
+  "previousTagPrice": "Preço anterior na etiqueta: {value}",
+  "@previousTagPrice": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "quantityUnit": "Quantidade ({unit})",
+  "@quantityUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "quantity": "Quantidade",
+  "promotion": "Promoção",
+  "take3pay2": "Leve 3 pague 2",
+  "take2pay1": "Leve 2 pague 1",
+  "off10": "10% off",
+  "off20": "20% off",
+  "subtotal": "Subtotal: {value}",
+  "@subtotal": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "addToCart": "Adicionar ao carrinho",
+  "leavePurchaseQ": "Sair da compra?",
+  "leavePurchaseText": "O carrinho fica salvo e você pode continuar depois pela aba Compras.",
+  "leaveKeep": "Sair e manter",
+  "newProductWarn": "Produto novo: informe o nome e o preço da etiqueta.",
+  "scaleCodeWarn": "Código de balança: o valor embutido pode ser peso ou preço; confirme.",
+  "ocrUnavailableWarn": "Leitura indisponível: informe manualmente.",
+  "variationWarn": "{percent}% em relação ao último preço ({value}).",
+  "@variationWarn": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "lowConfidenceWarn": "Leitura com baixa confiança: confira nome e preço.",
+  "noPriceInListWarn": "Sem preço na lista: informe o preço da etiqueta.",
+  "groceriesCategory": "Supermercado",
+  "camera": "Câmera",
+  "cameraPermissionText": "Para ler etiquetas de preço e códigos de barras, o SerenaCash precisa da câmera. As imagens não são guardadas nem enviadas.",
+  "allowCamera": "Permitir câmera",
+  "enterManually": "Informar manualmente",
+  "back": "Voltar",
+  "cameraUnavailable": "Câmera indisponível",
+  "frameTag": "Enquadre a etiqueta inteira, sem reflexo, e toque em Ler",
+  "pointBarcode": "Aponte para o código de barras ou QR do cupom",
+  "closeCamera": "Fechar câmera",
+  "torchOn": "Ligar lanterna",
+  "torchOff": "Desligar lanterna",
+  "readTag": "Ler etiqueta",
+  "readingTag": "Lendo a etiqueta…",
+  "scanningAuto": "Lendo automaticamente…",
+  "qrNotReceipt": "QR lido, mas não é um cupom fiscal (NFC-e).",
+  "invalidCode": "Código inválido; tente de novo.",
+  "readFailed": "Falha na leitura. Tente de novo.",
+  "ocrUnavailable": "Leitura de texto indisponível neste aparelho/versão. Informe o preço manualmente.",
+  "photoFailed": "Não foi possível capturar a foto."
 }

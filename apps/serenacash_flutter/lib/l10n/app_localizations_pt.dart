@@ -2658,4 +2658,567 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get notFound => 'Não encontrado';
+
+  @override
+  String get attachmentsTitle => 'Anexos e comprovantes';
+
+  @override
+  String get addPhoto => 'Tirar foto';
+
+  @override
+  String get addFile => 'Escolher arquivo';
+
+  @override
+  String get attachmentTooBig => 'Arquivo acima de 10 MB.';
+
+  @override
+  String get removeAttachment => 'Remover anexo';
+
+  @override
+  String attachmentCount(int n) {
+    return '$n anexo(s)';
+  }
+
+  @override
+  String get openAttachment => 'Abrir';
+
+  @override
+  String get attachmentsPlusHint => 'Anexos fazem parte do SerenaCash Plus.';
+
+  @override
+  String get changeHistory => 'Histórico de alterações';
+
+  @override
+  String get changeHistoryDesc =>
+      'Registro de mudanças e estado de sincronização';
+
+  @override
+  String get syncStatus => 'Sincronização';
+
+  @override
+  String get syncLocalOnly =>
+      'Somente neste aparelho. A sincronização entre aparelhos chega como serviço de assinatura; enquanto isso, todas as mudanças ficam registradas para envio futuro.';
+
+  @override
+  String pendingChanges(int n) {
+    return '$n alteração(ões) registrada(s) e pendente(s) de envio';
+  }
+
+  @override
+  String deviceLabel(String id) {
+    return 'Aparelho $id';
+  }
+
+  @override
+  String get recentChanges => 'Alterações recentes';
+
+  @override
+  String get opUpsert => 'salvo';
+
+  @override
+  String get opDelete => 'excluído';
+
+  @override
+  String get opRestore => 'restaurado';
+
+  @override
+  String versionN(int n) {
+    return 'v$n';
+  }
+
+  @override
+  String get noChangesYet => 'Nenhuma alteração registrada ainda.';
+
+  @override
+  String get entityAccount => 'Conta';
+
+  @override
+  String get entityCategory => 'Categoria';
+
+  @override
+  String get entityTag => 'Tag';
+
+  @override
+  String get entityCard => 'Cartão';
+
+  @override
+  String get entityTransaction => 'Lançamento';
+
+  @override
+  String get entityBudget => 'Orçamento';
+
+  @override
+  String get entityGoal => 'Meta';
+
+  @override
+  String get entityLoan => 'Empréstimo';
+
+  @override
+  String get entityRecurrence => 'Recorrência';
+
+  @override
+  String get entityPrefs => 'Preferências';
+
+  @override
+  String get entityList => 'Lista de compras';
+
+  @override
+  String get entitySession => 'Compra';
+
+  @override
+  String get entityProduct => 'Produto';
+
+  @override
+  String get entityObservation => 'Preço observado';
+
+  @override
+  String get entityLedger => 'Restauração';
+
+  @override
+  String get conflicts => 'Conflitos';
+
+  @override
+  String get noConflicts =>
+      'Nenhum conflito. Campos monetários nunca são resolvidos automaticamente.';
+
+  @override
+  String get annualPlanning => 'Planejamento anual';
+
+  @override
+  String get annualDesc => 'Visão do ano: resultado por mês, orçamento e metas';
+
+  @override
+  String get previousYear => 'Ano anterior';
+
+  @override
+  String get nextYear => 'Próximo ano';
+
+  @override
+  String get yearResult => 'Resultado do ano';
+
+  @override
+  String get monthCol => 'Mês';
+
+  @override
+  String get budgetCol => 'Orçamento';
+
+  @override
+  String get annualGoals => 'Metas até o fim do ano';
+
+  @override
+  String goalNeedPerMonth(String name, String remaining, String value) {
+    return '$name: faltam $remaining · $value/mês';
+  }
+
+  @override
+  String get annualBudgetNote =>
+      'Orçamento do mês = limite geral vigente no mês. Meses futuros mostram o previsto já registrado.';
+
+  @override
+  String get plannedShort => 'prev.';
+
+  @override
+  String get newList => 'Nova lista';
+
+  @override
+  String get create => 'Criar';
+
+  @override
+  String get listNameHint => 'Ex.: Compra do mês';
+
+  @override
+  String get storeOptional => 'Supermercado (opcional)';
+
+  @override
+  String get storeHint => 'Ex.: Mercado Bom';
+
+  @override
+  String get listBudgetLabel => 'Orçamento para esta compra (opcional)';
+
+  @override
+  String get listBudgetHelp =>
+      'No mercado, o carrinho mostra quanto ainda cabe.';
+
+  @override
+  String freeLimitLists(int n) {
+    return 'Plano gratuito: até $n listas.';
+  }
+
+  @override
+  String get defaultListName => 'Compra do mês';
+
+  @override
+  String get listNotFound => 'Lista não encontrada';
+
+  @override
+  String get buy => 'Comprar';
+
+  @override
+  String estimateWithPrice(int known, int total) {
+    return 'Estimativa ($known de $total com preço)';
+  }
+
+  @override
+  String get budget => 'Orçamento';
+
+  @override
+  String get estimateVsBudget => 'Estimativa contra o orçamento';
+
+  @override
+  String checkedCount(int checked, int total) {
+    return '$checked/$total marcados';
+  }
+
+  @override
+  String unpricedItems(int n) {
+    return ' · $n item(ns) sem preço (não estimados)';
+  }
+
+  @override
+  String get addItem => 'Adicionar item';
+
+  @override
+  String get itemNameHint => 'Ex.: Arroz 5kg';
+
+  @override
+  String get itemName => 'Nome do item';
+
+  @override
+  String get qty => 'Qtd';
+
+  @override
+  String get unit => 'Unidade';
+
+  @override
+  String get categoryAndPrice => 'Categoria e preço estimado';
+
+  @override
+  String get estimatedUnitPrice => 'Preço estimado por unidade (opcional)';
+
+  @override
+  String get estimatedPriceHelp =>
+      'Sem preço, o item entra na lista mas não na estimativa. Se já comprou antes, o histórico preenche sozinho.';
+
+  @override
+  String editItem(String name) {
+    return 'Editar $name';
+  }
+
+  @override
+  String get historySuffix => ' (histórico)';
+
+  @override
+  String get noPrice => ' · sem preço';
+
+  @override
+  String get emptyList => 'Lista vazia';
+
+  @override
+  String get emptyListText =>
+      'Adicione os itens acima. Unidades: un, kg, g, L, mL, pacote, dúzia, caixa.';
+
+  @override
+  String get startWithList => 'Iniciar compra com esta lista';
+
+  @override
+  String get uncheckAll => 'Desmarcar tudo';
+
+  @override
+  String get duplicate => 'Duplicar';
+
+  @override
+  String get deleteListQ => 'Excluir lista?';
+
+  @override
+  String get deleteListText =>
+      'Os itens serão removidos. Compras finalizadas não são afetadas.';
+
+  @override
+  String get editItemTitle => 'Editar item';
+
+  @override
+  String get removeItem => 'Remover item';
+
+  @override
+  String get newPurchase2 => 'Nova compra';
+
+  @override
+  String fromList(String name, int n) {
+    return 'A partir da lista \"$name\" ($n itens).';
+  }
+
+  @override
+  String get noListSession =>
+      'Sem lista: adicione itens pela câmera ou manualmente.';
+
+  @override
+  String get sessionBudgetLabel => 'Orçamento desta compra (opcional)';
+
+  @override
+  String get sessionBudgetHelp => 'O carrinho mostra quanto ainda cabe.';
+
+  @override
+  String get start => 'Começar';
+
+  @override
+  String get orChooseList => 'Ou escolha uma lista';
+
+  @override
+  String finishedOn(String date) {
+    return 'Finalizada em $date';
+  }
+
+  @override
+  String itemsInCart(int n) {
+    return '$n item(ns) no carrinho';
+  }
+
+  @override
+  String get exit => 'Sair';
+
+  @override
+  String get cartTotal => 'Total do carrinho';
+
+  @override
+  String stillFits(String remaining, String budget) {
+    return 'Ainda cabe $remaining de $budget';
+  }
+
+  @override
+  String overBudgetBy(String over, String budget) {
+    return '$over acima do orçamento de $budget';
+  }
+
+  @override
+  String get cartVsBudget => 'Carrinho contra o orçamento';
+
+  @override
+  String get noBudgetSession => 'Sem orçamento definido para esta compra.';
+
+  @override
+  String lowConfidenceItems(int n) {
+    return '$n item(ns) com leitura de baixa confiança.';
+  }
+
+  @override
+  String discountLine(String value) {
+    return ' · desconto $value';
+  }
+
+  @override
+  String get checkSuffix => ' · confira';
+
+  @override
+  String removeLine(String name) {
+    return 'Remover $name';
+  }
+
+  @override
+  String get emptyCart => 'Carrinho vazio';
+
+  @override
+  String get emptyCartText =>
+      'Leia a etiqueta de preço ou o código de barras, ou adicione manualmente.';
+
+  @override
+  String fromListMissing(int n) {
+    return 'Da lista ($n faltando)';
+  }
+
+  @override
+  String get summary => 'Resumo';
+
+  @override
+  String plannedVsActualLine(String planned, String actual, String diff) {
+    return 'Planejado (com preço): $planned · Realizado: $actual · Diferença: $diff';
+  }
+
+  @override
+  String boughtLine(int bought, int notBought, int extra) {
+    return '$bought da lista comprados · $notBought não comprados · $extra extras';
+  }
+
+  @override
+  String receiptRead(String key) {
+    return 'Cupom fiscal lido: chave …$key (consulta à SEFAZ não disponível offline).';
+  }
+
+  @override
+  String get expenseRegistered => 'Despesa registrada nas finanças.';
+
+  @override
+  String registerAsExpense(String value) {
+    return 'Registrar $value como despesa';
+  }
+
+  @override
+  String get registerOnceHelp =>
+      'Cria um único lançamento em Supermercado. Nunca é registrado duas vezes.';
+
+  @override
+  String get tagBtn => 'Etiqueta';
+
+  @override
+  String get codeBtn => 'Código';
+
+  @override
+  String get manualBtn => 'Manual';
+
+  @override
+  String get finishPurchase => 'Finalizar compra';
+
+  @override
+  String get confirmItem => 'Confirmar item';
+
+  @override
+  String readingConfidence(int percent) {
+    return 'Confiança da leitura: $percent%';
+  }
+
+  @override
+  String get product => 'Produto';
+
+  @override
+  String get productNameHint => 'Nome do produto';
+
+  @override
+  String pricePer(String unit) {
+    return 'Preço por $unit';
+  }
+
+  @override
+  String get unitPrice => 'Preço unitário';
+
+  @override
+  String previousTagPrice(String value) {
+    return 'Preço anterior na etiqueta: $value';
+  }
+
+  @override
+  String quantityUnit(String unit) {
+    return 'Quantidade ($unit)';
+  }
+
+  @override
+  String get quantity => 'Quantidade';
+
+  @override
+  String get promotion => 'Promoção';
+
+  @override
+  String get take3pay2 => 'Leve 3 pague 2';
+
+  @override
+  String get take2pay1 => 'Leve 2 pague 1';
+
+  @override
+  String get off10 => '10% off';
+
+  @override
+  String get off20 => '20% off';
+
+  @override
+  String subtotal(String value) {
+    return 'Subtotal: $value';
+  }
+
+  @override
+  String get addToCart => 'Adicionar ao carrinho';
+
+  @override
+  String get leavePurchaseQ => 'Sair da compra?';
+
+  @override
+  String get leavePurchaseText =>
+      'O carrinho fica salvo e você pode continuar depois pela aba Compras.';
+
+  @override
+  String get leaveKeep => 'Sair e manter';
+
+  @override
+  String get newProductWarn =>
+      'Produto novo: informe o nome e o preço da etiqueta.';
+
+  @override
+  String get scaleCodeWarn =>
+      'Código de balança: o valor embutido pode ser peso ou preço; confirme.';
+
+  @override
+  String get ocrUnavailableWarn => 'Leitura indisponível: informe manualmente.';
+
+  @override
+  String variationWarn(String percent, String value) {
+    return '$percent% em relação ao último preço ($value).';
+  }
+
+  @override
+  String get lowConfidenceWarn =>
+      'Leitura com baixa confiança: confira nome e preço.';
+
+  @override
+  String get noPriceInListWarn =>
+      'Sem preço na lista: informe o preço da etiqueta.';
+
+  @override
+  String get groceriesCategory => 'Supermercado';
+
+  @override
+  String get camera => 'Câmera';
+
+  @override
+  String get cameraPermissionText =>
+      'Para ler etiquetas de preço e códigos de barras, o SerenaCash precisa da câmera. As imagens não são guardadas nem enviadas.';
+
+  @override
+  String get allowCamera => 'Permitir câmera';
+
+  @override
+  String get enterManually => 'Informar manualmente';
+
+  @override
+  String get back => 'Voltar';
+
+  @override
+  String get cameraUnavailable => 'Câmera indisponível';
+
+  @override
+  String get frameTag =>
+      'Enquadre a etiqueta inteira, sem reflexo, e toque em Ler';
+
+  @override
+  String get pointBarcode => 'Aponte para o código de barras ou QR do cupom';
+
+  @override
+  String get closeCamera => 'Fechar câmera';
+
+  @override
+  String get torchOn => 'Ligar lanterna';
+
+  @override
+  String get torchOff => 'Desligar lanterna';
+
+  @override
+  String get readTag => 'Ler etiqueta';
+
+  @override
+  String get readingTag => 'Lendo a etiqueta…';
+
+  @override
+  String get scanningAuto => 'Lendo automaticamente…';
+
+  @override
+  String get qrNotReceipt => 'QR lido, mas não é um cupom fiscal (NFC-e).';
+
+  @override
+  String get invalidCode => 'Código inválido; tente de novo.';
+
+  @override
+  String get readFailed => 'Falha na leitura. Tente de novo.';
+
+  @override
+  String get ocrUnavailable =>
+      'Leitura de texto indisponível neste aparelho/versão. Informe o preço manualmente.';
+
+  @override
+  String get photoFailed => 'Não foi possível capturar a foto.';
 }

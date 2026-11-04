@@ -6,6 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/accounts/account_form_screen.dart';
+import '../features/annual/annual_screen.dart';
+import '../features/history/history_screen.dart';
+import '../features/shopping/list_screens.dart';
+import '../features/shopping/scan_screen.dart';
+import '../features/shopping/session_screen.dart';
 import '../features/accounts/accounts_screen.dart';
 import '../features/assistant/assistant_screen.dart';
 import '../features/billing/paywall_screen.dart';
@@ -305,6 +310,45 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/help',
         parentNavigatorKey: _rootKey,
         builder: (c, s) => const HelpScreen(),
+      ),
+      GoRoute(
+        path: '/history',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const HistoryScreen(),
+      ),
+      GoRoute(
+        path: '/plan/annual',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const AnnualScreen(),
+      ),
+      GoRoute(
+        path: '/shopping/list/new',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const ListFormScreen(),
+      ),
+      GoRoute(
+        path: '/shopping/list/:id',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => ListDetailScreen(id: s.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/shopping/session',
+        parentNavigatorKey: _rootKey,
+        pageBuilder: (c, s) => _modal(
+          s,
+          SessionScreen(
+            id: s.uri.queryParameters['id'],
+            listId: s.uri.queryParameters['listId'],
+          ),
+        ),
+      ),
+      GoRoute(
+        path: '/shopping/scan',
+        parentNavigatorKey: _rootKey,
+        pageBuilder: (c, s) => _modal(
+          s,
+          ScanScreen(mode: s.uri.queryParameters['mode'] ?? 'label'),
+        ),
       ),
       GoRoute(
         path: '/paywall',

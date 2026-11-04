@@ -1698,5 +1698,406 @@
     }
   },
   "stayFree": "Stay on free",
-  "notFound": "Not found"
+  "notFound": "Not found",
+  "attachmentsTitle": "Attachments and receipts",
+  "addPhoto": "Take photo",
+  "addFile": "Choose file",
+  "attachmentTooBig": "File larger than 10 MB.",
+  "removeAttachment": "Remove attachment",
+  "attachmentCount": "{n} attachment(s)",
+  "@attachmentCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "openAttachment": "Open",
+  "attachmentsPlusHint": "Attachments are part of SerenaCash Plus.",
+  "changeHistory": "Change history",
+  "changeHistoryDesc": "Change log and sync state",
+  "syncStatus": "Sync",
+  "syncLocalOnly": "On this device only. Cross-device sync arrives as a subscription service; meanwhile every change is recorded for future upload.",
+  "pendingChanges": "{n} change(s) recorded and pending upload",
+  "@pendingChanges": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "deviceLabel": "Device {id}",
+  "@deviceLabel": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "recentChanges": "Recent changes",
+  "opUpsert": "saved",
+  "opDelete": "deleted",
+  "opRestore": "restored",
+  "versionN": "v{n}",
+  "@versionN": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "noChangesYet": "No change recorded yet.",
+  "entityAccount": "Account",
+  "entityCategory": "Category",
+  "entityTag": "Tag",
+  "entityCard": "Card",
+  "entityTransaction": "Transaction",
+  "entityBudget": "Budget",
+  "entityGoal": "Goal",
+  "entityLoan": "Loan",
+  "entityRecurrence": "Recurrence",
+  "entityPrefs": "Preferences",
+  "entityList": "Shopping list",
+  "entitySession": "Shopping session",
+  "entityProduct": "Product",
+  "entityObservation": "Price observation",
+  "entityLedger": "Restore",
+  "conflicts": "Conflicts",
+  "noConflicts": "No conflicts. Monetary fields are never resolved automatically.",
+  "annualPlanning": "Annual planning",
+  "annualDesc": "Year view: result per month, budget and goals",
+  "previousYear": "Previous year",
+  "nextYear": "Next year",
+  "yearResult": "Year result",
+  "monthCol": "Month",
+  "budgetCol": "Budget",
+  "annualGoals": "Goals by year end",
+  "goalNeedPerMonth": "{name}: {remaining} to go · {value}/month",
+  "@goalNeedPerMonth": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "remaining": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "annualBudgetNote": "Monthly budget = general limit in force that month. Future months show what is already planned.",
+  "plannedShort": "plan.",
+  "newList": "New list",
+  "create": "Create",
+  "listNameHint": "E.g. Monthly shopping",
+  "storeOptional": "Supermarket (optional)",
+  "storeHint": "E.g. Good Market",
+  "listBudgetLabel": "Budget for this purchase (optional)",
+  "listBudgetHelp": "At the store, the cart shows how much still fits.",
+  "freeLimitLists": "Free plan: up to {n} lists.",
+  "@freeLimitLists": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "defaultListName": "Monthly shopping",
+  "listNotFound": "List not found",
+  "buy": "Shop",
+  "estimateWithPrice": "Estimate ({known} of {total} priced)",
+  "@estimateWithPrice": {
+    "placeholders": {
+      "known": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "budget": "Budget",
+  "estimateVsBudget": "Estimate against budget",
+  "checkedCount": "{checked}/{total} checked",
+  "@checkedCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "unpricedItems": " · {n} item(s) without price (not estimated)",
+  "@unpricedItems": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "addItem": "Add item",
+  "itemNameHint": "E.g. Rice 5kg",
+  "itemName": "Item name",
+  "qty": "Qty",
+  "unit": "Unit",
+  "categoryAndPrice": "Category and estimated price",
+  "estimatedUnitPrice": "Estimated unit price (optional)",
+  "estimatedPriceHelp": "Without a price the item joins the list but not the estimate. If bought before, history fills it in.",
+  "editItem": "Edit {name}",
+  "@editItem": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "historySuffix": " (history)",
+  "noPrice": " · no price",
+  "emptyList": "Empty list",
+  "emptyListText": "Add items above. Units: un, kg, g, L, mL, pack, dozen, box.",
+  "startWithList": "Start shopping with this list",
+  "uncheckAll": "Uncheck all",
+  "duplicate": "Duplicate",
+  "deleteListQ": "Delete list?",
+  "deleteListText": "Items will be removed. Finished purchases are not affected.",
+  "editItemTitle": "Edit item",
+  "removeItem": "Remove item",
+  "newPurchase2": "New purchase",
+  "fromList": "From the list \"{name}\" ({n} items).",
+  "@fromList": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "noListSession": "No list: add items by camera or manually.",
+  "sessionBudgetLabel": "Budget for this purchase (optional)",
+  "sessionBudgetHelp": "The cart shows how much still fits.",
+  "start": "Start",
+  "orChooseList": "Or choose a list",
+  "finishedOn": "Finished on {date}",
+  "@finishedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "itemsInCart": "{n} item(s) in the cart",
+  "@itemsInCart": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "exit": "Leave",
+  "cartTotal": "Cart total",
+  "stillFits": "{remaining} of {budget} still fits",
+  "@stillFits": {
+    "placeholders": {
+      "remaining": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "overBudgetBy": "{over} over the budget of {budget}",
+  "@overBudgetBy": {
+    "placeholders": {
+      "over": {
+        "type": "String"
+      },
+      "budget": {
+        "type": "String"
+      }
+    }
+  },
+  "cartVsBudget": "Cart against budget",
+  "noBudgetSession": "No budget set for this purchase.",
+  "lowConfidenceItems": "{n} item(s) with low-confidence reading.",
+  "@lowConfidenceItems": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "discountLine": " · discount {value}",
+  "@discountLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "checkSuffix": " · check",
+  "removeLine": "Remove {name}",
+  "@removeLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "emptyCart": "Empty cart",
+  "emptyCartText": "Read the price tag or barcode, or add manually.",
+  "fromListMissing": "From the list ({n} missing)",
+  "@fromListMissing": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "summary": "Summary",
+  "plannedVsActualLine": "Planned (priced): {planned} · Actual: {actual} · Difference: {diff}",
+  "@plannedVsActualLine": {
+    "placeholders": {
+      "planned": {
+        "type": "String"
+      },
+      "actual": {
+        "type": "String"
+      },
+      "diff": {
+        "type": "String"
+      }
+    }
+  },
+  "boughtLine": "{bought} from the list bought · {notBought} not bought · {extra} extras",
+  "@boughtLine": {
+    "placeholders": {
+      "bought": {
+        "type": "int"
+      },
+      "notBought": {
+        "type": "int"
+      },
+      "extra": {
+        "type": "int"
+      }
+    }
+  },
+  "receiptRead": "Receipt read: key …{key} (tax authority lookup not available offline).",
+  "@receiptRead": {
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  },
+  "expenseRegistered": "Expense recorded in finances.",
+  "registerAsExpense": "Record {value} as expense",
+  "@registerAsExpense": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "registerOnceHelp": "Creates a single transaction in Groceries. It is never recorded twice.",
+  "tagBtn": "Tag",
+  "codeBtn": "Code",
+  "manualBtn": "Manual",
+  "finishPurchase": "Finish purchase",
+  "confirmItem": "Confirm item",
+  "readingConfidence": "Reading confidence: {percent}%",
+  "@readingConfidence": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "product": "Product",
+  "productNameHint": "Product name",
+  "pricePer": "Price per {unit}",
+  "@pricePer": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "unitPrice": "Unit price",
+  "previousTagPrice": "Previous tag price: {value}",
+  "@previousTagPrice": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "quantityUnit": "Quantity ({unit})",
+  "@quantityUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "quantity": "Quantity",
+  "promotion": "Promotion",
+  "take3pay2": "Buy 3 pay 2",
+  "take2pay1": "Buy 2 pay 1",
+  "off10": "10% off",
+  "off20": "20% off",
+  "subtotal": "Subtotal: {value}",
+  "@subtotal": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "addToCart": "Add to cart",
+  "leavePurchaseQ": "Leave the purchase?",
+  "leavePurchaseText": "The cart stays saved and you can continue later from the Shopping tab.",
+  "leaveKeep": "Leave and keep",
+  "newProductWarn": "New product: enter the name and the tag price.",
+  "scaleCodeWarn": "Scale code: the embedded value may be weight or price; confirm.",
+  "ocrUnavailableWarn": "Reading unavailable: enter manually.",
+  "variationWarn": "{percent}% vs the last price ({value}).",
+  "@variationWarn": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "lowConfidenceWarn": "Low-confidence reading: check name and price.",
+  "noPriceInListWarn": "No price in the list: enter the tag price.",
+  "groceriesCategory": "Groceries",
+  "camera": "Camera",
+  "cameraPermissionText": "To read price tags and barcodes, SerenaCash needs the camera. Images are not kept or sent.",
+  "allowCamera": "Allow camera",
+  "enterManually": "Enter manually",
+  "back": "Back",
+  "cameraUnavailable": "Camera unavailable",
+  "frameTag": "Frame the whole tag, without glare, and tap Read",
+  "pointBarcode": "Point at the barcode or the receipt QR",
+  "closeCamera": "Close camera",
+  "torchOn": "Turn torch on",
+  "torchOff": "Turn torch off",
+  "readTag": "Read tag",
+  "readingTag": "Reading the tag…",
+  "scanningAuto": "Scanning automatically…",
+  "qrNotReceipt": "QR read, but it is not a tax receipt (NFC-e).",
+  "invalidCode": "Invalid code; try again.",
+  "readFailed": "Reading failed. Try again.",
+  "ocrUnavailable": "Text reading unavailable on this device/version. Enter the price manually.",
+  "photoFailed": "Could not capture the photo."
 }

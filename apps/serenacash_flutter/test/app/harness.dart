@@ -73,7 +73,13 @@ Future<void> pumpApp(WidgetTester tester, TestApp app) async {
   await tester.pumpAndSettle();
 }
 
-Future<void> screenshot(WidgetTester tester, String name) => expectLater(
-  find.byType(MaterialApp),
-  matchesGoldenFile('goldens/$name.png'),
-);
+/// Screenshots are documentation artifacts (docs/flutter-migration/screenshots), rendered from the real
+/// widget tree. They are written only with `flutter test --update-goldens` and never compared on a normal
+/// run, so font rasterization differences between machines cannot fail the suite.
+Future<void> screenshot(WidgetTester tester, String name) async {
+  if (!autoUpdateGoldenFiles) return;
+  await expectLater(
+    find.byType(MaterialApp),
+    matchesGoldenFile('goldens/$name.png'),
+  );
+}

@@ -30,7 +30,12 @@ issues, `dart format` sem alterações. Detalhes e divergências em `02-EQUIVALE
 - Telas: início (24 widgets, 4 presets, personalização com arrastar/setas), pode gastar, lançamentos (lista, formulário com parcelas/série/baixa/parcial/exclusão com desfazer), planejar, contas, categorias/tags, cartões (fatura, pagamento, histórico, parceladas), orçamentos, metas (guardar/resgatar), empréstimos (Price/SAC, simulação, tabela), calendário, contas a pagar, relatórios (fluxo, categorias, recorrentes, projeção, indicadores), assistente, importação (CSV/OFX/backup com mapeamento, duplicidades, relatório), exportação (CSV, PDF, backup cifrado/claro), privacidade (apagar tudo), ajuda, paywall (port de loja; RevenueCat em M8), configurações, onboarding.
 - Testes de fluxo com app real em banco em memória (6 cenários) e 13 capturas em `docs/flutter-migration/screenshots/`.
 
+## Progresso M6–M7 — concluído
+- Pendências fechadas: anexos (câmera/arquivo, ≤ 10 MB, SHA-256, dentro do banco cifrado, gate Plus), tela de histórico de alterações com contagem pendente de sincronização e conflitos, planejamento anual (resultado mês a mês, orçamento vigente, metas até o fim do ano).
+- Compras: nova lista, detalhe (itens por categoria, unidades, estimativa só com preços conhecidos, marcar/duplicar/excluir), sessão (total, orçamento com marca de progresso, itens da lista, manual, etiqueta/código, promoções, finalização com observações de preço, despesa única idempotente), câmera (`mobile_scanner` + `image_picker` + ML Kit atrás de `OcrService`, fallback manual, permissão negada tratada).
+- Testes: 3 fluxos novos (lista → sessão → despesa; leitura simulada de código/etiqueta; histórico e anual). 18 capturas em `screenshots/`.
+
 ## Próximos passos
-1. M6: anexos no detalhe do lançamento, tela de histórico de alterações (change log), planejamento anual, estado de sincronização.
-2. M7: compras (listas, sessão, mobile_scanner, ML Kit OCR, histórico de preços).
-3. M8–M10: RevenueCat (purchases_flutter), auditoria de segurança, performance, CI, release.
+1. M8: RevenueCat (`purchases_flutter`) atrás de `StoreBilling`, cache de direitos com carência.
+2. M9: auditoria de segurança final, testes de integração, performance, CI sem `|| true`.
+3. M10: preparação Android/iOS, docs 04/07–12, RELATORIO_FINAL.

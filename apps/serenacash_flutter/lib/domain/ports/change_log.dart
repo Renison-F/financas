@@ -10,6 +10,9 @@ abstract interface class ChangeLog {
   Future<void> markSynced(List<String> ids);
   Future<int> count();
 
+  /// Newest records first, for the change-history screen.
+  Future<List<ChangeRecord>> recent({int limit = 100});
+
   Future<void> saveConflicts(List<Conflict> conflicts);
   Future<List<Conflict>> openConflicts();
   Future<void> resolveConflict(

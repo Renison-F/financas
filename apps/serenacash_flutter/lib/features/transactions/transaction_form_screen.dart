@@ -13,6 +13,7 @@ import '../../domain/entities/entities.dart';
 import '../../domain/money/money.dart';
 import '../../ui/components/components.dart';
 import '../shared/format.dart';
+import 'attachments_section.dart';
 
 class TransactionFormScreen extends ConsumerStatefulWidget {
   const TransactionFormScreen({
@@ -438,14 +439,12 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
                         maxLines: 3,
                         maxLength: 500,
                       ),
-                      Text(
-                        s.access.tier == 'free'
-                            ? l.attachmentsPlus
-                            : l.attachmentsAfterSave,
-                        style: Type.caption.copyWith(color: c.textMuted),
-                      ),
                     ],
                   ),
+                  if (ex != null) ...[
+                    const SizedBox(height: Spacing.md),
+                    AttachmentsSection(transaction: ex),
+                  ],
                   if (_error != null)
                     Padding(
                       padding: const EdgeInsets.only(top: Spacing.sm),

@@ -58,6 +58,7 @@ class MoreScreen extends ConsumerWidget {
         [
           (SIconName.upload, l.importData, l.importDesc, '/import'),
           (SIconName.download, l.exportBackup, l.exportDesc, '/export'),
+          (SIconName.list, l.changeHistory, l.changeHistoryDesc, '/history'),
         ],
       ),
       (
