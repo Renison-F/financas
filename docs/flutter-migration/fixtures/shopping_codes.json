@@ -1,0 +1,180 @@
+{
+  "generatedFrom": "packages/shopping (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "parseBarcode 7891000100103",
+      "input": {
+        "raw": "7891000100103"
+      },
+      "expected": {
+        "raw": "7891000100103",
+        "kind": "ean13",
+        "valid": true,
+        "gtin": "7891000100103"
+      },
+      "note": ""
+    },
+    {
+      "name": "parseBarcode 7891000100104",
+      "input": {
+        "raw": "7891000100104"
+      },
+      "expected": {
+        "raw": "7891000100104",
+        "kind": "ean13",
+        "valid": false,
+        "gtin": "7891000100104"
+      },
+      "note": ""
+    },
+    {
+      "name": "parseBarcode 96385074",
+      "input": {
+        "raw": "96385074"
+      },
+      "expected": {
+        "raw": "96385074",
+        "kind": "ean8",
+        "valid": true,
+        "gtin": "0000096385074"
+      },
+      "note": ""
+    },
+    {
+      "name": "parseBarcode 036000291452",
+      "input": {
+        "raw": "036000291452"
+      },
+      "expected": {
+        "raw": "036000291452",
+        "kind": "upc_a",
+        "valid": true,
+        "gtin": "0036000291452"
+      },
+      "note": ""
+    },
+    {
+      "name": "parseBarcode 2123456012345",
+      "input": {
+        "raw": "2123456012345"
+      },
+      "expected": {
+        "raw": "2123456012345",
+        "kind": "gs1_variable_measure",
+        "valid": false,
+        "gtin": "2123456012345",
+        "variableMeasure": {
+          "itemCode": "123456",
+          "embedded": "unknown",
+          "valueCents": 1234,
+          "grams": 1234
+        }
+      },
+      "note": ""
+    },
+    {
+      "name": "parseBarcode 12345",
+      "input": {
+        "raw": "12345"
+      },
+      "expected": {
+        "raw": "12345",
+        "kind": "internal",
+        "valid": true
+      },
+      "note": ""
+    },
+    {
+      "name": "parseBarcode abc",
+      "input": {
+        "raw": "abc"
+      },
+      "expected": {
+        "raw": "abc",
+        "kind": "unknown",
+        "valid": false
+      },
+      "note": ""
+    },
+    {
+      "name": "parseBarcode 07891000100103",
+      "input": {
+        "raw": "07891000100103"
+      },
+      "expected": {
+        "raw": "07891000100103",
+        "kind": "ean13",
+        "valid": true,
+        "gtin": "7891000100103"
+      },
+      "note": ""
+    },
+    {
+      "name": "parseBarcode 4006381333931",
+      "input": {
+        "raw": "4006381333931"
+      },
+      "expected": {
+        "raw": "4006381333931",
+        "kind": "ean13",
+        "valid": true,
+        "gtin": "4006381333931"
+      },
+      "note": ""
+    },
+    {
+      "name": "gtin 7891000100103",
+      "input": {
+        "digits": "7891000100103"
+      },
+      "expected": true,
+      "note": ""
+    },
+    {
+      "name": "gtin 7891000100104",
+      "input": {
+        "digits": "7891000100104"
+      },
+      "expected": false,
+      "note": ""
+    },
+    {
+      "name": "gtin 96385074",
+      "input": {
+        "digits": "96385074"
+      },
+      "expected": true,
+      "note": ""
+    },
+    {
+      "name": "gtin 036000291452",
+      "input": {
+        "digits": "036000291452"
+      },
+      "expected": true,
+      "note": ""
+    },
+    {
+      "name": "nfce",
+      "input": {
+        "data": "https://www.fazenda.sp.gov.br/nfce/qrcode?p=35261112345678000199650010000012341000012345|2|1|1|ABCDEF0123"
+      },
+      "expected": {
+        "accessKey": "35261112345678000199650010000012341000012345",
+        "uf": "35",
+        "emissionYearMonth": "2026-11",
+        "cnpj": "12345678000199",
+        "url": "https://www.fazenda.sp.gov.br/nfce/qrcode?p=35261112345678000199650010000012341000012345|2|1|1|ABCDEF0123"
+      },
+      "note": ""
+    },
+    {
+      "name": "nfce none",
+      "input": {
+        "data": "https://example.com"
+      },
+      "expected": null,
+      "note": ""
+    }
+  ]
+}

@@ -1,0 +1,542 @@
+{
+  "generatedFrom": "packages/shopping (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "start",
+      "input": {
+        "list": {
+          "id": "L",
+          "name": "Compra do mês",
+          "store": "Mercado Bom",
+          "budgetCents": 30000,
+          "items": [
+            {
+              "id": "i1",
+              "name": "Arroz",
+              "unit": "un",
+              "quantity": 2,
+              "estimatedUnitPriceCents": 2490,
+              "productId": "p1",
+              "checked": false,
+              "sortOrder": 0
+            },
+            {
+              "id": "i2",
+              "name": "Leite",
+              "unit": "un",
+              "quantity": 6,
+              "estimatedUnitPriceCents": 549,
+              "checked": false,
+              "sortOrder": 1
+            },
+            {
+              "id": "i3",
+              "name": "Banana",
+              "unit": "kg",
+              "quantity": 1.5,
+              "checked": false,
+              "sortOrder": 2
+            }
+          ],
+          "archived": false,
+          "createdAt": "2026-11-04T10:00:00.000Z",
+          "updatedAt": "2026-11-04T10:00:00.000Z"
+        },
+        "now": "2026-11-04T10:00:00.000Z"
+      },
+      "expected": {
+        "id": "S1",
+        "store": "Mercado Bom",
+        "listId": "L",
+        "budgetCents": 30000,
+        "lines": [],
+        "status": "active",
+        "startedAt": "2026-11-04T10:00:00.000Z",
+        "events": [
+          {
+            "at": "2026-11-04T10:00:00.000Z",
+            "type": "start"
+          }
+        ]
+      },
+      "note": ""
+    },
+    {
+      "name": "lineFromListItem unknown price",
+      "input": {
+        "item": {
+          "id": "i3",
+          "name": "Banana",
+          "unit": "kg",
+          "quantity": 1.5,
+          "checked": false,
+          "sortOrder": 2
+        }
+      },
+      "expected": null,
+      "note": ""
+    },
+    {
+      "name": "totals",
+      "input": {
+        "session": {
+          "id": "S1",
+          "store": "Mercado Bom",
+          "listId": "L",
+          "budgetCents": 30000,
+          "lines": [
+            {
+              "id": "l1",
+              "name": "Arroz",
+              "unit": "un",
+              "quantity": 2,
+              "unitPriceCents": 2590,
+              "priceSource": "label_ocr",
+              "listItemId": "i1",
+              "productId": "p1",
+              "checked": true,
+              "confidence": 0.9
+            },
+            {
+              "id": "l2",
+              "name": "Leite",
+              "unit": "un",
+              "quantity": 6,
+              "unitPriceCents": 549,
+              "priceSource": "list_estimate",
+              "listItemId": "i2",
+              "checked": true
+            },
+            {
+              "id": "l3",
+              "name": "Banana",
+              "unit": "kg",
+              "quantity": 1.5,
+              "unitPriceCents": 699,
+              "priceSource": "manual",
+              "checked": true,
+              "listItemId": "i3"
+            },
+            {
+              "id": "l4",
+              "name": "Chocolate",
+              "unit": "un",
+              "quantity": 1,
+              "unitPriceCents": 899,
+              "priceSource": "manual",
+              "checked": true
+            }
+          ],
+          "status": "active",
+          "startedAt": "2026-11-04T10:00:00.000Z",
+          "events": [
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "start"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l1",
+              "detail": "Arroz"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l2",
+              "detail": "Leite"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l3",
+              "detail": "Banana"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l4",
+              "detail": "Chocolate"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "itemCount": 10,
+        "lineCount": 4,
+        "grossCents": 10422,
+        "discountCents": 0,
+        "totalCents": 10422,
+        "budgetCents": 30000,
+        "remainingCents": 19578,
+        "overBudget": false,
+        "state": "sereno",
+        "unconfirmedLines": 0
+      },
+      "note": ""
+    },
+    {
+      "name": "plannedVsActual",
+      "input": {
+        "session": {
+          "id": "S1",
+          "store": "Mercado Bom",
+          "listId": "L",
+          "budgetCents": 30000,
+          "lines": [
+            {
+              "id": "l1",
+              "name": "Arroz",
+              "unit": "un",
+              "quantity": 2,
+              "unitPriceCents": 2590,
+              "priceSource": "label_ocr",
+              "listItemId": "i1",
+              "productId": "p1",
+              "checked": true,
+              "confidence": 0.9
+            },
+            {
+              "id": "l2",
+              "name": "Leite",
+              "unit": "un",
+              "quantity": 6,
+              "unitPriceCents": 549,
+              "priceSource": "list_estimate",
+              "listItemId": "i2",
+              "checked": true
+            },
+            {
+              "id": "l3",
+              "name": "Banana",
+              "unit": "kg",
+              "quantity": 1.5,
+              "unitPriceCents": 699,
+              "priceSource": "manual",
+              "checked": true,
+              "listItemId": "i3"
+            },
+            {
+              "id": "l4",
+              "name": "Chocolate",
+              "unit": "un",
+              "quantity": 1,
+              "unitPriceCents": 899,
+              "priceSource": "manual",
+              "checked": true
+            }
+          ],
+          "status": "active",
+          "startedAt": "2026-11-04T10:00:00.000Z",
+          "events": [
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "start"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l1",
+              "detail": "Arroz"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l2",
+              "detail": "Leite"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l3",
+              "detail": "Banana"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l4",
+              "detail": "Chocolate"
+            }
+          ]
+        },
+        "list": {
+          "id": "L",
+          "name": "Compra do mês",
+          "store": "Mercado Bom",
+          "budgetCents": 30000,
+          "items": [
+            {
+              "id": "i1",
+              "name": "Arroz",
+              "unit": "un",
+              "quantity": 2,
+              "estimatedUnitPriceCents": 2490,
+              "productId": "p1",
+              "checked": false,
+              "sortOrder": 0
+            },
+            {
+              "id": "i2",
+              "name": "Leite",
+              "unit": "un",
+              "quantity": 6,
+              "estimatedUnitPriceCents": 549,
+              "checked": false,
+              "sortOrder": 1
+            },
+            {
+              "id": "i3",
+              "name": "Banana",
+              "unit": "kg",
+              "quantity": 1.5,
+              "checked": false,
+              "sortOrder": 2
+            }
+          ],
+          "archived": false,
+          "createdAt": "2026-11-04T10:00:00.000Z",
+          "updatedAt": "2026-11-04T10:00:00.000Z"
+        }
+      },
+      "expected": {
+        "plannedKnownCents": 8274,
+        "actualCents": 10422,
+        "differenceCents": 2148,
+        "bought": 3,
+        "notBought": [],
+        "extra": [
+          "l4"
+        ],
+        "perItem": [
+          {
+            "item": "i1",
+            "line": "l1",
+            "plannedCents": 4980,
+            "actualCents": 5180
+          },
+          {
+            "item": "i2",
+            "line": "l2",
+            "plannedCents": 3294,
+            "actualCents": 3294
+          },
+          {
+            "item": "i3",
+            "line": "l3",
+            "plannedCents": null,
+            "actualCents": 1049
+          }
+        ]
+      },
+      "note": ""
+    },
+    {
+      "name": "finish",
+      "input": {
+        "session": {
+          "id": "S1",
+          "store": "Mercado Bom",
+          "listId": "L",
+          "budgetCents": 30000,
+          "lines": [
+            {
+              "id": "l1",
+              "name": "Arroz",
+              "unit": "un",
+              "quantity": 2,
+              "unitPriceCents": 2590,
+              "priceSource": "label_ocr",
+              "listItemId": "i1",
+              "productId": "p1",
+              "checked": true,
+              "confidence": 0.9
+            },
+            {
+              "id": "l2",
+              "name": "Leite",
+              "unit": "un",
+              "quantity": 6,
+              "unitPriceCents": 549,
+              "priceSource": "list_estimate",
+              "listItemId": "i2",
+              "checked": true
+            },
+            {
+              "id": "l3",
+              "name": "Banana",
+              "unit": "kg",
+              "quantity": 1.5,
+              "unitPriceCents": 699,
+              "priceSource": "manual",
+              "checked": true,
+              "listItemId": "i3"
+            },
+            {
+              "id": "l4",
+              "name": "Chocolate",
+              "unit": "un",
+              "quantity": 1,
+              "unitPriceCents": 899,
+              "priceSource": "manual",
+              "checked": true
+            }
+          ],
+          "status": "active",
+          "startedAt": "2026-11-04T10:00:00.000Z",
+          "events": [
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "start"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l1",
+              "detail": "Arroz"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l2",
+              "detail": "Leite"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l3",
+              "detail": "Banana"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l4",
+              "detail": "Chocolate"
+            }
+          ]
+        },
+        "now": "2026-11-04T10:00:00.000Z"
+      },
+      "expected": {
+        "status": "finished",
+        "observations": [
+          {
+            "productId": "p1",
+            "store": "Mercado Bom",
+            "unit": "un",
+            "unitPriceCents": 2590,
+            "observedAt": "2026-11-04T10:00:00.000Z",
+            "source": "label_ocr",
+            "sessionId": "S1",
+            "promo": false
+          }
+        ],
+        "suggestedTransaction": {
+          "amountCents": 10422,
+          "description": "Compras em Mercado Bom",
+          "merchant": "Mercado Bom",
+          "externalRef": "shopping:S1"
+        }
+      },
+      "note": ""
+    },
+    {
+      "name": "finish after registered",
+      "input": {
+        "session": {
+          "id": "S1",
+          "store": "Mercado Bom",
+          "listId": "L",
+          "budgetCents": 30000,
+          "lines": [
+            {
+              "id": "l1",
+              "name": "Arroz",
+              "unit": "un",
+              "quantity": 2,
+              "unitPriceCents": 2590,
+              "priceSource": "label_ocr",
+              "listItemId": "i1",
+              "productId": "p1",
+              "checked": true,
+              "confidence": 0.9
+            },
+            {
+              "id": "l2",
+              "name": "Leite",
+              "unit": "un",
+              "quantity": 6,
+              "unitPriceCents": 549,
+              "priceSource": "list_estimate",
+              "listItemId": "i2",
+              "checked": true
+            },
+            {
+              "id": "l3",
+              "name": "Banana",
+              "unit": "kg",
+              "quantity": 1.5,
+              "unitPriceCents": 699,
+              "priceSource": "manual",
+              "checked": true,
+              "listItemId": "i3"
+            },
+            {
+              "id": "l4",
+              "name": "Chocolate",
+              "unit": "un",
+              "quantity": 1,
+              "unitPriceCents": 899,
+              "priceSource": "manual",
+              "checked": true
+            }
+          ],
+          "status": "finished",
+          "startedAt": "2026-11-04T10:00:00.000Z",
+          "events": [
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "start"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l1",
+              "detail": "Arroz"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l2",
+              "detail": "Leite"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l3",
+              "detail": "Banana"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "add",
+              "lineId": "l4",
+              "detail": "Chocolate"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "finish"
+            },
+            {
+              "at": "2026-11-04T10:00:00.000Z",
+              "type": "register",
+              "detail": "tx9"
+            }
+          ],
+          "finishedAt": "2026-11-04T10:00:00.000Z",
+          "transactionId": "tx9"
+        }
+      },
+      "expected": null,
+      "note": ""
+    }
+  ]
+}

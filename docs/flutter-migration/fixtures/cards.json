@@ -1,0 +1,1406 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "invoiceMonthFor closing20 2026-11-20",
+      "input": {
+        "closingDay": 20,
+        "date": "2026-11-20"
+      },
+      "expected": "2026-11",
+      "note": ""
+    },
+    {
+      "name": "invoiceMonthFor closing20 2026-11-21",
+      "input": {
+        "closingDay": 20,
+        "date": "2026-11-21"
+      },
+      "expected": "2026-12",
+      "note": ""
+    },
+    {
+      "name": "invoiceMonthFor closing20 2026-12-31",
+      "input": {
+        "closingDay": 20,
+        "date": "2026-12-31"
+      },
+      "expected": "2027-01",
+      "note": ""
+    },
+    {
+      "name": "invoiceMonthFor closing20 2026-02-28",
+      "input": {
+        "closingDay": 20,
+        "date": "2026-02-28"
+      },
+      "expected": "2026-03",
+      "note": ""
+    },
+    {
+      "name": "invoiceDueDate k 2026-11",
+      "input": {
+        "closingDay": 20,
+        "dueDay": 27,
+        "month": "2026-11"
+      },
+      "expected": "2026-11-27",
+      "note": ""
+    },
+    {
+      "name": "invoiceDueDate k2 2026-11",
+      "input": {
+        "closingDay": 28,
+        "dueDay": 5,
+        "month": "2026-11"
+      },
+      "expected": "2026-12-05",
+      "note": ""
+    },
+    {
+      "name": "invoiceDueDate day31 feb",
+      "input": {
+        "closingDay": 10,
+        "dueDay": 31,
+        "month": "2026-02"
+      },
+      "expected": "2026-02-28",
+      "note": ""
+    },
+    {
+      "name": "invoice 2026-10 today 2026-11-04",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "k",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "p1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 10000,
+              "date": "2026-10-15",
+              "cardId": "k"
+            },
+            {
+              "id": "p2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 5000,
+              "date": "2026-10-25",
+              "cardId": "k"
+            },
+            {
+              "id": "p3",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 7000,
+              "date": "2026-11-03",
+              "cardId": "k"
+            },
+            {
+              "id": "p4",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 3000,
+              "date": "2026-11-03",
+              "cardId": "k",
+              "invoiceMonth": "2027-01"
+            },
+            {
+              "id": "pay1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 10000,
+              "date": "2026-10-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-10"
+            },
+            {
+              "id": "pay2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 2000,
+              "date": "2026-11-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-11"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "cardId": "k",
+        "month": "2026-10",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "cardId": "k",
+        "month": "2026-10",
+        "closingDate": "2026-10-20",
+        "dueDate": "2026-10-27",
+        "purchases": [
+          "p1"
+        ],
+        "payments": [
+          "pay1"
+        ],
+        "totalCents": 10000,
+        "paidCents": 10000,
+        "remainingCents": 0,
+        "state": "paid"
+      },
+      "note": ""
+    },
+    {
+      "name": "invoice 2026-11 today 2026-11-04",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "k",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "p1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 10000,
+              "date": "2026-10-15",
+              "cardId": "k"
+            },
+            {
+              "id": "p2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 5000,
+              "date": "2026-10-25",
+              "cardId": "k"
+            },
+            {
+              "id": "p3",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 7000,
+              "date": "2026-11-03",
+              "cardId": "k"
+            },
+            {
+              "id": "p4",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 3000,
+              "date": "2026-11-03",
+              "cardId": "k",
+              "invoiceMonth": "2027-01"
+            },
+            {
+              "id": "pay1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 10000,
+              "date": "2026-10-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-10"
+            },
+            {
+              "id": "pay2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 2000,
+              "date": "2026-11-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-11"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "cardId": "k",
+        "month": "2026-11",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "cardId": "k",
+        "month": "2026-11",
+        "closingDate": "2026-11-20",
+        "dueDate": "2026-11-27",
+        "purchases": [
+          "p2",
+          "p3"
+        ],
+        "payments": [
+          "pay2"
+        ],
+        "totalCents": 12000,
+        "paidCents": 2000,
+        "remainingCents": 10000,
+        "state": "open"
+      },
+      "note": ""
+    },
+    {
+      "name": "invoice 2026-11 today 2026-11-22",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "k",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "p1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 10000,
+              "date": "2026-10-15",
+              "cardId": "k"
+            },
+            {
+              "id": "p2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 5000,
+              "date": "2026-10-25",
+              "cardId": "k"
+            },
+            {
+              "id": "p3",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 7000,
+              "date": "2026-11-03",
+              "cardId": "k"
+            },
+            {
+              "id": "p4",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 3000,
+              "date": "2026-11-03",
+              "cardId": "k",
+              "invoiceMonth": "2027-01"
+            },
+            {
+              "id": "pay1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 10000,
+              "date": "2026-10-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-10"
+            },
+            {
+              "id": "pay2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 2000,
+              "date": "2026-11-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-11"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "cardId": "k",
+        "month": "2026-11",
+        "today": "2026-11-22"
+      },
+      "expected": {
+        "cardId": "k",
+        "month": "2026-11",
+        "closingDate": "2026-11-20",
+        "dueDate": "2026-11-27",
+        "purchases": [
+          "p2",
+          "p3"
+        ],
+        "payments": [
+          "pay2"
+        ],
+        "totalCents": 12000,
+        "paidCents": 2000,
+        "remainingCents": 10000,
+        "state": "closed"
+      },
+      "note": ""
+    },
+    {
+      "name": "invoice 2026-11 today 2026-11-28",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "k",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "p1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 10000,
+              "date": "2026-10-15",
+              "cardId": "k"
+            },
+            {
+              "id": "p2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 5000,
+              "date": "2026-10-25",
+              "cardId": "k"
+            },
+            {
+              "id": "p3",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 7000,
+              "date": "2026-11-03",
+              "cardId": "k"
+            },
+            {
+              "id": "p4",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 3000,
+              "date": "2026-11-03",
+              "cardId": "k",
+              "invoiceMonth": "2027-01"
+            },
+            {
+              "id": "pay1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 10000,
+              "date": "2026-10-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-10"
+            },
+            {
+              "id": "pay2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 2000,
+              "date": "2026-11-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-11"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "cardId": "k",
+        "month": "2026-11",
+        "today": "2026-11-28"
+      },
+      "expected": {
+        "cardId": "k",
+        "month": "2026-11",
+        "closingDate": "2026-11-20",
+        "dueDate": "2026-11-27",
+        "purchases": [
+          "p2",
+          "p3"
+        ],
+        "payments": [
+          "pay2"
+        ],
+        "totalCents": 12000,
+        "paidCents": 2000,
+        "remainingCents": 10000,
+        "state": "overdue"
+      },
+      "note": ""
+    },
+    {
+      "name": "invoice 2027-01 today 2026-11-04",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "k",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "p1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 10000,
+              "date": "2026-10-15",
+              "cardId": "k"
+            },
+            {
+              "id": "p2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 5000,
+              "date": "2026-10-25",
+              "cardId": "k"
+            },
+            {
+              "id": "p3",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 7000,
+              "date": "2026-11-03",
+              "cardId": "k"
+            },
+            {
+              "id": "p4",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 3000,
+              "date": "2026-11-03",
+              "cardId": "k",
+              "invoiceMonth": "2027-01"
+            },
+            {
+              "id": "pay1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 10000,
+              "date": "2026-10-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-10"
+            },
+            {
+              "id": "pay2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 2000,
+              "date": "2026-11-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-11"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "cardId": "k",
+        "month": "2027-01",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "cardId": "k",
+        "month": "2027-01",
+        "closingDate": "2027-01-20",
+        "dueDate": "2027-01-27",
+        "purchases": [
+          "p4"
+        ],
+        "payments": [],
+        "totalCents": 3000,
+        "paidCents": 0,
+        "remainingCents": 3000,
+        "state": "future"
+      },
+      "note": ""
+    },
+    {
+      "name": "cardCommitment 2026-11-04",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "k",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "p1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 10000,
+              "date": "2026-10-15",
+              "cardId": "k"
+            },
+            {
+              "id": "p2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 5000,
+              "date": "2026-10-25",
+              "cardId": "k"
+            },
+            {
+              "id": "p3",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 7000,
+              "date": "2026-11-03",
+              "cardId": "k"
+            },
+            {
+              "id": "p4",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 3000,
+              "date": "2026-11-03",
+              "cardId": "k",
+              "invoiceMonth": "2027-01"
+            },
+            {
+              "id": "pay1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 10000,
+              "date": "2026-10-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-10"
+            },
+            {
+              "id": "pay2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 2000,
+              "date": "2026-11-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-11"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "cardId": "k",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "currentInvoiceCents": 10000,
+        "closedUnpaidCents": 0,
+        "futureCents": 3000,
+        "outstandingCents": 13000,
+        "availableLimitCents": 87000
+      },
+      "note": ""
+    },
+    {
+      "name": "cardCommitment 2026-11-28",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "k",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "p1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 10000,
+              "date": "2026-10-15",
+              "cardId": "k"
+            },
+            {
+              "id": "p2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 5000,
+              "date": "2026-10-25",
+              "cardId": "k"
+            },
+            {
+              "id": "p3",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 7000,
+              "date": "2026-11-03",
+              "cardId": "k"
+            },
+            {
+              "id": "p4",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 3000,
+              "date": "2026-11-03",
+              "cardId": "k",
+              "invoiceMonth": "2027-01"
+            },
+            {
+              "id": "pay1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 10000,
+              "date": "2026-10-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-10"
+            },
+            {
+              "id": "pay2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 2000,
+              "date": "2026-11-27",
+              "cardId": "k",
+              "accountId": "a",
+              "invoiceMonth": "2026-11"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "cardId": "k",
+        "today": "2026-11-28"
+      },
+      "expected": {
+        "currentInvoiceCents": 0,
+        "closedUnpaidCents": 10000,
+        "futureCents": 3000,
+        "outstandingCents": 13000,
+        "availableLimitCents": 87000
+      },
+      "note": ""
+    },
+    {
+      "name": "planInstallments 100000/3 2026-11-25 +0",
+      "input": {
+        "totalCents": 100000,
+        "count": 3,
+        "purchaseDate": "2026-11-25",
+        "closingDay": 20,
+        "firstInvoiceOffsetMonths": 0
+      },
+      "expected": [
+        {
+          "number": 1,
+          "of": 3,
+          "amountCents": 33334,
+          "date": "2026-11-25",
+          "invoiceMonth": "2026-12"
+        },
+        {
+          "number": 2,
+          "of": 3,
+          "amountCents": 33333,
+          "date": "2026-12-25",
+          "invoiceMonth": "2027-01"
+        },
+        {
+          "number": 3,
+          "of": 3,
+          "amountCents": 33333,
+          "date": "2027-01-25",
+          "invoiceMonth": "2027-02"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "planInstallments 9000/3 2026-01-31 +1",
+      "input": {
+        "totalCents": 9000,
+        "count": 3,
+        "purchaseDate": "2026-01-31",
+        "closingDay": 20,
+        "firstInvoiceOffsetMonths": 1
+      },
+      "expected": [
+        {
+          "number": 1,
+          "of": 3,
+          "amountCents": 3000,
+          "date": "2026-01-31",
+          "invoiceMonth": "2026-03"
+        },
+        {
+          "number": 2,
+          "of": 3,
+          "amountCents": 3000,
+          "date": "2026-02-28",
+          "invoiceMonth": "2026-04"
+        },
+        {
+          "number": 3,
+          "of": 3,
+          "amountCents": 3000,
+          "date": "2026-03-31",
+          "invoiceMonth": "2026-05"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "planInstallments 100/3 2026-11-20 +0",
+      "input": {
+        "totalCents": 100,
+        "count": 3,
+        "purchaseDate": "2026-11-20",
+        "closingDay": 20,
+        "firstInvoiceOffsetMonths": 0
+      },
+      "expected": [
+        {
+          "number": 1,
+          "of": 3,
+          "amountCents": 34,
+          "date": "2026-11-20",
+          "invoiceMonth": "2026-11"
+        },
+        {
+          "number": 2,
+          "of": 3,
+          "amountCents": 33,
+          "date": "2026-12-20",
+          "invoiceMonth": "2026-12"
+        },
+        {
+          "number": 3,
+          "of": 3,
+          "amountCents": 33,
+          "date": "2027-01-20",
+          "invoiceMonth": "2027-01"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "planInstallments 123457/12 2026-11-21 +0",
+      "input": {
+        "totalCents": 123457,
+        "count": 12,
+        "purchaseDate": "2026-11-21",
+        "closingDay": 20,
+        "firstInvoiceOffsetMonths": 0
+      },
+      "expected": [
+        {
+          "number": 1,
+          "of": 12,
+          "amountCents": 10289,
+          "date": "2026-11-21",
+          "invoiceMonth": "2026-12"
+        },
+        {
+          "number": 2,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2026-12-21",
+          "invoiceMonth": "2027-01"
+        },
+        {
+          "number": 3,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2027-01-21",
+          "invoiceMonth": "2027-02"
+        },
+        {
+          "number": 4,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2027-02-21",
+          "invoiceMonth": "2027-03"
+        },
+        {
+          "number": 5,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2027-03-21",
+          "invoiceMonth": "2027-04"
+        },
+        {
+          "number": 6,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2027-04-21",
+          "invoiceMonth": "2027-05"
+        },
+        {
+          "number": 7,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2027-05-21",
+          "invoiceMonth": "2027-06"
+        },
+        {
+          "number": 8,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2027-06-21",
+          "invoiceMonth": "2027-07"
+        },
+        {
+          "number": 9,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2027-07-21",
+          "invoiceMonth": "2027-08"
+        },
+        {
+          "number": 10,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2027-08-21",
+          "invoiceMonth": "2027-09"
+        },
+        {
+          "number": 11,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2027-09-21",
+          "invoiceMonth": "2027-10"
+        },
+        {
+          "number": 12,
+          "of": 12,
+          "amountCents": 10288,
+          "date": "2027-10-21",
+          "invoiceMonth": "2027-11"
+        }
+      ],
+      "note": ""
+    }
+  ]
+}

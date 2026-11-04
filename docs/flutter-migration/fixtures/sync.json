@@ -1,0 +1,135 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "only changed side",
+      "input": {
+        "base": {
+          "id": "t",
+          "amountCents": 1000,
+          "description": "a",
+          "status": "planned",
+          "updatedAt": "2026-11-01T00:00:00Z"
+        },
+        "local": {
+          "id": "t",
+          "amountCents": 1000,
+          "description": "local",
+          "status": "planned",
+          "updatedAt": "2026-11-01T00:00:00Z"
+        },
+        "remote": {
+          "id": "t",
+          "amountCents": 1000,
+          "description": "a",
+          "status": "settled",
+          "updatedAt": "2026-11-01T00:00:00Z"
+        }
+      },
+      "expected": {
+        "merged": {
+          "id": "t",
+          "amountCents": 1000,
+          "description": "local",
+          "status": "settled",
+          "updatedAt": "2026-11-01T00:00:00Z"
+        }
+      },
+      "note": ""
+    },
+    {
+      "name": "monetary conflict",
+      "input": {
+        "base": {
+          "id": "t",
+          "amountCents": 1000,
+          "description": "a",
+          "status": "planned",
+          "updatedAt": "2026-11-01T00:00:00Z"
+        },
+        "local": {
+          "id": "t",
+          "amountCents": 2000,
+          "description": "a",
+          "status": "planned",
+          "updatedAt": "2026-11-02T00:00:00Z"
+        },
+        "remote": {
+          "id": "t",
+          "amountCents": 3000,
+          "description": "a",
+          "status": "planned",
+          "updatedAt": "2026-11-03T00:00:00Z"
+        }
+      },
+      "expected": {
+        "merged": {
+          "id": "t",
+          "amountCents": 2000,
+          "description": "a",
+          "status": "planned",
+          "updatedAt": "2026-11-03T00:00:00Z"
+        },
+        "conflict": {
+          "entityType": "transaction",
+          "entityId": "t",
+          "local": {
+            "id": "t",
+            "amountCents": 2000,
+            "description": "a",
+            "status": "planned",
+            "updatedAt": "2026-11-02T00:00:00Z"
+          },
+          "remote": {
+            "id": "t",
+            "amountCents": 3000,
+            "description": "a",
+            "status": "planned",
+            "updatedAt": "2026-11-03T00:00:00Z"
+          },
+          "fields": [
+            "amountCents"
+          ],
+          "detectedAt": "now"
+        }
+      },
+      "note": ""
+    },
+    {
+      "name": "lww text",
+      "input": {
+        "base": {
+          "id": "t",
+          "amountCents": 1000,
+          "description": "a",
+          "status": "planned",
+          "updatedAt": "2026-11-01T00:00:00Z"
+        },
+        "local": {
+          "id": "t",
+          "amountCents": 1000,
+          "description": "L",
+          "status": "planned",
+          "updatedAt": "2026-11-02T00:00:00Z"
+        },
+        "remote": {
+          "id": "t",
+          "amountCents": 1000,
+          "description": "R",
+          "status": "planned",
+          "updatedAt": "2026-11-03T00:00:00Z"
+        }
+      },
+      "expected": {
+        "merged": {
+          "id": "t",
+          "amountCents": 1000,
+          "description": "R",
+          "status": "planned",
+          "updatedAt": "2026-11-03T00:00:00Z"
+        }
+      },
+      "note": ""
+    }
+  ]
+}

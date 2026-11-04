@@ -1,0 +1,339 @@
+{
+  "generatedFrom": "packages/shopping (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "parsePriceTag typical",
+      "input": {
+        "lines": [
+          {
+            "text": "ARROZ TIO JOAO TIPO 1 5KG",
+            "confidence": 0.9,
+            "height": 18
+          },
+          {
+            "text": "R$ 24,90",
+            "confidence": 0.95,
+            "height": 48
+          },
+          {
+            "text": "R$ 4,98/kg",
+            "confidence": 0.8,
+            "height": 14
+          },
+          {
+            "text": "COD 123456",
+            "confidence": 0.9,
+            "height": 12
+          }
+        ]
+      },
+      "expected": {
+        "name": "ARROZ TIO JOAO TIPO 1 5KG",
+        "presentation": {
+          "quantity": 5,
+          "unit": "kg"
+        },
+        "priceCents": 2490,
+        "pricePerUnit": {
+          "cents": 498,
+          "unit": "kg"
+        },
+        "priceUnit": "un",
+        "internalCode": "123456",
+        "confidence": 0.94,
+        "candidates": [
+          {
+            "cents": 2490,
+            "source": "R$ 24,90",
+            "score": 0.9,
+            "kind": "price"
+          },
+          {
+            "cents": 498,
+            "source": "R$ 4,98/kg",
+            "score": 0.6,
+            "kind": "per_unit",
+            "unit": "kg"
+          }
+        ],
+        "warnings": []
+      },
+      "note": ""
+    },
+    {
+      "name": "parsePriceTag de/por",
+      "input": {
+        "lines": [
+          {
+            "text": "LEITE INTEGRAL 1L",
+            "height": 16
+          },
+          {
+            "text": "DE R$ 6,49",
+            "height": 20
+          },
+          {
+            "text": "POR R$ 5,49",
+            "height": 44
+          }
+        ]
+      },
+      "expected": {
+        "name": "LEITE INTEGRAL 1L",
+        "presentation": {
+          "quantity": 1,
+          "unit": "l"
+        },
+        "priceCents": 549,
+        "promoFromCents": 649,
+        "priceUnit": "un",
+        "confidence": 0.95,
+        "candidates": [
+          {
+            "cents": 549,
+            "source": "POR R$ 5,49",
+            "score": 0.95,
+            "kind": "promo_to"
+          },
+          {
+            "cents": 649,
+            "source": "DE R$ 6,49",
+            "score": 0.3,
+            "kind": "promo_from"
+          }
+        ],
+        "warnings": []
+      },
+      "note": ""
+    },
+    {
+      "name": "parsePriceTag per kg",
+      "input": {
+        "lines": [
+          {
+            "text": "BANANA PRATA",
+            "height": 20
+          },
+          {
+            "text": "R$ 6,99 kg",
+            "height": 50
+          }
+        ]
+      },
+      "expected": {
+        "name": "BANANA PRATA",
+        "priceCents": 699,
+        "pricePerUnit": {
+          "cents": 699,
+          "unit": "kg"
+        },
+        "priceUnit": "kg",
+        "confidence": 0.8,
+        "candidates": [
+          {
+            "cents": 699,
+            "source": "R$ 6,99 kg",
+            "score": 0.6,
+            "kind": "per_unit",
+            "unit": "kg"
+          }
+        ],
+        "warnings": []
+      },
+      "note": ""
+    },
+    {
+      "name": "parsePriceTag installments ambiguity",
+      "input": {
+        "lines": [
+          {
+            "text": "CAFETEIRA ELETRICA",
+            "height": 16
+          },
+          {
+            "text": "R$ 199,90",
+            "height": 40
+          },
+          {
+            "text": "10x de R$ 19,99",
+            "height": 14
+          },
+          {
+            "text": "R$ 189,90 no app",
+            "height": 38
+          }
+        ]
+      },
+      "expected": {
+        "name": "CAFETEIRA ELETRICA",
+        "priceCents": 19990,
+        "promoFromCents": 1999,
+        "priceUnit": "un",
+        "confidence": 0.69,
+        "candidates": [
+          {
+            "cents": 19990,
+            "source": "R$ 199,90",
+            "score": 0.9,
+            "kind": "price"
+          },
+          {
+            "cents": 18990,
+            "source": "R$ 189,90 no app",
+            "score": 0.8799999999999999,
+            "kind": "price"
+          },
+          {
+            "cents": 1999,
+            "source": "de R$ 19,99",
+            "score": 0.3,
+            "kind": "promo_from"
+          },
+          {
+            "cents": 1999,
+            "source": "10x de R$ 19,99",
+            "score": 0.2,
+            "kind": "installment"
+          }
+        ],
+        "warnings": [
+          "Mais de um preço parecido na etiqueta; confirme o valor."
+        ]
+      },
+      "note": ""
+    },
+    {
+      "name": "parsePriceTag noise",
+      "input": {
+        "lines": [
+          {
+            "text": "OFERTA",
+            "height": 10
+          },
+          {
+            "text": "S0 HOJE",
+            "confidence": 0.3,
+            "height": 10
+          }
+        ]
+      },
+      "expected": {
+        "name": "S0 HOJE",
+        "priceUnit": "un",
+        "confidence": 0.15,
+        "candidates": [],
+        "warnings": [
+          "Nenhum preço reconhecido; informe manualmente."
+        ]
+      },
+      "note": ""
+    },
+    {
+      "name": "parsePriceTag barcode on tag",
+      "input": {
+        "lines": [
+          {
+            "text": "SABAO EM PO 1KG"
+          },
+          {
+            "text": "7891000100103"
+          },
+          {
+            "text": "12,90"
+          }
+        ]
+      },
+      "expected": {
+        "name": "SABAO EM PO 1KG",
+        "presentation": {
+          "quantity": 1,
+          "unit": "kg"
+        },
+        "priceCents": 1290,
+        "priceUnit": "un",
+        "barcode": "7891000100103",
+        "confidence": 0.68,
+        "candidates": [
+          {
+            "cents": 1290,
+            "source": "12,90",
+            "score": 0.51,
+            "kind": "price"
+          }
+        ],
+        "warnings": []
+      },
+      "note": ""
+    },
+    {
+      "name": "parsePriceTag no heights",
+      "input": {
+        "lines": [
+          {
+            "text": "QUEIJO MUSSARELA"
+          },
+          {
+            "text": "39,90"
+          },
+          {
+            "text": "kg"
+          }
+        ]
+      },
+      "expected": {
+        "name": "QUEIJO MUSSARELA",
+        "priceCents": 3990,
+        "pricePerUnit": {
+          "cents": 3990,
+          "unit": "kg"
+        },
+        "priceUnit": "kg",
+        "confidence": 0.8,
+        "candidates": [
+          {
+            "cents": 3990,
+            "source": "39,90\nkg",
+            "score": 0.6,
+            "kind": "per_unit",
+            "unit": "kg"
+          }
+        ],
+        "warnings": []
+      },
+      "note": ""
+    },
+    {
+      "name": "parsePriceTag promo only por",
+      "input": {
+        "lines": [
+          {
+            "text": "BISCOITO 200G"
+          },
+          {
+            "text": "POR 3,99"
+          }
+        ]
+      },
+      "expected": {
+        "name": "BISCOITO 200G",
+        "presentation": {
+          "quantity": 200,
+          "unit": "g"
+        },
+        "priceCents": 399,
+        "priceUnit": "un",
+        "confidence": 0.95,
+        "candidates": [
+          {
+            "cents": 399,
+            "source": "POR 3,99",
+            "score": 0.95,
+            "kind": "promo_to"
+          }
+        ],
+        "warnings": []
+      },
+      "note": ""
+    }
+  ]
+}

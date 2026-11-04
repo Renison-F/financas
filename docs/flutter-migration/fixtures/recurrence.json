@@ -1,0 +1,144 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "monthly from 31",
+      "input": {
+        "rule": {
+          "id": "r",
+          "frequency": "monthly",
+          "startDate": "2026-01-31"
+        },
+        "from": "2026-01-01",
+        "to": "2026-05-31"
+      },
+      "expected": [
+        "2026-01-31",
+        "2026-02-28",
+        "2026-03-31",
+        "2026-04-30",
+        "2026-05-31"
+      ],
+      "note": ""
+    },
+    {
+      "name": "monthly count 3",
+      "input": {
+        "rule": {
+          "id": "r",
+          "frequency": "monthly",
+          "startDate": "2026-01-10",
+          "count": 3
+        },
+        "from": "2026-01-01",
+        "to": "2027-01-01"
+      },
+      "expected": [
+        "2026-01-10",
+        "2026-02-10",
+        "2026-03-10"
+      ],
+      "note": ""
+    },
+    {
+      "name": "weekly endDate",
+      "input": {
+        "rule": {
+          "id": "r",
+          "frequency": "weekly",
+          "startDate": "2026-01-01",
+          "endDate": "2026-01-20"
+        },
+        "from": "2026-01-01",
+        "to": "2026-03-01"
+      },
+      "expected": [
+        "2026-01-01",
+        "2026-01-08",
+        "2026-01-15"
+      ],
+      "note": ""
+    },
+    {
+      "name": "yearly leap",
+      "input": {
+        "rule": {
+          "id": "r",
+          "frequency": "yearly",
+          "startDate": "2024-02-29"
+        },
+        "from": "2024-01-01",
+        "to": "2026-12-31"
+      },
+      "expected": [
+        "2024-02-29",
+        "2025-02-28",
+        "2026-02-28"
+      ],
+      "note": ""
+    },
+    {
+      "name": "biweekly window",
+      "input": {
+        "rule": {
+          "id": "r",
+          "frequency": "biweekly",
+          "startDate": "2026-01-01"
+        },
+        "from": "2026-01-20",
+        "to": "2026-02-20"
+      },
+      "expected": [
+        "2026-01-29",
+        "2026-02-12"
+      ],
+      "note": ""
+    },
+    {
+      "name": "quarterly",
+      "input": {
+        "rule": {
+          "id": "r",
+          "frequency": "quarterly",
+          "startDate": "2026-01-15"
+        },
+        "from": "2026-01-01",
+        "to": "2026-12-31"
+      },
+      "expected": [
+        "2026-01-15",
+        "2026-04-15",
+        "2026-07-15",
+        "2026-10-15"
+      ],
+      "note": ""
+    },
+    {
+      "name": "next after",
+      "input": {
+        "rule": {
+          "id": "r",
+          "frequency": "monthly",
+          "startDate": "2026-01-05"
+        },
+        "after": "2026-11-04"
+      },
+      "expected": "2026-11-05",
+      "note": ""
+    },
+    {
+      "name": "next ended",
+      "input": {
+        "rule": {
+          "id": "r",
+          "frequency": "monthly",
+          "startDate": "2026-01-05",
+          "count": 2
+        },
+        "after": "2026-11-04"
+      },
+      "expected": null,
+      "note": ""
+    }
+  ]
+}

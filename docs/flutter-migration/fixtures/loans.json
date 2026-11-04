@@ -1,0 +1,848 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "price 1000000 2% 12",
+      "input": {
+        "principalCents": 1000000,
+        "monthlyRatePercent": 2,
+        "n": 12
+      },
+      "expected": 94560,
+      "note": ""
+    },
+    {
+      "name": "price 1200000 0% 12",
+      "input": {
+        "principalCents": 1200000,
+        "monthlyRatePercent": 0,
+        "n": 12
+      },
+      "expected": 100000,
+      "note": ""
+    },
+    {
+      "name": "price 5000000 1.99% 48",
+      "input": {
+        "principalCents": 5000000,
+        "monthlyRatePercent": 1.99,
+        "n": 48
+      },
+      "expected": 162678,
+      "note": ""
+    },
+    {
+      "name": "price 123456 3.5% 7",
+      "input": {
+        "principalCents": 123456,
+        "monthlyRatePercent": 3.5,
+        "n": 7
+      },
+      "expected": 20191,
+      "note": ""
+    },
+    {
+      "name": "schedule price",
+      "input": {
+        "loan": {
+          "id": "l",
+          "name": "Empréstimo",
+          "principalCents": 1000000,
+          "monthlyRatePercent": 2,
+          "termMonths": 12,
+          "system": "price",
+          "firstDueDate": "2026-01-10",
+          "monthlyFeeCents": 0,
+          "upfrontFeesCents": 0,
+          "archived": false,
+          "createdAt": "2026-11-04T12:00:00.000Z",
+          "updatedAt": "2026-11-04T12:00:00.000Z"
+        }
+      },
+      "expected": [
+        {
+          "number": 1,
+          "dueDate": "2026-01-10",
+          "installmentCents": 94560,
+          "interestCents": 20000,
+          "amortizationCents": 74560,
+          "feeCents": 0,
+          "balanceAfterCents": 925440
+        },
+        {
+          "number": 2,
+          "dueDate": "2026-02-10",
+          "installmentCents": 94560,
+          "interestCents": 18509,
+          "amortizationCents": 76051,
+          "feeCents": 0,
+          "balanceAfterCents": 849389
+        },
+        {
+          "number": 3,
+          "dueDate": "2026-03-10",
+          "installmentCents": 94560,
+          "interestCents": 16988,
+          "amortizationCents": 77572,
+          "feeCents": 0,
+          "balanceAfterCents": 771817
+        },
+        {
+          "number": 4,
+          "dueDate": "2026-04-10",
+          "installmentCents": 94560,
+          "interestCents": 15436,
+          "amortizationCents": 79124,
+          "feeCents": 0,
+          "balanceAfterCents": 692693
+        },
+        {
+          "number": 5,
+          "dueDate": "2026-05-10",
+          "installmentCents": 94560,
+          "interestCents": 13854,
+          "amortizationCents": 80706,
+          "feeCents": 0,
+          "balanceAfterCents": 611987
+        },
+        {
+          "number": 6,
+          "dueDate": "2026-06-10",
+          "installmentCents": 94560,
+          "interestCents": 12240,
+          "amortizationCents": 82320,
+          "feeCents": 0,
+          "balanceAfterCents": 529667
+        },
+        {
+          "number": 7,
+          "dueDate": "2026-07-10",
+          "installmentCents": 94560,
+          "interestCents": 10593,
+          "amortizationCents": 83967,
+          "feeCents": 0,
+          "balanceAfterCents": 445700
+        },
+        {
+          "number": 8,
+          "dueDate": "2026-08-10",
+          "installmentCents": 94560,
+          "interestCents": 8914,
+          "amortizationCents": 85646,
+          "feeCents": 0,
+          "balanceAfterCents": 360054
+        },
+        {
+          "number": 9,
+          "dueDate": "2026-09-10",
+          "installmentCents": 94560,
+          "interestCents": 7201,
+          "amortizationCents": 87359,
+          "feeCents": 0,
+          "balanceAfterCents": 272695
+        },
+        {
+          "number": 10,
+          "dueDate": "2026-10-10",
+          "installmentCents": 94560,
+          "interestCents": 5454,
+          "amortizationCents": 89106,
+          "feeCents": 0,
+          "balanceAfterCents": 183589
+        },
+        {
+          "number": 11,
+          "dueDate": "2026-11-10",
+          "installmentCents": 94560,
+          "interestCents": 3672,
+          "amortizationCents": 90888,
+          "feeCents": 0,
+          "balanceAfterCents": 92701
+        },
+        {
+          "number": 12,
+          "dueDate": "2026-12-10",
+          "installmentCents": 94555,
+          "interestCents": 1854,
+          "amortizationCents": 92701,
+          "feeCents": 0,
+          "balanceAfterCents": 0
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "schedule sac",
+      "input": {
+        "loan": {
+          "id": "loan_49",
+          "name": "Empréstimo",
+          "principalCents": 1200000,
+          "monthlyRatePercent": 1,
+          "termMonths": 12,
+          "system": "sac",
+          "firstDueDate": "2026-12-10",
+          "monthlyFeeCents": 0,
+          "upfrontFeesCents": 0,
+          "archived": false,
+          "createdAt": "2026-11-04T12:00:00.000Z",
+          "updatedAt": "2026-11-04T12:00:00.000Z"
+        }
+      },
+      "expected": [
+        {
+          "number": 1,
+          "dueDate": "2026-12-10",
+          "installmentCents": 112000,
+          "interestCents": 12000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 1100000
+        },
+        {
+          "number": 2,
+          "dueDate": "2027-01-10",
+          "installmentCents": 111000,
+          "interestCents": 11000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 1000000
+        },
+        {
+          "number": 3,
+          "dueDate": "2027-02-10",
+          "installmentCents": 110000,
+          "interestCents": 10000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 900000
+        },
+        {
+          "number": 4,
+          "dueDate": "2027-03-10",
+          "installmentCents": 109000,
+          "interestCents": 9000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 800000
+        },
+        {
+          "number": 5,
+          "dueDate": "2027-04-10",
+          "installmentCents": 108000,
+          "interestCents": 8000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 700000
+        },
+        {
+          "number": 6,
+          "dueDate": "2027-05-10",
+          "installmentCents": 107000,
+          "interestCents": 7000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 600000
+        },
+        {
+          "number": 7,
+          "dueDate": "2027-06-10",
+          "installmentCents": 106000,
+          "interestCents": 6000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 500000
+        },
+        {
+          "number": 8,
+          "dueDate": "2027-07-10",
+          "installmentCents": 105000,
+          "interestCents": 5000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 400000
+        },
+        {
+          "number": 9,
+          "dueDate": "2027-08-10",
+          "installmentCents": 104000,
+          "interestCents": 4000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 300000
+        },
+        {
+          "number": 10,
+          "dueDate": "2027-09-10",
+          "installmentCents": 103000,
+          "interestCents": 3000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 200000
+        },
+        {
+          "number": 11,
+          "dueDate": "2027-10-10",
+          "installmentCents": 102000,
+          "interestCents": 2000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 100000
+        },
+        {
+          "number": 12,
+          "dueDate": "2027-11-10",
+          "installmentCents": 101000,
+          "interestCents": 1000,
+          "amortizationCents": 100000,
+          "feeCents": 0,
+          "balanceAfterCents": 0
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "schedule fees",
+      "input": {
+        "loan": {
+          "id": "loan_50",
+          "name": "Empréstimo",
+          "principalCents": 100000,
+          "monthlyRatePercent": 0,
+          "termMonths": 2,
+          "system": "price",
+          "firstDueDate": "2026-12-10",
+          "monthlyFeeCents": 500,
+          "upfrontFeesCents": 1000,
+          "archived": false,
+          "createdAt": "2026-11-04T12:00:00.000Z",
+          "updatedAt": "2026-11-04T12:00:00.000Z"
+        }
+      },
+      "expected": [
+        {
+          "number": 1,
+          "dueDate": "2026-12-10",
+          "installmentCents": 51000,
+          "interestCents": 0,
+          "amortizationCents": 50500,
+          "feeCents": 500,
+          "balanceAfterCents": 50500
+        },
+        {
+          "number": 2,
+          "dueDate": "2027-01-10",
+          "installmentCents": 51000,
+          "interestCents": 0,
+          "amortizationCents": 50500,
+          "feeCents": 500,
+          "balanceAfterCents": 0
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "schedule price 2.5% 36",
+      "input": {
+        "loan": {
+          "id": "loan_54",
+          "name": "Empréstimo",
+          "principalCents": 2500000,
+          "monthlyRatePercent": 2.5,
+          "termMonths": 36,
+          "system": "price",
+          "firstDueDate": "2026-01-31",
+          "monthlyFeeCents": 0,
+          "upfrontFeesCents": 0,
+          "archived": false,
+          "createdAt": "2026-11-04T12:00:00.000Z",
+          "updatedAt": "2026-11-04T12:00:00.000Z"
+        }
+      },
+      "expected": [
+        {
+          "number": 1,
+          "dueDate": "2026-01-31",
+          "installmentCents": 106129,
+          "interestCents": 62500,
+          "amortizationCents": 43629,
+          "feeCents": 0,
+          "balanceAfterCents": 2456371
+        },
+        {
+          "number": 2,
+          "dueDate": "2026-02-28",
+          "installmentCents": 106129,
+          "interestCents": 61409,
+          "amortizationCents": 44720,
+          "feeCents": 0,
+          "balanceAfterCents": 2411651
+        },
+        {
+          "number": 3,
+          "dueDate": "2026-03-31",
+          "installmentCents": 106129,
+          "interestCents": 60291,
+          "amortizationCents": 45838,
+          "feeCents": 0,
+          "balanceAfterCents": 2365813
+        },
+        {
+          "number": 4,
+          "dueDate": "2026-04-30",
+          "installmentCents": 106129,
+          "interestCents": 59145,
+          "amortizationCents": 46984,
+          "feeCents": 0,
+          "balanceAfterCents": 2318829
+        },
+        {
+          "number": 5,
+          "dueDate": "2026-05-31",
+          "installmentCents": 106129,
+          "interestCents": 57971,
+          "amortizationCents": 48158,
+          "feeCents": 0,
+          "balanceAfterCents": 2270671
+        },
+        {
+          "number": 6,
+          "dueDate": "2026-06-30",
+          "installmentCents": 106129,
+          "interestCents": 56767,
+          "amortizationCents": 49362,
+          "feeCents": 0,
+          "balanceAfterCents": 2221309
+        },
+        {
+          "number": 7,
+          "dueDate": "2026-07-31",
+          "installmentCents": 106129,
+          "interestCents": 55533,
+          "amortizationCents": 50596,
+          "feeCents": 0,
+          "balanceAfterCents": 2170713
+        },
+        {
+          "number": 8,
+          "dueDate": "2026-08-31",
+          "installmentCents": 106129,
+          "interestCents": 54268,
+          "amortizationCents": 51861,
+          "feeCents": 0,
+          "balanceAfterCents": 2118852
+        },
+        {
+          "number": 9,
+          "dueDate": "2026-09-30",
+          "installmentCents": 106129,
+          "interestCents": 52971,
+          "amortizationCents": 53158,
+          "feeCents": 0,
+          "balanceAfterCents": 2065694
+        },
+        {
+          "number": 10,
+          "dueDate": "2026-10-31",
+          "installmentCents": 106129,
+          "interestCents": 51642,
+          "amortizationCents": 54487,
+          "feeCents": 0,
+          "balanceAfterCents": 2011207
+        },
+        {
+          "number": 11,
+          "dueDate": "2026-11-30",
+          "installmentCents": 106129,
+          "interestCents": 50280,
+          "amortizationCents": 55849,
+          "feeCents": 0,
+          "balanceAfterCents": 1955358
+        },
+        {
+          "number": 12,
+          "dueDate": "2026-12-31",
+          "installmentCents": 106129,
+          "interestCents": 48884,
+          "amortizationCents": 57245,
+          "feeCents": 0,
+          "balanceAfterCents": 1898113
+        },
+        {
+          "number": 13,
+          "dueDate": "2027-01-31",
+          "installmentCents": 106129,
+          "interestCents": 47453,
+          "amortizationCents": 58676,
+          "feeCents": 0,
+          "balanceAfterCents": 1839437
+        },
+        {
+          "number": 14,
+          "dueDate": "2027-02-28",
+          "installmentCents": 106129,
+          "interestCents": 45986,
+          "amortizationCents": 60143,
+          "feeCents": 0,
+          "balanceAfterCents": 1779294
+        },
+        {
+          "number": 15,
+          "dueDate": "2027-03-31",
+          "installmentCents": 106129,
+          "interestCents": 44482,
+          "amortizationCents": 61647,
+          "feeCents": 0,
+          "balanceAfterCents": 1717647
+        },
+        {
+          "number": 16,
+          "dueDate": "2027-04-30",
+          "installmentCents": 106129,
+          "interestCents": 42941,
+          "amortizationCents": 63188,
+          "feeCents": 0,
+          "balanceAfterCents": 1654459
+        },
+        {
+          "number": 17,
+          "dueDate": "2027-05-31",
+          "installmentCents": 106129,
+          "interestCents": 41361,
+          "amortizationCents": 64768,
+          "feeCents": 0,
+          "balanceAfterCents": 1589691
+        },
+        {
+          "number": 18,
+          "dueDate": "2027-06-30",
+          "installmentCents": 106129,
+          "interestCents": 39742,
+          "amortizationCents": 66387,
+          "feeCents": 0,
+          "balanceAfterCents": 1523304
+        },
+        {
+          "number": 19,
+          "dueDate": "2027-07-31",
+          "installmentCents": 106129,
+          "interestCents": 38083,
+          "amortizationCents": 68046,
+          "feeCents": 0,
+          "balanceAfterCents": 1455258
+        },
+        {
+          "number": 20,
+          "dueDate": "2027-08-31",
+          "installmentCents": 106129,
+          "interestCents": 36381,
+          "amortizationCents": 69748,
+          "feeCents": 0,
+          "balanceAfterCents": 1385510
+        },
+        {
+          "number": 21,
+          "dueDate": "2027-09-30",
+          "installmentCents": 106129,
+          "interestCents": 34638,
+          "amortizationCents": 71491,
+          "feeCents": 0,
+          "balanceAfterCents": 1314019
+        },
+        {
+          "number": 22,
+          "dueDate": "2027-10-31",
+          "installmentCents": 106129,
+          "interestCents": 32850,
+          "amortizationCents": 73279,
+          "feeCents": 0,
+          "balanceAfterCents": 1240740
+        },
+        {
+          "number": 23,
+          "dueDate": "2027-11-30",
+          "installmentCents": 106129,
+          "interestCents": 31019,
+          "amortizationCents": 75110,
+          "feeCents": 0,
+          "balanceAfterCents": 1165630
+        },
+        {
+          "number": 24,
+          "dueDate": "2027-12-31",
+          "installmentCents": 106129,
+          "interestCents": 29141,
+          "amortizationCents": 76988,
+          "feeCents": 0,
+          "balanceAfterCents": 1088642
+        },
+        {
+          "number": 25,
+          "dueDate": "2028-01-31",
+          "installmentCents": 106129,
+          "interestCents": 27216,
+          "amortizationCents": 78913,
+          "feeCents": 0,
+          "balanceAfterCents": 1009729
+        },
+        {
+          "number": 26,
+          "dueDate": "2028-02-29",
+          "installmentCents": 106129,
+          "interestCents": 25243,
+          "amortizationCents": 80886,
+          "feeCents": 0,
+          "balanceAfterCents": 928843
+        },
+        {
+          "number": 27,
+          "dueDate": "2028-03-31",
+          "installmentCents": 106129,
+          "interestCents": 23221,
+          "amortizationCents": 82908,
+          "feeCents": 0,
+          "balanceAfterCents": 845935
+        },
+        {
+          "number": 28,
+          "dueDate": "2028-04-30",
+          "installmentCents": 106129,
+          "interestCents": 21148,
+          "amortizationCents": 84981,
+          "feeCents": 0,
+          "balanceAfterCents": 760954
+        },
+        {
+          "number": 29,
+          "dueDate": "2028-05-31",
+          "installmentCents": 106129,
+          "interestCents": 19024,
+          "amortizationCents": 87105,
+          "feeCents": 0,
+          "balanceAfterCents": 673849
+        },
+        {
+          "number": 30,
+          "dueDate": "2028-06-30",
+          "installmentCents": 106129,
+          "interestCents": 16846,
+          "amortizationCents": 89283,
+          "feeCents": 0,
+          "balanceAfterCents": 584566
+        },
+        {
+          "number": 31,
+          "dueDate": "2028-07-31",
+          "installmentCents": 106129,
+          "interestCents": 14614,
+          "amortizationCents": 91515,
+          "feeCents": 0,
+          "balanceAfterCents": 493051
+        },
+        {
+          "number": 32,
+          "dueDate": "2028-08-31",
+          "installmentCents": 106129,
+          "interestCents": 12326,
+          "amortizationCents": 93803,
+          "feeCents": 0,
+          "balanceAfterCents": 399248
+        },
+        {
+          "number": 33,
+          "dueDate": "2028-09-30",
+          "installmentCents": 106129,
+          "interestCents": 9981,
+          "amortizationCents": 96148,
+          "feeCents": 0,
+          "balanceAfterCents": 303100
+        },
+        {
+          "number": 34,
+          "dueDate": "2028-10-31",
+          "installmentCents": 106129,
+          "interestCents": 7578,
+          "amortizationCents": 98551,
+          "feeCents": 0,
+          "balanceAfterCents": 204549
+        },
+        {
+          "number": 35,
+          "dueDate": "2028-11-30",
+          "installmentCents": 106129,
+          "interestCents": 5114,
+          "amortizationCents": 101015,
+          "feeCents": 0,
+          "balanceAfterCents": 103534
+        },
+        {
+          "number": 36,
+          "dueDate": "2028-12-31",
+          "installmentCents": 106122,
+          "interestCents": 2588,
+          "amortizationCents": 103534,
+          "feeCents": 0,
+          "balanceAfterCents": 0
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "position",
+      "input": {
+        "ledger": {
+          "accounts": [],
+          "categories": [],
+          "tags": [],
+          "cards": [],
+          "transactions": [
+            {
+              "id": "tx_51",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "loan_payment",
+              "amountCents": 94560,
+              "date": "2026-01-10",
+              "loanId": "l"
+            },
+            {
+              "id": "tx_52",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "loan_payment",
+              "amountCents": 94560,
+              "date": "2026-02-10",
+              "loanId": "l"
+            },
+            {
+              "id": "tx_53",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "loan_payment",
+              "amountCents": 10000,
+              "date": "2026-02-11",
+              "loanId": "l"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 1000000,
+              "monthlyRatePercent": 2,
+              "termMonths": 12,
+              "system": "price",
+              "firstDueDate": "2026-01-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "loanId": "l",
+        "today": "2026-04-15"
+      },
+      "expected": {
+        "loan": "l",
+        "paidInstallments": 2,
+        "paidCents": 199120,
+        "extraAmortizationCents": 10000,
+        "outstandingCents": 839389,
+        "nextDue": 3,
+        "overdueInstallments": [
+          3,
+          4
+        ],
+        "payoffTodayCents": 885668
+      },
+      "note": ""
+    },
+    {
+      "name": "payoffValue slice 2",
+      "input": {
+        "loanId": "l",
+        "from": 2,
+        "rate": 2,
+        "today": "2026-03-10"
+      },
+      "expected": 866377,
+      "note": ""
+    },
+    {
+      "name": "extra reduce_installment",
+      "input": {
+        "outstanding": 500000,
+        "extra": 100000,
+        "remaining": 6,
+        "mode": "reduce_installment"
+      },
+      "expected": {
+        "newBalanceCents": 400000,
+        "newTermMonths": 6,
+        "newInstallmentCents": 71410
+      },
+      "note": ""
+    },
+    {
+      "name": "extra reduce_term",
+      "input": {
+        "outstanding": 500000,
+        "extra": 100000,
+        "remaining": 6,
+        "mode": "reduce_term"
+      },
+      "expected": {
+        "newBalanceCents": 400000,
+        "newTermMonths": 5,
+        "newInstallmentCents": 89263
+      },
+      "note": ""
+    },
+    {
+      "name": "extra payoff",
+      "input": {
+        "outstanding": 500000,
+        "extra": 600000,
+        "remaining": 6,
+        "mode": "reduce_term"
+      },
+      "expected": {
+        "newBalanceCents": 0,
+        "newTermMonths": 0,
+        "newInstallmentCents": 0
+      },
+      "note": ""
+    }
+  ]
+}

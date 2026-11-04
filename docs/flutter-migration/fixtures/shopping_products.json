@@ -1,0 +1,310 @@
+{
+  "generatedFrom": "packages/shopping (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "find barcode",
+      "input": {
+        "products": [
+          {
+            "id": "p1",
+            "name": "Arroz Tio João Tipo 1 5kg",
+            "brand": "Tio João",
+            "barcode": "7891000100103",
+            "internalCodes": [
+              {
+                "store": "Mercado Bom",
+                "code": "123456"
+              }
+            ],
+            "defaultUnit": "un",
+            "favorite": false,
+            "createdAt": "2026-11-04T10:00:00.000Z",
+            "updatedAt": "2026-11-04T10:00:00.000Z"
+          }
+        ],
+        "q": {
+          "barcode": "7891000100103"
+        }
+      },
+      "expected": {
+        "product": {
+          "id": "p1",
+          "name": "Arroz Tio João Tipo 1 5kg",
+          "brand": "Tio João",
+          "barcode": "7891000100103",
+          "internalCodes": [
+            {
+              "store": "Mercado Bom",
+              "code": "123456"
+            }
+          ],
+          "defaultUnit": "un",
+          "favorite": false,
+          "createdAt": "2026-11-04T10:00:00.000Z",
+          "updatedAt": "2026-11-04T10:00:00.000Z"
+        },
+        "match": "barcode",
+        "score": 1
+      },
+      "note": ""
+    },
+    {
+      "name": "find internal",
+      "input": {
+        "products": [
+          {
+            "id": "p1",
+            "name": "Arroz Tio João Tipo 1 5kg",
+            "brand": "Tio João",
+            "barcode": "7891000100103",
+            "internalCodes": [
+              {
+                "store": "Mercado Bom",
+                "code": "123456"
+              }
+            ],
+            "defaultUnit": "un",
+            "favorite": false,
+            "createdAt": "2026-11-04T10:00:00.000Z",
+            "updatedAt": "2026-11-04T10:00:00.000Z"
+          }
+        ],
+        "q": {
+          "internalCode": "123456",
+          "store": "Mercado Bom"
+        }
+      },
+      "expected": {
+        "product": {
+          "id": "p1",
+          "name": "Arroz Tio João Tipo 1 5kg",
+          "brand": "Tio João",
+          "barcode": "7891000100103",
+          "internalCodes": [
+            {
+              "store": "Mercado Bom",
+              "code": "123456"
+            }
+          ],
+          "defaultUnit": "un",
+          "favorite": false,
+          "createdAt": "2026-11-04T10:00:00.000Z",
+          "updatedAt": "2026-11-04T10:00:00.000Z"
+        },
+        "match": "internal_code",
+        "score": 0.95
+      },
+      "note": ""
+    },
+    {
+      "name": "find name",
+      "input": {
+        "products": [
+          {
+            "id": "p1",
+            "name": "Arroz Tio João Tipo 1 5kg",
+            "brand": "Tio João",
+            "barcode": "7891000100103",
+            "internalCodes": [
+              {
+                "store": "Mercado Bom",
+                "code": "123456"
+              }
+            ],
+            "defaultUnit": "un",
+            "favorite": false,
+            "createdAt": "2026-11-04T10:00:00.000Z",
+            "updatedAt": "2026-11-04T10:00:00.000Z"
+          }
+        ],
+        "q": {
+          "name": "ARROZ TIO JOAO 5KG"
+        }
+      },
+      "expected": {
+        "product": {
+          "id": "p1",
+          "name": "Arroz Tio João Tipo 1 5kg",
+          "brand": "Tio João",
+          "barcode": "7891000100103",
+          "internalCodes": [
+            {
+              "store": "Mercado Bom",
+              "code": "123456"
+            }
+          ],
+          "defaultUnit": "un",
+          "favorite": false,
+          "createdAt": "2026-11-04T10:00:00.000Z",
+          "updatedAt": "2026-11-04T10:00:00.000Z"
+        },
+        "match": "name",
+        "score": 0.8
+      },
+      "note": ""
+    },
+    {
+      "name": "find none",
+      "input": {
+        "products": [
+          {
+            "id": "p1",
+            "name": "Arroz Tio João Tipo 1 5kg",
+            "brand": "Tio João",
+            "barcode": "7891000100103",
+            "internalCodes": [
+              {
+                "store": "Mercado Bom",
+                "code": "123456"
+              }
+            ],
+            "defaultUnit": "un",
+            "favorite": false,
+            "createdAt": "2026-11-04T10:00:00.000Z",
+            "updatedAt": "2026-11-04T10:00:00.000Z"
+          }
+        ],
+        "q": {
+          "name": "Feijão carioca"
+        }
+      },
+      "expected": null,
+      "note": ""
+    },
+    {
+      "name": "history",
+      "input": {
+        "obs": [
+          {
+            "id": "o1",
+            "productId": "p1",
+            "store": "Mercado Bom",
+            "unit": "un",
+            "unitPriceCents": 2590,
+            "observedAt": "2026-09-01T00:00:00Z",
+            "source": "manual"
+          },
+          {
+            "id": "o2",
+            "productId": "p1",
+            "store": "Super Barato",
+            "unit": "un",
+            "unitPriceCents": 2390,
+            "observedAt": "2026-10-01T00:00:00Z",
+            "source": "label_ocr"
+          },
+          {
+            "id": "o3",
+            "productId": "p1",
+            "store": "Mercado Bom",
+            "unit": "un",
+            "unitPriceCents": 2490,
+            "observedAt": "2026-11-01T00:00:00Z",
+            "source": "label_ocr"
+          }
+        ],
+        "productId": "p1"
+      },
+      "expected": {
+        "lastCents": 2490,
+        "lastStore": "Mercado Bom",
+        "lastAt": "2026-11-01T00:00:00Z",
+        "minCents": 2390,
+        "maxCents": 2590,
+        "avgCents": 2490,
+        "byStore": [
+          {
+            "store": "Super Barato",
+            "lastCents": 2390,
+            "lastAt": "2026-10-01T00:00:00Z",
+            "count": 1
+          },
+          {
+            "store": "Mercado Bom",
+            "lastCents": 2490,
+            "lastAt": "2026-11-01T00:00:00Z",
+            "count": 2
+          }
+        ],
+        "observations": 3,
+        "lastPerBaseUnitCents": 2490
+      },
+      "note": ""
+    },
+    {
+      "name": "variation",
+      "input": {
+        "history": {
+          "lastCents": 2490,
+          "lastStore": "Mercado Bom",
+          "lastAt": "2026-11-01T00:00:00Z",
+          "minCents": 2390,
+          "maxCents": 2590,
+          "avgCents": 2490,
+          "byStore": [
+            {
+              "store": "Super Barato",
+              "lastCents": 2390,
+              "lastAt": "2026-10-01T00:00:00Z",
+              "count": 1
+            },
+            {
+              "store": "Mercado Bom",
+              "lastCents": 2490,
+              "lastAt": "2026-11-01T00:00:00Z",
+              "count": 2
+            }
+          ],
+          "observations": 3,
+          "lastPerBaseUnitCents": 2490
+        },
+        "current": 2739
+      },
+      "expected": {
+        "percent": 10,
+        "vsCents": 2490
+      },
+      "note": ""
+    },
+    {
+      "name": "history none",
+      "input": {
+        "obs": [
+          {
+            "id": "o1",
+            "productId": "p1",
+            "store": "Mercado Bom",
+            "unit": "un",
+            "unitPriceCents": 2590,
+            "observedAt": "2026-09-01T00:00:00Z",
+            "source": "manual"
+          },
+          {
+            "id": "o2",
+            "productId": "p1",
+            "store": "Super Barato",
+            "unit": "un",
+            "unitPriceCents": 2390,
+            "observedAt": "2026-10-01T00:00:00Z",
+            "source": "label_ocr"
+          },
+          {
+            "id": "o3",
+            "productId": "p1",
+            "store": "Mercado Bom",
+            "unit": "un",
+            "unitPriceCents": 2490,
+            "observedAt": "2026-11-01T00:00:00Z",
+            "source": "label_ocr"
+          }
+        ],
+        "productId": "zzz"
+      },
+      "expected": {
+        "byStore": [],
+        "observations": 0
+      },
+      "note": ""
+    }
+  ]
+}

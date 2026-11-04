@@ -1,0 +1,511 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "cents from decimal",
+      "input": {
+        "amount": 24.9
+      },
+      "expected": 2490,
+      "note": ""
+    },
+    {
+      "name": "cents float noise",
+      "input": {
+        "amount": 0.30000000000000004
+      },
+      "expected": 30,
+      "note": ""
+    },
+    {
+      "name": "cents negative",
+      "input": {
+        "amount": -5.49
+      },
+      "expected": -549,
+      "note": ""
+    },
+    {
+      "name": "mul 1000x0.125 half-even",
+      "input": {
+        "cents": 1000,
+        "factor": 0.125,
+        "mode": "half-even"
+      },
+      "expected": 125,
+      "note": ""
+    },
+    {
+      "name": "mul 1005x0.5 half-even",
+      "input": {
+        "cents": 1005,
+        "factor": 0.5,
+        "mode": "half-even"
+      },
+      "expected": 502,
+      "note": ""
+    },
+    {
+      "name": "mul 1015x0.5 half-even",
+      "input": {
+        "cents": 1015,
+        "factor": 0.5,
+        "mode": "half-even"
+      },
+      "expected": 508,
+      "note": ""
+    },
+    {
+      "name": "mul 699x1.5 half-even",
+      "input": {
+        "cents": 699,
+        "factor": 1.5,
+        "mode": "half-even"
+      },
+      "expected": 1048,
+      "note": ""
+    },
+    {
+      "name": "mul 699x1.5 half-up",
+      "input": {
+        "cents": 699,
+        "factor": 1.5,
+        "mode": "half-up"
+      },
+      "expected": 1049,
+      "note": ""
+    },
+    {
+      "name": "mul 1005x0.5 half-up",
+      "input": {
+        "cents": 1005,
+        "factor": 0.5,
+        "mode": "half-up"
+      },
+      "expected": 503,
+      "note": ""
+    },
+    {
+      "name": "mul -1005x0.5 half-up",
+      "input": {
+        "cents": -1005,
+        "factor": 0.5,
+        "mode": "half-up"
+      },
+      "expected": -503,
+      "note": ""
+    },
+    {
+      "name": "mul -1005x0.5 half-even",
+      "input": {
+        "cents": -1005,
+        "factor": 0.5,
+        "mode": "half-even"
+      },
+      "expected": -502,
+      "note": ""
+    },
+    {
+      "name": "mul 333x3 down",
+      "input": {
+        "cents": 333,
+        "factor": 3,
+        "mode": "down"
+      },
+      "expected": 999,
+      "note": ""
+    },
+    {
+      "name": "mul 12345x0.0199 half-up",
+      "input": {
+        "cents": 12345,
+        "factor": 0.0199,
+        "mode": "half-up"
+      },
+      "expected": 246,
+      "note": ""
+    },
+    {
+      "name": "div 1000/3",
+      "input": {
+        "cents": 1000,
+        "divisor": 3
+      },
+      "expected": 333,
+      "note": ""
+    },
+    {
+      "name": "percentOf 999 33.33",
+      "input": {
+        "cents": 999,
+        "percent": 33.33
+      },
+      "expected": 333,
+      "note": ""
+    },
+    {
+      "name": "allocate 10000/3 first",
+      "input": {
+        "total": 10000,
+        "n": 3,
+        "remainderOn": "first"
+      },
+      "expected": [
+        3334,
+        3333,
+        3333
+      ],
+      "note": ""
+    },
+    {
+      "name": "allocate 10000/3 last",
+      "input": {
+        "total": 10000,
+        "n": 3,
+        "remainderOn": "last"
+      },
+      "expected": [
+        3333,
+        3333,
+        3334
+      ],
+      "note": ""
+    },
+    {
+      "name": "allocate 100/3 first",
+      "input": {
+        "total": 100,
+        "n": 3,
+        "remainderOn": "first"
+      },
+      "expected": [
+        34,
+        33,
+        33
+      ],
+      "note": ""
+    },
+    {
+      "name": "allocate 5/10 first",
+      "input": {
+        "total": 5,
+        "n": 10,
+        "remainderOn": "first"
+      },
+      "expected": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "note": ""
+    },
+    {
+      "name": "allocate -10000/3 first",
+      "input": {
+        "total": -10000,
+        "n": 3,
+        "remainderOn": "first"
+      },
+      "expected": [
+        -3334,
+        -3333,
+        -3333
+      ],
+      "note": ""
+    },
+    {
+      "name": "allocate 777/1 first",
+      "input": {
+        "total": 777,
+        "n": 1,
+        "remainderOn": "first"
+      },
+      "expected": [
+        777
+      ],
+      "note": ""
+    },
+    {
+      "name": "allocate 123457/7 first",
+      "input": {
+        "total": 123457,
+        "n": 7,
+        "remainderOn": "first"
+      },
+      "expected": [
+        17637,
+        17637,
+        17637,
+        17637,
+        17637,
+        17636,
+        17636
+      ],
+      "note": ""
+    },
+    {
+      "name": "allocate 123457/60 first",
+      "input": {
+        "total": 123457,
+        "n": 60,
+        "remainderOn": "first"
+      },
+      "expected": [
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2058,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057,
+        2057
+      ],
+      "note": ""
+    },
+    {
+      "name": "parse \"R$ 1.234,56\"",
+      "input": {
+        "text": "R$ 1.234,56"
+      },
+      "expected": 123456,
+      "note": ""
+    },
+    {
+      "name": "parse \"1234,56\"",
+      "input": {
+        "text": "1234,56"
+      },
+      "expected": 123456,
+      "note": ""
+    },
+    {
+      "name": "parse \"24,9\"",
+      "input": {
+        "text": "24,9"
+      },
+      "expected": 2490,
+      "note": ""
+    },
+    {
+      "name": "parse \"24\"",
+      "input": {
+        "text": "24"
+      },
+      "expected": 2400,
+      "note": ""
+    },
+    {
+      "name": "parse \"-R$ 5,00\"",
+      "input": {
+        "text": "-R$ 5,00"
+      },
+      "expected": -500,
+      "note": ""
+    },
+    {
+      "name": "parse \"R$ -5,00\"",
+      "input": {
+        "text": "R$ -5,00"
+      },
+      "expected": -500,
+      "note": ""
+    },
+    {
+      "name": "parse \" 0,05 \"",
+      "input": {
+        "text": " 0,05 "
+      },
+      "expected": 5,
+      "note": ""
+    },
+    {
+      "name": "parse \"1234.56\"",
+      "input": {
+        "text": "1234.56"
+      },
+      "expected": 123456,
+      "note": ""
+    },
+    {
+      "name": "parse \"1,234.56\"",
+      "input": {
+        "text": "1,234.56"
+      },
+      "expected": 123456,
+      "note": ""
+    },
+    {
+      "name": "parse \"\"",
+      "input": {
+        "text": ""
+      },
+      "expected": null,
+      "note": ""
+    },
+    {
+      "name": "parse \"abc\"",
+      "input": {
+        "text": "abc"
+      },
+      "expected": null,
+      "note": ""
+    },
+    {
+      "name": "parse \"1,2,3\"",
+      "input": {
+        "text": "1,2,3"
+      },
+      "expected": null,
+      "note": ""
+    },
+    {
+      "name": "parse \"1.234\"",
+      "input": {
+        "text": "1.234"
+      },
+      "expected": 123400,
+      "note": ""
+    },
+    {
+      "name": "parse \"1.234.567,89\"",
+      "input": {
+        "text": "1.234.567,89"
+      },
+      "expected": 123456789,
+      "note": ""
+    },
+    {
+      "name": "parse \"12.5\"",
+      "input": {
+        "text": "12.5"
+      },
+      "expected": 1250,
+      "note": ""
+    },
+    {
+      "name": "format 123456",
+      "input": {
+        "cents": 123456
+      },
+      "expected": "R$ 1.234,56",
+      "note": ""
+    },
+    {
+      "name": "format -500",
+      "input": {
+        "cents": -500
+      },
+      "expected": "-R$ 5,00",
+      "note": ""
+    },
+    {
+      "name": "format 0",
+      "input": {
+        "cents": 0
+      },
+      "expected": "R$ 0,00",
+      "note": ""
+    },
+    {
+      "name": "format 1",
+      "input": {
+        "cents": 1
+      },
+      "expected": "R$ 0,01",
+      "note": ""
+    },
+    {
+      "name": "format 99",
+      "input": {
+        "cents": 99
+      },
+      "expected": "R$ 0,99",
+      "note": ""
+    },
+    {
+      "name": "format 100000000",
+      "input": {
+        "cents": 100000000
+      },
+      "expected": "R$ 1.000.000,00",
+      "note": ""
+    },
+    {
+      "name": "format hidden",
+      "input": {
+        "cents": 123456,
+        "hidden": true
+      },
+      "expected": "R$ ••••",
+      "note": ""
+    },
+    {
+      "name": "add overflow-safe",
+      "input": {
+        "a": 1,
+        "b": 2
+      },
+      "expected": 3,
+      "note": ""
+    }
+  ]
+}

@@ -1,0 +1,523 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "access free",
+      "input": {
+        "entitlements": [],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "free",
+        "planId": "free",
+        "features": [],
+        "limits": {
+          "accounts": 3,
+          "cards": 1,
+          "budgets": 3,
+          "goals": 2,
+          "ocrScansPerMonth": 30,
+          "attachmentsPerTransaction": 0,
+          "shoppingLists": 5
+        },
+        "reason": "Plano gratuito",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access active",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_monthly",
+            "state": "active",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified",
+            "expiresAt": "2026-12-04T00:00:00.000Z"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "plus",
+        "planId": "plus_monthly",
+        "features": [
+          "advanced_reports",
+          "attachments",
+          "custom_dashboard_presets",
+          "ofx_import",
+          "pdf_export",
+          "price_history",
+          "shared_lists",
+          "sync",
+          "unlimited_accounts",
+          "unlimited_budgets",
+          "unlimited_cards",
+          "unlimited_goals",
+          "unlimited_ocr"
+        ],
+        "limits": null,
+        "reason": "Assinatura ativa",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access expired",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_monthly",
+            "state": "active",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified",
+            "expiresAt": "2026-11-01T00:00:00.000Z"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "free",
+        "planId": "free",
+        "features": [],
+        "limits": {
+          "accounts": 3,
+          "cards": 1,
+          "budgets": 3,
+          "goals": 2,
+          "ocrScansPerMonth": 30,
+          "attachmentsPerTransaction": 0,
+          "shoppingLists": 5
+        },
+        "reason": "Plano gratuito",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access refunded",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_monthly",
+            "state": "refunded",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "free",
+        "planId": "free",
+        "features": [],
+        "limits": {
+          "accounts": 3,
+          "cards": 1,
+          "budgets": 3,
+          "goals": 2,
+          "ocrScansPerMonth": 30,
+          "attachmentsPerTransaction": 0,
+          "shoppingLists": 5
+        },
+        "reason": "Plano gratuito",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access paused",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_monthly",
+            "state": "paused",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "free",
+        "planId": "free",
+        "features": [],
+        "limits": {
+          "accounts": 3,
+          "cards": 1,
+          "budgets": 3,
+          "goals": 2,
+          "ocrScansPerMonth": 30,
+          "attachmentsPerTransaction": 0,
+          "shoppingLists": 5
+        },
+        "reason": "Plano gratuito",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access grace",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_monthly",
+            "state": "in_grace_period",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified",
+            "expiresAt": "2026-11-01T00:00:00.000Z"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "plus",
+        "planId": "plus_monthly",
+        "features": [
+          "advanced_reports",
+          "attachments",
+          "custom_dashboard_presets",
+          "ofx_import",
+          "pdf_export",
+          "price_history",
+          "shared_lists",
+          "sync",
+          "unlimited_accounts",
+          "unlimited_budgets",
+          "unlimited_cards",
+          "unlimited_goals",
+          "unlimited_ocr"
+        ],
+        "limits": null,
+        "reason": "Assinatura com problema de cobrança (acesso mantido temporariamente)",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access billing_issue",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_monthly",
+            "state": "billing_issue",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified",
+            "expiresAt": "2026-11-01T00:00:00.000Z"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "plus",
+        "planId": "plus_monthly",
+        "features": [
+          "advanced_reports",
+          "attachments",
+          "custom_dashboard_presets",
+          "ofx_import",
+          "pdf_export",
+          "price_history",
+          "shared_lists",
+          "sync",
+          "unlimited_accounts",
+          "unlimited_budgets",
+          "unlimited_cards",
+          "unlimited_goals",
+          "unlimited_ocr"
+        ],
+        "limits": null,
+        "reason": "Assinatura com problema de cobrança (acesso mantido temporariamente)",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access cancelled active",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_monthly",
+            "state": "cancelled_active_until_expiry",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified",
+            "expiresAt": "2026-11-20T00:00:00.000Z"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "plus",
+        "planId": "plus_monthly",
+        "features": [
+          "advanced_reports",
+          "attachments",
+          "custom_dashboard_presets",
+          "ofx_import",
+          "pdf_export",
+          "price_history",
+          "shared_lists",
+          "sync",
+          "unlimited_accounts",
+          "unlimited_budgets",
+          "unlimited_cards",
+          "unlimited_goals",
+          "unlimited_ocr"
+        ],
+        "limits": null,
+        "reason": "Assinatura cancelada, ativa até o fim do período",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access cancelled expired",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_monthly",
+            "state": "cancelled_active_until_expiry",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified",
+            "expiresAt": "2026-11-02T00:00:00.000Z"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "free",
+        "planId": "free",
+        "features": [],
+        "limits": {
+          "accounts": 3,
+          "cards": 1,
+          "budgets": 3,
+          "goals": 2,
+          "ocrScansPerMonth": 30,
+          "attachmentsPerTransaction": 0,
+          "shoppingLists": 5
+        },
+        "reason": "Plano gratuito",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access cached fresh",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_monthly",
+            "state": "active",
+            "verifiedAt": "2026-11-01T00:00:00.000Z",
+            "source": "cached",
+            "expiresAt": "2027-01-01T00:00:00.000Z"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "plus",
+        "planId": "plus_monthly",
+        "features": [
+          "advanced_reports",
+          "attachments",
+          "custom_dashboard_presets",
+          "ofx_import",
+          "pdf_export",
+          "price_history",
+          "shared_lists",
+          "sync",
+          "unlimited_accounts",
+          "unlimited_budgets",
+          "unlimited_cards",
+          "unlimited_goals",
+          "unlimited_ocr"
+        ],
+        "limits": null,
+        "reason": "Assinatura ativa",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access cached stale",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_monthly",
+            "state": "active",
+            "verifiedAt": "2026-10-01T00:00:00.000Z",
+            "source": "cached",
+            "expiresAt": "2027-01-01T00:00:00.000Z"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "free",
+        "planId": "free",
+        "features": [],
+        "limits": {
+          "accounts": 3,
+          "cards": 1,
+          "budgets": 3,
+          "goals": 2,
+          "ocrScansPerMonth": 30,
+          "attachmentsPerTransaction": 0,
+          "shoppingLists": 5
+        },
+        "reason": "Plano gratuito",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access lifetime+plus",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "lifetime",
+            "state": "active",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified"
+          },
+          {
+            "planId": "plus_monthly",
+            "state": "active",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified",
+            "expiresAt": "2026-12-04T00:00:00.000Z"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "lifetime",
+        "planId": "lifetime",
+        "features": [
+          "advanced_reports",
+          "attachments",
+          "custom_dashboard_presets",
+          "ofx_import",
+          "pdf_export",
+          "price_history",
+          "shared_lists",
+          "unlimited_accounts",
+          "unlimited_budgets",
+          "unlimited_cards",
+          "unlimited_goals",
+          "unlimited_ocr"
+        ],
+        "limits": null,
+        "reason": "Licença vitalícia",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "access yearly over monthly",
+      "input": {
+        "entitlements": [
+          {
+            "planId": "plus_yearly",
+            "state": "active",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified",
+            "expiresAt": "2027-11-04T00:00:00.000Z"
+          },
+          {
+            "planId": "plus_monthly",
+            "state": "active",
+            "verifiedAt": "2026-11-04T11:00:00.000Z",
+            "source": "store_verified",
+            "expiresAt": "2026-12-04T00:00:00.000Z"
+          }
+        ],
+        "now": "2026-11-04T12:00:00.000Z"
+      },
+      "expected": {
+        "tier": "plus",
+        "planId": "plus_yearly",
+        "features": [
+          "advanced_reports",
+          "attachments",
+          "custom_dashboard_presets",
+          "ofx_import",
+          "pdf_export",
+          "price_history",
+          "shared_lists",
+          "sync",
+          "unlimited_accounts",
+          "unlimited_budgets",
+          "unlimited_cards",
+          "unlimited_goals",
+          "unlimited_ocr"
+        ],
+        "limits": null,
+        "reason": "Assinatura ativa",
+        "staleAfterMs": 604800000
+      },
+      "note": ""
+    },
+    {
+      "name": "withinLimit free cards 0",
+      "input": {
+        "tier": "free",
+        "key": "cards",
+        "count": 0
+      },
+      "expected": {
+        "ok": true,
+        "limit": 1,
+        "remaining": 1
+      },
+      "note": ""
+    },
+    {
+      "name": "withinLimit free cards 1",
+      "input": {
+        "tier": "free",
+        "key": "cards",
+        "count": 1
+      },
+      "expected": {
+        "ok": false,
+        "limit": 1,
+        "remaining": 0
+      },
+      "note": ""
+    },
+    {
+      "name": "merge freshest",
+      "input": {
+        "existing": [
+          {
+            "planId": "plus_monthly",
+            "state": "expired",
+            "verifiedAt": "2026-11-01T00:00:00.000Z",
+            "source": "store_verified"
+          }
+        ],
+        "incoming": [
+          {
+            "planId": "plus_monthly",
+            "state": "active",
+            "verifiedAt": "2026-11-04T00:00:00.000Z",
+            "source": "store_verified"
+          }
+        ]
+      },
+      "expected": [
+        {
+          "planId": "plus_monthly",
+          "state": "active",
+          "verifiedAt": "2026-11-04T00:00:00.000Z",
+          "source": "store_verified"
+        }
+      ],
+      "note": ""
+    }
+  ]
+}

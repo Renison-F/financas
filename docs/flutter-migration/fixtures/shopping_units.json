@@ -1,0 +1,109 @@
+{
+  "generatedFrom": "packages/shopping (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "normalize kg",
+      "input": {
+        "q": 1.2345,
+        "unit": "kg"
+      },
+      "expected": 1.235,
+      "note": ""
+    },
+    {
+      "name": "normalize un",
+      "input": {
+        "q": 2.7,
+        "unit": "un"
+      },
+      "expected": 3,
+      "note": ""
+    },
+    {
+      "name": "format kg",
+      "input": {
+        "q": 1.5,
+        "unit": "kg"
+      },
+      "expected": "1,5 kg",
+      "note": ""
+    },
+    {
+      "name": "format un",
+      "input": {
+        "q": 6,
+        "unit": "un"
+      },
+      "expected": "6 un",
+      "note": ""
+    },
+    {
+      "name": "toBase g",
+      "input": {
+        "q": 500,
+        "unit": "g"
+      },
+      "expected": {
+        "quantity": 0.5,
+        "base": "kg"
+      },
+      "note": ""
+    },
+    {
+      "name": "parseUnit KG",
+      "input": {
+        "token": "KG"
+      },
+      "expected": "kg",
+      "note": ""
+    },
+    {
+      "name": "parseUnit gr",
+      "input": {
+        "token": "gr"
+      },
+      "expected": "g",
+      "note": ""
+    },
+    {
+      "name": "parseUnit lt",
+      "input": {
+        "token": "lt"
+      },
+      "expected": "l",
+      "note": ""
+    },
+    {
+      "name": "parseUnit zz",
+      "input": {
+        "token": "zz"
+      },
+      "expected": null,
+      "note": ""
+    },
+    {
+      "name": "parseUnit und",
+      "input": {
+        "token": "und"
+      },
+      "expected": "un",
+      "note": ""
+    },
+    {
+      "name": "parseUnit pç",
+      "input": {
+        "token": "pç"
+      },
+      "expected": "un",
+      "note": ""
+    },
+    {
+      "name": "parseUnit dúzia",
+      "input": {
+        "token": "dúzia"
+      },
+      "expected": "dz",
+      "note": ""
+    }
+  ]
+}

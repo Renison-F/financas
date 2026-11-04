@@ -1,0 +1,234 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "addMonthsClamped 2026-01-31 1",
+      "input": {
+        "date": "2026-01-31",
+        "months": 1
+      },
+      "expected": "2026-02-28",
+      "note": ""
+    },
+    {
+      "name": "addMonthsClamped 2024-01-31 1",
+      "input": {
+        "date": "2024-01-31",
+        "months": 1
+      },
+      "expected": "2024-02-29",
+      "note": ""
+    },
+    {
+      "name": "addMonthsClamped 2026-01-31 2",
+      "input": {
+        "date": "2026-01-31",
+        "months": 2
+      },
+      "expected": "2026-03-31",
+      "note": ""
+    },
+    {
+      "name": "addMonthsClamped 2026-11-15 2",
+      "input": {
+        "date": "2026-11-15",
+        "months": 2
+      },
+      "expected": "2027-01-15",
+      "note": ""
+    },
+    {
+      "name": "addMonthsClamped 2026-03-31 -1",
+      "input": {
+        "date": "2026-03-31",
+        "months": -1
+      },
+      "expected": "2026-02-28",
+      "note": ""
+    },
+    {
+      "name": "addMonthsClamped 2026-01-31 13",
+      "input": {
+        "date": "2026-01-31",
+        "months": 13
+      },
+      "expected": "2027-02-28",
+      "note": ""
+    },
+    {
+      "name": "addMonthsClamped 2024-02-29 12",
+      "input": {
+        "date": "2024-02-29",
+        "months": 12
+      },
+      "expected": "2025-02-28",
+      "note": ""
+    },
+    {
+      "name": "addMonthsClamped anchor 31 +2",
+      "input": {
+        "date": "2026-01-31",
+        "months": 2,
+        "anchorDay": 31
+      },
+      "expected": "2026-03-31",
+      "note": ""
+    },
+    {
+      "name": "addMonthsClamped anchor 31 +1 from feb",
+      "input": {
+        "date": "2026-02-28",
+        "months": 1,
+        "anchorDay": 31
+      },
+      "expected": "2026-03-31",
+      "note": ""
+    },
+    {
+      "name": "addDays 2026-12-31 1",
+      "input": {
+        "date": "2026-12-31",
+        "days": 1
+      },
+      "expected": "2027-01-01",
+      "note": ""
+    },
+    {
+      "name": "addDays 2026-03-01 -1",
+      "input": {
+        "date": "2026-03-01",
+        "days": -1
+      },
+      "expected": "2026-02-28",
+      "note": ""
+    },
+    {
+      "name": "addDays 2026-11-01 0",
+      "input": {
+        "date": "2026-11-01",
+        "days": 0
+      },
+      "expected": "2026-11-01",
+      "note": ""
+    },
+    {
+      "name": "addDays 2026-10-31 30",
+      "input": {
+        "date": "2026-10-31",
+        "days": 30
+      },
+      "expected": "2026-11-30",
+      "note": ""
+    },
+    {
+      "name": "addDays 2026-02-28 1",
+      "input": {
+        "date": "2026-02-28",
+        "days": 1
+      },
+      "expected": "2026-03-01",
+      "note": ""
+    },
+    {
+      "name": "addDays 2024-02-28 1",
+      "input": {
+        "date": "2024-02-28",
+        "days": 1
+      },
+      "expected": "2024-02-29",
+      "note": ""
+    },
+    {
+      "name": "daysInMonth 2026-02",
+      "input": {
+        "year": 2026,
+        "month": 2
+      },
+      "expected": 28,
+      "note": ""
+    },
+    {
+      "name": "daysInMonth 2024-02",
+      "input": {
+        "year": 2024,
+        "month": 2
+      },
+      "expected": 29,
+      "note": ""
+    },
+    {
+      "name": "daysInMonth 2100-02",
+      "input": {
+        "year": 2100,
+        "month": 2
+      },
+      "expected": 28,
+      "note": ""
+    },
+    {
+      "name": "diffDays",
+      "input": {
+        "from": "2026-01-01",
+        "to": "2026-01-31"
+      },
+      "expected": 30,
+      "note": ""
+    },
+    {
+      "name": "diffDays negative",
+      "input": {
+        "from": "2026-03-01",
+        "to": "2026-02-01"
+      },
+      "expected": -28,
+      "note": ""
+    },
+    {
+      "name": "diffDays across DST and year",
+      "input": {
+        "from": "2025-10-15",
+        "to": "2026-03-15"
+      },
+      "expected": 151,
+      "note": ""
+    },
+    {
+      "name": "weekday 2026-11-04",
+      "input": {
+        "date": "2026-11-04"
+      },
+      "expected": 3,
+      "note": ""
+    },
+    {
+      "name": "lastMonthKeys",
+      "input": {
+        "end": "2026-02",
+        "n": 3
+      },
+      "expected": [
+        "2025-12",
+        "2026-01",
+        "2026-02"
+      ],
+      "note": ""
+    },
+    {
+      "name": "monthKeyToDate clamp",
+      "input": {
+        "key": "2026-02",
+        "day": 31
+      },
+      "expected": "2026-02-28",
+      "note": ""
+    },
+    {
+      "name": "endOfMonth",
+      "input": {
+        "key": "2026-11"
+      },
+      "expected": "2026-11-30",
+      "note": ""
+    }
+  ]
+}

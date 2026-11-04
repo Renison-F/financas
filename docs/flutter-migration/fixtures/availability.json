@@ -1,0 +1,798 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "prudent",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 200000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "s",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_29",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 30000,
+              "date": "2026-11-10",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_30",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-30",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_31",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 99999,
+              "date": "2026-12-05",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_32",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 400000,
+              "date": "2026-11-25",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_33",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 25000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_34",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 50000,
+              "date": "2026-09-01",
+              "accountId": "a",
+              "goalId": "g"
+            },
+            {
+              "id": "tx_35",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 20000,
+              "date": "2026-09-02",
+              "accountId": "a",
+              "toAccountId": "a",
+              "goalId": "g2"
+            }
+          ],
+          "budgets": [],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Meta",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "g2",
+              "name": "Meta",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "accountId": "a"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "availableCents": 70000,
+        "horizonEnd": "2026-11-30",
+        "lines": [
+          {
+            "key": "balances",
+            "label": "Dinheiro nas contas",
+            "cents": 150000,
+            "sign": 1
+          },
+          {
+            "key": "overdue",
+            "label": "Contas atrasadas",
+            "cents": 5000,
+            "sign": -1,
+            "note": "1 conta(s)"
+          },
+          {
+            "key": "bills",
+            "label": "Contas até 30/11",
+            "cents": 30000,
+            "sign": -1,
+            "note": "1 conta(s)"
+          },
+          {
+            "key": "cards",
+            "label": "Faturas de cartão",
+            "cents": 25000,
+            "sign": -1,
+            "note": "1 cartão(ões)"
+          },
+          {
+            "key": "reserved",
+            "label": "Reservas guardadas",
+            "cents": 20000,
+            "sign": -1,
+            "note": "dinheiro separado dentro das contas"
+          }
+        ],
+        "mode": "prudente",
+        "hasAccounts": true,
+        "status": "positive"
+      },
+      "note": ""
+    },
+    {
+      "name": "optimistic cushion",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 200000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "s",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_29",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 30000,
+              "date": "2026-11-10",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_30",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-30",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_31",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 99999,
+              "date": "2026-12-05",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_32",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 400000,
+              "date": "2026-11-25",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_33",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 25000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_34",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 50000,
+              "date": "2026-09-01",
+              "accountId": "a",
+              "goalId": "g"
+            },
+            {
+              "id": "tx_35",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 20000,
+              "date": "2026-09-02",
+              "accountId": "a",
+              "toAccountId": "a",
+              "goalId": "g2"
+            }
+          ],
+          "budgets": [],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Meta",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "g2",
+              "name": "Meta",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "accountId": "a"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "today": "2026-11-04",
+        "includePlannedIncome": true,
+        "safetyCushionCents": 10000
+      },
+      "expected": {
+        "availableCents": 460000,
+        "horizonEnd": "2026-11-30",
+        "lines": [
+          {
+            "key": "balances",
+            "label": "Dinheiro nas contas",
+            "cents": 150000,
+            "sign": 1
+          },
+          {
+            "key": "overdue",
+            "label": "Contas atrasadas",
+            "cents": 5000,
+            "sign": -1,
+            "note": "1 conta(s)"
+          },
+          {
+            "key": "bills",
+            "label": "Contas até 30/11",
+            "cents": 30000,
+            "sign": -1,
+            "note": "1 conta(s)"
+          },
+          {
+            "key": "cards",
+            "label": "Faturas de cartão",
+            "cents": 25000,
+            "sign": -1,
+            "note": "1 cartão(ões)"
+          },
+          {
+            "key": "reserved",
+            "label": "Reservas guardadas",
+            "cents": 20000,
+            "sign": -1,
+            "note": "dinheiro separado dentro das contas"
+          },
+          {
+            "key": "cushion",
+            "label": "Colchão de segurança",
+            "cents": 10000,
+            "sign": -1
+          },
+          {
+            "key": "planned_income",
+            "label": "Receitas previstas",
+            "cents": 400000,
+            "sign": 1,
+            "note": "ainda não recebidas"
+          }
+        ],
+        "mode": "otimista",
+        "hasAccounts": true,
+        "status": "positive"
+      },
+      "note": ""
+    },
+    {
+      "name": "horizon 30d",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 200000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "s",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_29",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 30000,
+              "date": "2026-11-10",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_30",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-30",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_31",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 99999,
+              "date": "2026-12-05",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_32",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 400000,
+              "date": "2026-11-25",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_33",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 25000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_34",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 50000,
+              "date": "2026-09-01",
+              "accountId": "a",
+              "goalId": "g"
+            },
+            {
+              "id": "tx_35",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 20000,
+              "date": "2026-09-02",
+              "accountId": "a",
+              "toAccountId": "a",
+              "goalId": "g2"
+            }
+          ],
+          "budgets": [],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Meta",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "g2",
+              "name": "Meta",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "accountId": "a"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "today": "2026-11-10",
+        "horizonEnd": "2026-12-10"
+      },
+      "expected": {
+        "availableCents": -29999,
+        "horizonEnd": "2026-12-10",
+        "lines": [
+          {
+            "key": "balances",
+            "label": "Dinheiro nas contas",
+            "cents": 150000,
+            "sign": 1
+          },
+          {
+            "key": "overdue",
+            "label": "Contas atrasadas",
+            "cents": 5000,
+            "sign": -1,
+            "note": "1 conta(s)"
+          },
+          {
+            "key": "bills",
+            "label": "Contas até 10/12",
+            "cents": 129999,
+            "sign": -1,
+            "note": "2 conta(s)"
+          },
+          {
+            "key": "cards",
+            "label": "Faturas de cartão",
+            "cents": 25000,
+            "sign": -1,
+            "note": "1 cartão(ões)"
+          },
+          {
+            "key": "reserved",
+            "label": "Reservas guardadas",
+            "cents": 20000,
+            "sign": -1,
+            "note": "dinheiro separado dentro das contas"
+          }
+        ],
+        "mode": "prudente",
+        "hasAccounts": true,
+        "status": "negative"
+      },
+      "note": ""
+    },
+    {
+      "name": "empty",
+      "input": {
+        "ledger": {
+          "accounts": [],
+          "categories": [],
+          "tags": [],
+          "cards": [],
+          "transactions": [],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "availableCents": 0,
+        "horizonEnd": "2026-11-30",
+        "lines": [
+          {
+            "key": "balances",
+            "label": "Dinheiro nas contas",
+            "cents": 0,
+            "sign": 1
+          },
+          {
+            "key": "bills",
+            "label": "Contas até 30/11",
+            "cents": 0,
+            "sign": -1,
+            "note": "0 conta(s)"
+          },
+          {
+            "key": "cards",
+            "label": "Faturas de cartão",
+            "cents": 0,
+            "sign": -1
+          }
+        ],
+        "mode": "prudente",
+        "hasAccounts": false,
+        "status": "tight"
+      },
+      "note": ""
+    }
+  ]
+}

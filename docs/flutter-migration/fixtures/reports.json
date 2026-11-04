@@ -1,0 +1,3205 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "expensesByCategory flat",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "month": "2026-11"
+      },
+      "expected": [
+        {
+          "categoryId": "rent",
+          "name": "Moradia",
+          "color": "#5B6962",
+          "cents": 150000,
+          "percent": 60,
+          "count": 1
+        },
+        {
+          "categoryId": "market",
+          "name": "Supermercado",
+          "color": "#5B6962",
+          "cents": 60000,
+          "percent": 24,
+          "count": 1
+        },
+        {
+          "categoryId": "food",
+          "name": "Alimentação",
+          "color": "#5B6962",
+          "cents": 40000,
+          "percent": 16,
+          "count": 1
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "expensesByCategory rollUp",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "month": "2026-11",
+        "rollUp": true
+      },
+      "expected": [
+        {
+          "categoryId": "rent",
+          "name": "Moradia",
+          "color": "#5B6962",
+          "cents": 150000,
+          "percent": 60,
+          "count": 1
+        },
+        {
+          "categoryId": "food",
+          "name": "Alimentação",
+          "color": "#5B6962",
+          "cents": 100000,
+          "percent": 40,
+          "count": 2
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "expensesByCategory planned",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "month": "2026-11",
+        "includePlanned": true
+      },
+      "expected": [
+        {
+          "categoryId": "rent",
+          "name": "Moradia",
+          "color": "#5B6962",
+          "cents": 150000,
+          "percent": 55.6,
+          "count": 1
+        },
+        {
+          "categoryId": "food",
+          "name": "Alimentação",
+          "color": "#5B6962",
+          "cents": 60000,
+          "percent": 22.2,
+          "count": 2
+        },
+        {
+          "categoryId": "market",
+          "name": "Supermercado",
+          "color": "#5B6962",
+          "cents": 60000,
+          "percent": 22.2,
+          "count": 1
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "cashflow 3",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "end": "2026-11",
+        "months": 3
+      },
+      "expected": [
+        {
+          "month": "2026-09",
+          "incomeSettled": 0,
+          "incomePlanned": 0,
+          "expenseSettled": 150000,
+          "expensePlanned": 0,
+          "net": -150000,
+          "cardPurchases": 0,
+          "balanceEnd": -50000
+        },
+        {
+          "month": "2026-10",
+          "incomeSettled": 500000,
+          "incomePlanned": 0,
+          "expenseSettled": 150000,
+          "expensePlanned": 0,
+          "net": 350000,
+          "cardPurchases": 0,
+          "balanceEnd": 300000
+        },
+        {
+          "month": "2026-11",
+          "incomeSettled": 500000,
+          "incomePlanned": 100000,
+          "expenseSettled": 250000,
+          "expensePlanned": 20000,
+          "net": 250000,
+          "cardPurchases": 60000,
+          "balanceEnd": 610000
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "compareMonths",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "month": "2026-11"
+      },
+      "expected": {
+        "current": {
+          "month": "2026-11",
+          "incomeSettled": 500000,
+          "incomePlanned": 100000,
+          "expenseSettled": 250000,
+          "expensePlanned": 20000,
+          "net": 250000,
+          "cardPurchases": 60000
+        },
+        "previous": {
+          "month": "2026-10",
+          "incomeSettled": 500000,
+          "incomePlanned": 0,
+          "expenseSettled": 150000,
+          "expensePlanned": 0,
+          "net": 350000,
+          "cardPurchases": 0
+        },
+        "incomeDeltaCents": 0,
+        "expenseDeltaCents": 100000,
+        "expenseDeltaPercent": 66.7
+      },
+      "note": ""
+    },
+    {
+      "name": "yearSummary",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "year": 2026
+      },
+      "expected": {
+        "year": 2026,
+        "months": [
+          {
+            "month": "2026-01",
+            "incomeSettled": 0,
+            "incomePlanned": 0,
+            "expenseSettled": 0,
+            "expensePlanned": 0,
+            "net": 0,
+            "cardPurchases": 0
+          },
+          {
+            "month": "2026-02",
+            "incomeSettled": 0,
+            "incomePlanned": 0,
+            "expenseSettled": 0,
+            "expensePlanned": 0,
+            "net": 0,
+            "cardPurchases": 0
+          },
+          {
+            "month": "2026-03",
+            "incomeSettled": 0,
+            "incomePlanned": 0,
+            "expenseSettled": 0,
+            "expensePlanned": 0,
+            "net": 0,
+            "cardPurchases": 0
+          },
+          {
+            "month": "2026-04",
+            "incomeSettled": 0,
+            "incomePlanned": 0,
+            "expenseSettled": 0,
+            "expensePlanned": 0,
+            "net": 0,
+            "cardPurchases": 0
+          },
+          {
+            "month": "2026-05",
+            "incomeSettled": 0,
+            "incomePlanned": 0,
+            "expenseSettled": 0,
+            "expensePlanned": 0,
+            "net": 0,
+            "cardPurchases": 0
+          },
+          {
+            "month": "2026-06",
+            "incomeSettled": 0,
+            "incomePlanned": 0,
+            "expenseSettled": 0,
+            "expensePlanned": 0,
+            "net": 0,
+            "cardPurchases": 0
+          },
+          {
+            "month": "2026-07",
+            "incomeSettled": 0,
+            "incomePlanned": 0,
+            "expenseSettled": 0,
+            "expensePlanned": 0,
+            "net": 0,
+            "cardPurchases": 0
+          },
+          {
+            "month": "2026-08",
+            "incomeSettled": 0,
+            "incomePlanned": 0,
+            "expenseSettled": 0,
+            "expensePlanned": 0,
+            "net": 0,
+            "cardPurchases": 0
+          },
+          {
+            "month": "2026-09",
+            "incomeSettled": 0,
+            "incomePlanned": 0,
+            "expenseSettled": 150000,
+            "expensePlanned": 0,
+            "net": -150000,
+            "cardPurchases": 0
+          },
+          {
+            "month": "2026-10",
+            "incomeSettled": 500000,
+            "incomePlanned": 0,
+            "expenseSettled": 150000,
+            "expensePlanned": 0,
+            "net": 350000,
+            "cardPurchases": 0
+          },
+          {
+            "month": "2026-11",
+            "incomeSettled": 500000,
+            "incomePlanned": 100000,
+            "expenseSettled": 250000,
+            "expensePlanned": 20000,
+            "net": 250000,
+            "cardPurchases": 60000
+          },
+          {
+            "month": "2026-12",
+            "incomeSettled": 0,
+            "incomePlanned": 0,
+            "expenseSettled": 0,
+            "expensePlanned": 0,
+            "net": 0,
+            "cardPurchases": 0
+          }
+        ],
+        "incomeCents": 1000000,
+        "expenseCents": 550000,
+        "netCents": 450000,
+        "bestMonth": "2026-10",
+        "worstMonth": "2026-09"
+      },
+      "note": ""
+    },
+    {
+      "name": "recurring",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "end": "2026-11"
+      },
+      "expected": [
+        {
+          "key": "aluguel|150000",
+          "description": "Aluguel",
+          "amountCents": 150000,
+          "months": [
+            "2026-09",
+            "2026-10",
+            "2026-11"
+          ]
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "projectBalance",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "today": "2026-11-15",
+        "until": "2026-11-30"
+      },
+      "expected": {
+        "startCents": 610000,
+        "endCents": 630000,
+        "minCents": 530000,
+        "minDate": "2026-11-28",
+        "points": [
+          {
+            "date": "2026-11-27",
+            "label": "Fatura Cartão",
+            "cents": -60000,
+            "kind": "card",
+            "balanceAfterCents": 550000
+          },
+          {
+            "date": "2026-11-28",
+            "label": "Delivery",
+            "cents": -20000,
+            "kind": "expense",
+            "balanceAfterCents": 530000
+          },
+          {
+            "date": "2026-11-30",
+            "label": "Freela",
+            "cents": 100000,
+            "kind": "income",
+            "balanceAfterCents": 630000
+          }
+        ]
+      },
+      "note": ""
+    },
+    {
+      "name": "netWorth",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "end": "2026-11",
+        "months": 2,
+        "today": "2026-11-15"
+      },
+      "expected": [
+        {
+          "month": "2026-10",
+          "assetsCents": 300000,
+          "debtsCents": 160000,
+          "netCents": 140000
+        },
+        {
+          "month": "2026-11",
+          "assetsCents": 610000,
+          "debtsCents": 160000,
+          "netCents": 450000
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "search salario",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "query": "salario"
+      },
+      "expected": [
+        "r2",
+        "r1"
+      ],
+      "note": ""
+    },
+    {
+      "name": "search food planned",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "categoryIds": [
+          "food"
+        ],
+        "status": [
+          "planned"
+        ]
+      },
+      "expected": [
+        "r8"
+      ],
+      "note": ""
+    },
+    {
+      "name": "search min",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            },
+            {
+              "id": "rent",
+              "name": "Moradia",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "r1",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-10-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r2",
+              "currency": "BRL",
+              "description": "Salário",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "r3",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-09-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r4",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-10-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r5",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 150000,
+              "date": "2026-11-10",
+              "accountId": "a",
+              "categoryId": "rent"
+            },
+            {
+              "id": "r6",
+              "currency": "BRL",
+              "description": "Padaria",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 40000,
+              "date": "2026-11-11",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r7",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 60000,
+              "date": "2026-11-12",
+              "cardId": "c",
+              "categoryId": "market"
+            },
+            {
+              "id": "r8",
+              "currency": "BRL",
+              "description": "Delivery",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-28",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "r9",
+              "currency": "BRL",
+              "description": "Freela",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 100000,
+              "date": "2026-11-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [
+            {
+              "id": "l",
+              "name": "Empréstimo",
+              "principalCents": 100000,
+              "monthlyRatePercent": 0,
+              "termMonths": 10,
+              "system": "price",
+              "firstDueDate": "2026-12-10",
+              "monthlyFeeCents": 0,
+              "upfrontFeesCents": 0,
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "minCents": 200000
+      },
+      "expected": [
+        "r2",
+        "r1"
+      ],
+      "note": ""
+    }
+  ]
+}

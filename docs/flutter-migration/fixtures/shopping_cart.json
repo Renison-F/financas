@@ -1,0 +1,391 @@
+{
+  "generatedFrom": "packages/shopping (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "lineTotal Arroz",
+      "input": {
+        "line": {
+          "id": "a",
+          "name": "Arroz",
+          "unit": "un",
+          "quantity": 2,
+          "unitPriceCents": 2490,
+          "priceSource": "manual",
+          "checked": false
+        }
+      },
+      "expected": {
+        "grossCents": 4980,
+        "discountCents": 0,
+        "netCents": 4980,
+        "pricePerBaseUnitCents": 2490,
+        "baseUnit": "un"
+      },
+      "note": ""
+    },
+    {
+      "name": "lineTotal Leite",
+      "input": {
+        "line": {
+          "id": "b",
+          "name": "Leite",
+          "unit": "un",
+          "quantity": 6,
+          "unitPriceCents": 549,
+          "priceSource": "manual",
+          "checked": false
+        }
+      },
+      "expected": {
+        "grossCents": 3294,
+        "discountCents": 0,
+        "netCents": 3294,
+        "pricePerBaseUnitCents": 549,
+        "baseUnit": "un"
+      },
+      "note": ""
+    },
+    {
+      "name": "lineTotal Banana",
+      "input": {
+        "line": {
+          "id": "c",
+          "name": "Banana",
+          "unit": "kg",
+          "quantity": 1.5,
+          "unitPriceCents": 699,
+          "priceSource": "manual",
+          "checked": false
+        }
+      },
+      "expected": {
+        "grossCents": 1049,
+        "discountCents": 0,
+        "netCents": 1049,
+        "pricePerBaseUnitCents": 699,
+        "baseUnit": "kg"
+      },
+      "note": ""
+    },
+    {
+      "name": "lineTotal promo 3x2 q3",
+      "input": {
+        "line": {
+          "id": "l",
+          "name": "x",
+          "unit": "un",
+          "quantity": 3,
+          "unitPriceCents": 1000,
+          "priceSource": "manual",
+          "checked": false,
+          "promo": {
+            "take": 3,
+            "pay": 2
+          }
+        }
+      },
+      "expected": {
+        "grossCents": 3000,
+        "discountCents": 1000,
+        "netCents": 2000,
+        "pricePerBaseUnitCents": 1000,
+        "baseUnit": "un"
+      },
+      "note": ""
+    },
+    {
+      "name": "lineTotal promo 3x2 q7",
+      "input": {
+        "line": {
+          "id": "l",
+          "name": "x",
+          "unit": "un",
+          "quantity": 7,
+          "unitPriceCents": 1000,
+          "priceSource": "manual",
+          "checked": false,
+          "promo": {
+            "take": 3,
+            "pay": 2
+          }
+        }
+      },
+      "expected": {
+        "grossCents": 7000,
+        "discountCents": 2000,
+        "netCents": 5000,
+        "pricePerBaseUnitCents": 1000,
+        "baseUnit": "un"
+      },
+      "note": ""
+    },
+    {
+      "name": "lineTotal pct 10",
+      "input": {
+        "line": {
+          "id": "l",
+          "name": "x",
+          "unit": "un",
+          "quantity": 2,
+          "unitPriceCents": 1000,
+          "priceSource": "manual",
+          "checked": false,
+          "discountPercent": 10
+        }
+      },
+      "expected": {
+        "grossCents": 2000,
+        "discountCents": 200,
+        "netCents": 1800,
+        "pricePerBaseUnitCents": 1000,
+        "baseUnit": "un"
+      },
+      "note": ""
+    },
+    {
+      "name": "lineTotal abs over",
+      "input": {
+        "line": {
+          "id": "l",
+          "name": "x",
+          "unit": "un",
+          "quantity": 1,
+          "unitPriceCents": 1000,
+          "priceSource": "manual",
+          "checked": false,
+          "discountCents": 5000
+        }
+      },
+      "expected": {
+        "grossCents": 1000,
+        "discountCents": 1000,
+        "netCents": 0,
+        "pricePerBaseUnitCents": 1000,
+        "baseUnit": "un"
+      },
+      "note": ""
+    },
+    {
+      "name": "lineTotal g 350",
+      "input": {
+        "line": {
+          "id": "l",
+          "name": "x",
+          "unit": "g",
+          "quantity": 350,
+          "unitPriceCents": 5,
+          "priceSource": "manual",
+          "checked": false
+        }
+      },
+      "expected": {
+        "grossCents": 1750,
+        "discountCents": 0,
+        "netCents": 1750,
+        "pricePerBaseUnitCents": 5000,
+        "baseUnit": "kg"
+      },
+      "note": ""
+    },
+    {
+      "name": "lineTotal kg 1.5 half-up",
+      "input": {
+        "line": {
+          "id": "l",
+          "name": "x",
+          "unit": "kg",
+          "quantity": 1.5,
+          "unitPriceCents": 699,
+          "priceSource": "manual",
+          "checked": false
+        }
+      },
+      "expected": {
+        "grossCents": 1049,
+        "discountCents": 0,
+        "netCents": 1049,
+        "pricePerBaseUnitCents": 699,
+        "baseUnit": "kg"
+      },
+      "note": ""
+    },
+    {
+      "name": "lineTotal kg 0.333",
+      "input": {
+        "line": {
+          "id": "l",
+          "name": "x",
+          "unit": "kg",
+          "quantity": 0.333,
+          "unitPriceCents": 2999,
+          "priceSource": "manual",
+          "checked": false
+        }
+      },
+      "expected": {
+        "grossCents": 999,
+        "discountCents": 0,
+        "netCents": 999,
+        "pricePerBaseUnitCents": 2999,
+        "baseUnit": "kg"
+      },
+      "note": ""
+    },
+    {
+      "name": "lineTotal ml 750",
+      "input": {
+        "line": {
+          "id": "l",
+          "name": "x",
+          "unit": "ml",
+          "quantity": 750,
+          "unitPriceCents": 1,
+          "priceSource": "manual",
+          "checked": false
+        }
+      },
+      "expected": {
+        "grossCents": 750,
+        "discountCents": 0,
+        "netCents": 750,
+        "pricePerBaseUnitCents": 1000,
+        "baseUnit": "l"
+      },
+      "note": ""
+    },
+    {
+      "name": "cartTotals brief budget 10000",
+      "input": {
+        "lines": [
+          {
+            "id": "a",
+            "name": "Arroz",
+            "unit": "un",
+            "quantity": 2,
+            "unitPriceCents": 2490,
+            "priceSource": "manual",
+            "checked": false
+          },
+          {
+            "id": "b",
+            "name": "Leite",
+            "unit": "un",
+            "quantity": 6,
+            "unitPriceCents": 549,
+            "priceSource": "manual",
+            "checked": false
+          },
+          {
+            "id": "c",
+            "name": "Banana",
+            "unit": "kg",
+            "quantity": 1.5,
+            "unitPriceCents": 699,
+            "priceSource": "manual",
+            "checked": false
+          }
+        ],
+        "budget": 10000
+      },
+      "expected": {
+        "itemCount": 9,
+        "lineCount": 3,
+        "grossCents": 9323,
+        "discountCents": 0,
+        "totalCents": 9323,
+        "budgetCents": 10000,
+        "remainingCents": 677,
+        "overBudget": false,
+        "state": "atencao",
+        "unconfirmedLines": 0
+      },
+      "note": ""
+    },
+    {
+      "name": "cartTotals over",
+      "input": {
+        "lines": [
+          {
+            "id": "l",
+            "name": "x",
+            "unit": "un",
+            "quantity": 1,
+            "unitPriceCents": 15000,
+            "priceSource": "label_ocr",
+            "checked": false,
+            "confidence": 0.4
+          }
+        ],
+        "budget": 10000
+      },
+      "expected": {
+        "itemCount": 1,
+        "lineCount": 1,
+        "grossCents": 15000,
+        "discountCents": 0,
+        "totalCents": 15000,
+        "budgetCents": 10000,
+        "remainingCents": -5000,
+        "overBudget": true,
+        "state": "agitado",
+        "unconfirmedLines": 1
+      },
+      "note": ""
+    },
+    {
+      "name": "cartTotals empty",
+      "input": {
+        "lines": []
+      },
+      "expected": {
+        "itemCount": 0,
+        "lineCount": 0,
+        "grossCents": 0,
+        "discountCents": 0,
+        "totalCents": 0,
+        "overBudget": false,
+        "state": "sem_orcamento",
+        "unconfirmedLines": 0
+      },
+      "note": ""
+    },
+    {
+      "name": "addLine merge",
+      "input": {
+        "a": {
+          "id": "1",
+          "name": "x",
+          "unit": "un",
+          "quantity": 1,
+          "unitPriceCents": 100,
+          "priceSource": "manual",
+          "checked": false,
+          "barcode": "7891000100103"
+        },
+        "b": {
+          "id": "2",
+          "name": "x",
+          "unit": "un",
+          "quantity": 2,
+          "unitPriceCents": 100,
+          "priceSource": "manual",
+          "checked": false,
+          "barcode": "7891000100103"
+        }
+      },
+      "expected": [
+        {
+          "id": "1",
+          "name": "x",
+          "unit": "un",
+          "quantity": 3,
+          "unitPriceCents": 100,
+          "priceSource": "manual",
+          "checked": false,
+          "barcode": "7891000100103"
+        }
+      ],
+      "note": ""
+    }
+  ]
+}

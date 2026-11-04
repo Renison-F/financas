@@ -1,0 +1,602 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "spentInMonth food",
+      "input": {
+        "ledger": {
+          "accounts": [],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_41",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-02",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_42",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 30000,
+              "date": "2026-11-03",
+              "categoryId": "market",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_43",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 10000,
+              "date": "2026-11-20",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_44",
+              "currency": "BRL",
+              "description": "",
+              "status": "partially_paid",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-11-20",
+              "categoryId": "food",
+              "paidCents": 2000
+            }
+          ],
+          "budgets": [
+            {
+              "id": "b1",
+              "limitCents": 100000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            },
+            {
+              "id": "b2",
+              "limitCents": 120000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food",
+              "month": "2026-12"
+            },
+            {
+              "id": "g",
+              "limitCents": 300000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "month": "2026-11",
+        "categoryId": "food"
+      },
+      "expected": {
+        "spentCents": 52000,
+        "plannedCents": 13000
+      },
+      "note": ""
+    },
+    {
+      "name": "budgetsForMonth 2026-11 @15",
+      "input": {
+        "ledger": {
+          "accounts": [],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_41",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-02",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_42",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 30000,
+              "date": "2026-11-03",
+              "categoryId": "market",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_43",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 10000,
+              "date": "2026-11-20",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_44",
+              "currency": "BRL",
+              "description": "",
+              "status": "partially_paid",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-11-20",
+              "categoryId": "food",
+              "paidCents": 2000
+            }
+          ],
+          "budgets": [
+            {
+              "id": "b1",
+              "limitCents": 100000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            },
+            {
+              "id": "b2",
+              "limitCents": 120000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food",
+              "month": "2026-12"
+            },
+            {
+              "id": "g",
+              "limitCents": 300000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "month": "2026-11",
+        "today": "2026-11-15"
+      },
+      "expected": [
+        {
+          "budget": "g",
+          "month": "2026-11",
+          "limitCents": 300000,
+          "spentCents": 52000,
+          "plannedCents": 13000,
+          "remainingCents": 248000,
+          "percentUsed": 17.3,
+          "expectedPercent": 50,
+          "pace": "sereno"
+        },
+        {
+          "budget": "b1",
+          "category": "food",
+          "month": "2026-11",
+          "limitCents": 100000,
+          "spentCents": 52000,
+          "plannedCents": 13000,
+          "remainingCents": 48000,
+          "percentUsed": 52,
+          "expectedPercent": 50,
+          "pace": "atencao"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "budgetsForMonth 2026-12",
+      "input": {
+        "ledger": {
+          "accounts": [],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "market",
+              "name": "Supermercado",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "parentId": "food"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_41",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 20000,
+              "date": "2026-11-02",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_42",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 30000,
+              "date": "2026-11-03",
+              "categoryId": "market",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_43",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 10000,
+              "date": "2026-11-20",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_44",
+              "currency": "BRL",
+              "description": "",
+              "status": "partially_paid",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-11-20",
+              "categoryId": "food",
+              "paidCents": 2000
+            }
+          ],
+          "budgets": [
+            {
+              "id": "b1",
+              "limitCents": 100000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            },
+            {
+              "id": "b2",
+              "limitCents": 120000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food",
+              "month": "2026-12"
+            },
+            {
+              "id": "g",
+              "limitCents": 300000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "month": "2026-12",
+        "today": "2026-12-01"
+      },
+      "expected": [
+        {
+          "budget": "g",
+          "month": "2026-12",
+          "limitCents": 300000,
+          "spentCents": 0,
+          "plannedCents": 0,
+          "remainingCents": 300000,
+          "percentUsed": 0,
+          "expectedPercent": 3.2,
+          "pace": "sereno"
+        },
+        {
+          "budget": "b2",
+          "category": "food",
+          "month": "2026-12",
+          "limitCents": 120000,
+          "spentCents": 0,
+          "plannedCents": 0,
+          "remainingCents": 120000,
+          "percentUsed": 0,
+          "expectedPercent": 3.2,
+          "pace": "sereno"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "pace 30 vs 50",
+      "input": {
+        "used": 30,
+        "expected": 50
+      },
+      "expected": "sereno",
+      "note": ""
+    },
+    {
+      "name": "pace 55 vs 50",
+      "input": {
+        "used": 55,
+        "expected": 50
+      },
+      "expected": "atencao",
+      "note": ""
+    },
+    {
+      "name": "pace 61 vs 50",
+      "input": {
+        "used": 61,
+        "expected": 50
+      },
+      "expected": "agitado",
+      "note": ""
+    },
+    {
+      "name": "pace 101 vs 100",
+      "input": {
+        "used": 101,
+        "expected": 100
+      },
+      "expected": "agitado",
+      "note": ""
+    },
+    {
+      "name": "pace 50 vs 50",
+      "input": {
+        "used": 50,
+        "expected": 50
+      },
+      "expected": "sereno",
+      "note": ""
+    },
+    {
+      "name": "pace 60 vs 50",
+      "input": {
+        "used": 60,
+        "expected": 50
+      },
+      "expected": "atencao",
+      "note": ""
+    },
+    {
+      "name": "pace 60.1 vs 50",
+      "input": {
+        "used": 60.1,
+        "expected": 50
+      },
+      "expected": "agitado",
+      "note": ""
+    },
+    {
+      "name": "monthElapsed after",
+      "input": {
+        "month": "2026-11",
+        "today": "2026-12-01"
+      },
+      "expected": 100,
+      "note": ""
+    },
+    {
+      "name": "monthElapsed before",
+      "input": {
+        "month": "2026-11",
+        "today": "2026-10-01"
+      },
+      "expected": 0,
+      "note": ""
+    },
+    {
+      "name": "monthElapsed mid",
+      "input": {
+        "month": "2026-11",
+        "today": "2026-11-15"
+      },
+      "expected": 50,
+      "note": ""
+    }
+  ]
+}

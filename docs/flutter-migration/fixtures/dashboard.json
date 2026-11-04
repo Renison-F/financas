@@ -1,0 +1,131 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "widget ids",
+      "input": {},
+      "expected": [
+        "available",
+        "consolidated_balance",
+        "account_balances",
+        "income",
+        "expenses",
+        "bills_to_pay",
+        "overdue_bills",
+        "upcoming_due",
+        "cards_invoices",
+        "installments",
+        "monthly_budget",
+        "spending_by_category",
+        "evolution",
+        "goals",
+        "reserves",
+        "monthly_savings",
+        "subscriptions",
+        "loans",
+        "calendar",
+        "recent_transactions",
+        "recommendations",
+        "shopping_lists",
+        "shopping_assistant",
+        "advanced_indicators"
+      ],
+      "note": ""
+    },
+    {
+      "name": "default layout",
+      "input": {},
+      "expected": {
+        "order": [
+          "available",
+          "bills_to_pay",
+          "cards_invoices",
+          "monthly_budget",
+          "recent_transactions",
+          "spending_by_category",
+          "goals"
+        ],
+        "period": "current_month",
+        "privacyMode": false,
+        "version": 1
+      },
+      "note": ""
+    },
+    {
+      "name": "ops sequence",
+      "input": {
+        "ops": [
+          "preset focus",
+          "show goals @1",
+          "move goals -1",
+          "move goals -1",
+          "hide bills_to_pay"
+        ]
+      },
+      "expected": {
+        "order": [
+          "goals",
+          "available",
+          "recent_transactions"
+        ],
+        "period": "current_month",
+        "privacyMode": false,
+        "version": 1
+      },
+      "note": ""
+    },
+    {
+      "name": "normalize corrupted",
+      "input": {
+        "raw": {
+          "order": [
+            "available",
+            "bogus",
+            "available",
+            "goals"
+          ],
+          "period": "weird",
+          "privacyMode": "yes",
+          "accountIds": [
+            "a",
+            2
+          ]
+        }
+      },
+      "expected": {
+        "order": [
+          "available",
+          "goals"
+        ],
+        "period": "current_month",
+        "accountIds": [
+          "a"
+        ],
+        "privacyMode": false,
+        "version": 1
+      },
+      "note": ""
+    },
+    {
+      "name": "normalize null",
+      "input": {
+        "raw": null
+      },
+      "expected": {
+        "order": [
+          "available",
+          "bills_to_pay",
+          "cards_invoices",
+          "monthly_budget",
+          "recent_transactions",
+          "spending_by_category",
+          "goals"
+        ],
+        "period": "current_month",
+        "privacyMode": false,
+        "version": 1
+      },
+      "note": ""
+    }
+  ]
+}

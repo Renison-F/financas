@@ -1,0 +1,259 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "ledger L1",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 100000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            },
+            {
+              "id": "b",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 0,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 500000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "t1",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 300000,
+              "date": "2026-11-05",
+              "accountId": "a"
+            },
+            {
+              "id": "t2",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "t3",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 9999,
+              "date": "2026-11-07",
+              "accountId": "a"
+            },
+            {
+              "id": "t4",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "transfer",
+              "amountCents": 50000,
+              "date": "2026-11-08",
+              "accountId": "a",
+              "toAccountId": "b"
+            },
+            {
+              "id": "t5",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 20000,
+              "date": "2026-11-09",
+              "cardId": "c"
+            },
+            {
+              "id": "t6",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_payment",
+              "amountCents": 20000,
+              "date": "2026-11-27",
+              "accountId": "a",
+              "cardId": "c",
+              "invoiceMonth": "2026-11"
+            },
+            {
+              "id": "t7",
+              "currency": "BRL",
+              "description": "",
+              "status": "partially_paid",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 10000,
+              "date": "2026-11-10",
+              "accountId": "b",
+              "paidCents": 4000
+            },
+            {
+              "id": "t8",
+              "currency": "BRL",
+              "description": "",
+              "status": "cancelled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 777,
+              "date": "2026-11-11",
+              "accountId": "a"
+            },
+            {
+              "id": "t9",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "balance_adjustment",
+              "amountCents": 100,
+              "date": "2026-11-12",
+              "toAccountId": "b"
+            },
+            {
+              "id": "t10",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 1000,
+              "date": "2026-11-13",
+              "accountId": "a",
+              "toAccountId": "a",
+              "goalId": "g"
+            },
+            {
+              "id": "late",
+              "currency": "BRL",
+              "description": "",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 100,
+              "date": "2026-10-28",
+              "dueDate": "2026-10-30",
+              "accountId": "a"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        }
+      },
+      "expected": {
+        "balanceA": 325000,
+        "balanceB": 46100,
+        "balanceA_asOf_1105": 400000,
+        "consolidated": 371100,
+        "monthTotals": {
+          "month": "2026-11",
+          "incomeSettled": 300000,
+          "incomePlanned": 0,
+          "expenseSettled": 29000,
+          "expensePlanned": 15999,
+          "net": 271000,
+          "cardPurchases": 20000
+        },
+        "overdueIds": [
+          "late"
+        ],
+        "upcomingIds": [
+          "t3",
+          "t7"
+        ]
+      },
+      "note": "transfer neutral; card payment is not an expense; partial counts paid part; same-account goal deposit is neutral"
+    }
+  ]
+}

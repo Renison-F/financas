@@ -1,0 +1,319 @@
+{
+  "generatedFrom": "packages/shopping (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "list after adds",
+      "input": {
+        "ops": "add Arroz(2490) + arroz(merge) + Banana kg + Sabão"
+      },
+      "expected": {
+        "id": "L",
+        "name": "Compra do mês",
+        "store": "Mercado Bom",
+        "budgetCents": 30000,
+        "items": [
+          {
+            "id": "i1",
+            "name": "Arroz",
+            "unit": "un",
+            "quantity": 2,
+            "category": "Mercearia",
+            "estimatedUnitPriceCents": 2490,
+            "estimateSource": "history",
+            "checked": false,
+            "sortOrder": 0
+          },
+          {
+            "id": "i3",
+            "name": "Banana",
+            "unit": "kg",
+            "quantity": 1.5,
+            "category": "Hortifruti",
+            "checked": false,
+            "sortOrder": 1
+          },
+          {
+            "id": "i4",
+            "name": "Sabão",
+            "unit": "un",
+            "quantity": 1,
+            "category": "Limpeza",
+            "estimatedUnitPriceCents": 1290,
+            "estimateSource": "manual",
+            "checked": false,
+            "sortOrder": 2
+          }
+        ],
+        "archived": false,
+        "createdAt": "2026-11-04T10:00:00.000Z",
+        "updatedAt": "2026-11-04T10:00:00.000Z"
+      },
+      "note": ""
+    },
+    {
+      "name": "estimate",
+      "input": {
+        "list": {
+          "id": "L",
+          "name": "Compra do mês",
+          "store": "Mercado Bom",
+          "budgetCents": 30000,
+          "items": [
+            {
+              "id": "i1",
+              "name": "Arroz",
+              "unit": "un",
+              "quantity": 2,
+              "category": "Mercearia",
+              "estimatedUnitPriceCents": 2490,
+              "estimateSource": "history",
+              "checked": false,
+              "sortOrder": 0
+            },
+            {
+              "id": "i3",
+              "name": "Banana",
+              "unit": "kg",
+              "quantity": 1.5,
+              "category": "Hortifruti",
+              "checked": false,
+              "sortOrder": 1
+            },
+            {
+              "id": "i4",
+              "name": "Sabão",
+              "unit": "un",
+              "quantity": 1,
+              "category": "Limpeza",
+              "estimatedUnitPriceCents": 1290,
+              "estimateSource": "manual",
+              "checked": false,
+              "sortOrder": 2
+            }
+          ],
+          "archived": false,
+          "createdAt": "2026-11-04T10:00:00.000Z",
+          "updatedAt": "2026-11-04T10:00:00.000Z"
+        }
+      },
+      "expected": {
+        "knownCents": 6270,
+        "knownItems": 2,
+        "unknownItems": 1,
+        "totalItems": 3,
+        "coveragePercent": 67,
+        "budgetCents": 30000,
+        "remainingCents": 23730
+      },
+      "note": ""
+    },
+    {
+      "name": "groups",
+      "input": {
+        "list": {
+          "id": "L",
+          "name": "Compra do mês",
+          "store": "Mercado Bom",
+          "budgetCents": 30000,
+          "items": [
+            {
+              "id": "i1",
+              "name": "Arroz",
+              "unit": "un",
+              "quantity": 2,
+              "category": "Mercearia",
+              "estimatedUnitPriceCents": 2490,
+              "estimateSource": "history",
+              "checked": false,
+              "sortOrder": 0
+            },
+            {
+              "id": "i3",
+              "name": "Banana",
+              "unit": "kg",
+              "quantity": 1.5,
+              "category": "Hortifruti",
+              "checked": false,
+              "sortOrder": 1
+            },
+            {
+              "id": "i4",
+              "name": "Sabão",
+              "unit": "un",
+              "quantity": 1,
+              "category": "Limpeza",
+              "estimatedUnitPriceCents": 1290,
+              "estimateSource": "manual",
+              "checked": false,
+              "sortOrder": 2
+            }
+          ],
+          "archived": false,
+          "createdAt": "2026-11-04T10:00:00.000Z",
+          "updatedAt": "2026-11-04T10:00:00.000Z"
+        }
+      },
+      "expected": [
+        {
+          "category": "Hortifruti",
+          "items": [
+            "i3"
+          ]
+        },
+        {
+          "category": "Mercearia",
+          "items": [
+            "i1"
+          ]
+        },
+        {
+          "category": "Limpeza",
+          "items": [
+            "i4"
+          ]
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "progress after toggle",
+      "input": {
+        "list": {
+          "id": "L",
+          "name": "Compra do mês",
+          "store": "Mercado Bom",
+          "budgetCents": 30000,
+          "items": [
+            {
+              "id": "i1",
+              "name": "Arroz",
+              "unit": "un",
+              "quantity": 2,
+              "category": "Mercearia",
+              "estimatedUnitPriceCents": 2490,
+              "estimateSource": "history",
+              "checked": true,
+              "sortOrder": 0
+            },
+            {
+              "id": "i3",
+              "name": "Banana",
+              "unit": "kg",
+              "quantity": 1.5,
+              "category": "Hortifruti",
+              "checked": false,
+              "sortOrder": 1
+            },
+            {
+              "id": "i4",
+              "name": "Sabão",
+              "unit": "un",
+              "quantity": 1,
+              "category": "Limpeza",
+              "estimatedUnitPriceCents": 1290,
+              "estimateSource": "manual",
+              "checked": false,
+              "sortOrder": 2
+            }
+          ],
+          "archived": false,
+          "createdAt": "2026-11-04T10:00:00.000Z",
+          "updatedAt": "2026-11-04T10:00:00.000Z"
+        }
+      },
+      "expected": {
+        "checked": 1,
+        "total": 3,
+        "percent": 33
+      },
+      "note": ""
+    },
+    {
+      "name": "duplicate",
+      "input": {
+        "list": {
+          "id": "L",
+          "name": "Compra do mês",
+          "store": "Mercado Bom",
+          "budgetCents": 30000,
+          "items": [
+            {
+              "id": "i1",
+              "name": "Arroz",
+              "unit": "un",
+              "quantity": 2,
+              "category": "Mercearia",
+              "estimatedUnitPriceCents": 2490,
+              "estimateSource": "history",
+              "checked": true,
+              "sortOrder": 0
+            },
+            {
+              "id": "i3",
+              "name": "Banana",
+              "unit": "kg",
+              "quantity": 1.5,
+              "category": "Hortifruti",
+              "checked": false,
+              "sortOrder": 1
+            },
+            {
+              "id": "i4",
+              "name": "Sabão",
+              "unit": "un",
+              "quantity": 1,
+              "category": "Limpeza",
+              "estimatedUnitPriceCents": 1290,
+              "estimateSource": "manual",
+              "checked": false,
+              "sortOrder": 2
+            }
+          ],
+          "archived": false,
+          "createdAt": "2026-11-04T10:00:00.000Z",
+          "updatedAt": "2026-11-04T10:00:00.000Z"
+        }
+      },
+      "expected": {
+        "id": "L2",
+        "name": "Compra do mês (cópia)",
+        "store": "Mercado Bom",
+        "budgetCents": 30000,
+        "items": [
+          {
+            "name": "Arroz",
+            "unit": "un",
+            "quantity": 2,
+            "category": "Mercearia",
+            "estimatedUnitPriceCents": 2490,
+            "estimateSource": "history",
+            "checked": false,
+            "sortOrder": 0
+          },
+          {
+            "name": "Banana",
+            "unit": "kg",
+            "quantity": 1.5,
+            "category": "Hortifruti",
+            "checked": false,
+            "sortOrder": 1
+          },
+          {
+            "name": "Sabão",
+            "unit": "un",
+            "quantity": 1,
+            "category": "Limpeza",
+            "estimatedUnitPriceCents": 1290,
+            "estimateSource": "manual",
+            "checked": false,
+            "sortOrder": 2
+          }
+        ],
+        "archived": false,
+        "createdAt": "2026-11-04T10:00:00.000Z",
+        "updatedAt": "2026-11-04T10:00:00.000Z"
+      },
+      "note": ""
+    }
+  ]
+}

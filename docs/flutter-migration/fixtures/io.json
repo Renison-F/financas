@@ -1,0 +1,619 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "parseCSV pt",
+      "input": {
+        "text": "﻿Data;Descrição;Valor;Tipo\n04/11/2026;\"Mercado; Bom\";-R$ 1.234,56;despesa\n2026-11-05;Salário;5.000,00;receita\n05/11/2026;Ruim;abc;despesa\n"
+      },
+      "expected": {
+        "delimiter": ";",
+        "headers": [
+          "Data",
+          "Descrição",
+          "Valor",
+          "Tipo"
+        ],
+        "rows": [
+          [
+            "04/11/2026",
+            "Mercado; Bom",
+            "-R$ 1.234,56",
+            "despesa"
+          ],
+          [
+            "2026-11-05",
+            "Salário",
+            "5.000,00",
+            "receita"
+          ],
+          [
+            "05/11/2026",
+            "Ruim",
+            "abc",
+            "despesa"
+          ]
+        ]
+      },
+      "note": ""
+    },
+    {
+      "name": "guessMapping pt",
+      "input": {
+        "headers": [
+          "Data",
+          "Descrição",
+          "Valor",
+          "Tipo"
+        ]
+      },
+      "expected": {
+        "date": 0,
+        "description": 1,
+        "amount": 2,
+        "type": 3
+      },
+      "note": ""
+    },
+    {
+      "name": "candidates pt",
+      "input": {
+        "text": "﻿Data;Descrição;Valor;Tipo\n04/11/2026;\"Mercado; Bom\";-R$ 1.234,56;despesa\n2026-11-05;Salário;5.000,00;receita\n05/11/2026;Ruim;abc;despesa\n"
+      },
+      "expected": [
+        {
+          "rowIndex": 0,
+          "date": "2026-11-04",
+          "description": "Mercado; Bom",
+          "amountCents": 123456,
+          "kind": "expense",
+          "problems": []
+        },
+        {
+          "rowIndex": 1,
+          "date": "2026-11-05",
+          "description": "Salário",
+          "amountCents": 500000,
+          "kind": "income",
+          "problems": []
+        },
+        {
+          "rowIndex": 2,
+          "date": "2026-11-05",
+          "description": "Ruim",
+          "amountCents": 0,
+          "kind": "expense",
+          "problems": [
+            "Valor inválido"
+          ]
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "candidates en no type",
+      "input": {
+        "text": "date,description,amount\n2026-11-04,Uber,-23.90\n2026-11-04,Pix recebido,100.00"
+      },
+      "expected": [
+        {
+          "rowIndex": 0,
+          "date": "2026-11-04",
+          "description": "Uber",
+          "amountCents": 2390,
+          "kind": "expense",
+          "problems": []
+        },
+        {
+          "rowIndex": 1,
+          "date": "2026-11-04",
+          "description": "Pix recebido",
+          "amountCents": 10000,
+          "kind": "income",
+          "problems": []
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "parseDateFlexible 31/12/2026",
+      "input": {
+        "text": "31/12/2026"
+      },
+      "expected": "2026-12-31",
+      "note": ""
+    },
+    {
+      "name": "parseDateFlexible 2026-12-31T10:00:00Z",
+      "input": {
+        "text": "2026-12-31T10:00:00Z"
+      },
+      "expected": "2026-12-31",
+      "note": ""
+    },
+    {
+      "name": "parseDateFlexible 31-12-2026",
+      "input": {
+        "text": "31-12-2026"
+      },
+      "expected": "2026-12-31",
+      "note": ""
+    },
+    {
+      "name": "parseDateFlexible 32/12/2026",
+      "input": {
+        "text": "32/12/2026"
+      },
+      "expected": null,
+      "note": ""
+    },
+    {
+      "name": "parseDateFlexible 31/12/26",
+      "input": {
+        "text": "31/12/26"
+      },
+      "expected": "2026-12-31",
+      "note": ""
+    },
+    {
+      "name": "parseDateFlexible 2026-02-30",
+      "input": {
+        "text": "2026-02-30"
+      },
+      "expected": null,
+      "note": ""
+    },
+    {
+      "name": "exportCSV",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Nubank",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 0,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "c",
+              "name": "Casa",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [],
+          "transactions": [
+            {
+              "id": "e1",
+              "currency": "BRL",
+              "description": "Luz; \"nov\"",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 123456,
+              "date": "2026-11-04",
+              "accountId": "a",
+              "categoryId": "c"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        }
+      },
+      "expected": "﻿data;tipo;descricao;categoria;conta;conta_destino;cartao;valor;situacao;vencimento;parcela;tags;observacoes\r\n2026-11-04;despesa;\"Luz; \"\"nov\"\"\";Casa;Nubank;;;1234,56;efetivado;;;;",
+      "note": ""
+    },
+    {
+      "name": "parseOFX",
+      "input": {
+        "text": "OFXHEADER:100\nDATA:OFXSGML\n<OFX><BANKMSGSRSV1><STMTTRNRS><STMTRS><CURDEF>BRL<BANKACCTFROM><BANKID>0260<ACCTID>12345-6</BANKACCTFROM>\n<BANKTRANLIST><DTSTART>20261101<DTEND>20261130\n<STMTTRN><TRNTYPE>DEBIT<DTPOSTED>20261104120000[-3:BRT]<TRNAMT>-45.90<FITID>2026110400001<MEMO>PAG*MercadoBom</STMTTRN>\n<STMTTRN><TRNTYPE>CREDIT<DTPOSTED>20261105<TRNAMT>5000.00<FITID>2026110500002<NAME>TED SALARIO</STMTTRN>\n</BANKTRANLIST><LEDGERBAL><BALAMT>1234.56<DTASOF>20261130</LEDGERBAL></STMTRS></STMTTRNRS></BANKMSGSRSV1></OFX>"
+      },
+      "expected": {
+        "currency": "BRL",
+        "accountId": "12345-6",
+        "bankId": "0260",
+        "transactions": [
+          {
+            "fitId": "2026110400001",
+            "date": "2026-11-04",
+            "amountCents": -4590,
+            "memo": "PAG*MercadoBom",
+            "type": "DEBIT"
+          },
+          {
+            "fitId": "2026110500002",
+            "date": "2026-11-05",
+            "amountCents": 500000,
+            "memo": "TED SALARIO",
+            "type": "CREDIT"
+          }
+        ],
+        "balanceCents": 123456,
+        "balanceDate": "2026-11-30"
+      },
+      "note": ""
+    },
+    {
+      "name": "candidatesFromOFX",
+      "input": {
+        "text": "OFXHEADER:100\nDATA:OFXSGML\n<OFX><BANKMSGSRSV1><STMTTRNRS><STMTRS><CURDEF>BRL<BANKACCTFROM><BANKID>0260<ACCTID>12345-6</BANKACCTFROM>\n<BANKTRANLIST><DTSTART>20261101<DTEND>20261130\n<STMTTRN><TRNTYPE>DEBIT<DTPOSTED>20261104120000[-3:BRT]<TRNAMT>-45.90<FITID>2026110400001<MEMO>PAG*MercadoBom</STMTTRN>\n<STMTTRN><TRNTYPE>CREDIT<DTPOSTED>20261105<TRNAMT>5000.00<FITID>2026110500002<NAME>TED SALARIO</STMTTRN>\n</BANKTRANLIST><LEDGERBAL><BALAMT>1234.56<DTASOF>20261130</LEDGERBAL></STMTRS></STMTTRNRS></BANKMSGSRSV1></OFX>"
+      },
+      "expected": [
+        {
+          "rowIndex": 0,
+          "date": "2026-11-04",
+          "description": "PAG*MercadoBom",
+          "amountCents": 4590,
+          "kind": "expense",
+          "externalRef": "ofx:2026110400001",
+          "problems": []
+        },
+        {
+          "rowIndex": 1,
+          "date": "2026-11-05",
+          "description": "TED SALARIO",
+          "amountCents": 500000,
+          "kind": "income",
+          "externalRef": "ofx:2026110500002",
+          "problems": []
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "textSimilarity",
+      "input": {
+        "a": "Mercado Bom",
+        "b": "MERCADO BOM LTDA"
+      },
+      "expected": 0.6666666666666666,
+      "note": ""
+    },
+    {
+      "name": "findDuplicates",
+      "input": {
+        "ledger": {
+          "accounts": [],
+          "categories": [],
+          "tags": [],
+          "cards": [],
+          "transactions": [
+            {
+              "id": "t1",
+              "currency": "BRL",
+              "description": "Mercado Bom",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 4590,
+              "date": "2026-11-04",
+              "externalRef": "ofx:X"
+            },
+            {
+              "id": "t2",
+              "currency": "BRL",
+              "description": "Conta de luz",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 10000,
+              "date": "2026-11-10"
+            }
+          ],
+          "budgets": [],
+          "goals": [],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "candidates": [
+          {
+            "rowIndex": 0,
+            "date": "2026-11-04",
+            "description": "whatever",
+            "amountCents": 1,
+            "kind": "expense",
+            "externalRef": "ofx:X",
+            "problems": []
+          },
+          {
+            "rowIndex": 1,
+            "date": "2026-11-11",
+            "description": "conta de luz",
+            "amountCents": 10000,
+            "kind": "expense",
+            "problems": []
+          },
+          {
+            "rowIndex": 2,
+            "date": "2026-11-20",
+            "description": "Novo",
+            "amountCents": 500,
+            "kind": "expense",
+            "problems": []
+          },
+          {
+            "rowIndex": 3,
+            "date": "2026-11-20",
+            "description": "novo",
+            "amountCents": 500,
+            "kind": "expense",
+            "problems": []
+          },
+          {
+            "rowIndex": 4,
+            "date": "2026-11-10",
+            "description": "Conta de luz",
+            "amountCents": 10000,
+            "kind": "income",
+            "problems": []
+          }
+        ]
+      },
+      "expected": [
+        {
+          "candidateIndex": 0,
+          "existingId": "t1",
+          "reason": "external_ref",
+          "score": 1
+        },
+        {
+          "candidateIndex": 1,
+          "existingId": "t2",
+          "reason": "similar",
+          "score": 0.7499999999999999
+        },
+        {
+          "candidateIndex": 3,
+          "existingId": "batch:2",
+          "reason": "exact",
+          "score": 0.95
+        }
+      ],
+      "note": ""
+    },
+    {
+      "name": "importLegacy",
+      "input": {
+        "backup": {
+          "version": 1,
+          "prefs": {
+            "name": "Eu",
+            "theme": "dark",
+            "safetyCushion": 150.5
+          },
+          "accounts": [
+            {
+              "id": "a1",
+              "name": "Carteira",
+              "type": "cash",
+              "balance": 10.1
+            }
+          ],
+          "categories": [
+            {
+              "id": "c1",
+              "name": "Alimentação",
+              "type": "expense",
+              "icon": "🍽️",
+              "color": "#cb856a"
+            }
+          ],
+          "cards": [
+            {
+              "id": "k1",
+              "name": "Roxo",
+              "limit": 1500,
+              "closing": 20,
+              "due": 27
+            }
+          ],
+          "transactions": [
+            {
+              "id": "t1",
+              "type": "expense",
+              "amount": 24.9,
+              "date": "2026-11-03",
+              "accountId": "a1",
+              "categoryId": "c1",
+              "description": "Padaria",
+              "paid": true,
+              "tags": []
+            },
+            {
+              "id": "t2",
+              "type": "card_expense",
+              "amount": 99.99,
+              "date": "2026-11-25",
+              "cardId": "k1",
+              "categoryId": "c1",
+              "description": "Mercado",
+              "paid": true
+            },
+            {
+              "id": "t3",
+              "type": "card_payment",
+              "amount": 50,
+              "date": "2026-11-27",
+              "accountId": "a1",
+              "cardId": "k1",
+              "invoiceKey": "2026-11",
+              "paid": true
+            },
+            {
+              "id": "t4",
+              "type": "expense",
+              "amount": 1,
+              "date": "not-a-date",
+              "accountId": "a1"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "b1",
+              "categoryId": "c1",
+              "limit": 500
+            }
+          ],
+          "goals": [
+            {
+              "id": "g1",
+              "name": "Viagem",
+              "target": 3000
+            }
+          ],
+          "loans": [],
+          "tags": []
+        }
+      },
+      "expected": {
+        "counts": {
+          "accounts": 1,
+          "categories": 1,
+          "cards": 1,
+          "transactions": 3,
+          "budgets": 1,
+          "goals": 1,
+          "loans": 0,
+          "tags": 0
+        },
+        "warnings": [
+          "Lançamento ignorado (tipo ou data inválidos): t4"
+        ],
+        "accounts": [
+          {
+            "id": "a1",
+            "name": "Carteira",
+            "type": "cash",
+            "currency": "BRL",
+            "openingBalanceCents": 1010,
+            "openingDate": "1970-01-01",
+            "color": "#24477A",
+            "archived": false,
+            "includeInAvailability": true,
+            "sortOrder": 0
+          }
+        ],
+        "cards": [
+          {
+            "id": "k1",
+            "name": "Roxo",
+            "limitCents": 150000,
+            "closingDay": 20,
+            "dueDay": 27,
+            "color": "#24477A",
+            "archived": false,
+            "currency": "BRL"
+          }
+        ],
+        "transactions": [
+          {
+            "id": "t1",
+            "kind": "expense",
+            "amountCents": 2490,
+            "currency": "BRL",
+            "date": "2026-11-03",
+            "description": "Padaria",
+            "categoryId": "c1",
+            "accountId": "a1",
+            "status": "settled",
+            "tags": [],
+            "attachments": [],
+            "externalRef": "legacy:t1"
+          },
+          {
+            "id": "t2",
+            "kind": "card_purchase",
+            "amountCents": 9999,
+            "currency": "BRL",
+            "date": "2026-11-25",
+            "description": "Mercado",
+            "categoryId": "c1",
+            "cardId": "k1",
+            "status": "settled",
+            "invoiceMonth": "2026-12",
+            "tags": [],
+            "attachments": [],
+            "externalRef": "legacy:t2"
+          },
+          {
+            "id": "t3",
+            "kind": "card_payment",
+            "amountCents": 5000,
+            "currency": "BRL",
+            "date": "2026-11-27",
+            "description": "",
+            "accountId": "a1",
+            "cardId": "k1",
+            "status": "settled",
+            "invoiceMonth": "2026-11",
+            "tags": [],
+            "attachments": [],
+            "externalRef": "legacy:t3"
+          }
+        ],
+        "prefs": {
+          "locale": "pt-BR",
+          "currency": "BRL",
+          "theme": "dark",
+          "privacyMode": false,
+          "safetyCushionCents": 15050,
+          "includePlannedIncomeInAvailability": false,
+          "availabilityHorizon": "month_end",
+          "firstDayOfMonth": 1,
+          "hapticsEnabled": true,
+          "biometricLock": false
+        }
+      },
+      "note": ""
+    }
+  ]
+}

@@ -1,0 +1,2413 @@
+{
+  "generatedFrom": "packages/core (TypeScript) @ ae2c229",
+  "cases": [
+    {
+      "name": "intent \"Quanto posso gastar?\"",
+      "input": {
+        "question": "Quanto posso gastar?"
+      },
+      "expected": {
+        "intent": "can_spend"
+      },
+      "note": ""
+    },
+    {
+      "name": "intent \"Quais contas vencem esta semana?\"",
+      "input": {
+        "question": "Quais contas vencem esta semana?"
+      },
+      "expected": {
+        "intent": "bills_this_week"
+      },
+      "note": ""
+    },
+    {
+      "name": "intent \"Onde estou gastando mais?\"",
+      "input": {
+        "question": "Onde estou gastando mais?"
+      },
+      "expected": {
+        "intent": "where_spending_most"
+      },
+      "note": ""
+    },
+    {
+      "name": "intent \"Quanto já gastei com alimentação?\"",
+      "input": {
+        "question": "Quanto já gastei com alimentação?"
+      },
+      "expected": {
+        "intent": "spent_on_category",
+        "category": "alimentacao"
+      },
+      "note": ""
+    },
+    {
+      "name": "intent \"Tenho dinheiro suficiente para comprar um celular de 1.200,50?\"",
+      "input": {
+        "question": "Tenho dinheiro suficiente para comprar um celular de 1.200,50?"
+      },
+      "expected": {
+        "intent": "can_afford",
+        "amountCents": 120050
+      },
+      "note": ""
+    },
+    {
+      "name": "intent \"Como organizar minhas contas?\"",
+      "input": {
+        "question": "Como organizar minhas contas?"
+      },
+      "expected": {
+        "intent": "how_to_organize"
+      },
+      "note": ""
+    },
+    {
+      "name": "intent \"Quanto falta para minha meta?\"",
+      "input": {
+        "question": "Quanto falta para minha meta?"
+      },
+      "expected": {
+        "intent": "goal_remaining"
+      },
+      "note": ""
+    },
+    {
+      "name": "intent \"Quanto tenho comprometido em parcelas?\"",
+      "input": {
+        "question": "Quanto tenho comprometido em parcelas?"
+      },
+      "expected": {
+        "intent": "installments_committed"
+      },
+      "note": ""
+    },
+    {
+      "name": "intent \"Como está o mês?\"",
+      "input": {
+        "question": "Como está o mês?"
+      },
+      "expected": {
+        "intent": "month_status"
+      },
+      "note": ""
+    },
+    {
+      "name": "intent \"Posso comprar algo de 999.999,00?\"",
+      "input": {
+        "question": "Posso comprar algo de 999.999,00?"
+      },
+      "expected": {
+        "intent": "can_afford",
+        "amountCents": 99999900
+      },
+      "note": ""
+    },
+    {
+      "name": "intent \"xyz\"",
+      "input": {
+        "question": "xyz"
+      },
+      "expected": {
+        "intent": "unknown"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"Quanto posso gastar?\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "Quanto posso gastar?",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "can_spend",
+        "title": "Pode gastar",
+        "cents": 550000,
+        "basis": [
+          {
+            "label": "Dinheiro nas contas",
+            "cents": 725000
+          },
+          {
+            "label": "Contas atrasadas",
+            "cents": -5000
+          },
+          {
+            "label": "Contas até 30/11",
+            "cents": -80000
+          },
+          {
+            "label": "Faturas de cartão",
+            "cents": -90000
+          }
+        ],
+        "route": "/available"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"Quais contas vencem esta semana?\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "Quais contas vencem esta semana?",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "bills_this_week",
+        "title": "Vencendo esta semana",
+        "cents": 80000,
+        "basis": [
+          {
+            "label": "Aluguel (06/11)",
+            "cents": -80000
+          }
+        ],
+        "route": "/bills"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"Onde estou gastando mais?\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "Onde estou gastando mais?",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "where_spending_most",
+        "title": "Onde o dinheiro está indo",
+        "cents": 90000,
+        "basis": [
+          {
+            "label": "Sem categoria",
+            "cents": -90000
+          },
+          {
+            "label": "Alimentação",
+            "cents": -45000
+          }
+        ],
+        "route": "/reports/categories"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"Quanto já gastei com alimentação?\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "Quanto já gastei com alimentação?",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "spent_on_category",
+        "title": "Gasto com Alimentação",
+        "cents": 45000,
+        "basis": [
+          {
+            "label": "Alimentação",
+            "cents": -45000
+          }
+        ],
+        "route": "/reports/categories"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"Tenho dinheiro suficiente para comprar um celular de 1.200,50?\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "Tenho dinheiro suficiente para comprar um celular de 1.200,50?",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "can_afford",
+        "title": "Cabe",
+        "cents": 429950,
+        "basis": [
+          {
+            "label": "Pode gastar",
+            "cents": 550000
+          },
+          {
+            "label": "Compra",
+            "cents": -120050
+          }
+        ],
+        "route": "/available"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"Como organizar minhas contas?\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "Como organizar minhas contas?",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "how_to_organize",
+        "title": "Por onde começar",
+        "basis": [],
+        "route": "/budgets"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"Quanto falta para minha meta?\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "Quanto falta para minha meta?",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "goal_remaining",
+        "title": "Suas metas",
+        "basis": [
+          {
+            "label": "Viagem",
+            "cents": 70000
+          }
+        ],
+        "route": "/goals"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"Quanto tenho comprometido em parcelas?\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "Quanto tenho comprometido em parcelas?",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "installments_committed",
+        "title": "Comprometido em parcelas e faturas",
+        "cents": 90000,
+        "basis": [
+          {
+            "label": "Cartão",
+            "cents": -90000
+          }
+        ],
+        "route": "/cards/installments"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"Como está o mês?\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "Como está o mês?",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "month_status",
+        "title": "Mês agitado",
+        "cents": 365000,
+        "basis": [
+          {
+            "label": "Receitas",
+            "cents": 500000
+          },
+          {
+            "label": "Despesas",
+            "cents": -135000
+          }
+        ],
+        "route": "/budgets"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"Posso comprar algo de 999.999,00?\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "Posso comprar algo de 999.999,00?",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "can_afford",
+        "title": "Não cabe agora",
+        "cents": -99449900,
+        "basis": [
+          {
+            "label": "Pode gastar",
+            "cents": 550000
+          },
+          {
+            "label": "Compra",
+            "cents": -99999900
+          }
+        ],
+        "route": "/available"
+      },
+      "note": ""
+    },
+    {
+      "name": "answer \"xyz\"",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "question": "xyz",
+        "today": "2026-11-04"
+      },
+      "expected": {
+        "intent": "unknown",
+        "title": "Não entendi",
+        "basis": []
+      },
+      "note": ""
+    },
+    {
+      "name": "recommendations",
+      "input": {
+        "ledger": {
+          "accounts": [
+            {
+              "id": "a",
+              "name": "Conta",
+              "type": "checking",
+              "currency": "BRL",
+              "openingBalanceCents": 300000,
+              "openingDate": "2026-01-01",
+              "color": "#0F5C45",
+              "archived": false,
+              "includeInAvailability": true,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "categories": [
+            {
+              "id": "food",
+              "name": "Alimentação",
+              "kind": "expense",
+              "icon": "tag",
+              "color": "#5B6962",
+              "archived": false,
+              "sortOrder": 0,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "tags": [],
+          "cards": [
+            {
+              "id": "c",
+              "name": "Cartão",
+              "limitCents": 100000,
+              "closingDay": 20,
+              "dueDay": 27,
+              "color": "#0F5C45",
+              "archived": false,
+              "currency": "BRL",
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "transactions": [
+            {
+              "id": "tx_73",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "income",
+              "amountCents": 500000,
+              "date": "2026-11-01",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_74",
+              "currency": "BRL",
+              "description": "Mercado",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 45000,
+              "date": "2026-11-03",
+              "accountId": "a",
+              "categoryId": "food"
+            },
+            {
+              "id": "tx_75",
+              "currency": "BRL",
+              "description": "Aluguel",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 80000,
+              "date": "2026-11-06",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_76",
+              "currency": "BRL",
+              "description": "Luz",
+              "status": "planned",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "expense",
+              "amountCents": 5000,
+              "date": "2026-10-20",
+              "accountId": "a"
+            },
+            {
+              "id": "tx_77",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "card_purchase",
+              "amountCents": 90000,
+              "date": "2026-11-02",
+              "cardId": "c"
+            },
+            {
+              "id": "tx_78",
+              "currency": "BRL",
+              "description": "",
+              "status": "settled",
+              "tags": [],
+              "attachments": [],
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "kind": "goal_deposit",
+              "amountCents": 30000,
+              "date": "2026-11-02",
+              "accountId": "a",
+              "goalId": "g"
+            }
+          ],
+          "budgets": [
+            {
+              "id": "bb",
+              "limitCents": 50000,
+              "rollover": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z",
+              "categoryId": "food"
+            }
+          ],
+          "goals": [
+            {
+              "id": "g",
+              "name": "Viagem",
+              "kind": "savings",
+              "targetCents": 100000,
+              "reserved": true,
+              "color": "#0F5C45",
+              "archived": false,
+              "createdAt": "2026-11-04T12:00:00.000Z",
+              "updatedAt": "2026-11-04T12:00:00.000Z"
+            }
+          ],
+          "loans": [],
+          "prefs": {
+            "locale": "pt-BR",
+            "currency": "BRL",
+            "theme": "system",
+            "privacyMode": false,
+            "safetyCushionCents": 0,
+            "includePlannedIncomeInAvailability": false,
+            "availabilityHorizon": "month_end",
+            "firstDayOfMonth": 1,
+            "hapticsEnabled": true,
+            "biometricLock": false
+          }
+        },
+        "today": "2026-11-04"
+      },
+      "expected": [
+        {
+          "id": "overdue",
+          "severity": "urgent"
+        },
+        {
+          "id": "budget_bb",
+          "severity": "attention"
+        },
+        {
+          "id": "card_c",
+          "severity": "attention"
+        }
+      ],
+      "note": ""
+    }
+  ]
+}
