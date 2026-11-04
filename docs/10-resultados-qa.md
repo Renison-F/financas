@@ -40,7 +40,7 @@ Capturas de referência (não versionadas) foram geradas no scratch da sessão; 
 
 **Veredito de conformidade:** lê-se como app nativo (sem controles web, sem hover, insets respeitados, gestos do sistema vivos). Violações: cabeçalhos customizados (P2), ausência de layout de tablet (P1).
 
-**Issues registradas:** P0: 0 · P1: 1 (tablet) · P2: 3 (cabeçalhos; Segmented customizado em vez de `SegmentedControl` nativo; `Toggle` customizado em vez de `Switch`) · P3: 2 (animação da onda ainda não implementada; splash sem variante animada).
+**Issues registradas:** P0: 0 · P1: 1 (tablet) · P2: 2 (cabeçalhos inline; Segmented customizado em vez de `SegmentedControl` nativo). Resolvido nesta sessão: `Toggle` agora usa o `Switch` da plataforma · P3: 2 (animação da onda ainda não implementada; splash sem variante animada).
 
 **Pontos positivos:** um número-herói por tela; estados vazio/erro/carregando em todos os widgets; "pode gastar" sempre explicável; sem emojis; contraste verificado por script; desfazer em exclusões; nenhuma tela falsa.
 

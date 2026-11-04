@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Pressable, Modal, ScrollView } from 'react-native';
+import { View, Pressable, Modal, ScrollView, Switch } from 'react-native';
 import { isISODate, addDays, todayISO } from '@financas/core';
 import { Text, Chip, Input, Button, Icon, useColors, spacing, radius, touch } from '../../design';
 
@@ -48,10 +48,11 @@ export function DateField({ label, value, onChange }: { label: string; value: st
 
 export function Toggle({ label, value, onChange, help }: { label: string; value: boolean; onChange: (v: boolean) => void; help?: string }) {
   const c = useColors();
+  // Platform Switch (iOS/Material) themed with the design tokens; the row is the touch target.
   return (
-    <Pressable accessibilityRole="switch" accessibilityState={{ checked: value }} onPress={() => onChange(!value)} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', minHeight: touch.min, gap: spacing.sm }}>
+    <Pressable accessibilityRole="switch" accessibilityState={{ checked: value }} accessibilityLabel={label} onPress={() => onChange(!value)} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', minHeight: touch.min, gap: spacing.sm }}>
       <View style={{ flex: 1 }}><Text role="body">{label}</Text>{help ? <Text role="caption" color="textMuted">{help}</Text> : null}</View>
-      <View style={{ width: 48, height: 28, borderRadius: 14, backgroundColor: value ? c.primary : c.borderStrong, padding: 3, alignItems: value ? 'flex-end' : 'flex-start' }}><View style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: c.surface }} /></View>
+      <Switch value={value} onValueChange={onChange} trackColor={{ false: c.borderStrong, true: c.primary }} thumbColor={c.surface} ios_backgroundColor={c.borderStrong} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" />
     </Pressable>
   );
 }
