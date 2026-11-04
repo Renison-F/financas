@@ -64,7 +64,7 @@ export function accountBalance(ledger: Ledger, accountId: string, asOf?: ISODate
 
 export function activeAccounts(ledger: Ledger): Account[] { return ledger.accounts.filter((a) => !a.archived && !a.deletedAt); }
 
-export function consolidatedBalance(ledger: Ledger, opts: { accountIds?: string[]; asOf?: ISODate; includeArchived?: boolean } = {}): Cents {
+export function consolidatedBalance(ledger: Ledger, opts: { accountIds?: string[] | undefined; asOf?: ISODate | undefined; includeArchived?: boolean | undefined } = {}): Cents {
   const accounts = (opts.includeArchived ? ledger.accounts.filter((a) => !a.deletedAt) : activeAccounts(ledger))
     .filter((a) => !opts.accountIds || opts.accountIds.includes(a.id));
   return sumCents(accounts.map((a) => accountBalance(ledger, a.id, opts.asOf)));

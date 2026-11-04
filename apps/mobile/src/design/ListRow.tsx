@@ -6,7 +6,7 @@ import { useColors } from './theme';
 import { spacing } from './tokens';
 
 /** 56px dense list row: icon bubble, title + description, right slot (usually <Money/>). */
-export function ListRow({ icon, iconColor, title, description, right, onPress, testID, chevron }: { icon?: IconName; iconColor?: string; title: string; description?: string; right?: React.ReactNode; onPress?: () => void; testID?: string; chevron?: boolean }) {
+export function ListRow({ icon, iconColor, title, description, right, onPress, testID, chevron }: { icon?: IconName | undefined; iconColor?: string | undefined; title: string; description?: string | undefined; right?: React.ReactNode; onPress?: (() => void) | undefined; testID?: string | undefined; chevron?: boolean | undefined }) {
   const c = useColors();
   const body = (
     <View style={{ minHeight: 56, flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingVertical: 6 }}>

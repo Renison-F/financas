@@ -105,7 +105,7 @@ export function netWorth(ledger: Ledger, endMonth: MonthKey, months: number, tod
   });
 }
 
-export function searchTransactions(ledger: Ledger, query: string, filters: { kinds?: Transaction['kind'][]; categoryIds?: string[]; accountIds?: string[]; cardIds?: string[]; tagIds?: string[]; from?: ISODate; to?: ISODate; status?: Transaction['status'][]; minCents?: Cents; maxCents?: Cents } = {}): Transaction[] {
+export function searchTransactions(ledger: Ledger, query: string, filters: { kinds?: Transaction['kind'][] | undefined; categoryIds?: string[] | undefined; accountIds?: string[] | undefined; cardIds?: string[] | undefined; tagIds?: string[] | undefined; from?: ISODate | undefined; to?: ISODate | undefined; status?: Transaction['status'][] | undefined; minCents?: Cents | undefined; maxCents?: Cents | undefined } = {}): Transaction[] {
   const q = query.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   return ledger.transactions.filter((t) => {
