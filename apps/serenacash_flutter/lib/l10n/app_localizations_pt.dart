@@ -1277,4 +1277,1385 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get undoToastHint => 'Toque para desfazer';
+
+  @override
+  String get accountsTitle => 'Contas e carteiras';
+
+  @override
+  String get consolidatedBalance => 'Saldo consolidado';
+
+  @override
+  String get transfersDontChange =>
+      'Transferências entre contas não alteram o total.';
+
+  @override
+  String get active => 'Ativas';
+
+  @override
+  String get archivedF => 'Arquivadas';
+
+  @override
+  String get typeCashL => 'Dinheiro';
+
+  @override
+  String get typeCheckingL => 'Conta bancária';
+
+  @override
+  String get typeSavingsL => 'Poupança';
+
+  @override
+  String get typeDigitalL => 'Carteira digital';
+
+  @override
+  String get typeInvestmentL => 'Investimento';
+
+  @override
+  String get typeOtherL => 'Outra';
+
+  @override
+  String get outOfAvailability => ' · fora do pode gastar';
+
+  @override
+  String get accountNotFound => 'Conta não encontrada';
+
+  @override
+  String get currentBalance => 'Saldo atual';
+
+  @override
+  String openingBalanceLine(String value, String date) {
+    return 'Saldo inicial $value em $date';
+  }
+
+  @override
+  String get archivedSuffix => ' · arquivada';
+
+  @override
+  String get history => 'Histórico';
+
+  @override
+  String get noMovements => 'Sem movimentações';
+
+  @override
+  String get reactivateAccount => 'Reativar conta';
+
+  @override
+  String get archiveAccount => 'Arquivar conta';
+
+  @override
+  String get deleteAccount => 'Excluir conta';
+
+  @override
+  String get archiveAccountQ => 'Arquivar conta?';
+
+  @override
+  String get archiveAccountText =>
+      'Ela some das listas e do \'pode gastar\', mas o histórico continua. Você pode reativar depois.';
+
+  @override
+  String get archive => 'Arquivar';
+
+  @override
+  String get deleteAccountQ => 'Excluir conta?';
+
+  @override
+  String get deleteAccountText =>
+      'Só é possível excluir contas sem lançamentos. Se houver movimentações, arquive.';
+
+  @override
+  String get accountHasTransactions =>
+      'Esta conta tem lançamentos. Arquive-a ou mova os lançamentos antes de excluir.';
+
+  @override
+  String get editAccount => 'Editar conta';
+
+  @override
+  String get newAccount => 'Nova conta';
+
+  @override
+  String get accountNameHint => 'Ex.: Nubank, Carteira';
+
+  @override
+  String get type => 'Tipo';
+
+  @override
+  String get openingBalanceOnDate => 'Saldo inicial (na data abaixo)';
+
+  @override
+  String get openingHelpEdit =>
+      'Para corrigir o saldo de hoje, use o ajuste abaixo.';
+
+  @override
+  String get openingHelpNew => 'O saldo de hoje vira o saldo inicial da conta.';
+
+  @override
+  String get openingDate => 'Data do saldo inicial';
+
+  @override
+  String get includeInAvailability => 'Considerar no \"pode gastar\"';
+
+  @override
+  String get includeHelp =>
+      'Desligue para reservas, investimentos ou contas que você não usa no dia a dia.';
+
+  @override
+  String get color => 'Cor';
+
+  @override
+  String get adjustBalance => 'Ajustar saldo';
+
+  @override
+  String adjustHelp(String value) {
+    return 'Saldo calculado hoje: $value. Informe o saldo real e o app cria um ajuste com a diferença (conciliação).';
+  }
+
+  @override
+  String get realBalanceToday => 'Saldo real hoje';
+
+  @override
+  String get registerAdjustment => 'Registrar ajuste';
+
+  @override
+  String get balanceAdjustment => 'Ajuste de saldo';
+
+  @override
+  String get nameAccountErr => 'Dê um nome à conta.';
+
+  @override
+  String freeLimitAccounts(int n) {
+    return 'Plano gratuito: até $n contas. Contas ilimitadas no SerenaCash Plus.';
+  }
+
+  @override
+  String get newCategory => 'Nova categoria';
+
+  @override
+  String get categoryNameHint => 'Ex.: Delivery';
+
+  @override
+  String get subcategoryOf => 'Subcategoria de (opcional)';
+
+  @override
+  String get expenseCategories => 'Categorias de despesa';
+
+  @override
+  String get incomeCategories => 'Categorias de receita';
+
+  @override
+  String get reactivate => 'Reativar';
+
+  @override
+  String get archivedLower => 'arquivada';
+
+  @override
+  String get tagsHelp =>
+      'Tags marcam lançamentos de forma transversal (ex.: viagem, reembolsável).';
+
+  @override
+  String get newTag => 'Nova tag';
+
+  @override
+  String get tagHint => 'Ex.: viagem';
+
+  @override
+  String get creditCards => 'Cartões de crédito';
+
+  @override
+  String closesDueDays(int closing, int due) {
+    return 'fecha dia $closing · vence dia $due';
+  }
+
+  @override
+  String cardSummary(String month, String state, String free, String limit) {
+    return 'Fatura $month ($state) · limite livre $free de $limit';
+  }
+
+  @override
+  String get noCardListText =>
+      'Com fechamento e vencimento o app mostra a fatura certa.';
+
+  @override
+  String get cardNotFound => 'Cartão não encontrado';
+
+  @override
+  String get previousInvoice => 'Fatura anterior';
+
+  @override
+  String get nextInvoice => 'Próxima fatura';
+
+  @override
+  String invoiceOf(String label) {
+    return 'Fatura $label';
+  }
+
+  @override
+  String invoiceState(String state) {
+    return 'Fatura $state';
+  }
+
+  @override
+  String closesOn(String date) {
+    return 'fecha $date';
+  }
+
+  @override
+  String totalPaid(String total, String paid) {
+    return 'Total $total · pago $paid';
+  }
+
+  @override
+  String get limitCommittedLabel => 'Limite comprometido';
+
+  @override
+  String limitBreakdown(
+    String free,
+    String limit,
+    String current,
+    String closed,
+    String future,
+  ) {
+    return 'Limite livre $free de $limit (fatura atual $current + fechadas $closed + futuras $future)';
+  }
+
+  @override
+  String get purchasesThisInvoice => 'Compras desta fatura';
+
+  @override
+  String get newPurchase => 'Nova compra';
+
+  @override
+  String get purchase => 'Compra';
+
+  @override
+  String installmentOf(int n, int of) {
+    return ' · parcela $n/$of';
+  }
+
+  @override
+  String get noPurchasesInvoice => 'Nenhuma compra nesta fatura.';
+
+  @override
+  String get payments => 'Pagamentos';
+
+  @override
+  String get payInvoice => 'Pagar fatura';
+
+  @override
+  String get payInvoiceHelp =>
+      'O pagamento sai da conta e abate a fatura. Não vira despesa de novo: as compras já contaram quando aconteceram.';
+
+  @override
+  String totalOf(String value) {
+    return 'Total $value';
+  }
+
+  @override
+  String get minimum15 => 'Mínimo (15%)';
+
+  @override
+  String get paymentDate => 'Data do pagamento';
+
+  @override
+  String get registerPayment => 'Registrar pagamento';
+
+  @override
+  String get invoiceHistory => 'Histórico de faturas';
+
+  @override
+  String get noInvoicesYet => 'Ainda sem faturas.';
+
+  @override
+  String invoiceRule(int day) {
+    return 'Regra: compras até o dia $day entram na fatura do mês; depois disso, na seguinte. Parcelas caem uma por fatura.';
+  }
+
+  @override
+  String invoicePaymentDesc(String label) {
+    return 'Pagamento fatura $label';
+  }
+
+  @override
+  String get editCard => 'Editar cartão';
+
+  @override
+  String get newCard => 'Novo cartão';
+
+  @override
+  String get cardNameHint => 'Ex.: Cartão roxo';
+
+  @override
+  String get closingHelp =>
+      'Compras depois desse dia vão para a próxima fatura.';
+
+  @override
+  String get paymentAccount => 'Conta usada para pagar a fatura';
+
+  @override
+  String get nameCardErr => 'Dê um nome ao cartão.';
+
+  @override
+  String get daysRangeErr =>
+      'Dias de fechamento e vencimento devem estar entre 1 e 31.';
+
+  @override
+  String get closingChangeErr =>
+      'Não dá para mudar o fechamento de um cartão com compras: as faturas mudariam de mês. Crie outro cartão.';
+
+  @override
+  String freeLimitCards(int n) {
+    return 'Plano gratuito: $n cartão. Cartões ilimitados no SerenaCash Plus.';
+  }
+
+  @override
+  String get committedPerInvoice => 'Comprometido por fatura';
+
+  @override
+  String installmentsCount(int n) {
+    return '$n parcela(s)';
+  }
+
+  @override
+  String get noFutureInstallments => 'Nenhuma parcela futura';
+
+  @override
+  String get perPurchase => 'Por compra';
+
+  @override
+  String get installmentPurchase => 'Compra parcelada';
+
+  @override
+  String pastInvoicesRemaining(int paid, int of, String value) {
+    return '$paid/$of faturas passadas · restam $value';
+  }
+
+  @override
+  String get noInstallmentPurchase => 'Nenhuma compra parcelada.';
+
+  @override
+  String plannedSuffix(String value) {
+    return ' · $value previstos';
+  }
+
+  @override
+  String paceUsed(String pace, int used, int expected) {
+    return '$pace · $used% usado, $expected% do mês';
+  }
+
+  @override
+  String get noBudgetListText =>
+      'Defina um limite para uma categoria ou para o mês inteiro. A marca de hoje mostra se o ritmo está sereno.';
+
+  @override
+  String get budgetRules =>
+      'Sereno: gasto até a marca de hoje. Atenção: até 10 pontos acima. Agitado: além disso ou acima do limite. Subcategorias somam no orçamento da categoria-mãe.';
+
+  @override
+  String get editBudget => 'Editar orçamento';
+
+  @override
+  String get newBudget => 'Novo orçamento';
+
+  @override
+  String get forLabel => 'Para';
+
+  @override
+  String get wholeMonth => 'O mês inteiro';
+
+  @override
+  String get monthlyLimit => 'Limite mensal';
+
+  @override
+  String get onlyThisMonth => 'Só para este mês';
+
+  @override
+  String get onlyThisMonthHelp => 'Desligado = vale todo mês até você mudar.';
+
+  @override
+  String get limitErr => 'Informe o limite.';
+
+  @override
+  String freeLimitBudgets(int n) {
+    return 'Plano gratuito: até $n orçamentos. Ilimitados no SerenaCash Plus.';
+  }
+
+  @override
+  String get deleteBudget => 'Excluir orçamento';
+
+  @override
+  String get deleteBudgetQ => 'Excluir orçamento?';
+
+  @override
+  String get deleteBudgetText => 'Os lançamentos não são afetados.';
+
+  @override
+  String get goalKindSavings => 'Economia';
+
+  @override
+  String get goalKindEmergency => 'Reserva de emergência';
+
+  @override
+  String get goalKindPurchase => 'Compra';
+
+  @override
+  String get goalKindDebt => 'Quitar dívida';
+
+  @override
+  String get goalKindOther => 'Outro';
+
+  @override
+  String get protectedSuffix => ' · protegida';
+
+  @override
+  String untilDate(String date) {
+    return ' · até $date';
+  }
+
+  @override
+  String goalSummary(int percent, String target, String remaining) {
+    return '$percent% de $target · faltam $remaining';
+  }
+
+  @override
+  String saveMonthly(String value, int months) {
+    return ' · guarde $value/mês ($months meses)';
+  }
+
+  @override
+  String suggestionMonthly(String value) {
+    return ' · sugestão $value/mês';
+  }
+
+  @override
+  String get deposit => 'Guardar';
+
+  @override
+  String get withdraw => 'Resgatar';
+
+  @override
+  String get noGoalListText =>
+      'Uma reserva de emergência com 3 meses de despesas é um ótimo primeiro objetivo.';
+
+  @override
+  String get goalNotFound => 'Meta não encontrada';
+
+  @override
+  String get saved => 'Guardado';
+
+  @override
+  String get leavesAccount => 'Sai da conta';
+
+  @override
+  String get goesToAccount => 'Vai para a conta';
+
+  @override
+  String get movements => 'Movimentações';
+
+  @override
+  String get noMovementsYet => 'Nenhuma movimentação ainda.';
+
+  @override
+  String depositDesc(String name) {
+    return 'Guardado: $name';
+  }
+
+  @override
+  String withdrawDesc(String name) {
+    return 'Resgate: $name';
+  }
+
+  @override
+  String get editGoal => 'Editar meta';
+
+  @override
+  String get newGoal => 'Nova meta';
+
+  @override
+  String get goalNameHint => 'Ex.: Reserva de emergência';
+
+  @override
+  String get goalAmount => 'Valor da meta';
+
+  @override
+  String get hasDeadline => 'Tem prazo';
+
+  @override
+  String get untilWhen => 'Até quando';
+
+  @override
+  String get whereMoney => 'Onde o dinheiro fica';
+
+  @override
+  String get outsideApp => 'Fora das contas do app';
+
+  @override
+  String get whereMoneyHelp =>
+      'Se ficar dentro de uma conta considerada no \"pode gastar\", o valor guardado é descontado de lá.';
+
+  @override
+  String get protectFromAvail => 'Proteger do \"pode gastar\"';
+
+  @override
+  String get protectHelp => 'O valor guardado nunca aparece como disponível.';
+
+  @override
+  String get archiveGoal => 'Arquivar meta';
+
+  @override
+  String get nameGoalErr => 'Dê um nome à meta.';
+
+  @override
+  String get goalAmountErr => 'Informe o valor da meta.';
+
+  @override
+  String freeLimitGoals(int n) {
+    return 'Plano gratuito: até $n metas. Ilimitadas no SerenaCash Plus.';
+  }
+
+  @override
+  String loanLineList(String system, String rate, int paid, int total) {
+    return '$system · $rate% a.m. · $paid/$total pagas';
+  }
+
+  @override
+  String overdueInstallments(int n) {
+    return ' · $n atrasada(s)';
+  }
+
+  @override
+  String get installmentsPaid => 'Parcelas pagas';
+
+  @override
+  String nextAndPayoff(String value, String date, String payoff) {
+    return 'Próxima: $value em $date · quitar hoje ≈ $payoff';
+  }
+
+  @override
+  String get paidOffCap => 'Quitado';
+
+  @override
+  String get noLoanListText =>
+      'Cadastre financiamentos, crediário ou dívidas para ver saldo devedor, juros e simulação de quitação.';
+
+  @override
+  String get loanNotFound => 'Empréstimo não encontrado';
+
+  @override
+  String get outstanding => 'Saldo devedor';
+
+  @override
+  String paidSummary(int paid, int total, String value) {
+    return '$paid de $total parcelas pagas · $value pagos';
+  }
+
+  @override
+  String extraPaid(String value) {
+    return ' ($value além das parcelas)';
+  }
+
+  @override
+  String payoffToday(String value) {
+    return 'Quitar hoje ≈ $value (valor presente das parcelas restantes à taxa do contrato, sem tarifas)';
+  }
+
+  @override
+  String overdueInstallmentsMsg(int n) {
+    return '$n parcela(s) atrasada(s).';
+  }
+
+  @override
+  String get simulateExtra => 'Simular pagamento extra';
+
+  @override
+  String get extraAmount => 'Valor extra';
+
+  @override
+  String get reduceTerm => 'Reduzir prazo';
+
+  @override
+  String get reduceInstallment => 'Reduzir parcela';
+
+  @override
+  String get paysOffLoan => 'Quita o empréstimo.';
+
+  @override
+  String newTerm(int n, String value, int before) {
+    return 'Novo prazo: $n parcelas de $value (antes $before).';
+  }
+
+  @override
+  String newInstallment(String value, int n) {
+    return 'Nova parcela: $value por $n meses.';
+  }
+
+  @override
+  String get registerExtra => 'Registrar pagamento extra';
+
+  @override
+  String amortization(String name) {
+    return 'Amortização: $name';
+  }
+
+  @override
+  String get table => 'Tabela';
+
+  @override
+  String get editLoan => 'Editar empréstimo';
+
+  @override
+  String get newLoan => 'Novo empréstimo';
+
+  @override
+  String get loanNameHint => 'Ex.: Financiamento do carro';
+
+  @override
+  String get borrowed => 'Valor emprestado';
+
+  @override
+  String get monthlyRate => 'Juros (% ao mês)';
+
+  @override
+  String get system => 'Sistema';
+
+  @override
+  String get priceSystem => 'Price (parcela fixa)';
+
+  @override
+  String get sacSystem => 'SAC (decrescente)';
+
+  @override
+  String get firstDue => 'Primeiro vencimento';
+
+  @override
+  String get monthlyFee => 'Tarifa/seguro mensal (opcional)';
+
+  @override
+  String get registerDisbursement => 'Registrar a entrada do dinheiro na conta';
+
+  @override
+  String get registerDisbursementHelp => 'Ligue se o valor caiu na conta hoje.';
+
+  @override
+  String get createInstallments => 'Criar as parcelas como contas previstas';
+
+  @override
+  String get createInstallmentsHelp =>
+      'Entram em \'contas a pagar\' e no \'pode gastar\' mês a mês.';
+
+  @override
+  String get preview => 'Prévia';
+
+  @override
+  String previewLine(int n, String first) {
+    return '$n parcelas · primeira $first';
+  }
+
+  @override
+  String lastInstallment(String value) {
+    return ' · última $value';
+  }
+
+  @override
+  String totalInterestCost(String interest, String cost) {
+    return 'Juros totais $interest · custo total $cost';
+  }
+
+  @override
+  String get loanAssumptions =>
+      'Hipóteses: taxa nominal mensal sobre o saldo devedor; arredondamento por parcela; IOF e seguros só se informados.';
+
+  @override
+  String get loanFormErr => 'Preencha nome, valor, taxa (% ao mês) e prazo.';
+
+  @override
+  String get disbursementLabel => 'Entrada';
+
+  @override
+  String dayItems(String day, int n) {
+    return '$day: $n lançamento(s)';
+  }
+
+  @override
+  String get nothingThisDay => 'Nada neste dia.';
+
+  @override
+  String dayTotal(String value) {
+    return 'Total do dia: $value';
+  }
+
+  @override
+  String get thisMonth => 'Este mês';
+
+  @override
+  String get days90 => '90 dias';
+
+  @override
+  String overdueTotal(String value) {
+    return 'Atrasadas · $value';
+  }
+
+  @override
+  String get pay => 'Pagar';
+
+  @override
+  String dueUntil(String date, String value) {
+    return 'A vencer até $date · $value';
+  }
+
+  @override
+  String alreadyPaid(String value) {
+    return ' · já pago $value';
+  }
+
+  @override
+  String get nothingDuePeriod => 'Nada a vencer no período';
+
+  @override
+  String get billsHelp =>
+      '\"Pagar\" marca como pago hoje na conta do lançamento. Para pagar parte, abra o lançamento.';
+
+  @override
+  String get cashflowReport => 'Fluxo de caixa';
+
+  @override
+  String get cashflowDesc =>
+      'Receitas, despesas e saldo mês a mês; comparativo mensal e anual';
+
+  @override
+  String get categoriesDesc => 'Para onde o dinheiro foi, com filtros';
+
+  @override
+  String get recurringReport => 'Gastos recorrentes';
+
+  @override
+  String get recurringDesc => 'Assinaturas e contas que se repetem';
+
+  @override
+  String get projectionDesc => 'Como o saldo evolui com o que está previsto';
+
+  @override
+  String get indicatorsReport => 'Indicadores e patrimônio';
+
+  @override
+  String get indicatorsDesc => 'Taxa de poupança, comprometimento, patrimônio';
+
+  @override
+  String get exportHint => 'Exportação em CSV e PDF em Mais → Exportar.';
+
+  @override
+  String get months6 => '6 meses';
+
+  @override
+  String get months12 => '12 meses';
+
+  @override
+  String get incomeVsExpenses => 'Receitas × despesas';
+
+  @override
+  String get monthByMonth => 'Mês a mês';
+
+  @override
+  String balanceShort(String value) {
+    return 'saldo $value';
+  }
+
+  @override
+  String get compareWithPrevious => 'Comparativo com o mês anterior';
+
+  @override
+  String yearLabel(int year) {
+    return 'Ano $year';
+  }
+
+  @override
+  String bestWorst(String best, String worst) {
+    return 'Melhor mês: $best · pior: $worst';
+  }
+
+  @override
+  String get groupSubcategories => 'Agrupar subcategorias';
+
+  @override
+  String get includePlanned => 'Incluir previstos';
+
+  @override
+  String totalLabel(String value) {
+    return 'Total $value';
+  }
+
+  @override
+  String transactionsCount(int n) {
+    return '$n lançamento(s)';
+  }
+
+  @override
+  String get seeMonthTransactions => 'Ver lançamentos do mês';
+
+  @override
+  String get plusFeature => 'Recurso do SerenaCash Plus';
+
+  @override
+  String get indicatorsPlusText =>
+      'Taxa de poupança, comprometimento de renda e evolução do patrimônio nos últimos 12 meses.';
+
+  @override
+  String get knowPlus => 'Conhecer o Plus';
+
+  @override
+  String get thisMonthTitle => 'Este mês';
+
+  @override
+  String get savingRateHow =>
+      '(receitas − despesas) ÷ receitas efetivadas do mês';
+
+  @override
+  String get commitmentHow =>
+      '(saldo devedor dos cartões + próxima parcela de empréstimos) ÷ receitas do mês';
+
+  @override
+  String get netWorthHow =>
+      'contas + reservas fora das contas − faturas em aberto − saldo devedor de empréstimos';
+
+  @override
+  String get netWorth12 => 'Patrimônio nos últimos 12 meses';
+
+  @override
+  String assetsDebts(String assets, String debts) {
+    return 'ativos $assets · dívidas $debts';
+  }
+
+  @override
+  String get indicatorsMethod =>
+      'Metodologia transparente, calculada só com o que você registrou. Não é avaliação de crédito nem diagnóstico financeiro.';
+
+  @override
+  String get days60 => '60 dias';
+
+  @override
+  String onDate(String date) {
+    return 'Em $date';
+  }
+
+  @override
+  String negativeWarning(String value, String date) {
+    return 'Atenção: o saldo fica negativo ($value) em $date.';
+  }
+
+  @override
+  String minBalance(String value, String date) {
+    return 'Menor saldo no período: $value em $date.';
+  }
+
+  @override
+  String balanceAfter(String date, String value) {
+    return '$date · saldo após $value';
+  }
+
+  @override
+  String get nothingPlanned =>
+      'Nada previsto no período. Cadastre contas e receitas previstas para projetar.';
+
+  @override
+  String get projectionRules =>
+      'Considera lançamentos previstos, parcelas de empréstimo e faturas de cartão até o vencimento. Faturas atrasadas entram hoje.';
+
+  @override
+  String get perMonthLabel => 'Por mês';
+
+  @override
+  String get recurringHelp =>
+      'Séries cadastradas e gastos repetidos (mesma descrição e valor em 3+ meses dos últimos 6).';
+
+  @override
+  String recurringLine(int n, String kind) {
+    return '$n meses · $kind';
+  }
+
+  @override
+  String get series => 'série';
+
+  @override
+  String get detected => 'detectado';
+
+  @override
+  String get recurring => 'Recorrente';
+
+  @override
+  String get nothingRecurring => 'Nada recorrente detectado';
+
+  @override
+  String get nothingRecurringText =>
+      'Com 3 meses de histórico o app encontra assinaturas e contas repetidas.';
+
+  @override
+  String recurringTip(String month, String year) {
+    return 'Dica: revise assinaturas que você não usa; cada $month/mês são $year/ano.';
+  }
+
+  @override
+  String get assistantIntro =>
+      'Respostas calculadas com os seus dados, no aparelho. Nenhuma pergunta sai do celular.';
+
+  @override
+  String get askHint => 'Pergunte: posso comprar algo de 300,00?';
+
+  @override
+  String get ask => 'Perguntar';
+
+  @override
+  String get question => 'Pergunta';
+
+  @override
+  String get calculationBasis => 'Base do cálculo';
+
+  @override
+  String get suggestionsForYou => 'Sugestões para você';
+
+  @override
+  String get allCalmNoSuggestion => 'Tudo sereno. Nenhuma sugestão agora.';
+
+  @override
+  String get assistantRules =>
+      'Regras transparentes: contas atrasadas, orçamentos acima do ritmo, cartão acima de 80% do limite, mês negativo, sobra ≥ 20% sem reserva, 3+ gastos recorrentes.';
+
+  @override
+  String get q1 => 'Quanto posso gastar?';
+
+  @override
+  String get q2 => 'Quais contas vencem esta semana?';
+
+  @override
+  String get q3 => 'Onde estou gastando mais?';
+
+  @override
+  String get q4 => 'Quanto gastei com supermercado?';
+
+  @override
+  String get q5 => 'Quanto falta para minha meta?';
+
+  @override
+  String get q6 => 'Quanto tenho comprometido em parcelas?';
+
+  @override
+  String get q7 => 'Como está o mês?';
+
+  @override
+  String get q8 => 'Como organizar minhas contas?';
+
+  @override
+  String get importTitle => 'Importar';
+
+  @override
+  String get importIntroTitle => 'CSV, OFX ou backup';
+
+  @override
+  String get importIntro =>
+      'CSV do seu banco ou de outro app (data, descrição, valor, tipo); OFX de extrato bancário (Plus); ou um backup do SerenaCash / do app anterior. Você revisa tudo antes de confirmar e o app aponta possíveis duplicidades.';
+
+  @override
+  String get chooseFile => 'Escolher arquivo';
+
+  @override
+  String get fileReadError => 'Não foi possível ler o arquivo.';
+
+  @override
+  String columnsOf(String file) {
+    return 'Colunas de $file';
+  }
+
+  @override
+  String rowsCheck(int n) {
+    return '$n linhas. Confira as colunas:';
+  }
+
+  @override
+  String columnN(int n) {
+    return 'Coluna $n';
+  }
+
+  @override
+  String get typeColumn => 'Tipo (receita/despesa)';
+
+  @override
+  String get noTypeHelp =>
+      'Sem coluna de tipo, valores negativos viram despesas e positivos, receitas.';
+
+  @override
+  String get chooseDateAmount => 'Escolha as colunas de data e valor.';
+
+  @override
+  String get reviewTransactions => 'Revisar lançamentos';
+
+  @override
+  String get restoreBackup => 'Restaurar backup';
+
+  @override
+  String get backupPassphrase => 'Senha do backup';
+
+  @override
+  String warningsCount(int n, String text) {
+    return '$n aviso(s): $text';
+  }
+
+  @override
+  String get restoreReplaces =>
+      'Restaurar substitui TODOS os dados atuais deste aparelho.';
+
+  @override
+  String get replaceWithBackup => 'Substituir meus dados por este backup';
+
+  @override
+  String get restoreQ => 'Substituir todos os dados?';
+
+  @override
+  String get restoreText =>
+      'Os dados atuais serão apagados e substituídos pelo backup. Exporte antes, se quiser guardar.';
+
+  @override
+  String get restore => 'Restaurar';
+
+  @override
+  String foundTransactions(int n) {
+    return '$n lançamentos encontrados';
+  }
+
+  @override
+  String dupesInfo(int d, int e) {
+    return '$d possível(is) duplicidade(s) e $e com erro foram desmarcados. Toque para incluir ou excluir.';
+  }
+
+  @override
+  String get targetAccount => 'Conta de destino';
+
+  @override
+  String get categoriesByName => 'Usar categorias pelo nome';
+
+  @override
+  String get include => 'Incluir';
+
+  @override
+  String get alreadyImported => 'já importado';
+
+  @override
+  String get sameAsExisting => 'igual a um lançamento existente';
+
+  @override
+  String get similarToExisting => 'parecido com um lançamento existente';
+
+  @override
+  String importN(int n) {
+    return 'Importar $n';
+  }
+
+  @override
+  String get chooseTargetAccount => 'Escolha a conta de destino.';
+
+  @override
+  String importResult(int n, int skipped) {
+    return '$n lançamento(s) importado(s); $skipped ignorado(s).';
+  }
+
+  @override
+  String get importDone => 'Importação concluída';
+
+  @override
+  String get restored => 'Backup restaurado.';
+
+  @override
+  String get backToStart => 'Voltar ao início';
+
+  @override
+  String get exportTitle => 'Exportar e backup';
+
+  @override
+  String get allScope => 'Tudo';
+
+  @override
+  String get csvSheet => 'CSV (planilha)';
+
+  @override
+  String get pdfReport => 'PDF (relatório)';
+
+  @override
+  String get fullBackup => 'Backup completo';
+
+  @override
+  String get backupHelp =>
+      'Arquivo com tudo (contas, lançamentos, cartões, orçamentos, metas, empréstimos, preferências, anexos). Guarde em local seguro; restaure em Importar.';
+
+  @override
+  String get encryptedBackup => 'Backup cifrado (recomendado)';
+
+  @override
+  String get plainBackup => 'Backup em claro (compatível com o app anterior)';
+
+  @override
+  String get plainWarning =>
+      'Sem senha: qualquer pessoa com o arquivo lê seus dados.';
+
+  @override
+  String get passphraseMin => 'Senha com ao menos 8 caracteres';
+
+  @override
+  String get fileGenerated => 'Arquivo gerado.';
+
+  @override
+  String get exportFailed => 'Falha ao exportar.';
+
+  @override
+  String reportOf(String month) {
+    return 'Relatório de $month';
+  }
+
+  @override
+  String get fullReport => 'Relatório completo';
+
+  @override
+  String generatedOn(String date) {
+    return 'gerado em $date';
+  }
+
+  @override
+  String get byCategory => 'Por categoria';
+
+  @override
+  String get pdfFooter =>
+      'Valores efetivados e previstos conforme registrados pelo usuário. Compras no cartão contam na data da compra; pagamentos de fatura não são despesas.';
+
+  @override
+  String get privacyTitle => 'Privacidade e dados';
+
+  @override
+  String get whatWeKeep => 'O que guardamos';
+
+  @override
+  String get privacy1 =>
+      'Contas, lançamentos, cartões, orçamentos, metas, empréstimos, listas e compras: tudo fica neste aparelho, em um banco de dados local cifrado.';
+
+  @override
+  String get privacy2 =>
+      'Não pedimos e-mail, CPF nem senha de banco. Não há conexão bancária. Nenhum dado financeiro é enviado a servidores.';
+
+  @override
+  String get privacy3 =>
+      'Assinaturas são processadas pela Apple ou pelo Google; recebemos apenas a confirmação do direito de acesso, nunca dados de pagamento.';
+
+  @override
+  String get privacy4 =>
+      'A câmera é usada só para ler etiquetas e códigos durante a compra; as imagens não são guardadas.';
+
+  @override
+  String get yourRights => 'Seus direitos';
+
+  @override
+  String get exportAllData => 'Exportar todos os meus dados';
+
+  @override
+  String get eraseAll => 'Apagar tudo deste aparelho';
+
+  @override
+  String get eraseHelp =>
+      'Apagar remove dados, preferências, chave do banco e cache de assinatura. Compras na loja podem ser restauradas depois.';
+
+  @override
+  String get privacyPolicyNote =>
+      'Política de privacidade completa e termos: serão publicados em serenacash.app/privacidade antes do lançamento nas lojas.';
+
+  @override
+  String get eraseQ => 'Apagar tudo?';
+
+  @override
+  String get eraseText =>
+      'Esta ação não pode ser desfeita. Exporte um backup antes, se quiser guardar o histórico.';
+
+  @override
+  String get eraseConfirm => 'Apagar definitivamente';
+
+  @override
+  String get helpTitle => 'Ajuda';
+
+  @override
+  String get faq1q => 'O que é \"pode gastar\"?';
+
+  @override
+  String get faq1a =>
+      'Dinheiro nas contas consideradas, menos contas previstas até o fim do período (inclusive atrasadas), menos faturas de cartão em aberto, menos reservas guardadas dentro das contas e o colchão que você definir. Receitas previstas só entram no modo otimista. É uma estimativa, não um saldo.';
+
+  @override
+  String get faq2q => 'Compra no cartão conta duas vezes?';
+
+  @override
+  String get faq2a =>
+      'Não. A compra é despesa na data em que aconteceu (na categoria dela). Pagar a fatura só tira dinheiro da conta e abate a fatura.';
+
+  @override
+  String get faq3q => 'Como funciona a fatura?';
+
+  @override
+  String get faq3a =>
+      'Compras até o dia de fechamento entram na fatura do mês; depois, na seguinte. Parcelas caem uma por fatura. O vencimento é o dia que você cadastrou.';
+
+  @override
+  String get faq4q => 'O que é a marca de hoje?';
+
+  @override
+  String get faq4a =>
+      'Nas barras de orçamento, a pequena onda mostra onde o gasto deveria estar hoje (proporcional aos dias do mês). Antes dela: sereno. Até 10 pontos depois: atenção. Além disso ou acima do limite: agitado.';
+
+  @override
+  String get faq5q => 'Previsto × efetivado';
+
+  @override
+  String get faq5a =>
+      'Previsto é o que ainda vai acontecer (conta a pagar, salário a receber). Efetivado já aconteceu e altera o saldo. Pagamento parcial fica como \"parcial\" até completar.';
+
+  @override
+  String get faq6q => 'Reservas e metas';
+
+  @override
+  String get faq6a =>
+      'Guardar dinheiro numa meta tira o valor da conta de origem. Se a meta fica dentro de uma conta considerada, o valor guardado é descontado do \"pode gastar\" (quando protegida).';
+
+  @override
+  String get faq7q => 'Empréstimos';
+
+  @override
+  String get faq7a =>
+      'Tabela Price (parcela fixa) ou SAC (parcela decrescente), com taxa mensal sobre o saldo devedor. \"Quitar hoje\" é o valor presente das parcelas restantes à taxa do contrato, sem tarifas: uma estimativa para negociar.';
+
+  @override
+  String get faq8q => 'Supermercado';
+
+  @override
+  String get faq8a =>
+      'Código de barras identifica o produto, não o preço. O preço vem da etiqueta lida (OCR), do seu histórico ou de você. Nada é adicionado sem confirmação, e o total do carrinho usa arredondamento de balança.';
+
+  @override
+  String get faq9q => 'Meus dados';
+
+  @override
+  String get faq9a =>
+      'Tudo fica no aparelho, cifrado. Exporte backups em Mais → Exportar. Apague tudo em Privacidade.';
+
+  @override
+  String featurePartOfPlus(String feature) {
+    return '\"$feature\" faz parte do Plus.';
+  }
+
+  @override
+  String thanksSupport(String plan) {
+    return 'Plano $plan. Obrigado por apoiar o SerenaCash.';
+  }
+
+  @override
+  String get whatChanges => 'O que muda';
+
+  @override
+  String get limitsRow => 'Contas / cartões / orçamentos / metas';
+
+  @override
+  String get unlimited => 'Ilimitados';
+
+  @override
+  String get ocrRow => 'Leitura de etiquetas (OCR)';
+
+  @override
+  String perMonthN(int n) {
+    return '$n/mês';
+  }
+
+  @override
+  String get unlimitedF => 'Ilimitada';
+
+  @override
+  String get reportsPdfRow => 'Relatórios avançados e PDF';
+
+  @override
+  String get yes => 'Sim';
+
+  @override
+  String get ofxAttachRow => 'Importação OFX e anexos';
+
+  @override
+  String get priceHistoryRow => 'Histórico de preços por loja';
+
+  @override
+  String get syncRow => 'Sincronização entre aparelhos';
+
+  @override
+  String get syncWhen => 'Assinatura (quando disponível)';
+
+  @override
+  String get essentialFree =>
+      'O essencial (contas, lançamentos, 1 cartão, orçamentos, metas, listas e carrinho) é gratuito para sempre.';
+
+  @override
+  String get recommended => 'recomendado';
+
+  @override
+  String get lifetimeDesc =>
+      'Pagamento único. Inclui tudo o que funciona no aparelho, para sempre. Não inclui serviços com custo recorrente (sincronização).';
+
+  @override
+  String get yearlyDesc =>
+      'Cobrado uma vez por ano. Cancele quando quiser na loja.';
+
+  @override
+  String get monthlyDesc =>
+      'Cobrado mensalmente. Cancele quando quiser na loja.';
+
+  @override
+  String get planCoverage => 'Abrangência do plano';
+
+  @override
+  String get perYear => ' / ano';
+
+  @override
+  String get perMonthShort => ' / mês';
+
+  @override
+  String get loadingPrice => 'Carregando preço da loja…';
+
+  @override
+  String get priceInStore =>
+      'Preço e compra disponíveis na versão publicada nas lojas.';
+
+  @override
+  String get restorePurchases => 'Restaurar compras';
+
+  @override
+  String get manageSubscription => 'Gerenciar assinatura na loja';
+
+  @override
+  String get thanksActive => 'Obrigado! Seu plano está ativo.';
+
+  @override
+  String get purchaseFailed => 'Compra não concluída.';
+
+  @override
+  String get purchasesRestored => 'Compras restauradas.';
+
+  @override
+  String get noPurchasesFound =>
+      'Nenhuma compra encontrada nesta conta da loja.';
+
+  @override
+  String get restoreFailed => 'Não foi possível restaurar.';
+
+  @override
+  String get subscriptionTerms =>
+      'Assinaturas renovam automaticamente até serem canceladas na App Store ou no Google Play. Reembolsos seguem as políticas das lojas. Termos e privacidade: Mais → Privacidade.';
+
+  @override
+  String get storeProcesses =>
+      'Pagamento processado pela loja; não vemos seus dados de pagamento.';
+
+  @override
+  String plusFeaturesList(String list) {
+    return 'Recursos do Plus: $list';
+  }
+
+  @override
+  String get stayFree => 'Continuar no gratuito';
+
+  @override
+  String get notFound => 'Não encontrado';
 }

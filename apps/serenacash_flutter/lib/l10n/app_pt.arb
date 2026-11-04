@@ -44,7 +44,13 @@
   "usePin": "Usar PIN",
   "useBiometrics": "Usar biometria",
   "canSpendUntil": "Pode gastar até {date}",
-  "@canSpendUntil": {"placeholders": {"date": {"type": "String"}}},
+  "@canSpendUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "canSpendTitle": "Pode gastar",
   "startWithAccount": "Comece pela sua conta",
   "startWithAccountText": "Com o saldo de uma conta o app já mostra quanto cabe gastar.",
@@ -62,15 +68,42 @@
   "income": "Receitas",
   "expenses": "Despesas",
   "plannedLabel": "Previstas: {value}",
-  "@plannedLabel": {"placeholders": {"value": {"type": "String"}}},
+  "@plannedLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "plannedAndCard": "Previstas: {planned} · no cartão: {card}",
-  "@plannedAndCard": {"placeholders": {"planned": {"type": "String"}, "card": {"type": "String"}}},
+  "@plannedAndCard": {
+    "placeholders": {
+      "planned": {
+        "type": "String"
+      },
+      "card": {
+        "type": "String"
+      }
+    }
+  },
   "billsToPay": "Contas a pagar",
   "bill": "Conta",
   "dueOn": "vence {date}",
-  "@dueOn": {"placeholders": {"date": {"type": "String"}}},
+  "@dueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "duePast": "venceu {date}",
-  "@duePast": {"placeholders": {"date": {"type": "String"}}},
+  "@duePast": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "nothingToPay": "Nada a pagar até o fim do período",
   "nothingToPayText": "Cadastre contas previstas para o 'pode gastar' ficar honesto.",
   "newBillToPay": "Nova conta a pagar",
@@ -81,14 +114,32 @@
   "noDueNext7": "Nenhum vencimento nos próximos 7 dias.",
   "cardsAndInvoices": "Cartões e faturas",
   "invoiceLine": "Fatura {state} · vence {date} · limite livre {free}",
-  "@invoiceLine": {"placeholders": {"state": {"type": "String"}, "date": {"type": "String"}, "free": {"type": "String"}}},
+  "@invoiceLine": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      },
+      "free": {
+        "type": "String"
+      }
+    }
+  },
   "invoiceOpen": "aberta",
   "invoiceClosed": "fechada",
   "invoicePaid": "paga",
   "invoiceOverdue": "atrasada",
   "invoiceFuture": "futura",
   "limitCommitted": "{percent}% do limite comprometido",
-  "@limitCommitted": {"placeholders": {"percent": {"type": "int"}}},
+  "@limitCommitted": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "noCard": "Nenhum cartão",
   "noCardText": "Cadastre fechamento e vencimento para acompanhar a fatura.",
   "addCard": "Adicionar cartão",
@@ -97,9 +148,21 @@
   "monthlyBudget": "Orçamento do mês",
   "budgets": "Orçamentos",
   "ofLimit": "de {value}",
-  "@ofLimit": {"placeholders": {"value": {"type": "String"}}},
+  "@ofLimit": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "monthPace": "Mês {pace}",
-  "@monthPace": {"placeholders": {"pace": {"type": "String"}}},
+  "@monthPace": {
+    "placeholders": {
+      "pace": {
+        "type": "String"
+      }
+    }
+  },
   "paceSereno": "sereno",
   "paceAtencao": "em atenção",
   "paceAgitado": "agitado",
@@ -116,9 +179,27 @@
   "noHistory": "Ainda sem histórico",
   "noHistoryText": "Registre receitas e despesas para ver a evolução.",
   "incomeOf": "Receitas {month}: {value}",
-  "@incomeOf": {"placeholders": {"month": {"type": "String"}, "value": {"type": "String"}}},
+  "@incomeOf": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "expensesOf": "Despesas {month}: {value}",
-  "@expensesOf": {"placeholders": {"month": {"type": "String"}, "value": {"type": "String"}}},
+  "@expensesOf": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "goals": "Metas",
   "noGoal": "Nenhuma meta",
   "noGoalText": "Uma reserva de emergência é um bom começo.",
@@ -128,22 +209,58 @@
   "monthlySavings": "Economia do mês",
   "registerIncomeForRate": "Registre receitas para ver a taxa de economia.",
   "percentOfIncome": "{percent}% das receitas",
-  "@percentOfIncome": {"placeholders": {"percent": {"type": "int"}}},
+  "@percentOfIncome": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "subscriptions": "Assinaturas e recorrentes",
   "monthsInARow": "{n} meses seguidos",
-  "@monthsInARow": {"placeholders": {"n": {"type": "int"}}},
+  "@monthsInARow": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "noRecurring": "Nenhum gasto recorrente detectado ainda.",
   "loans": "Empréstimos",
   "nextInstallment": "próxima {date} · {value}",
-  "@nextInstallment": {"placeholders": {"date": {"type": "String"}, "value": {"type": "String"}}},
+  "@nextInstallment": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "paidOff": "quitado",
   "noLoan": "Nenhum empréstimo",
   "registerLoan": "Cadastrar",
   "open": "Abrir",
   "calendarSummary": "{n} vencimento(s) até {date}",
-  "@calendarSummary": {"placeholders": {"n": {"type": "int"}, "date": {"type": "String"}}},
+  "@calendarSummary": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "overdueCount": " · {n} atrasado(s)",
-  "@overdueCount": {"placeholders": {"n": {"type": "int"}}},
+  "@overdueCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "recentTransactions": "Últimos lançamentos",
   "allLabel": "Todos",
   "planned": "previsto",
@@ -153,12 +270,24 @@
   "allCalm": "Tudo sereno por aqui.",
   "shoppingLists": "Listas de compras",
   "listCount": "{n} lista(s)",
-  "@listCount": {"placeholders": {"n": {"type": "int"}}},
+  "@listCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "noListYet": "Nenhuma lista ainda.",
   "createList": "Criar lista",
   "shoppingAssistant": "Assistente de supermercado",
   "sessionsCount": "{n} compra(s) registrada(s)",
-  "@sessionsCount": {"placeholders": {"n": {"type": "int"}}},
+  "@sessionsCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingAssistantText": "Leia etiquetas e códigos e veja o total antes do caixa.",
   "startShopping": "Iniciar compra",
   "continueShopping": "Continuar compra",
@@ -185,19 +314,52 @@
   "visibleWidgets": "Visíveis (segure e arraste, ou use as setas)",
   "hiddenWidgets": "Ocultos",
   "moveUp": "Mover {name} para cima",
-  "@moveUp": {"placeholders": {"name": {"type": "String"}}},
+  "@moveUp": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "moveDown": "Mover {name} para baixo",
-  "@moveDown": {"placeholders": {"name": {"type": "String"}}},
+  "@moveDown": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "hideWidget": "Ocultar {name}",
-  "@hideWidget": {"placeholders": {"name": {"type": "String"}}},
+  "@hideWidget": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "showWidget": "Mostrar {name}",
-  "@showWidget": {"placeholders": {"name": {"type": "String"}}},
+  "@showWidget": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "indicatorsPeriod": "Período dos indicadores",
   "currentMonth": "Mês atual",
   "next30days": "Próximos 30 dias",
   "accountsConsidered": "Contas consideradas",
   "availableSubtitle": "Até {date} · modo {mode}",
-  "@availableSubtitle": {"placeholders": {"date": {"type": "String"}, "mode": {"type": "String"}}},
+  "@availableSubtitle": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
   "estimateDisclaimer": "É uma estimativa com o que você registrou. Não é saldo garantido.",
   "theMath": "A conta",
   "equalsCanSpend": "= Pode gastar",
@@ -222,7 +384,13 @@
   "filterTransfers": "Transferências",
   "filterPlanned": "Previstos",
   "paidPart": "pago {value}",
-  "@paidPart": {"placeholders": {"value": {"type": "String"}}},
+  "@paidPart": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "nothingFound": "Nada encontrado",
   "tryAnotherWord": "Tente outra palavra.",
   "noTransactionMonth": "Nenhum lançamento neste mês",
@@ -254,7 +422,16 @@
   "installments": "Parcelas",
   "cashPayment": "À vista",
   "installmentsHelp": "{n}x de {value} (centavos ajustados nas primeiras parcelas), uma por fatura.",
-  "@installmentsHelp": {"placeholders": {"n": {"type": "int"}, "value": {"type": "String"}}},
+  "@installmentsHelp": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "moreOptions": "Mais opções",
   "repeat": "Repetir",
   "repeatHelp": "Cria uma série; os próximos 3 meses ficam como previstos e novos são gerados automaticamente.",
@@ -270,7 +447,13 @@
   "markReceived": "Marcar como recebido",
   "markPaid": "Marcar como pago",
   "payPart": "Pagar parte (restam {value})",
-  "@payPart": {"placeholders": {"value": {"type": "String"}}},
+  "@payPart": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "registerPartial": "Registrar pagamento parcial",
   "deleteThisAndNext": "Excluir este e os próximos",
   "deleteTransaction": "Excluir lançamento",
@@ -279,7 +462,13 @@
   "deleteOneText": "Você pode desfazer em seguida.",
   "deletedOne": "Lançamento excluído",
   "deletedMany": "{n} lançamentos excluídos",
-  "@deletedMany": {"placeholders": {"n": {"type": "int"}}},
+  "@deletedMany": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "errAmount": "Informe um valor maior que zero.",
   "errCardFirst": "Cadastre um cartão antes de registrar uma compra no cartão.",
   "errAccountFirst": "Cadastre uma conta antes de registrar.",
@@ -295,16 +484,58 @@
   "noBudgetPlanText": "Defina limites por categoria ou para o mês inteiro.",
   "goalsAndReserves": "Metas e reservas",
   "goalLine": "{percent}% · faltam {remaining}",
-  "@goalLine": {"placeholders": {"percent": {"type": "int"}, "remaining": {"type": "String"}}},
+  "@goalLine": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "remaining": {
+        "type": "String"
+      }
+    }
+  },
   "perMonth": " · {value}/mês",
-  "@perMonth": {"placeholders": {"value": {"type": "String"}}},
+  "@perMonth": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "noGoalPlanText": "Comece por uma reserva de emergência.",
   "cards": "Cartões",
   "cardLine": "fatura {state} · vence {date} · livre {free}",
-  "@cardLine": {"placeholders": {"state": {"type": "String"}, "date": {"type": "String"}, "free": {"type": "String"}}},
+  "@cardLine": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      },
+      "free": {
+        "type": "String"
+      }
+    }
+  },
   "loansAndDebts": "Empréstimos e dívidas",
   "loanLine": "próxima {date} · {value} · {paid}/{total} pagas",
-  "@loanLine": {"placeholders": {"date": {"type": "String"}, "value": {"type": "String"}, "paid": {"type": "int"}, "total": {"type": "int"}}},
+  "@loanLine": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      },
+      "paid": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "noLoanRegistered": "Nenhum empréstimo cadastrado.",
   "balanceProjection": "Projeção de saldo",
   "projectionText": "Veja como o saldo evolui com as contas e receitas previstas até o fim do mês.",
@@ -338,21 +569,54 @@
   "help": "Ajuda",
   "helpDesc": "Como o app calcula as coisas",
   "footerLocal": "SerenaCash · dados guardados neste aparelho · versão {version}",
-  "@footerLocal": {"placeholders": {"version": {"type": "String"}}},
+  "@footerLocal": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingTitle": "Compras",
   "shoppingSubtitle": "Listas e assistente de supermercado",
   "shoppingInProgress": "Compra em andamento",
   "sessionLine": "{n} item(ns) · {total}",
-  "@sessionLine": {"placeholders": {"n": {"type": "int"}, "total": {"type": "String"}}},
+  "@sessionLine": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingIntro": "Leia etiquetas de preço e códigos de barras, veja o total e quanto ainda cabe no orçamento antes do caixa.",
   "lists": "Listas",
   "itemsCount": "{n} itens",
-  "@itemsCount": {"placeholders": {"n": {"type": "int"}}},
+  "@itemsCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "estimated": "estimado {value}",
-  "@estimated": {"placeholders": {"value": {"type": "String"}}},
+  "@estimated": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "noPricesYet": "sem preços ainda",
   "withoutPrice": " ({n} sem preço)",
-  "@withoutPrice": {"placeholders": {"n": {"type": "int"}}},
+  "@withoutPrice": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "noList": "Nenhuma lista",
   "noListText": "Crie a lista em casa e use no mercado, mesmo sem internet.",
   "previousPurchases": "Compras anteriores",
@@ -421,5 +685,1018 @@
   "continue_": "Continuar",
   "skip": "Pular",
   "finish": "Concluir",
-  "undoToastHint": "Toque para desfazer"
+  "undoToastHint": "Toque para desfazer",
+  "accountsTitle": "Contas e carteiras",
+  "consolidatedBalance": "Saldo consolidado",
+  "transfersDontChange": "Transferências entre contas não alteram o total.",
+  "active": "Ativas",
+  "archivedF": "Arquivadas",
+  "typeCashL": "Dinheiro",
+  "typeCheckingL": "Conta bancária",
+  "typeSavingsL": "Poupança",
+  "typeDigitalL": "Carteira digital",
+  "typeInvestmentL": "Investimento",
+  "typeOtherL": "Outra",
+  "outOfAvailability": " · fora do pode gastar",
+  "accountNotFound": "Conta não encontrada",
+  "currentBalance": "Saldo atual",
+  "openingBalanceLine": "Saldo inicial {value} em {date}",
+  "@openingBalanceLine": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "archivedSuffix": " · arquivada",
+  "history": "Histórico",
+  "noMovements": "Sem movimentações",
+  "reactivateAccount": "Reativar conta",
+  "archiveAccount": "Arquivar conta",
+  "deleteAccount": "Excluir conta",
+  "archiveAccountQ": "Arquivar conta?",
+  "archiveAccountText": "Ela some das listas e do 'pode gastar', mas o histórico continua. Você pode reativar depois.",
+  "archive": "Arquivar",
+  "deleteAccountQ": "Excluir conta?",
+  "deleteAccountText": "Só é possível excluir contas sem lançamentos. Se houver movimentações, arquive.",
+  "accountHasTransactions": "Esta conta tem lançamentos. Arquive-a ou mova os lançamentos antes de excluir.",
+  "editAccount": "Editar conta",
+  "newAccount": "Nova conta",
+  "accountNameHint": "Ex.: Nubank, Carteira",
+  "type": "Tipo",
+  "openingBalanceOnDate": "Saldo inicial (na data abaixo)",
+  "openingHelpEdit": "Para corrigir o saldo de hoje, use o ajuste abaixo.",
+  "openingHelpNew": "O saldo de hoje vira o saldo inicial da conta.",
+  "openingDate": "Data do saldo inicial",
+  "includeInAvailability": "Considerar no \"pode gastar\"",
+  "includeHelp": "Desligue para reservas, investimentos ou contas que você não usa no dia a dia.",
+  "color": "Cor",
+  "adjustBalance": "Ajustar saldo",
+  "adjustHelp": "Saldo calculado hoje: {value}. Informe o saldo real e o app cria um ajuste com a diferença (conciliação).",
+  "@adjustHelp": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "realBalanceToday": "Saldo real hoje",
+  "registerAdjustment": "Registrar ajuste",
+  "balanceAdjustment": "Ajuste de saldo",
+  "nameAccountErr": "Dê um nome à conta.",
+  "freeLimitAccounts": "Plano gratuito: até {n} contas. Contas ilimitadas no SerenaCash Plus.",
+  "@freeLimitAccounts": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "newCategory": "Nova categoria",
+  "categoryNameHint": "Ex.: Delivery",
+  "subcategoryOf": "Subcategoria de (opcional)",
+  "expenseCategories": "Categorias de despesa",
+  "incomeCategories": "Categorias de receita",
+  "reactivate": "Reativar",
+  "archivedLower": "arquivada",
+  "tagsHelp": "Tags marcam lançamentos de forma transversal (ex.: viagem, reembolsável).",
+  "newTag": "Nova tag",
+  "tagHint": "Ex.: viagem",
+  "creditCards": "Cartões de crédito",
+  "closesDueDays": "fecha dia {closing} · vence dia {due}",
+  "@closesDueDays": {
+    "placeholders": {
+      "closing": {
+        "type": "int"
+      },
+      "due": {
+        "type": "int"
+      }
+    }
+  },
+  "cardSummary": "Fatura {month} ({state}) · limite livre {free} de {limit}",
+  "@cardSummary": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      },
+      "free": {
+        "type": "String"
+      },
+      "limit": {
+        "type": "String"
+      }
+    }
+  },
+  "noCardListText": "Com fechamento e vencimento o app mostra a fatura certa.",
+  "cardNotFound": "Cartão não encontrado",
+  "previousInvoice": "Fatura anterior",
+  "nextInvoice": "Próxima fatura",
+  "invoiceOf": "Fatura {label}",
+  "@invoiceOf": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "invoiceState": "Fatura {state}",
+  "@invoiceState": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "closesOn": "fecha {date}",
+  "@closesOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "totalPaid": "Total {total} · pago {paid}",
+  "@totalPaid": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      },
+      "paid": {
+        "type": "String"
+      }
+    }
+  },
+  "limitCommittedLabel": "Limite comprometido",
+  "limitBreakdown": "Limite livre {free} de {limit} (fatura atual {current} + fechadas {closed} + futuras {future})",
+  "@limitBreakdown": {
+    "placeholders": {
+      "free": {
+        "type": "String"
+      },
+      "limit": {
+        "type": "String"
+      },
+      "current": {
+        "type": "String"
+      },
+      "closed": {
+        "type": "String"
+      },
+      "future": {
+        "type": "String"
+      }
+    }
+  },
+  "purchasesThisInvoice": "Compras desta fatura",
+  "newPurchase": "Nova compra",
+  "purchase": "Compra",
+  "installmentOf": " · parcela {n}/{of}",
+  "@installmentOf": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "of": {
+        "type": "int"
+      }
+    }
+  },
+  "noPurchasesInvoice": "Nenhuma compra nesta fatura.",
+  "payments": "Pagamentos",
+  "payInvoice": "Pagar fatura",
+  "payInvoiceHelp": "O pagamento sai da conta e abate a fatura. Não vira despesa de novo: as compras já contaram quando aconteceram.",
+  "totalOf": "Total {value}",
+  "@totalOf": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "minimum15": "Mínimo (15%)",
+  "paymentDate": "Data do pagamento",
+  "registerPayment": "Registrar pagamento",
+  "invoiceHistory": "Histórico de faturas",
+  "noInvoicesYet": "Ainda sem faturas.",
+  "invoiceRule": "Regra: compras até o dia {day} entram na fatura do mês; depois disso, na seguinte. Parcelas caem uma por fatura.",
+  "@invoiceRule": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "invoicePaymentDesc": "Pagamento fatura {label}",
+  "@invoicePaymentDesc": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "editCard": "Editar cartão",
+  "newCard": "Novo cartão",
+  "cardNameHint": "Ex.: Cartão roxo",
+  "closingHelp": "Compras depois desse dia vão para a próxima fatura.",
+  "paymentAccount": "Conta usada para pagar a fatura",
+  "nameCardErr": "Dê um nome ao cartão.",
+  "daysRangeErr": "Dias de fechamento e vencimento devem estar entre 1 e 31.",
+  "closingChangeErr": "Não dá para mudar o fechamento de um cartão com compras: as faturas mudariam de mês. Crie outro cartão.",
+  "freeLimitCards": "Plano gratuito: {n} cartão. Cartões ilimitados no SerenaCash Plus.",
+  "@freeLimitCards": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "committedPerInvoice": "Comprometido por fatura",
+  "installmentsCount": "{n} parcela(s)",
+  "@installmentsCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "noFutureInstallments": "Nenhuma parcela futura",
+  "perPurchase": "Por compra",
+  "installmentPurchase": "Compra parcelada",
+  "pastInvoicesRemaining": "{paid}/{of} faturas passadas · restam {value}",
+  "@pastInvoicesRemaining": {
+    "placeholders": {
+      "paid": {
+        "type": "int"
+      },
+      "of": {
+        "type": "int"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "noInstallmentPurchase": "Nenhuma compra parcelada.",
+  "plannedSuffix": " · {value} previstos",
+  "@plannedSuffix": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "paceUsed": "{pace} · {used}% usado, {expected}% do mês",
+  "@paceUsed": {
+    "placeholders": {
+      "pace": {
+        "type": "String"
+      },
+      "used": {
+        "type": "int"
+      },
+      "expected": {
+        "type": "int"
+      }
+    }
+  },
+  "noBudgetListText": "Defina um limite para uma categoria ou para o mês inteiro. A marca de hoje mostra se o ritmo está sereno.",
+  "budgetRules": "Sereno: gasto até a marca de hoje. Atenção: até 10 pontos acima. Agitado: além disso ou acima do limite. Subcategorias somam no orçamento da categoria-mãe.",
+  "editBudget": "Editar orçamento",
+  "newBudget": "Novo orçamento",
+  "forLabel": "Para",
+  "wholeMonth": "O mês inteiro",
+  "monthlyLimit": "Limite mensal",
+  "onlyThisMonth": "Só para este mês",
+  "onlyThisMonthHelp": "Desligado = vale todo mês até você mudar.",
+  "limitErr": "Informe o limite.",
+  "freeLimitBudgets": "Plano gratuito: até {n} orçamentos. Ilimitados no SerenaCash Plus.",
+  "@freeLimitBudgets": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "deleteBudget": "Excluir orçamento",
+  "deleteBudgetQ": "Excluir orçamento?",
+  "deleteBudgetText": "Os lançamentos não são afetados.",
+  "goalKindSavings": "Economia",
+  "goalKindEmergency": "Reserva de emergência",
+  "goalKindPurchase": "Compra",
+  "goalKindDebt": "Quitar dívida",
+  "goalKindOther": "Outro",
+  "protectedSuffix": " · protegida",
+  "untilDate": " · até {date}",
+  "@untilDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "goalSummary": "{percent}% de {target} · faltam {remaining}",
+  "@goalSummary": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "target": {
+        "type": "String"
+      },
+      "remaining": {
+        "type": "String"
+      }
+    }
+  },
+  "saveMonthly": " · guarde {value}/mês ({months} meses)",
+  "@saveMonthly": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "months": {
+        "type": "int"
+      }
+    }
+  },
+  "suggestionMonthly": " · sugestão {value}/mês",
+  "@suggestionMonthly": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "deposit": "Guardar",
+  "withdraw": "Resgatar",
+  "noGoalListText": "Uma reserva de emergência com 3 meses de despesas é um ótimo primeiro objetivo.",
+  "goalNotFound": "Meta não encontrada",
+  "saved": "Guardado",
+  "leavesAccount": "Sai da conta",
+  "goesToAccount": "Vai para a conta",
+  "movements": "Movimentações",
+  "noMovementsYet": "Nenhuma movimentação ainda.",
+  "depositDesc": "Guardado: {name}",
+  "@depositDesc": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "withdrawDesc": "Resgate: {name}",
+  "@withdrawDesc": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "editGoal": "Editar meta",
+  "newGoal": "Nova meta",
+  "goalNameHint": "Ex.: Reserva de emergência",
+  "goalAmount": "Valor da meta",
+  "hasDeadline": "Tem prazo",
+  "untilWhen": "Até quando",
+  "whereMoney": "Onde o dinheiro fica",
+  "outsideApp": "Fora das contas do app",
+  "whereMoneyHelp": "Se ficar dentro de uma conta considerada no \"pode gastar\", o valor guardado é descontado de lá.",
+  "protectFromAvail": "Proteger do \"pode gastar\"",
+  "protectHelp": "O valor guardado nunca aparece como disponível.",
+  "archiveGoal": "Arquivar meta",
+  "nameGoalErr": "Dê um nome à meta.",
+  "goalAmountErr": "Informe o valor da meta.",
+  "freeLimitGoals": "Plano gratuito: até {n} metas. Ilimitadas no SerenaCash Plus.",
+  "@freeLimitGoals": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "loanLineList": "{system} · {rate}% a.m. · {paid}/{total} pagas",
+  "@loanLineList": {
+    "placeholders": {
+      "system": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "paid": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "overdueInstallments": " · {n} atrasada(s)",
+  "@overdueInstallments": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "installmentsPaid": "Parcelas pagas",
+  "nextAndPayoff": "Próxima: {value} em {date} · quitar hoje ≈ {payoff}",
+  "@nextAndPayoff": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      },
+      "payoff": {
+        "type": "String"
+      }
+    }
+  },
+  "paidOffCap": "Quitado",
+  "noLoanListText": "Cadastre financiamentos, crediário ou dívidas para ver saldo devedor, juros e simulação de quitação.",
+  "loanNotFound": "Empréstimo não encontrado",
+  "outstanding": "Saldo devedor",
+  "paidSummary": "{paid} de {total} parcelas pagas · {value} pagos",
+  "@paidSummary": {
+    "placeholders": {
+      "paid": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "extraPaid": " ({value} além das parcelas)",
+  "@extraPaid": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "payoffToday": "Quitar hoje ≈ {value} (valor presente das parcelas restantes à taxa do contrato, sem tarifas)",
+  "@payoffToday": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "overdueInstallmentsMsg": "{n} parcela(s) atrasada(s).",
+  "@overdueInstallmentsMsg": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "simulateExtra": "Simular pagamento extra",
+  "extraAmount": "Valor extra",
+  "reduceTerm": "Reduzir prazo",
+  "reduceInstallment": "Reduzir parcela",
+  "paysOffLoan": "Quita o empréstimo.",
+  "newTerm": "Novo prazo: {n} parcelas de {value} (antes {before}).",
+  "@newTerm": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "value": {
+        "type": "String"
+      },
+      "before": {
+        "type": "int"
+      }
+    }
+  },
+  "newInstallment": "Nova parcela: {value} por {n} meses.",
+  "@newInstallment": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "registerExtra": "Registrar pagamento extra",
+  "amortization": "Amortização: {name}",
+  "@amortization": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "table": "Tabela",
+  "editLoan": "Editar empréstimo",
+  "newLoan": "Novo empréstimo",
+  "loanNameHint": "Ex.: Financiamento do carro",
+  "borrowed": "Valor emprestado",
+  "monthlyRate": "Juros (% ao mês)",
+  "system": "Sistema",
+  "priceSystem": "Price (parcela fixa)",
+  "sacSystem": "SAC (decrescente)",
+  "firstDue": "Primeiro vencimento",
+  "monthlyFee": "Tarifa/seguro mensal (opcional)",
+  "registerDisbursement": "Registrar a entrada do dinheiro na conta",
+  "registerDisbursementHelp": "Ligue se o valor caiu na conta hoje.",
+  "createInstallments": "Criar as parcelas como contas previstas",
+  "createInstallmentsHelp": "Entram em 'contas a pagar' e no 'pode gastar' mês a mês.",
+  "preview": "Prévia",
+  "previewLine": "{n} parcelas · primeira {first}",
+  "@previewLine": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "first": {
+        "type": "String"
+      }
+    }
+  },
+  "lastInstallment": " · última {value}",
+  "@lastInstallment": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "totalInterestCost": "Juros totais {interest} · custo total {cost}",
+  "@totalInterestCost": {
+    "placeholders": {
+      "interest": {
+        "type": "String"
+      },
+      "cost": {
+        "type": "String"
+      }
+    }
+  },
+  "loanAssumptions": "Hipóteses: taxa nominal mensal sobre o saldo devedor; arredondamento por parcela; IOF e seguros só se informados.",
+  "loanFormErr": "Preencha nome, valor, taxa (% ao mês) e prazo.",
+  "disbursementLabel": "Entrada",
+  "dayItems": "{day}: {n} lançamento(s)",
+  "@dayItems": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "nothingThisDay": "Nada neste dia.",
+  "dayTotal": "Total do dia: {value}",
+  "@dayTotal": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "thisMonth": "Este mês",
+  "days90": "90 dias",
+  "overdueTotal": "Atrasadas · {value}",
+  "@overdueTotal": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "pay": "Pagar",
+  "dueUntil": "A vencer até {date} · {value}",
+  "@dueUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "alreadyPaid": " · já pago {value}",
+  "@alreadyPaid": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "nothingDuePeriod": "Nada a vencer no período",
+  "billsHelp": "\"Pagar\" marca como pago hoje na conta do lançamento. Para pagar parte, abra o lançamento.",
+  "cashflowReport": "Fluxo de caixa",
+  "cashflowDesc": "Receitas, despesas e saldo mês a mês; comparativo mensal e anual",
+  "categoriesDesc": "Para onde o dinheiro foi, com filtros",
+  "recurringReport": "Gastos recorrentes",
+  "recurringDesc": "Assinaturas e contas que se repetem",
+  "projectionDesc": "Como o saldo evolui com o que está previsto",
+  "indicatorsReport": "Indicadores e patrimônio",
+  "indicatorsDesc": "Taxa de poupança, comprometimento, patrimônio",
+  "exportHint": "Exportação em CSV e PDF em Mais → Exportar.",
+  "months6": "6 meses",
+  "months12": "12 meses",
+  "incomeVsExpenses": "Receitas × despesas",
+  "monthByMonth": "Mês a mês",
+  "balanceShort": "saldo {value}",
+  "@balanceShort": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "compareWithPrevious": "Comparativo com o mês anterior",
+  "yearLabel": "Ano {year}",
+  "@yearLabel": {
+    "placeholders": {
+      "year": {
+        "type": "int"
+      }
+    }
+  },
+  "bestWorst": "Melhor mês: {best} · pior: {worst}",
+  "@bestWorst": {
+    "placeholders": {
+      "best": {
+        "type": "String"
+      },
+      "worst": {
+        "type": "String"
+      }
+    }
+  },
+  "groupSubcategories": "Agrupar subcategorias",
+  "includePlanned": "Incluir previstos",
+  "totalLabel": "Total {value}",
+  "@totalLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionsCount": "{n} lançamento(s)",
+  "@transactionsCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "seeMonthTransactions": "Ver lançamentos do mês",
+  "plusFeature": "Recurso do SerenaCash Plus",
+  "indicatorsPlusText": "Taxa de poupança, comprometimento de renda e evolução do patrimônio nos últimos 12 meses.",
+  "knowPlus": "Conhecer o Plus",
+  "thisMonthTitle": "Este mês",
+  "savingRateHow": "(receitas − despesas) ÷ receitas efetivadas do mês",
+  "commitmentHow": "(saldo devedor dos cartões + próxima parcela de empréstimos) ÷ receitas do mês",
+  "netWorthHow": "contas + reservas fora das contas − faturas em aberto − saldo devedor de empréstimos",
+  "netWorth12": "Patrimônio nos últimos 12 meses",
+  "assetsDebts": "ativos {assets} · dívidas {debts}",
+  "@assetsDebts": {
+    "placeholders": {
+      "assets": {
+        "type": "String"
+      },
+      "debts": {
+        "type": "String"
+      }
+    }
+  },
+  "indicatorsMethod": "Metodologia transparente, calculada só com o que você registrou. Não é avaliação de crédito nem diagnóstico financeiro.",
+  "days60": "60 dias",
+  "onDate": "Em {date}",
+  "@onDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "negativeWarning": "Atenção: o saldo fica negativo ({value}) em {date}.",
+  "@negativeWarning": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "minBalance": "Menor saldo no período: {value} em {date}.",
+  "@minBalance": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "balanceAfter": "{date} · saldo após {value}",
+  "@balanceAfter": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "nothingPlanned": "Nada previsto no período. Cadastre contas e receitas previstas para projetar.",
+  "projectionRules": "Considera lançamentos previstos, parcelas de empréstimo e faturas de cartão até o vencimento. Faturas atrasadas entram hoje.",
+  "perMonthLabel": "Por mês",
+  "recurringHelp": "Séries cadastradas e gastos repetidos (mesma descrição e valor em 3+ meses dos últimos 6).",
+  "recurringLine": "{n} meses · {kind}",
+  "@recurringLine": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "kind": {
+        "type": "String"
+      }
+    }
+  },
+  "series": "série",
+  "detected": "detectado",
+  "recurring": "Recorrente",
+  "nothingRecurring": "Nada recorrente detectado",
+  "nothingRecurringText": "Com 3 meses de histórico o app encontra assinaturas e contas repetidas.",
+  "recurringTip": "Dica: revise assinaturas que você não usa; cada {month}/mês são {year}/ano.",
+  "@recurringTip": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "assistantIntro": "Respostas calculadas com os seus dados, no aparelho. Nenhuma pergunta sai do celular.",
+  "askHint": "Pergunte: posso comprar algo de 300,00?",
+  "ask": "Perguntar",
+  "question": "Pergunta",
+  "calculationBasis": "Base do cálculo",
+  "suggestionsForYou": "Sugestões para você",
+  "allCalmNoSuggestion": "Tudo sereno. Nenhuma sugestão agora.",
+  "assistantRules": "Regras transparentes: contas atrasadas, orçamentos acima do ritmo, cartão acima de 80% do limite, mês negativo, sobra ≥ 20% sem reserva, 3+ gastos recorrentes.",
+  "q1": "Quanto posso gastar?",
+  "q2": "Quais contas vencem esta semana?",
+  "q3": "Onde estou gastando mais?",
+  "q4": "Quanto gastei com supermercado?",
+  "q5": "Quanto falta para minha meta?",
+  "q6": "Quanto tenho comprometido em parcelas?",
+  "q7": "Como está o mês?",
+  "q8": "Como organizar minhas contas?",
+  "importTitle": "Importar",
+  "importIntroTitle": "CSV, OFX ou backup",
+  "importIntro": "CSV do seu banco ou de outro app (data, descrição, valor, tipo); OFX de extrato bancário (Plus); ou um backup do SerenaCash / do app anterior. Você revisa tudo antes de confirmar e o app aponta possíveis duplicidades.",
+  "chooseFile": "Escolher arquivo",
+  "fileReadError": "Não foi possível ler o arquivo.",
+  "columnsOf": "Colunas de {file}",
+  "@columnsOf": {
+    "placeholders": {
+      "file": {
+        "type": "String"
+      }
+    }
+  },
+  "rowsCheck": "{n} linhas. Confira as colunas:",
+  "@rowsCheck": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "columnN": "Coluna {n}",
+  "@columnN": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "typeColumn": "Tipo (receita/despesa)",
+  "noTypeHelp": "Sem coluna de tipo, valores negativos viram despesas e positivos, receitas.",
+  "chooseDateAmount": "Escolha as colunas de data e valor.",
+  "reviewTransactions": "Revisar lançamentos",
+  "restoreBackup": "Restaurar backup",
+  "backupPassphrase": "Senha do backup",
+  "warningsCount": "{n} aviso(s): {text}",
+  "@warningsCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "restoreReplaces": "Restaurar substitui TODOS os dados atuais deste aparelho.",
+  "replaceWithBackup": "Substituir meus dados por este backup",
+  "restoreQ": "Substituir todos os dados?",
+  "restoreText": "Os dados atuais serão apagados e substituídos pelo backup. Exporte antes, se quiser guardar.",
+  "restore": "Restaurar",
+  "foundTransactions": "{n} lançamentos encontrados",
+  "@foundTransactions": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "dupesInfo": "{d} possível(is) duplicidade(s) e {e} com erro foram desmarcados. Toque para incluir ou excluir.",
+  "@dupesInfo": {
+    "placeholders": {
+      "d": {
+        "type": "int"
+      },
+      "e": {
+        "type": "int"
+      }
+    }
+  },
+  "targetAccount": "Conta de destino",
+  "categoriesByName": "Usar categorias pelo nome",
+  "include": "Incluir",
+  "alreadyImported": "já importado",
+  "sameAsExisting": "igual a um lançamento existente",
+  "similarToExisting": "parecido com um lançamento existente",
+  "importN": "Importar {n}",
+  "@importN": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "chooseTargetAccount": "Escolha a conta de destino.",
+  "importResult": "{n} lançamento(s) importado(s); {skipped} ignorado(s).",
+  "@importResult": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "skipped": {
+        "type": "int"
+      }
+    }
+  },
+  "importDone": "Importação concluída",
+  "restored": "Backup restaurado.",
+  "backToStart": "Voltar ao início",
+  "exportTitle": "Exportar e backup",
+  "allScope": "Tudo",
+  "csvSheet": "CSV (planilha)",
+  "pdfReport": "PDF (relatório)",
+  "fullBackup": "Backup completo",
+  "backupHelp": "Arquivo com tudo (contas, lançamentos, cartões, orçamentos, metas, empréstimos, preferências, anexos). Guarde em local seguro; restaure em Importar.",
+  "encryptedBackup": "Backup cifrado (recomendado)",
+  "plainBackup": "Backup em claro (compatível com o app anterior)",
+  "plainWarning": "Sem senha: qualquer pessoa com o arquivo lê seus dados.",
+  "passphraseMin": "Senha com ao menos 8 caracteres",
+  "fileGenerated": "Arquivo gerado.",
+  "exportFailed": "Falha ao exportar.",
+  "reportOf": "Relatório de {month}",
+  "@reportOf": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "fullReport": "Relatório completo",
+  "generatedOn": "gerado em {date}",
+  "@generatedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "byCategory": "Por categoria",
+  "pdfFooter": "Valores efetivados e previstos conforme registrados pelo usuário. Compras no cartão contam na data da compra; pagamentos de fatura não são despesas.",
+  "privacyTitle": "Privacidade e dados",
+  "whatWeKeep": "O que guardamos",
+  "privacy1": "Contas, lançamentos, cartões, orçamentos, metas, empréstimos, listas e compras: tudo fica neste aparelho, em um banco de dados local cifrado.",
+  "privacy2": "Não pedimos e-mail, CPF nem senha de banco. Não há conexão bancária. Nenhum dado financeiro é enviado a servidores.",
+  "privacy3": "Assinaturas são processadas pela Apple ou pelo Google; recebemos apenas a confirmação do direito de acesso, nunca dados de pagamento.",
+  "privacy4": "A câmera é usada só para ler etiquetas e códigos durante a compra; as imagens não são guardadas.",
+  "yourRights": "Seus direitos",
+  "exportAllData": "Exportar todos os meus dados",
+  "eraseAll": "Apagar tudo deste aparelho",
+  "eraseHelp": "Apagar remove dados, preferências, chave do banco e cache de assinatura. Compras na loja podem ser restauradas depois.",
+  "privacyPolicyNote": "Política de privacidade completa e termos: serão publicados em serenacash.app/privacidade antes do lançamento nas lojas.",
+  "eraseQ": "Apagar tudo?",
+  "eraseText": "Esta ação não pode ser desfeita. Exporte um backup antes, se quiser guardar o histórico.",
+  "eraseConfirm": "Apagar definitivamente",
+  "helpTitle": "Ajuda",
+  "faq1q": "O que é \"pode gastar\"?",
+  "faq1a": "Dinheiro nas contas consideradas, menos contas previstas até o fim do período (inclusive atrasadas), menos faturas de cartão em aberto, menos reservas guardadas dentro das contas e o colchão que você definir. Receitas previstas só entram no modo otimista. É uma estimativa, não um saldo.",
+  "faq2q": "Compra no cartão conta duas vezes?",
+  "faq2a": "Não. A compra é despesa na data em que aconteceu (na categoria dela). Pagar a fatura só tira dinheiro da conta e abate a fatura.",
+  "faq3q": "Como funciona a fatura?",
+  "faq3a": "Compras até o dia de fechamento entram na fatura do mês; depois, na seguinte. Parcelas caem uma por fatura. O vencimento é o dia que você cadastrou.",
+  "faq4q": "O que é a marca de hoje?",
+  "faq4a": "Nas barras de orçamento, a pequena onda mostra onde o gasto deveria estar hoje (proporcional aos dias do mês). Antes dela: sereno. Até 10 pontos depois: atenção. Além disso ou acima do limite: agitado.",
+  "faq5q": "Previsto × efetivado",
+  "faq5a": "Previsto é o que ainda vai acontecer (conta a pagar, salário a receber). Efetivado já aconteceu e altera o saldo. Pagamento parcial fica como \"parcial\" até completar.",
+  "faq6q": "Reservas e metas",
+  "faq6a": "Guardar dinheiro numa meta tira o valor da conta de origem. Se a meta fica dentro de uma conta considerada, o valor guardado é descontado do \"pode gastar\" (quando protegida).",
+  "faq7q": "Empréstimos",
+  "faq7a": "Tabela Price (parcela fixa) ou SAC (parcela decrescente), com taxa mensal sobre o saldo devedor. \"Quitar hoje\" é o valor presente das parcelas restantes à taxa do contrato, sem tarifas: uma estimativa para negociar.",
+  "faq8q": "Supermercado",
+  "faq8a": "Código de barras identifica o produto, não o preço. O preço vem da etiqueta lida (OCR), do seu histórico ou de você. Nada é adicionado sem confirmação, e o total do carrinho usa arredondamento de balança.",
+  "faq9q": "Meus dados",
+  "faq9a": "Tudo fica no aparelho, cifrado. Exporte backups em Mais → Exportar. Apague tudo em Privacidade.",
+  "featurePartOfPlus": "\"{feature}\" faz parte do Plus.",
+  "@featurePartOfPlus": {
+    "placeholders": {
+      "feature": {
+        "type": "String"
+      }
+    }
+  },
+  "thanksSupport": "Plano {plan}. Obrigado por apoiar o SerenaCash.",
+  "@thanksSupport": {
+    "placeholders": {
+      "plan": {
+        "type": "String"
+      }
+    }
+  },
+  "whatChanges": "O que muda",
+  "limitsRow": "Contas / cartões / orçamentos / metas",
+  "unlimited": "Ilimitados",
+  "ocrRow": "Leitura de etiquetas (OCR)",
+  "perMonthN": "{n}/mês",
+  "@perMonthN": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "unlimitedF": "Ilimitada",
+  "reportsPdfRow": "Relatórios avançados e PDF",
+  "yes": "Sim",
+  "ofxAttachRow": "Importação OFX e anexos",
+  "priceHistoryRow": "Histórico de preços por loja",
+  "syncRow": "Sincronização entre aparelhos",
+  "syncWhen": "Assinatura (quando disponível)",
+  "essentialFree": "O essencial (contas, lançamentos, 1 cartão, orçamentos, metas, listas e carrinho) é gratuito para sempre.",
+  "recommended": "recomendado",
+  "lifetimeDesc": "Pagamento único. Inclui tudo o que funciona no aparelho, para sempre. Não inclui serviços com custo recorrente (sincronização).",
+  "yearlyDesc": "Cobrado uma vez por ano. Cancele quando quiser na loja.",
+  "monthlyDesc": "Cobrado mensalmente. Cancele quando quiser na loja.",
+  "planCoverage": "Abrangência do plano",
+  "perYear": " / ano",
+  "perMonthShort": " / mês",
+  "loadingPrice": "Carregando preço da loja…",
+  "priceInStore": "Preço e compra disponíveis na versão publicada nas lojas.",
+  "restorePurchases": "Restaurar compras",
+  "manageSubscription": "Gerenciar assinatura na loja",
+  "thanksActive": "Obrigado! Seu plano está ativo.",
+  "purchaseFailed": "Compra não concluída.",
+  "purchasesRestored": "Compras restauradas.",
+  "noPurchasesFound": "Nenhuma compra encontrada nesta conta da loja.",
+  "restoreFailed": "Não foi possível restaurar.",
+  "subscriptionTerms": "Assinaturas renovam automaticamente até serem canceladas na App Store ou no Google Play. Reembolsos seguem as políticas das lojas. Termos e privacidade: Mais → Privacidade.",
+  "storeProcesses": "Pagamento processado pela loja; não vemos seus dados de pagamento.",
+  "plusFeaturesList": "Recursos do Plus: {list}",
+  "@plusFeaturesList": {
+    "placeholders": {
+      "list": {
+        "type": "String"
+      }
+    }
+  },
+  "stayFree": "Continuar no gratuito",
+  "notFound": "Não encontrado"
 }

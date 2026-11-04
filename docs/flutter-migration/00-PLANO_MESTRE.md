@@ -9,8 +9,8 @@ Decisão aprovada pelo cliente em 2026-11-04. Origem congelada em `ae2c229c4977d
 | M1 | Flutter SDK 3.47.9 instalado, projeto `apps/serenacash_flutter` criado, pubspec com versões verificadas, análise estrita, fixtures (22 arquivos JSON) | **concluída** (CI na M9) |
 | M2 | domínio Dart (money, dates, ledger, cards, recurrence, availability, budgets, goals, loans, reports, assistant, billing, io, shopping) + fixtures de equivalência (`02`) | concluído: 22 fixtures, 272 casos TS reproduzidos, 279 testes Dart verdes, analyze limpo (`02-EQUIVALENCIA_DOMINIO.md`) |
 | M3 | Drift/SQLite relacional, migrações, criptografia, backup autenticado | concluído: 23 tabelas, SQLCipher validado, 26 testes de dados (`05`, `06`, auditoria parcial) |
-| M4 | design system Flutter, temas, navegação (GoRouter), onboarding | pendente |
-| M5 | núcleo funcional + dashboard 24 widgets | pendente |
+| M4 | design system Flutter, temas, navegação (GoRouter), onboarding | concluído: tema claro/escuro/sistema, DI Riverpod, GoRouter 5 abas, onboarding, bloqueio PIN/biometria, i18n pt-BR/en, lembretes locais |
+| M5 | núcleo funcional + dashboard 24 widgets | concluído: contas, categorias/tags, cartões (faturas, parcelas, pagamento), orçamentos, metas, empréstimos, calendário, contas a pagar, relatórios, assistente, importação/exportação (CSV/OFX/backup cifrado/PDF), privacidade, ajuda, paywall |
 | M6 | relatórios, calendário, projeções, assistente, import/export, configurações | pendente |
 | M7 | listas, sessão, câmera (mobile_scanner), OCR (ML Kit), histórico de preços | pendente |
 | M8 | RevenueCat Flutter, paywall, direitos | pendente |

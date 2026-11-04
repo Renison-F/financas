@@ -5,12 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/accounts/account_form_screen.dart';
+import '../features/accounts/accounts_screen.dart';
+import '../features/assistant/assistant_screen.dart';
+import '../features/billing/paywall_screen.dart';
+import '../features/bills/bills_screen.dart';
+import '../features/budgets/budgets_screen.dart';
+import '../features/calendar/calendar_screen.dart';
+import '../features/cards/cards_screen.dart';
+import '../features/categories/categories_screen.dart';
+import '../features/data/export_screen.dart';
+import '../features/data/import_screen.dart';
+import '../features/data/privacy_help_screens.dart';
+import '../features/goals/goals_screen.dart';
 import '../features/home/available_screen.dart';
 import '../features/home/customize_screen.dart';
 import '../features/home/home_screen.dart';
+import '../features/loans/loans_screen.dart';
 import '../features/more/more_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/plan/plan_screen.dart';
+import '../features/reports/reports_screens.dart';
 import '../features/settings/settings_screen.dart';
 import '../features/shopping/shopping_tab.dart';
 import '../features/transactions/transaction_form_screen.dart';
@@ -137,6 +152,165 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: Routes.settings,
         parentNavigatorKey: _rootKey,
         builder: (c, s) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: '/accounts',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const AccountsScreen(),
+      ),
+      GoRoute(
+        path: '/accounts/new',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const AccountFormScreen(),
+      ),
+      GoRoute(
+        path: '/accounts/edit',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => AccountFormScreen(id: s.uri.queryParameters['id']),
+      ),
+      GoRoute(
+        path: '/accounts/:id',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => AccountDetailScreen(id: s.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/categories',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const CategoriesScreen(),
+      ),
+      GoRoute(
+        path: '/cards',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const CardsScreen(),
+      ),
+      GoRoute(
+        path: '/cards/new',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => CardFormScreen(id: s.uri.queryParameters['id']),
+      ),
+      GoRoute(
+        path: '/cards/installments',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const InstallmentsScreen(),
+      ),
+      GoRoute(
+        path: '/cards/:id',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => CardDetailScreen(id: s.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/budgets',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const BudgetsScreen(),
+      ),
+      GoRoute(
+        path: '/budgets/new',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => BudgetFormScreen(id: s.uri.queryParameters['id']),
+      ),
+      GoRoute(
+        path: '/goals',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const GoalsScreen(),
+      ),
+      GoRoute(
+        path: '/goals/new',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => GoalFormScreen(id: s.uri.queryParameters['id']),
+      ),
+      GoRoute(
+        path: '/goals/:id',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => GoalDetailScreen(
+          id: s.pathParameters['id']!,
+          action: s.uri.queryParameters['action'],
+        ),
+      ),
+      GoRoute(
+        path: '/loans',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const LoansScreen(),
+      ),
+      GoRoute(
+        path: '/loans/new',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => LoanFormScreen(id: s.uri.queryParameters['id']),
+      ),
+      GoRoute(
+        path: '/loans/:id',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => LoanDetailScreen(id: s.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/calendar',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const CalendarScreen(),
+      ),
+      GoRoute(
+        path: '/bills',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => BillsScreen(filter: s.uri.queryParameters['filter']),
+      ),
+      GoRoute(
+        path: '/reports',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const ReportsIndexScreen(),
+      ),
+      GoRoute(
+        path: '/reports/cashflow',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const CashflowReportScreen(),
+      ),
+      GoRoute(
+        path: '/reports/categories',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const CategoriesReportScreen(),
+      ),
+      GoRoute(
+        path: '/reports/indicators',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const IndicatorsReportScreen(),
+      ),
+      GoRoute(
+        path: '/reports/projection',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const ProjectionReportScreen(),
+      ),
+      GoRoute(
+        path: '/reports/recurring',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const RecurringReportScreen(),
+      ),
+      GoRoute(
+        path: '/assistant',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const AssistantScreen(),
+      ),
+      GoRoute(
+        path: '/import',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const ImportScreen(),
+      ),
+      GoRoute(
+        path: '/export',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const ExportScreen(),
+      ),
+      GoRoute(
+        path: '/privacy',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const PrivacyScreen(),
+      ),
+      GoRoute(
+        path: '/help',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const HelpScreen(),
+      ),
+      GoRoute(
+        path: '/paywall',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) =>
+            PaywallScreen(feature: s.uri.queryParameters['feature']),
       ),
     ],
   );

@@ -2413,6 +2413,2352 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Toque para desfazer'**
   String get undoToastHint;
+
+  /// No description provided for @accountsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Contas e carteiras'**
+  String get accountsTitle;
+
+  /// No description provided for @consolidatedBalance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo consolidado'**
+  String get consolidatedBalance;
+
+  /// No description provided for @transfersDontChange.
+  ///
+  /// In pt, this message translates to:
+  /// **'Transferências entre contas não alteram o total.'**
+  String get transfersDontChange;
+
+  /// No description provided for @active.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ativas'**
+  String get active;
+
+  /// No description provided for @archivedF.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivadas'**
+  String get archivedF;
+
+  /// No description provided for @typeCashL.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dinheiro'**
+  String get typeCashL;
+
+  /// No description provided for @typeCheckingL.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta bancária'**
+  String get typeCheckingL;
+
+  /// No description provided for @typeSavingsL.
+  ///
+  /// In pt, this message translates to:
+  /// **'Poupança'**
+  String get typeSavingsL;
+
+  /// No description provided for @typeDigitalL.
+  ///
+  /// In pt, this message translates to:
+  /// **'Carteira digital'**
+  String get typeDigitalL;
+
+  /// No description provided for @typeInvestmentL.
+  ///
+  /// In pt, this message translates to:
+  /// **'Investimento'**
+  String get typeInvestmentL;
+
+  /// No description provided for @typeOtherL.
+  ///
+  /// In pt, this message translates to:
+  /// **'Outra'**
+  String get typeOtherL;
+
+  /// No description provided for @outOfAvailability.
+  ///
+  /// In pt, this message translates to:
+  /// **' · fora do pode gastar'**
+  String get outOfAvailability;
+
+  /// No description provided for @accountNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta não encontrada'**
+  String get accountNotFound;
+
+  /// No description provided for @currentBalance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo atual'**
+  String get currentBalance;
+
+  /// No description provided for @openingBalanceLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo inicial {value} em {date}'**
+  String openingBalanceLine(String value, String date);
+
+  /// No description provided for @archivedSuffix.
+  ///
+  /// In pt, this message translates to:
+  /// **' · arquivada'**
+  String get archivedSuffix;
+
+  /// No description provided for @history.
+  ///
+  /// In pt, this message translates to:
+  /// **'Histórico'**
+  String get history;
+
+  /// No description provided for @noMovements.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem movimentações'**
+  String get noMovements;
+
+  /// No description provided for @reactivateAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reativar conta'**
+  String get reactivateAccount;
+
+  /// No description provided for @archiveAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivar conta'**
+  String get archiveAccount;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir conta'**
+  String get deleteAccount;
+
+  /// No description provided for @archiveAccountQ.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivar conta?'**
+  String get archiveAccountQ;
+
+  /// No description provided for @archiveAccountText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ela some das listas e do \'pode gastar\', mas o histórico continua. Você pode reativar depois.'**
+  String get archiveAccountText;
+
+  /// No description provided for @archive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivar'**
+  String get archive;
+
+  /// No description provided for @deleteAccountQ.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir conta?'**
+  String get deleteAccountQ;
+
+  /// No description provided for @deleteAccountText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só é possível excluir contas sem lançamentos. Se houver movimentações, arquive.'**
+  String get deleteAccountText;
+
+  /// No description provided for @accountHasTransactions.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esta conta tem lançamentos. Arquive-a ou mova os lançamentos antes de excluir.'**
+  String get accountHasTransactions;
+
+  /// No description provided for @editAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar conta'**
+  String get editAccount;
+
+  /// No description provided for @newAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova conta'**
+  String get newAccount;
+
+  /// No description provided for @accountNameHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Nubank, Carteira'**
+  String get accountNameHint;
+
+  /// No description provided for @type.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tipo'**
+  String get type;
+
+  /// No description provided for @openingBalanceOnDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo inicial (na data abaixo)'**
+  String get openingBalanceOnDate;
+
+  /// No description provided for @openingHelpEdit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Para corrigir o saldo de hoje, use o ajuste abaixo.'**
+  String get openingHelpEdit;
+
+  /// No description provided for @openingHelpNew.
+  ///
+  /// In pt, this message translates to:
+  /// **'O saldo de hoje vira o saldo inicial da conta.'**
+  String get openingHelpNew;
+
+  /// No description provided for @openingDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Data do saldo inicial'**
+  String get openingDate;
+
+  /// No description provided for @includeInAvailability.
+  ///
+  /// In pt, this message translates to:
+  /// **'Considerar no \"pode gastar\"'**
+  String get includeInAvailability;
+
+  /// No description provided for @includeHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desligue para reservas, investimentos ou contas que você não usa no dia a dia.'**
+  String get includeHelp;
+
+  /// No description provided for @color.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cor'**
+  String get color;
+
+  /// No description provided for @adjustBalance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ajustar saldo'**
+  String get adjustBalance;
+
+  /// No description provided for @adjustHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo calculado hoje: {value}. Informe o saldo real e o app cria um ajuste com a diferença (conciliação).'**
+  String adjustHelp(String value);
+
+  /// No description provided for @realBalanceToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo real hoje'**
+  String get realBalanceToday;
+
+  /// No description provided for @registerAdjustment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Registrar ajuste'**
+  String get registerAdjustment;
+
+  /// No description provided for @balanceAdjustment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ajuste de saldo'**
+  String get balanceAdjustment;
+
+  /// No description provided for @nameAccountErr.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dê um nome à conta.'**
+  String get nameAccountErr;
+
+  /// No description provided for @freeLimitAccounts.
+  ///
+  /// In pt, this message translates to:
+  /// **'Plano gratuito: até {n} contas. Contas ilimitadas no SerenaCash Plus.'**
+  String freeLimitAccounts(int n);
+
+  /// No description provided for @newCategory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova categoria'**
+  String get newCategory;
+
+  /// No description provided for @categoryNameHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Delivery'**
+  String get categoryNameHint;
+
+  /// No description provided for @subcategoryOf.
+  ///
+  /// In pt, this message translates to:
+  /// **'Subcategoria de (opcional)'**
+  String get subcategoryOf;
+
+  /// No description provided for @expenseCategories.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categorias de despesa'**
+  String get expenseCategories;
+
+  /// No description provided for @incomeCategories.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categorias de receita'**
+  String get incomeCategories;
+
+  /// No description provided for @reactivate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reativar'**
+  String get reactivate;
+
+  /// No description provided for @archivedLower.
+  ///
+  /// In pt, this message translates to:
+  /// **'arquivada'**
+  String get archivedLower;
+
+  /// No description provided for @tagsHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tags marcam lançamentos de forma transversal (ex.: viagem, reembolsável).'**
+  String get tagsHelp;
+
+  /// No description provided for @newTag.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova tag'**
+  String get newTag;
+
+  /// No description provided for @tagHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: viagem'**
+  String get tagHint;
+
+  /// No description provided for @creditCards.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cartões de crédito'**
+  String get creditCards;
+
+  /// No description provided for @closesDueDays.
+  ///
+  /// In pt, this message translates to:
+  /// **'fecha dia {closing} · vence dia {due}'**
+  String closesDueDays(int closing, int due);
+
+  /// No description provided for @cardSummary.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fatura {month} ({state}) · limite livre {free} de {limit}'**
+  String cardSummary(String month, String state, String free, String limit);
+
+  /// No description provided for @noCardListText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com fechamento e vencimento o app mostra a fatura certa.'**
+  String get noCardListText;
+
+  /// No description provided for @cardNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cartão não encontrado'**
+  String get cardNotFound;
+
+  /// No description provided for @previousInvoice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fatura anterior'**
+  String get previousInvoice;
+
+  /// No description provided for @nextInvoice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Próxima fatura'**
+  String get nextInvoice;
+
+  /// No description provided for @invoiceOf.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fatura {label}'**
+  String invoiceOf(String label);
+
+  /// No description provided for @invoiceState.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fatura {state}'**
+  String invoiceState(String state);
+
+  /// No description provided for @closesOn.
+  ///
+  /// In pt, this message translates to:
+  /// **'fecha {date}'**
+  String closesOn(String date);
+
+  /// No description provided for @totalPaid.
+  ///
+  /// In pt, this message translates to:
+  /// **'Total {total} · pago {paid}'**
+  String totalPaid(String total, String paid);
+
+  /// No description provided for @limitCommittedLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite comprometido'**
+  String get limitCommittedLabel;
+
+  /// No description provided for @limitBreakdown.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite livre {free} de {limit} (fatura atual {current} + fechadas {closed} + futuras {future})'**
+  String limitBreakdown(
+    String free,
+    String limit,
+    String current,
+    String closed,
+    String future,
+  );
+
+  /// No description provided for @purchasesThisInvoice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compras desta fatura'**
+  String get purchasesThisInvoice;
+
+  /// No description provided for @newPurchase.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova compra'**
+  String get newPurchase;
+
+  /// No description provided for @purchase.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compra'**
+  String get purchase;
+
+  /// No description provided for @installmentOf.
+  ///
+  /// In pt, this message translates to:
+  /// **' · parcela {n}/{of}'**
+  String installmentOf(int n, int of);
+
+  /// No description provided for @noPurchasesInvoice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma compra nesta fatura.'**
+  String get noPurchasesInvoice;
+
+  /// No description provided for @payments.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pagamentos'**
+  String get payments;
+
+  /// No description provided for @payInvoice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pagar fatura'**
+  String get payInvoice;
+
+  /// No description provided for @payInvoiceHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'O pagamento sai da conta e abate a fatura. Não vira despesa de novo: as compras já contaram quando aconteceram.'**
+  String get payInvoiceHelp;
+
+  /// No description provided for @totalOf.
+  ///
+  /// In pt, this message translates to:
+  /// **'Total {value}'**
+  String totalOf(String value);
+
+  /// No description provided for @minimum15.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mínimo (15%)'**
+  String get minimum15;
+
+  /// No description provided for @paymentDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Data do pagamento'**
+  String get paymentDate;
+
+  /// No description provided for @registerPayment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Registrar pagamento'**
+  String get registerPayment;
+
+  /// No description provided for @invoiceHistory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Histórico de faturas'**
+  String get invoiceHistory;
+
+  /// No description provided for @noInvoicesYet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ainda sem faturas.'**
+  String get noInvoicesYet;
+
+  /// No description provided for @invoiceRule.
+  ///
+  /// In pt, this message translates to:
+  /// **'Regra: compras até o dia {day} entram na fatura do mês; depois disso, na seguinte. Parcelas caem uma por fatura.'**
+  String invoiceRule(int day);
+
+  /// No description provided for @invoicePaymentDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pagamento fatura {label}'**
+  String invoicePaymentDesc(String label);
+
+  /// No description provided for @editCard.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar cartão'**
+  String get editCard;
+
+  /// No description provided for @newCard.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo cartão'**
+  String get newCard;
+
+  /// No description provided for @cardNameHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Cartão roxo'**
+  String get cardNameHint;
+
+  /// No description provided for @closingHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compras depois desse dia vão para a próxima fatura.'**
+  String get closingHelp;
+
+  /// No description provided for @paymentAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta usada para pagar a fatura'**
+  String get paymentAccount;
+
+  /// No description provided for @nameCardErr.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dê um nome ao cartão.'**
+  String get nameCardErr;
+
+  /// No description provided for @daysRangeErr.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dias de fechamento e vencimento devem estar entre 1 e 31.'**
+  String get daysRangeErr;
+
+  /// No description provided for @closingChangeErr.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não dá para mudar o fechamento de um cartão com compras: as faturas mudariam de mês. Crie outro cartão.'**
+  String get closingChangeErr;
+
+  /// No description provided for @freeLimitCards.
+  ///
+  /// In pt, this message translates to:
+  /// **'Plano gratuito: {n} cartão. Cartões ilimitados no SerenaCash Plus.'**
+  String freeLimitCards(int n);
+
+  /// No description provided for @committedPerInvoice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Comprometido por fatura'**
+  String get committedPerInvoice;
+
+  /// No description provided for @installmentsCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} parcela(s)'**
+  String installmentsCount(int n);
+
+  /// No description provided for @noFutureInstallments.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma parcela futura'**
+  String get noFutureInstallments;
+
+  /// No description provided for @perPurchase.
+  ///
+  /// In pt, this message translates to:
+  /// **'Por compra'**
+  String get perPurchase;
+
+  /// No description provided for @installmentPurchase.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compra parcelada'**
+  String get installmentPurchase;
+
+  /// No description provided for @pastInvoicesRemaining.
+  ///
+  /// In pt, this message translates to:
+  /// **'{paid}/{of} faturas passadas · restam {value}'**
+  String pastInvoicesRemaining(int paid, int of, String value);
+
+  /// No description provided for @noInstallmentPurchase.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma compra parcelada.'**
+  String get noInstallmentPurchase;
+
+  /// No description provided for @plannedSuffix.
+  ///
+  /// In pt, this message translates to:
+  /// **' · {value} previstos'**
+  String plannedSuffix(String value);
+
+  /// No description provided for @paceUsed.
+  ///
+  /// In pt, this message translates to:
+  /// **'{pace} · {used}% usado, {expected}% do mês'**
+  String paceUsed(String pace, int used, int expected);
+
+  /// No description provided for @noBudgetListText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Defina um limite para uma categoria ou para o mês inteiro. A marca de hoje mostra se o ritmo está sereno.'**
+  String get noBudgetListText;
+
+  /// No description provided for @budgetRules.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sereno: gasto até a marca de hoje. Atenção: até 10 pontos acima. Agitado: além disso ou acima do limite. Subcategorias somam no orçamento da categoria-mãe.'**
+  String get budgetRules;
+
+  /// No description provided for @editBudget.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar orçamento'**
+  String get editBudget;
+
+  /// No description provided for @newBudget.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo orçamento'**
+  String get newBudget;
+
+  /// No description provided for @forLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Para'**
+  String get forLabel;
+
+  /// No description provided for @wholeMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'O mês inteiro'**
+  String get wholeMonth;
+
+  /// No description provided for @monthlyLimit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite mensal'**
+  String get monthlyLimit;
+
+  /// No description provided for @onlyThisMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só para este mês'**
+  String get onlyThisMonth;
+
+  /// No description provided for @onlyThisMonthHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desligado = vale todo mês até você mudar.'**
+  String get onlyThisMonthHelp;
+
+  /// No description provided for @limitErr.
+  ///
+  /// In pt, this message translates to:
+  /// **'Informe o limite.'**
+  String get limitErr;
+
+  /// No description provided for @freeLimitBudgets.
+  ///
+  /// In pt, this message translates to:
+  /// **'Plano gratuito: até {n} orçamentos. Ilimitados no SerenaCash Plus.'**
+  String freeLimitBudgets(int n);
+
+  /// No description provided for @deleteBudget.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir orçamento'**
+  String get deleteBudget;
+
+  /// No description provided for @deleteBudgetQ.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir orçamento?'**
+  String get deleteBudgetQ;
+
+  /// No description provided for @deleteBudgetText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Os lançamentos não são afetados.'**
+  String get deleteBudgetText;
+
+  /// No description provided for @goalKindSavings.
+  ///
+  /// In pt, this message translates to:
+  /// **'Economia'**
+  String get goalKindSavings;
+
+  /// No description provided for @goalKindEmergency.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reserva de emergência'**
+  String get goalKindEmergency;
+
+  /// No description provided for @goalKindPurchase.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compra'**
+  String get goalKindPurchase;
+
+  /// No description provided for @goalKindDebt.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quitar dívida'**
+  String get goalKindDebt;
+
+  /// No description provided for @goalKindOther.
+  ///
+  /// In pt, this message translates to:
+  /// **'Outro'**
+  String get goalKindOther;
+
+  /// No description provided for @protectedSuffix.
+  ///
+  /// In pt, this message translates to:
+  /// **' · protegida'**
+  String get protectedSuffix;
+
+  /// No description provided for @untilDate.
+  ///
+  /// In pt, this message translates to:
+  /// **' · até {date}'**
+  String untilDate(String date);
+
+  /// No description provided for @goalSummary.
+  ///
+  /// In pt, this message translates to:
+  /// **'{percent}% de {target} · faltam {remaining}'**
+  String goalSummary(int percent, String target, String remaining);
+
+  /// No description provided for @saveMonthly.
+  ///
+  /// In pt, this message translates to:
+  /// **' · guarde {value}/mês ({months} meses)'**
+  String saveMonthly(String value, int months);
+
+  /// No description provided for @suggestionMonthly.
+  ///
+  /// In pt, this message translates to:
+  /// **' · sugestão {value}/mês'**
+  String suggestionMonthly(String value);
+
+  /// No description provided for @deposit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Guardar'**
+  String get deposit;
+
+  /// No description provided for @withdraw.
+  ///
+  /// In pt, this message translates to:
+  /// **'Resgatar'**
+  String get withdraw;
+
+  /// No description provided for @noGoalListText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Uma reserva de emergência com 3 meses de despesas é um ótimo primeiro objetivo.'**
+  String get noGoalListText;
+
+  /// No description provided for @goalNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meta não encontrada'**
+  String get goalNotFound;
+
+  /// No description provided for @saved.
+  ///
+  /// In pt, this message translates to:
+  /// **'Guardado'**
+  String get saved;
+
+  /// No description provided for @leavesAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sai da conta'**
+  String get leavesAccount;
+
+  /// No description provided for @goesToAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vai para a conta'**
+  String get goesToAccount;
+
+  /// No description provided for @movements.
+  ///
+  /// In pt, this message translates to:
+  /// **'Movimentações'**
+  String get movements;
+
+  /// No description provided for @noMovementsYet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma movimentação ainda.'**
+  String get noMovementsYet;
+
+  /// No description provided for @depositDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Guardado: {name}'**
+  String depositDesc(String name);
+
+  /// No description provided for @withdrawDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Resgate: {name}'**
+  String withdrawDesc(String name);
+
+  /// No description provided for @editGoal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar meta'**
+  String get editGoal;
+
+  /// No description provided for @newGoal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova meta'**
+  String get newGoal;
+
+  /// No description provided for @goalNameHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Reserva de emergência'**
+  String get goalNameHint;
+
+  /// No description provided for @goalAmount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Valor da meta'**
+  String get goalAmount;
+
+  /// No description provided for @hasDeadline.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tem prazo'**
+  String get hasDeadline;
+
+  /// No description provided for @untilWhen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Até quando'**
+  String get untilWhen;
+
+  /// No description provided for @whereMoney.
+  ///
+  /// In pt, this message translates to:
+  /// **'Onde o dinheiro fica'**
+  String get whereMoney;
+
+  /// No description provided for @outsideApp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fora das contas do app'**
+  String get outsideApp;
+
+  /// No description provided for @whereMoneyHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Se ficar dentro de uma conta considerada no \"pode gastar\", o valor guardado é descontado de lá.'**
+  String get whereMoneyHelp;
+
+  /// No description provided for @protectFromAvail.
+  ///
+  /// In pt, this message translates to:
+  /// **'Proteger do \"pode gastar\"'**
+  String get protectFromAvail;
+
+  /// No description provided for @protectHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'O valor guardado nunca aparece como disponível.'**
+  String get protectHelp;
+
+  /// No description provided for @archiveGoal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivar meta'**
+  String get archiveGoal;
+
+  /// No description provided for @nameGoalErr.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dê um nome à meta.'**
+  String get nameGoalErr;
+
+  /// No description provided for @goalAmountErr.
+  ///
+  /// In pt, this message translates to:
+  /// **'Informe o valor da meta.'**
+  String get goalAmountErr;
+
+  /// No description provided for @freeLimitGoals.
+  ///
+  /// In pt, this message translates to:
+  /// **'Plano gratuito: até {n} metas. Ilimitadas no SerenaCash Plus.'**
+  String freeLimitGoals(int n);
+
+  /// No description provided for @loanLineList.
+  ///
+  /// In pt, this message translates to:
+  /// **'{system} · {rate}% a.m. · {paid}/{total} pagas'**
+  String loanLineList(String system, String rate, int paid, int total);
+
+  /// No description provided for @overdueInstallments.
+  ///
+  /// In pt, this message translates to:
+  /// **' · {n} atrasada(s)'**
+  String overdueInstallments(int n);
+
+  /// No description provided for @installmentsPaid.
+  ///
+  /// In pt, this message translates to:
+  /// **'Parcelas pagas'**
+  String get installmentsPaid;
+
+  /// No description provided for @nextAndPayoff.
+  ///
+  /// In pt, this message translates to:
+  /// **'Próxima: {value} em {date} · quitar hoje ≈ {payoff}'**
+  String nextAndPayoff(String value, String date, String payoff);
+
+  /// No description provided for @paidOffCap.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quitado'**
+  String get paidOffCap;
+
+  /// No description provided for @noLoanListText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cadastre financiamentos, crediário ou dívidas para ver saldo devedor, juros e simulação de quitação.'**
+  String get noLoanListText;
+
+  /// No description provided for @loanNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Empréstimo não encontrado'**
+  String get loanNotFound;
+
+  /// No description provided for @outstanding.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo devedor'**
+  String get outstanding;
+
+  /// No description provided for @paidSummary.
+  ///
+  /// In pt, this message translates to:
+  /// **'{paid} de {total} parcelas pagas · {value} pagos'**
+  String paidSummary(int paid, int total, String value);
+
+  /// No description provided for @extraPaid.
+  ///
+  /// In pt, this message translates to:
+  /// **' ({value} além das parcelas)'**
+  String extraPaid(String value);
+
+  /// No description provided for @payoffToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quitar hoje ≈ {value} (valor presente das parcelas restantes à taxa do contrato, sem tarifas)'**
+  String payoffToday(String value);
+
+  /// No description provided for @overdueInstallmentsMsg.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} parcela(s) atrasada(s).'**
+  String overdueInstallmentsMsg(int n);
+
+  /// No description provided for @simulateExtra.
+  ///
+  /// In pt, this message translates to:
+  /// **'Simular pagamento extra'**
+  String get simulateExtra;
+
+  /// No description provided for @extraAmount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Valor extra'**
+  String get extraAmount;
+
+  /// No description provided for @reduceTerm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reduzir prazo'**
+  String get reduceTerm;
+
+  /// No description provided for @reduceInstallment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reduzir parcela'**
+  String get reduceInstallment;
+
+  /// No description provided for @paysOffLoan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quita o empréstimo.'**
+  String get paysOffLoan;
+
+  /// No description provided for @newTerm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo prazo: {n} parcelas de {value} (antes {before}).'**
+  String newTerm(int n, String value, int before);
+
+  /// No description provided for @newInstallment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova parcela: {value} por {n} meses.'**
+  String newInstallment(String value, int n);
+
+  /// No description provided for @registerExtra.
+  ///
+  /// In pt, this message translates to:
+  /// **'Registrar pagamento extra'**
+  String get registerExtra;
+
+  /// No description provided for @amortization.
+  ///
+  /// In pt, this message translates to:
+  /// **'Amortização: {name}'**
+  String amortization(String name);
+
+  /// No description provided for @table.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tabela'**
+  String get table;
+
+  /// No description provided for @editLoan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar empréstimo'**
+  String get editLoan;
+
+  /// No description provided for @newLoan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo empréstimo'**
+  String get newLoan;
+
+  /// No description provided for @loanNameHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Financiamento do carro'**
+  String get loanNameHint;
+
+  /// No description provided for @borrowed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Valor emprestado'**
+  String get borrowed;
+
+  /// No description provided for @monthlyRate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Juros (% ao mês)'**
+  String get monthlyRate;
+
+  /// No description provided for @system.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sistema'**
+  String get system;
+
+  /// No description provided for @priceSystem.
+  ///
+  /// In pt, this message translates to:
+  /// **'Price (parcela fixa)'**
+  String get priceSystem;
+
+  /// No description provided for @sacSystem.
+  ///
+  /// In pt, this message translates to:
+  /// **'SAC (decrescente)'**
+  String get sacSystem;
+
+  /// No description provided for @firstDue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Primeiro vencimento'**
+  String get firstDue;
+
+  /// No description provided for @monthlyFee.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tarifa/seguro mensal (opcional)'**
+  String get monthlyFee;
+
+  /// No description provided for @registerDisbursement.
+  ///
+  /// In pt, this message translates to:
+  /// **'Registrar a entrada do dinheiro na conta'**
+  String get registerDisbursement;
+
+  /// No description provided for @registerDisbursementHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ligue se o valor caiu na conta hoje.'**
+  String get registerDisbursementHelp;
+
+  /// No description provided for @createInstallments.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar as parcelas como contas previstas'**
+  String get createInstallments;
+
+  /// No description provided for @createInstallmentsHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entram em \'contas a pagar\' e no \'pode gastar\' mês a mês.'**
+  String get createInstallmentsHelp;
+
+  /// No description provided for @preview.
+  ///
+  /// In pt, this message translates to:
+  /// **'Prévia'**
+  String get preview;
+
+  /// No description provided for @previewLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} parcelas · primeira {first}'**
+  String previewLine(int n, String first);
+
+  /// No description provided for @lastInstallment.
+  ///
+  /// In pt, this message translates to:
+  /// **' · última {value}'**
+  String lastInstallment(String value);
+
+  /// No description provided for @totalInterestCost.
+  ///
+  /// In pt, this message translates to:
+  /// **'Juros totais {interest} · custo total {cost}'**
+  String totalInterestCost(String interest, String cost);
+
+  /// No description provided for @loanAssumptions.
+  ///
+  /// In pt, this message translates to:
+  /// **'Hipóteses: taxa nominal mensal sobre o saldo devedor; arredondamento por parcela; IOF e seguros só se informados.'**
+  String get loanAssumptions;
+
+  /// No description provided for @loanFormErr.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preencha nome, valor, taxa (% ao mês) e prazo.'**
+  String get loanFormErr;
+
+  /// No description provided for @disbursementLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entrada'**
+  String get disbursementLabel;
+
+  /// No description provided for @dayItems.
+  ///
+  /// In pt, this message translates to:
+  /// **'{day}: {n} lançamento(s)'**
+  String dayItems(String day, int n);
+
+  /// No description provided for @nothingThisDay.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada neste dia.'**
+  String get nothingThisDay;
+
+  /// No description provided for @dayTotal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Total do dia: {value}'**
+  String dayTotal(String value);
+
+  /// No description provided for @thisMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Este mês'**
+  String get thisMonth;
+
+  /// No description provided for @days90.
+  ///
+  /// In pt, this message translates to:
+  /// **'90 dias'**
+  String get days90;
+
+  /// No description provided for @overdueTotal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atrasadas · {value}'**
+  String overdueTotal(String value);
+
+  /// No description provided for @pay.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pagar'**
+  String get pay;
+
+  /// No description provided for @dueUntil.
+  ///
+  /// In pt, this message translates to:
+  /// **'A vencer até {date} · {value}'**
+  String dueUntil(String date, String value);
+
+  /// No description provided for @alreadyPaid.
+  ///
+  /// In pt, this message translates to:
+  /// **' · já pago {value}'**
+  String alreadyPaid(String value);
+
+  /// No description provided for @nothingDuePeriod.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada a vencer no período'**
+  String get nothingDuePeriod;
+
+  /// No description provided for @billsHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'\"Pagar\" marca como pago hoje na conta do lançamento. Para pagar parte, abra o lançamento.'**
+  String get billsHelp;
+
+  /// No description provided for @cashflowReport.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fluxo de caixa'**
+  String get cashflowReport;
+
+  /// No description provided for @cashflowDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receitas, despesas e saldo mês a mês; comparativo mensal e anual'**
+  String get cashflowDesc;
+
+  /// No description provided for @categoriesDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Para onde o dinheiro foi, com filtros'**
+  String get categoriesDesc;
+
+  /// No description provided for @recurringReport.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gastos recorrentes'**
+  String get recurringReport;
+
+  /// No description provided for @recurringDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Assinaturas e contas que se repetem'**
+  String get recurringDesc;
+
+  /// No description provided for @projectionDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como o saldo evolui com o que está previsto'**
+  String get projectionDesc;
+
+  /// No description provided for @indicatorsReport.
+  ///
+  /// In pt, this message translates to:
+  /// **'Indicadores e patrimônio'**
+  String get indicatorsReport;
+
+  /// No description provided for @indicatorsDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Taxa de poupança, comprometimento, patrimônio'**
+  String get indicatorsDesc;
+
+  /// No description provided for @exportHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Exportação em CSV e PDF em Mais → Exportar.'**
+  String get exportHint;
+
+  /// No description provided for @months6.
+  ///
+  /// In pt, this message translates to:
+  /// **'6 meses'**
+  String get months6;
+
+  /// No description provided for @months12.
+  ///
+  /// In pt, this message translates to:
+  /// **'12 meses'**
+  String get months12;
+
+  /// No description provided for @incomeVsExpenses.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receitas × despesas'**
+  String get incomeVsExpenses;
+
+  /// No description provided for @monthByMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mês a mês'**
+  String get monthByMonth;
+
+  /// No description provided for @balanceShort.
+  ///
+  /// In pt, this message translates to:
+  /// **'saldo {value}'**
+  String balanceShort(String value);
+
+  /// No description provided for @compareWithPrevious.
+  ///
+  /// In pt, this message translates to:
+  /// **'Comparativo com o mês anterior'**
+  String get compareWithPrevious;
+
+  /// No description provided for @yearLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ano {year}'**
+  String yearLabel(int year);
+
+  /// No description provided for @bestWorst.
+  ///
+  /// In pt, this message translates to:
+  /// **'Melhor mês: {best} · pior: {worst}'**
+  String bestWorst(String best, String worst);
+
+  /// No description provided for @groupSubcategories.
+  ///
+  /// In pt, this message translates to:
+  /// **'Agrupar subcategorias'**
+  String get groupSubcategories;
+
+  /// No description provided for @includePlanned.
+  ///
+  /// In pt, this message translates to:
+  /// **'Incluir previstos'**
+  String get includePlanned;
+
+  /// No description provided for @totalLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Total {value}'**
+  String totalLabel(String value);
+
+  /// No description provided for @transactionsCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} lançamento(s)'**
+  String transactionsCount(int n);
+
+  /// No description provided for @seeMonthTransactions.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver lançamentos do mês'**
+  String get seeMonthTransactions;
+
+  /// No description provided for @plusFeature.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recurso do SerenaCash Plus'**
+  String get plusFeature;
+
+  /// No description provided for @indicatorsPlusText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Taxa de poupança, comprometimento de renda e evolução do patrimônio nos últimos 12 meses.'**
+  String get indicatorsPlusText;
+
+  /// No description provided for @knowPlus.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conhecer o Plus'**
+  String get knowPlus;
+
+  /// No description provided for @thisMonthTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Este mês'**
+  String get thisMonthTitle;
+
+  /// No description provided for @savingRateHow.
+  ///
+  /// In pt, this message translates to:
+  /// **'(receitas − despesas) ÷ receitas efetivadas do mês'**
+  String get savingRateHow;
+
+  /// No description provided for @commitmentHow.
+  ///
+  /// In pt, this message translates to:
+  /// **'(saldo devedor dos cartões + próxima parcela de empréstimos) ÷ receitas do mês'**
+  String get commitmentHow;
+
+  /// No description provided for @netWorthHow.
+  ///
+  /// In pt, this message translates to:
+  /// **'contas + reservas fora das contas − faturas em aberto − saldo devedor de empréstimos'**
+  String get netWorthHow;
+
+  /// No description provided for @netWorth12.
+  ///
+  /// In pt, this message translates to:
+  /// **'Patrimônio nos últimos 12 meses'**
+  String get netWorth12;
+
+  /// No description provided for @assetsDebts.
+  ///
+  /// In pt, this message translates to:
+  /// **'ativos {assets} · dívidas {debts}'**
+  String assetsDebts(String assets, String debts);
+
+  /// No description provided for @indicatorsMethod.
+  ///
+  /// In pt, this message translates to:
+  /// **'Metodologia transparente, calculada só com o que você registrou. Não é avaliação de crédito nem diagnóstico financeiro.'**
+  String get indicatorsMethod;
+
+  /// No description provided for @days60.
+  ///
+  /// In pt, this message translates to:
+  /// **'60 dias'**
+  String get days60;
+
+  /// No description provided for @onDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em {date}'**
+  String onDate(String date);
+
+  /// No description provided for @negativeWarning.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atenção: o saldo fica negativo ({value}) em {date}.'**
+  String negativeWarning(String value, String date);
+
+  /// No description provided for @minBalance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Menor saldo no período: {value} em {date}.'**
+  String minBalance(String value, String date);
+
+  /// No description provided for @balanceAfter.
+  ///
+  /// In pt, this message translates to:
+  /// **'{date} · saldo após {value}'**
+  String balanceAfter(String date, String value);
+
+  /// No description provided for @nothingPlanned.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada previsto no período. Cadastre contas e receitas previstas para projetar.'**
+  String get nothingPlanned;
+
+  /// No description provided for @projectionRules.
+  ///
+  /// In pt, this message translates to:
+  /// **'Considera lançamentos previstos, parcelas de empréstimo e faturas de cartão até o vencimento. Faturas atrasadas entram hoje.'**
+  String get projectionRules;
+
+  /// No description provided for @perMonthLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Por mês'**
+  String get perMonthLabel;
+
+  /// No description provided for @recurringHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Séries cadastradas e gastos repetidos (mesma descrição e valor em 3+ meses dos últimos 6).'**
+  String get recurringHelp;
+
+  /// No description provided for @recurringLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} meses · {kind}'**
+  String recurringLine(int n, String kind);
+
+  /// No description provided for @series.
+  ///
+  /// In pt, this message translates to:
+  /// **'série'**
+  String get series;
+
+  /// No description provided for @detected.
+  ///
+  /// In pt, this message translates to:
+  /// **'detectado'**
+  String get detected;
+
+  /// No description provided for @recurring.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recorrente'**
+  String get recurring;
+
+  /// No description provided for @nothingRecurring.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada recorrente detectado'**
+  String get nothingRecurring;
+
+  /// No description provided for @nothingRecurringText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com 3 meses de histórico o app encontra assinaturas e contas repetidas.'**
+  String get nothingRecurringText;
+
+  /// No description provided for @recurringTip.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dica: revise assinaturas que você não usa; cada {month}/mês são {year}/ano.'**
+  String recurringTip(String month, String year);
+
+  /// No description provided for @assistantIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'Respostas calculadas com os seus dados, no aparelho. Nenhuma pergunta sai do celular.'**
+  String get assistantIntro;
+
+  /// No description provided for @askHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pergunte: posso comprar algo de 300,00?'**
+  String get askHint;
+
+  /// No description provided for @ask.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perguntar'**
+  String get ask;
+
+  /// No description provided for @question.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pergunta'**
+  String get question;
+
+  /// No description provided for @calculationBasis.
+  ///
+  /// In pt, this message translates to:
+  /// **'Base do cálculo'**
+  String get calculationBasis;
+
+  /// No description provided for @suggestionsForYou.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sugestões para você'**
+  String get suggestionsForYou;
+
+  /// No description provided for @allCalmNoSuggestion.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tudo sereno. Nenhuma sugestão agora.'**
+  String get allCalmNoSuggestion;
+
+  /// No description provided for @assistantRules.
+  ///
+  /// In pt, this message translates to:
+  /// **'Regras transparentes: contas atrasadas, orçamentos acima do ritmo, cartão acima de 80% do limite, mês negativo, sobra ≥ 20% sem reserva, 3+ gastos recorrentes.'**
+  String get assistantRules;
+
+  /// No description provided for @q1.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quanto posso gastar?'**
+  String get q1;
+
+  /// No description provided for @q2.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quais contas vencem esta semana?'**
+  String get q2;
+
+  /// No description provided for @q3.
+  ///
+  /// In pt, this message translates to:
+  /// **'Onde estou gastando mais?'**
+  String get q3;
+
+  /// No description provided for @q4.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quanto gastei com supermercado?'**
+  String get q4;
+
+  /// No description provided for @q5.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quanto falta para minha meta?'**
+  String get q5;
+
+  /// No description provided for @q6.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quanto tenho comprometido em parcelas?'**
+  String get q6;
+
+  /// No description provided for @q7.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como está o mês?'**
+  String get q7;
+
+  /// No description provided for @q8.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como organizar minhas contas?'**
+  String get q8;
+
+  /// No description provided for @importTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Importar'**
+  String get importTitle;
+
+  /// No description provided for @importIntroTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'CSV, OFX ou backup'**
+  String get importIntroTitle;
+
+  /// No description provided for @importIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'CSV do seu banco ou de outro app (data, descrição, valor, tipo); OFX de extrato bancário (Plus); ou um backup do SerenaCash / do app anterior. Você revisa tudo antes de confirmar e o app aponta possíveis duplicidades.'**
+  String get importIntro;
+
+  /// No description provided for @chooseFile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolher arquivo'**
+  String get chooseFile;
+
+  /// No description provided for @fileReadError.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não foi possível ler o arquivo.'**
+  String get fileReadError;
+
+  /// No description provided for @columnsOf.
+  ///
+  /// In pt, this message translates to:
+  /// **'Colunas de {file}'**
+  String columnsOf(String file);
+
+  /// No description provided for @rowsCheck.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} linhas. Confira as colunas:'**
+  String rowsCheck(int n);
+
+  /// No description provided for @columnN.
+  ///
+  /// In pt, this message translates to:
+  /// **'Coluna {n}'**
+  String columnN(int n);
+
+  /// No description provided for @typeColumn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tipo (receita/despesa)'**
+  String get typeColumn;
+
+  /// No description provided for @noTypeHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem coluna de tipo, valores negativos viram despesas e positivos, receitas.'**
+  String get noTypeHelp;
+
+  /// No description provided for @chooseDateAmount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha as colunas de data e valor.'**
+  String get chooseDateAmount;
+
+  /// No description provided for @reviewTransactions.
+  ///
+  /// In pt, this message translates to:
+  /// **'Revisar lançamentos'**
+  String get reviewTransactions;
+
+  /// No description provided for @restoreBackup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Restaurar backup'**
+  String get restoreBackup;
+
+  /// No description provided for @backupPassphrase.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha do backup'**
+  String get backupPassphrase;
+
+  /// No description provided for @warningsCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} aviso(s): {text}'**
+  String warningsCount(int n, String text);
+
+  /// No description provided for @restoreReplaces.
+  ///
+  /// In pt, this message translates to:
+  /// **'Restaurar substitui TODOS os dados atuais deste aparelho.'**
+  String get restoreReplaces;
+
+  /// No description provided for @replaceWithBackup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Substituir meus dados por este backup'**
+  String get replaceWithBackup;
+
+  /// No description provided for @restoreQ.
+  ///
+  /// In pt, this message translates to:
+  /// **'Substituir todos os dados?'**
+  String get restoreQ;
+
+  /// No description provided for @restoreText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Os dados atuais serão apagados e substituídos pelo backup. Exporte antes, se quiser guardar.'**
+  String get restoreText;
+
+  /// No description provided for @restore.
+  ///
+  /// In pt, this message translates to:
+  /// **'Restaurar'**
+  String get restore;
+
+  /// No description provided for @foundTransactions.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} lançamentos encontrados'**
+  String foundTransactions(int n);
+
+  /// No description provided for @dupesInfo.
+  ///
+  /// In pt, this message translates to:
+  /// **'{d} possível(is) duplicidade(s) e {e} com erro foram desmarcados. Toque para incluir ou excluir.'**
+  String dupesInfo(int d, int e);
+
+  /// No description provided for @targetAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta de destino'**
+  String get targetAccount;
+
+  /// No description provided for @categoriesByName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usar categorias pelo nome'**
+  String get categoriesByName;
+
+  /// No description provided for @include.
+  ///
+  /// In pt, this message translates to:
+  /// **'Incluir'**
+  String get include;
+
+  /// No description provided for @alreadyImported.
+  ///
+  /// In pt, this message translates to:
+  /// **'já importado'**
+  String get alreadyImported;
+
+  /// No description provided for @sameAsExisting.
+  ///
+  /// In pt, this message translates to:
+  /// **'igual a um lançamento existente'**
+  String get sameAsExisting;
+
+  /// No description provided for @similarToExisting.
+  ///
+  /// In pt, this message translates to:
+  /// **'parecido com um lançamento existente'**
+  String get similarToExisting;
+
+  /// No description provided for @importN.
+  ///
+  /// In pt, this message translates to:
+  /// **'Importar {n}'**
+  String importN(int n);
+
+  /// No description provided for @chooseTargetAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha a conta de destino.'**
+  String get chooseTargetAccount;
+
+  /// No description provided for @importResult.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} lançamento(s) importado(s); {skipped} ignorado(s).'**
+  String importResult(int n, int skipped);
+
+  /// No description provided for @importDone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Importação concluída'**
+  String get importDone;
+
+  /// No description provided for @restored.
+  ///
+  /// In pt, this message translates to:
+  /// **'Backup restaurado.'**
+  String get restored;
+
+  /// No description provided for @backToStart.
+  ///
+  /// In pt, this message translates to:
+  /// **'Voltar ao início'**
+  String get backToStart;
+
+  /// No description provided for @exportTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Exportar e backup'**
+  String get exportTitle;
+
+  /// No description provided for @allScope.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tudo'**
+  String get allScope;
+
+  /// No description provided for @csvSheet.
+  ///
+  /// In pt, this message translates to:
+  /// **'CSV (planilha)'**
+  String get csvSheet;
+
+  /// No description provided for @pdfReport.
+  ///
+  /// In pt, this message translates to:
+  /// **'PDF (relatório)'**
+  String get pdfReport;
+
+  /// No description provided for @fullBackup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Backup completo'**
+  String get fullBackup;
+
+  /// No description provided for @backupHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivo com tudo (contas, lançamentos, cartões, orçamentos, metas, empréstimos, preferências, anexos). Guarde em local seguro; restaure em Importar.'**
+  String get backupHelp;
+
+  /// No description provided for @encryptedBackup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Backup cifrado (recomendado)'**
+  String get encryptedBackup;
+
+  /// No description provided for @plainBackup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Backup em claro (compatível com o app anterior)'**
+  String get plainBackup;
+
+  /// No description provided for @plainWarning.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem senha: qualquer pessoa com o arquivo lê seus dados.'**
+  String get plainWarning;
+
+  /// No description provided for @passphraseMin.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha com ao menos 8 caracteres'**
+  String get passphraseMin;
+
+  /// No description provided for @fileGenerated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivo gerado.'**
+  String get fileGenerated;
+
+  /// No description provided for @exportFailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Falha ao exportar.'**
+  String get exportFailed;
+
+  /// No description provided for @reportOf.
+  ///
+  /// In pt, this message translates to:
+  /// **'Relatório de {month}'**
+  String reportOf(String month);
+
+  /// No description provided for @fullReport.
+  ///
+  /// In pt, this message translates to:
+  /// **'Relatório completo'**
+  String get fullReport;
+
+  /// No description provided for @generatedOn.
+  ///
+  /// In pt, this message translates to:
+  /// **'gerado em {date}'**
+  String generatedOn(String date);
+
+  /// No description provided for @byCategory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Por categoria'**
+  String get byCategory;
+
+  /// No description provided for @pdfFooter.
+  ///
+  /// In pt, this message translates to:
+  /// **'Valores efetivados e previstos conforme registrados pelo usuário. Compras no cartão contam na data da compra; pagamentos de fatura não são despesas.'**
+  String get pdfFooter;
+
+  /// No description provided for @privacyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Privacidade e dados'**
+  String get privacyTitle;
+
+  /// No description provided for @whatWeKeep.
+  ///
+  /// In pt, this message translates to:
+  /// **'O que guardamos'**
+  String get whatWeKeep;
+
+  /// No description provided for @privacy1.
+  ///
+  /// In pt, this message translates to:
+  /// **'Contas, lançamentos, cartões, orçamentos, metas, empréstimos, listas e compras: tudo fica neste aparelho, em um banco de dados local cifrado.'**
+  String get privacy1;
+
+  /// No description provided for @privacy2.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não pedimos e-mail, CPF nem senha de banco. Não há conexão bancária. Nenhum dado financeiro é enviado a servidores.'**
+  String get privacy2;
+
+  /// No description provided for @privacy3.
+  ///
+  /// In pt, this message translates to:
+  /// **'Assinaturas são processadas pela Apple ou pelo Google; recebemos apenas a confirmação do direito de acesso, nunca dados de pagamento.'**
+  String get privacy3;
+
+  /// No description provided for @privacy4.
+  ///
+  /// In pt, this message translates to:
+  /// **'A câmera é usada só para ler etiquetas e códigos durante a compra; as imagens não são guardadas.'**
+  String get privacy4;
+
+  /// No description provided for @yourRights.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seus direitos'**
+  String get yourRights;
+
+  /// No description provided for @exportAllData.
+  ///
+  /// In pt, this message translates to:
+  /// **'Exportar todos os meus dados'**
+  String get exportAllData;
+
+  /// No description provided for @eraseAll.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar tudo deste aparelho'**
+  String get eraseAll;
+
+  /// No description provided for @eraseHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar remove dados, preferências, chave do banco e cache de assinatura. Compras na loja podem ser restauradas depois.'**
+  String get eraseHelp;
+
+  /// No description provided for @privacyPolicyNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Política de privacidade completa e termos: serão publicados em serenacash.app/privacidade antes do lançamento nas lojas.'**
+  String get privacyPolicyNote;
+
+  /// No description provided for @eraseQ.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar tudo?'**
+  String get eraseQ;
+
+  /// No description provided for @eraseText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esta ação não pode ser desfeita. Exporte um backup antes, se quiser guardar o histórico.'**
+  String get eraseText;
+
+  /// No description provided for @eraseConfirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar definitivamente'**
+  String get eraseConfirm;
+
+  /// No description provided for @helpTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ajuda'**
+  String get helpTitle;
+
+  /// No description provided for @faq1q.
+  ///
+  /// In pt, this message translates to:
+  /// **'O que é \"pode gastar\"?'**
+  String get faq1q;
+
+  /// No description provided for @faq1a.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dinheiro nas contas consideradas, menos contas previstas até o fim do período (inclusive atrasadas), menos faturas de cartão em aberto, menos reservas guardadas dentro das contas e o colchão que você definir. Receitas previstas só entram no modo otimista. É uma estimativa, não um saldo.'**
+  String get faq1a;
+
+  /// No description provided for @faq2q.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compra no cartão conta duas vezes?'**
+  String get faq2q;
+
+  /// No description provided for @faq2a.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não. A compra é despesa na data em que aconteceu (na categoria dela). Pagar a fatura só tira dinheiro da conta e abate a fatura.'**
+  String get faq2a;
+
+  /// No description provided for @faq3q.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como funciona a fatura?'**
+  String get faq3q;
+
+  /// No description provided for @faq3a.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compras até o dia de fechamento entram na fatura do mês; depois, na seguinte. Parcelas caem uma por fatura. O vencimento é o dia que você cadastrou.'**
+  String get faq3a;
+
+  /// No description provided for @faq4q.
+  ///
+  /// In pt, this message translates to:
+  /// **'O que é a marca de hoje?'**
+  String get faq4q;
+
+  /// No description provided for @faq4a.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nas barras de orçamento, a pequena onda mostra onde o gasto deveria estar hoje (proporcional aos dias do mês). Antes dela: sereno. Até 10 pontos depois: atenção. Além disso ou acima do limite: agitado.'**
+  String get faq4a;
+
+  /// No description provided for @faq5q.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto × efetivado'**
+  String get faq5q;
+
+  /// No description provided for @faq5a.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto é o que ainda vai acontecer (conta a pagar, salário a receber). Efetivado já aconteceu e altera o saldo. Pagamento parcial fica como \"parcial\" até completar.'**
+  String get faq5a;
+
+  /// No description provided for @faq6q.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reservas e metas'**
+  String get faq6q;
+
+  /// No description provided for @faq6a.
+  ///
+  /// In pt, this message translates to:
+  /// **'Guardar dinheiro numa meta tira o valor da conta de origem. Se a meta fica dentro de uma conta considerada, o valor guardado é descontado do \"pode gastar\" (quando protegida).'**
+  String get faq6a;
+
+  /// No description provided for @faq7q.
+  ///
+  /// In pt, this message translates to:
+  /// **'Empréstimos'**
+  String get faq7q;
+
+  /// No description provided for @faq7a.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tabela Price (parcela fixa) ou SAC (parcela decrescente), com taxa mensal sobre o saldo devedor. \"Quitar hoje\" é o valor presente das parcelas restantes à taxa do contrato, sem tarifas: uma estimativa para negociar.'**
+  String get faq7a;
+
+  /// No description provided for @faq8q.
+  ///
+  /// In pt, this message translates to:
+  /// **'Supermercado'**
+  String get faq8q;
+
+  /// No description provided for @faq8a.
+  ///
+  /// In pt, this message translates to:
+  /// **'Código de barras identifica o produto, não o preço. O preço vem da etiqueta lida (OCR), do seu histórico ou de você. Nada é adicionado sem confirmação, e o total do carrinho usa arredondamento de balança.'**
+  String get faq8a;
+
+  /// No description provided for @faq9q.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meus dados'**
+  String get faq9q;
+
+  /// No description provided for @faq9a.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tudo fica no aparelho, cifrado. Exporte backups em Mais → Exportar. Apague tudo em Privacidade.'**
+  String get faq9a;
+
+  /// No description provided for @featurePartOfPlus.
+  ///
+  /// In pt, this message translates to:
+  /// **'\"{feature}\" faz parte do Plus.'**
+  String featurePartOfPlus(String feature);
+
+  /// No description provided for @thanksSupport.
+  ///
+  /// In pt, this message translates to:
+  /// **'Plano {plan}. Obrigado por apoiar o SerenaCash.'**
+  String thanksSupport(String plan);
+
+  /// No description provided for @whatChanges.
+  ///
+  /// In pt, this message translates to:
+  /// **'O que muda'**
+  String get whatChanges;
+
+  /// No description provided for @limitsRow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Contas / cartões / orçamentos / metas'**
+  String get limitsRow;
+
+  /// No description provided for @unlimited.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ilimitados'**
+  String get unlimited;
+
+  /// No description provided for @ocrRow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Leitura de etiquetas (OCR)'**
+  String get ocrRow;
+
+  /// No description provided for @perMonthN.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n}/mês'**
+  String perMonthN(int n);
+
+  /// No description provided for @unlimitedF.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ilimitada'**
+  String get unlimitedF;
+
+  /// No description provided for @reportsPdfRow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Relatórios avançados e PDF'**
+  String get reportsPdfRow;
+
+  /// No description provided for @yes.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sim'**
+  String get yes;
+
+  /// No description provided for @ofxAttachRow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Importação OFX e anexos'**
+  String get ofxAttachRow;
+
+  /// No description provided for @priceHistoryRow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Histórico de preços por loja'**
+  String get priceHistoryRow;
+
+  /// No description provided for @syncRow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sincronização entre aparelhos'**
+  String get syncRow;
+
+  /// No description provided for @syncWhen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Assinatura (quando disponível)'**
+  String get syncWhen;
+
+  /// No description provided for @essentialFree.
+  ///
+  /// In pt, this message translates to:
+  /// **'O essencial (contas, lançamentos, 1 cartão, orçamentos, metas, listas e carrinho) é gratuito para sempre.'**
+  String get essentialFree;
+
+  /// No description provided for @recommended.
+  ///
+  /// In pt, this message translates to:
+  /// **'recomendado'**
+  String get recommended;
+
+  /// No description provided for @lifetimeDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pagamento único. Inclui tudo o que funciona no aparelho, para sempre. Não inclui serviços com custo recorrente (sincronização).'**
+  String get lifetimeDesc;
+
+  /// No description provided for @yearlyDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cobrado uma vez por ano. Cancele quando quiser na loja.'**
+  String get yearlyDesc;
+
+  /// No description provided for @monthlyDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cobrado mensalmente. Cancele quando quiser na loja.'**
+  String get monthlyDesc;
+
+  /// No description provided for @planCoverage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Abrangência do plano'**
+  String get planCoverage;
+
+  /// No description provided for @perYear.
+  ///
+  /// In pt, this message translates to:
+  /// **' / ano'**
+  String get perYear;
+
+  /// No description provided for @perMonthShort.
+  ///
+  /// In pt, this message translates to:
+  /// **' / mês'**
+  String get perMonthShort;
+
+  /// No description provided for @loadingPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Carregando preço da loja…'**
+  String get loadingPrice;
+
+  /// No description provided for @priceInStore.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preço e compra disponíveis na versão publicada nas lojas.'**
+  String get priceInStore;
+
+  /// No description provided for @restorePurchases.
+  ///
+  /// In pt, this message translates to:
+  /// **'Restaurar compras'**
+  String get restorePurchases;
+
+  /// No description provided for @manageSubscription.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gerenciar assinatura na loja'**
+  String get manageSubscription;
+
+  /// No description provided for @thanksActive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Obrigado! Seu plano está ativo.'**
+  String get thanksActive;
+
+  /// No description provided for @purchaseFailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compra não concluída.'**
+  String get purchaseFailed;
+
+  /// No description provided for @purchasesRestored.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compras restauradas.'**
+  String get purchasesRestored;
+
+  /// No description provided for @noPurchasesFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma compra encontrada nesta conta da loja.'**
+  String get noPurchasesFound;
+
+  /// No description provided for @restoreFailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não foi possível restaurar.'**
+  String get restoreFailed;
+
+  /// No description provided for @subscriptionTerms.
+  ///
+  /// In pt, this message translates to:
+  /// **'Assinaturas renovam automaticamente até serem canceladas na App Store ou no Google Play. Reembolsos seguem as políticas das lojas. Termos e privacidade: Mais → Privacidade.'**
+  String get subscriptionTerms;
+
+  /// No description provided for @storeProcesses.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pagamento processado pela loja; não vemos seus dados de pagamento.'**
+  String get storeProcesses;
+
+  /// No description provided for @plusFeaturesList.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recursos do Plus: {list}'**
+  String plusFeaturesList(String list);
+
+  /// No description provided for @stayFree.
+  ///
+  /// In pt, this message translates to:
+  /// **'Continuar no gratuito'**
+  String get stayFree;
+
+  /// No description provided for @notFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não encontrado'**
+  String get notFound;
 }
 
 class _AppLocalizationsDelegate
