@@ -157,7 +157,8 @@ export function formatBRL(value: Cents, opts: FormatOptions = {}): string {
     const symbol = formatter(locale, currency).formatToParts(0).find((p) => p.type === 'currency')?.value ?? currency;
     return `${symbol} ••••`;
   }
-  return formatter(locale, currency).format(assertCents(value) / 100);
+  const v = assertCents(value);
+  return formatter(locale, currency).format((v === 0 ? 0 : v) / 100); // normalizes -0
 }
 
 /** Alias: formats any currency using locale; BRL by default. */

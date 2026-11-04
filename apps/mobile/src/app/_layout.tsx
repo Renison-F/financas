@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useMemo, useState } from 'react';
-import { Platform, View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
@@ -10,14 +10,13 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ThemeProvider, PrivacyProvider, useTheme, palette } from '../design';
 import { useAppStore } from '../state/appStore';
 import { DataStore } from '../data/store';
-import { MemoryDatabase } from '../data/memoryDatabase';
+import { SQLiteDatabase } from '../data/sqliteDatabase';
 import { UndoToast } from '../features/shared/UndoToast';
 
 void SplashScreen.preventAutoHideAsync().catch(() => {});
 
 async function openDatabase() {
-  if (Platform.OS === 'web') return new MemoryDatabase(); // web preview only; real persistence is SQLite on device
-  const { SQLiteDatabase } = await import('../data/sqliteDatabase');
+  // sqliteDatabase.native.ts uses expo-sqlite; sqliteDatabase.web.ts falls back to memory (preview only).
   return SQLiteDatabase.open();
 }
 

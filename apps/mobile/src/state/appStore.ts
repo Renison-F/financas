@@ -7,6 +7,7 @@ import { DEFAULT_CATEGORIES } from './seed';
 import { newId } from './ids';
 
 export type LoadState = 'idle' | 'loading' | 'ready' | 'error';
+export type LoosePartial<T> = { [K in keyof T]?: T[K] | undefined };
 
 export interface UndoAction { label: string; run: () => Promise<void>; }
 
@@ -32,17 +33,17 @@ export interface AppState {
   setLayout: (layout: DashboardLayout) => Promise<void>;
   completeOnboarding: () => Promise<void>;
 
-  saveAccount: (a: Partial<Account> & Pick<Account, 'name'>) => Promise<Account>;
+  saveAccount: (a: LoosePartial<Account> & Pick<Account, 'name'>) => Promise<Account>;
   archiveAccount: (id: string, archived?: boolean) => Promise<void>;
   deleteAccount: (id: string) => Promise<{ ok: boolean; reason?: string }>;
   adjustBalance: (accountId: string, newBalanceCents: number, date: string) => Promise<void>;
-  saveCategory: (c: Partial<Category> & Pick<Category, 'name' | 'kind'>) => Promise<Category>;
-  saveTag: (t: Partial<Tag> & Pick<Tag, 'name'>) => Promise<Tag>;
-  saveCard: (c: Partial<CreditCard> & Pick<CreditCard, 'name' | 'limitCents' | 'closingDay' | 'dueDay'>) => Promise<CreditCard>;
-  saveBudget: (b: Partial<Budget> & Pick<Budget, 'limitCents'>) => Promise<Budget>;
+  saveCategory: (c: LoosePartial<Category> & Pick<Category, 'name' | 'kind'>) => Promise<Category>;
+  saveTag: (t: LoosePartial<Tag> & Pick<Tag, 'name'>) => Promise<Tag>;
+  saveCard: (c: LoosePartial<CreditCard> & Pick<CreditCard, 'name' | 'limitCents' | 'closingDay' | 'dueDay'>) => Promise<CreditCard>;
+  saveBudget: (b: LoosePartial<Budget> & Pick<Budget, 'limitCents'>) => Promise<Budget>;
   deleteBudget: (id: string) => Promise<void>;
-  saveGoal: (g: Partial<Goal> & Pick<Goal, 'name' | 'targetCents'>) => Promise<Goal>;
-  saveLoan: (l: Partial<Loan> & Pick<Loan, 'name' | 'principalCents' | 'monthlyRatePercent' | 'termMonths' | 'firstDueDate'>, opts?: { registerDisbursement?: boolean; createInstallments?: boolean }) => Promise<Loan>;
+  saveGoal: (g: LoosePartial<Goal> & Pick<Goal, 'name' | 'targetCents'>) => Promise<Goal>;
+  saveLoan: (l: LoosePartial<Loan> & Pick<Loan, 'name' | 'principalCents' | 'monthlyRatePercent' | 'termMonths' | 'firstDueDate'>, opts?: { registerDisbursement?: boolean; createInstallments?: boolean }) => Promise<Loan>;
 
   saveTransaction: (t: TransactionInput) => Promise<Transaction[]>;
   settleTransaction: (id: string, opts?: { paidCents?: number; date?: string }) => Promise<void>;
@@ -62,8 +63,6 @@ export interface AppState {
   eraseEverything: () => Promise<void>;
 }
 
-export type LoosePartial<T> = { [K in keyof T]?: T[K] | undefined };
-
 export interface TransactionInput extends LoosePartial<Transaction> {
   kind: Transaction['kind'];
   amountCents: number;
@@ -76,7 +75,8 @@ export interface TransactionInput extends LoosePartial<Transaction> {
 
 const nowISO = () => new Date().toISOString();
 /** Removes keys whose value is undefined so they do not override defaults when spread. */
-const compact = <T extends object>(o: T): Partial<T> => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined)) as Partial<T>;
+type Compact<T> = { [K in keyof T]?: Exclude<T[K], undefined> };
+const compact = <T extends object>(o: T): Compact<T> => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined)) as Compact<T>;
 const stamp = <T extends object>(x: T): T & { createdAt: string; updatedAt: string } => ({ createdAt: nowISO(), updatedAt: nowISO(), ...x });
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -106,7 +106,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   async saveAccount(a) {
     const existing = a.id ? get().ledger.accounts.find((x) => x.id === a.id) : undefined;
-    const acc: Account = stamp({ id: newId(), type: 'checking', currency: get().ledger.prefs.currency, openingBalanceCents: 0, openingDate: get().today(), color: '#0B5563', archived: false, includeInAvailability: true, sortOrder: get().ledger.accounts.length, ...existing, ...a });
+    const acc = stamp({ id: newId(), type: 'checking', currency: get().ledger.prefs.currency, openingBalanceCents: 0, openingDate: get().today(), color: '#0B5563', archived: false, includeInAvailability: true, sortOrder: get().ledger.accounts.length, ...existing, ...a }) as Account;
     await get().store!.accounts.upsert(acc); await get().reload(); return acc;
   },
   async archiveAccount(id, archived = true) { const a = get().ledger.accounts.find((x) => x.id === id); if (a) { await get().store!.accounts.upsert({ ...a, archived }); await get().reload(); } },
@@ -121,14 +121,14 @@ export const useAppStore = create<AppState>((set, get) => ({
     if (diff === 0) return;
     await get().saveTransaction({ kind: 'balance_adjustment', amountCents: Math.abs(diff), date, description: 'Ajuste de saldo', status: 'settled', ...(diff > 0 ? { toAccountId: accountId } : { accountId }) });
   },
-  async saveCategory(c) { const cat: Category = stamp({ id: newId(), icon: 'tag', color: '#4F5E61', archived: false, sortOrder: get().ledger.categories.length, ...get().ledger.categories.find((x) => x.id === c.id), ...c }); await get().store!.categories.upsert(cat); await get().reload(); return cat; },
-  async saveTag(t) { const tag: Tag = stamp({ id: newId(), color: '#4F5E61', ...get().ledger.tags.find((x) => x.id === t.id), ...t }); await get().store!.tags.upsert(tag); await get().reload(); return tag; },
-  async saveCard(c) { const card: CreditCard = stamp({ id: newId(), color: '#0B5563', archived: false, currency: get().ledger.prefs.currency, ...get().ledger.cards.find((x) => x.id === c.id), ...c }); await get().store!.cards.upsert(card); await get().reload(); return card; },
-  async saveBudget(b) { const budget: Budget = stamp({ id: newId(), rollover: false, ...get().ledger.budgets.find((x) => x.id === b.id), ...b }); await get().store!.budgets.upsert(budget); await get().reload(); return budget; },
+  async saveCategory(c) { const cat = stamp({ id: newId(), icon: 'tag', color: '#4F5E61', archived: false, sortOrder: get().ledger.categories.length, ...get().ledger.categories.find((x) => x.id === c.id), ...compact(c) }) as Category; await get().store!.categories.upsert(cat); await get().reload(); return cat; },
+  async saveTag(t) { const tag = stamp({ id: newId(), color: '#4F5E61', ...get().ledger.tags.find((x) => x.id === t.id), ...compact(t) }) as Tag; await get().store!.tags.upsert(tag); await get().reload(); return tag; },
+  async saveCard(c) { const card = stamp({ id: newId(), color: '#0B5563', archived: false, currency: get().ledger.prefs.currency, ...get().ledger.cards.find((x) => x.id === c.id), ...compact(c) }) as CreditCard; await get().store!.cards.upsert(card); await get().reload(); return card; },
+  async saveBudget(b) { const budget = stamp({ id: newId(), rollover: false, ...get().ledger.budgets.find((x) => x.id === b.id), ...compact(b) }) as Budget; await get().store!.budgets.upsert(budget); await get().reload(); return budget; },
   async deleteBudget(id) { await get().store!.budgets.softDelete(id); await get().reload(); },
-  async saveGoal(g) { const goal: Goal = stamp({ id: newId(), kind: 'savings', reserved: true, color: '#0B5563', archived: false, ...get().ledger.goals.find((x) => x.id === g.id), ...g }); await get().store!.goals.upsert(goal); await get().reload(); return goal; },
+  async saveGoal(g) { const goal = stamp({ id: newId(), kind: 'savings', reserved: true, color: '#0B5563', archived: false, ...get().ledger.goals.find((x) => x.id === g.id), ...compact(g) }) as Goal; await get().store!.goals.upsert(goal); await get().reload(); return goal; },
   async saveLoan(l, opts = {}) {
-    const loan: Loan = stamp({ id: newId(), system: 'price', monthlyFeeCents: 0, upfrontFeesCents: 0, archived: false, ...get().ledger.loans.find((x) => x.id === l.id), ...l });
+    const loan = stamp({ id: newId(), system: 'price', monthlyFeeCents: 0, upfrontFeesCents: 0, archived: false, ...get().ledger.loans.find((x) => x.id === l.id), ...compact(l) }) as Loan;
     const store = get().store!;
     await store.db.withTransactionAsync(async () => {
       await store.loans.upsert(loan);
@@ -144,8 +144,8 @@ export const useAppStore = create<AppState>((set, get) => ({
   async saveTransaction(input) {
     const store = get().store!;
     const { installments, recurrence, ...rest } = input;
-    const clean = compact(rest) as Partial<Transaction> & Pick<Transaction, 'kind' | 'amountCents' | 'date'>;
-    const base: Transaction = stamp({ id: newId(), currency: get().ledger.prefs.currency, description: '', status: 'settled', tags: [], attachments: [], ...get().ledger.transactions.find((x) => x.id === clean.id), ...clean });
+    const clean = compact(rest) as Compact<Transaction> & Pick<Transaction, 'kind' | 'amountCents' | 'date'>;
+    const base = stamp({ id: newId(), currency: get().ledger.prefs.currency, description: '', status: 'settled', tags: [], attachments: [], ...get().ledger.transactions.find((x) => x.id === clean.id), ...clean }) as Transaction;
     if (!Number.isSafeInteger(base.amountCents) || base.amountCents <= 0) throw new Error('Informe um valor maior que zero.');
     if (base.kind === 'transfer' && (!base.accountId || !base.toAccountId || base.accountId === base.toAccountId)) throw new Error('Escolha duas contas diferentes.');
     if (base.kind === 'card_purchase' && !base.cardId) throw new Error('Escolha o cartão.');

@@ -8,7 +8,8 @@ import { Screen, Card, CardHeader, Text, Button, ListRow, Money, EmptyState, spa
 import { useAppStore } from '../../state/appStore';
 
 export default function ShoppingTab() {
-  const lists = useAppStore((s) => s.shoppingLists.filter((l) => !l.archived));
+  const allLists = useAppStore((s) => s.shoppingLists);
+  const lists = allLists.filter((l) => !l.archived);
   const sessions = useAppStore((s) => s.sessions);
   const router = useRouter();
   const insets = useSafeAreaInsets();

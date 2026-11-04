@@ -11,7 +11,8 @@ import { DraggableList } from '../features/dashboard/DraggableList';
 export default function CustomizeScreen() {
   const saved = useAppStore((s) => s.layout);
   const setLayout = useAppStore((s) => s.setLayout);
-  const accounts = useAppStore((s) => s.ledger.accounts.filter((a) => !a.archived));
+  const allAccounts = useAppStore((s) => s.ledger.accounts);
+  const accounts = allAccounts.filter((a) => !a.archived);
   const [layout, setLocal] = useState<DashboardLayout>(saved);
   const router = useRouter();
   const c = useColors();

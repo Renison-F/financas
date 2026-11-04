@@ -73,7 +73,7 @@ export default function TransactionScreen() {
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1, backgroundColor: c.bg, paddingTop: Platform.OS === 'ios' ? spacing.sm : insets.top }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: spacing.md, paddingVertical: spacing.xs }}>
         <Button title="Cancelar" variant="ghost" onPress={() => router.back()} />
-        <Text role="title" numberOfLines={1} style={{ flex: 1, textAlign: 'center' }}>{title}</Text>
+        <Text role="title" numberOfLines={1} style={{ flex: 1, textAlign: 'center', fontSize: 17 }}>{title}</Text>
         {editable ? <Button title="Salvar" variant="ghost" onPress={() => void onSave()} loading={saving} testID="save-transaction" /> : <View style={{ width: 90 }} />}
       </View>
       <SheetScroll>

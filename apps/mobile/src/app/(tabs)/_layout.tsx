@@ -14,7 +14,7 @@ const TABS: { name: string; title: string; icon: IconName }[] = [
 export default function TabsLayout() {
   const { colors } = useTheme();
   return (
-    <Tabs screenOptions={{ headerShown: false, tabBarActiveTintColor: colors.primary, tabBarInactiveTintColor: colors.textMuted, tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border, height: Platform.OS === 'ios' ? 84 : 64, paddingTop: 6 }, tabBarLabelStyle: { fontSize: 11, fontWeight: '500' } }}>
+    <Tabs screenOptions={{ headerShown: false, tabBarActiveTintColor: colors.primary, tabBarInactiveTintColor: colors.textMuted, tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border, height: Platform.OS === 'ios' ? 84 : 64, paddingTop: 6 }, tabBarLabelStyle: { fontSize: 10, fontWeight: '500' } }}>
       {TABS.map((t) => (
         <Tabs.Screen key={t.name} name={t.name} options={{ title: t.title, tabBarIcon: ({ color, focused }) => <Icon name={t.icon} color={String(color)} filled={focused && t.icon === 'home'} /> }} />
       ))}
