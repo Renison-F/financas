@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Prepara um PC Windows para desenvolver, compilar, executar e testar o SerenaCash (Flutter).
 
@@ -47,7 +47,8 @@ $script:LogFile = Join-Path $OutputDir ("setup-" + $script:StartedAt.ToString('y
 
 function Log { param([string]$Message, [string]$Level = 'INFO')
   $line = "[{0}] [{1}] {2}" -f (Get-Date -Format 'HH:mm:ss'), $Level, $Message
-  Write-Host $line -ForegroundColor @{INFO='Gray';OK='Green';WARN='Yellow';ERR='Red';STEP='Cyan'}[$Level]
+  $colors = @{ INFO = 'Gray'; OK = 'Green'; WARN = 'Yellow'; ERR = 'Red'; STEP = 'Cyan' }
+  Write-Host $line -ForegroundColor $colors[$Level]
   Add-Content -Path $script:LogFile -Value $line
 }
 function Step { param([string]$Title) Write-Host ''; Log "== $Title" 'STEP' }
@@ -299,8 +300,18 @@ else {
 } finally {
 # ---------------------------------------------------------------- 14. Relatorio
 $report = Join-Path $OutputDir 'relatorio-setup.md'
-$lines = @("# SerenaCash — relatorio de preparacao do ambiente Windows", "", ("Executado em {0} em {1}" -f $script:StartedAt, $env:COMPUTERNAME), "", "| Etapa | Resultado |", "|---|---|")
-foreach ($k in $script:Results.Keys) { $lines += ("| {0} | {1} |" -f $k, ($script:Results[$k] -replace '\|','/')) }
+$lines = @()
+$lines += '# SerenaCash - relatorio de preparacao do ambiente Windows'
+$lines += ''
+$lines += ('Executado em ' + $script:StartedAt.ToString() + ' em ' + $env:COMPUTERNAME)
+$lines += ''
+$lines += '| Etapa | Resultado |'
+$lines += '|---|---|'
+foreach ($k in $script:Results.Keys) {
+  $value = [string]$script:Results[$k]
+  $value = $value.Replace('|', '/')
+  $lines += ('| ' + $k + ' | ' + $value + ' |')
+}
 $lines += @("", "Log completo: $script:LogFile", "flutter doctor: $(Join-Path $OutputDir 'flutter-doctor.txt')", "Testes: $(Join-Path $OutputDir 'flutter-test.txt')")
 Set-Content -Path $report -Value $lines -Encoding UTF8
 Write-Host ''; Log "Relatorio: $report" 'STEP'
