@@ -70,3 +70,11 @@ Flutter **não** lê o banco do app React Native (sandbox e esquema diferentes).
 
 ## ADR-09 Segurança (resumo; detalhes em 06-SEGURANCA.md)
 Banco local cifrado (SQLCipher via sqlite3 3.x) com chave aleatória no Keystore/Keychain; backups com criptografia autenticada (AES-GCM com chave derivada por Argon2id/PBKDF2 de senha do usuário); PIN armazenado apenas como verificador derivado; biometria como gate de UI; sem dados em logs; FLAG_SECURE/ocultação em recents opcional; direitos comerciais só a partir do provedor com cache assinado localmente e expiração.
+
+## ADR-10 SQLCipher via hooks do `package:sqlite3` (decidido em M3)
+`sqlite3_flutter_libs`/`sqlcipher_flutter_libs` estão EOL; a partir do `sqlite3` 3.x o binário nativo é
+resolvido por hook de build (`hooks.user_defines.sqlite3.source: sqlcipher` no `pubspec.yaml`), que
+baixa a build SQLCipher community para cada plataforma. Validado nesta sessão: `PRAGMA cipher_version`
+= `4.19.0 community` nos testes Linux. Consequências: licença SQLCipher community (BSD-style) e
+OpenSSL no Android/Linux/Windows; build offline exige espelho via `url_pattern`. Alternativa avaliada
+e mantida como fallback documentado: SQLite3MultipleCiphers (`source: sqlite3mc`).

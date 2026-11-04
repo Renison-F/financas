@@ -18,8 +18,13 @@
 M2 concluído: 22 fixtures / 272 casos TS reproduzidos, 279 testes Dart verdes, `flutter analyze` sem
 issues, `dart format` sem alterações. Detalhes e divergências em `02-EQUIVALENCIA_DOMINIO.md`.
 
+## Progresso M3 (persistência) — concluído
+- Ports do domínio em `lib/domain/ports/` (ledger, shopping, prefs, change log, auth, sync, backup em nuvem, direitos, família, clock/ids).
+- Esquema Drift v1 (23 tabelas, CHECK/FK/índices, dump em `drift_schemas/`), repositórios, change log, conflitos, relatórios de importação.
+- SQLCipher 4.19 via hook do `sqlite3` (fail-closed), chave no Keystore, PIN Argon2id, backup AES-256-GCM + Argon2id, importação v1/cifrada/legado.
+- Gates: `flutter analyze` sem issues, `dart format` sem alterações, `flutter test` 305 verdes.
+
 ## Próximos passos
-1. M3: esquema Drift relacional (constraints/índices), repositórios implementando as portas do domínio,
-   migrações, SQLCipher via `sqlite3` 3.x, backup cifrado autenticado, importadores versionados.
-2. M4–M6: design system, navegação, dashboard, módulos, relatórios, ferramentas.
+1. M4: tema (claro/escuro/sistema por DESIGN.md), DI Riverpod (`lib/app/di.dart`), GoRouter com 5 abas, onboarding, bloqueio PIN/biometria.
+2. M5–M6: dashboard 24 widgets, módulos financeiros, relatórios, importação/exportação, configurações.
 3. M7–M10: compras com câmera/OCR, RevenueCat, segurança/performance, release.

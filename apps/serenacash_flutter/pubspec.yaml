@@ -66,3 +66,9 @@ flutter:
   assets:
     - assets/brand/
     - assets/fixtures/
+
+# Banco cifrado: o hook nativo do package:sqlite3 baixa a build SQLCipher (community edition).
+hooks:
+  user_defines:
+    sqlite3:
+      source: sqlcipher
