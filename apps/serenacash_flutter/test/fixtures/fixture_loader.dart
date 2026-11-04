@@ -13,14 +13,23 @@ class FixtureCase {
 }
 
 List<FixtureCase> loadFixtures(String name) {
-  final candidates = ['../../docs/flutter-migration/fixtures/$name.json', 'docs/flutter-migration/fixtures/$name.json', 'assets/fixtures/$name.json'];
+  final candidates = [
+    '../../docs/flutter-migration/fixtures/$name.json',
+    'docs/flutter-migration/fixtures/$name.json',
+    'assets/fixtures/$name.json',
+  ];
   for (final c in candidates) {
     final f = File(c);
     if (f.existsSync()) {
       final json = jsonDecode(f.readAsStringSync()) as Map<String, dynamic>;
       return (json['cases'] as List<dynamic>).map((e) {
         final m = e as Map<String, dynamic>;
-        return FixtureCase(m['name'] as String, m['input'], m['expected'], (m['note'] as String?) ?? '');
+        return FixtureCase(
+          m['name'] as String,
+          m['input'],
+          m['expected'],
+          (m['note'] as String?) ?? '',
+        );
       }).toList();
     }
   }

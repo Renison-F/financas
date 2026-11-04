@@ -23,7 +23,10 @@ final _monthRe = RegExp(r'^\d{4}-\d{2}$');
 bool isISODate(Object? s) {
   if (s is! String || !_isoRe.hasMatch(s)) return false;
   final p = parts(s);
-  return p.month >= 1 && p.month <= 12 && p.day >= 1 && p.day <= daysInMonth(p.year, p.month);
+  return p.month >= 1 &&
+      p.month <= 12 &&
+      p.day >= 1 &&
+      p.day <= daysInMonth(p.year, p.month);
 }
 
 bool isMonthKey(Object? s) {
@@ -32,13 +35,19 @@ bool isMonthKey(Object? s) {
   return m >= 1 && m <= 12;
 }
 
-DateParts parts(ISODate date) => DateParts(int.parse(date.substring(0, 4)), int.parse(date.substring(5, 7)), int.parse(date.substring(8, 10)));
+DateParts parts(ISODate date) => DateParts(
+  int.parse(date.substring(0, 4)),
+  int.parse(date.substring(5, 7)),
+  int.parse(date.substring(8, 10)),
+);
 
 String _pad(int n) => n.toString().padLeft(2, '0');
 
-ISODate fromParts(int year, int month, int day) => '$year-${_pad(month)}-${_pad(day)}';
+ISODate fromParts(int year, int month, int day) =>
+    '$year-${_pad(month)}-${_pad(day)}';
 
-int clampDay(int year, int month, int day) => day.clamp(1, daysInMonth(year, month));
+int clampDay(int year, int month, int day) =>
+    day.clamp(1, daysInMonth(year, month));
 
 MonthKey monthKeyOf(ISODate date) => date.substring(0, 7);
 MonthKey monthKey(int year, int month) => '$year-${_pad(month)}';
@@ -65,11 +74,13 @@ ISODate addMonthsClamped(ISODate date, int months, [int? anchorDay]) {
   return fromParts(y, m, clampDay(y, m, anchorDay ?? p.day));
 }
 
-MonthKey addMonthsToKey(MonthKey key, int months) => monthKeyOf(addMonthsClamped(startOfMonth(key), months));
+MonthKey addMonthsToKey(MonthKey key, int months) =>
+    monthKeyOf(addMonthsClamped(startOfMonth(key), months));
 
 int _toEpochDay(ISODate date) {
   final p = parts(date);
-  return DateTime.utc(p.year, p.month, p.day).millisecondsSinceEpoch ~/ 86400000;
+  return DateTime.utc(p.year, p.month, p.day).millisecondsSinceEpoch ~/
+      86400000;
 }
 
 ISODate _fromEpochDay(int n) {
@@ -77,7 +88,8 @@ ISODate _fromEpochDay(int n) {
   return fromParts(d.year, d.month, d.day);
 }
 
-ISODate addDays(ISODate date, int days) => _fromEpochDay(_toEpochDay(date) + days);
+ISODate addDays(ISODate date, int days) =>
+    _fromEpochDay(_toEpochDay(date) + days);
 int diffDays(ISODate from, ISODate to) => _toEpochDay(to) - _toEpochDay(from);
 int compareISO(ISODate a, ISODate b) => a.compareTo(b).sign;
 
@@ -96,9 +108,12 @@ ISODate todayISO([Clock clock = systemClock]) {
   return fromParts(d.year, d.month, d.day);
 }
 
-MonthKey currentMonthKey([Clock clock = systemClock]) => monthKeyOf(todayISO(clock));
+MonthKey currentMonthKey([Clock clock = systemClock]) =>
+    monthKeyOf(todayISO(clock));
 
-List<MonthKey> lastMonthKeys(MonthKey endKey, int n) => [for (var i = n - 1; i >= 0; i--) addMonthsToKey(endKey, -i)];
+List<MonthKey> lastMonthKeys(MonthKey endKey, int n) => [
+  for (var i = n - 1; i >= 0; i--) addMonthsToKey(endKey, -i),
+];
 
 List<MonthKey> monthKeysBetween(MonthKey startKey, MonthKey endKey) {
   final out = <MonthKey>[];

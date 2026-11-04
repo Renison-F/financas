@@ -3,7 +3,17 @@
 library;
 
 class ChangeRecord {
-  const ChangeRecord({required this.id, required this.entityType, required this.entityId, required this.op, this.payload, required this.version, required this.deviceId, required this.at, required this.synced});
+  const ChangeRecord({
+    required this.id,
+    required this.entityType,
+    required this.entityId,
+    required this.op,
+    this.payload,
+    required this.version,
+    required this.deviceId,
+    required this.at,
+    required this.synced,
+  });
   final String id;
   final String entityType;
   final String entityId;
@@ -16,23 +26,47 @@ class ChangeRecord {
 }
 
 class Conflict {
-  const Conflict({required this.entityType, required this.entityId, required this.local, required this.remote, required this.fields, required this.detectedAt});
+  const Conflict({
+    required this.entityType,
+    required this.entityId,
+    required this.local,
+    required this.remote,
+    required this.fields,
+    required this.detectedAt,
+  });
   final String entityType;
   final String entityId;
   final Map<String, dynamic> local;
   final Map<String, dynamic> remote;
   final List<String> fields;
   final String detectedAt;
-  Map<String, dynamic> toJson() => {'entityType': entityType, 'entityId': entityId, 'local': local, 'remote': remote, 'fields': fields, 'detectedAt': detectedAt};
+  Map<String, dynamic> toJson() => {
+    'entityType': entityType,
+    'entityId': entityId,
+    'local': local,
+    'remote': remote,
+    'fields': fields,
+    'detectedAt': detectedAt,
+  };
 }
 
 /// Port for a future transport (Firestore, REST over PostgreSQL…). No implementation ships in v1.
 abstract interface class SyncTransport {
-  Future<({List<String> accepted, List<({String id, String reason})> rejected})> push(List<ChangeRecord> changes);
-  Future<({List<ChangeRecord> changes, String cursor})> pull(String? sinceCursor);
+  Future<({List<String> accepted, List<({String id, String reason})> rejected})>
+  push(List<ChangeRecord> changes);
+  Future<({List<ChangeRecord> changes, String cursor})> pull(
+    String? sinceCursor,
+  );
 }
 
-const monetaryFields = {'amountCents', 'paidCents', 'openingBalanceCents', 'limitCents', 'targetCents', 'principalCents'};
+const monetaryFields = {
+  'amountCents',
+  'paidCents',
+  'openingBalanceCents',
+  'limitCents',
+  'targetCents',
+  'principalCents',
+};
 
 bool _deepEq(Object? a, Object? b) {
   if (a is Map && b is Map) {
@@ -54,7 +88,14 @@ bool _deepEq(Object? a, Object? b) {
 
 /// Last-writer-wins per field by `updatedAt`, EXCEPT monetary fields and status, which produce a Conflict
 /// when both sides changed them differently since the common base (local value kept until the user decides).
-({Map<String, dynamic> merged, Conflict? conflict}) mergeEntity(Map<String, dynamic>? base, Map<String, dynamic> local, Map<String, dynamic> remote, String entityType, String entityId, String now) {
+({Map<String, dynamic> merged, Conflict? conflict}) mergeEntity(
+  Map<String, dynamic>? base,
+  Map<String, dynamic> local,
+  Map<String, dynamic> remote,
+  String entityType,
+  String entityId,
+  String now,
+) {
   final merged = <String, dynamic>{...remote, ...local};
   final conflictFields = <String>[];
   for (final k in {...local.keys, ...remote.keys}) {
@@ -73,8 +114,26 @@ bool _deepEq(Object? a, Object? b) {
       conflictFields.add(k);
       merged[k] = lv;
     } else {
-      merged[k] = (local['updatedAt']?.toString() ?? '').compareTo(remote['updatedAt']?.toString() ?? '') >= 0 ? lv : rv;
+      merged[k] =
+          (local['updatedAt']?.toString() ?? '').compareTo(
+                remote['updatedAt']?.toString() ?? '',
+              ) >=
+              0
+          ? lv
+          : rv;
     }
   }
-  return (merged: merged, conflict: conflictFields.isEmpty ? null : Conflict(entityType: entityType, entityId: entityId, local: local, remote: remote, fields: conflictFields, detectedAt: now));
+  return (
+    merged: merged,
+    conflict: conflictFields.isEmpty
+        ? null
+        : Conflict(
+            entityType: entityType,
+            entityId: entityId,
+            local: local,
+            remote: remote,
+            fields: conflictFields,
+            detectedAt: now,
+          ),
+  );
 }

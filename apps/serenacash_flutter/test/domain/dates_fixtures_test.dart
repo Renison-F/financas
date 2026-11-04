@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:serenacash/domain/dates/dates.dart';
+
 import '../fixtures/fixture_loader.dart';
 
 void main() {
@@ -9,7 +10,11 @@ void main() {
         final i = c.inputMap;
         dynamic actual;
         if (c.name.startsWith('addMonthsClamped')) {
-          actual = addMonthsClamped(i['date'] as String, i['months'] as int, i['anchorDay'] as int?);
+          actual = addMonthsClamped(
+            i['date'] as String,
+            i['months'] as int,
+            i['anchorDay'] as int?,
+          );
         } else if (c.name.startsWith('addDays')) {
           actual = addDays(i['date'] as String, i['days'] as int);
         } else if (c.name.startsWith('daysInMonth')) {
@@ -27,7 +32,11 @@ void main() {
         } else {
           fail('unmapped fixture ${c.name}');
         }
-        expect(jsonEquals(actual, c.expected), isTrue, reason: 'expected ${c.expected} got $actual');
+        expect(
+          jsonEquals(actual, c.expected),
+          isTrue,
+          reason: 'expected ${c.expected} got $actual',
+        );
       });
     }
   });
@@ -36,7 +45,11 @@ void main() {
     expect(isISODate('2024-02-29'), isTrue);
     expect(isMonthKey('2026-13'), isFalse);
     expect(todayISO(() => DateTime(2026, 11, 4, 23, 59)), '2026-11-04');
-    expect(monthKeysBetween('2026-11', '2027-01'), ['2026-11', '2026-12', '2027-01']);
+    expect(monthKeysBetween('2026-11', '2027-01'), [
+      '2026-11',
+      '2026-12',
+      '2027-01',
+    ]);
     expect(addMonthsClamped('2026-01-15', -13), '2024-12-15');
   });
 }

@@ -6,7 +6,11 @@ import '../entities/entities.dart';
 import '../text/normalize.dart';
 import 'csv.dart';
 
-String _norm(String s) => normalizeText(s).replaceAll(RegExp(r'[^a-z0-9 ]+'), ' ').replaceAll(RegExp(r'\s+'), ' ').trim();
+String _norm(String s) =>
+    normalizeText(s)
+        .replaceAll(RegExp(r'[^a-z0-9 ]+'), ' ')
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .trim();
 
 /// Jaccard similarity on word tokens.
 double textSimilarity(String a, String b) {
@@ -18,22 +22,46 @@ double textSimilarity(String a, String b) {
 }
 
 class DuplicateMatch {
-  const DuplicateMatch({required this.candidateIndex, required this.existingId, required this.reason, required this.score});
+  const DuplicateMatch({
+    required this.candidateIndex,
+    required this.existingId,
+    required this.reason,
+    required this.score,
+  });
   final int candidateIndex;
   final String existingId;
   final String reason; // external_ref | exact | similar
   final double score;
-  Map<String, dynamic> toJson() => {'candidateIndex': candidateIndex, 'existingId': existingId, 'reason': reason, 'score': score};
+  Map<String, dynamic> toJson() => {
+    'candidateIndex': candidateIndex,
+    'existingId': existingId,
+    'reason': reason,
+    'score': score,
+  };
 }
 
-List<DuplicateMatch> findDuplicates(Ledger ledger, List<ImportCandidate> candidates, [List<Transaction>? existingList]) {
+List<DuplicateMatch> findDuplicates(
+  Ledger ledger,
+  List<ImportCandidate> candidates, [
+  List<Transaction>? existingList,
+]) {
   final existing = existingList ?? ledger.transactions;
   final out = <DuplicateMatch>[];
-  final byRef = {for (final t in existing) if (t.externalRef != null) t.externalRef!: t};
+  final byRef = {
+    for (final t in existing)
+      if (t.externalRef != null) t.externalRef!: t,
+  };
   for (var i = 0; i < candidates.length; i++) {
     final c = candidates[i];
     if (c.externalRef != null && byRef.containsKey(c.externalRef)) {
-      out.add(DuplicateMatch(candidateIndex: i, existingId: byRef[c.externalRef]!.id, reason: 'external_ref', score: 1));
+      out.add(
+        DuplicateMatch(
+          candidateIndex: i,
+          existingId: byRef[c.externalRef]!.id,
+          reason: 'external_ref',
+          score: 1,
+        ),
+      );
       continue;
     }
     if (c.problems.isNotEmpty) continue;
@@ -46,9 +74,19 @@ List<DuplicateMatch> findDuplicates(Ledger ledger, List<ImportCandidate> candida
       final sim = textSimilarity(t.description, c.description);
       DuplicateMatch? m;
       if (days == 0 && sim >= 0.6) {
-        m = DuplicateMatch(candidateIndex: i, existingId: t.id, reason: 'exact', score: 0.9 + sim / 10);
+        m = DuplicateMatch(
+          candidateIndex: i,
+          existingId: t.id,
+          reason: 'exact',
+          score: 0.9 + sim / 10,
+        );
       } else if (sim >= 0.8) {
-        m = DuplicateMatch(candidateIndex: i, existingId: t.id, reason: 'similar', score: 0.7 + sim / 10 - days * 0.05);
+        m = DuplicateMatch(
+          candidateIndex: i,
+          existingId: t.id,
+          reason: 'similar',
+          score: 0.7 + sim / 10 - days * 0.05,
+        );
       }
       if (m != null && (best == null || m.score > best.score)) best = m;
     }
@@ -60,7 +98,14 @@ List<DuplicateMatch> findDuplicates(Ledger ledger, List<ImportCandidate> candida
     final key = '${c.date}|${c.amountCents}|${c.kind}|${_norm(c.description)}';
     final first = seen[key];
     if (first != null && !out.any((m) => m.candidateIndex == i)) {
-      out.add(DuplicateMatch(candidateIndex: i, existingId: 'batch:$first', reason: 'exact', score: 0.95));
+      out.add(
+        DuplicateMatch(
+          candidateIndex: i,
+          existingId: 'batch:$first',
+          reason: 'exact',
+          score: 0.95,
+        ),
+      );
     } else {
       seen.putIfAbsent(key, () => i);
     }

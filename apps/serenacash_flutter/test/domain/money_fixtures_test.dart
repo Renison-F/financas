@@ -1,8 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:serenacash/domain/money/money.dart';
+
 import '../fixtures/fixture_loader.dart';
 
-RoundingMode _mode(String s) => switch (s) { 'half-up' => RoundingMode.halfUp, 'down' => RoundingMode.down, _ => RoundingMode.halfEven };
+RoundingMode _mode(String s) => switch (s) {
+  'half-up' => RoundingMode.halfUp,
+  'down' => RoundingMode.down,
+  _ => RoundingMode.halfEven,
+};
 
 void main() {
   group('money fixtures (TypeScript equivalence)', () {
@@ -13,13 +18,27 @@ void main() {
         if (c.name.startsWith('cents ')) {
           actual = cents((i['amount'] as num).toDouble());
         } else if (c.name.startsWith('mul ')) {
-          actual = mulCents(i['cents'] as int, (i['factor'] as num).toDouble(), _mode(i['mode'] as String));
+          actual = mulCents(
+            i['cents'] as int,
+            (i['factor'] as num).toDouble(),
+            _mode(i['mode'] as String),
+          );
         } else if (c.name.startsWith('div ')) {
-          actual = divCents(i['cents'] as int, (i['divisor'] as num).toDouble());
+          actual = divCents(
+            i['cents'] as int,
+            (i['divisor'] as num).toDouble(),
+          );
         } else if (c.name.startsWith('percentOf')) {
-          actual = percentOf(i['cents'] as int, (i['percent'] as num).toDouble());
+          actual = percentOf(
+            i['cents'] as int,
+            (i['percent'] as num).toDouble(),
+          );
         } else if (c.name.startsWith('allocate')) {
-          actual = allocate(i['total'] as int, i['n'] as int, i['remainderOn'] == 'last' ? RemainderOn.last : RemainderOn.first);
+          actual = allocate(
+            i['total'] as int,
+            i['n'] as int,
+            i['remainderOn'] == 'last' ? RemainderOn.last : RemainderOn.first,
+          );
         } else if (c.name.startsWith('parse ')) {
           actual = parseMoneyBR(i['text'] as String);
         } else if (c.name.startsWith('format hidden')) {
@@ -31,7 +50,11 @@ void main() {
         } else {
           fail('unmapped fixture ${c.name}');
         }
-        expect(jsonEquals(actual, c.expected), isTrue, reason: 'expected ${c.expected} got $actual (${c.note})');
+        expect(
+          jsonEquals(actual, c.expected),
+          isTrue,
+          reason: 'expected ${c.expected} got $actual (${c.note})',
+        );
       });
     }
   });
@@ -46,7 +69,11 @@ void main() {
       for (var n = 1; n <= 60; n++) {
         final parts = allocate(123457, n);
         expect(parts.fold<int>(0, (a, b) => a + b), 123457);
-        expect(parts.reduce((a, b) => a > b ? a : b) - parts.reduce((a, b) => a < b ? a : b), lessThanOrEqualTo(1));
+        expect(
+          parts.reduce((a, b) => a > b ? a : b) -
+              parts.reduce((a, b) => a < b ? a : b),
+          lessThanOrEqualTo(1),
+        );
       }
     });
     test('no drift over 10.000 additions of one cent', () {

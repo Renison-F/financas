@@ -10,12 +10,16 @@
 ## Progresso M2 (domínio Dart)
 | Módulo | Estado |
 |---|---|
-| money | equivalente (fixtures + regras extras) |
-| dates | equivalente |
-| entidades, ledger, cards, recurrence, availability, budgets, goals, loans, reports, assistant, billing, dashboard, io, sync, shopping | pendente |
+| money, dates | equivalente (fixtures + regras extras) |
+| entidades, ledger, cards, recurrence, availability, budgets, goals, loans | equivalente |
+| reports, assistant, billing, dashboard, io, sync | equivalente |
+| shopping (units, cart, codes, pricetag, lists, products, session) | equivalente |
+
+M2 concluído: 22 fixtures / 272 casos TS reproduzidos, 279 testes Dart verdes, `flutter analyze` sem
+issues, `dart format` sem alterações. Detalhes e divergências em `02-EQUIVALENCIA_DOMINIO.md`.
 
 ## Próximos passos
-1. Entidades (freezed) e ledger/cards/recurrence com fixtures.
-2. availability/budgets/goals/loans/reports/assistant/billing/dashboard/io/sync.
-3. shopping (units, cart, codes, pricetag, lists, products, session).
-4. M3 Drift relacional + criptografia + backup.
+1. M3: esquema Drift relacional (constraints/índices), repositórios implementando as portas do domínio,
+   migrações, SQLCipher via `sqlite3` 3.x, backup cifrado autenticado, importadores versionados.
+2. M4–M6: design system, navegação, dashboard, módulos, relatórios, ferramentas.
+3. M7–M10: compras com câmera/OCR, RevenueCat, segurança/performance, release.

@@ -24,7 +24,9 @@ class MoneyError implements Exception {
 
 Cents assertCents(num value) {
   if (value is! int || value.abs() > maxSafeCents) {
-    throw MoneyError('Valor monetário inválido (esperado inteiro em centavos): $value');
+    throw MoneyError(
+      'Valor monetário inválido (esperado inteiro em centavos): $value',
+    );
   }
   return value;
 }
@@ -53,7 +55,9 @@ int _roundTo(double value, RoundingMode mode) {
       final floor = abs.floor();
       final diff = abs - floor;
       const eps = 1e-9;
-      if ((diff - 0.5).abs() < eps) return sign * (floor.isEven ? floor : floor + 1);
+      if ((diff - 0.5).abs() < eps) {
+        return sign * (floor.isEven ? floor : floor + 1);
+      }
       return sign * (diff > 0.5 ? floor + 1 : floor);
   }
 }
@@ -75,7 +79,11 @@ Cents sumCents(Iterable<Cents> values) => values.fold<Cents>(0, addCents);
 
 /// Multiplies cents by an arbitrary factor (quantity, rate) and rounds once.
 /// Tiny binary noise is snapped away at 1e-6 before rounding, exactly like the TypeScript original.
-Cents mulCents(Cents a, double factor, [RoundingMode mode = RoundingMode.halfEven]) {
+Cents mulCents(
+  Cents a,
+  double factor, [
+  RoundingMode mode = RoundingMode.halfEven,
+]) {
   if (!factor.isFinite) throw MoneyError('Fator inválido: $factor');
   final raw = assertCents(a) * factor;
   final snapped = _jsRound(raw * 1e6) / 1e6;
@@ -83,19 +91,31 @@ Cents mulCents(Cents a, double factor, [RoundingMode mode = RoundingMode.halfEve
   return assertCents(r == 0 ? 0 : r);
 }
 
-Cents divCents(Cents a, double divisor, [RoundingMode mode = RoundingMode.halfEven]) {
+Cents divCents(
+  Cents a,
+  double divisor, [
+  RoundingMode mode = RoundingMode.halfEven,
+]) {
   if (!divisor.isFinite || divisor == 0) throw MoneyError('Divisão por zero');
   return mulCents(a, 1 / divisor, mode);
 }
 
 /// percent in 0..100 (e.g. 15 for 15%)
-Cents percentOf(Cents a, double percent, [RoundingMode mode = RoundingMode.halfEven]) => mulCents(a, percent / 100, mode);
+Cents percentOf(
+  Cents a,
+  double percent, [
+  RoundingMode mode = RoundingMode.halfEven,
+]) => mulCents(a, percent / 100, mode);
 
 enum RemainderOn { first, last }
 
 /// Splits `total` into `n` integer parts whose sum is exactly `total`.
 /// The remainder (at most n−1 cents) goes one cent at a time to the first parts (default) or the last parts.
-List<Cents> allocate(Cents total, int n, [RemainderOn remainderOn = RemainderOn.first]) {
+List<Cents> allocate(
+  Cents total,
+  int n, [
+  RemainderOn remainderOn = RemainderOn.first,
+]) {
   assertCents(total);
   if (n < 1) throw MoneyError('Número de partes inválido: $n');
   final sign = total < 0 ? -1 : 1;
@@ -174,8 +194,9 @@ Cents? parseMoneyBR(String input) {
     return null;
   }
   if (!_digitsOnly.hasMatch(intPart) || !_frac.hasMatch(fracPart)) return null;
-  final padded = (fracPart + '00').substring(0, 2);
-  final big = BigInt.parse(intPart) * BigInt.from(100) + BigInt.from(int.parse(padded));
+  final padded = ('${fracPart}00').substring(0, 2);
+  final big =
+      BigInt.parse(intPart) * BigInt.from(100) + BigInt.from(int.parse(padded));
   if (big > BigInt.from(maxSafeCents)) return null;
   final value = big.toInt();
   if (negative) return value == 0 ? 0 : -value;
@@ -184,7 +205,12 @@ Cents? parseMoneyBR(String input) {
 
 /// Formats cents with pt-BR conventions ("R$ 1.234,56"); `hidden` renders the privacy placeholder.
 /// Uses a non-breaking space between symbol and amount, like `Intl.NumberFormat('pt-BR')` in JavaScript.
-String formatBRL(Cents value, {bool hidden = false, String currency = 'BRL', String locale = 'pt_BR'}) {
+String formatBRL(
+  Cents value, {
+  bool hidden = false,
+  String currency = 'BRL',
+  String locale = 'pt_BR',
+}) {
   final symbol = _symbolFor(currency);
   if (hidden) return '$symbol ••••';
   final v = assertCents(value);
