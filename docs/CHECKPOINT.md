@@ -23,8 +23,10 @@ Branch: `claude/wonderful-knuth-30ejqq`. Leia este arquivo antes de continuar em
 | 8 Monetização | implementada; **integração real com lojas pendente** (chaves, produtos, sandbox) |
 | 9 Qualidade | automatizado verde; dispositivo pendente (`docs/10`) |
 | 10 Publicação | preparada, não executada (`docs/12`) |
+| Build EAS | configurado e validado (prebuild OK, expo-doctor 18/20); **builds não gerados**: sem `EXPO_TOKEN` e rede da sessão bloqueia `api.expo.dev` (`docs/13`) |
 
 ## Pendências ordenadas (próxima sessão)
+0. Liberar `api.expo.dev`/`expo.dev`/`exp.host` na rede do ambiente e definir `EXPO_TOKEN` (ou rodar o workflow EAS no GitHub) → gerar development builds (`docs/13` §4).
 1. Gerar development build (EAS) e validar em Android + iPhone: câmera/códigos, OCR (trocar motor se ML Kit falhar na Nova Arquitetura), biometria, notificações, arrastar e soltar, SQLite real.
 2. INPI/domínio/handles para SerenaCash; fixar identificadores de pacote.
 3. RevenueCat + produtos nas lojas + sandbox; testar restauração/carência/reembolso.

@@ -28,8 +28,11 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": true,
-      "edgeToEdgeEnabled": true,
-      "permissions": ["android.permission.CAMERA", "android.permission.USE_BIOMETRIC", "android.permission.VIBRATE"]
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.VIBRATE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -51,7 +54,9 @@
           "imageWidth": 160,
           "resizeMode": "contain",
           "backgroundColor": "#F3F6F5",
-          "dark": { "backgroundColor": "#0C1517" }
+          "dark": {
+            "backgroundColor": "#0C1517"
+          }
         }
       ],
       [
@@ -63,13 +68,22 @@
       ],
       [
         "expo-local-authentication",
-        { "faceIDPermission": "Proteja seus dados financeiros com Face ID." }
+        {
+          "faceIDPermission": "Proteja seus dados financeiros com Face ID."
+        }
       ],
       [
         "expo-notifications",
-        { "color": "#0B5563" }
+        {
+          "color": "#0B5563"
+        }
       ]
     ],
-    "experiments": { "typedRoutes": true }
+    "experiments": {
+      "typedRoutes": true
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }

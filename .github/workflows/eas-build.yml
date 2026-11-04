@@ -1,0 +1,34 @@
+# Gera development builds no EAS a partir do GitHub, sem precisar de máquina local.
+# Pré-requisito: segredo EXPO_TOKEN no repositório (Settings → Secrets → Actions), criado em https://expo.dev/settings/access-tokens
+name: EAS development build
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'android | ios | all'
+        default: 'android'
+        required: true
+      profile:
+        description: 'development | preview | production'
+        default: 'development'
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Garantir projectId do EAS
+        working-directory: apps/mobile
+        run: eas init --non-interactive --force || true
+      - name: Build
+        working-directory: apps/mobile
+        run: eas build --profile ${{ inputs.profile }} --platform ${{ inputs.platform }} --non-interactive --no-wait
