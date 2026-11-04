@@ -1,0 +1,689 @@
+{
+  "@@locale": "en",
+  "appName": "SerenaCash",
+  "tabHome": "Home",
+  "tabTransactions": "Transactions",
+  "tabShopping": "Shopping",
+  "tabPlan": "Plan",
+  "tabMore": "More",
+  "greetingMorning": "Good morning",
+  "greetingAfternoon": "Good afternoon",
+  "greetingEvening": "Good evening",
+  "showValues": "Show amounts",
+  "hideValues": "Hide amounts",
+  "customizeHome": "Customize home screen",
+  "addTransaction": "Add transaction",
+  "noWidgetsVisible": "No widgets visible. Tap the gear to choose what to see.",
+  "widgetLoadError": "Could not load",
+  "tapToRetry": "Tap to try again.",
+  "retry": "Try again",
+  "cancel": "Cancel",
+  "save": "Save",
+  "close": "Close",
+  "delete": "Delete",
+  "undo": "Undo",
+  "edit": "Edit",
+  "seeAll": "See all",
+  "see": "See",
+  "all": "All",
+  "new_": "New",
+  "newF": "New",
+  "add": "Add",
+  "register": "Record",
+  "details": "Details",
+  "ok": "OK",
+  "loadingError": "Could not open your data.",
+  "unlockTitle": "Locked",
+  "unlockText": "Confirm your identity to see your data.",
+  "unlock": "Unlock",
+  "unlockPrompt": "Unlock SerenaCash",
+  "biometricFailed": "Could not confirm your identity.",
+  "biometricUnavailable": "Biometrics unavailable on this device.",
+  "pinLabel": "PIN",
+  "pinWrong": "Wrong PIN.",
+  "usePin": "Use PIN",
+  "useBiometrics": "Use biometrics",
+  "canSpendUntil": "Can spend until {date}",
+  "@canSpendUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "canSpendTitle": "Can spend",
+  "startWithAccount": "Start with your account",
+  "startWithAccountText": "With one account balance the app already shows how much fits.",
+  "addAccount": "Add account",
+  "availNegative": "Registered bills exceed the money available.",
+  "availTight": "It's tight: what's left barely covers the bills.",
+  "availOk": "An estimate from what is recorded, not a guaranteed balance.",
+  "modeOptimistic": "Optimistic mode",
+  "modePrudent": "Prudent mode",
+  "howWeCalculate": "How we calculate ›",
+  "totalBalance": "Total balance",
+  "accounts": "Accounts",
+  "noAccount": "No account",
+  "balancesByAccount": "Balances by account",
+  "income": "Income",
+  "expenses": "Expenses",
+  "plannedLabel": "Planned: {value}",
+  "@plannedLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "plannedAndCard": "Planned: {planned} · on card: {card}",
+  "@plannedAndCard": {
+    "placeholders": {
+      "planned": {
+        "type": "String"
+      },
+      "card": {
+        "type": "String"
+      }
+    }
+  },
+  "billsToPay": "Bills to pay",
+  "bill": "Bill",
+  "dueOn": "due {date}",
+  "@dueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "duePast": "was due {date}",
+  "@duePast": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "nothingToPay": "Nothing to pay until the end of the period",
+  "nothingToPayText": "Register planned bills so 'can spend' stays honest.",
+  "newBillToPay": "New bill to pay",
+  "overdueBills": "Overdue bills",
+  "noOverdue": "No overdue bills.",
+  "next7days": "Next 7 days",
+  "calendar": "Calendar",
+  "noDueNext7": "Nothing due in the next 7 days.",
+  "cardsAndInvoices": "Cards and statements",
+  "invoiceLine": "Statement {state} · due {date} · free limit {free}",
+  "@invoiceLine": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      },
+      "free": {
+        "type": "String"
+      }
+    }
+  },
+  "invoiceOpen": "open",
+  "invoiceClosed": "closed",
+  "invoicePaid": "paid",
+  "invoiceOverdue": "overdue",
+  "invoiceFuture": "future",
+  "limitCommitted": "{percent}% of limit committed",
+  "@limitCommitted": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "noCard": "No card",
+  "noCardText": "Register closing and due days to track the statement.",
+  "addCard": "Add card",
+  "installmentPurchases": "Installment purchases",
+  "committedFuture": "committed in future statements",
+  "monthlyBudget": "Monthly budget",
+  "budgets": "Budgets",
+  "ofLimit": "of {value}",
+  "@ofLimit": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "monthPace": "Month {pace}",
+  "@monthPace": {
+    "placeholders": {
+      "pace": {
+        "type": "String"
+      }
+    }
+  },
+  "paceSereno": "serene",
+  "paceAtencao": "needs attention",
+  "paceAgitado": "agitated",
+  "general": "General",
+  "noBudgetYet": "No budget yet",
+  "noBudgetText": "Set a monthly limit and follow the pace with today's mark.",
+  "createBudget": "Create budget",
+  "spendingByCategory": "Spending by category",
+  "report": "Report",
+  "noExpensesMonth": "No expenses this month",
+  "registerExpense": "Record expense",
+  "evolution": "Evolution",
+  "cashflow": "Cash flow",
+  "noHistory": "No history yet",
+  "noHistoryText": "Record income and expenses to see the evolution.",
+  "incomeOf": "Income {month}: {value}",
+  "@incomeOf": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "expensesOf": "Expenses {month}: {value}",
+  "@expensesOf": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "goals": "Goals",
+  "noGoal": "No goal",
+  "noGoalText": "An emergency fund is a good start.",
+  "createGoal": "Create goal",
+  "reserves": "Reserves",
+  "reservesText": "set aside and outside \"can spend\"",
+  "monthlySavings": "Savings this month",
+  "registerIncomeForRate": "Record income to see the savings rate.",
+  "percentOfIncome": "{percent}% of income",
+  "@percentOfIncome": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "subscriptions": "Subscriptions and recurring",
+  "monthsInARow": "{n} months in a row",
+  "@monthsInARow": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "noRecurring": "No recurring expense detected yet.",
+  "loans": "Loans",
+  "nextInstallment": "next {date} · {value}",
+  "@nextInstallment": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "paidOff": "paid off",
+  "noLoan": "No loan",
+  "registerLoan": "Register",
+  "open": "Open",
+  "calendarSummary": "{n} due date(s) until {date}",
+  "@calendarSummary": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "overdueCount": " · {n} overdue",
+  "@overdueCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "recentTransactions": "Recent transactions",
+  "allLabel": "All",
+  "planned": "planned",
+  "noTransaction": "No transaction",
+  "suggestions": "Suggestions",
+  "assistant": "Assistant",
+  "allCalm": "All calm here.",
+  "shoppingLists": "Shopping lists",
+  "listCount": "{n} list(s)",
+  "@listCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "noListYet": "No list yet.",
+  "createList": "Create list",
+  "shoppingAssistant": "Supermarket assistant",
+  "sessionsCount": "{n} purchase(s) recorded",
+  "@sessionsCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "shoppingAssistantText": "Read price tags and barcodes and see the total before checkout.",
+  "startShopping": "Start shopping",
+  "continueShopping": "Continue shopping",
+  "advancedIndicators": "Advanced indicators",
+  "methodology": "Methodology",
+  "savingRate": "Savings rate (month)",
+  "committedIncome": "Committed income (cards + installment)",
+  "netWorth": "Net worth",
+  "indicatorsDisclaimer": "Calculations over recorded data; not financial advice.",
+  "kindIncome": "Income",
+  "kindExpense": "Expense",
+  "kindTransfer": "Transfer",
+  "kindCardPurchase": "Card purchase",
+  "kindCardPayment": "Statement payment",
+  "kindGoalDeposit": "Deposit to reserve",
+  "kindGoalWithdrawal": "Withdrawal from reserve",
+  "kindLoanDisbursement": "Loan disbursement",
+  "kindLoanPayment": "Loan installment",
+  "kindBalanceAdjustment": "Balance adjustment",
+  "kindCardRefund": "Card refund",
+  "customizeTitle": "Home screen",
+  "presets": "Presets",
+  "restoreDefault": "Restore default",
+  "visibleWidgets": "Visible (hold and drag, or use the arrows)",
+  "hiddenWidgets": "Hidden",
+  "moveUp": "Move {name} up",
+  "@moveUp": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "moveDown": "Move {name} down",
+  "@moveDown": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "hideWidget": "Hide {name}",
+  "@hideWidget": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "showWidget": "Show {name}",
+  "@showWidget": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "indicatorsPeriod": "Indicators period",
+  "currentMonth": "Current month",
+  "next30days": "Next 30 days",
+  "accountsConsidered": "Accounts considered",
+  "availableSubtitle": "Until {date} · {mode} mode",
+  "@availableSubtitle": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "estimateDisclaimer": "An estimate from what you recorded. Not a guaranteed balance.",
+  "theMath": "The math",
+  "equalsCanSpend": "= Can spend",
+  "adjustments": "Adjustments",
+  "includePlannedIncome": "Count planned income",
+  "includePlannedIncomeHelp": "On = optimistic mode: counts money that has not arrived yet.",
+  "horizon": "Horizon",
+  "untilMonthEnd": "Until month end",
+  "safetyCushion": "Safety cushion",
+  "none": "None",
+  "cushionHelp": "Money you prefer never to touch; it leaves \"can spend\".",
+  "rules": "Rules",
+  "availabilityRules": "Only accounts marked for the calculation and settled money count. Out: planned bills until the horizon (including overdue), closed card statements and the open statement, reserves kept inside accounts and the cushion. Card purchases never count twice: the purchase is an expense on its date; paying the statement only moves money.",
+  "previousMonth": "Previous month",
+  "nextMonth": "Next month",
+  "inflow": "In",
+  "outflow": "Out",
+  "result": "Result",
+  "searchTransactions": "Search by description, merchant or note",
+  "filterAll": "All",
+  "filterCard": "Card",
+  "filterTransfers": "Transfers",
+  "filterPlanned": "Planned",
+  "paidPart": "paid {value}",
+  "@paidPart": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "nothingFound": "Nothing found",
+  "tryAnotherWord": "Try another word.",
+  "noTransactionMonth": "No transaction this month",
+  "registerWithPlus": "Record an expense or income with the + button.",
+  "newTransaction": "New transaction",
+  "editTransaction": "Edit transaction",
+  "transaction": "Transaction",
+  "amount": "Amount",
+  "description": "Description",
+  "descHintIncome": "E.g. Salary",
+  "descHintTransfer": "E.g. To savings",
+  "descHintExpense": "E.g. Groceries",
+  "category": "Category",
+  "card": "Card",
+  "registerCard": "Register card",
+  "account": "Account",
+  "from": "From",
+  "to": "To",
+  "registerAccount": "Register account",
+  "dueDate": "Due date",
+  "date": "Date",
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "tomorrow": "Tomorrow",
+  "invalidDate": "Invalid date (dd/mm/yyyy)",
+  "notReceivedYet": "Not received yet (planned)",
+  "notPaidYet": "Not paid yet (planned)",
+  "plannedHelp": "Planned transactions go to 'bills to pay' and into the 'can spend' calculation.",
+  "installments": "Installments",
+  "cashPayment": "Single payment",
+  "installmentsHelp": "{n}x of {value} (cents adjusted in the first installments), one per statement.",
+  "@installmentsHelp": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "moreOptions": "More options",
+  "repeat": "Repeat",
+  "repeatHelp": "Creates a series; the next 3 months become planned and new ones are generated automatically.",
+  "tags": "Tags",
+  "merchant": "Merchant",
+  "optional": "Optional",
+  "notes": "Notes",
+  "attachmentsPlus": "Attachments and receipts are part of SerenaCash Plus.",
+  "attachmentsAfterSave": "Attachments: add from the transaction detail after saving.",
+  "attachments": "Attachments",
+  "addAttachment": "Attach receipt",
+  "payment": "Payment",
+  "markReceived": "Mark as received",
+  "markPaid": "Mark as paid",
+  "payPart": "Pay part (remaining {value})",
+  "@payPart": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "registerPartial": "Record partial payment",
+  "deleteThisAndNext": "Delete this and the next",
+  "deleteTransaction": "Delete transaction",
+  "deleteTransactionQ": "Delete transaction?",
+  "deleteSeriesText": "Transactions of this series from this date on will be deleted. You can undo right after.",
+  "deleteOneText": "You can undo right after.",
+  "deletedOne": "Transaction deleted",
+  "deletedMany": "{n} transactions deleted",
+  "@deletedMany": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "errAmount": "Enter an amount greater than zero.",
+  "errCardFirst": "Register a card before recording a card purchase.",
+  "errAccountFirst": "Register an account before recording.",
+  "errTwoAccounts": "Choose two different accounts.",
+  "errSave": "Could not save.",
+  "frequencyMonthly": "Monthly",
+  "frequencyWeekly": "Weekly",
+  "frequencyBiweekly": "Every two weeks",
+  "frequencyYearly": "Yearly",
+  "planTitle": "Plan",
+  "planSubtitle": "Budgets, goals, cards and loans",
+  "noBudget": "No budget",
+  "noBudgetPlanText": "Set limits per category or for the whole month.",
+  "goalsAndReserves": "Goals and reserves",
+  "goalLine": "{percent}% · {remaining} to go",
+  "@goalLine": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "remaining": {
+        "type": "String"
+      }
+    }
+  },
+  "perMonth": " · {value}/month",
+  "@perMonth": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "noGoalPlanText": "Start with an emergency fund.",
+  "cards": "Cards",
+  "cardLine": "statement {state} · due {date} · free {free}",
+  "@cardLine": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      },
+      "free": {
+        "type": "String"
+      }
+    }
+  },
+  "loansAndDebts": "Loans and debts",
+  "loanLine": "next {date} · {value} · {paid}/{total} paid",
+  "@loanLine": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      },
+      "paid": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noLoanRegistered": "No loan registered.",
+  "balanceProjection": "Balance projection",
+  "projectionText": "See how the balance evolves with planned bills and income until month end.",
+  "moreTitle": "More",
+  "freePlan": "Free plan",
+  "groupMoney": "My money",
+  "accountsWallets": "Accounts and wallets",
+  "accountsWalletsDesc": "Balances, adjustments, archiving",
+  "categoriesTags": "Categories and tags",
+  "categoriesTagsDesc": "Organize your transactions",
+  "financialCalendar": "Financial calendar",
+  "financialCalendarDesc": "Due dates and receipts",
+  "billsDesc": "Planned, overdue, partial",
+  "groupAnalysis": "Analysis",
+  "reports": "Reports",
+  "reportsDesc": "Cash flow, categories, comparisons, projections",
+  "financialAssistant": "Financial assistant",
+  "financialAssistantDesc": "Ask about your money",
+  "groupData": "Data",
+  "importData": "Import CSV or OFX",
+  "importDesc": "With review and no duplicates",
+  "exportBackup": "Export and backup",
+  "exportDesc": "CSV, PDF and full backup",
+  "groupAccount": "Account",
+  "plusTitle": "SerenaCash Plus",
+  "plusDesc": "Plans, subscription and restore",
+  "settings": "Settings",
+  "settingsDesc": "Theme, currency, privacy, biometrics",
+  "privacyData": "Privacy and data",
+  "privacyDataDesc": "Export or erase everything",
+  "help": "Help",
+  "helpDesc": "How the app calculates things",
+  "footerLocal": "SerenaCash · data kept on this device · version {version}",
+  "@footerLocal": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "shoppingTitle": "Shopping",
+  "shoppingSubtitle": "Lists and supermarket assistant",
+  "shoppingInProgress": "Shopping in progress",
+  "sessionLine": "{n} item(s) · {total}",
+  "@sessionLine": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "shoppingIntro": "Read price tags and barcodes, see the total and how much still fits the budget before checkout.",
+  "lists": "Lists",
+  "itemsCount": "{n} items",
+  "@itemsCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "estimated": "estimated {value}",
+  "@estimated": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "noPricesYet": "no prices yet",
+  "withoutPrice": " ({n} without price)",
+  "@withoutPrice": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "noList": "No list",
+  "noListText": "Build the list at home and use it in the store, even offline.",
+  "previousPurchases": "Previous purchases",
+  "supermarket": "Supermarket",
+  "registered": "recorded",
+  "previousPurchasesText": "Finished purchases show up here, with price history per store.",
+  "settingsTitle": "Settings",
+  "appearance": "Appearance",
+  "theme": "Theme",
+  "themeSystem": "Automatic",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "privacyModeHelp": "Shows R$ •••• on every screen until you turn it off.",
+  "haptics": "Vibrate on confirm",
+  "money": "Money",
+  "currency": "Currency",
+  "currencyHelp": "The currency applies to new transactions. Format and language follow the device (pt-BR by default).",
+  "availabilityHorizon": "\"Can spend\" horizon",
+  "monthEnd": "Month end",
+  "days30": "30 days",
+  "security": "Security",
+  "biometricLock": "Ask for biometrics on open",
+  "biometricAvailable": "Face ID / fingerprint of the device.",
+  "biometricNotAvailable": "No biometrics set up on this device.",
+  "pinLock": "Protect with PIN",
+  "pinLockHelp": "4 to 8 digit PIN, stored protected; it never leaves the device.",
+  "setPin": "Set PIN",
+  "changePin": "Change PIN",
+  "confirmPin": "Confirm PIN",
+  "pinMismatch": "PINs do not match.",
+  "pinFormat": "Use 4 to 8 digits.",
+  "lockOnBackground": "Lock when returning from background",
+  "dataLocalHelp": "Your data stays only on this device. Make backups in More → Export.",
+  "reminders": "Reminders",
+  "remindersText": "Local notice the day before and on the due date of planned bills (next 7 days). Nothing leaves the device.",
+  "enableReminders": "Enable due-date reminders",
+  "remindersEnabled": "Reminders enabled.",
+  "remindersDenied": "Notification permission denied or unavailable.",
+  "language": "Language",
+  "languageSystem": "Device",
+  "onbWelcomeTitle": "Your money at peace.",
+  "onbWelcomeText": "In under two minutes you'll know how much you can spend without compromising your bills. No sign-up, no bank password: everything stays on your device.",
+  "onbStart": "Start",
+  "onbAccountTitle": "How much do you have now?",
+  "onbAccountText": "It can be approximate. You adjust later.",
+  "accountName": "Account name",
+  "mainAccount": "Main account",
+  "typeBank": "Bank",
+  "typeDigital": "Digital",
+  "typeCash": "Cash",
+  "typeSavings": "Savings",
+  "balanceToday": "Balance today",
+  "onbBillsTitle": "Fixed bills this month",
+  "onbBillsText": "Tap the ones you pay and enter the amount. They become planned and repeat every month.",
+  "fixedRent": "Rent",
+  "fixedPower": "Electricity",
+  "fixedInternet": "Internet",
+  "fixedPhone": "Mobile",
+  "fixedWater": "Water",
+  "onbCardTitle": "Do you use a credit card?",
+  "onbCardText": "With closing and due days the app shows the right statement and never counts a purchase twice.",
+  "name": "Name",
+  "limit": "Limit",
+  "closingDay": "Closing day",
+  "dueDay": "Due day",
+  "continue_": "Continue",
+  "skip": "Skip",
+  "finish": "Finish",
+  "undoToastHint": "Tap to undo"
+}

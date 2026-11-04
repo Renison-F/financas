@@ -1,0 +1,107 @@
+/// Dependency injection (Riverpod). Every feature reaches storage, security and integrations only through
+/// these providers and the domain ports (ADR-03/06); tests override them with in-memory implementations.
+library;
+
+import 'dart:io';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+
+import '../data/backup/backup_service.dart';
+import '../data/database/app_database.dart';
+import '../data/database/drift_change_log.dart';
+import '../data/database/drift_ledger_repository.dart';
+import '../data/database/drift_preferences_store.dart';
+import '../data/database/drift_shopping_repository.dart';
+import '../data/security/db_key.dart';
+import '../data/security/pin.dart';
+import '../data/security/secret_store.dart';
+import '../domain/ports/ports.dart';
+
+final clockProvider = Provider<Clock>((_) => const SystemClock());
+final idGeneratorProvider = Provider<IdGenerator>(
+  (_) => const UuidV4IdGenerator(),
+);
+final secretStoreProvider = Provider<SecretStore>((_) => KeystoreSecretStore());
+final pinManagerProvider = Provider<PinManager>(
+  (ref) => PinManager(ref.watch(secretStoreProvider)),
+);
+
+/// Stable per-install device id (ADR-04), kept in the keystore so a restore from backup does not clone it.
+final deviceIdProvider = FutureProvider<String>((ref) async {
+  final store = ref.watch(secretStoreProvider);
+  final existing = await store.read(SecretKeys.deviceId);
+  if (existing != null) return existing;
+  final id = ref.read(idGeneratorProvider).newId();
+  await store.write(SecretKeys.deviceId, id);
+  return id;
+});
+
+/// Opens the encrypted database. Overridden in tests with `AppDatabase.inMemory()`.
+final databaseProvider = FutureProvider<AppDatabase>((ref) async {
+  final key = await DatabaseKeyManager(ref.watch(secretStoreProvider))
+      .getOrCreate();
+  final dir = await getApplicationSupportDirectory();
+  await Directory(dir.path).create(recursive: true);
+  final db = AppDatabase(
+    encryptedExecutor(p.join(dir.path, 'serenacash.db'), key),
+  );
+  ref.onDispose(db.close);
+  return db;
+});
+
+final changeLogProvider = FutureProvider<ChangeLog>(
+  (ref) async => DriftChangeLog(await ref.watch(databaseProvider.future)),
+);
+
+final ledgerRepositoryProvider = FutureProvider<LedgerRepository>((ref) async {
+  final db = await ref.watch(databaseProvider.future);
+  return DriftLedgerRepository(
+    db,
+    clock: ref.watch(clockProvider),
+    deviceId: await ref.watch(deviceIdProvider.future),
+    changeLog: await ref.watch(changeLogProvider.future),
+  );
+});
+
+final shoppingRepositoryProvider = FutureProvider<ShoppingRepository>((
+  ref,
+) async {
+  final db = await ref.watch(databaseProvider.future);
+  return DriftShoppingRepository(
+    db,
+    clock: ref.watch(clockProvider),
+    deviceId: await ref.watch(deviceIdProvider.future),
+    changeLog: await ref.watch(changeLogProvider.future),
+  );
+});
+
+final preferencesStoreProvider = FutureProvider<PreferencesStore>(
+  (ref) async => DriftPreferencesStore(
+    await ref.watch(databaseProvider.future),
+    clock: ref.watch(clockProvider),
+  ),
+);
+
+final backupServiceProvider = FutureProvider<BackupService>(
+  (ref) async => BackupService(
+    repo: await ref.watch(ledgerRepositoryProvider.future),
+    db: await ref.watch(databaseProvider.future),
+    clock: ref.watch(clockProvider),
+    ids: ref.watch(idGeneratorProvider),
+  ),
+);
+
+final authProviderProvider = FutureProvider<AuthProvider>(
+  (ref) async => AnonymousLocalAuth(await ref.watch(deviceIdProvider.future)),
+);
+final entitlementsProviderProvider = Provider<EntitlementsProvider>(
+  (_) => const UnavailableBilling(),
+);
+final cloudBackupProvider = Provider<CloudBackupProvider>(
+  (_) => const UnavailableCloudBackup(),
+);
+final familySharePolicyProvider = Provider<FamilySharePolicy>(
+  (_) => const SingleUserPolicy(),
+);

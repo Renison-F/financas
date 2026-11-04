@@ -904,6 +904,8 @@ class Ledger {
       id == null ? null : goals.where((g) => g.id == id).firstOrNull;
   Loan? loanById(Id? id) =>
       id == null ? null : loans.where((l) => l.id == id).firstOrNull;
+  Transaction? transactionById(Id? id) =>
+      id == null ? null : transactions.where((t) => t.id == id).firstOrNull;
   Ledger copyWith({
     List<Account>? accounts,
     List<Category>? categories,
