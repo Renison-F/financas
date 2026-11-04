@@ -35,7 +35,13 @@ issues, `dart format` sem alterações. Detalhes e divergências em `02-EQUIVALE
 - Compras: nova lista, detalhe (itens por categoria, unidades, estimativa só com preços conhecidos, marcar/duplicar/excluir), sessão (total, orçamento com marca de progresso, itens da lista, manual, etiqueta/código, promoções, finalização com observações de preço, despesa única idempotente), câmera (`mobile_scanner` + `image_picker` + ML Kit atrás de `OcrService`, fallback manual, permissão negada tratada).
 - Testes: 3 fluxos novos (lista → sessão → despesa; leitura simulada de código/etiqueta; histórico e anual). 18 capturas em `screenshots/`.
 
+## Progresso M8–M10
+- RevenueCat (`purchases_flutter` 11) atrás de `StoreBilling`; mapeamento puro testado; chaves por `--dart-define`.
+- Testes de performance (painel 5k lançamentos 84 ms; DB load 237 ms), CI `flutter.yml` (format/analyze --fatal-infos/test/apk), Android `allowBackup=false` + regras de extração, iOS usage descriptions, `integration_test/app_test.dart`.
+- Docs 04, 07–12, RELATORIO_FINAL e auditoria consolidada.
+- Bloqueios: APK (sem Android SDK: `dl.google.com` 403), iOS (sem macOS), aparelho (câmera/OCR/biometria/compras).
+
 ## Próximos passos
-1. M8: RevenueCat (`purchases_flutter`) atrás de `StoreBilling`, cache de direitos com carência.
-2. M9: auditoria de segurança final, testes de integração, performance, CI sem `|| true`.
-3. M10: preparação Android/iOS, docs 04/07–12, RELATORIO_FINAL.
+1. Executar o CI (APK) e validar em aparelho conforme `docs/13-guia-teste-dispositivo.md`.
+2. Configurar lojas/RevenueCat (ação do cliente) e assinar release.
+3. Após paridade validada em aparelho, decidir remoção do código RN.

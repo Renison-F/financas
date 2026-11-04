@@ -13,9 +13,9 @@ Decisão aprovada pelo cliente em 2026-11-04. Origem congelada em `ae2c229c4977d
 | M5 | núcleo funcional + dashboard 24 widgets | concluído: contas, categorias/tags, cartões (faturas, parcelas, pagamento), orçamentos, metas, empréstimos, calendário, contas a pagar, relatórios, assistente, importação/exportação (CSV/OFX/backup cifrado/PDF), privacidade, ajuda, paywall |
 | M6 | relatórios, calendário, projeções, assistente, import/export, configurações | concluído: anexos no lançamento (bytes no banco cifrado), histórico de alterações + estado de sincronização, planejamento anual |
 | M7 | listas, sessão, câmera (mobile_scanner), OCR (ML Kit), histórico de preços | concluído: listas, sessão de compra com confirmação obrigatória, mobile_scanner (EAN/UPC/QR NFC-e), OCR ML Kit via port (fallback manual), histórico de preços, despesa idempotente |
-| M8 | RevenueCat Flutter, paywall, direitos | pendente |
-| M9 | segurança (MASVS), integração, performance | pendente |
-| M10 | builds, assinatura, lojas, release candidate | pendente |
+| M8 | RevenueCat Flutter, paywall, direitos | concluído: purchases_flutter atrás de StoreBilling, mapeamento testado, paywall com oferta/restauração; produtos nas lojas pendentes do cliente |
+| M9 | segurança (MASVS), integração, performance | concluído: 320 testes, analyze/format limpos, CI flutter.yml sem `|| true`, perf medida (5.000 lançamentos), auditoria MASVS consolidada |
+| M10 | builds, assinatura, lojas, release candidate | parcial: manifestos/plist endurecidos, guias 11/12, teste de integração escrito; `flutter build apk` bloqueado (sem Android SDK), iOS sem macOS, assinatura/lojas dependem do cliente |
 
 ## Diretriz adicional de arquitetura (cliente, 2026-11-04)
 Crescimento incremental sem reconstrução: regras financeiras independentes de UI e banco; ports/repositórios que aceitem fontes remotas; IDs estáveis, versionamento e rastreabilidade; conflitos financeiros explícitos e operações idempotentes; separação entre armazenamento local, autenticação, sincronização e assinaturas; contratos e pontos de extensão documentados (`03-ARQUITETURA_FLUTTER.md`, ADR-03 a ADR-08); nenhuma dependência de Firebase no domínio; migrações seguras para futuros usuários/dispositivos; SQLite/Drift como banco local; Firebase/Firestore e PostgreSQL registrados como alternativas a avaliar (ADR-07), sem implementação prematura.

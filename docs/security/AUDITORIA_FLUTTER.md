@@ -1,6 +1,6 @@
 # Auditoria de segurança — SerenaCash Flutter (em andamento)
 
-Última atualização: M3 (persistência). Auditoria final consolidada em M9.
+Última atualização: M9 (auditoria consolidada).
 
 ## Escopo auditado até aqui
 - `apps/serenacash_flutter/lib/data/database/*` (Drift/SQLCipher)

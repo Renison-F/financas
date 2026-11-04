@@ -2,9 +2,11 @@
 /// (purchases_flutter) lands in M8 behind the same interface, so no business rule depends on the SDK.
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/billing/billing.dart';
+import 'revenuecat_billing.dart';
 
 class StoreOffer {
   const StoreOffer({
@@ -49,6 +51,15 @@ class UnavailableStoreBilling implements StoreBilling {
   Future<List<Entitlement>> restore() async => const [];
 }
 
-final storeBillingProvider = Provider<StoreBilling>(
-  (_) => const UnavailableStoreBilling(),
-);
+/// RevenueCat when running on a phone with an API key compiled in; otherwise the paywall shows no purchase buttons.
+final storeBillingProvider = Provider<StoreBilling>((_) {
+  final mobile =
+      defaultTargetPlatform == TargetPlatform.android ||
+      defaultTargetPlatform == TargetPlatform.iOS;
+  final hasKey =
+      (defaultTargetPlatform == TargetPlatform.iOS ? rcIosKey : rcAndroidKey)
+          .isNotEmpty;
+  return mobile && hasKey
+      ? RevenueCatBilling()
+      : const UnavailableStoreBilling();
+});
