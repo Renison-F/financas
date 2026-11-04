@@ -13,13 +13,13 @@ export function daysInMonth(year: number, month: number): number {
   return new Date(Date.UTC(year, month, 0)).getUTCDate();
 }
 
-export function isISODate(s: unknown): s is ISODate {
+export function isISODate(s: unknown): boolean {
   if (typeof s !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
   const { year, month, day } = parts(s);
   return month >= 1 && month <= 12 && day >= 1 && day <= daysInMonth(year, month);
 }
 
-export function isMonthKey(s: unknown): s is MonthKey {
+export function isMonthKey(s: unknown): boolean {
   if (typeof s !== 'string' || !/^\d{4}-\d{2}$/.test(s)) return false;
   const m = Number(s.slice(5, 7));
   return m >= 1 && m <= 12;

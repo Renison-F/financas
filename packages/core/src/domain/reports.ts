@@ -2,7 +2,7 @@ import { addCents, sumCents, type Cents } from '../money/money';
 import { addMonthsToKey, compareISO, endOfMonth, lastMonthKeys, monthKeyOf, type ISODate, type MonthKey } from '../dates/dates';
 import type { Category, Ledger, Transaction } from './types';
 import { consolidatedBalance, isActive, isExpenseLike, isIncomeLike, effectiveCents, monthTotals, pendingCents, isPlanned, type MonthTotals } from './ledger';
-import { cardCommitment } from './cards';
+import { cardCommitment, invoice, invoiceMonths } from './cards';
 import { goalSavedCents } from './goals';
 import { loanPosition } from './loans';
 
@@ -81,7 +81,6 @@ export function projectBalance(ledger: Ledger, today: ISODate, until: ISODate): 
     else if (t.kind === 'expense' || t.kind === 'loan_payment') events.push({ date: d, label: t.description || 'Despesa prevista', cents: -pendingCents(t), kind: t.kind === 'loan_payment' ? 'loan' : 'expense' });
   }
   for (const card of ledger.cards.filter((c) => !c.archived && !c.deletedAt)) {
-    const { invoice, invoiceMonths } = cardsApi();
     for (const m of invoiceMonths(ledger, card)) {
       const inv = invoice(ledger, card, m, today);
       if (inv.remainingCents > 0 && compareISO(inv.dueDate, until) <= 0) events.push({ date: compareISO(inv.dueDate, today) < 0 ? today : inv.dueDate, label: `Fatura ${card.name}`, cents: -inv.remainingCents, kind: 'card' });
@@ -92,10 +91,6 @@ export function projectBalance(ledger: Ledger, today: ISODate, until: ISODate): 
   const points: ProjectionPoint[] = events.map((e) => { bal = addCents(bal, e.cents); if (bal < minCents) { minCents = bal; minDate = e.date; } return { ...e, balanceAfterCents: bal }; });
   return { startCents, endCents: bal, minCents, minDate, points };
 }
-
-// lazy import to avoid circular type issues at module init
-import * as cardsModule from './cards';
-function cardsApi() { return cardsModule; }
 
 export interface NetWorthPoint { month: MonthKey; assetsCents: Cents; debtsCents: Cents; netCents: Cents; }
 

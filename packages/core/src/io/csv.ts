@@ -54,14 +54,16 @@ export interface ColumnMapping { date?: number | undefined; description?: number
 export function parseDateFlexible(raw: string): ISODate | null {
   const s = raw.trim();
   if (isISODate(s)) return s;
-  let m = s.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
-  if (m) { const d = `${m[3]}-${m[2]}-${m[1]}`; return isISODate(d) ? d : null; }
-  m = s.match(/^(\d{4})-(\d{2})-(\d{2})T/);
-  if (m) { const d = `${m[1]}-${m[2]}-${m[3]}`; return isISODate(d) ? d : null; }
-  m = s.match(/^(\d{2})-(\d{2})-(\d{4})$/);
-  if (m) { const d = `${m[3]}-${m[2]}-${m[1]}`; return isISODate(d) ? d : null; }
-  m = s.match(/^(\d{2})\/(\d{2})\/(\d{2})$/);
-  if (m) { const d = `20${m[3]}-${m[2]}-${m[1]}`; return isISODate(d) ? d : null; }
+  const patterns: [RegExp, (m: RegExpMatchArray) => string][] = [
+    [/^(\d{2})\/(\d{2})\/(\d{4})/, (m) => `${m[3]}-${m[2]}-${m[1]}`],
+    [/^(\d{4})-(\d{2})-(\d{2})T/, (m) => `${m[1]}-${m[2]}-${m[3]}`],
+    [/^(\d{2})-(\d{2})-(\d{4})$/, (m) => `${m[3]}-${m[2]}-${m[1]}`],
+    [/^(\d{2})\/(\d{2})\/(\d{2})$/, (m) => `20${m[3]}-${m[2]}-${m[1]}`],
+  ];
+  for (const [re, build] of patterns) {
+    const m = s.match(re);
+    if (m) { const d = build(m); return isISODate(d) ? d : null; }
+  }
   return null;
 }
 
