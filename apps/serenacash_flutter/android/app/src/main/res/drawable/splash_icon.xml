@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Símbolo da abertura (brand/splash-icon.svg); as cores acompanham o tema claro/escuro. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <group
+        android:translateX="18"
+        android:translateY="18">
+        <path
+            android:pathData="M19,24a13,13 0 1,0 26,0a13,13 0 1,0 -26,0"
+            android:strokeColor="@color/splash_symbol"
+            android:strokeWidth="5" />
+        <path
+            android:pathData="M8,50C16,42 24,42 32,50S48,58 56,50"
+            android:strokeColor="@color/splash_wave"
+            android:strokeLineCap="round"
+            android:strokeWidth="5" />
+    </group>
+</vector>

@@ -3,6 +3,7 @@
 library;
 
 import 'dart:async';
+import 'dart:ui' show Color;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -75,7 +76,8 @@ class LocalBillReminders implements BillReminders {
         if (route != null && route.isNotEmpty) _opened.add(route);
       },
       settings: const InitializationSettings(
-        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+        // White silhouette in res/drawable (kept from R8 by res/raw/keep.xml).
+        android: AndroidInitializationSettings('ic_stat_serenacash'),
         iOS: DarwinInitializationSettings(
           requestAlertPermission: false,
           requestBadgePermission: false,
@@ -173,6 +175,7 @@ class LocalBillReminders implements BillReminders {
               channelDescription: 'Lembretes de contas a pagar',
               importance: Importance.defaultImportance,
               priority: Priority.defaultPriority,
+              color: Color(0xFF0B5563),
             ),
             iOS: DarwinNotificationDetails(),
           ),

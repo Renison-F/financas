@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mesmos valores de lib/app/theme/tokens.dart (tema escuro). -->
+    <color name="splash_background">#0C1517</color>
+    <color name="splash_symbol">#6FC8D6</color>
+    <color name="splash_wave">#F0B48A</color>
+</resources>

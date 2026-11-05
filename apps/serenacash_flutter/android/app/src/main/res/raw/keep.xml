@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- O ícone das notificações só é citado pelo nome no código Dart; sem isto o R8 o removeria do release. -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/ic_stat_serenacash" />
