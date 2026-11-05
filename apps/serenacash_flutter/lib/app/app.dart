@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../features/security/lock_gate.dart';
 import '../l10n/app_localizations.dart';
+import 'reminders_host.dart';
 import 'router.dart';
 import 'state/app_controller.dart';
 import 'theme/theme.dart';
@@ -47,7 +48,8 @@ class SerenaCashApp extends ConsumerWidget {
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router,
-      builder: (context, child) => LockGate(child: child ?? const SizedBox()),
+      builder: (context, child) =>
+          RemindersHost(child: LockGate(child: child ?? const SizedBox())),
     );
   }
 }

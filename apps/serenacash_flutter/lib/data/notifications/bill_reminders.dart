@@ -2,6 +2,8 @@
 /// the day before and on the day. No server, no push tokens. Idempotent (cancel-all then reschedule).
 library;
 
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,8 +15,18 @@ import '../../domain/ledger/ledger.dart';
 import '../../domain/money/money.dart';
 
 abstract interface class BillReminders {
+  /// Asks the system for permission (shows the system dialog when needed).
   Future<bool> requestPermission();
+
+  /// Whether notifications are already allowed. Never prompts.
+  Future<bool> hasPermission();
   Future<int> schedule(Ledger ledger, String today);
+
+  /// Route of the reminder that launched the app from a terminated state; returned once.
+  Future<String?> takeLaunchRoute();
+
+  /// Routes of reminders tapped while the app is running or in the background.
+  Stream<String> get openedRoutes;
 }
 
 final billRemindersProvider = Provider<BillReminders>(
@@ -30,7 +42,13 @@ class NoopBillReminders implements BillReminders {
   @override
   Future<bool> requestPermission() async => false;
   @override
+  Future<bool> hasPermission() async => false;
+  @override
   Future<int> schedule(Ledger ledger, String today) async => 0;
+  @override
+  Future<String?> takeLaunchRoute() async => null;
+  @override
+  Stream<String> get openedRoutes => const Stream.empty();
 }
 
 class LocalBillReminders implements BillReminders {
@@ -43,10 +61,19 @@ class LocalBillReminders implements BillReminders {
   final FlutterLocalNotificationsPlugin _plugin;
   final String labelTomorrow, labelToday, tapHint;
   bool _initialized = false;
+  bool _launchRouteTaken = false;
+  final _opened = StreamController<String>.broadcast();
+
+  @override
+  Stream<String> get openedRoutes => _opened.stream;
 
   Future<void> _init() async {
     if (_initialized) return;
     await _plugin.initialize(
+      onDidReceiveNotificationResponse: (response) {
+        final route = response.payload;
+        if (route != null && route.isNotEmpty) _opened.add(route);
+      },
       settings: const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
         iOS: DarwinInitializationSettings(
@@ -82,6 +109,37 @@ class LocalBillReminders implements BillReminders {
           false;
     }
     return false;
+  }
+
+  @override
+  Future<bool> hasPermission() async {
+    await _init();
+    final android = _plugin
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
+    if (android != null) {
+      return await android.areNotificationsEnabled() ?? false;
+    }
+    final ios = _plugin
+        .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin
+        >();
+    if (ios != null) {
+      return (await ios.checkPermissions())?.isEnabled ?? false;
+    }
+    return false;
+  }
+
+  @override
+  Future<String?> takeLaunchRoute() async {
+    if (_launchRouteTaken) return null;
+    _launchRouteTaken = true;
+    await _init();
+    final details = await _plugin.getNotificationAppLaunchDetails();
+    if (details == null || !details.didNotificationLaunchApp) return null;
+    final route = details.notificationResponse?.payload;
+    return route == null || route.isEmpty ? null : route;
   }
 
   @override
