@@ -649,7 +649,7 @@
   "pinMismatch": "Os PINs não conferem.",
   "pinFormat": "Use de 4 a 8 dígitos.",
   "lockOnBackground": "Bloquear ao voltar do segundo plano",
-  "dataLocalHelp": "Seus dados ficam só neste aparelho. Faça backups em Mais → Exportar.",
+  "dataLocalHelp": "Seus dados ficam só neste aparelho. Faça backups no menu, em Exportar e backup.",
   "reminders": "Lembretes",
   "remindersText": "Aviso local no dia anterior e no dia do vencimento das contas previstas (próximos 7 dias). Nada sai do aparelho.",
   "enableReminders": "Ativar lembretes de vencimento",
@@ -1311,7 +1311,7 @@
   "projectionDesc": "Como o saldo evolui com o que está previsto",
   "indicatorsReport": "Indicadores e patrimônio",
   "indicatorsDesc": "Taxa de poupança, comprometimento, patrimônio",
-  "exportHint": "Exportação em CSV e PDF em Mais → Exportar.",
+  "exportHint": "Exportação em CSV e PDF no menu, em Exportar e backup.",
   "months6": "6 meses",
   "months12": "12 meses",
   "incomeVsExpenses": "Receitas × despesas",
@@ -1634,7 +1634,7 @@
   "faq8q": "Supermercado",
   "faq8a": "Código de barras identifica o produto, não o preço. O preço vem da etiqueta lida (OCR), do seu histórico ou de você. Nada é adicionado sem confirmação, e o total do carrinho usa arredondamento de balança.",
   "faq9q": "Meus dados",
-  "faq9a": "Tudo fica no aparelho, cifrado. Exporte backups em Mais → Exportar. Apague tudo em Privacidade.",
+  "faq9a": "Tudo fica no aparelho, cifrado. Exporte backups no menu, em Exportar e backup. Apague tudo em Privacidade.",
   "featurePartOfPlus": "\"{feature}\" faz parte do Plus.",
   "@featurePartOfPlus": {
     "placeholders": {
@@ -2463,5 +2463,20 @@
   "addReceivable": "Conta a receber",
   "addReceivableDesc": "Receita prevista, ainda não recebida",
   "repDirectInCategory": "Direto na categoria",
-  "repSubsIncluded": "O total de cada categoria já inclui as subcategorias listadas abaixo dela."
+  "repSubsIncluded": "O total de cada categoria já inclui as subcategorias listadas abaixo dela.",
+  "billsBoth": "A pagar e a receber",
+  "segPayable": "A pagar",
+  "segReceivable": "A receber",
+  "receive": "Receber",
+  "receivableUntil": "A receber até {date} · {value}",
+  "@receivableUntil": {"placeholders": {"date": {"type": "String"}, "value": {"type": "String"}}},
+  "receivableLate": "Atrasadas · {value}",
+  "@receivableLate": {"placeholders": {"value": {"type": "String"}}},
+  "nothingToReceive": "Nada a receber no período",
+  "newReceivable": "Nova conta a receber",
+  "receivablesHelp": "“Receber” marca como recebido hoje na conta do lançamento. Para receber parte, abra o lançamento.",
+  "expectedOn": "Previsto para {date}",
+  "@expectedOn": {"placeholders": {"date": {"type": "String"}}},
+  "expectedSince": "Previsto desde {date}",
+  "@expectedSince": {"placeholders": {"date": {"type": "String"}}}
 }

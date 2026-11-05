@@ -54,7 +54,7 @@ class AppDrawer extends ConsumerWidget {
       (
         l.navGroupMoves,
         [
-          _Item(SIconName.receipt, l.billsToPay, route: '/bills'),
+          _Item(SIconName.receipt, l.billsBoth, route: '/bills'),
           _Item(SIconName.calendar, l.financialCalendar, route: '/calendar'),
           _Item(SIconName.document, l.changeHistory, route: '/history'),
         ],

@@ -1164,7 +1164,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dataLocalHelp =>
-      'Your data stays only on this device. Make backups in More → Export.';
+      'Your data stays only on this device. Make backups in the menu, under Export and backup.';
 
   @override
   String get reminders => 'Reminders';
@@ -2042,7 +2042,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get indicatorsDesc => 'Savings rate, commitment, net worth';
 
   @override
-  String get exportHint => 'CSV and PDF export in More → Export.';
+  String get exportHint =>
+      'CSV and PDF export in the menu, under Export and backup.';
 
   @override
   String get months6 => '6 months';
@@ -2543,7 +2544,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faq9a =>
-      'Everything stays on the device, encrypted. Export backups in More → Export. Erase everything in Privacy.';
+      'Everything stays on the device, encrypted. Export backups in the menu, under Export and backup. Erase everything in Privacy.';
 
   @override
   String featurePartOfPlus(String feature) {
@@ -3919,4 +3920,46 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get repSubsIncluded =>
       'Each category total already includes the subcategories listed under it.';
+
+  @override
+  String get billsBoth => 'Payable and receivable';
+
+  @override
+  String get segPayable => 'To pay';
+
+  @override
+  String get segReceivable => 'To receive';
+
+  @override
+  String get receive => 'Receive';
+
+  @override
+  String receivableUntil(String date, String value) {
+    return 'To receive until $date · $value';
+  }
+
+  @override
+  String receivableLate(String value) {
+    return 'Late · $value';
+  }
+
+  @override
+  String get nothingToReceive => 'Nothing to receive in the period';
+
+  @override
+  String get newReceivable => 'New amount to receive';
+
+  @override
+  String get receivablesHelp =>
+      '“Receive” marks it as received today in the entry\'s account. To receive part of it, open the entry.';
+
+  @override
+  String expectedOn(String date) {
+    return 'Expected on $date';
+  }
+
+  @override
+  String expectedSince(String date) {
+    return 'Expected since $date';
+  }
 }

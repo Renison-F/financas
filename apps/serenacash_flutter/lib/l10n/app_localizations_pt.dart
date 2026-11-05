@@ -1169,7 +1169,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get dataLocalHelp =>
-      'Seus dados ficam só neste aparelho. Faça backups em Mais → Exportar.';
+      'Seus dados ficam só neste aparelho. Faça backups no menu, em Exportar e backup.';
 
   @override
   String get reminders => 'Lembretes';
@@ -2044,7 +2044,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get indicatorsDesc => 'Taxa de poupança, comprometimento, patrimônio';
 
   @override
-  String get exportHint => 'Exportação em CSV e PDF em Mais → Exportar.';
+  String get exportHint =>
+      'Exportação em CSV e PDF no menu, em Exportar e backup.';
 
   @override
   String get months6 => '6 meses';
@@ -2545,7 +2546,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get faq9a =>
-      'Tudo fica no aparelho, cifrado. Exporte backups em Mais → Exportar. Apague tudo em Privacidade.';
+      'Tudo fica no aparelho, cifrado. Exporte backups no menu, em Exportar e backup. Apague tudo em Privacidade.';
 
   @override
   String featurePartOfPlus(String feature) {
@@ -3931,4 +3932,46 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get repSubsIncluded =>
       'O total de cada categoria já inclui as subcategorias listadas abaixo dela.';
+
+  @override
+  String get billsBoth => 'A pagar e a receber';
+
+  @override
+  String get segPayable => 'A pagar';
+
+  @override
+  String get segReceivable => 'A receber';
+
+  @override
+  String get receive => 'Receber';
+
+  @override
+  String receivableUntil(String date, String value) {
+    return 'A receber até $date · $value';
+  }
+
+  @override
+  String receivableLate(String value) {
+    return 'Atrasadas · $value';
+  }
+
+  @override
+  String get nothingToReceive => 'Nada a receber no período';
+
+  @override
+  String get newReceivable => 'Nova conta a receber';
+
+  @override
+  String get receivablesHelp =>
+      '“Receber” marca como recebido hoje na conta do lançamento. Para receber parte, abra o lançamento.';
+
+  @override
+  String expectedOn(String date) {
+    return 'Previsto para $date';
+  }
+
+  @override
+  String expectedSince(String date) {
+    return 'Previsto desde $date';
+  }
 }

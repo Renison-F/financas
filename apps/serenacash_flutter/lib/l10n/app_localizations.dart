@@ -2195,7 +2195,7 @@ abstract class AppLocalizations {
   /// No description provided for @dataLocalHelp.
   ///
   /// In pt, this message translates to:
-  /// **'Seus dados ficam só neste aparelho. Faça backups em Mais → Exportar.'**
+  /// **'Seus dados ficam só neste aparelho. Faça backups no menu, em Exportar e backup.'**
   String get dataLocalHelp;
 
   /// No description provided for @reminders.
@@ -3707,7 +3707,7 @@ abstract class AppLocalizations {
   /// No description provided for @exportHint.
   ///
   /// In pt, this message translates to:
-  /// **'Exportação em CSV e PDF em Mais → Exportar.'**
+  /// **'Exportação em CSV e PDF no menu, em Exportar e backup.'**
   String get exportHint;
 
   /// No description provided for @months6.
@@ -4541,7 +4541,7 @@ abstract class AppLocalizations {
   /// No description provided for @faq9a.
   ///
   /// In pt, this message translates to:
-  /// **'Tudo fica no aparelho, cifrado. Exporte backups em Mais → Exportar. Apague tudo em Privacidade.'**
+  /// **'Tudo fica no aparelho, cifrado. Exporte backups no menu, em Exportar e backup. Apague tudo em Privacidade.'**
   String get faq9a;
 
   /// No description provided for @featurePartOfPlus.
@@ -6649,6 +6649,72 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'O total de cada categoria já inclui as subcategorias listadas abaixo dela.'**
   String get repSubsIncluded;
+
+  /// No description provided for @billsBoth.
+  ///
+  /// In pt, this message translates to:
+  /// **'A pagar e a receber'**
+  String get billsBoth;
+
+  /// No description provided for @segPayable.
+  ///
+  /// In pt, this message translates to:
+  /// **'A pagar'**
+  String get segPayable;
+
+  /// No description provided for @segReceivable.
+  ///
+  /// In pt, this message translates to:
+  /// **'A receber'**
+  String get segReceivable;
+
+  /// No description provided for @receive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receber'**
+  String get receive;
+
+  /// No description provided for @receivableUntil.
+  ///
+  /// In pt, this message translates to:
+  /// **'A receber até {date} · {value}'**
+  String receivableUntil(String date, String value);
+
+  /// No description provided for @receivableLate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atrasadas · {value}'**
+  String receivableLate(String value);
+
+  /// No description provided for @nothingToReceive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada a receber no período'**
+  String get nothingToReceive;
+
+  /// No description provided for @newReceivable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova conta a receber'**
+  String get newReceivable;
+
+  /// No description provided for @receivablesHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'“Receber” marca como recebido hoje na conta do lançamento. Para receber parte, abra o lançamento.'**
+  String get receivablesHelp;
+
+  /// No description provided for @expectedOn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto para {date}'**
+  String expectedOn(String date);
+
+  /// No description provided for @expectedSince.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto desde {date}'**
+  String expectedSince(String date);
 }
 
 class _AppLocalizationsDelegate

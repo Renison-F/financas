@@ -649,7 +649,7 @@
   "pinMismatch": "PINs do not match.",
   "pinFormat": "Use 4 to 8 digits.",
   "lockOnBackground": "Lock when returning from background",
-  "dataLocalHelp": "Your data stays only on this device. Make backups in More → Export.",
+  "dataLocalHelp": "Your data stays only on this device. Make backups in the menu, under Export and backup.",
   "reminders": "Reminders",
   "remindersText": "Local notice the day before and on the due date of planned bills (next 7 days). Nothing leaves the device.",
   "enableReminders": "Enable due-date reminders",
@@ -1311,7 +1311,7 @@
   "projectionDesc": "How the balance evolves with what is planned",
   "indicatorsReport": "Indicators and net worth",
   "indicatorsDesc": "Savings rate, commitment, net worth",
-  "exportHint": "CSV and PDF export in More → Export.",
+  "exportHint": "CSV and PDF export in the menu, under Export and backup.",
   "months6": "6 months",
   "months12": "12 months",
   "incomeVsExpenses": "Income × expenses",
@@ -1634,7 +1634,7 @@
   "faq8q": "Supermarket",
   "faq8a": "A barcode identifies the product, not the price. The price comes from the scanned tag (OCR), your history or you. Nothing is added without confirmation, and the cart total uses scale rounding.",
   "faq9q": "My data",
-  "faq9a": "Everything stays on the device, encrypted. Export backups in More → Export. Erase everything in Privacy.",
+  "faq9a": "Everything stays on the device, encrypted. Export backups in the menu, under Export and backup. Erase everything in Privacy.",
   "featurePartOfPlus": "\"{feature}\" is part of Plus.",
   "@featurePartOfPlus": {
     "placeholders": {
@@ -2463,5 +2463,20 @@
   "addReceivable": "Amount to receive",
   "addReceivableDesc": "Expected income, not received yet",
   "repDirectInCategory": "Directly in the category",
-  "repSubsIncluded": "Each category total already includes the subcategories listed under it."
+  "repSubsIncluded": "Each category total already includes the subcategories listed under it.",
+  "billsBoth": "Payable and receivable",
+  "segPayable": "To pay",
+  "segReceivable": "To receive",
+  "receive": "Receive",
+  "receivableUntil": "To receive until {date} · {value}",
+  "@receivableUntil": {"placeholders": {"date": {"type": "String"}, "value": {"type": "String"}}},
+  "receivableLate": "Late · {value}",
+  "@receivableLate": {"placeholders": {"value": {"type": "String"}}},
+  "nothingToReceive": "Nothing to receive in the period",
+  "newReceivable": "New amount to receive",
+  "receivablesHelp": "“Receive” marks it as received today in the entry's account. To receive part of it, open the entry.",
+  "expectedOn": "Expected on {date}",
+  "@expectedOn": {"placeholders": {"date": {"type": "String"}}},
+  "expectedSince": "Expected since {date}",
+  "@expectedSince": {"placeholders": {"date": {"type": "String"}}}
 }
