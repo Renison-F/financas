@@ -167,10 +167,28 @@ class _LockGateState extends ConsumerState<LockGate>
     container.invalidate(appControllerProvider);
   }
 
+  /// The app stays mounted under the lock, at the same place in the tree, so nothing the user was
+  /// doing is lost when the lock comes and goes (a form half filled when the app went to background).
+  /// While locked it is offstage: not painted, not touchable, out of the accessibility tree, without
+  /// focus and with its animations stopped.
+  Widget _gate({required bool locked, Widget? lockScreen}) => Stack(
+    fit: StackFit.expand,
+    children: [
+      Offstage(
+        offstage: locked,
+        child: TickerMode(
+          enabled: !locked,
+          child: ExcludeFocus(excluding: locked, child: widget.child),
+        ),
+      ),
+      ?lockScreen,
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
     final app = ref.watch(appControllerProvider);
-    if (!app.hasValue) return widget.child;
+    if (!app.hasValue) return _gate(locked: false);
     final p = app.value!.ledger.prefs;
     final required = p.biometricLock || p.pinEnabled;
     // With a lock on, the window is also kept out of screenshots and of the recent-apps thumbnail.
@@ -178,7 +196,7 @@ class _LockGateState extends ConsumerState<LockGate>
       _secureApplied = required;
       unawaited(ref.read(windowSecurityProvider).setSecure(required));
     }
-    if (!required || _unlocked) return widget.child;
+    if (!required || _unlocked) return _gate(locked: false);
     if (p.biometricLock && !_tried) {
       _tried = true;
       WidgetsBinding.instance.addPostFrameCallback((_) => _biometrics());
@@ -191,9 +209,12 @@ class _LockGateState extends ConsumerState<LockGate>
     final l = context.l10n;
     // LockGate sits in MaterialApp.builder, above the app Navigator, so the lock screen needs its own
     // Navigator (sheets, the keyboard overlay): without one the PIN field throws on every edit.
-    return Navigator(
-      onGenerateRoute: (_) => MaterialPageRoute<void>(
-        builder: (context) => _lockScreen(context, c, l, p),
+    return _gate(
+      locked: true,
+      lockScreen: Navigator(
+        onGenerateRoute: (_) => MaterialPageRoute<void>(
+          builder: (context) => _lockScreen(context, c, l, p),
+        ),
       ),
     );
   }

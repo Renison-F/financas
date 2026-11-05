@@ -177,4 +177,110 @@ void main() {
       expect(tester.takeException(), isNull);
     },
   );
+
+  testWidgets(
+    'turning the PIN off asks for the current PIN: a wrong one keeps the lock, the right one removes it',
+    (tester) async {
+      await setPhone(tester);
+      final app = TestApp();
+      addTearDown(app.dispose);
+      await app.db.into(app.db.kv).insert(KvCompanionFactory.onboarded());
+      await tester.pumpWidget(_appWithFastPin(app));
+      for (var i = 0; i < 30; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+      await tester.pumpAndSettle();
+
+      await _openSettings(tester);
+      await tester.tap(find.text('Proteger com PIN'));
+      await tester.pumpAndSettle();
+      await _answerPinDialog(tester, '4826');
+      await _answerPinDialog(tester, '4826');
+      await _pumpReal(tester);
+      // Unlock: the settings screen is still underneath.
+      await tester.enterText(find.byType(TextField), '4826');
+      await tester.tap(find.text('Usar PIN'));
+      await _pumpReal(tester);
+      expect(find.byType(SettingsScreen), findsOneWidget);
+
+      await tester.tap(find.text('Proteger com PIN'));
+      await tester.pumpAndSettle();
+      expect(find.text('Confirme o PIN para desativar'), findsOneWidget);
+      await _answerPinDialog(tester, '1111');
+      await _pumpReal(tester);
+      expect(await app.secrets.read(SecretKeys.pinVerifier), isNotNull);
+      expect(find.text('PIN incorreto.'), findsOneWidget);
+
+      await tester.tap(find.text('Proteger com PIN'));
+      await tester.pumpAndSettle();
+      await _answerPinDialog(tester, '4826');
+      await _pumpReal(tester);
+      expect(await app.secrets.read(SecretKeys.pinVerifier), isNull);
+      expect(await app.secrets.read(SecretKeys.pinAttempts), isNull);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'locking on background keeps what was being typed: the form is still there after unlocking',
+    (tester) async {
+      await setPhone(tester);
+      final app = TestApp();
+      addTearDown(app.dispose);
+      await app.db.into(app.db.kv).insert(KvCompanionFactory.onboarded());
+      await tester.pumpWidget(_appWithFastPin(app));
+      for (var i = 0; i < 30; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+      await tester.pumpAndSettle();
+
+      await _openSettings(tester);
+      await tester.tap(find.text('Proteger com PIN'));
+      await tester.pumpAndSettle();
+      await _answerPinDialog(tester, '4826');
+      await _answerPinDialog(tester, '4826');
+      await _pumpReal(tester);
+      await tester.enterText(find.byType(TextField), '4826');
+      await tester.tap(find.text('Usar PIN'));
+      await _pumpReal(tester);
+      // System back (the header with the back arrow is scrolled out of view).
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+
+      await addEntry(tester);
+      await tester.enterText(find.byType(TextField).at(0), '15990');
+      await tester.enterText(
+        find.byType(TextField).at(1),
+        'Farmácia da esquina',
+      );
+      await tester.pumpAndSettle();
+
+      // The app goes to the background and comes back: it is locked, and nothing of it is on screen.
+      for (final state in const [
+        AppLifecycleState.inactive,
+        AppLifecycleState.hidden,
+        AppLifecycleState.paused,
+        AppLifecycleState.hidden,
+        AppLifecycleState.inactive,
+        AppLifecycleState.resumed,
+      ]) {
+        tester.binding.handleAppLifecycleStateChanged(state);
+      }
+      await tester.pumpAndSettle();
+      expect(find.text('Bloqueado'), findsOneWidget);
+      expect(find.text('Farmácia da esquina'), findsNothing);
+      expect(find.textContaining('159,90'), findsNothing);
+
+      await tester.enterText(find.byType(TextField), '4826');
+      await tester.tap(find.text('Usar PIN'));
+      await _pumpReal(tester);
+      expect(find.text('Bloqueado'), findsNothing);
+      expect(
+        find.widgetWithText(TextField, 'Farmácia da esquina'),
+        findsOneWidget,
+      );
+      expect(find.textContaining('159,90'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
 }
