@@ -4,6 +4,10 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// Instalação isolada para testes que apagam ou corrompem dados: com SERENA_APP_ID_SUFFIX=.seg o
+// pacote vira br.com.serenacash.mobile.seg e convive com o app normal, sem tocar nos dados dele.
+val appIdSuffix: String = System.getenv("SERENA_APP_ID_SUFFIX") ?: ""
+
 android {
     namespace = "br.com.serenacash.mobile"
     compileSdk = flutter.compileSdkVersion
@@ -17,7 +21,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "br.com.serenacash.mobile"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
@@ -29,12 +32,18 @@ android {
         // flag during build.
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        if (appIdSuffix.isNotBlank()) {
+            applicationIdSuffix = appIdSuffix
+        }
+        manifestPlaceholders["appLabel"] =
+            if (appIdSuffix.isNotBlank()) "SerenaCash teste" else "SerenaCash"
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // Homologação interna: a variante release é assinada com a chave de debug desta máquina.
+            // Serve para instalar e testar; não é a chave da loja e não vale para publicação. A chave
+            // definitiva entra por um signingConfig próprio, fora do repositório, quando houver.
             signingConfig = signingConfigs.getByName("debug")
             // Regras do R8 do app, somadas às que o Flutter já aplica.
             proguardFiles("proguard-rules.pro")
