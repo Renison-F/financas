@@ -6637,6 +6637,18 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Receita prevista, ainda não recebida'**
   String get addReceivableDesc;
+
+  /// No description provided for @repDirectInCategory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Direto na categoria'**
+  String get repDirectInCategory;
+
+  /// No description provided for @repSubsIncluded.
+  ///
+  /// In pt, this message translates to:
+  /// **'O total de cada categoria já inclui as subcategorias listadas abaixo dela.'**
+  String get repSubsIncluded;
 }
 
 class _AppLocalizationsDelegate

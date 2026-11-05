@@ -3912,4 +3912,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addReceivableDesc => 'Expected income, not received yet';
+
+  @override
+  String get repDirectInCategory => 'Directly in the category';
+
+  @override
+  String get repSubsIncluded =>
+      'Each category total already includes the subcategories listed under it.';
 }

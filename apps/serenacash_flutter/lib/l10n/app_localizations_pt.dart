@@ -3924,4 +3924,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get addReceivableDesc => 'Receita prevista, ainda não recebida';
+
+  @override
+  String get repDirectInCategory => 'Direto na categoria';
+
+  @override
+  String get repSubsIncluded =>
+      'O total de cada categoria já inclui as subcategorias listadas abaixo dela.';
 }

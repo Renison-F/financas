@@ -2461,5 +2461,7 @@
   "addBill": "Bill to pay",
   "addBillDesc": "Expense with a due date, not paid yet",
   "addReceivable": "Amount to receive",
-  "addReceivableDesc": "Expected income, not received yet"
+  "addReceivableDesc": "Expected income, not received yet",
+  "repDirectInCategory": "Directly in the category",
+  "repSubsIncluded": "Each category total already includes the subcategories listed under it."
 }

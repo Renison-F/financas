@@ -2461,5 +2461,7 @@
   "addBill": "Conta a pagar",
   "addBillDesc": "Despesa com vencimento, ainda não paga",
   "addReceivable": "Conta a receber",
-  "addReceivableDesc": "Receita prevista, ainda não recebida"
+  "addReceivableDesc": "Receita prevista, ainda não recebida",
+  "repDirectInCategory": "Direto na categoria",
+  "repSubsIncluded": "O total de cada categoria já inclui as subcategorias listadas abaixo dela."
 }

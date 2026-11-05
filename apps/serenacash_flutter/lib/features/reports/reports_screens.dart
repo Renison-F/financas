@@ -404,6 +404,24 @@ class _CategoriesReportScreenState
     );
     final total = rows.fold(0, (a, r) => a + r.cents);
     String brl(int v) => formatBRL(v, hidden: hidden);
+    // Grouped view: each category also shows how its amount splits among its subcategories. The parts
+    // are a breakdown of the category total, never added to it again.
+    final parts = <String?, List<CategoryTotal>>{};
+    if (_rollUp) {
+      for (final f in expensesByCategory(
+        s.ledger,
+        _month,
+        includePlanned: _planned,
+      )) {
+        final cat = s.ledger.categoryById(f.categoryId);
+        if (cat == null) continue;
+        (parts[cat.parentId ?? cat.id] ??= []).add(f);
+      }
+      // A category with entries only in itself has nothing to break down.
+      parts.removeWhere(
+        (root, list) => list.every((f) => f.categoryId == root),
+      );
+    }
     return StackScreen(
       title: l.spendingByCategory,
       children: [
@@ -491,9 +509,50 @@ class _CategoriesReportScreenState
                             ),
                           ),
                         ),
+                        for (final f
+                            in parts[r.categoryId] ?? const <CategoryTotal>[])
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 4,
+                              left: Spacing.sm,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    f.categoryId == r.categoryId
+                                        ? l.repDirectInCategory
+                                        : f.name,
+                                    style: Type.rowMeta.copyWith(
+                                      color: c.textMuted,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                Text(
+                                  brl(f.cents),
+                                  style: Type.rowMeta.copyWith(
+                                    color: c.textMuted,
+                                    fontFeatures: const [
+                                      FontFeature.tabularFigures(),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
                   ),
+              if (parts.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: Spacing.xs),
+                  child: Text(
+                    l.repSubsIncluded,
+                    style: Type.rowMeta.copyWith(color: c.textMuted),
+                  ),
+                ),
               SButton(
                 label: l.seeMonthTransactions,
                 variant: SButtonVariant.ghost,

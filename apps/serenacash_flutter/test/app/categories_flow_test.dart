@@ -11,7 +11,9 @@ import 'package:serenacash/app/state/app_controller.dart';
 import 'package:serenacash/app/state/app_state.dart';
 import 'package:serenacash/domain/categories/categories.dart';
 import 'package:serenacash/domain/entities/entities.dart';
+import 'package:serenacash/domain/budgets/budgets.dart';
 import 'package:serenacash/domain/ports/ports.dart';
+import 'package:serenacash/domain/reports/reports.dart';
 import 'package:serenacash/features/categories/categories_screen.dart';
 import 'package:serenacash/features/categories/category_form_screen.dart';
 import 'package:serenacash/features/transactions/transaction_form_screen.dart';
@@ -600,6 +602,100 @@ void main() {
         findsOneWidget,
       );
       expect(find.byType(CategoriesScreen), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
+    'totals count each entry once; the list filter of a category brings its subcategories',
+    (tester) async {
+      await setPhone(tester);
+      await _boot(tester);
+      final c = _container(tester);
+      final ctl = c.read(appControllerProvider.notifier);
+      Ledger ledger() => c.read(ledgerProvider);
+      final today = c.read(todayProvider);
+      final month = today.substring(0, 7);
+      final account = await _run(
+        tester,
+        () => ctl.saveAccount(
+          name: 'Conta',
+          type: 'checking',
+          openingBalanceCents: 500000,
+          openingDate: today,
+        ),
+      );
+      final moradia = _cat(ledger(), 'Moradia');
+      final aluguel = await _run(
+        tester,
+        () => ctl.saveCategory(
+          name: 'Aluguel',
+          kind: 'expense',
+          parentId: moradia.id,
+        ),
+      );
+      Future<void> spend(String d, int cents, String cat) => _run(
+        tester,
+        () => ctl.saveTransaction(
+          TransactionInput(
+            kind: TransactionKind.expense,
+            amountCents: cents,
+            date: today,
+            description: d,
+            accountId: account.id,
+            categoryId: cat,
+          ),
+        ),
+      );
+      await spend('Aluguel de novembro', 120000, aluguel.id);
+      await spend('Conserto da pia', 15000, moradia.id);
+      await spend('Mercado', 30000, _cat(ledger(), 'Supermercado').id);
+
+      // Grouped: Moradia = its own entry + the subcategory's. Flat: each one apart. Same grand total.
+      final grouped = expensesByCategory(ledger(), month, rollUp: true);
+      final flat = expensesByCategory(ledger(), month);
+      int sum(List<CategoryTotal> l) => l.fold(0, (a, x) => a + x.cents);
+      expect(sum(grouped), 165000);
+      expect(sum(flat), 165000);
+      expect(
+        grouped.firstWhere((x) => x.categoryId == moradia.id).cents,
+        135000,
+      );
+      expect(grouped.any((x) => x.categoryId == aluguel.id), isFalse);
+      expect(flat.firstWhere((x) => x.categoryId == moradia.id).cents, 15000);
+      expect(flat.firstWhere((x) => x.categoryId == aluguel.id).cents, 120000);
+
+      // A budget for the main category sees the subcategory's spending once.
+      await _run(
+        tester,
+        () => ctl.saveBudget(categoryId: moradia.id, limitCents: 200000),
+      );
+      final progress = budgetsForMonth(
+        ledger(),
+        month,
+        today,
+      ).firstWhere((b) => b.budget.categoryId == moradia.id);
+      expect(progress.spentCents, 135000);
+
+      // On the entries tab, filtering by Moradia lists both entries and leaves the groceries out.
+      await tester.tap(find.text('Lançamentos'));
+      await tester.pumpAndSettle();
+      expect(find.text('Mercado'), findsOneWidget);
+      await screenshot(tester, 'transactions_light');
+      await tester.tap(find.text('Categoria'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.descendant(
+          of: find.byType(BottomSheet),
+          matching: find.text('Moradia'),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Aluguel de novembro'), findsOneWidget);
+      expect(find.text('Conserto da pia'), findsOneWidget);
+      expect(find.text('Mercado'), findsNothing);
+      // The row says where the entry is filed.
+      expect(find.textContaining('Moradia › Aluguel'), findsOneWidget);
       expect(tester.takeException(), isNull);
     },
   );

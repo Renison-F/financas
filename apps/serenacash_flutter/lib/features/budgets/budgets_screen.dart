@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/app.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/theme/tokens.dart';
+import '../../domain/categories/categories.dart';
 import '../../domain/billing/billing.dart';
 import '../../domain/budgets/budgets.dart';
 import '../../domain/dates/dates.dart';
@@ -14,6 +15,7 @@ import '../../domain/money/money.dart';
 import '../../ui/components/components.dart';
 import '../cards/cards_screen.dart';
 import '../home/widgets.dart';
+import '../categories/category_widgets.dart';
 import '../shared/stack_screen.dart';
 
 class MonthChips extends StatelessWidget {
@@ -205,17 +207,38 @@ class _BudgetFormScreenState extends ConsumerState<BudgetFormScreen> {
       children: [
         Field(
           label: l.forLabel,
-          child: ChipSelect<String>(
-            options: [
-              ('__all__', l.wholeMonth),
-              for (final x in s.ledger.categories.where(
-                (x) => x.kind == 'expense' && !x.archived,
-              ))
-                (x.id, x.name),
-            ],
-            value: _categoryId ?? '__all__',
-            onChanged: (v) =>
-                setState(() => _categoryId = v == '__all__' ? null : v),
+          // A budget for a main category already counts what is spent in its subcategories.
+          child: SCard(
+            padding: const EdgeInsets.symmetric(horizontal: Spacing.sm),
+            onTap: () async {
+              final choice = await showCategoryPicker(
+                context,
+                kind: 'expense',
+                selectedId: _categoryId,
+                allowNone: true,
+                noneLabel: l.wholeMonth,
+              );
+              if (choice != null && mounted) {
+                setState(() => _categoryId = choice.id);
+              }
+            },
+            child: () {
+              final cat = s.ledger.categoryById(_categoryId);
+              return ListRow(
+                leading: cat == null
+                    ? IconTile(
+                        icon: SIconName.calendar,
+                        color: c.textMuted,
+                        background: c.surfaceInset,
+                      )
+                    : CategoryMark.of(cat),
+                title: cat == null
+                    ? l.wholeMonth
+                    : (categoryPath(s.ledger, cat.id) ?? cat.name),
+                titleMaxLines: 2,
+                chevron: true,
+              );
+            }(),
           ),
         ),
         MoneyField(
