@@ -18,6 +18,7 @@ Observações de ambiente (Windows):
 
 - A partir de um shell em que o Gradle falhe com `Unable to establish loopback connection`, defina só para o processo `JAVA_TOOL_OPTIONS=-Djdk.net.unixdomain.tmpdir=<pasta gravável>`.
 - O `integration_test` é instável nesse emulador (a conexão adb reinicia quando a ferramenta se conecta): repita com limite de tempo. Ele pula o onboarding quando o app já tem dados; apague os dados antes (`adb shell pm clear br.com.serenacash.mobile`).
+- O `integration_test` deixa instalada uma build com o ponto de entrada do teste (e sobrescreve `build/app/outputs/flutter-apk/app-debug.apk` com ela). Aberta pelo ícone, essa build fica parada na tela de abertura, sem erro no logcat. Depois do teste, rode `flutter build apk --debug`, reinstale e abra pelo ícone para conferir. Aconteceu em 05/11/2026: o app pareceu travado na abertura e o código não tinha defeito.
 - Capturas: `adb exec-out screencap -p > arquivo.png` em um shell POSIX (no PowerShell 5.1 o redirecionamento corrompe o PNG).
 - O emulador usado está em fuso GMT; à noite a data do app fica um dia à frente da do PC.
 
