@@ -63,6 +63,15 @@ issues, `dart format` sem alterações. Detalhes e divergências em `02-EQUIVALE
 - Gates: `dart format` 0 alterações, `flutter analyze --fatal-infos` 0 issues, `flutter test` 359 aprovados, 0 ignorados, 0 falhas.
 - Nenhuma regra financeira foi alterada. A ordem padrão do domínio para a tela inicial continua igual à fixture; quem nunca personalizou recebe a ordem do mockup (definida na camada de app).
 
+## Homologação avançada e endurecimento de segurança (05/11/2026)
+- Defeitos corrigidos: "Apagar tudo" deixava o app sem abrir (P0); chave do banco regenerada em silêncio, falha de abertura sem saída, bloqueio por biometria sem aparelho capaz, pagamento repetido que devolvia dinheiro (P1); limite de tentativas de PIN, PIN atual para trocar, PIN esquecido, arquivos exportados no cache, captura de tela com bloqueio, formulário perdido ao bloquear, data inexistente, toque duplo em salvar (P2).
+- Banco e chave passaram a ser tratados juntos (`lib/data/security/local_vault.dart`); a tela de inicialização explica a falha e oferece recuperação.
+- Testes: 399 aprovados (domínio 288, dados 48, app 55, desempenho 8), com 15 invariantes financeiras novas.
+- Evidência no emulador em instalação isolada: banco e WAL cifrados sem texto em claro, chave embrulhada pelo Keystore, recuperação por chave ausente e por arquivo corrompido, PIN com pausa persistente, captura preta com bloqueio, restauração interrompida sem dano.
+- Desempenho medido de 100 a 50.000 lançamentos (`10-PERFORMANCE.md`).
+- Documentos: `docs/security/AUDITORIA_FLUTTER.md` (reescrito), matriz em `10-HOMOLOGACAO.md`, `14-CHECKLIST_APARELHO.md` (novo), variantes de APK em `11-BUILD_CI.md`.
+- Build 0.1.0+2. APKs de debug e de homologação em `E:\SerenaCash\homologacao\`.
+
 ## Pendências reais
 - iOS: sem macOS neste ambiente; ícone e abertura com a marca só foram feitos no Android.
 - TalkBack ligado não foi testado; os nós de acessibilidade foram conferidos pela árvore do sistema (uiautomator).

@@ -6,19 +6,19 @@ Suíte: `apps/serenacash_flutter/test` + fixtures TS→Dart em `docs/flutter-mig
 
 | Resultado | Qtde |
 |---|---|
-| Aprovados | 359 |
+| Aprovados | 399 |
 | Ignorados (`skip`) | 0 |
 | Com falha | 0 |
-| **Total executado** | **359** |
+| **Total executado** | **399** |
 
-Comando: `flutter test` em `apps/serenacash_flutter` (saída final `+359: All tests passed!`). As referências antigas a 317, 320 e 349 testes ficaram desatualizadas; o número cresceu com os testes de PIN, lembretes, backup de Compras, regressões da homologação, da tela inicial, de categorias e do tour de telas.
+Comando: `flutter test` em `apps/serenacash_flutter` (saída final `+399: All tests passed!`). As referências antigas a 317, 320, 349 e 359 testes ficaram desatualizadas; o número cresceu com os testes de PIN, lembretes, backup de Compras, regressões da homologação, da tela inicial, de categorias e do tour de telas.
 
 | Camada | Local | O que cobre | Aprovados | Ignorados | Falhas |
 |---|---|---|---|---|---|
 | Domínio (equivalência e regras) | `test/domain/*` | 22 fixtures / 272 casos TS reproduzidos sem divergência monetária + invariantes (estorno, erros, arredondamento); `regressions_test.dart`: resultado do dia do calendário, ranking do ano limitado ao mês corrente, saudação por horário, plurais e rótulos do resumo de importação | 288 | 0 | 0 |
-| Persistência e segurança | `test/data/*` | esquema/índices/FK/CHECK, round-trip, idempotência, exclusão lógica, anexos com hash, stream, prefs, compras, SQLCipher (chave errada falha, arquivo não é SQLite em claro), PIN Argon2id, backup AES-GCM (adulteração), serviço de backup (v1, cifrado, legado, erros sem efeito), mapeamento RevenueCat; `backup_shopping_test.dart`: Compras no backup (ida e volta, substituição, backup antigo sem Compras, seção malformada aborta) | 33 | 0 | 0 |
-| App (widget/fluxo) | `test/app/*` | app real com banco em memória: onboarding → pode gastar → lançamento → lista → tema escuro; 24 widgets; privacidade; contas → cartão → compra parcelada → fatura; orçamento/meta/empréstimo/relatórios; lista → sessão → confirmação de finalização → despesa; leitura simulada de código/etiqueta; histórico e anual; `pin_lock_test.dart`; `reminders_host_test.dart`; `regressions_flow_test.dart` (desfazer, "Cancelar" sem corte, cores com nome, senha oculta, onboarding: voltar um passo e configuração interrompida sem duplicar conta); `home_redesign_test.dart` (primeiro acesso, conta sem movimentações, com dados, claro/escuro, valores ocultos, ações rápidas e período, tela estreita com fonte a 200%); `categories_flow_test.dart` (regras de hierarquia; excluir movendo também os lançamentos excluídos; criar com ícone e cor, subcategoria, editar, arquivar pelo menu lateral; criar categoria e subcategoria durante o lançamento sem perder o que foi digitado; excluir pedindo o destino; totais sem dupla contagem e filtro por categoria); `tour_test.dart` (20 telas com dados em claro, escuro e em 320 pt com texto a 150%) | 35 | 0 | 0 |
-| Performance | `test/perf/perf_test.dart` | painel com 5.000 lançamentos, busca, banco | 3 | 0 | 0 |
+| Persistência e segurança | `test/data/*` | esquema/índices/FK/CHECK, round-trip, idempotência, exclusão lógica, anexos com hash, stream, prefs, compras, SQLCipher (chave errada falha, arquivo não é SQLite em claro), PIN Argon2id, backup AES-GCM (adulteração), serviço de backup (v1, cifrado, legado, erros sem efeito), mapeamento RevenueCat; `backup_shopping_test.dart`: Compras no backup (ida e volta, substituição, backup antigo sem Compras, seção malformada aborta) | 48 | 0 | 0 |
+| App (widget/fluxo) | `test/app/*` | app real com banco em memória: onboarding → pode gastar → lançamento → lista → tema escuro; 24 widgets; privacidade; contas → cartão → compra parcelada → fatura; orçamento/meta/empréstimo/relatórios; lista → sessão → confirmação de finalização → despesa; leitura simulada de código/etiqueta; histórico e anual; `pin_lock_test.dart`; `reminders_host_test.dart`; `regressions_flow_test.dart` (desfazer, "Cancelar" sem corte, cores com nome, senha oculta, onboarding: voltar um passo e configuração interrompida sem duplicar conta); `home_redesign_test.dart` (primeiro acesso, conta sem movimentações, com dados, claro/escuro, valores ocultos, ações rápidas e período, tela estreita com fonte a 200%); `categories_flow_test.dart` (regras de hierarquia; excluir movendo também os lançamentos excluídos; criar com ícone e cor, subcategoria, editar, arquivar pelo menu lateral; criar categoria e subcategoria durante o lançamento sem perder o que foi digitado; excluir pedindo o destino; totais sem dupla contagem e filtro por categoria); `tour_test.dart` (20 telas com dados em claro, escuro e em 320 pt com texto a 150%) | 55 | 0 | 0 |
+| Performance | `test/perf/perf_test.dart` | painel com 5.000 lançamentos, busca, banco | 8 | 0 | 0 |
 
 ## Gates (todos sem `|| true`)
 
@@ -34,7 +34,7 @@ dart run build_runner build --delete-conflicting-outputs && flutter gen-l10n
 dart format --set-exit-if-changed lib test && flutter analyze --fatal-infos && flutter test
 ```
 
-Resultado em 05/11/2026: `dart format` → 155 arquivos, 0 alterações; `flutter analyze --fatal-infos` → 0 issues; `flutter test` → 359 aprovados, 0 ignorados, 0 falhas.
+Resultado em 05/11/2026: `dart format` → 0 alterações; `flutter analyze --fatal-infos` → 0 issues; `flutter test` → 399 aprovados, 0 ignorados, 0 falhas.
 
 ## Capturas de tela
 
@@ -55,3 +55,24 @@ adb -s emulator-5554 install -r build/app/outputs/flutter-apk/app-debug.apk
 ```
 
 Os cenários de dispositivo (câmera, OCR, biometria, notificações, compras em sandbox) estão no checklist de `docs/13-guia-teste-dispositivo.md`, escrito para o app React Native. A homologação do app Flutter no emulador está em `10-HOMOLOGACAO.md`.
+
+## Testes acrescentados na homologação avançada (05/11/2026)
+
+| Arquivo | O que prova | Testes |
+|---|---|---|
+| `test/app/financial_invariants_test.dart` | 15 invariantes financeiras e a recusa de entradas inválidas, pelo controlador real em banco em memória, com dados aleatórios semeados: precisão dos centavos, transferências, pagamento de fatura, parcelas, estorno, receita prevista, pagamento parcial, repetição, lote que falha no meio, backup e restauração, excluir e desfazer, peso, "pode gastar", datas de fatura, sessão de compras | 16 |
+| `test/data/vault_recovery_test.dart` | Banco e chave juntos, com arquivo SQLCipher real: chave ausente ou danificada é recusada sem gerar outra; apagar remove arquivo, WAL e chave; arquivo corrompido é preservado | 6 |
+| `test/data/pin_throttle_test.dart` | Tentativas de PIN: contagem, pausas crescentes, persistência, contador danificado, nada em claro | 7 |
+| `test/data/backup_resilience_test.dart` | Dez formas de backup inválido recusadas sem mudar o banco; sal e nonce nunca repetidos | 2 |
+| `test/app/pin_lock_test.dart` | Pausa na tela de bloqueio, "Esqueci o PIN", desativar com o PIN atual, formulário preservado ao bloquear | +3 |
+| `test/app/regressions_flow_test.dart` | Toque duplo em salvar grava uma vez | +1 |
+| `test/perf/volume_test.dart` | Escala de 100 a 50.000 lançamentos | 5 |
+
+Contagem por camada: domínio 288, dados 48, app 55, desempenho 8.
+
+O teste de integração roda em uma instalação isolada para não apagar os dados do app que está no aparelho:
+
+```bash
+SERENA_APP_ID_SUFFIX=.itest flutter test integration_test -d emulator-5554
+```
+

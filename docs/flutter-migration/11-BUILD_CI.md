@@ -40,3 +40,18 @@ O `package:sqlite3` baixa o binário SQLCipher na primeira compilação (`hooks.
 ## iOS
 
 Bundle `br.com.serenacash.mobile`, `NSCameraUsageDescription`, `NSPhotoLibraryUsageDescription`, `ITSAppUsesNonExemptEncryption=false` (criptografia de dados locais padrão). Capacidades a ativar no Xcode: In-App Purchase, Push (não usado), Keychain Sharing (não necessário).
+
+## Variantes de APK (05/11/2026)
+
+| Variante | Comando | Para que serve |
+|---|---|---|
+| Debug | `flutter build apk --debug` | Desenvolvimento. Depurável, mais lento, maior. |
+| Homologação interna | `flutter build apk --release` | Testes em aparelho. Comportamento de release (R8, sem depuração), assinado com a chave de debug da máquina que compilou. Não vale para loja. |
+| Comercial (futuro) | `flutter build appbundle --release` com `signingConfig` próprio | Publicação. Exige a chave definitiva, fora do repositório, e as chaves do RevenueCat por `--dart-define`. |
+
+Um APK assinado por uma máquina não atualiza por cima de um APK assinado por outra (o do CI, por exemplo): o Android pede para desinstalar antes, e isso apaga os dados. Para manter os dados entre versões de teste, instale sempre APKs compilados na mesma máquina, ou exporte um backup antes de trocar.
+
+Instalação isolada para testes que apagam dados: `SERENA_APP_ID_SUFFIX=.seg flutter build apk --debug` gera o pacote `br.com.serenacash.mobile.seg` ("SerenaCash teste"), que convive com o app normal.
+
+Depois de `flutter test integration_test`, o arquivo `app-debug.apk` do diretório de build é o do teste. Gere o build de novo antes de distribuir e confira que `kernel_blob.bin` não contém `integration_test/app_test.dart`.
+
