@@ -112,7 +112,7 @@ class Money extends StatelessWidget {
               TextSpan(
                 text: cent,
                 style: style.copyWith(
-                  fontSize: 26,
+                  fontSize: 22,
                   fontWeight: FontWeight.w500,
                 ),
               ),

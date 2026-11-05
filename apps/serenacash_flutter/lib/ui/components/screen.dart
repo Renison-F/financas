@@ -17,7 +17,7 @@ class SScreen extends StatelessWidget {
     this.compactTitle = false,
     this.header,
     this.gutter,
-    this.headerPadding = Spacing.sm,
+    this.headerPadding = Spacing.xs,
   });
   final String title;
   final String? subtitle;
@@ -31,7 +31,7 @@ class SScreen extends StatelessWidget {
   /// Replaces the title/subtitle block (the header actions stay on the right).
   final Widget? header;
 
-  /// Side margin; defaults to 20 (16 on narrow screens).
+  /// Side margin; defaults to [Layout.gutter].
   final double? gutter;
 
   /// Space above and below the header row.
@@ -40,8 +40,7 @@ class SScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    final width = MediaQuery.sizeOf(context).width;
-    final gutter = this.gutter ?? (width >= 400 ? 20.0 : 16.0);
+    final gutter = this.gutter ?? Layout.gutter;
     return Scaffold(
       backgroundColor: c.bg,
       floatingActionButton: fab,
@@ -80,29 +79,34 @@ class SScreen extends StatelessWidget {
                         Expanded(
                           child:
                               header ??
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    title,
-                                    style:
-                                        (compactTitle
-                                                ? Type.title
-                                                : Type.headline)
-                                            .copyWith(color: c.text),
-                                    maxLines: 2,
-                                  ),
-                                  if (subtitle != null)
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 2),
-                                      child: Text(
-                                        subtitle!,
-                                        style: Type.bodySmall.copyWith(
-                                          color: c.textMuted,
+                              // Same 4 px inset as the home header: titles align across screens.
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: showBack ? 0 : Spacing.xxs,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      title,
+                                      style: Type.headline.copyWith(
+                                        color: c.text,
+                                        fontSize: compactTitle ? 18 : 22,
+                                      ),
+                                      maxLines: 2,
+                                    ),
+                                    if (subtitle != null)
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 2),
+                                        child: Text(
+                                          subtitle!,
+                                          style: Type.bodySmall.copyWith(
+                                            color: c.textMuted,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                ],
+                                  ],
+                                ),
                               ),
                         ),
                         ...actions,

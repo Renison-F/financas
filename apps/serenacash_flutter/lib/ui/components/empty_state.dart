@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app/theme/tokens.dart';
 import '../icons.dart';
 import 'buttons.dart';
+import 'list_row.dart';
 
 /// One-line empty state: icon, what is missing and one quiet action on the right. Used where several
 /// empty sections would otherwise stack as tall onboarding cards.
@@ -25,15 +26,7 @@ class EmptyRow extends StatelessWidget {
       constraints: const BoxConstraints(minHeight: Touch.target),
       child: Row(
         children: [
-          Container(
-            width: 32,
-            height: 32,
-            decoration: BoxDecoration(
-              color: c.surfaceInset,
-              borderRadius: BorderRadius.circular(Spacing.xs),
-            ),
-            child: Center(child: SIcon(icon, size: 18, color: c.textMuted)),
-          ),
+          IconTile(icon: icon, color: c.textMuted, background: c.surfaceInset),
           const SizedBox(width: Spacing.sm),
           Expanded(
             child: Text(
@@ -86,27 +79,17 @@ class EmptyState extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: c.surfaceInset,
-                  borderRadius: BorderRadius.circular(Radii.sm),
-                ),
-                child: Center(child: SIcon(icon, size: 20, color: c.textMuted)),
+              IconTile(
+                icon: icon,
+                color: c.textMuted,
+                background: c.surfaceInset,
               ),
               const SizedBox(width: Spacing.sm),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: Type.body.copyWith(
-                        color: c.text,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    Text(title, style: Type.rowTitle.copyWith(color: c.text)),
                     if (text != null)
                       Padding(
                         padding: const EdgeInsets.only(top: 2),

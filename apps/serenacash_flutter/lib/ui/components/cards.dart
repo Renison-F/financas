@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app/theme/tokens.dart';
 
-/// Flat card: Branco over Névoa, 20 px radius, no shadow, no border (Regra do Plano).
+/// Flat card: Branco over Névoa, 14 px radius, no shadow, no border (Regra do Plano).
 class SCard extends StatelessWidget {
   const SCard({
     super.key,
@@ -21,16 +21,18 @@ class SCard extends StatelessWidget {
   final VoidCallback? onTap;
   final String? semanticHint;
 
-  /// Corner radius; defaults to 20 (14 when inset).
+  /// Corner radius; defaults to 14 (10 when inset).
   final double? radius;
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final radius = BorderRadius.circular(
-      this.radius ?? (inset ? Radii.md : Radii.lg),
+      this.radius ?? (inset ? Radii.sm : Radii.md),
     );
     final body = Padding(
-      padding: padding ?? EdgeInsets.all(inset ? Spacing.sm : Spacing.md),
+      padding:
+          padding ??
+          (inset ? const EdgeInsets.all(Spacing.sm) : Layout.cardPadding),
       child: child,
     );
     final box = Material(
@@ -45,28 +47,43 @@ class SCard extends StatelessWidget {
   }
 }
 
+/// Section title of a card, with an optional action or link on the right.
 class CardHeader extends StatelessWidget {
-  const CardHeader({super.key, required this.title, this.action});
+  const CardHeader({super.key, required this.title, this.action, this.link});
   final String title;
   final Widget? action;
+
+  /// Plain link text on the right (the card itself is the touch target).
+  final String? link;
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: Spacing.xs),
-    child: Row(
-      children: [
-        Expanded(
-          child: Text(
-            title,
-            style: Type.title.copyWith(color: context.colors.text),
-            // Two lines keep the title readable at large text sizes next to the action.
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        crossAxisAlignment: action == null
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: Type.title.copyWith(color: c.text),
+              // Two lines keep the title readable at large text sizes next to the action.
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        ),
-        ?action,
-      ],
-    ),
-  );
+          ?action,
+          if (link != null)
+            Padding(
+              padding: const EdgeInsets.only(left: Spacing.xs, top: 2),
+              child: Text(link!, style: Type.link.copyWith(color: c.primary)),
+            ),
+        ],
+      ),
+    );
+  }
 }
 
 class KeyValueRow extends StatelessWidget {

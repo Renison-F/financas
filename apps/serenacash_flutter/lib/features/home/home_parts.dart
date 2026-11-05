@@ -16,10 +16,10 @@ import '../shared/format.dart';
 /// Measures of the home screen (logical pixels).
 abstract final class HomeMetrics {
   /// Side margin of the cards; the header text sits 4 px further in.
-  static const gutter = 12.0;
+  static const gutter = Layout.gutter;
   static const radius = Radii.md;
   static const cardPadding = EdgeInsets.fromLTRB(14, 12, 14, 8);
-  static const tile = 32.0;
+  static const tile = Layout.tile;
   static const action = 40.0;
 }
 
@@ -58,10 +58,7 @@ class HomeHeader extends StatelessWidget {
               children: [
                 Text(
                   greeting,
-                  style: Type.title.copyWith(
-                    color: c.text,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: Type.headline.copyWith(color: c.text, fontSize: 20),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -124,10 +121,7 @@ class SummaryPanel extends StatelessWidget {
           children: [
             Text(
               l.homeSetupTitle,
-              style: Type.title.copyWith(
-                color: c.onHero,
-                fontWeight: FontWeight.w700,
-              ),
+              style: Type.headline.copyWith(color: c.onHero, fontSize: 20),
             ),
             const SizedBox(height: Spacing.xxs),
             Text(
@@ -480,169 +474,6 @@ class HomeCard extends StatelessWidget {
     child: child,
   );
 }
-
-/// Section title with the "ver…" link on the right.
-class HomeSectionHeader extends StatelessWidget {
-  const HomeSectionHeader({super.key, required this.title, this.link});
-  final String title;
-  final String? link;
-  @override
-  Widget build(BuildContext context) {
-    final c = context.colors;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Text(
-              title,
-              style: Type.sectionTitle.copyWith(color: c.text),
-              // Two lines keep the title readable at large text sizes next to the link.
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          if (link != null)
-            Padding(
-              padding: const EdgeInsets.only(left: Spacing.xs, top: 2),
-              child: Text(link!, style: Type.link.copyWith(color: c.primary)),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Dense row of a section: tinted icon tile, title, a line underneath and the value on the right.
-class HomeRow extends StatelessWidget {
-  const HomeRow({
-    super.key,
-    this.icon,
-    this.iconColor,
-    this.tileColor,
-    required this.title,
-    this.description,
-    this.trailing,
-    this.onTap,
-    this.chevron = false,
-    this.leading,
-    this.descriptionWidget,
-  });
-  final SIconName? icon;
-  final Color? iconColor;
-  final Color? tileColor;
-  final String title;
-  final String? description;
-  final Widget? trailing;
-  final VoidCallback? onTap;
-  final bool chevron;
-  final Widget? leading;
-
-  /// Shown under the title instead of [description] (a badge, for example).
-  final Widget? descriptionWidget;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = context.colors;
-    final row = ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: Touch.target),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6),
-        child: LayoutBuilder(
-          builder: (context, box) => Row(
-            children: [
-              if (leading != null) ...[
-                leading!,
-                const SizedBox(width: Spacing.sm),
-              ] else if (icon != null) ...[
-                Container(
-                  width: HomeMetrics.tile,
-                  height: HomeMetrics.tile,
-                  decoration: BoxDecoration(
-                    color: tileColor ?? c.primaryContainer,
-                    borderRadius: BorderRadius.circular(Spacing.xs),
-                  ),
-                  child: Center(
-                    child: SIcon(
-                      icon!,
-                      size: 18,
-                      color: iconColor ?? c.primary,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: Spacing.sm),
-              ],
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: Type.rowTitle.copyWith(color: c.text),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    if (descriptionWidget != null)
-                      descriptionWidget!
-                    else if (description != null)
-                      Text(
-                        description!,
-                        style: Type.rowMeta.copyWith(color: c.textMuted),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                  ],
-                ),
-              ),
-              if (trailing != null) ...[
-                const SizedBox(width: Spacing.xs),
-                // A very large amount (or large text) scales down instead of pushing the title out.
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: box.maxWidth * 0.5),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: trailing!,
-                  ),
-                ),
-              ],
-              if (chevron) ...[
-                const SizedBox(width: 4),
-                SIcon(SIconName.chevronRight, size: 18, color: c.primary),
-              ],
-            ],
-          ),
-        ),
-      ),
-    );
-    if (onTap == null) return row;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(Radii.sm),
-        child: row,
-      ),
-    );
-  }
-}
-
-/// Hairline used between rows and blocks of a section card.
-class HomeDivider extends StatelessWidget {
-  const HomeDivider({super.key});
-  @override
-  Widget build(BuildContext context) =>
-      Divider(height: 1, thickness: 1, color: context.colors.surfaceInset);
-}
-
-/// [rows] with a hairline between each pair.
-List<Widget> dividedRows(List<Widget> rows) => [
-  for (var i = 0; i < rows.length; i++) ...[
-    if (i > 0) const HomeDivider(),
-    rows[i],
-  ],
-];
 
 /// Small drawing of a credit card: a solid card in the action color with its stripe.
 class CardGlyph extends StatelessWidget {

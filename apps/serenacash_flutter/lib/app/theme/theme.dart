@@ -47,12 +47,12 @@ ThemeData serenaTheme(Brightness brightness) {
     bodyLarge: Type.body.copyWith(color: c.text),
     bodyMedium: Type.bodySmall.copyWith(color: c.text),
     bodySmall: Type.caption.copyWith(color: c.textMuted),
-    labelLarge: Type.label.copyWith(color: c.text, fontSize: 16),
+    labelLarge: Type.button.copyWith(color: c.text),
     labelMedium: Type.label.copyWith(color: c.text),
     labelSmall: Type.caption.copyWith(color: c.textMuted),
   );
   final shape14 = RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(Radii.md),
+    borderRadius: BorderRadius.circular(Radii.sm),
   );
   return ThemeData(
     useMaterial3: true,
@@ -69,7 +69,7 @@ ThemeData serenaTheme(Brightness brightness) {
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: false,
-      titleTextStyle: Type.title.copyWith(color: c.text),
+      titleTextStyle: Type.headline.copyWith(color: c.text, fontSize: 18),
       surfaceTintColor: Colors.transparent,
     ),
     cardTheme: CardThemeData(
@@ -77,7 +77,7 @@ ThemeData serenaTheme(Brightness brightness) {
       elevation: 0,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Radii.lg),
+        borderRadius: BorderRadius.circular(Radii.md),
       ),
       surfaceTintColor: Colors.transparent,
     ),
@@ -87,9 +87,9 @@ ThemeData serenaTheme(Brightness brightness) {
         backgroundColor: c.primary,
         foregroundColor: c.onPrimary,
         minimumSize: const Size(0, Touch.comfortable),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
         shape: shape14,
-        textStyle: Type.label.copyWith(fontSize: 16),
+        textStyle: Type.button,
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -97,7 +97,7 @@ ThemeData serenaTheme(Brightness brightness) {
         foregroundColor: c.primary,
         minimumSize: const Size(0, Touch.min),
         shape: shape14,
-        textStyle: Type.label.copyWith(fontSize: 16),
+        textStyle: Type.button,
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -107,13 +107,14 @@ ThemeData serenaTheme(Brightness brightness) {
         side: BorderSide.none,
         minimumSize: const Size(0, Touch.comfortable),
         shape: shape14,
-        textStyle: Type.label.copyWith(fontSize: 16),
+        textStyle: Type.button,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: c.surface,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      isDense: true,
       hintStyle: Type.body.copyWith(color: c.textMuted),
       labelStyle: Type.label.copyWith(color: c.textMuted),
       border: OutlineInputBorder(
@@ -141,11 +142,11 @@ ThemeData serenaTheme(Brightness brightness) {
     chipTheme: ChipThemeData(
       backgroundColor: c.surfaceInset,
       selectedColor: c.primaryContainer,
-      labelStyle: Type.label.copyWith(color: c.text, fontSize: 14),
-      secondaryLabelStyle: Type.label.copyWith(
-        color: c.onPrimaryContainer,
-        fontSize: 14,
+      labelStyle: Type.link.copyWith(
+        color: c.text,
+        fontWeight: FontWeight.w500,
       ),
+      secondaryLabelStyle: Type.link.copyWith(color: c.onPrimaryContainer),
       shape: const StadiumBorder(),
       side: BorderSide.none,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -196,8 +197,19 @@ ThemeData serenaTheme(Brightness brightness) {
     dialogTheme: DialogThemeData(
       backgroundColor: c.surface,
       surfaceTintColor: Colors.transparent,
+      titleTextStyle: Type.headline.copyWith(color: c.text, fontSize: 18),
+      contentTextStyle: Type.body.copyWith(color: c.textMuted),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Radii.lg),
+      ),
+    ),
+    drawerTheme: DrawerThemeData(
+      backgroundColor: c.bg,
+      surfaceTintColor: Colors.transparent,
+      scrimColor: c.overlay,
+      elevation: 0,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.horizontal(right: Radius.circular(Radii.lg)),
       ),
     ),
     snackBarTheme: SnackBarThemeData(
@@ -206,7 +218,7 @@ ThemeData serenaTheme(Brightness brightness) {
       actionTextColor: c.primaryContainer,
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Radii.md),
+        borderRadius: BorderRadius.circular(Radii.sm),
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(

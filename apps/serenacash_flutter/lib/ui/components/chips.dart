@@ -46,7 +46,10 @@ class SChip extends StatelessWidget {
                 Flexible(
                   child: Text(
                     label,
-                    style: Type.label.copyWith(color: fg, fontSize: 14),
+                    style: Type.link.copyWith(
+                      color: fg,
+                      fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+                    ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -103,7 +106,7 @@ class Segmented<T> extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: c.surfaceInset,
-        borderRadius: BorderRadius.circular(Radii.md),
+        borderRadius: BorderRadius.circular(Radii.sm),
       ),
       padding: const EdgeInsets.all(3),
       child: Row(
@@ -115,17 +118,19 @@ class Segmented<T> extends StatelessWidget {
                 button: true,
                 child: Material(
                   color: v == value ? c.surface : Colors.transparent,
-                  borderRadius: BorderRadius.circular(Radii.sm),
+                  borderRadius: BorderRadius.circular(Spacing.xs),
                   child: InkWell(
                     onTap: () => onChanged(v),
-                    borderRadius: BorderRadius.circular(Radii.sm),
+                    borderRadius: BorderRadius.circular(Spacing.xs),
                     child: SizedBox(
                       height: Touch.min - 4,
                       child: Center(
                         child: Text(
                           l,
-                          style: Type.label.copyWith(
-                            fontSize: 14,
+                          style: Type.link.copyWith(
+                            fontWeight: v == value
+                                ? FontWeight.w600
+                                : FontWeight.w500,
                             color: v == value ? c.primary : c.textMuted,
                           ),
                           maxLines: 1,

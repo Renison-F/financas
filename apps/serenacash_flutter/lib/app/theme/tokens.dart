@@ -146,6 +146,17 @@ class SerenaColors extends ThemeExtension<SerenaColors> {
   }
 }
 
+/// Measures shared by every screen.
+abstract final class Layout {
+  /// Side margin of cards and lists.
+  static const gutter = 12.0;
+  static const cardPadding = EdgeInsets.fromLTRB(14, 12, 14, 12);
+
+  /// Tinted square that holds a row icon.
+  static const tile = 32.0;
+  static const tileRadius = 8.0;
+}
+
 abstract final class Spacing {
   static const xxs = 4.0,
       xs = 8.0,
@@ -161,7 +172,7 @@ abstract final class Radii {
 }
 
 abstract final class Touch {
-  static const min = 44.0, comfortable = 52.0;
+  static const min = 44.0, comfortable = 48.0;
 
   /// Android's 48 dp floor, used where a control is not one of the standard buttons.
   static const target = 48.0;
@@ -175,55 +186,60 @@ abstract final class Motion {
 
 const displayFont = 'BricolageGrotesque';
 
-/// Type roles from DESIGN.md. Body roles use the platform font on purpose.
+/// Type roles from DESIGN.md. One compact scale for the whole app, set by the home screen: titles in
+/// the display face, rows and values in the platform font. Body roles use the platform font on purpose.
 abstract final class Type {
   static const moneyHero = TextStyle(
     fontFamily: displayFont,
-    fontSize: 44,
-    height: 1.0,
+    fontSize: 36,
+    height: 1.05,
     fontWeight: FontWeight.w700,
-    letterSpacing: -1.3,
+    letterSpacing: -1.0,
     fontFeatures: [FontFeature.tabularFigures()],
   );
   static const display = TextStyle(
     fontFamily: displayFont,
-    fontSize: 40,
-    height: 1.05,
-    fontWeight: FontWeight.w600,
-    letterSpacing: -0.8,
+    fontSize: 30,
+    height: 1.1,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.6,
   );
+
+  /// Screen titles.
   static const headline = TextStyle(
     fontFamily: displayFont,
-    fontSize: 28,
-    height: 1.15,
-    fontWeight: FontWeight.w600,
-    letterSpacing: -0.4,
+    fontSize: 22,
+    height: 1.2,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.3,
   );
+
+  /// Section and card titles, dialog titles.
   static const title = TextStyle(
     fontFamily: displayFont,
-    fontSize: 20,
+    fontSize: 16,
     height: 1.25,
-    fontWeight: FontWeight.w600,
-    letterSpacing: -0.2,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.1,
   );
   static const body = TextStyle(
-    fontSize: 17,
-    height: 1.4,
-    fontWeight: FontWeight.w400,
-  );
-  static const bodySmall = TextStyle(
     fontSize: 15,
     height: 1.4,
     fontWeight: FontWeight.w400,
   );
-  static const label = TextStyle(
+  static const bodySmall = TextStyle(
     fontSize: 13,
+    height: 1.35,
+    fontWeight: FontWeight.w400,
+  );
+  static const label = TextStyle(
+    fontSize: 12,
     height: 1.3,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.1,
   );
   static const moneyRow = TextStyle(
-    fontSize: 17,
+    fontSize: 14,
     height: 1.3,
     fontWeight: FontWeight.w600,
     fontFeatures: [FontFeature.tabularFigures()],
@@ -234,8 +250,7 @@ abstract final class Type {
     fontWeight: FontWeight.w400,
   );
 
-  // Compact scale of the home screen (reference mockup): several sections share one screen, so its
-  // titles, rows and amounts are smaller than the reading scale above.
+  /// The amount of the summary panel.
   static const heroValue = TextStyle(
     fontFamily: displayFont,
     fontSize: 30,
@@ -244,13 +259,9 @@ abstract final class Type {
     letterSpacing: -0.6,
     fontFeatures: [FontFeature.tabularFigures()],
   );
-  static const sectionTitle = TextStyle(
-    fontFamily: displayFont,
-    fontSize: 16,
-    height: 1.25,
-    fontWeight: FontWeight.w700,
-    letterSpacing: -0.1,
-  );
+  static const sectionTitle = title;
+
+  /// The total under a section title.
   static const sectionValue = TextStyle(
     fontFamily: displayFont,
     fontSize: 20,
@@ -259,30 +270,30 @@ abstract final class Type {
     letterSpacing: -0.3,
     fontFeatures: [FontFeature.tabularFigures()],
   );
+
+  /// List rows: title, supporting text, the small line under the title and the value on the right.
   static const rowTitle = TextStyle(
     fontSize: 14,
     height: 1.3,
     fontWeight: FontWeight.w600,
   );
-  static const rowText = TextStyle(
-    fontSize: 13,
-    height: 1.35,
-    fontWeight: FontWeight.w400,
-  );
+  static const rowText = bodySmall;
   static const rowMeta = TextStyle(
     fontSize: 12,
     height: 1.3,
     fontWeight: FontWeight.w400,
   );
-  static const rowValue = TextStyle(
-    fontSize: 14,
-    height: 1.3,
-    fontWeight: FontWeight.w600,
-    fontFeatures: [FontFeature.tabularFigures()],
-  );
+  static const rowValue = moneyRow;
+
+  /// Text links ("Ver todas") and button labels.
   static const link = TextStyle(
     fontSize: 13,
     height: 1.3,
+    fontWeight: FontWeight.w600,
+  );
+  static const button = TextStyle(
+    fontSize: 15,
+    height: 1.2,
     fontWeight: FontWeight.w600,
   );
 }

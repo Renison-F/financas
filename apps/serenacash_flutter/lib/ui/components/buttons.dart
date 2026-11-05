@@ -5,7 +5,7 @@ import '../icons.dart';
 
 enum SButtonVariant { primary, secondary, ghost, destructive }
 
-/// Buttons per DESIGN.md: 14 px radius, 52 px (44 ghost), label 500/16, pressed scale 0.98.
+/// Buttons per DESIGN.md: 10 px radius, 48 px (44 ghost and compact), label 600/15.
 class SButton extends StatelessWidget {
   const SButton({
     super.key,
@@ -47,14 +47,13 @@ class SButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (icon != null) ...[
-                SIcon(icon!, size: 20, color: fg),
+                SIcon(icon!, size: 18, color: fg),
                 const SizedBox(width: 8),
               ],
               Flexible(
                 child: Text(
                   label,
-                  style: Type.label.copyWith(
-                    fontSize: compact ? 14 : 16,
+                  style: (compact ? Type.link : Type.button).copyWith(
                     color: fg,
                   ),
                   maxLines: 1,
@@ -67,7 +66,7 @@ class SButton extends StatelessWidget {
     final base = Theme.of(context).textTheme.labelLarge ?? const TextStyle();
     final style = ButtonStyle(
       textStyle: WidgetStatePropertyAll(
-        base.merge(Type.label.copyWith(fontSize: compact ? 14 : 16)),
+        base.merge(compact ? Type.link : Type.button),
       ),
       backgroundColor: WidgetStateProperty.resolveWith(
         (s) =>
@@ -81,10 +80,10 @@ class SButton extends StatelessWidget {
         Size(fullWidth ? double.infinity : 0, height),
       ),
       padding: WidgetStatePropertyAll(
-        EdgeInsets.symmetric(horizontal: compact ? 12 : 20),
+        EdgeInsets.symmetric(horizontal: compact ? 10 : 18),
       ),
       shape: WidgetStatePropertyAll(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(Radii.md)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(Radii.sm)),
       ),
       elevation: const WidgetStatePropertyAll(0),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,

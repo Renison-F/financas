@@ -77,7 +77,7 @@ class DashboardWidget extends ConsumerWidget {
       Color? iconColor,
       String? desc,
       Widget? right,
-    }) => HomeRow(
+    }) => ListRow(
       icon: icon,
       iconColor: iconColor,
       title: t.description.isEmpty ? l.bill : t.description,
@@ -153,7 +153,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.totalBalance, link: l.accounts),
+              CardHeader(title: l.totalBalance, link: l.accounts),
               if (data.accounts.isNotEmpty)
                 money(data.consolidated, role: MoneyRole.section, signed: true)
               else
@@ -173,7 +173,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.balancesByAccount, link: l.all),
+              CardHeader(title: l.balancesByAccount, link: l.all),
               if (data.accounts.isEmpty)
                 EmptyState(
                   icon: SIconName.wallet,
@@ -183,7 +183,7 @@ class DashboardWidget extends ConsumerWidget {
                 )
               else
                 for (final a in data.accounts)
-                  HomeRow(
+                  ListRow(
                     icon: a.account.type == 'cash'
                         ? SIconName.wallet
                         : SIconName.bank,
@@ -201,7 +201,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.income, link: l.see),
+              CardHeader(title: l.income, link: l.see),
               money(
                 data.totals.incomeSettled,
                 role: MoneyRole.section,
@@ -218,7 +218,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.expenses, link: l.see),
+              CardHeader(title: l.expenses, link: l.see),
               money(data.totals.expenseSettled, role: MoneyRole.section),
               muted(
                 l.plannedAndCard(
@@ -240,7 +240,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.billsToPay, link: l.seeAllFem),
+              CardHeader(title: l.billsToPay, link: l.seeAllFem),
               money(total, role: MoneyRole.section),
               Text.rich(
                 TextSpan(
@@ -266,7 +266,7 @@ class DashboardWidget extends ConsumerWidget {
                   () {
                     final due = dueLabel(l, t.dueDate ?? t.date, data.today);
                     final late = due.tone == DueTone.overdue;
-                    return HomeRow(
+                    return ListRow(
                       icon: late
                           ? SIconName.alert
                           : catIcon(t, SIconName.receipt),
@@ -295,7 +295,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.overdueBills),
+              CardHeader(title: l.overdueBills),
               if (data.overdue.isEmpty)
                 muted(l.noOverdue)
               else
@@ -317,7 +317,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.next7days, link: l.calendar),
+              CardHeader(title: l.next7days, link: l.calendar),
               if (data.next7.isEmpty)
                 muted(l.noDueNext7)
               else
@@ -339,12 +339,12 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.cardsAndInvoices, link: l.seeCards),
+              CardHeader(title: l.cardsAndInvoices, link: l.seeCards),
               for (var i = 0; i < shown.length; i++) ...[
                 if (i > 0)
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: Spacing.xs),
-                    child: HomeDivider(),
+                    child: RowDivider(),
                   ),
                 _CardInvoice(
                   view: shown[i],
@@ -366,7 +366,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.installmentPurchases, link: l.details),
+              CardHeader(title: l.installmentPurchases, link: l.details),
               money(data.installmentsFuture, role: MoneyRole.section),
               muted(l.committedFuture),
             ],
@@ -380,7 +380,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.monthlyBudget, link: l.budgets),
+              CardHeader(title: l.monthlyBudget, link: l.budgets),
               if (g != null) ...[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -453,7 +453,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.spendingByCategory, link: l.report),
+              CardHeader(title: l.spendingByCategory, link: l.report),
               if (data.categories.isEmpty)
                 EmptyState(
                   icon: SIconName.tag,
@@ -530,7 +530,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.evolution, link: l.cashflow),
+              CardHeader(title: l.evolution, link: l.cashflow),
               if (!data.hasTransactions)
                 EmptyState(
                   icon: SIconName.arrowUp,
@@ -619,7 +619,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.goals, link: l.see),
+              CardHeader(title: l.goals, link: l.see),
               if (data.goals.isEmpty)
                 EmptyState(
                   icon: SIconName.target,
@@ -683,7 +683,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.reserves, link: l.see),
+              CardHeader(title: l.reserves, link: l.see),
               money(reserved, role: MoneyRole.section),
               muted(l.reservesText),
             ],
@@ -698,7 +698,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.monthlySavings),
+              CardHeader(title: l.monthlySavings),
               money(data.totals.net, role: MoneyRole.section, signed: true),
               muted(
                 rate == null
@@ -715,12 +715,12 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.subscriptions, link: l.see),
+              CardHeader(title: l.subscriptions, link: l.see),
               if (data.recurring.isEmpty)
                 muted(l.noRecurring)
               else
                 for (final r in data.recurring.take(5))
-                  HomeRow(
+                  ListRow(
                     icon: SIconName.receipt,
                     title: r.description,
                     description: l.monthsInARow(r.months.length),
@@ -736,7 +736,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.loans, link: l.see),
+              CardHeader(title: l.loans, link: l.see),
               if (data.loans.isEmpty)
                 EmptyState(
                   icon: SIconName.bank,
@@ -746,7 +746,7 @@ class DashboardWidget extends ConsumerWidget {
                 )
               else
                 for (final p in data.loans)
-                  HomeRow(
+                  ListRow(
                     icon: SIconName.bank,
                     title: p.loan.name,
                     description: p.nextDue != null
@@ -768,7 +768,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.calendar, link: l.open),
+              CardHeader(title: l.calendar, link: l.open),
               muted(
                 '${l.calendarSummary(data.bills.length, dayMonth(data.horizonEnd))}${data.overdue.isNotEmpty ? l.overdueCount(data.overdue.length) : ''}',
               ),
@@ -787,13 +787,10 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(
-                title: l.recentTransactions,
-                link: l.seeAllMasc,
-              ),
+              CardHeader(title: l.recentTransactions, link: l.seeAllMasc),
               ...dividedRows([
                 for (final t in data.recent)
-                  HomeRow(
+                  ListRow(
                     icon: catIcon(
                       t,
                       t.kind == TransactionKind.income
@@ -833,12 +830,12 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.suggestions, link: l.assistant),
+              CardHeader(title: l.suggestions, link: l.assistant),
               if (data.recommendations.isEmpty)
                 muted(l.allCalm)
               else
                 for (final r in data.recommendations)
-                  HomeRow(
+                  ListRow(
                     icon: r.severity == 'urgent'
                         ? SIconName.alert
                         : r.severity == 'attention'
@@ -863,7 +860,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.shoppingLists, link: l.see),
+              CardHeader(title: l.shoppingLists, link: l.see),
               muted(
                 data.listCount > 0 ? l.listCount(data.listCount) : l.noListYet,
               ),
@@ -885,7 +882,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: l.shoppingAssistant),
+              CardHeader(title: l.shoppingAssistant),
               muted(
                 data.finishedSessions > 0
                     ? l.sessionsCount(data.finishedSessions)
@@ -924,10 +921,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(
-                title: l.advancedIndicators,
-                link: l.methodology,
-              ),
+              CardHeader(title: l.advancedIndicators, link: l.methodology),
               KeyValueRow(
                 l.savingRate,
                 savingRate == null ? '—' : '$savingRate%',
@@ -956,7 +950,7 @@ class DashboardWidget extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeSectionHeader(title: def.title),
+              CardHeader(title: def.title),
               muted(def.description),
             ],
           ),
@@ -1052,7 +1046,7 @@ class _CardInvoice extends StatelessWidget {
           if (inv.state == InvoiceState.open) ...[
             const Padding(
               padding: EdgeInsets.only(top: Spacing.xs, bottom: 6),
-              child: HomeDivider(),
+              child: RowDivider(),
             ),
             Text(
               l.invoiceCloses(dayMonthShort(inv.closingDate, locale)),
@@ -1092,7 +1086,7 @@ class _WidgetBoundaryState extends State<WidgetBoundary> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HomeSectionHeader(title: widget.title),
+            CardHeader(title: widget.title),
             EmptyState(
               icon: SIconName.alert,
               title: l.widgetLoadError,
