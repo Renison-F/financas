@@ -31,8 +31,8 @@ class _AnnualScreenState extends ConsumerState<AnnualScreen> {
     final s = ref.watch(appControllerProvider).requireValue;
     final hidden = ref.watch(privacyHiddenProvider);
     final locale = Localizations.localeOf(context).toString();
-    final year = yearSummary(s.ledger, _year);
     final currentMonth = monthKeyOf(s.today);
+    final year = yearSummary(s.ledger, _year, rankUpTo: currentMonth);
     String brl(int v) => formatBRL(v, hidden: hidden);
     final tab = Type.bodySmall.copyWith(
       color: c.text,

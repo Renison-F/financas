@@ -118,8 +118,27 @@ void main() {
       expect(find.textContaining('35,39'), findsWidgets); // 24,90 + 10,49
       await screenshot(tester, 'shopping_session_light');
 
-      // finish → summary → register expense (idempotent)
+      // finishing asks first; cancelling keeps the cart open
       await tester.tap(find.text('Finalizar compra'));
+      await tester.pumpAndSettle();
+      expect(find.text('Finalizar a compra?'), findsOneWidget);
+      expect(find.textContaining('ficará de fora'), findsNothing);
+      await tester.tap(find.text('Cancelar'));
+      await tester.pumpAndSettle();
+      expect(find.text('Resumo'), findsNothing);
+
+      // with an item still in the confirmation panel, the sheet warns it will be left out
+      await tester.tap(find.text('Manual'));
+      await tester.pumpAndSettle();
+      expect(find.text('Confirmar item'), findsOneWidget);
+      await tester.ensureVisible(find.text('Finalizar compra'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Finalizar compra'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('ficará de fora'), findsOneWidget);
+
+      // finish → summary → register expense (idempotent)
+      await tester.tap(find.text('Finalizar'));
       await tester.pumpAndSettle();
       expect(find.text('Resumo'), findsOneWidget);
       await tester.scrollUntilVisible(

@@ -51,7 +51,9 @@ Future<String> encryptBackup(
   Random? rng,
 }) async {
   if (passphrase.length < 8) {
-    throw BackupCryptoError('senha do backup deve ter ao menos 8 caracteres');
+    throw BackupCryptoError(
+      'A senha do backup deve ter ao menos 8 caracteres.',
+    );
   }
   final r = rng ?? Random.secure();
   final salt = List<int>.generate(16, (_) => r.nextInt(256));
@@ -84,15 +86,17 @@ Future<List<int>> decryptBackup(
 ) async {
   if (envelope['app'] != 'serenacash' ||
       envelope['format'] != backupEncFormat) {
-    throw BackupCryptoError('não é um backup cifrado do SerenaCash');
+    throw BackupCryptoError(
+      'Este arquivo não é um backup cifrado do SerenaCash.',
+    );
   }
   final version = envelope['version'];
   if (version is! num || version > backupEncVersion) {
-    throw BackupCryptoError('backup cifrado de uma versão mais nova do app');
+    throw BackupCryptoError('Backup cifrado de uma versão mais nova do app.');
   }
   final kdf = PinKdfParams.fromJson(envelope['kdf'] as Map<String, dynamic>);
   if (kdf.memoryKiB > 262144 || kdf.iterations > 10) {
-    throw BackupCryptoError('parâmetros de KDF fora do limite permitido');
+    throw BackupCryptoError('Parâmetros de KDF fora do limite permitido.');
   }
   final salt = base64Decode(envelope['salt'] as String);
   final key = SecretKey(await deriveArgon2id(passphrase, salt, kdf));
@@ -108,6 +112,6 @@ Future<List<int>> decryptBackup(
       aad: utf8.encode(_aad(envelope)),
     );
   } on SecretBoxAuthenticationError {
-    throw BackupCryptoError('senha incorreta ou arquivo alterado');
+    throw BackupCryptoError('Senha incorreta ou arquivo alterado.');
   }
 }

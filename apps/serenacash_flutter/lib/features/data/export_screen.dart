@@ -263,9 +263,11 @@ class _ExportScreenState extends ConsumerState<ExportScreen> {
               ),
               const SizedBox(height: Spacing.sm),
               if (_encrypted)
-                STextField(
+                SecretField(
                   label: l.backupPassphrase,
                   controller: _pass,
+                  showLabel: l.showSecret,
+                  hideLabel: l.hideSecret,
                   keyboardType: TextInputType.visiblePassword,
                   placeholder: l.passphraseMin,
                   onChanged: (_) => setState(() {}),

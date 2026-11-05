@@ -28,6 +28,17 @@ Color colorFromHex(String hex, Color fallback) {
   return v == null ? fallback : Color(0xFF000000 | v);
 }
 
+/// Spoken name of a palette color, so a screen reader does not read the hex code.
+String colorName(AppLocalizations l, String hex) => switch (hex.toUpperCase()) {
+  '#0B5563' => l.colorTeal,
+  '#176B4E' => l.colorGreen,
+  '#C0703E' => l.colorCopper,
+  '#8A5200' => l.colorAmber,
+  '#A93A29' => l.colorRed,
+  '#4F5E61' => l.colorGray,
+  _ => l.colorOther(hex),
+};
+
 class ColorPicker extends StatelessWidget {
   const ColorPicker({
     super.key,
@@ -40,20 +51,22 @@ class ColorPicker extends StatelessWidget {
   final List<String> colors;
   @override
   Widget build(BuildContext context) => Wrap(
-    spacing: 10,
-    runSpacing: 10,
+    spacing: 0,
+    runSpacing: 0,
     children: [
       for (final h in colors)
         Semantics(
           selected: h == value,
           button: true,
-          label: h,
+          label: colorName(context.l10n, h),
+          excludeSemantics: true,
           child: InkWell(
             onTap: () => onChanged(h),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(24),
             child: Container(
               width: 36,
               height: 36,
+              margin: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                 color: colorFromHex(h, context.colors.primary),
                 shape: BoxShape.circle,

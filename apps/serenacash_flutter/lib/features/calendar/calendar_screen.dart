@@ -13,6 +13,13 @@ import '../../ui/components/components.dart';
 import '../shared/format.dart';
 import '../shared/stack_screen.dart';
 
+/// Kinds listed on a day that are not part of its result (see `resultCents`).
+bool _onlyMovesMoney(Transaction t) =>
+    t.kind != TransactionKind.income &&
+    t.kind != TransactionKind.expense &&
+    t.kind != TransactionKind.cardPurchase &&
+    t.kind != TransactionKind.cardRefund;
+
 /// Month calendar with per-day totals of bills and incomes; tap a day to see its items.
 class CalendarScreen extends ConsumerStatefulWidget {
   const CalendarScreen({super.key});
@@ -229,21 +236,14 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                     ),
                 const SizedBox(height: 6),
                 Text(
-                  l.dayTotal(
-                    formatBRL(
-                      sel.fold(
-                        0,
-                        (a, x) =>
-                            a +
-                            (x.kind == TransactionKind.income
-                                ? x.amountCents
-                                : -x.amountCents),
-                      ),
-                      hidden: hidden,
-                    ),
-                  ),
+                  l.dayTotal(formatBRL(resultCents(sel), hidden: hidden)),
                   style: Type.caption.copyWith(color: c.textMuted),
                 ),
+                if (sel.any(_onlyMovesMoney))
+                  Text(
+                    l.dayTotalHint,
+                    style: Type.caption.copyWith(color: c.textMuted),
+                  ),
               ],
             ),
           ),

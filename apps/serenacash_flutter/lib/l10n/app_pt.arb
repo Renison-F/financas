@@ -592,7 +592,7 @@
   },
   "shoppingIntro": "Leia etiquetas de preço e códigos de barras, veja o total e quanto ainda cabe no orçamento antes do caixa.",
   "lists": "Listas",
-  "itemsCount": "{n} itens",
+  "itemsCount": "{n, plural, =1{1 item} other{{n} itens}}",
   "@itemsCount": {
     "placeholders": {
       "n": {
@@ -1263,7 +1263,7 @@
     }
   },
   "nothingThisDay": "Nada neste dia.",
-  "dayTotal": "Total do dia: {value}",
+  "dayTotal": "Resultado do dia: {value}",
   "@dayTotal": {
     "placeholders": {
       "value": {
@@ -1429,7 +1429,7 @@
   "projectionRules": "Considera lançamentos previstos, parcelas de empréstimo e faturas de cartão até o vencimento. Faturas atrasadas entram hoje.",
   "perMonthLabel": "Por mês",
   "recurringHelp": "Séries cadastradas e gastos repetidos (mesma descrição e valor em 3+ meses dos últimos 6).",
-  "recurringLine": "{n} meses · {kind}",
+  "recurringLine": "{n, plural, =1{1 mês} other{{n} meses}} · {kind}",
   "@recurringLine": {
     "placeholders": {
       "n": {
@@ -2099,5 +2099,156 @@
   "invalidCode": "Código inválido; tente de novo.",
   "readFailed": "Falha na leitura. Tente de novo.",
   "ocrUnavailable": "Leitura de texto indisponível neste aparelho/versão. Informe o preço manualmente.",
-  "photoFailed": "Não foi possível capturar a foto."
+  "photoFailed": "Não foi possível capturar a foto.",
+  "dayTotalHint": "Receitas menos despesas. Transferências, pagamentos de fatura e reservas só movem dinheiro e não entram.",
+  "colorTeal": "Azul-petróleo",
+  "colorGreen": "Verde",
+  "colorCopper": "Cobre",
+  "colorAmber": "Âmbar",
+  "colorRed": "Vermelho",
+  "colorGray": "Cinza",
+  "colorOther": "Cor {hex}",
+  "@colorOther": {
+    "placeholders": {
+      "hex": {
+        "type": "String"
+      }
+    }
+  },
+  "countAccounts": "{n, plural, =1{1 conta} other{{n} contas}}",
+  "@countAccounts": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countCategories": "{n, plural, =1{1 categoria} other{{n} categorias}}",
+  "@countCategories": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countTags": "{n, plural, =1{1 tag} other{{n} tags}}",
+  "@countTags": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countCards": "{n, plural, =1{1 cartão} other{{n} cartões}}",
+  "@countCards": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countTransactions": "{n, plural, =1{1 lançamento} other{{n} lançamentos}}",
+  "@countTransactions": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countBudgets": "{n, plural, =1{1 orçamento} other{{n} orçamentos}}",
+  "@countBudgets": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countGoals": "{n, plural, =1{1 meta} other{{n} metas}}",
+  "@countGoals": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countLoans": "{n, plural, =1{1 empréstimo} other{{n} empréstimos}}",
+  "@countLoans": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countAttachments": "{n, plural, =1{1 anexo} other{{n} anexos}}",
+  "@countAttachments": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countRecurrenceRules": "{n, plural, =1{1 série} other{{n} séries}}",
+  "@countRecurrenceRules": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countShoppingLists": "{n, plural, =1{1 lista de compras} other{{n} listas de compras}}",
+  "@countShoppingLists": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countShoppingSessions": "{n, plural, =1{1 compra} other{{n} compras}}",
+  "@countShoppingSessions": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countProducts": "{n, plural, =1{1 produto} other{{n} produtos}}",
+  "@countProducts": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countPriceObservations": "{n, plural, =1{1 preço registrado} other{{n} preços registrados}}",
+  "@countPriceObservations": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countOther": "{n} {name}",
+  "@countOther": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "finishPurchaseQ": "Finalizar a compra?",
+  "finishPurchaseText": "O carrinho é fechado com {total}. Depois você escolhe se registra como despesa.",
+  "@finishPurchaseText": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "finishPurchasePending": "O item que você estava confirmando ainda não foi adicionado e ficará de fora.",
+  "finishConfirm": "Finalizar",
+  "showSecret": "Mostrar",
+  "hideSecret": "Ocultar"
 }

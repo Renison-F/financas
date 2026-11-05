@@ -29,9 +29,10 @@ class SChip extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onTap,
+          // Min height, not fixed: a long label wraps instead of overflowing on narrow phones.
           child: Container(
-            height: 36,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            constraints: const BoxConstraints(minHeight: 36),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -42,9 +43,13 @@ class SChip extends StatelessWidget {
                   SIcon(icon!, size: 16, color: fg),
                   const SizedBox(width: 6),
                 ],
-                Text(
-                  label,
-                  style: Type.label.copyWith(color: fg, fontSize: 14),
+                Flexible(
+                  child: Text(
+                    label,
+                    style: Type.label.copyWith(color: fg, fontSize: 14),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),

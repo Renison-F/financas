@@ -1043,7 +1043,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String itemsCount(int n) {
-    return '$n itens';
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n itens',
+      one: '1 item',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1978,7 +1984,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String dayTotal(String value) {
-    return 'Total do dia: $value';
+    return 'Resultado do dia: $value';
   }
 
   @override
@@ -2166,7 +2172,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String recurringLine(int n, String kind) {
-    return '$n meses · $kind';
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n meses',
+      one: '1 mês',
+    );
+    return '$_temp0 · $kind';
   }
 
   @override
@@ -3221,4 +3233,211 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get photoFailed => 'Não foi possível capturar a foto.';
+
+  @override
+  String get dayTotalHint =>
+      'Receitas menos despesas. Transferências, pagamentos de fatura e reservas só movem dinheiro e não entram.';
+
+  @override
+  String get colorTeal => 'Azul-petróleo';
+
+  @override
+  String get colorGreen => 'Verde';
+
+  @override
+  String get colorCopper => 'Cobre';
+
+  @override
+  String get colorAmber => 'Âmbar';
+
+  @override
+  String get colorRed => 'Vermelho';
+
+  @override
+  String get colorGray => 'Cinza';
+
+  @override
+  String colorOther(String hex) {
+    return 'Cor $hex';
+  }
+
+  @override
+  String countAccounts(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n contas',
+      one: '1 conta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countCategories(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n categorias',
+      one: '1 categoria',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countTags(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n tags',
+      one: '1 tag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countCards(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n cartões',
+      one: '1 cartão',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countTransactions(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n lançamentos',
+      one: '1 lançamento',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countBudgets(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n orçamentos',
+      one: '1 orçamento',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countGoals(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n metas',
+      one: '1 meta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countLoans(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n empréstimos',
+      one: '1 empréstimo',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countAttachments(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n anexos',
+      one: '1 anexo',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countRecurrenceRules(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n séries',
+      one: '1 série',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countShoppingLists(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n listas de compras',
+      one: '1 lista de compras',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countShoppingSessions(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n compras',
+      one: '1 compra',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countProducts(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n produtos',
+      one: '1 produto',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countPriceObservations(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n preços registrados',
+      one: '1 preço registrado',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String countOther(int n, String name) {
+    return '$n $name';
+  }
+
+  @override
+  String get finishPurchaseQ => 'Finalizar a compra?';
+
+  @override
+  String finishPurchaseText(String total) {
+    return 'O carrinho é fechado com $total. Depois você escolhe se registra como despesa.';
+  }
+
+  @override
+  String get finishPurchasePending =>
+      'O item que você estava confirmando ainda não foi adicionado e ficará de fora.';
+
+  @override
+  String get finishConfirm => 'Finalizar';
+
+  @override
+  String get showSecret => 'Mostrar';
+
+  @override
+  String get hideSecret => 'Ocultar';
 }

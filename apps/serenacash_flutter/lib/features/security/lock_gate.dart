@@ -147,9 +147,11 @@ class _LockGateState extends ConsumerState<LockGate>
                     ),
                   const SizedBox(height: Spacing.lg),
                   if (p.pinEnabled) ...[
-                    STextField(
+                    SecretField(
                       label: l.pinLabel,
                       controller: _pin,
+                      showLabel: l.showSecret,
+                      hideLabel: l.hideSecret,
                       keyboardType: TextInputType.number,
                       maxLength: 8,
                       textInputAction: TextInputAction.done,

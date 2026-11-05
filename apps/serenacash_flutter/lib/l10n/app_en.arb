@@ -592,7 +592,7 @@
   },
   "shoppingIntro": "Read price tags and barcodes, see the total and how much still fits the budget before checkout.",
   "lists": "Lists",
-  "itemsCount": "{n} items",
+  "itemsCount": "{n, plural, =1{1 item} other{{n} items}}",
   "@itemsCount": {
     "placeholders": {
       "n": {
@@ -1263,7 +1263,7 @@
     }
   },
   "nothingThisDay": "Nothing on this day.",
-  "dayTotal": "Day total: {value}",
+  "dayTotal": "Day result: {value}",
   "@dayTotal": {
     "placeholders": {
       "value": {
@@ -1429,7 +1429,7 @@
   "projectionRules": "Considers planned transactions, loan installments and card statements until due. Overdue statements enter today.",
   "perMonthLabel": "Per month",
   "recurringHelp": "Registered series and repeated expenses (same description and amount in 3+ of the last 6 months).",
-  "recurringLine": "{n} months · {kind}",
+  "recurringLine": "{n, plural, =1{1 month} other{{n} months}} · {kind}",
   "@recurringLine": {
     "placeholders": {
       "n": {
@@ -2099,5 +2099,156 @@
   "invalidCode": "Invalid code; try again.",
   "readFailed": "Reading failed. Try again.",
   "ocrUnavailable": "Text reading unavailable on this device/version. Enter the price manually.",
-  "photoFailed": "Could not capture the photo."
+  "photoFailed": "Could not capture the photo.",
+  "dayTotalHint": "Income minus expenses. Transfers, invoice payments and reserves only move money and are left out.",
+  "colorTeal": "Teal",
+  "colorGreen": "Green",
+  "colorCopper": "Copper",
+  "colorAmber": "Amber",
+  "colorRed": "Red",
+  "colorGray": "Gray",
+  "colorOther": "Color {hex}",
+  "@colorOther": {
+    "placeholders": {
+      "hex": {
+        "type": "String"
+      }
+    }
+  },
+  "countAccounts": "{n, plural, =1{1 account} other{{n} accounts}}",
+  "@countAccounts": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countCategories": "{n, plural, =1{1 category} other{{n} categories}}",
+  "@countCategories": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countTags": "{n, plural, =1{1 tag} other{{n} tags}}",
+  "@countTags": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countCards": "{n, plural, =1{1 card} other{{n} cards}}",
+  "@countCards": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countTransactions": "{n, plural, =1{1 transaction} other{{n} transactions}}",
+  "@countTransactions": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countBudgets": "{n, plural, =1{1 budget} other{{n} budgets}}",
+  "@countBudgets": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countGoals": "{n, plural, =1{1 goal} other{{n} goals}}",
+  "@countGoals": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countLoans": "{n, plural, =1{1 loan} other{{n} loans}}",
+  "@countLoans": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countAttachments": "{n, plural, =1{1 attachment} other{{n} attachments}}",
+  "@countAttachments": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countRecurrenceRules": "{n, plural, =1{1 series} other{{n} series}}",
+  "@countRecurrenceRules": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countShoppingLists": "{n, plural, =1{1 shopping list} other{{n} shopping lists}}",
+  "@countShoppingLists": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countShoppingSessions": "{n, plural, =1{1 purchase} other{{n} purchases}}",
+  "@countShoppingSessions": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countProducts": "{n, plural, =1{1 product} other{{n} products}}",
+  "@countProducts": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countPriceObservations": "{n, plural, =1{1 recorded price} other{{n} recorded prices}}",
+  "@countPriceObservations": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "countOther": "{n} {name}",
+  "@countOther": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "finishPurchaseQ": "Finish the purchase?",
+  "finishPurchaseText": "The cart is closed at {total}. You then choose whether to record it as an expense.",
+  "@finishPurchaseText": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "finishPurchasePending": "The item you were confirming has not been added yet and will be left out.",
+  "finishConfirm": "Finish",
+  "showSecret": "Show",
+  "hideSecret": "Hide"
 }

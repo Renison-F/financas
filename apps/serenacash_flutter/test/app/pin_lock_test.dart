@@ -114,6 +114,7 @@ void main() {
       expect(tester.getSize(lock), const Size(40, 40));
 
       final pinField = find.byType(TextField);
+      expect(tester.widget<TextField>(pinField).obscureText, isTrue);
       await tester.enterText(pinField, '0000');
       await tester.tap(find.text('Usar PIN'));
       await _pumpReal(tester);

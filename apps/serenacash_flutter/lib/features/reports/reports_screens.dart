@@ -107,7 +107,11 @@ class _CashflowReportScreenState extends ConsumerState<CashflowReportScreen> {
       ),
     ].reduce((a, b) => a > b ? a : b);
     final cmp = compareMonths(s.ledger, month);
-    final year = yearSummary(s.ledger, int.parse(month.substring(0, 4)));
+    final year = yearSummary(
+      s.ledger,
+      int.parse(month.substring(0, 4)),
+      rankUpTo: monthKeyOf(s.today),
+    );
     String brl(int v) => formatBRL(v, hidden: hidden);
     String ml(String k) => monthLabelShort(k, locale);
     final tab = Type.bodySmall.copyWith(

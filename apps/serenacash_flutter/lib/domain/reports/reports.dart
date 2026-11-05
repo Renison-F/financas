@@ -177,7 +177,9 @@ class YearSummary {
   };
 }
 
-YearSummary yearSummary(Ledger ledger, int year) {
+/// [rankUpTo] limits the best/worst month to months up to it (inclusive), so a future month that only
+/// holds a card installment is not announced as "the best month". Totals always cover the whole year.
+YearSummary yearSummary(Ledger ledger, int year, {MonthKey? rankUpTo}) {
   final months = [
     for (var i = 1; i <= 12; i++) monthTotals(ledger, monthKey(year, i)),
   ];
@@ -185,6 +187,7 @@ YearSummary yearSummary(Ledger ledger, int year) {
   final expense = sumCents(months.map((m) => m.expenseSettled));
   final withData = months
       .where((m) => m.incomeSettled != 0 || m.expenseSettled != 0)
+      .where((m) => rankUpTo == null || m.month.compareTo(rankUpTo) <= 0)
       .toList();
   MonthTotals? best, worst;
   for (final m in withData) {

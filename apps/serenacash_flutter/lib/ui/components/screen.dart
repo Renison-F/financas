@@ -139,32 +139,23 @@ class SheetHeader extends StatelessWidget {
       horizontal: Spacing.xs,
       vertical: Spacing.xs,
     ),
-    child: Row(
-      children: [
-        SizedBox(
-          width: 100,
-          child: Align(alignment: Alignment.centerLeft, child: leading),
+    // The side actions keep their natural width (a fixed slot cut "Cancelar" short) and the title
+    // takes what is left, centered when it fits.
+    // The toolbar fills the height it is given, so the row height follows the text scale.
+    child: SizedBox(
+      height: MediaQuery.textScalerOf(context).scale(20) + 36,
+      child: NavigationToolbar(
+        leading: leading,
+        middle: Text(
+          title,
+          style: Type.title.copyWith(fontSize: 17, color: context.colors.text),
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
-        Expanded(
-          child: Text(
-            title,
-            style: Type.title.copyWith(
-              fontSize: 17,
-              color: context.colors.text,
-            ),
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        SizedBox(
-          width: 100,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: trailing ?? const SizedBox(),
-          ),
-        ),
-      ],
+        trailing: trailing,
+        middleSpacing: Spacing.xs,
+      ),
     ),
   );
 }

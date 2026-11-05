@@ -1979,7 +1979,7 @@ abstract class AppLocalizations {
   /// No description provided for @itemsCount.
   ///
   /// In pt, this message translates to:
-  /// **'{n} itens'**
+  /// **'{n, plural, =1{1 item} other{{n} itens}}'**
   String itemsCount(int n);
 
   /// No description provided for @estimated.
@@ -3605,7 +3605,7 @@ abstract class AppLocalizations {
   /// No description provided for @dayTotal.
   ///
   /// In pt, this message translates to:
-  /// **'Total do dia: {value}'**
+  /// **'Resultado do dia: {value}'**
   String dayTotal(String value);
 
   /// No description provided for @thisMonth.
@@ -3905,7 +3905,7 @@ abstract class AppLocalizations {
   /// No description provided for @recurringLine.
   ///
   /// In pt, this message translates to:
-  /// **'{n} meses · {kind}'**
+  /// **'{n, plural, =1{1 mês} other{{n} meses}} · {kind}'**
   String recurringLine(int n, String kind);
 
   /// No description provided for @series.
@@ -5731,6 +5731,180 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Não foi possível capturar a foto.'**
   String get photoFailed;
+
+  /// No description provided for @dayTotalHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receitas menos despesas. Transferências, pagamentos de fatura e reservas só movem dinheiro e não entram.'**
+  String get dayTotalHint;
+
+  /// No description provided for @colorTeal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Azul-petróleo'**
+  String get colorTeal;
+
+  /// No description provided for @colorGreen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Verde'**
+  String get colorGreen;
+
+  /// No description provided for @colorCopper.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cobre'**
+  String get colorCopper;
+
+  /// No description provided for @colorAmber.
+  ///
+  /// In pt, this message translates to:
+  /// **'Âmbar'**
+  String get colorAmber;
+
+  /// No description provided for @colorRed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vermelho'**
+  String get colorRed;
+
+  /// No description provided for @colorGray.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cinza'**
+  String get colorGray;
+
+  /// No description provided for @colorOther.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cor {hex}'**
+  String colorOther(String hex);
+
+  /// No description provided for @countAccounts.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 conta} other{{n} contas}}'**
+  String countAccounts(int n);
+
+  /// No description provided for @countCategories.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 categoria} other{{n} categorias}}'**
+  String countCategories(int n);
+
+  /// No description provided for @countTags.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 tag} other{{n} tags}}'**
+  String countTags(int n);
+
+  /// No description provided for @countCards.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 cartão} other{{n} cartões}}'**
+  String countCards(int n);
+
+  /// No description provided for @countTransactions.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 lançamento} other{{n} lançamentos}}'**
+  String countTransactions(int n);
+
+  /// No description provided for @countBudgets.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 orçamento} other{{n} orçamentos}}'**
+  String countBudgets(int n);
+
+  /// No description provided for @countGoals.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 meta} other{{n} metas}}'**
+  String countGoals(int n);
+
+  /// No description provided for @countLoans.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 empréstimo} other{{n} empréstimos}}'**
+  String countLoans(int n);
+
+  /// No description provided for @countAttachments.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 anexo} other{{n} anexos}}'**
+  String countAttachments(int n);
+
+  /// No description provided for @countRecurrenceRules.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 série} other{{n} séries}}'**
+  String countRecurrenceRules(int n);
+
+  /// No description provided for @countShoppingLists.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 lista de compras} other{{n} listas de compras}}'**
+  String countShoppingLists(int n);
+
+  /// No description provided for @countShoppingSessions.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 compra} other{{n} compras}}'**
+  String countShoppingSessions(int n);
+
+  /// No description provided for @countProducts.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 produto} other{{n} produtos}}'**
+  String countProducts(int n);
+
+  /// No description provided for @countPriceObservations.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 preço registrado} other{{n} preços registrados}}'**
+  String countPriceObservations(int n);
+
+  /// No description provided for @countOther.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} {name}'**
+  String countOther(int n, String name);
+
+  /// No description provided for @finishPurchaseQ.
+  ///
+  /// In pt, this message translates to:
+  /// **'Finalizar a compra?'**
+  String get finishPurchaseQ;
+
+  /// No description provided for @finishPurchaseText.
+  ///
+  /// In pt, this message translates to:
+  /// **'O carrinho é fechado com {total}. Depois você escolhe se registra como despesa.'**
+  String finishPurchaseText(String total);
+
+  /// No description provided for @finishPurchasePending.
+  ///
+  /// In pt, this message translates to:
+  /// **'O item que você estava confirmando ainda não foi adicionado e ficará de fora.'**
+  String get finishPurchasePending;
+
+  /// No description provided for @finishConfirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Finalizar'**
+  String get finishConfirm;
+
+  /// No description provided for @showSecret.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mostrar'**
+  String get showSecret;
+
+  /// No description provided for @hideSecret.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ocultar'**
+  String get hideSecret;
 }
 
 class _AppLocalizationsDelegate

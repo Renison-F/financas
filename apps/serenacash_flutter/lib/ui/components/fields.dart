@@ -53,6 +53,8 @@ class STextField extends StatelessWidget {
     this.prefixText,
     this.semanticLabel,
     this.enabled = true,
+    this.obscureText = false,
+    this.suffix,
   });
   final String? label;
   final TextEditingController? controller;
@@ -69,10 +71,15 @@ class STextField extends StatelessWidget {
   final String? prefixText;
   final String? semanticLabel;
   final bool enabled;
+  final bool obscureText;
+  final Widget? suffix;
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final field = TextField(
+      obscureText: obscureText,
+      enableSuggestions: !obscureText,
+      autocorrect: !obscureText,
       controller: controller,
       onChanged: onChanged,
       keyboardType: keyboardType,
@@ -90,6 +97,7 @@ class STextField extends StatelessWidget {
         counterText: '',
         prefixText: prefixText,
         prefixStyle: Type.body.copyWith(color: c.textMuted),
+        suffixIcon: suffix,
         constraints: BoxConstraints(
           minHeight: maxLines == 1 ? Touch.comfortable : 0,
         ),
@@ -102,6 +110,63 @@ class STextField extends StatelessWidget {
     );
     return label == null ? wrapped : Field(label: label!, child: wrapped);
   }
+}
+
+/// Text field for a PIN or a passphrase: hidden by default, with a show/hide button so a typo in a
+/// backup passphrase can still be caught before it locks the file.
+class SecretField extends StatefulWidget {
+  const SecretField({
+    super.key,
+    required this.label,
+    required this.controller,
+    required this.showLabel,
+    required this.hideLabel,
+    this.placeholder,
+    this.keyboardType,
+    this.maxLength,
+    this.autofocus = false,
+    this.textInputAction,
+    this.onChanged,
+    this.onSubmitted,
+  });
+  final String label;
+  final TextEditingController controller;
+  final String showLabel;
+  final String hideLabel;
+  final String? placeholder;
+  final TextInputType? keyboardType;
+  final int? maxLength;
+  final bool autofocus;
+  final TextInputAction? textInputAction;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
+  @override
+  State<SecretField> createState() => _SecretFieldState();
+}
+
+class _SecretFieldState extends State<SecretField> {
+  bool _hidden = true;
+  @override
+  Widget build(BuildContext context) => STextField(
+    label: widget.label,
+    controller: widget.controller,
+    placeholder: widget.placeholder,
+    keyboardType: widget.keyboardType,
+    maxLength: widget.maxLength,
+    autofocus: widget.autofocus,
+    textInputAction: widget.textInputAction,
+    onChanged: widget.onChanged,
+    onSubmitted: widget.onSubmitted,
+    obscureText: _hidden,
+    suffix: IconButton(
+      tooltip: _hidden ? widget.showLabel : widget.hideLabel,
+      onPressed: () => setState(() => _hidden = !_hidden),
+      icon: SIcon(
+        _hidden ? SIconName.eye : SIconName.eyeOff,
+        color: context.colors.textMuted,
+      ),
+    ),
+  );
 }
 
 /// Money input: numeric keyboard, pt-BR mask, cents always visible, "R$" prefix in Cinza-mar.

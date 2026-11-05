@@ -25,55 +25,48 @@ class HomeScreen extends ConsumerWidget {
     );
     final hidden = ref.watch(privacyHiddenProvider);
     if (data == null || layout == null) return const SizedBox();
-    final hour = DateTime.now().hour;
-    final greeting = hour < 12
-        ? l.greetingMorning
-        : hour < 18
-        ? l.greetingAfternoon
-        : l.greetingEvening;
-    return UndoHost(
-      child: SScreen(
-        title: greeting,
-        subtitle: monthLabelLong(
-          data.month,
-          Localizations.localeOf(context).toString(),
-        ),
-        actions: [
-          SIconButton(
-            icon: hidden ? SIconName.eyeOff : SIconName.eye,
-            label: hidden ? l.showValues : l.hideValues,
-            onPressed: () => ref
-                .read(appControllerProvider.notifier)
-                .setPrefs((p) => p.copyWith(privacyMode: !hidden)),
-          ),
-          SIconButton(
-            icon: SIconName.settings,
-            label: l.customizeHome,
-            onPressed: () => context.push(Routes.customize),
-          ),
-        ],
-        fab: AddFab(
-          label: l.addTransaction,
-          onPressed: () => context.push(Routes.transaction),
-        ),
-        children: [
-          for (final id in layout.order)
-            WidgetBoundary(
-              key: ValueKey(id),
-              title: dash.widgetById(id).title,
-              child: DashboardWidget(id: id, data: data),
-            ),
-          if (layout.order.isEmpty)
-            Padding(
-              padding: const EdgeInsets.all(Spacing.lg),
-              child: Text(
-                l.noWidgetsVisible,
-                style: Type.bodySmall.copyWith(color: c.textMuted),
-                textAlign: TextAlign.center,
-              ),
-            ),
-        ],
+    final greeting = greetingFor(l, DateTime.now().hour);
+    return SScreen(
+      title: greeting,
+      subtitle: monthLabelLong(
+        data.month,
+        Localizations.localeOf(context).toString(),
       ),
+      actions: [
+        SIconButton(
+          icon: hidden ? SIconName.eyeOff : SIconName.eye,
+          label: hidden ? l.showValues : l.hideValues,
+          onPressed: () => ref
+              .read(appControllerProvider.notifier)
+              .setPrefs((p) => p.copyWith(privacyMode: !hidden)),
+        ),
+        SIconButton(
+          icon: SIconName.settings,
+          label: l.customizeHome,
+          onPressed: () => context.push(Routes.customize),
+        ),
+      ],
+      fab: AddFab(
+        label: l.addTransaction,
+        onPressed: () => context.push(Routes.transaction),
+      ),
+      children: [
+        for (final id in layout.order)
+          WidgetBoundary(
+            key: ValueKey(id),
+            title: dash.widgetById(id).title,
+            child: DashboardWidget(id: id, data: data),
+          ),
+        if (layout.order.isEmpty)
+          Padding(
+            padding: const EdgeInsets.all(Spacing.lg),
+            child: Text(
+              l.noWidgetsVisible,
+              style: Type.bodySmall.copyWith(color: c.textMuted),
+              textAlign: TextAlign.center,
+            ),
+          ),
+      ],
     );
   }
 }

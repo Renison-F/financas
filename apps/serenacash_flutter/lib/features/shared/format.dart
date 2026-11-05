@@ -3,6 +3,14 @@ import 'package:intl/intl.dart';
 import '../../app/app.dart';
 import '../../domain/entities/entities.dart';
 
+/// Greeting for the hour of the day (0-23): morning from 5h, afternoon from 12h, evening from 18h
+/// through the small hours.
+String greetingFor(AppLocalizations l, int hour) => hour >= 5 && hour < 12
+    ? l.greetingMorning
+    : hour >= 12 && hour < 18
+    ? l.greetingAfternoon
+    : l.greetingEvening;
+
 String dayMonth(String iso) => '${iso.substring(8, 10)}/${iso.substring(5, 7)}';
 
 String monthLabelShort(String key, String locale) {
@@ -31,6 +39,25 @@ String dayTitle(String iso, String locale) {
   final s = DateFormat('EEEE, dd MMM', locale).format(d).replaceAll('.', '');
   return s.isEmpty ? s : s[0].toUpperCase() + s.substring(1);
 }
+
+/// Human label for one entry of an import report's counts ("2 contas").
+String importCountLabel(AppLocalizations l, String key, int n) => switch (key) {
+  'accounts' => l.countAccounts(n),
+  'categories' => l.countCategories(n),
+  'tags' => l.countTags(n),
+  'cards' => l.countCards(n),
+  'transactions' => l.countTransactions(n),
+  'budgets' => l.countBudgets(n),
+  'goals' => l.countGoals(n),
+  'loans' => l.countLoans(n),
+  'attachments' => l.countAttachments(n),
+  'recurrenceRules' => l.countRecurrenceRules(n),
+  'shoppingLists' => l.countShoppingLists(n),
+  'shoppingSessions' => l.countShoppingSessions(n),
+  'products' => l.countProducts(n),
+  'priceObservations' => l.countPriceObservations(n),
+  _ => l.countOther(n, key),
+};
 
 String kindLabel(AppLocalizations l, TransactionKind k) => switch (k) {
   TransactionKind.income => l.kindIncome,

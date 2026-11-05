@@ -167,6 +167,26 @@ MonthTotals monthTotals(Ledger ledger, MonthKey month) {
   );
 }
 
+/// Result of a set of transactions by the same rule as [monthTotals], but counting what is still
+/// planned as well: income adds, expenses and card purchases subtract, card refunds add back.
+/// Transfers, invoice payments, reserves, loan movements and balance adjustments only move money and
+/// are left out. Not part of the TS core; used by the calendar's day total.
+Cents resultCents(Iterable<Transaction> list) {
+  var total = 0;
+  for (final t in list) {
+    if (!isActive(t)) continue;
+    if (isIncomeLike(t)) {
+      total = addCents(total, t.amountCents);
+    } else if (t.kind == TransactionKind.expense ||
+        t.kind == TransactionKind.cardPurchase) {
+      total = subCents(total, t.amountCents);
+    } else if (t.kind == TransactionKind.cardRefund) {
+      total = addCents(total, t.amountCents);
+    }
+  }
+  return total;
+}
+
 const _billKinds = {
   TransactionKind.expense,
   TransactionKind.income,

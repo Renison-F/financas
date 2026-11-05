@@ -296,6 +296,26 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     }
   }
 
+  /// Finishing closes the cart for good, so it is confirmed first, and says so when an item is still
+  /// waiting in the confirmation panel (it would be dropped).
+  Future<void> _confirmFinish(String total) async {
+    final l = context.l10n;
+    final pending = _draft != null;
+    final ok = await confirmSheet(
+      context,
+      title: l.finishPurchaseQ,
+      text: pending
+          ? '${l.finishPurchaseText(total)} ${l.finishPurchasePending}'
+          : l.finishPurchaseText(total),
+      confirmLabel: l.finishConfirm,
+      cancelLabel: l.cancel,
+      destructive: false,
+    );
+    if (!ok || !mounted) return;
+    setState(() => _draft = null);
+    await _finish();
+  }
+
   Future<void> _finish() async {
     setState(() => _finishing = true);
     try {
@@ -852,7 +872,9 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                     variant: SButtonVariant.ghost,
                     fullWidth: true,
                     loading: _finishing,
-                    onPressed: session.lines.isEmpty ? null : _finish,
+                    onPressed: session.lines.isEmpty
+                        ? null
+                        : () => _confirmFinish(brl(totals.totalCents)),
                   ),
                   if (_draft != null)
                     _DraftSheet(

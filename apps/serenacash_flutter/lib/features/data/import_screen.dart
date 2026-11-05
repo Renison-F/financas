@@ -375,9 +375,11 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
                 ),
                 if (_encrypted) ...[
                   const SizedBox(height: Spacing.sm),
-                  STextField(
+                  SecretField(
                     label: l.backupPassphrase,
                     controller: _pass,
+                    showLabel: l.showSecret,
+                    hideLabel: l.hideSecret,
                     keyboardType: TextInputType.visiblePassword,
                   ),
                 ],
@@ -530,7 +532,8 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
                   const SizedBox(height: 6),
                   Text(
                     _report!.counts.entries
-                        .map((e) => '${e.value} ${e.key}')
+                        .where((e) => e.value > 0)
+                        .map((e) => importCountLabel(l, e.key, e.value))
                         .join(' · '),
                     style: Type.bodySmall.copyWith(color: c.textMuted),
                   ),

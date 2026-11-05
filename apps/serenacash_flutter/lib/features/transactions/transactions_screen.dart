@@ -67,157 +67,149 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
       ('transfer', l.filterTransfers),
       ('planned', l.filterPlanned),
     ];
-    return UndoHost(
-      child: Scaffold(
-        backgroundColor: c.bg,
-        floatingActionButton: AddFab(
-          label: l.addTransaction,
-          onPressed: () => context.push(Routes.transaction),
-        ),
-        body: SafeArea(
-          bottom: false,
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 600),
-              child: CustomScrollView(
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        Spacing.md,
-                        Spacing.xs,
-                        Spacing.md,
-                        Spacing.sm,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SIconButton(
-                                icon: SIconName.chevronLeft,
-                                label: l.previousMonth,
-                                color: c.primary,
-                                onPressed: () => setState(
-                                  () => _month = addMonthsToKey(_month, -1),
-                                ),
+    return Scaffold(
+      backgroundColor: c.bg,
+      floatingActionButton: AddFab(
+        label: l.addTransaction,
+        onPressed: () => context.push(Routes.transaction),
+      ),
+      body: SafeArea(
+        bottom: false,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: CustomScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Spacing.md,
+                      Spacing.xs,
+                      Spacing.md,
+                      Spacing.sm,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SIconButton(
+                              icon: SIconName.chevronLeft,
+                              label: l.previousMonth,
+                              color: c.primary,
+                              onPressed: () => setState(
+                                () => _month = addMonthsToKey(_month, -1),
                               ),
-                              Text(
-                                monthLabelLong(_month, locale),
-                                style: Type.title.copyWith(color: c.text),
-                              ),
-                              SIconButton(
-                                icon: SIconName.chevronRight,
-                                label: l.nextMonth,
-                                color: c.primary,
-                                onPressed: () => setState(
-                                  () => _month = addMonthsToKey(_month, 1),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SCard(
-                            inset: true,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                _Total(
-                                  l.inflow,
-                                  Money(
-                                    totals.incomeSettled,
-                                    color: c.positive,
-                                    hidden: hidden,
-                                  ),
-                                ),
-                                _Total(
-                                  l.outflow,
-                                  Money(totals.expenseSettled, hidden: hidden),
-                                ),
-                                _Total(
-                                  l.result,
-                                  Money(
-                                    totals.net,
-                                    signed: true,
-                                    hidden: hidden,
-                                  ),
-                                ),
-                              ],
                             ),
-                          ),
-                          const SizedBox(height: Spacing.sm),
-                          STextField(
-                            placeholder: l.searchTransactions,
-                            semanticLabel: l.searchTransactions,
-                            onChanged: (v) => setState(() => _query = v),
-                            textInputAction: TextInputAction.search,
-                          ),
-                          const SizedBox(height: Spacing.sm),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
+                            Text(
+                              monthLabelLong(_month, locale),
+                              style: Type.title.copyWith(color: c.text),
+                            ),
+                            SIconButton(
+                              icon: SIconName.chevronRight,
+                              label: l.nextMonth,
+                              color: c.primary,
+                              onPressed: () => setState(
+                                () => _month = addMonthsToKey(_month, 1),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SCard(
+                          inset: true,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              for (final f in filters)
-                                SChip(
-                                  label: f.$2,
-                                  selected: _filter == f.$1,
-                                  onTap: () => setState(() => _filter = f.$1),
+                              _Total(
+                                l.inflow,
+                                Money(
+                                  totals.incomeSettled,
+                                  color: c.positive,
+                                  hidden: hidden,
                                 ),
+                              ),
+                              _Total(
+                                l.outflow,
+                                Money(totals.expenseSettled, hidden: hidden),
+                              ),
+                              _Total(
+                                l.result,
+                                Money(totals.net, signed: true, hidden: hidden),
+                              ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: Spacing.sm),
+                        STextField(
+                          placeholder: l.searchTransactions,
+                          semanticLabel: l.searchTransactions,
+                          onChanged: (v) => setState(() => _query = v),
+                          textInputAction: TextInputAction.search,
+                        ),
+                        const SizedBox(height: Spacing.sm),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: [
+                            for (final f in filters)
+                              SChip(
+                                label: f.$2,
+                                selected: _filter == f.$1,
+                                onTap: () => setState(() => _filter = f.$1),
+                              ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  if (items.isEmpty)
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.all(Spacing.md),
-                        child: EmptyState(
-                          icon: SIconName.list,
-                          title: _query.isNotEmpty
-                              ? l.nothingFound
-                              : l.noTransactionMonth,
-                          text: _query.isNotEmpty
-                              ? l.tryAnotherWord
-                              : l.registerWithPlus,
-                          actionLabel: _query.isNotEmpty ? null : l.register,
-                          onAction: () => context.push(Routes.transaction),
-                          compact: false,
-                        ),
-                      ),
-                    )
-                  else
-                    SliverPadding(
-                      padding: const EdgeInsets.fromLTRB(
-                        Spacing.md,
-                        0,
-                        Spacing.md,
-                        120,
-                      ),
-                      sliver: SliverList.list(
-                        children: [
-                          for (final e in byDay.entries) ...[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: Spacing.md,
-                                bottom: 4,
-                              ),
-                              child: Text(
-                                dayTitle(e.key, locale),
-                                style: Type.label.copyWith(color: c.textMuted),
-                              ),
-                            ),
-                            for (final t in e.value)
-                              _TxRow(t: t, hidden: hidden),
-                          ],
-                        ],
+                ),
+                if (items.isEmpty)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(Spacing.md),
+                      child: EmptyState(
+                        icon: SIconName.list,
+                        title: _query.isNotEmpty
+                            ? l.nothingFound
+                            : l.noTransactionMonth,
+                        text: _query.isNotEmpty
+                            ? l.tryAnotherWord
+                            : l.registerWithPlus,
+                        actionLabel: _query.isNotEmpty ? null : l.register,
+                        onAction: () => context.push(Routes.transaction),
+                        compact: false,
                       ),
                     ),
-                ],
-              ),
+                  )
+                else
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Spacing.md,
+                      0,
+                      Spacing.md,
+                      120,
+                    ),
+                    sliver: SliverList.list(
+                      children: [
+                        for (final e in byDay.entries) ...[
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: Spacing.md,
+                              bottom: 4,
+                            ),
+                            child: Text(
+                              dayTitle(e.key, locale),
+                              style: Type.label.copyWith(color: c.textMuted),
+                            ),
+                          ),
+                          for (final t in e.value) _TxRow(t: t, hidden: hidden),
+                        ],
+                      ],
+                    ),
+                  ),
+              ],
             ),
           ),
         ),
