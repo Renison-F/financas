@@ -31,7 +31,7 @@ O script para de propósito uma vez, após instalar o Android Studio, pedindo qu
 2. Git (instala via winget só se faltar).
 3. Extrai o Flutter para `C:\dev\flutter` (ou reutiliza um Flutter já no PATH) e adiciona `C:\dev\flutter\bin` ao PATH do usuário (Dart vem junto).
 4. Instala o Android Studio (`/S`) só se não existir; define `JAVA_HOME` para o JBR do Studio.
-5. Define `ANDROID_HOME`/`ANDROID_SDK_ROOT`; instala pelo `sdkmanager` o que faltar: platform-tools, `platforms;android-35`, build-tools 35, emulator e imagem `android-35 google_apis x86_64`; adiciona `platform-tools` ao PATH.
+5. Define `ANDROID_HOME`/`ANDROID_SDK_ROOT`; instala pelo `sdkmanager` o que faltar: platform-tools, `platforms;android-35`, build-tools 35, emulator, imagem `android-35 google_apis x86_64` e `ndk;28.2.13676358` (versão que o Flutter 3.47 exige; `-NdkVersion` muda); adiciona `platform-tools` ao PATH. Um `ANDROID_HOME` já configurado é respeitado mesmo que a pasta ainda não exista.
 6. Plugins Flutter e Dart via `studio64.exe installPlugins Dart io.flutter` (Studio fechado) ou manualmente pelo Marketplace.
 7. `flutter config --android-sdk/--android-studio-dir` e aceite interativo das licenças.
 8. `flutter doctor -v` salvo em `E:\SerenaCash\flutter-doctor.txt`.
@@ -49,6 +49,9 @@ File → Open → `C:\dev\financas\apps\serenacash_flutter`. Selecione o emulado
 Use apenas dados fictícios. O onboarding cria uma conta a partir de qualquer valor; o import aceita o backup de exemplo em `docs/flutter-migration/fixtures/io.json` (caso `importLegacy`) se precisar de massa de dados.
 
 ## Problemas comuns
+- `NDK at ... did not have a source.properties` ou NDK ausente: o Flutter Gradle Plugin exige o NDK 28.2.13676358. O script o instala pelo `sdkmanager`; manualmente, marque "NDK (Side by side)" 28.2.13676358 em SDK Manager > SDK Tools (mostrar detalhes do pacote).
+- `coreLibraryDesugaring` / `flutter_local_notifications requires desugaring`: já tratado em `android/app/build.gradle.kts` (desugar_jdk_libs 2.1.4). Se aparecer, o clone está antes do commit `82000bc`; faça `git pull --ff-only`.
+- `unable to find directory entry in pubspec.yaml` para `assets/brand` ou `assets/fixtures`: idem, clone antes do commit `79bf3fa`.
 - `No Android SDK found`: termine o assistente do Android Studio e rode o script de novo.
 - Emulador não inicia: ative Hyper-V/Windows Hypervisor Platform (Recursos do Windows) ou a virtualização no BIOS.
 - Primeiro build demora: o Gradle baixa dependências e o `package:sqlite3` baixa o binário SQLCipher do GitHub Releases; precisa de internet.

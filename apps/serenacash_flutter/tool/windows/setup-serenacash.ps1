@@ -18,6 +18,7 @@
 .PARAMETER DryRun         Apenas mostra o que faria; nao altera nada.
 .PARAMETER AutoApprove    Nao pergunta antes de cada etapa.
 .PARAMETER SkipEmulator   Nao cria/inicia o emulador.
+.PARAMETER NdkVersion     NDK exigido pelo Flutter Gradle Plugin (padrao: 28.2.13676358, Flutter 3.47).
 .PARAMETER ApiLevel       Nivel de API do emulador/plataforma (padrao: 35).
 
 .EXAMPLE
@@ -34,6 +35,7 @@ param(
   [string]$OutputDir = 'E:\SerenaCash',
   [string]$RepoUrl = 'https://github.com/Renison-F/financas.git',
   [int]$ApiLevel = 35,
+  [string]$NdkVersion = '28.2.13676358',
   [switch]$DryRun,
   [switch]$AutoApprove,
   [switch]$SkipEmulator
@@ -106,7 +108,8 @@ $studioCandidates = @("$env:LOCALAPPDATA\Programs\Android Studio", "$env:Program
 $studioDir = $studioCandidates | Where-Object { Test-Path (Join-Path $_ 'bin\studio64.exe') } | Select-Object -First 1
 Log ("Android Studio: {0}" -f $(if ($studioDir) { $studioDir } else { 'nao instalado' }))
 $sdkDir = Get-UserEnv 'ANDROID_HOME'; if (-not $sdkDir) { $sdkDir = $env:ANDROID_HOME }
-if (-not $sdkDir -or -not (Test-Path $sdkDir)) { $sdkDir = "$env:LOCALAPPDATA\Android\Sdk" }
+if (-not $sdkDir) { $sdkDir = "$env:LOCALAPPDATA\Android\Sdk" }
+# Respeita um ANDROID_HOME ja configurado mesmo que a pasta ainda nao exista (o SDK Manager vai cria-la).
 Log ("Android SDK: {0} ({1})" -f $sdkDir, $(if (Test-Path $sdkDir) { 'existe' } else { 'ausente' }))
 Log ("Downloads: {0}" -f $DownloadsDir)
 if (Test-Path $DownloadsDir) { Get-ChildItem $DownloadsDir -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'flutter|android-studio' } | ForEach-Object { Log ("  encontrado: {0} ({1:N0} MB)" -f $_.Name, $_.Length/1MB) } }
@@ -179,7 +182,7 @@ if (-not (Test-Path $sdkDir) -or -not $sdkmanager) {
   Result 'Android SDK' 'pendente: instalar cmdline-tools pelo SDK Manager e rodar o script novamente'
   throw 'Interrompido de proposito: termine a instalacao do SDK no Android Studio e rode o script de novo.'
 }
-$needed = @('platform-tools', "platforms;android-$ApiLevel", "build-tools;$ApiLevel.0.0", 'emulator', "system-images;android-$ApiLevel;google_apis;x86_64")
+$needed = @('platform-tools', "platforms;android-$ApiLevel", "build-tools;$ApiLevel.0.0", 'emulator', "system-images;android-$ApiLevel;google_apis;x86_64", "ndk;$NdkVersion")
 $installedList = Run $sdkmanager.FullName @("--sdk_root=$sdkDir", '--list_installed') -Capture
 $missing = $needed | Where-Object { $installedList -notmatch [regex]::Escape($_) }
 if ($missing.Count -gt 0) {
