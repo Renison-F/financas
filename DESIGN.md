@@ -173,7 +173,7 @@ Uma paleta de água e névoa ao amanhecer: fundo frio e claro, tinta grafite esv
 
 ### Primary
 - **Sereno** (#0B5563): única cor de ação. Botões primários, links, ícone ativo na barra de abas, preenchimento "dentro do ritmo", foco de teclado. 7,7:1 sobre Névoa. No tema escuro vira **Noite-sereno** (#6FC8D6), 9,6:1 sobre Noite.
-- **Sereno-claro** (#D4ECEF): container do primário: chips selecionados, botão secundário, fundo do cartão "pode gastar" quando positivo. Texto sobre ele sempre **Sereno-profundo** (#083E48), 9,5:1.
+- **Sereno-claro** (#D4ECEF): container do primário: chips selecionados, botão secundário, fundo dos ícones das ações rápidas e da aba ativa. Texto sobre ele sempre **Sereno-profundo** (#083E48), 9,5:1.
 
 ### Secondary
 - **Aurora** (#C0703E / escuro #F0B48A): a luz baixa do amanhecer. Só no símbolo, na marca de hoje e em ícones de destaque ≥ 24 px; nunca como texto (3,4:1 sobre Névoa é suficiente apenas para elementos gráficos).
@@ -259,9 +259,21 @@ Cantos arredondados contínuos: 6 px em chips pequenos e barras, 10 px em campos
 - **Money input:** teclado numérico, máscara pt-BR, centavos sempre visíveis, prefixo "R$" em Cinza-mar.
 
 ### Navigation
-- **Tab bar:** Branco, 56 px + safe area, 5 itens, ícone 24 px e rótulo 11 px; ativo Sereno com ícone preenchido.
+- **Tab bar:** Branco, 64 px + safe area, 5 itens, ícone 24 px e rótulo 11 px; a aba ativa ganha uma pílula Sereno-claro atrás do ícone, com ícone e rótulo em Sereno-profundo. Os rótulos acompanham a fonte do sistema só até o ponto em que "Lançamentos" ainda cabe sem quebrar.
 - **Headers:** iOS large title colapsável; Android top app bar Material 3. Voltar sempre do sistema.
 - **Sheets:** bottom sheet para tarefas curtas; tela cheia para fluxos longos (sessão de compras com câmera).
+
+### Painel-resumo "pode gastar" (tela inicial)
+Superfície sólida em **Sereno** (#0B5563; no escuro **Noite-sereno-container** #123F48), raio 20 px, texto Branco e texto de apoio tingido da própria cor (#CDE6EA), nunca cinza. Ordem: rótulo "Pode gastar até dd/mm", valor em Money Hero, uma linha de explicação, um fio e dois valores que explicam o número (**Dinheiro nas contas** e **Compromissos**), tirados das mesmas linhas da tela "Como calculamos"; rodapé com o modo (prudente/otimista) e "Como calculamos ›". O painel inteiro é tocável. Quando o valor é negativo o painel vira Coral-claro com texto Coral. Sem conta cadastrada o valor é desconhecido: o painel mostra "Configure seu saldo", uma frase e o botão "Adicionar conta", nunca R$ 0,00. Valores longos e fonte grande reduzem a escala em vez de cortar; em tela estreita ou fonte acima de 140% os dois valores empilham.
+
+### Ações rápidas (tela inicial)
+Até três atalhos logo abaixo do painel: ícone de 24 px em círculo Sereno-claro de 48 px e rótulo de até duas linhas. Complementam o botão flutuante "+" (que adiciona um lançamento) em vez de repeti-lo: "Conta a pagar", "Transferir" (ou "Receita" enquanto houver menos de duas contas) e "Contas".
+
+### Linha vazia
+Seção sem dados na tela inicial é uma linha só: ícone em quadro Bruma, o que falta ("Nenhuma conta prevista", "Adicione seu primeiro cartão") e uma ação ghost à direita. Evita empilhar cartões altos de instrução no primeiro acesso.
+
+### Vencimento
+Em listas de contas a pagar, "Atrasada desde dd/mm" (Coral sobre Coral-claro) e "Vence hoje"/"Vence amanhã" (Âmbar sobre Âmbar-claro) aparecem como etiqueta de raio 6 px; os demais vencimentos são texto Cinza-mar ("Vence em 3 dias", "Vence dd/mm"). Cor e texto sempre juntos.
 
 ### Barra de ritmo (componente-assinatura)
 Trilho Bruma de 12 px com raio 6 px; preenchimento Sereno (Coral ao ultrapassar 100%); **marca de hoje** em Aurora na posição esperada (dias decorridos ÷ dias do período, ou itens comprados ÷ itens da lista no carrinho). Legenda de três estados, sempre com ícone e texto: **sereno** (preenchimento ≤ marca), **atenção** (até 10% acima), **agitado** (acima disso). Usado em: orçamento por categoria, orçamento do mês, limite do cartão, meta/reserva, orçamento do carrinho.
@@ -272,7 +284,7 @@ Trilho Bruma de 12 px com raio 6 px; preenchimento Sereno (Coral ao ultrapassar 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** colocar um único número-herói por tela, em Money Hero, com uma linha de explicação e um botão ghost "Como calculamos".
+- **Do** colocar um único número-herói por tela, em Money Hero, com uma linha de explicação e o acesso a "Como calculamos". Na tela inicial ele vive no painel-resumo em Sereno.
 - **Do** usar Névoa (#F3F6F5) como fundo e Branco (#FFFFFF) só em cartões e folhas; oferecer claro, escuro e automático.
 - **Do** desenhar ícones em traço 1,75 px com cantos arredondados, da biblioteca interna.
 - **Do** mostrar estados vazio, carregando e erro em todo widget, com uma ação útil no vazio.

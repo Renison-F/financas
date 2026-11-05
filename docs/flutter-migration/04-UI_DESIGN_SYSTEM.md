@@ -18,8 +18,28 @@ Fonte normativa: `DESIGN.md` (SerenaCash, "Água parada ao amanhecer"). Implemen
 - `Money`: centavos inteiros, sinal explícito, Regra do Sinal, modo privacidade (`R$ ••••`), rótulo falado por extenso; hero com centavos a 60 %.
 - `RhythmBar`: trilho 12 px + preenchimento + **marca de hoje** (onda 12×6 em aurora sobre linha de 2 px), estados sereno/atenção/agitado, texto "% acima do limite".
 - `SCard`/`CardHeader`: branco sobre névoa, raio 20, sem sombra, cabeçalho título + ação ghost.
-- `SButton` (primário/secundário/ghost/destrutivo, 52/44 px, loading mantém largura), `SChip`/`ChipSelect`/`Segmented`, `ListRow` (56 px), `EmptyState` com ação, `STextField`, `MoneyField` (máscara pt-BR, prefixo R$, centavos sempre visíveis), `DateField` (hoje/ontem/amanhã + dd/mm/aaaa), `ToggleRow`, `Collapsible`, `confirmSheet` (folha para ações destrutivas), `SScreen`/`StackScreen`/`SheetHeader`, `AddFab`.
+- `SButton` (primário/secundário/ghost/destrutivo, 52/44 px, loading mantém largura), `SChip`/`ChipSelect`/`Segmented`, `ListRow` (56 px; o valor à direita encolhe em vez de estourar), `EmptyState` com ação, `EmptyRow` (estado vazio de uma linha), `STextField`, `SecretField` (PIN e senhas ocultos, com botão para mostrar), `MoneyField` (máscara pt-BR, prefixo R$, centavos sempre visíveis), `DateField` (hoje/ontem/amanhã + dd/mm/aaaa), `ToggleRow`, `Collapsible`, `confirmSheet` (folha para ações destrutivas), `SScreen`/`StackScreen`/`SheetHeader`, `AddFab`.
 - Ícones: `SIcon` desenha o conjunto próprio (traço 1,75 px, grade 24) a partir dos paths SVG da marca; nunca emoji.
+
+## Tela inicial (redesenho de 05/11/2026)
+
+Composição em `lib/features/home/`:
+
+| Bloco | Onde | Dados |
+|---|---|---|
+| Cabeçalho compacto: saudação por horário e período como controle discreto (abre "Personalizar tela inicial", onde ficam período e contas consideradas); ações de ocultar valores e alternar tema claro/escuro | `HomeHeader` em `home_parts.dart`, `home_screen.dart` | `greetingFor`, `layout.period`, `prefs.privacyMode`, `prefs.theme` |
+| Painel-resumo "pode gastar" com os dois valores que o explicam | `SummaryPanel` | `Availability` (`availableCents`, `lines`, `status`, `mode`); "Dinheiro nas contas" é a linha `balances`, "Compromissos" é a soma das linhas de sinal negativo. Nenhum cálculo novo |
+| Primeiro acesso (sem conta) | `SummaryPanel` | `availability.hasAccounts == false` mostra "Configure seu saldo" e "Adicionar conta"; não exibe valor |
+| Ações rápidas | `QuickActions` | rotas existentes: `/transaction?kind=expense&planned=1`, `/transaction?kind=transfer` ou `kind=income`, `/accounts` |
+| Contas a pagar: total pendente, atrasadas primeiro, vencimento em palavras | caso `bills_to_pay` em `widgets.dart`, `DueBadge`, `dueLabel` | `data.overdue`, `data.bills`, `pendingCents` |
+| Cartões e faturas: cartão, fatura, vencimento, fechamento e limite livre; até 2 cartões e "Mais N cartões" | `_CardInvoice` | `data.cards` (`Invoice`, `CardCommitment`) |
+| Últimos lançamentos: o que já aconteceu (previstos futuros ficam em "Contas a pagar") | caso `recent_transactions` | `data.recent` |
+| Seções vazias em uma linha | `EmptyRow` | — |
+| Carregando | `HomeSkeleton` (blocos estáticos) | `dashboardDataProvider == null` |
+
+A personalização continua valendo: ordem, visibilidade, modelos, período e contas consideradas vêm de `DashboardLayout`. As ações rápidas aparecem logo abaixo do painel "pode gastar" (ou no topo, se ele estiver oculto) e o atalho "Personalizar tela inicial" fica no fim da lista. Tokens novos em `SerenaColors`: `hero`, `onHero`, `onHeroMuted`, `heroDivider`; `Touch.target` (48 dp). Barra inferior: pílula `primaryContainer` na aba ativa (`navigationBarTheme`).
+
+Capturas (`screenshots/`): `home_first_access_light`, `home_no_movements_light`, `home_data_light`, `home_data_dark`, `home_data_hidden_light`, `home_data_narrow_large_text(_top)`. Os dados de demonstração existem só em `test/app/home_redesign_test.dart`, em banco em memória.
 
 ## Navegação
 
@@ -28,7 +48,7 @@ GoRouter com `StatefulShellRoute.indexedStack`: Início, Lançamentos, Compras, 
 ## Acessibilidade
 
 - Toda ação tem rótulo (`tooltip`/`Semantics`); valores têm leitura por extenso; barra de ritmo expõe valor e rótulo.
-- Alvos ≥ 44 px; contraste conforme tabela do DESIGN.md (checagem no pipeline RN mantida em `docs/qa`).
+- Alvos ≥ 44 px (48 dp nos botões de ícone, ações rápidas e cores de conta); contraste conforme tabela do DESIGN.md (checagem no pipeline RN mantida em `docs/qa`).
 - Dynamic Type: estilos sem tamanhos fixos em px além da escala; `MediaQuery` respeitado por `Text`.
 - `Reduce motion`: transições são curtas; nenhuma animação decorativa.
 

@@ -41,7 +41,25 @@ issues, `dart format` sem alterações. Detalhes e divergências em `02-EQUIVALE
 - Docs 04, 07–12, RELATORIO_FINAL e auditoria consolidada.
 - Bloqueios: APK (sem Android SDK: `dl.google.com` 403), iOS (sem macOS), aparelho (câmera/OCR/biometria/compras).
 
+## Homologação no emulador e correções (04–05/11/2026)
+- Ambiente Windows preparado (`13-SETUP_WINDOWS.md`); APK debug e release compilam localmente; emulador `serenacash_api35` (Android 15).
+- Homologação percorrida no emulador com dados fictícios: `10-HOMOLOGACAO.md`. Os 11 achados foram corrigidos (release/R8, receptores e toque das notificações, PIN, desfazer, calendário, backup com Compras, segredos ocultos, confirmação ao finalizar compra, textos, ícone e abertura com a marca no Android).
+- Notificação real exibida e toque validado com o app aberto, em segundo plano e encerrado.
+- Lembretes reagendam sozinhos quando o livro muda (paridade com o RN).
+- `integration_test` passou no emulador; a ferramenta é instável ali (conexão adb), repetir com limite de tempo.
+
+## Redesenho da tela inicial (05/11/2026)
+- Cabeçalho compacto (saudação, período como controle, ocultar valores, alternar tema), painel-resumo "pode gastar" em azul-petróleo com "Dinheiro nas contas" e "Compromissos", ações rápidas, "Contas a pagar" com total e vencimentos em palavras, "Cartões e faturas", "Últimos lançamentos", estados vazios de uma linha e primeiro acesso sem valor inventado. Detalhes em `04-UI_DESIGN_SYSTEM.md` e `DESIGN.md`.
+- Personalização da tela inicial (ordem, visibilidade, modelos, período, contas) preservada; nenhuma regra financeira alterada.
+- Gates: `dart format` 0 alterações, `flutter analyze --fatal-infos` 0 issues, `flutter test` 349 aprovados, 0 ignorados, 0 falhas (`09-TESTES.md`).
+
+## Pendências reais
+- iOS: sem macOS neste ambiente; ícone e abertura com a marca só foram feitos no Android.
+- Aparelho físico: câmera/OCR, biometria e compras em sandbox continuam sem validação.
+- Lojas/RevenueCat, assinatura de release e política de privacidade publicada dependem do cliente.
+- Lembretes usam alarmes inexatos (podem atrasar até 1 h); alarmes exatos exigem permissão sujeita à política da loja.
+
 ## Próximos passos
-1. Executar o CI (APK) e validar em aparelho conforme `docs/13-guia-teste-dispositivo.md`.
+1. Validar em aparelho físico os itens de `10-HOMOLOGACAO.md` em "Não coberto".
 2. Configurar lojas/RevenueCat (ação do cliente) e assinar release.
 3. Após paridade validada em aparelho, decidir remoção do código RN.
