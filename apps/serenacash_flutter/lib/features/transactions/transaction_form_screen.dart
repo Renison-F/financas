@@ -102,6 +102,8 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
   }
 
   Future<void> _save() async {
+    // Two taps before the button has had time to show "saving" must still save once.
+    if (_saving) return;
     final l = context.l10n;
     setState(() => _error = null);
     if (_amount == null || _amount! <= 0) {

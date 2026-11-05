@@ -218,4 +218,35 @@ void main() {
       expect(find.textContaining('5.480,50'), findsWidgets);
     },
   );
+
+  testWidgets('tapping Salvar twice in a row stores the entry once', (
+    tester,
+  ) async {
+    await setPhone(tester);
+    final app = TestApp();
+    addTearDown(app.dispose);
+    await pumpApp(tester, app);
+    await _onboard(tester);
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(SerenaCashApp)),
+    );
+    final before = container.read(ledgerProvider).transactions.length;
+
+    await addEntry(tester);
+    await tester.enterText(find.byType(TextField).at(0), '4590');
+    await tester.enterText(find.byType(TextField).at(1), 'Padaria');
+    await tester.pump();
+    // No frame between the two taps: the second one finds the form already saving.
+    await tester.tap(find.text('Salvar'));
+    await tester.tap(find.text('Salvar'), warnIfMissed: false);
+    await tester.pumpAndSettle();
+
+    final entries = container
+        .read(ledgerProvider)
+        .transactions
+        .where((t) => t.description == 'Padaria');
+    expect(entries, hasLength(1));
+    expect(container.read(ledgerProvider).transactions.length, before + 1);
+    expect(tester.takeException(), isNull);
+  });
 }
