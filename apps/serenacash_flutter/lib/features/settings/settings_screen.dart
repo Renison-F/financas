@@ -59,36 +59,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
-  Future<String?> _askPin(String title, String label) async {
-    final ctl = TextEditingController();
-    final l = context.l10n;
-    final r = await showDialog<String>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(title),
-        content: TextField(
-          controller: ctl,
-          autofocus: true,
-          obscureText: true,
-          keyboardType: TextInputType.number,
-          maxLength: 8,
-          decoration: InputDecoration(labelText: label),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: Text(l.cancel),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(ctl.text),
-            child: Text(l.ok),
-          ),
-        ],
-      ),
-    );
-    ctl.dispose();
-    return r;
-  }
+  Future<String?> _askPin(String title, String label) => showDialog<String>(
+    context: context,
+    builder: (_) => _PinDialog(title: title, label: label),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -321,6 +295,52 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ),
             ],
           ),
+        ),
+      ],
+    );
+  }
+}
+
+/// PIN prompt. The dialog owns its controller so it is disposed only when the route leaves the tree,
+/// after the exit animation, never while the field is still being rebuilt.
+class _PinDialog extends StatefulWidget {
+  const _PinDialog({required this.title, required this.label});
+  final String title;
+  final String label;
+  @override
+  State<_PinDialog> createState() => _PinDialogState();
+}
+
+class _PinDialogState extends State<_PinDialog> {
+  final _ctl = TextEditingController();
+
+  @override
+  void dispose() {
+    _ctl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    return AlertDialog(
+      title: Text(widget.title),
+      content: TextField(
+        controller: _ctl,
+        autofocus: true,
+        obscureText: true,
+        keyboardType: TextInputType.number,
+        maxLength: 8,
+        decoration: InputDecoration(labelText: widget.label),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(l.cancel),
+        ),
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(_ctl.text),
+          child: Text(l.ok),
         ),
       ],
     );

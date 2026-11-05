@@ -9,6 +9,7 @@ import '../../app/app.dart';
 import '../../app/di.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/theme/tokens.dart';
+import '../../domain/entities/entities.dart';
 import '../../ui/components/components.dart';
 
 final localAuthProvider = Provider<LocalAuthentication>(
@@ -101,6 +102,12 @@ class _LockGateState extends ConsumerState<LockGate>
     }
     final c = context.colors;
     final l = context.l10n;
+    // LockGate sits in MaterialApp.builder, above the app Navigator, so the lock screen needs its own
+    // Overlay: without one the PIN field throws on every edit and stops syncing with the keyboard.
+    return Overlay.wrap(child: _lockScreen(c, l, p));
+  }
+
+  Widget _lockScreen(SerenaColors c, AppLocalizations l, UserPrefs p) {
     return Scaffold(
       backgroundColor: c.bg,
       body: SafeArea(
@@ -113,7 +120,10 @@ class _LockGateState extends ConsumerState<LockGate>
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SIcon(SIconName.lock, size: 40, color: c.primary),
+                  // Centered: the column stretches its children and the icon paints to its width.
+                  Center(
+                    child: SIcon(SIconName.lock, size: 40, color: c.primary),
+                  ),
                   const SizedBox(height: Spacing.md),
                   Text(
                     l.unlockTitle,
