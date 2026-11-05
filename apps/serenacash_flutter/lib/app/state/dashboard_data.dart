@@ -112,11 +112,15 @@ DashboardData computeDashboard(
     );
   }).toList();
   final budgets = budgetsForMonth(ledger, month, today);
+  // "Últimos lançamentos" lists what has happened. A bill that is still planned for a future date
+  // belongs to "Contas a pagar" and would otherwise sit on top of this list.
   final recent =
       ledger.transactions
           .where(
             (t) =>
-                t.deletedAt == null && t.status != TransactionStatus.cancelled,
+                t.deletedAt == null &&
+                t.status != TransactionStatus.cancelled &&
+                !(isPlanned(t) && compareISO(t.date, today) > 0),
           )
           .toList()
         ..sort(

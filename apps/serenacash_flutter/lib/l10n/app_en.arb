@@ -2250,5 +2250,115 @@
   "finishPurchasePending": "The item you were confirming has not been added yet and will be left out.",
   "finishConfirm": "Finish",
   "showSecret": "Show",
-  "hideSecret": "Hide"
+  "hideSecret": "Hide",
+  "homeSetupTitle": "Set up your balance",
+  "homeSetupText": "Add your first account to see how much you can spend.",
+  "heroBalances": "Money in accounts",
+  "heroCommitted": "Committed",
+  "heroPlannedIncome": "Includes {value} of planned income.",
+  "@heroPlannedIncome": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "quickBill": "Bill to pay",
+  "quickTransfer": "Transfer",
+  "quickIncome": "Income",
+  "quickAccounts": "Accounts",
+  "seeAllFem": "See all",
+  "seeAllMasc": "See all",
+  "seeCards": "See cards",
+  "billsPendingUntil": "Pending until {date}",
+  "@billsPendingUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "billsOverdueCount": "{n, plural, =1{1 overdue} other{{n} overdue}}",
+  "@billsOverdueCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "dueToday": "Due today",
+  "dueTomorrow": "Due tomorrow",
+  "dueInDays": "{n, plural, =1{Due in 1 day} other{Due in {n} days}}",
+  "@dueInDays": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "dueOnDate": "Due {date}",
+  "@dueOnDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "overdueSince": "Overdue since {date}",
+  "@overdueSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "noBillPlanned": "No bills planned",
+  "moreBills": "{n, plural, =1{1 more bill} other{{n} more bills}}",
+  "@moreBills": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "firstCard": "Add your first card",
+  "invoiceDueLabel": "Due date",
+  "invoiceCloses": "Closes on {date}",
+  "@invoiceCloses": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "freeLimit": "Free limit {value}",
+  "@freeLimit": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "moreCards": "{n, plural, =1{1 more card} other{{n} more cards}}",
+  "@moreCards": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "noTransactionYet": "No transactions yet",
+  "useDarkTheme": "Use dark theme",
+  "useLightTheme": "Use light theme",
+  "periodControl": "{period}. Change period and customize",
+  "@periodControl": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "homeLoading": "Loading your data",
+  "noSpendingYet": "No spending in this period",
+  "noGoalYet": "No goal created"
 }

@@ -5905,6 +5905,204 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Ocultar'**
   String get hideSecret;
+
+  /// No description provided for @homeSetupTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Configure seu saldo'**
+  String get homeSetupTitle;
+
+  /// No description provided for @homeSetupText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicione sua primeira conta para saber quanto pode gastar.'**
+  String get homeSetupText;
+
+  /// No description provided for @heroBalances.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dinheiro nas contas'**
+  String get heroBalances;
+
+  /// No description provided for @heroCommitted.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compromissos'**
+  String get heroCommitted;
+
+  /// No description provided for @heroPlannedIncome.
+  ///
+  /// In pt, this message translates to:
+  /// **'Inclui {value} de receitas previstas.'**
+  String heroPlannedIncome(String value);
+
+  /// No description provided for @quickBill.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta a pagar'**
+  String get quickBill;
+
+  /// No description provided for @quickTransfer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Transferir'**
+  String get quickTransfer;
+
+  /// No description provided for @quickIncome.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receita'**
+  String get quickIncome;
+
+  /// No description provided for @quickAccounts.
+  ///
+  /// In pt, this message translates to:
+  /// **'Contas'**
+  String get quickAccounts;
+
+  /// No description provided for @seeAllFem.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver todas'**
+  String get seeAllFem;
+
+  /// No description provided for @seeAllMasc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver todos'**
+  String get seeAllMasc;
+
+  /// No description provided for @seeCards.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver cartões'**
+  String get seeCards;
+
+  /// No description provided for @billsPendingUntil.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pendente até {date}'**
+  String billsPendingUntil(String date);
+
+  /// No description provided for @billsOverdueCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{1 atrasada} other{{n} atrasadas}}'**
+  String billsOverdueCount(int n);
+
+  /// No description provided for @dueToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vence hoje'**
+  String get dueToday;
+
+  /// No description provided for @dueTomorrow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vence amanhã'**
+  String get dueTomorrow;
+
+  /// No description provided for @dueInDays.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{Vence em 1 dia} other{Vence em {n} dias}}'**
+  String dueInDays(int n);
+
+  /// No description provided for @dueOnDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vence {date}'**
+  String dueOnDate(String date);
+
+  /// No description provided for @overdueSince.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atrasada desde {date}'**
+  String overdueSince(String date);
+
+  /// No description provided for @noBillPlanned.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma conta prevista'**
+  String get noBillPlanned;
+
+  /// No description provided for @moreBills.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{Mais 1 conta} other{Mais {n} contas}}'**
+  String moreBills(int n);
+
+  /// No description provided for @firstCard.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicione seu primeiro cartão'**
+  String get firstCard;
+
+  /// No description provided for @invoiceDueLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vencimento'**
+  String get invoiceDueLabel;
+
+  /// No description provided for @invoiceCloses.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fecha em {date}'**
+  String invoiceCloses(String date);
+
+  /// No description provided for @freeLimit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite livre {value}'**
+  String freeLimit(String value);
+
+  /// No description provided for @moreCards.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =1{Mais 1 cartão} other{Mais {n} cartões}}'**
+  String moreCards(int n);
+
+  /// No description provided for @noTransactionYet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum lançamento ainda'**
+  String get noTransactionYet;
+
+  /// No description provided for @useDarkTheme.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usar tema escuro'**
+  String get useDarkTheme;
+
+  /// No description provided for @useLightTheme.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usar tema claro'**
+  String get useLightTheme;
+
+  /// No description provided for @periodControl.
+  ///
+  /// In pt, this message translates to:
+  /// **'{period}. Mudar período e personalizar'**
+  String periodControl(String period);
+
+  /// No description provided for @homeLoading.
+  ///
+  /// In pt, this message translates to:
+  /// **'Carregando seus dados'**
+  String get homeLoading;
+
+  /// No description provided for @noSpendingYet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum gasto neste período'**
+  String get noSpendingYet;
+
+  /// No description provided for @noGoalYet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma meta criada'**
+  String get noGoalYet;
 }
 
 class _AppLocalizationsDelegate

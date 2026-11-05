@@ -10,15 +10,16 @@ import '../../app/router.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/state/dashboard_data.dart';
 import '../../app/theme/tokens.dart';
-import '../../domain/availability/availability.dart';
 import '../../domain/budgets/budgets.dart';
 import '../../domain/cards/cards.dart';
+import '../../domain/dates/dates.dart';
 import '../../domain/dashboard/widgets.dart' as dash;
 import '../../domain/entities/entities.dart';
 import '../../domain/ledger/ledger.dart';
 import '../../domain/money/money.dart';
 import '../../ui/components/components.dart';
 import '../shared/format.dart';
+import 'home_parts.dart';
 
 String invoiceStateLabel(AppLocalizations l, InvoiceState s) => switch (s) {
   InvoiceState.open => l.invoiceOpen,
@@ -76,77 +77,66 @@ class DashboardWidget extends ConsumerWidget {
       onTap: () => go('/transaction?id=${t.id}'),
     );
 
+    // A section with nothing to show is one quiet line, not a tall card: several of them together
+    // (first use) must not push the content that exists off the screen.
+    Widget emptyRow(
+      SIconName icon,
+      String title, [
+      String? actionLabel,
+      String? route,
+    ]) => SCard(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Spacing.md,
+        vertical: Spacing.xs,
+      ),
+      child: EmptyRow(
+        icon: icon,
+        title: title,
+        actionLabel: actionLabel,
+        onAction: route == null ? null : () => go(route),
+      ),
+    );
+    final noAccount = data.accounts.isEmpty;
+    switch (id) {
+      case 'bills_to_pay' when data.bills.isEmpty && data.overdue.isEmpty:
+        return emptyRow(
+          SIconName.calendar,
+          l.noBillPlanned,
+          l.add,
+          '/transaction?kind=expense&planned=1',
+        );
+      case 'cards_invoices' when data.cards.isEmpty:
+        return emptyRow(SIconName.card, l.firstCard, l.add, '/cards/new');
+      case 'recent_transactions' when data.recent.isEmpty:
+        return emptyRow(
+          SIconName.list,
+          l.noTransactionYet,
+          l.add,
+          Routes.transaction,
+        );
+      case 'monthly_budget' when data.budgets.isEmpty:
+        return emptyRow(
+          SIconName.plan,
+          l.noBudgetYet,
+          l.create,
+          '/budgets/new',
+        );
+      case 'spending_by_category' when data.categories.isEmpty:
+        return emptyRow(SIconName.tag, l.noSpendingYet);
+      case 'goals' when data.goals.isEmpty:
+        return emptyRow(SIconName.target, l.noGoalYet, l.create, '/goals/new');
+      case 'loans' when data.loans.isEmpty:
+        return emptyRow(SIconName.bank, l.noLoan, l.add, '/loans/new');
+      case 'consolidated_balance' || 'account_balances' when noAccount:
+        return emptyRow(SIconName.wallet, l.noAccount, l.add, '/accounts/new');
+    }
     switch (id) {
       case 'available':
-        final av = data.availability;
-        if (!av.hasAccounts) {
-          return SCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CardHeader(title: l.canSpendTitle),
-                EmptyState(
-                  icon: SIconName.wallet,
-                  title: l.startWithAccount,
-                  text: l.startWithAccountText,
-                  actionLabel: l.addAccount,
-                  onAction: () => go('/accounts/new'),
-                ),
-              ],
-            ),
-          );
-        }
-        final neg = av.status == AvailabilityStatus.negative;
-        final fg = neg ? c.negative : c.onPrimaryContainer;
-        final tone = neg
-            ? c.negative
-            : av.status == AvailabilityStatus.tight
-            ? c.warning
-            : c.positive;
-        return SCard(
-          color: neg ? c.negativeContainer : c.primaryContainer,
-          onTap: () => go(Routes.available),
-          semanticHint: l.howWeCalculate,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                l.canSpendUntil(dayMonth(av.horizonEnd)),
-                style: Type.label.copyWith(color: fg),
-              ),
-              const SizedBox(height: 6),
-              money(av.availableCents, role: MoneyRole.hero, color: fg),
-              const SizedBox(height: 8),
-              Text(
-                neg
-                    ? l.availNegative
-                    : av.status == AvailabilityStatus.tight
-                    ? l.availTight
-                    : l.availOk,
-                style: Type.bodySmall.copyWith(color: fg),
-              ),
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: Text(
-                      av.mode == 'otimista' ? l.modeOptimistic : l.modePrudent,
-                      style: Type.label.copyWith(color: tone),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Flexible(
-                    child: Text(
-                      l.howWeCalculate,
-                      style: Type.label.copyWith(color: fg),
-                      textAlign: TextAlign.end,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+        return SummaryPanel(
+          availability: data.availability,
+          hidden: hidden,
+          onExplain: () => go(Routes.available),
+          onAddAccount: () => go('/accounts/new'),
         );
       case 'consolidated_balance':
         return SCard(
@@ -236,22 +226,57 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'bills_to_pay':
+        // Overdue first, then what is still to come in the period; the total is what remains to pay.
+        final pending = [...data.overdue, ...data.bills];
+        final total = pending.fold<int>(0, (a, t) => a + pendingCents(t));
+        const maxRows = 4;
         return SCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(title: l.billsToPay, action: action(l.all, '/bills')),
-              if (data.bills.isEmpty)
-                EmptyState(
-                  icon: SIconName.check,
-                  title: l.nothingToPay,
-                  text: l.nothingToPayText,
-                  actionLabel: l.newBillToPay,
-                  onAction: () => go('/transaction?kind=expense&planned=1'),
-                )
-              else
-                for (final t in data.bills.take(5))
-                  txRow(t, desc: l.dueOn(dayMonth(t.dueDate ?? t.date))),
+              CardHeader(
+                title: l.billsToPay,
+                action: action(l.seeAllFem, '/bills'),
+              ),
+              money(total, role: MoneyRole.headline),
+              const SizedBox(height: 2),
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: l.billsPendingUntil(dayMonth(data.horizonEnd)),
+                    ),
+                    if (data.overdue.isNotEmpty)
+                      TextSpan(
+                        text: ' · ${l.billsOverdueCount(data.overdue.length)}',
+                        style: TextStyle(
+                          color: c.negative,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                  ],
+                ),
+                style: Type.bodySmall.copyWith(color: c.textMuted),
+              ),
+              const SizedBox(height: Spacing.xs),
+              for (final t in pending.take(maxRows))
+                () {
+                  final due = dueLabel(l, t.dueDate ?? t.date, data.today);
+                  final late = due.tone == DueTone.overdue;
+                  return ListRow(
+                    icon: late ? SIconName.alert : SIconName.receipt,
+                    iconColor: late ? c.negative : null,
+                    title: t.description.isEmpty ? l.bill : t.description,
+                    descriptionWidget: DueBadge(text: due.text, tone: due.tone),
+                    trailing: money(
+                      pendingCents(t),
+                      color: late ? c.negative : null,
+                    ),
+                    onTap: () => go('/transaction?id=${t.id}'),
+                  );
+                }(),
+              if (pending.length > maxRows)
+                action(l.moreBills(pending.length - maxRows), '/bills'),
             ],
           ),
         );
@@ -297,68 +322,31 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'cards_invoices':
+        const maxCards = 2;
+        final shown = data.cards.take(maxCards).toList();
         return SCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CardHeader(
                 title: l.cardsAndInvoices,
-                action: action(l.see, '/cards'),
+                action: action(l.seeCards, '/cards'),
               ),
-              if (data.cards.isEmpty)
-                EmptyState(
-                  icon: SIconName.card,
-                  title: l.noCard,
-                  text: l.noCardText,
-                  actionLabel: l.addCard,
-                  onAction: () => go('/cards/new'),
-                )
-              else
-                for (final v in data.cards)
-                  InkWell(
-                    onTap: () => go('/cards/${v.card.id}'),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                v.card.name,
-                                style: Type.body.copyWith(color: c.text),
-                              ),
-                              money(v.invoice.remainingCents),
-                            ],
-                          ),
-                          muted(
-                            l.invoiceLine(
-                              invoiceStateLabel(l, v.invoice.state),
-                              dayMonth(v.invoice.dueDate),
-                              brl(v.commitment.availableLimitCents),
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          RhythmBar(
-                            percent: v.card.limitCents > 0
-                                ? v.commitment.outstandingCents /
-                                      v.card.limitCents *
-                                      100
-                                : 0,
-                            label: l.limitCommitted(
-                              v.card.limitCents > 0
-                                  ? (v.commitment.outstandingCents /
-                                            v.card.limitCents *
-                                            100)
-                                        .round()
-                                  : 0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+              for (var i = 0; i < shown.length; i++) ...[
+                if (i > 0)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: Spacing.xs),
+                    child: Divider(height: 1, thickness: 1, color: c.border),
                   ),
+                _CardInvoice(
+                  view: shown[i],
+                  hidden: hidden,
+                  onTap: () => go('/cards/${shown[i].card.id}'),
+                ),
+              ],
+              // The remaining cards stay one tap away and are announced, never silently dropped.
+              if (data.cards.length > maxCards)
+                action(l.moreCards(data.cards.length - maxCards), '/cards'),
             ],
           ),
         );
@@ -645,12 +633,24 @@ class DashboardWidget extends ConsumerWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                g.goal.name,
-                                style: Type.bodySmall.copyWith(color: c.text),
+                              Flexible(
+                                child: Text(
+                                  g.goal.name,
+                                  style: Type.bodySmall.copyWith(color: c.text),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
-                              muted(
-                                '${brl(g.savedCents)} ${l.ofLimit(brl(g.goal.targetCents))}',
+                              const SizedBox(width: Spacing.xs),
+                              Flexible(
+                                child: Text(
+                                  '${brl(g.savedCents)} ${l.ofLimit(brl(g.goal.targetCents))}',
+                                  style: Type.bodySmall.copyWith(
+                                    color: c.textMuted,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ],
                           ),
@@ -767,42 +767,47 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'recent_transactions':
+        final categories = {
+          for (final k in ref.watch(ledgerProvider).categories) k.id: k.name,
+        };
+        String day(String iso) => iso == data.today
+            ? l.today
+            : iso == addDays(data.today, -1)
+            ? l.yesterday
+            : dayMonth(iso);
         return SCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CardHeader(
                 title: l.recentTransactions,
-                action: action(l.allLabel, '/transactions'),
+                action: action(l.seeAllMasc, '/transactions'),
               ),
-              if (data.recent.isEmpty)
-                EmptyState(
-                  icon: SIconName.list,
-                  title: l.noTransaction,
-                  actionLabel: l.register,
-                  onAction: () => go('/transaction'),
-                )
-              else
-                for (final t in data.recent)
-                  ListRow(
-                    icon: t.kind == TransactionKind.income
-                        ? SIconName.arrowDown
-                        : t.kind == TransactionKind.transfer
-                        ? SIconName.swap
-                        : t.kind == TransactionKind.cardPurchase
-                        ? SIconName.card
-                        : SIconName.arrowUp,
-                    title: t.description.isEmpty
-                        ? kindLabel(l, t.kind)
-                        : t.description,
-                    description:
-                        '${dayMonth(t.date)}${t.status == TransactionStatus.planned ? ' · ${l.planned}' : ''}',
-                    trailing: money(
-                      signedAmount(t),
-                      signed: !isNeutralKind(t.kind),
-                    ),
-                    onTap: () => go('/transaction?id=${t.id}'),
+              for (final t in data.recent)
+                ListRow(
+                  icon: t.kind == TransactionKind.income
+                      ? SIconName.arrowDown
+                      : t.kind == TransactionKind.transfer
+                      ? SIconName.swap
+                      : t.kind == TransactionKind.cardPurchase
+                      ? SIconName.card
+                      : SIconName.arrowUp,
+                  title: t.description.isEmpty
+                      ? kindLabel(l, t.kind)
+                      : t.description,
+                  description:
+                      '${day(t.date)} · ${categories[t.categoryId] ?? kindLabel(l, t.kind)}${t.status == TransactionStatus.planned ? ' · ${l.planned}' : ''}',
+                  // Regra do Sinal: green marks money coming in; routine spending stays in the text color.
+                  trailing: Money(
+                    signedAmount(t),
+                    color: t.kind == TransactionKind.income
+                        ? c.positive
+                        : c.text,
+                    showPlus: t.kind == TransactionKind.income,
+                    hidden: hidden,
                   ),
+                  onTap: () => go('/transaction?id=${t.id}'),
+                ),
             ],
           ),
         );
@@ -942,6 +947,133 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
     }
+  }
+}
+
+/// One card inside "Cartões e faturas": which card, what is owed and when it is due.
+class _CardInvoice extends StatelessWidget {
+  const _CardInvoice({
+    required this.view,
+    required this.hidden,
+    required this.onTap,
+  });
+  final CardView view;
+  final bool hidden;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final l = context.l10n;
+    final inv = view.invoice;
+    final late = inv.state == InvoiceState.overdue;
+    final labelStyle = Type.label.copyWith(color: c.textMuted);
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(Radii.sm),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: Spacing.xxs),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: c.primary,
+                    borderRadius: BorderRadius.circular(Radii.sm),
+                  ),
+                  child: Center(
+                    child: SIcon(SIconName.card, size: 22, color: c.onPrimary),
+                  ),
+                ),
+                const SizedBox(width: Spacing.sm),
+                Expanded(
+                  child: Text(
+                    view.card.name,
+                    style: Type.body.copyWith(
+                      color: c.text,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                SIcon(SIconName.chevronRight, size: 20, color: c.borderStrong),
+              ],
+            ),
+            const SizedBox(height: Spacing.sm),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l.invoiceOf(invoiceStateLabel(l, inv.state)),
+                        style: late
+                            ? labelStyle.copyWith(
+                                color: c.negative,
+                                fontWeight: FontWeight.w600,
+                              )
+                            : labelStyle,
+                      ),
+                      const SizedBox(height: 2),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Money(
+                          inv.remainingCents,
+                          role: MoneyRole.title,
+                          color: late ? c.negative : null,
+                          hidden: hidden,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: Spacing.sm),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(l.invoiceDueLabel, style: labelStyle),
+                      const SizedBox(height: 2),
+                      Text(
+                        dayMonth(inv.dueDate),
+                        style: Type.title.copyWith(
+                          color: c.text,
+                          fontFeatures: const [FontFeature.tabularFigures()],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: Spacing.xs),
+            Text(
+              [
+                if (inv.state == InvoiceState.open)
+                  l.invoiceCloses(dayMonth(inv.closingDate)),
+                l.freeLimit(
+                  formatBRL(
+                    view.commitment.availableLimitCents,
+                    hidden: hidden,
+                  ),
+                ),
+              ].join(' · '),
+              style: Type.bodySmall.copyWith(color: c.textMuted),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

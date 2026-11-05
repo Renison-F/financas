@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:serenacash/data/database/drift_ledger_repository.dart';
 import 'package:serenacash/domain/entities/entities.dart';
+import 'package:serenacash/features/home/home_parts.dart';
 import 'package:serenacash/features/home/home_screen.dart';
 import 'package:serenacash/features/onboarding/onboarding_screen.dart';
 import 'package:serenacash/features/transactions/transaction_form_screen.dart';
@@ -114,36 +115,39 @@ void main() {
       await app.db.into(app.db.kv).insert(KvCompanionFactory.completeLayout());
       await pumpApp(tester, app);
       expect(find.byType(HomeScreen), findsOneWidget);
-      final titles = [
-        'Pode gastar',
-        'Saldo total',
-        'Saldos por conta',
+      // No data yet: the summary asks for the first account and every section with nothing to show
+      // is a single line; the others keep their title.
+      final texts = [
+        'Configure seu saldo', // Pode gastar
+        'Nenhuma conta', // Saldo total, Saldos por conta
         'Receitas',
         'Despesas',
-        'Contas a pagar',
+        'Nenhuma conta prevista', // Contas a pagar
         'Contas atrasadas',
         'Próximos 7 dias',
-        'Cartões e faturas',
+        'Adicione seu primeiro cartão', // Cartões e faturas
         'Compras parceladas',
-        'Orçamento do mês',
-        'Gastos por categoria',
+        'Sem orçamento ainda', // Orçamento do mês
+        'Nenhum gasto neste período', // Gastos por categoria
         'Evolução',
-        'Metas',
+        'Nenhuma meta criada', // Metas
         'Reservas',
         'Economia do mês',
         'Assinaturas e recorrentes',
-        'Empréstimos',
+        'Nenhum empréstimo', // Empréstimos
         'Calendário',
-        'Últimos lançamentos',
+        'Nenhum lançamento ainda', // Últimos lançamentos
         'Sugestões',
         'Listas de compras',
         'Assistente de supermercado',
         'Indicadores avançados',
       ];
-      for (final t in titles) {
-        expect(find.text(t), findsWidgets, reason: t);
+      for (final t in texts) {
+        expect(find.textContaining(t), findsWidgets, reason: t);
       }
-      expect(find.byType(SCard), findsAtLeast(24));
+      // 24 widgets: the summary panel plus 23 cards.
+      expect(find.byType(SummaryPanel), findsOneWidget);
+      expect(find.byType(SCard), findsAtLeast(23));
       await screenshot(tester, 'home_complete_light');
     },
   );

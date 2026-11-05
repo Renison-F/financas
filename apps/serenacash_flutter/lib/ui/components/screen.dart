@@ -15,6 +15,7 @@ class SScreen extends StatelessWidget {
     this.showBack = false,
     this.bottomPadding = 120,
     this.compactTitle = false,
+    this.header,
   });
   final String title;
   final String? subtitle;
@@ -24,6 +25,9 @@ class SScreen extends StatelessWidget {
   final bool showBack;
   final double bottomPadding;
   final bool compactTitle;
+
+  /// Replaces the title/subtitle block (the header actions stay on the right).
+  final Widget? header;
 
   @override
   Widget build(BuildContext context) {
@@ -66,28 +70,32 @@ class SScreen extends StatelessWidget {
                             ),
                           ),
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                title,
-                                style:
-                                    (compactTitle ? Type.title : Type.headline)
-                                        .copyWith(color: c.text),
-                                maxLines: 2,
-                              ),
-                              if (subtitle != null)
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 2),
-                                  child: Text(
-                                    subtitle!,
-                                    style: Type.bodySmall.copyWith(
-                                      color: c.textMuted,
-                                    ),
+                          child:
+                              header ??
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    title,
+                                    style:
+                                        (compactTitle
+                                                ? Type.title
+                                                : Type.headline)
+                                            .copyWith(color: c.text),
+                                    maxLines: 2,
                                   ),
-                                ),
-                            ],
-                          ),
+                                  if (subtitle != null)
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 2),
+                                      child: Text(
+                                        subtitle!,
+                                        style: Type.bodySmall.copyWith(
+                                          color: c.textMuted,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
                         ),
                         ...actions,
                       ],

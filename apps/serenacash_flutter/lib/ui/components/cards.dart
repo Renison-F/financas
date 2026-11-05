@@ -52,7 +52,8 @@ class CardHeader extends StatelessWidget {
           child: Text(
             title,
             style: Type.title.copyWith(color: context.colors.text),
-            maxLines: 1,
+            // Two lines keep the title readable at large text sizes next to the action.
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
         ),

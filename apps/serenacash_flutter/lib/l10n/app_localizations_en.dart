@@ -3429,4 +3429,150 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hideSecret => 'Hide';
+
+  @override
+  String get homeSetupTitle => 'Set up your balance';
+
+  @override
+  String get homeSetupText =>
+      'Add your first account to see how much you can spend.';
+
+  @override
+  String get heroBalances => 'Money in accounts';
+
+  @override
+  String get heroCommitted => 'Committed';
+
+  @override
+  String heroPlannedIncome(String value) {
+    return 'Includes $value of planned income.';
+  }
+
+  @override
+  String get quickBill => 'Bill to pay';
+
+  @override
+  String get quickTransfer => 'Transfer';
+
+  @override
+  String get quickIncome => 'Income';
+
+  @override
+  String get quickAccounts => 'Accounts';
+
+  @override
+  String get seeAllFem => 'See all';
+
+  @override
+  String get seeAllMasc => 'See all';
+
+  @override
+  String get seeCards => 'See cards';
+
+  @override
+  String billsPendingUntil(String date) {
+    return 'Pending until $date';
+  }
+
+  @override
+  String billsOverdueCount(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n overdue',
+      one: '1 overdue',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dueToday => 'Due today';
+
+  @override
+  String get dueTomorrow => 'Due tomorrow';
+
+  @override
+  String dueInDays(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Due in $n days',
+      one: 'Due in 1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dueOnDate(String date) {
+    return 'Due $date';
+  }
+
+  @override
+  String overdueSince(String date) {
+    return 'Overdue since $date';
+  }
+
+  @override
+  String get noBillPlanned => 'No bills planned';
+
+  @override
+  String moreBills(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n more bills',
+      one: '1 more bill',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get firstCard => 'Add your first card';
+
+  @override
+  String get invoiceDueLabel => 'Due date';
+
+  @override
+  String invoiceCloses(String date) {
+    return 'Closes on $date';
+  }
+
+  @override
+  String freeLimit(String value) {
+    return 'Free limit $value';
+  }
+
+  @override
+  String moreCards(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n more cards',
+      one: '1 more card',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noTransactionYet => 'No transactions yet';
+
+  @override
+  String get useDarkTheme => 'Use dark theme';
+
+  @override
+  String get useLightTheme => 'Use light theme';
+
+  @override
+  String periodControl(String period) {
+    return '$period. Change period and customize';
+  }
+
+  @override
+  String get homeLoading => 'Loading your data';
+
+  @override
+  String get noSpendingYet => 'No spending in this period';
+
+  @override
+  String get noGoalYet => 'No goal created';
 }

@@ -161,12 +161,18 @@ ThemeData serenaTheme(Brightness brightness) {
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: c.surface,
-      indicatorColor: Colors.transparent,
+      indicatorColor: c.primaryContainer,
+      indicatorShape: const StadiumBorder(),
       height: 64,
       labelTextStyle: WidgetStateProperty.resolveWith(
         (s) => Type.label.copyWith(
           fontSize: 11,
-          color: s.contains(WidgetState.selected) ? c.primary : c.textMuted,
+          fontWeight: s.contains(WidgetState.selected)
+              ? FontWeight.w600
+              : FontWeight.w500,
+          color: s.contains(WidgetState.selected)
+              ? c.onPrimaryContainer
+              : c.textMuted,
         ),
       ),
       iconTheme: WidgetStateProperty.resolveWith(

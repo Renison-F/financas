@@ -26,6 +26,10 @@ class SerenaColors extends ThemeExtension<SerenaColors> {
     required this.warningContainer,
     required this.overlay,
     required this.shadow,
+    required this.hero,
+    required this.onHero,
+    required this.onHeroMuted,
+    required this.heroDivider,
   });
   final Color bg,
       surface,
@@ -46,7 +50,12 @@ class SerenaColors extends ThemeExtension<SerenaColors> {
       warning,
       warningContainer,
       overlay,
-      shadow;
+      shadow,
+      // Summary panel of the home screen ("pode gastar"): a solid surface of the action color.
+      hero,
+      onHero,
+      onHeroMuted,
+      heroDivider;
 
   static const light = SerenaColors(
     bg: Color(0xFFF3F6F5),
@@ -69,6 +78,10 @@ class SerenaColors extends ThemeExtension<SerenaColors> {
     warningContainer: Color(0xFFF6E3BE),
     overlay: Color(0x73162022),
     shadow: Color(0x24162022),
+    hero: Color(0xFF0B5563),
+    onHero: Color(0xFFFFFFFF),
+    onHeroMuted: Color(0xFFCDE6EA),
+    heroDivider: Color(0x33FFFFFF),
   );
   static const dark = SerenaColors(
     bg: Color(0xFF0C1517),
@@ -91,6 +104,10 @@ class SerenaColors extends ThemeExtension<SerenaColors> {
     warningContainer: Color(0xFF4A3410),
     overlay: Color(0x8C000000),
     shadow: Color(0x80000000),
+    hero: Color(0xFF123F48),
+    onHero: Color(0xFFEAF7F9),
+    onHeroMuted: Color(0xFFA9D3DA),
+    heroDivider: Color(0x33C8ECF2),
   );
 
   @override
@@ -121,6 +138,10 @@ class SerenaColors extends ThemeExtension<SerenaColors> {
       warningContainer: l(warningContainer, other.warningContainer),
       overlay: l(overlay, other.overlay),
       shadow: l(shadow, other.shadow),
+      hero: l(hero, other.hero),
+      onHero: l(onHero, other.onHero),
+      onHeroMuted: l(onHeroMuted, other.onHeroMuted),
+      heroDivider: l(heroDivider, other.heroDivider),
     );
   }
 }
@@ -141,6 +162,9 @@ abstract final class Radii {
 
 abstract final class Touch {
   static const min = 44.0, comfortable = 52.0;
+
+  /// Android's 48 dp floor, used where a control is not one of the standard buttons.
+  static const target = 48.0;
 }
 
 abstract final class Motion {

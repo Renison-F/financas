@@ -126,8 +126,8 @@ class SIconButton extends StatelessWidget {
         onPressed: onPressed,
         tooltip: label,
         constraints: const BoxConstraints(
-          minWidth: Touch.min,
-          minHeight: Touch.min,
+          minWidth: Touch.target,
+          minHeight: Touch.target,
         ),
         icon: SIcon(icon, size: size, color: color ?? c.textMuted),
       ),

@@ -2250,5 +2250,115 @@
   "finishPurchasePending": "O item que você estava confirmando ainda não foi adicionado e ficará de fora.",
   "finishConfirm": "Finalizar",
   "showSecret": "Mostrar",
-  "hideSecret": "Ocultar"
+  "hideSecret": "Ocultar",
+  "homeSetupTitle": "Configure seu saldo",
+  "homeSetupText": "Adicione sua primeira conta para saber quanto pode gastar.",
+  "heroBalances": "Dinheiro nas contas",
+  "heroCommitted": "Compromissos",
+  "heroPlannedIncome": "Inclui {value} de receitas previstas.",
+  "@heroPlannedIncome": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "quickBill": "Conta a pagar",
+  "quickTransfer": "Transferir",
+  "quickIncome": "Receita",
+  "quickAccounts": "Contas",
+  "seeAllFem": "Ver todas",
+  "seeAllMasc": "Ver todos",
+  "seeCards": "Ver cartões",
+  "billsPendingUntil": "Pendente até {date}",
+  "@billsPendingUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "billsOverdueCount": "{n, plural, =1{1 atrasada} other{{n} atrasadas}}",
+  "@billsOverdueCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "dueToday": "Vence hoje",
+  "dueTomorrow": "Vence amanhã",
+  "dueInDays": "{n, plural, =1{Vence em 1 dia} other{Vence em {n} dias}}",
+  "@dueInDays": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "dueOnDate": "Vence {date}",
+  "@dueOnDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "overdueSince": "Atrasada desde {date}",
+  "@overdueSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "noBillPlanned": "Nenhuma conta prevista",
+  "moreBills": "{n, plural, =1{Mais 1 conta} other{Mais {n} contas}}",
+  "@moreBills": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "firstCard": "Adicione seu primeiro cartão",
+  "invoiceDueLabel": "Vencimento",
+  "invoiceCloses": "Fecha em {date}",
+  "@invoiceCloses": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "freeLimit": "Limite livre {value}",
+  "@freeLimit": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "moreCards": "{n, plural, =1{Mais 1 cartão} other{Mais {n} cartões}}",
+  "@moreCards": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "noTransactionYet": "Nenhum lançamento ainda",
+  "useDarkTheme": "Usar tema escuro",
+  "useLightTheme": "Usar tema claro",
+  "periodControl": "{period}. Mudar período e personalizar",
+  "@periodControl": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "homeLoading": "Carregando seus dados",
+  "noSpendingYet": "Nenhum gasto neste período",
+  "noGoalYet": "Nenhuma meta criada"
 }

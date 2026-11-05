@@ -3440,4 +3440,150 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get hideSecret => 'Ocultar';
+
+  @override
+  String get homeSetupTitle => 'Configure seu saldo';
+
+  @override
+  String get homeSetupText =>
+      'Adicione sua primeira conta para saber quanto pode gastar.';
+
+  @override
+  String get heroBalances => 'Dinheiro nas contas';
+
+  @override
+  String get heroCommitted => 'Compromissos';
+
+  @override
+  String heroPlannedIncome(String value) {
+    return 'Inclui $value de receitas previstas.';
+  }
+
+  @override
+  String get quickBill => 'Conta a pagar';
+
+  @override
+  String get quickTransfer => 'Transferir';
+
+  @override
+  String get quickIncome => 'Receita';
+
+  @override
+  String get quickAccounts => 'Contas';
+
+  @override
+  String get seeAllFem => 'Ver todas';
+
+  @override
+  String get seeAllMasc => 'Ver todos';
+
+  @override
+  String get seeCards => 'Ver cartões';
+
+  @override
+  String billsPendingUntil(String date) {
+    return 'Pendente até $date';
+  }
+
+  @override
+  String billsOverdueCount(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n atrasadas',
+      one: '1 atrasada',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get dueToday => 'Vence hoje';
+
+  @override
+  String get dueTomorrow => 'Vence amanhã';
+
+  @override
+  String dueInDays(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Vence em $n dias',
+      one: 'Vence em 1 dia',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String dueOnDate(String date) {
+    return 'Vence $date';
+  }
+
+  @override
+  String overdueSince(String date) {
+    return 'Atrasada desde $date';
+  }
+
+  @override
+  String get noBillPlanned => 'Nenhuma conta prevista';
+
+  @override
+  String moreBills(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Mais $n contas',
+      one: 'Mais 1 conta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get firstCard => 'Adicione seu primeiro cartão';
+
+  @override
+  String get invoiceDueLabel => 'Vencimento';
+
+  @override
+  String invoiceCloses(String date) {
+    return 'Fecha em $date';
+  }
+
+  @override
+  String freeLimit(String value) {
+    return 'Limite livre $value';
+  }
+
+  @override
+  String moreCards(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Mais $n cartões',
+      one: 'Mais 1 cartão',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get noTransactionYet => 'Nenhum lançamento ainda';
+
+  @override
+  String get useDarkTheme => 'Usar tema escuro';
+
+  @override
+  String get useLightTheme => 'Usar tema claro';
+
+  @override
+  String periodControl(String period) {
+    return '$period. Mudar período e personalizar';
+  }
+
+  @override
+  String get homeLoading => 'Carregando seus dados';
+
+  @override
+  String get noSpendingYet => 'Nenhum gasto neste período';
+
+  @override
+  String get noGoalYet => 'Nenhuma meta criada';
 }

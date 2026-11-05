@@ -389,22 +389,29 @@ class _TabsShell extends ConsumerWidget {
             color: c.surface,
             border: Border(top: BorderSide(color: c.border)),
           ),
-          child: NavigationBar(
-            selectedIndex: shell.currentIndex,
-            onDestinationSelected: (i) =>
-                shell.goBranch(i, initialLocation: i == shell.currentIndex),
-            destinations: [
-              for (var i = 0; i < tabs.length; i++)
-                NavigationDestination(
-                  icon: SIcon(tabs[i].$1, color: c.textMuted),
-                  selectedIcon: SIcon(
-                    tabs[i].$1,
-                    color: c.primary,
-                    filled: i == 0,
+          // Five labels share the width: they follow the system font only as far as "Lançamentos"
+          // still fits its fifth of the bar without wrapping.
+          child: MediaQuery.withClampedTextScaling(
+            maxScaleFactor: MediaQuery.sizeOf(context).width >= 400
+                ? 1.15
+                : 1.0,
+            child: NavigationBar(
+              selectedIndex: shell.currentIndex,
+              onDestinationSelected: (i) =>
+                  shell.goBranch(i, initialLocation: i == shell.currentIndex),
+              destinations: [
+                for (var i = 0; i < tabs.length; i++)
+                  NavigationDestination(
+                    icon: SIcon(tabs[i].$1, color: c.textMuted),
+                    selectedIcon: SIcon(
+                      tabs[i].$1,
+                      color: c.onPrimaryContainer,
+                      filled: i == 0,
+                    ),
+                    label: tabs[i].$2,
                   ),
-                  label: tabs[i].$2,
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
