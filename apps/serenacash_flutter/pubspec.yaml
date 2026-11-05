@@ -64,9 +64,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
-  assets:
-    - assets/brand/
-    - assets/fixtures/
   fonts:
     - family: BricolageGrotesque
       fonts:
