@@ -14,6 +14,8 @@ import '../../domain/io/backup.dart';
 import '../../domain/io/legacy.dart';
 import '../../domain/ports/clock.dart';
 import '../../domain/ports/ledger_repository.dart';
+import '../../domain/ports/shopping_repository.dart';
+import '../../domain/shopping/shopping.dart';
 import '../database/app_database.dart';
 import '../security/backup_crypto.dart';
 
@@ -50,15 +52,21 @@ class BackupService {
   BackupService({
     required this.repo,
     required this.db,
+    this.shopping,
     this.clock = const SystemClock(),
     this.ids = const UuidV4IdGenerator(),
   });
   final LedgerRepository repo;
+
+  /// Shopping lists, purchases, products and price history. Optional so the ledger-only format of
+  /// the original app keeps working; when present it is exported under the `shopping` extension key.
+  final ShoppingRepository? shopping;
   final AppDatabase db;
   final Clock clock;
   final IdGenerator ids;
 
-  /// Plain JSON backup (schema v1) plus attachments (base64) under the `attachments` extension key.
+  /// Plain JSON backup (schema v1) plus the extension keys `attachments` (base64), `recurrenceRules`
+  /// and `shopping`. A reader that does not know an extension key ignores it.
   Future<String> exportPlainJson() async {
     final ledger = await repo.loadLedger();
     final doc = createBackup(ledger, exportedAt: clock.nowISO()).toJson();
@@ -78,8 +86,23 @@ class BackupService {
     final rules = await repo.recurrenceRules();
     doc['attachments'] = atts;
     doc['recurrenceRules'] = rules.map((r) => r.toJson()).toList();
+    final shop = shopping;
+    if (shop != null) {
+      doc['shopping'] = {
+        'lists': [
+          for (final x in await shop.lists(includeArchived: true)) x.toJson(),
+        ],
+        'sessions': [
+          for (final x in await shop.sessions(limit: _allSessions)) x.toJson(),
+        ],
+        'products': [for (final x in await shop.products()) x.toJson()],
+        'observations': [for (final x in await shop.observations()) x.toJson()],
+      };
+    }
     return jsonEncode(doc);
   }
+
+  static const _allSessions = 1 << 30;
 
   Future<String> exportEncrypted(String passphrase) async =>
       encryptBackup(utf8.encode(await exportPlainJson()), passphrase);
@@ -208,9 +231,58 @@ class BackupService {
         .toList();
     final atts = (doc['attachments'] as List<dynamic>? ?? const [])
         .cast<Map<String, dynamic>>();
+    // Shopping data: parsed before anything is written, so a malformed section aborts the restore.
+    final shop = shopping;
+    final shopDoc = doc['shopping'];
+    var lists = const <ShoppingList>[];
+    var sessions = const <ShoppingSession>[];
+    var products = const <Product>[];
+    var observations = const <PriceObservation>[];
+    final hasShopping = shop != null && shopDoc is Map<String, dynamic>;
+    if (hasShopping) {
+      try {
+        List<T> read<T>(String key, T Function(Map<String, dynamic>) f) => [
+          for (final e in shopDoc[key] as List<dynamic>? ?? const [])
+            f(e as Map<String, dynamic>),
+        ];
+        lists = read('lists', ShoppingList.fromJson);
+        sessions = read('sessions', ShoppingSession.fromJson);
+        products = read('products', Product.fromJson);
+        observations = read('observations', PriceObservation.fromJson);
+      } catch (e) {
+        return _save(
+          ImportReport(
+            id: id,
+            source: source,
+            at: at,
+            counts: _counts(ledger),
+            warnings: warnings,
+            errors: ['Backup corrompido: dados de compras inválidos ($e).'],
+            schemaVersion: ok.schemaVersion,
+          ),
+        );
+      }
+    } else if (shop != null) {
+      warnings.add(
+        'Este backup não traz dados de Compras; as listas e o histórico de preços atuais foram mantidos.',
+      );
+    }
     if (replace) {
       await db.transaction(() async {
         await repo.replaceAll(ledger, recurrenceRules: rules);
+        if (hasShopping) {
+          await shop.purgeAll();
+          for (final x in products) {
+            await shop.upsertProduct(x);
+          }
+          for (final x in lists) {
+            await shop.upsertList(x);
+          }
+          for (final x in sessions) {
+            await shop.upsertSession(x);
+          }
+          await shop.addObservations(observations);
+        }
         for (final a in atts) {
           try {
             await repo.putAttachment(
@@ -233,6 +305,12 @@ class BackupService {
           ..._counts(ledger),
           'attachments': atts.length,
           'recurrenceRules': rules.length,
+          if (hasShopping) ...{
+            'shoppingLists': lists.length,
+            'shoppingSessions': sessions.length,
+            'products': products.length,
+            'priceObservations': observations.length,
+          },
         },
         warnings: warnings,
         errors: errors,

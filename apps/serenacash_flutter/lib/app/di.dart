@@ -87,6 +87,7 @@ final preferencesStoreProvider = FutureProvider<PreferencesStore>(
 final backupServiceProvider = FutureProvider<BackupService>(
   (ref) async => BackupService(
     repo: await ref.watch(ledgerRepositoryProvider.future),
+    shopping: await ref.watch(shoppingRepositoryProvider.future),
     db: await ref.watch(databaseProvider.future),
     clock: ref.watch(clockProvider),
     ids: ref.watch(idGeneratorProvider),
