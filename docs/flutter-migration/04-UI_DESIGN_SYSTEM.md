@@ -62,3 +62,18 @@ GoRouter com `StatefulShellRoute.indexedStack`: Início, Lançamentos, Compras, 
 ## Paridade com o RN
 
 Todas as telas do inventário de rotas (`01-AUDITORIA_ORIGEM.md` §1) existem em Flutter com o mesmo comportamento; o conteúdo textual foi movido para ARB (pt-BR e en) — 940 chaves.
+
+## Identidade em todo o app (05/11/2026)
+
+A tela inicial passou a definir a linguagem de todas as telas. O que mudou no código:
+
+- `lib/app/theme/tokens.dart`: uma escala compacta única em `Type` (headline 22, title 16, body 15, linha 14/12, valores 14 com algarismos tabulares, botão 15) e `Layout` (margem 12, preenchimento do cartão, quadro de ícone de 32).
+- `lib/app/theme/theme.dart`: botões com raio 10 e 48 px, cartões com raio 14, diálogo, folha, aviso, menu lateral e botão "+" circular.
+- `lib/ui/components/`: `SCard` (raio e preenchimento novos, parâmetro `radius`), `CardHeader` (link à direita), `ListRow` (linha densa, a mesma da tela inicial), `IconTile`, `RowDivider`/`dividedRows`, `SButton`, `SChip`, `Segmented`, `SScreen` (margem e título), `EmptyState`/`EmptyRow`, `Money` (papéis `heroFlat`, `section`, `dense`, sinal separado).
+- `lib/ui/icons.dart` e `lib/ui/category_icons.dart`: 40 ícones novos no mesmo traço e a biblioteca de ícones de categoria com palavras de busca; paleta de 13 cores sem roxo.
+- `lib/features/home/home_parts.dart`: só o que é próprio da tela inicial (cabeçalho, painel-resumo, ações rápidas, desenho do cartão, etiqueta de vencimento).
+- `lib/app/app_drawer.dart` e `lib/features/shared/add_sheet.dart`: menu lateral e folha "Adicionar".
+
+Acessibilidade: botões que podem aparecer sozinhos (ícone, cor, chip, linha tocável) declaram `container: true`; sem isso o Flutter funde a anotação com o nó vizinho e o botão deixa de ser anunciado.
+
+Capturas em `screenshots/` (`tour_*`, `categories_*`, `category_*`, `menu_light`, `transactions_light`, `home_*`).

@@ -6,18 +6,18 @@ Suíte: `apps/serenacash_flutter/test` + fixtures TS→Dart em `docs/flutter-mig
 
 | Resultado | Qtde |
 |---|---|
-| Aprovados | 349 |
+| Aprovados | 359 |
 | Ignorados (`skip`) | 0 |
 | Com falha | 0 |
-| **Total executado** | **349** |
+| **Total executado** | **359** |
 
-Comando: `flutter test` em `apps/serenacash_flutter` (saída final `+349: All tests passed!`). As referências antigas a 317 e 320 testes ficaram desatualizadas; o número cresceu com os testes de PIN, lembretes, backup de Compras, regressões da homologação e da nova tela inicial.
+Comando: `flutter test` em `apps/serenacash_flutter` (saída final `+359: All tests passed!`). As referências antigas a 317, 320 e 349 testes ficaram desatualizadas; o número cresceu com os testes de PIN, lembretes, backup de Compras, regressões da homologação, da tela inicial, de categorias e do tour de telas.
 
 | Camada | Local | O que cobre | Aprovados | Ignorados | Falhas |
 |---|---|---|---|---|---|
 | Domínio (equivalência e regras) | `test/domain/*` | 22 fixtures / 272 casos TS reproduzidos sem divergência monetária + invariantes (estorno, erros, arredondamento); `regressions_test.dart`: resultado do dia do calendário, ranking do ano limitado ao mês corrente, saudação por horário, plurais e rótulos do resumo de importação | 288 | 0 | 0 |
 | Persistência e segurança | `test/data/*` | esquema/índices/FK/CHECK, round-trip, idempotência, exclusão lógica, anexos com hash, stream, prefs, compras, SQLCipher (chave errada falha, arquivo não é SQLite em claro), PIN Argon2id, backup AES-GCM (adulteração), serviço de backup (v1, cifrado, legado, erros sem efeito), mapeamento RevenueCat; `backup_shopping_test.dart`: Compras no backup (ida e volta, substituição, backup antigo sem Compras, seção malformada aborta) | 33 | 0 | 0 |
-| App (widget/fluxo) | `test/app/*` | app real com banco em memória: onboarding → pode gastar → lançamento → lista → tema escuro; 24 widgets; privacidade; contas → cartão → compra parcelada → fatura; orçamento/meta/empréstimo/relatórios; lista → sessão → confirmação de finalização → despesa; leitura simulada de código/etiqueta; histórico e anual; `pin_lock_test.dart` (definir PIN, tela de bloqueio, PIN errado e depois o correto); `reminders_host_test.dart` (toque no lembrete com app aberto e em abertura a frio, lançamento inexistente, reagendamento); `regressions_flow_test.dart` (um único aviso de desfazer, "Cancelar" sem corte, cores com nome, senha oculta); `home_redesign_test.dart` (tela inicial: primeiro acesso sem valor inventado, conta sem movimentações, estado com dados, claro/escuro, valores ocultos, ações rápidas e período, tela estreita com fonte a 200%) | 25 | 0 | 0 |
+| App (widget/fluxo) | `test/app/*` | app real com banco em memória: onboarding → pode gastar → lançamento → lista → tema escuro; 24 widgets; privacidade; contas → cartão → compra parcelada → fatura; orçamento/meta/empréstimo/relatórios; lista → sessão → confirmação de finalização → despesa; leitura simulada de código/etiqueta; histórico e anual; `pin_lock_test.dart`; `reminders_host_test.dart`; `regressions_flow_test.dart` (desfazer, "Cancelar" sem corte, cores com nome, senha oculta, onboarding: voltar um passo e configuração interrompida sem duplicar conta); `home_redesign_test.dart` (primeiro acesso, conta sem movimentações, com dados, claro/escuro, valores ocultos, ações rápidas e período, tela estreita com fonte a 200%); `categories_flow_test.dart` (regras de hierarquia; excluir movendo também os lançamentos excluídos; criar com ícone e cor, subcategoria, editar, arquivar pelo menu lateral; criar categoria e subcategoria durante o lançamento sem perder o que foi digitado; excluir pedindo o destino; totais sem dupla contagem e filtro por categoria); `tour_test.dart` (20 telas com dados em claro, escuro e em 320 pt com texto a 150%) | 35 | 0 | 0 |
 | Performance | `test/perf/perf_test.dart` | painel com 5.000 lançamentos, busca, banco | 3 | 0 | 0 |
 
 ## Gates (todos sem `|| true`)
@@ -34,7 +34,7 @@ dart run build_runner build --delete-conflicting-outputs && flutter gen-l10n
 dart format --set-exit-if-changed lib test && flutter analyze --fatal-infos && flutter test
 ```
 
-Resultado em 05/11/2026: `dart format` → 148 arquivos, 0 alterações; `flutter analyze --fatal-infos` → 0 issues; `flutter test` → 349 aprovados, 0 ignorados, 0 falhas.
+Resultado em 05/11/2026: `dart format` → 155 arquivos, 0 alterações; `flutter analyze --fatal-infos` → 0 issues; `flutter test` → 359 aprovados, 0 ignorados, 0 falhas.
 
 ## Capturas de tela
 

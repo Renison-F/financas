@@ -53,8 +53,21 @@ issues, `dart format` sem alterações. Detalhes e divergências em `02-EQUIVALE
 - Personalização da tela inicial (ordem, visibilidade, modelos, período, contas) preservada; nenhuma regra financeira alterada.
 - Gates: `dart format` 0 alterações, `flutter analyze --fatal-infos` 0 issues, `flutter test` 349 aprovados, 0 ignorados, 0 falhas (`09-TESTES.md`).
 
+## Identidade em todo o app, categorias e navegação (05/11/2026)
+- Tela inicial refeita na identidade do mockup de referência (escala compacta, painel "Pode gastar neste mês" com "Saldo em contas" e "Compromissos do mês", ações Lançamento / Conta a pagar / Contas, linhas densas com ícone da categoria, botão "+" circular). Nome opcional na saudação (Configurações > Perfil).
+- A mesma identidade foi levada ao tema e aos componentes compartilhados (tipografia, cartão, linha de lista, botões, campos, chips, diálogos, folhas, avisos), e com isso a todas as telas. `DESIGN.md` e `04-UI_DESIGN_SYSTEM.md` atualizados.
+- Categorias e subcategorias: regras no domínio (`lib/domain/categories/`), biblioteca de ícones com busca, paleta sem roxo, criar/editar/arquivar/reativar, excluir com reclassificação, seletor no lançamento com criação na hora, filtro por categoria nos lançamentos, detalhe por subcategoria no relatório. Sem mudança de esquema do banco.
+- Navegação: barra inferior com os quatro destinos frequentes e a entrada do menu lateral; a tela "Mais" deixou de existir. O botão "+" abre a folha "Adicionar".
+- Contas a receber na tela "A pagar e a receber".
+- Achados da validação no emulador corrigidos: onboarding duplicava a conta quando interrompido e o voltar saía do app; botões únicos (ícone, cor, chip, linha) perdiam o nó de acessibilidade.
+- Gates: `dart format` 0 alterações, `flutter analyze --fatal-infos` 0 issues, `flutter test` 359 aprovados, 0 ignorados, 0 falhas.
+- Nenhuma regra financeira foi alterada. A ordem padrão do domínio para a tela inicial continua igual à fixture; quem nunca personalizou recebe a ordem do mockup (definida na camada de app).
+
 ## Pendências reais
 - iOS: sem macOS neste ambiente; ícone e abertura com a marca só foram feitos no Android.
+- TalkBack ligado não foi testado; os nós de acessibilidade foram conferidos pela árvore do sistema (uiautomator).
+- Final do cartão ("Final 4582" no mockup): o app não guarda esse dado; exigiria um campo novo e uma migração do banco.
+- Fora do escopo, por exigirem evolução própria: Open Finance, sincronização em nuvem, perfis, assistente de IA, edição em lote, lançamento em várias categorias, antecipar e reabrir fatura.
 - Aparelho físico: câmera/OCR, biometria e compras em sandbox continuam sem validação.
 - Lojas/RevenueCat, assinatura de release e política de privacidade publicada dependem do cliente.
 - Lembretes usam alarmes inexatos (podem atrasar até 1 h); alarmes exatos exigem permissão sujeita à política da loja.

@@ -49,6 +49,25 @@ Com o relógio do emulador adiantado temporariamente e depois restaurado:
 - Com duas ou mais notificações o Android as agrupa; tocar no cabeçalho do grupo abre o app pela tela inicial (comportamento do sistema).
 - Contas criadas depois de ativar os lembretes são agendadas sozinhas.
 
+## Validação da identidade, das categorias e da navegação (05/11/2026)
+
+No mesmo emulador, com dados fictícios e o APK debug da branch:
+
+| Fluxo | Resultado |
+|---|---|
+| Onboarding até a tela inicial | Passou. Achado corrigido: fechar o app no meio da configuração e recomeçar criava a conta de novo (o saldo dobrava), e o voltar saía do app. |
+| Botão "+" → folha "Adicionar" → Despesa | Passou; a folha cobre a barra inferior. |
+| Seletor de categoria com busca; "Criar “Feiras”" a partir do nome buscado | Passou; o nome chega preenchido, e ao salvar a categoria volta selecionada com valor e descrição preservados. |
+| Cor e ícone por busca ("feira" → mercado) | Passou. Achado corrigido: com um único ícone no resultado o botão não existia para o leitor de tela. |
+| Subcategoria criada durante o lançamento | Passou; volta selecionada e a linha mostra "Feiras › Hortifruti". |
+| Menu lateral: grupos, seção atual, voltar fecha o menu, voltar da tela retorna à aba | Passou. |
+| Editar categoria e arquivar subcategoria | Passou; a arquivada vai para "Arquivadas" e o lançamento antigo continua com ela. |
+| Conta a receber: criar pela folha, ver em "A receber", marcar como recebida | Passou; o saldo foi de 5.294,10 para 13.494,10. |
+| Tema escuro e fonte do sistema a 130% | Passou, sem corte nem sobreposição. |
+| Logcat | 0 erros do Flutter e 0 quedas. |
+
+Não refeito nesta rodada: notificação real e toque nela (validado em 05/11 antes desta mudança; a rota do lançamento não mudou e os testes de `reminders_host_test.dart` continuam passando).
+
 ## Não coberto
 
 Biometria (emulador sem biometria), leitura real de código de barras e OCR de etiqueta, compras em sandbox e restauração de compras, importação de CSV e OFX, TalkBack ligado, aparelho físico e iOS.
