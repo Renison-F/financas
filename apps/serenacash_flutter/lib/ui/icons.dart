@@ -51,6 +51,46 @@ enum SIconName {
   sun,
   layers,
   chart,
+  food,
+  coffee,
+  glass,
+  car,
+  bus,
+  fuel,
+  bike,
+  plane,
+  globe,
+  key,
+  building,
+  drop,
+  wifi,
+  phone,
+  tv,
+  heart,
+  pill,
+  dumbbell,
+  book,
+  gift,
+  shirt,
+  scissors,
+  paw,
+  person,
+  people,
+  game,
+  music,
+  film,
+  smile,
+  briefcase,
+  coins,
+  trending,
+  percent,
+  shield,
+  wrench,
+  document,
+  bag,
+  menu,
+  filter,
+  archive,
 }
 
 sealed class _Shape {
@@ -179,6 +219,134 @@ const _shapes = <SIconName, List<_Shape>>{
     _P('M3 12.2l9 4.5 9-4.5M3 16.4l9 4.5 9-4.5'),
   ],
   SIconName.chart: [_P('M4 20.5h16M7 17v-4M12 17V8M17 17V4.5')],
+  SIconName.food: [
+    _P('M7 3v18M5 3v4a2 2 0 0 0 4 0V3'),
+    _P('M17 3v18M17 3c-2 1.5-3 4-3 7v2h3'),
+  ],
+  SIconName.coffee: [
+    _P('M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z'),
+    _P('M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3v3M12 3v3'),
+  ],
+  SIconName.glass: [_P('M6 4h12l-1.5 8a4.5 4.5 0 0 1-9 0zM12 16.5V21M8 21h8')],
+  SIconName.car: [
+    _P('M5 11l1.6-4a2 2 0 0 1 1.9-1.3h7a2 2 0 0 1 1.9 1.3L19 11'),
+    _R(3, 11, 18, 6, 2),
+    _C(7.5, 14, 1),
+    _C(16.5, 14, 1),
+    _P('M6 17v2M18 17v2'),
+  ],
+  SIconName.bus: [
+    _R(5, 4, 14, 14, 3),
+    _P('M5 11h14M8 18v2M16 18v2'),
+    _C(8.5, 14.5, 1),
+    _C(15.5, 14.5, 1),
+  ],
+  SIconName.fuel: [
+    _R(4, 4, 9, 16, 2),
+    _P('M4 10h9M13 8l3 3v6a1.5 1.5 0 0 0 3 0V9l-2.5-2.5'),
+  ],
+  SIconName.bike: [
+    _C(6, 16, 3.5),
+    _C(18, 16, 3.5),
+    _P('M6 16l4-7h5l3 7M10 9l4 7M14 6h2'),
+  ],
+  SIconName.plane: [_P('M3 11.5l18-7.5-6 16.5-3.5-6.5z'), _P('M11.5 14L21 4')],
+  SIconName.globe: [
+    _C(12, 12, 9),
+    _P('M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18'),
+  ],
+  SIconName.key: [_C(8, 15, 4), _P('M11 12l9-9M16 7l3 3M13.5 9.5l2 2')],
+  SIconName.building: [
+    _R(5, 3, 14, 18, 1.5),
+    _P('M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2'),
+  ],
+  SIconName.drop: [
+    _P('M12 3c3.5 4 6 7 6 10.5a6 6 0 0 1-12 0C6 10 8.5 7 12 3z'),
+  ],
+  SIconName.wifi: [
+    _P('M3 9.5a13 13 0 0 1 18 0M6 13a9 9 0 0 1 12 0M9 16.5a4.5 4.5 0 0 1 6 0'),
+    _C(12, 19.5, 1),
+  ],
+  SIconName.phone: [_R(7, 2.5, 10, 19, 2.5), _P('M11 18h2')],
+  SIconName.tv: [_R(3, 5, 18, 12, 2), _P('M8 21h8M12 17v4')],
+  SIconName.heart: [
+    _P('M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.7-7 10-7 10z'),
+  ],
+  SIconName.pill: [
+    _P('M10.5 3.5a5 5 0 0 1 7 7l-7 7a5 5 0 0 1-7-7z'),
+    _P('M7 7l7 7'),
+  ],
+  SIconName.dumbbell: [_P('M4 9v6M7 7v10M17 7v10M20 9v6M7 12h10')],
+  SIconName.book: [
+    _P('M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z'),
+    _P('M5 17a3 3 0 0 1 3-3h11'),
+  ],
+  SIconName.gift: [
+    _R(4, 9, 16, 11, 2),
+    _P('M4 13h16M12 9v11'),
+    _P(
+      'M12 9C10.5 5.5 7 5.5 7 7.5S10 9 12 9zM12 9c1.5-3.5 5-3.5 5-1.5S14 9 12 9z',
+    ),
+  ],
+  SIconName.shirt: [_P('M8 3l4 2 4-2 5 4-3 3-2-1v12H8V9l-2 1-3-3z')],
+  SIconName.scissors: [
+    _C(6, 7, 2.5),
+    _C(6, 17, 2.5),
+    _P('M8 8.5l12 8M8 15.5l12-8'),
+  ],
+  SIconName.paw: [
+    _C(7, 9.5, 1.6),
+    _C(12, 6.5, 1.6),
+    _C(17, 9.5, 1.6),
+    _P(
+      'M12 12c-3 0-5 2.5-5 4.5 0 1.5 1.2 2.5 2.7 2 1.5-.5 3.1-.5 4.6 0 1.5.5 2.7-.5 2.7-2 0-2-2-4.5-5-4.5z',
+    ),
+  ],
+  SIconName.person: [_C(12, 8, 4), _P('M5 21a7 7 0 0 1 14 0')],
+  SIconName.people: [
+    _C(9, 8.5, 3.5),
+    _P('M3 20a6 6 0 0 1 12 0'),
+    _P('M15.5 5.2a3.5 3.5 0 0 1 0 6.6M17.5 14.5a6 6 0 0 1 3.5 5.5'),
+  ],
+  SIconName.game: [
+    _R(3, 8, 18, 10, 5),
+    _P('M8 11v4M6 13h4'),
+    _C(15.5, 12, 1),
+    _C(17.5, 14.5, 1),
+  ],
+  SIconName.music: [_P('M9 18V5l11-2v13'), _C(6.5, 18, 2.5), _C(17.5, 16, 2.5)],
+  SIconName.film: [
+    _R(3, 4, 18, 16, 2),
+    _P('M8 4v16M16 4v16M3 9h5M3 15h5M16 9h5M16 15h5'),
+  ],
+  SIconName.smile: [
+    _C(12, 12, 9),
+    _P('M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5v.5M15 9.5v.5'),
+  ],
+  SIconName.briefcase: [
+    _R(3, 7, 18, 13, 2),
+    _P('M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 13h18'),
+  ],
+  SIconName.coins: [
+    _C(9, 9, 5.5),
+    _P('M14.4 9.9a5.5 5.5 0 1 1-4.5 4.5M7.5 9h3M9 7v4'),
+  ],
+  SIconName.trending: [_P('M3 17l6-6 4 4 8-8M15 7h6v6')],
+  SIconName.percent: [_C(7, 7, 2.5), _C(17, 17, 2.5), _P('M19 5L5 19')],
+  SIconName.shield: [
+    _P('M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z'),
+    _P('M9 12l2.2 2.2L15 10.5'),
+  ],
+  SIconName.wrench: [
+    _P(
+      'M20 7a4.5 4.5 0 0 1-6 4.2L7 18.5A1.8 1.8 0 0 1 4.5 16l7.3-7A4.5 4.5 0 0 1 16 3l-2.5 2.5 1 3 3 1z',
+    ),
+  ],
+  SIconName.document: [_P('M7 3h7l5 5v13H7z'), _P('M14 3v5h5M10 13h6M10 17h6')],
+  SIconName.bag: [_P('M5 8h14l-1 12H6z'), _P('M9 8V6a3 3 0 0 1 6 0v2')],
+  SIconName.menu: [_P('M4 7h16M4 12h16M4 17h16')],
+  SIconName.filter: [_P('M4 6h16M7 12h10M10 18h4')],
+  SIconName.archive: [_R(3, 4, 18, 5, 1.5), _P('M5 9v10h14V9M10 13h4')],
 };
 
 /// Icon stored on a category ("cart", "arrow-up"…); unknown keys fall back to [fallback].
@@ -450,3 +618,9 @@ void _arcTo(
     t = t2;
   }
 }
+
+/// The key stored for an icon ("arrow-up"), the inverse of [iconByKey].
+String iconKey(SIconName icon) => icon.name.replaceAllMapped(
+  RegExp('[A-Z]'),
+  (m) => '-${m.group(0)!.toLowerCase()}',
+);

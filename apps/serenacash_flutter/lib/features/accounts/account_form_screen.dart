@@ -36,6 +36,13 @@ String colorName(AppLocalizations l, String hex) => switch (hex.toUpperCase()) {
   '#8A5200' => l.colorAmber,
   '#A93A29' => l.colorRed,
   '#4F5E61' => l.colorGray,
+  '#2E7FA8' => l.colorSky,
+  '#1F5F9E' => l.colorBlue,
+  '#5B7F2B' => l.colorOlive,
+  '#A6791E' => l.colorGold,
+  '#B84E5E' => l.colorRose,
+  '#7A5A44' => l.colorBrown,
+  '#74848A' => l.colorLightGray,
   _ => l.colorOther(hex),
 };
 

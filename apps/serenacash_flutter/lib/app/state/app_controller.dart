@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/billing/billing.dart';
 import '../../domain/cards/cards.dart';
+import '../../domain/categories/categories.dart';
 import '../../domain/dashboard/widgets.dart';
 import '../../domain/dates/dates.dart' hide Clock;
 import '../../domain/entities/entities.dart';
@@ -198,6 +199,9 @@ class AppController extends AsyncNotifier<AppState> {
     );
   }
 
+  /// Creates or edits a category. [parentId] is only applied when [setParent] is true (so callers that
+  /// just rename or archive do not have to repeat it); passing null with [setParent] makes it a main
+  /// category again. Throws [CategoryException] when the change breaks the hierarchy rules.
   Future<Category> saveCategory({
     String? id,
     required String name,
@@ -205,17 +209,29 @@ class AppController extends AsyncNotifier<AppState> {
     String? icon,
     String? color,
     String? parentId,
+    bool? setParent,
     bool? archived,
   }) => _mutate(() async {
     final now = nowISO();
     final ex = id == null ? null : _s.ledger.categoryById(id);
-    final c = Category(
-      id: ex?.id ?? newId(),
+    // A new category takes the parent it is given; an edit keeps its own unless told otherwise.
+    final parent = (setParent ?? ex == null) ? parentId : ex?.parentId;
+    final error = validateCategory(
+      _s.ledger,
+      id: ex?.id,
       name: name,
       kind: kind,
-      icon: icon ?? ex?.icon ?? 'tag',
-      color: color ?? ex?.color ?? '#4F5E61',
-      parentId: parentId ?? ex?.parentId,
+      parentId: parent,
+    );
+    if (error != null) throw CategoryException(error);
+    final parentCat = _s.ledger.categoryById(parent);
+    final c = Category(
+      id: ex?.id ?? newId(),
+      name: name.trim(),
+      kind: kind,
+      icon: icon ?? ex?.icon ?? parentCat?.icon ?? 'tag',
+      color: color ?? ex?.color ?? parentCat?.color ?? '#4F5E61',
+      parentId: parent,
       archived: archived ?? ex?.archived ?? false,
       sortOrder: ex?.sortOrder ?? _s.ledger.categories.length,
       createdAt: ex?.createdAt ?? now,
@@ -223,6 +239,51 @@ class AppController extends AsyncNotifier<AppState> {
     );
     await _ledger.upsertCategory(c);
     return c;
+  });
+
+  /// Archiving keeps the category on every entry that already uses it; it only leaves the pickers.
+  Future<void> archiveCategory(String id, {bool archived = true}) async {
+    final c = _s.ledger.categoryById(id);
+    if (c == null) return;
+    await saveCategory(id: id, name: c.name, kind: c.kind, archived: archived);
+  }
+
+  /// Deletes a category together with its subcategories. Every entry filed under any of them (including
+  /// recurrence templates) goes to [moveToId], or stays without a category when it is null, before the
+  /// categories are removed, so nothing is left pointing at a deleted category. Budgets of the deleted
+  /// categories are removed with them. Throws [CategoryException] for an invalid target.
+  Future<({int moved, int budgets})> deleteCategory(
+    String id, {
+    String? moveToId,
+  }) => _mutate(() async {
+    final ledger = _s.ledger;
+    final error = validateReclassifyTarget(ledger, id, moveToId);
+    if (error != null) throw CategoryException(error);
+    final family = categoryFamily(ledger, id);
+    final now = nowISO();
+    final moved = [
+      for (final t in ledger.transactions)
+        if (family.contains(t.categoryId))
+          Transaction.fromJson({
+            ...t.toJson()..remove('categoryId'),
+            'categoryId': ?moveToId,
+            'updatedAt': now,
+          }),
+    ];
+    if (moved.isNotEmpty) await _ledger.upsertTransactions(moved);
+    await _ledger.reassignCategoryOnDeleted(family, moveToId);
+    final budgets = ledger.budgets
+        .where((b) => b.deletedAt == null && family.contains(b.categoryId))
+        .toList();
+    for (final b in budgets) {
+      await _ledger.softDelete(EntityTypes.budget, b.id);
+    }
+    // Subcategories first, then the category itself.
+    for (final cid in family.where((x) => x != id)) {
+      await _ledger.softDelete(EntityTypes.category, cid);
+    }
+    await _ledger.softDelete(EntityTypes.category, id);
+    return (moved: moved.length, budgets: budgets.length);
   });
 
   Future<Tag> saveTag({String? id, required String name, String? color}) =>

@@ -6169,6 +6169,474 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Aparece na saudação da tela inicial. Fica só neste aparelho.'**
   String get yourNameHelp;
+
+  /// No description provided for @catTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categorias'**
+  String get catTitle;
+
+  /// No description provided for @catNewSub.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova subcategoria'**
+  String get catNewSub;
+
+  /// No description provided for @catEdit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar categoria'**
+  String get catEdit;
+
+  /// No description provided for @catEditSub.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar subcategoria'**
+  String get catEditSub;
+
+  /// No description provided for @catIcon.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ícone'**
+  String get catIcon;
+
+  /// No description provided for @catSearchIcon.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar ícone (ex.: mercado, saúde)'**
+  String get catSearchIcon;
+
+  /// No description provided for @catNoIcon.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum ícone para “{q}”.'**
+  String catNoIcon(String q);
+
+  /// No description provided for @catPreview.
+  ///
+  /// In pt, this message translates to:
+  /// **'Prévia'**
+  String get catPreview;
+
+  /// No description provided for @catPreviewName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome da categoria'**
+  String get catPreviewName;
+
+  /// No description provided for @catParent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categoria principal'**
+  String get catParent;
+
+  /// No description provided for @catParentNone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma: é uma categoria principal'**
+  String get catParentNone;
+
+  /// No description provided for @catParentHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Uma subcategoria detalha a categoria principal. Os totais da principal já incluem as subcategorias.'**
+  String get catParentHelp;
+
+  /// No description provided for @catParentLocked.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esta categoria tem subcategorias, por isso continua como principal.'**
+  String get catParentLocked;
+
+  /// No description provided for @catSubCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =0{Sem subcategorias} one{1 subcategoria} other{{n} subcategorias}}'**
+  String catSubCount(int n);
+
+  /// No description provided for @catAddSubTo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar subcategoria em {name}'**
+  String catAddSubTo(String name);
+
+  /// No description provided for @catAddSub.
+  ///
+  /// In pt, this message translates to:
+  /// **'Subcategoria'**
+  String get catAddSub;
+
+  /// No description provided for @catArchivedSection.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivadas'**
+  String get catArchivedSection;
+
+  /// No description provided for @catArchivedHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categorias arquivadas continuam nos lançamentos antigos e nos relatórios, mas saem das listas de escolha.'**
+  String get catArchivedHelp;
+
+  /// No description provided for @catArchive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivar'**
+  String get catArchive;
+
+  /// No description provided for @catArchiveText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sai das listas de escolha. Os lançamentos que já usam esta categoria continuam como estão.'**
+  String get catArchiveText;
+
+  /// No description provided for @catReactivate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reativar'**
+  String get catReactivate;
+
+  /// No description provided for @catDelete.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir'**
+  String get catDelete;
+
+  /// No description provided for @catDeleteTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir “{name}”?'**
+  String catDeleteTitle(String name);
+
+  /// No description provided for @catDeleteUnused.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum lançamento usa esta categoria.'**
+  String get catDeleteUnused;
+
+  /// No description provided for @catDeleteUsed.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, one{1 lançamento usa esta categoria} other{{n} lançamentos usam esta categoria}}. Escolha o que fazer com eles:'**
+  String catDeleteUsed(int n);
+
+  /// No description provided for @catDeleteSubs.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, one{A subcategoria será excluída junto} other{As {n} subcategorias serão excluídas junto}}.'**
+  String catDeleteSubs(int n);
+
+  /// No description provided for @catDeleteBudgets.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, one{1 orçamento desta categoria será removido} other{{n} orçamentos desta categoria serão removidos}}.'**
+  String catDeleteBudgets(int n);
+
+  /// No description provided for @catMoveTo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mover para outra categoria'**
+  String get catMoveTo;
+
+  /// No description provided for @catMoveToPick.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolher categoria de destino'**
+  String get catMoveToPick;
+
+  /// No description provided for @catLeaveNone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Deixar sem categoria'**
+  String get catLeaveNone;
+
+  /// No description provided for @catDeleteConfirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir categoria'**
+  String get catDeleteConfirm;
+
+  /// No description provided for @catDeleted.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =0{Categoria excluída.} one{Categoria excluída. 1 lançamento reclassificado.} other{Categoria excluída. {n} lançamentos reclassificados.}}'**
+  String catDeleted(int n);
+
+  /// No description provided for @catErrEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Informe um nome.'**
+  String get catErrEmpty;
+
+  /// No description provided for @catErrDuplicate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Já existe uma categoria com esse nome neste nível.'**
+  String get catErrDuplicate;
+
+  /// No description provided for @catErrParent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha uma categoria principal válida do mesmo tipo.'**
+  String get catErrParent;
+
+  /// No description provided for @catErrHasSubs.
+  ///
+  /// In pt, this message translates to:
+  /// **'Uma categoria com subcategorias não pode virar subcategoria.'**
+  String get catErrHasSubs;
+
+  /// No description provided for @catErrTarget.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha outra categoria de destino.'**
+  String get catErrTarget;
+
+  /// No description provided for @catSearch.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar categoria'**
+  String get catSearch;
+
+  /// No description provided for @catNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma categoria para “{q}”.'**
+  String catNotFound(String q);
+
+  /// No description provided for @catCreateNamed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar “{q}”'**
+  String catCreateNamed(String q);
+
+  /// No description provided for @catNone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem categoria'**
+  String get catNone;
+
+  /// No description provided for @catChoose.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolher categoria'**
+  String get catChoose;
+
+  /// No description provided for @catSubcategory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Subcategoria'**
+  String get catSubcategory;
+
+  /// No description provided for @catSubNone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma'**
+  String get catSubNone;
+
+  /// No description provided for @catNewSubShort.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova'**
+  String get catNewSubShort;
+
+  /// No description provided for @catUsage.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, =0{Sem lançamentos} one{1 lançamento} other{{n} lançamentos}}'**
+  String catUsage(int n);
+
+  /// No description provided for @catEmptyKind.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma categoria aqui ainda.'**
+  String get catEmptyKind;
+
+  /// No description provided for @catAllCategories.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todas as categorias'**
+  String get catAllCategories;
+
+  /// No description provided for @catFilter.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categoria'**
+  String get catFilter;
+
+  /// No description provided for @colorBlue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Azul'**
+  String get colorBlue;
+
+  /// No description provided for @colorSky.
+  ///
+  /// In pt, this message translates to:
+  /// **'Azul-claro'**
+  String get colorSky;
+
+  /// No description provided for @colorOlive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Verde-oliva'**
+  String get colorOlive;
+
+  /// No description provided for @colorGold.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dourado'**
+  String get colorGold;
+
+  /// No description provided for @colorRose.
+  ///
+  /// In pt, this message translates to:
+  /// **'Rosado'**
+  String get colorRose;
+
+  /// No description provided for @colorBrown.
+  ///
+  /// In pt, this message translates to:
+  /// **'Marrom'**
+  String get colorBrown;
+
+  /// No description provided for @colorLightGray.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cinza-claro'**
+  String get colorLightGray;
+
+  /// No description provided for @tagsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tags'**
+  String get tagsTitle;
+
+  /// No description provided for @navMenu.
+  ///
+  /// In pt, this message translates to:
+  /// **'Menu'**
+  String get navMenu;
+
+  /// No description provided for @navGroupMain.
+  ///
+  /// In pt, this message translates to:
+  /// **'Principal'**
+  String get navGroupMain;
+
+  /// No description provided for @navGroupMoves.
+  ///
+  /// In pt, this message translates to:
+  /// **'Movimentações'**
+  String get navGroupMoves;
+
+  /// No description provided for @navGroupPlanning.
+  ///
+  /// In pt, this message translates to:
+  /// **'Planejamento'**
+  String get navGroupPlanning;
+
+  /// No description provided for @navGroupRegisters.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cadastros'**
+  String get navGroupRegisters;
+
+  /// No description provided for @navGroupSettings.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aplicativo'**
+  String get navGroupSettings;
+
+  /// No description provided for @navCards.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cartões de crédito'**
+  String get navCards;
+
+  /// No description provided for @navCategories.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categorias e subcategorias'**
+  String get navCategories;
+
+  /// No description provided for @addTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar'**
+  String get addTitle;
+
+  /// No description provided for @addExpense.
+  ///
+  /// In pt, this message translates to:
+  /// **'Despesa'**
+  String get addExpense;
+
+  /// No description provided for @addExpenseDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dinheiro que saiu de uma conta'**
+  String get addExpenseDesc;
+
+  /// No description provided for @addIncome.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receita'**
+  String get addIncome;
+
+  /// No description provided for @addIncomeDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dinheiro que entrou em uma conta'**
+  String get addIncomeDesc;
+
+  /// No description provided for @addTransfer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Transferência'**
+  String get addTransfer;
+
+  /// No description provided for @addTransferDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entre duas contas suas'**
+  String get addTransferDesc;
+
+  /// No description provided for @addCardPurchase.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compra no cartão'**
+  String get addCardPurchase;
+
+  /// No description provided for @addCardPurchaseDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entra na fatura do cartão de crédito'**
+  String get addCardPurchaseDesc;
+
+  /// No description provided for @addBill.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta a pagar'**
+  String get addBill;
+
+  /// No description provided for @addBillDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Despesa com vencimento, ainda não paga'**
+  String get addBillDesc;
+
+  /// No description provided for @addReceivable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta a receber'**
+  String get addReceivable;
+
+  /// No description provided for @addReceivableDesc.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receita prevista, ainda não recebida'**
+  String get addReceivableDesc;
 }
 
 class _AppLocalizationsDelegate

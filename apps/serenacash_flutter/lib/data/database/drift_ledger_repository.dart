@@ -443,6 +443,22 @@ class DriftLedgerRepository implements LedgerRepository {
       _setDeleted(entityType, id, clock.nowISO(), 'delete');
 
   @override
+  Future<int> reassignCategoryOnDeleted(Set<String> fromIds, String? toId) {
+    if (fromIds.isEmpty) return Future.value(0);
+    final marks = List.filled(fromIds.length, '?').join(', ');
+    return db.customUpdate(
+      'UPDATE transactions SET category_id = ?, updated_at = ?, dirty = 1 '
+      'WHERE deleted_at IS NOT NULL AND category_id IN ($marks)',
+      variables: [
+        Variable(toId),
+        Variable(clock.nowISO()),
+        for (final id in fromIds) Variable(id),
+      ],
+      updates: {db.transactions},
+    );
+  }
+
+  @override
   Future<bool> restore(String entityType, String id) async =>
       _setDeleted(entityType, id, null, 'restore');
 

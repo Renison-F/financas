@@ -69,6 +69,10 @@ abstract interface class LedgerRepository {
 
   Future<bool> softDelete(String entityType, String id);
 
+  /// Moves the soft-deleted entries that still point at one of [fromIds] to [toId] (or to no category),
+  /// so that restoring one of them later never brings back a reference to a deleted category.
+  Future<int> reassignCategoryOnDeleted(Set<String> fromIds, String? toId);
+
   /// Restores a soft-deleted record if still present.
   Future<bool> restore(String entityType, String id);
 

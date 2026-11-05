@@ -3611,4 +3611,305 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get yourNameHelp =>
       'Shown in the greeting on the home screen. Stays on this device only.';
+
+  @override
+  String get catTitle => 'Categories';
+
+  @override
+  String get catNewSub => 'New subcategory';
+
+  @override
+  String get catEdit => 'Edit category';
+
+  @override
+  String get catEditSub => 'Edit subcategory';
+
+  @override
+  String get catIcon => 'Icon';
+
+  @override
+  String get catSearchIcon => 'Search icon (e.g. groceries, health)';
+
+  @override
+  String catNoIcon(String q) {
+    return 'No icon for “$q”.';
+  }
+
+  @override
+  String get catPreview => 'Preview';
+
+  @override
+  String get catPreviewName => 'Category name';
+
+  @override
+  String get catParent => 'Main category';
+
+  @override
+  String get catParentNone => 'None: it is a main category';
+
+  @override
+  String get catParentHelp =>
+      'A subcategory details its main category. The main category totals already include its subcategories.';
+
+  @override
+  String get catParentLocked =>
+      'This category has subcategories, so it stays a main category.';
+
+  @override
+  String catSubCount(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n subcategories',
+      one: '1 subcategory',
+      zero: 'No subcategories',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String catAddSubTo(String name) {
+    return 'Add subcategory to $name';
+  }
+
+  @override
+  String get catAddSub => 'Subcategory';
+
+  @override
+  String get catArchivedSection => 'Archived';
+
+  @override
+  String get catArchivedHelp =>
+      'Archived categories stay on past entries and in reports, but leave the pickers.';
+
+  @override
+  String get catArchive => 'Archive';
+
+  @override
+  String get catArchiveText =>
+      'It leaves the pickers. Entries that already use this category stay as they are.';
+
+  @override
+  String get catReactivate => 'Reactivate';
+
+  @override
+  String get catDelete => 'Delete';
+
+  @override
+  String catDeleteTitle(String name) {
+    return 'Delete “$name”?';
+  }
+
+  @override
+  String get catDeleteUnused => 'No entry uses this category.';
+
+  @override
+  String catDeleteUsed(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n entries use this category',
+      one: '1 entry uses this category',
+    );
+    return '$_temp0. Choose what to do with them:';
+  }
+
+  @override
+  String catDeleteSubs(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Its $n subcategories will be deleted too',
+      one: 'Its subcategory will be deleted too',
+    );
+    return '$_temp0.';
+  }
+
+  @override
+  String catDeleteBudgets(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n budgets of this category will be removed',
+      one: '1 budget of this category will be removed',
+    );
+    return '$_temp0.';
+  }
+
+  @override
+  String get catMoveTo => 'Move to another category';
+
+  @override
+  String get catMoveToPick => 'Choose the destination category';
+
+  @override
+  String get catLeaveNone => 'Leave without a category';
+
+  @override
+  String get catDeleteConfirm => 'Delete category';
+
+  @override
+  String catDeleted(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Category deleted. $n entries reclassified.',
+      one: 'Category deleted. 1 entry reclassified.',
+      zero: 'Category deleted.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get catErrEmpty => 'Enter a name.';
+
+  @override
+  String get catErrDuplicate =>
+      'A category with this name already exists at this level.';
+
+  @override
+  String get catErrParent => 'Choose a valid main category of the same kind.';
+
+  @override
+  String get catErrHasSubs =>
+      'A category with subcategories cannot become a subcategory.';
+
+  @override
+  String get catErrTarget => 'Choose another destination category.';
+
+  @override
+  String get catSearch => 'Search category';
+
+  @override
+  String catNotFound(String q) {
+    return 'No category for “$q”.';
+  }
+
+  @override
+  String catCreateNamed(String q) {
+    return 'Create “$q”';
+  }
+
+  @override
+  String get catNone => 'No category';
+
+  @override
+  String get catChoose => 'Choose category';
+
+  @override
+  String get catSubcategory => 'Subcategory';
+
+  @override
+  String get catSubNone => 'None';
+
+  @override
+  String get catNewSubShort => 'New';
+
+  @override
+  String catUsage(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n entries',
+      one: '1 entry',
+      zero: 'No entries',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get catEmptyKind => 'No category here yet.';
+
+  @override
+  String get catAllCategories => 'All categories';
+
+  @override
+  String get catFilter => 'Category';
+
+  @override
+  String get colorBlue => 'Blue';
+
+  @override
+  String get colorSky => 'Light blue';
+
+  @override
+  String get colorOlive => 'Olive';
+
+  @override
+  String get colorGold => 'Gold';
+
+  @override
+  String get colorRose => 'Rose';
+
+  @override
+  String get colorBrown => 'Brown';
+
+  @override
+  String get colorLightGray => 'Light gray';
+
+  @override
+  String get tagsTitle => 'Tags';
+
+  @override
+  String get navMenu => 'Menu';
+
+  @override
+  String get navGroupMain => 'Main';
+
+  @override
+  String get navGroupMoves => 'Activity';
+
+  @override
+  String get navGroupPlanning => 'Planning';
+
+  @override
+  String get navGroupRegisters => 'Registers';
+
+  @override
+  String get navGroupSettings => 'App';
+
+  @override
+  String get navCards => 'Credit cards';
+
+  @override
+  String get navCategories => 'Categories and subcategories';
+
+  @override
+  String get addTitle => 'Add';
+
+  @override
+  String get addExpense => 'Expense';
+
+  @override
+  String get addExpenseDesc => 'Money that left an account';
+
+  @override
+  String get addIncome => 'Income';
+
+  @override
+  String get addIncomeDesc => 'Money that came into an account';
+
+  @override
+  String get addTransfer => 'Transfer';
+
+  @override
+  String get addTransferDesc => 'Between two of your accounts';
+
+  @override
+  String get addCardPurchase => 'Card purchase';
+
+  @override
+  String get addCardPurchaseDesc => 'Goes on the credit card invoice';
+
+  @override
+  String get addBill => 'Bill to pay';
+
+  @override
+  String get addBillDesc => 'Expense with a due date, not paid yet';
+
+  @override
+  String get addReceivable => 'Amount to receive';
+
+  @override
+  String get addReceivableDesc => 'Expected income, not received yet';
 }

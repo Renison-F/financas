@@ -9,9 +9,11 @@ import '../../app/app.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/state/app_state.dart';
 import '../../app/theme/tokens.dart';
+import '../../domain/categories/categories.dart';
 import '../../domain/entities/entities.dart';
 import '../../domain/money/money.dart';
 import '../../ui/components/components.dart';
+import '../categories/category_widgets.dart';
 import '../shared/format.dart';
 import 'attachments_section.dart';
 
@@ -45,7 +47,9 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
   late TransactionKind _kind;
   int? _amount;
   late final TextEditingController _desc, _notes, _merchant;
-  String? _categoryId, _accountId, _toAccountId, _cardId;
+  // The main category and, when one is chosen, its subcategory; the entry stores the most specific.
+  String? _categoryId, _subcategoryId;
+  String? _accountId, _toAccountId, _cardId;
   late String _date;
   late bool _planned;
   int _installments = 1;
@@ -71,7 +75,9 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
     _desc = TextEditingController(text: ex?.description ?? '');
     _notes = TextEditingController(text: ex?.notes ?? '');
     _merchant = TextEditingController(text: ex?.merchant ?? '');
-    _categoryId = ex?.categoryId;
+    final cat = ledger.categoryById(ex?.categoryId);
+    _categoryId = cat?.parentId ?? cat?.id;
+    _subcategoryId = cat?.parentId == null ? null : cat?.id;
     _accountId =
         ex?.accountId ??
         ledger.accounts.where((a) => a.isActive).firstOrNull?.id;
@@ -134,7 +140,7 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
                   : _desc.text.trim(),
               categoryId: _kind == TransactionKind.transfer
                   ? null
-                  : _categoryId,
+                  : _subcategoryId ?? _categoryId,
               accountId: _kind == TransactionKind.cardPurchase
                   ? null
                   : _accountId,
@@ -169,6 +175,52 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
     }
   }
 
+  String get _categoryKind =>
+      _kind == TransactionKind.income ? 'income' : 'expense';
+
+  /// Opens the picker; what was typed stays, because this screen keeps its state underneath.
+  Future<void> _pickCategory() async {
+    final choice = await showCategoryPicker(
+      context,
+      kind: _categoryKind,
+      selectedId: _subcategoryId ?? _categoryId,
+      allowNone: true,
+    );
+    if (choice == null || !mounted) return;
+    final ledger = ref.read(ledgerProvider);
+    final picked = ledger.categoryById(choice.id);
+    setState(() {
+      if (picked == null) {
+        _categoryId = null;
+        _subcategoryId = null;
+      } else if (picked.parentId != null) {
+        _categoryId = picked.parentId;
+        _subcategoryId = picked.id;
+      } else {
+        // A different main category: a subcategory of the previous one no longer applies.
+        if (ledger.categoryById(_subcategoryId)?.parentId != picked.id) {
+          _subcategoryId = null;
+        }
+        _categoryId = picked.id;
+      }
+    });
+  }
+
+  Future<void> _newSubcategory() async {
+    final created = await openCategoryForm(
+      context,
+      kind: _categoryKind,
+      parentId: _categoryId,
+      lockKind: true,
+    );
+    if (created == null || !mounted) return;
+    setState(() {
+      // The form allows changing the main category; follow what was actually saved.
+      _categoryId = created.parentId ?? created.id;
+      _subcategoryId = created.parentId == null ? null : created.id;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
@@ -178,14 +230,17 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
     final hidden = ref.watch(privacyHiddenProvider);
     final ex = _existing;
     final editable = ex == null || _editable.contains(ex.kind);
-    final categories = ledger.categories
-        .where(
-          (x) =>
-              !x.archived &&
-              x.kind ==
-                  (_kind == TransactionKind.income ? 'income' : 'expense'),
-        )
-        .toList();
+    final category = ledger.categoryById(_categoryId);
+    final subcategories = category == null
+        ? const <Category>[]
+        : subcategoriesOf(ledger, category.id)
+              .followedBy(
+                // An archived subcategory stays visible on the entry that already uses it.
+                ledger.categories.where(
+                  (x) => x.id == _subcategoryId && x.archived,
+                ),
+              )
+              .toList();
     final accounts = ledger.accounts.where((a) => a.isActive).toList();
     final cards = ledger.cards.where((x) => x.isActive).toList();
     final ctl = ref.read(appControllerProvider.notifier);
@@ -238,6 +293,7 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
                       onChanged: (k) => setState(() {
                         _kind = k;
                         _categoryId = null;
+                        _subcategoryId = null;
                       }),
                     ),
                     const SizedBox(height: Spacing.md),
@@ -267,13 +323,55 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
                   if (_kind != TransactionKind.transfer) ...[
                     Field(
                       label: l.category,
-                      child: ChipSelect<String>(
-                        options: [for (final x in categories) (x.id, x.name)],
-                        value: _categoryId,
-                        allowNone: true,
-                        onChanged: (v) => setState(() => _categoryId = v),
+                      child: SCard(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Spacing.sm,
+                        ),
+                        onTap: editable ? _pickCategory : null,
+                        semanticHint: l.catChoose,
+                        child: ListRow(
+                          leading: category == null
+                              ? IconTile(
+                                  icon: SIconName.tag,
+                                  color: c.textMuted,
+                                  background: c.surfaceInset,
+                                )
+                              : CategoryMark.of(category),
+                          title: category?.name ?? l.catChoose,
+                          titleMaxLines: 2,
+                          chevron: editable,
+                        ),
                       ),
                     ),
+                    if (category != null && editable) ...[
+                      const SizedBox(height: Spacing.sm),
+                      Field(
+                        label: l.catSubcategory,
+                        child: Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: [
+                            for (final x in subcategories)
+                              SChip(
+                                label: x.name,
+                                selected: x.id == _subcategoryId,
+                                onTap: () => setState(
+                                  () => _subcategoryId = x.id == _subcategoryId
+                                      ? null
+                                      : x.id,
+                                ),
+                              ),
+                            SChip(
+                              label: subcategories.isEmpty
+                                  ? l.catNewSub
+                                  : l.catNewSubShort,
+                              icon: SIconName.plus,
+                              onTap: _newSubcategory,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                     const SizedBox(height: Spacing.md),
                   ],
                   if (_kind == TransactionKind.cardPurchase)

@@ -4,10 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../app/app.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/theme/tokens.dart';
+import '../../domain/categories/categories.dart';
+import '../../domain/entities/entities.dart';
 import '../../ui/components/components.dart';
-import '../accounts/account_form_screen.dart';
 import '../shared/stack_screen.dart';
+import 'category_widgets.dart';
 
+/// Categories and their subcategories, by kind. Tapping one opens it for editing; the "+" on a category
+/// adds a subcategory to it. Archived ones are listed apart. Tags live at the bottom.
 class CategoriesScreen extends ConsumerStatefulWidget {
   const CategoriesScreen({super.key});
   @override
@@ -16,9 +20,13 @@ class CategoriesScreen extends ConsumerStatefulWidget {
 
 class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
   String _kind = 'expense';
-  final _name = TextEditingController();
   final _tag = TextEditingController();
-  String? _parentId;
+
+  @override
+  void dispose() {
+    _tag.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,106 +34,132 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
     final c = context.colors;
     final ledger = ref.watch(ledgerProvider);
     final ctl = ref.read(appControllerProvider.notifier);
-    final cats = ledger.categories
-        .where((x) => x.kind == _kind && x.deletedAt == null)
-        .toList();
-    final roots = cats.where((x) => x.parentId == null).toList();
-    Widget archiveBtn(String id, String name, String kind, bool archived) =>
+    final uses = <String, int>{};
+    for (final t in ledger.transactions) {
+      final id = t.categoryId;
+      if (id != null && t.deletedAt == null) uses[id] = (uses[id] ?? 0) + 1;
+    }
+    final all = rootCategories(ledger, _kind, includeArchived: true);
+    final active = all.where((x) => !x.archived).toList();
+    final archivedRoots = all.where((x) => x.archived).toList();
+    // Archived subcategories of categories that are still in use.
+    final archivedSubs = [
+      for (final r in active)
+        ...subcategoriesOf(
+          ledger,
+          r.id,
+          includeArchived: true,
+        ).where((s) => s.archived),
+    ];
+
+    Widget row(Category x, {bool sub = false, String? under}) {
+      final subs = sub ? 0 : subcategoriesOf(ledger, x.id).length;
+      final used = sub
+          ? (uses[x.id] ?? 0)
+          : categoryFamily(
+              ledger,
+              x.id,
+            ).fold<int>(0, (a, id) => a + (uses[id] ?? 0));
+      // Only what there is to say: an unused category without subcategories shows just its name.
+      final facts = [
+        ?under,
+        if (subs > 0) l.catSubCount(subs),
+        if (used > 0) l.catUsage(used),
+      ];
+      return ListRow(
+        leading: CategoryMark.of(x, size: sub ? 26 : Layout.tile),
+        title: x.name,
+        description: facts.isEmpty ? null : facts.join(' · '),
+        trailing: sub || x.archived
+            ? null
+            : SIconButton(
+                icon: SIconName.plus,
+                label: l.catAddSubTo(x.name),
+                size: 20,
+                color: c.primary,
+                onPressed: () =>
+                    openCategoryForm(context, kind: x.kind, parentId: x.id),
+              ),
+        chevron: sub || x.archived,
+        onTap: () => openCategoryForm(context, id: x.id),
+      );
+    }
+
+    return StackScreen(
+      title: l.catTitle,
+      actions: [
         SButton(
-          label: archived ? l.reactivate : l.archive,
+          label: l.newCategory,
+          icon: SIconName.plus,
           variant: SButtonVariant.ghost,
           compact: true,
-          onPressed: () => ctl.saveCategory(
-            id: id,
-            name: name,
-            kind: kind,
-            archived: !archived,
-          ),
-        );
-    return StackScreen(
-      title: l.categoriesTags,
+          onPressed: () => openCategoryForm(context, kind: _kind),
+        ),
+      ],
       children: [
         Segmented<String>(
           options: [('expense', l.expenses), ('income', l.income)],
           value: _kind,
-          onChanged: (v) => setState(() {
-            _kind = v;
-            _parentId = null;
-          }),
+          onChanged: (v) => setState(() => _kind = v),
         ),
-        SCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CardHeader(title: l.newCategory),
-              STextField(
-                label: l.name,
-                controller: _name,
-                placeholder: l.categoryNameHint,
-                onChanged: (_) => setState(() {}),
-              ),
-              const SizedBox(height: Spacing.sm),
-              Field(
-                label: l.subcategoryOf,
-                child: ChipSelect<String>(
-                  options: [for (final x in roots) (x.id, x.name)],
-                  value: _parentId,
-                  allowNone: true,
-                  onChanged: (v) => setState(() => _parentId = v),
+        if (active.isEmpty)
+          SCard(
+            child: EmptyState(
+              icon: SIconName.tag,
+              title: l.catEmptyKind,
+              actionLabel: l.newCategory,
+              onAction: () => openCategoryForm(context, kind: _kind),
+            ),
+          )
+        else
+          SCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CardHeader(
+                  title: _kind == 'expense'
+                      ? l.expenseCategories
+                      : l.incomeCategories,
                 ),
-              ),
-              const SizedBox(height: Spacing.sm),
-              SButton(
-                label: l.add,
-                onPressed: _name.text.trim().isEmpty
-                    ? null
-                    : () async {
-                        await ctl.saveCategory(
-                          name: _name.text.trim(),
-                          kind: _kind,
-                          parentId: _parentId,
-                        );
-                        setState(() {
-                          _name.clear();
-                          _parentId = null;
-                        });
-                      },
-              ),
-            ],
-          ),
-        ),
-        SCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CardHeader(
-                title: _kind == 'expense'
-                    ? l.expenseCategories
-                    : l.incomeCategories,
-              ),
-              for (final x in roots) ...[
-                ListRow(
-                  icon: SIconName.tag,
-                  iconColor: colorFromHex(x.color, c.textMuted),
-                  title: x.name,
-                  description: x.archived ? l.archivedLower : null,
-                  trailing: archiveBtn(x.id, x.name, x.kind, x.archived),
-                ),
-                for (final sub in cats.where((s) => s.parentId == x.id))
-                  ListRow(
-                    title: '↳ ${sub.name}',
-                    description: sub.archived ? l.archivedLower : null,
-                    trailing: archiveBtn(
-                      sub.id,
-                      sub.name,
-                      sub.kind,
-                      sub.archived,
+                ...dividedRows([
+                  for (final x in active)
+                    Column(
+                      children: [
+                        row(x),
+                        for (final s in subcategoriesOf(ledger, x.id))
+                          Padding(
+                            padding: const EdgeInsets.only(left: Spacing.lg),
+                            child: row(s, sub: true),
+                          ),
+                      ],
                     ),
-                  ),
+                ]),
               ],
-            ],
+            ),
           ),
-        ),
+        if (archivedRoots.isNotEmpty || archivedSubs.isNotEmpty)
+          SCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CardHeader(title: l.catArchivedSection),
+                Text(
+                  l.catArchivedHelp,
+                  style: Type.rowMeta.copyWith(color: c.textMuted),
+                ),
+                const SizedBox(height: Spacing.xxs),
+                ...dividedRows([
+                  for (final x in archivedRoots) row(x),
+                  for (final s in archivedSubs)
+                    row(
+                      s,
+                      sub: true,
+                      under: ledger.categoryById(s.parentId)?.name,
+                    ),
+                ]),
+              ],
+            ),
+          ),
         SCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
