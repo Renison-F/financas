@@ -2478,5 +2478,6 @@
   "expectedOn": "Expected on {date}",
   "@expectedOn": {"placeholders": {"date": {"type": "String"}}},
   "expectedSince": "Expected since {date}",
-  "@expectedSince": {"placeholders": {"date": {"type": "String"}}}
+  "@expectedSince": {"placeholders": {"date": {"type": "String"}}},
+  "plannedHelpIncome": "Expected income shows under \"To receive\" and only enters the balance when you mark it as received."
 }

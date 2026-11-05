@@ -31,10 +31,16 @@ class CategoryMark extends StatelessWidget {
     this.size = Layout.tile,
     this.muted = false,
   });
-  CategoryMark.of(Category c, {super.key, this.size = Layout.tile})
-    : icon = c.icon,
-      color = c.color,
-      muted = c.archived;
+
+  /// The mark of [c] in its own color. Entries keep that color even after the category is archived;
+  /// only the screens that manage categories pass [muted] for archived ones.
+  CategoryMark.of(
+    Category c, {
+    super.key,
+    this.size = Layout.tile,
+    this.muted = false,
+  }) : icon = c.icon,
+       color = c.color;
 
   /// Icon key as stored ("cart", "arrow-up").
   final String icon;

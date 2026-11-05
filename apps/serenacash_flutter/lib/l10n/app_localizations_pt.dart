@@ -3974,4 +3974,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String expectedSince(String date) {
     return 'Previsto desde $date';
   }
+
+  @override
+  String get plannedHelpIncome =>
+      'Receitas previstas aparecem em \"A receber\" e só entram no saldo quando você marcar como recebidas.';
 }

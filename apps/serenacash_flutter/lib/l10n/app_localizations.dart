@@ -6715,6 +6715,12 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Previsto desde {date}'**
   String expectedSince(String date);
+
+  /// No description provided for @plannedHelpIncome.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receitas previstas aparecem em \"A receber\" e só entram no saldo quando você marcar como recebidas.'**
+  String get plannedHelpIncome;
 }
 
 class _AppLocalizationsDelegate

@@ -2478,5 +2478,6 @@
   "expectedOn": "Previsto para {date}",
   "@expectedOn": {"placeholders": {"date": {"type": "String"}}},
   "expectedSince": "Previsto desde {date}",
-  "@expectedSince": {"placeholders": {"date": {"type": "String"}}}
+  "@expectedSince": {"placeholders": {"date": {"type": "String"}}},
+  "plannedHelpIncome": "Receitas previstas aparecem em \"A receber\" e só entram no saldo quando você marcar como recebidas."
 }

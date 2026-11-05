@@ -94,12 +94,17 @@ class ListRow extends StatelessWidget {
       ),
     );
     if (onTap == null) return row;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(Radii.sm),
-        child: row,
+    // A tappable row is always its own accessibility node: when it is the only row of a card it would
+    // otherwise be absorbed by the card's text and be activated in the middle of the card.
+    return Semantics(
+      container: true,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(Radii.sm),
+          child: row,
+        ),
       ),
     );
   }

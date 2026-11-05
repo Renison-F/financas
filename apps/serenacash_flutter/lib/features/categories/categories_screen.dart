@@ -67,7 +67,11 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
         if (used > 0) l.catUsage(used),
       ];
       return ListRow(
-        leading: CategoryMark.of(x, size: sub ? 26 : Layout.tile),
+        leading: CategoryMark.of(
+          x,
+          size: sub ? 26 : Layout.tile,
+          muted: x.archived,
+        ),
         title: x.name,
         description: facts.isEmpty ? null : facts.join(' · '),
         trailing: sub || x.archived

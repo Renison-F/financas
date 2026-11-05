@@ -443,7 +443,9 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
                           ? l.notReceivedYet
                           : l.notPaidYet,
                       value: _planned,
-                      help: l.plannedHelp,
+                      help: _kind == TransactionKind.income
+                          ? l.plannedHelpIncome
+                          : l.plannedHelp,
                       onChanged: (v) => setState(() => _planned = v),
                     ),
                     const SizedBox(height: Spacing.md),

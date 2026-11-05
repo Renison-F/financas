@@ -3962,4 +3962,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String expectedSince(String date) {
     return 'Expected since $date';
   }
+
+  @override
+  String get plannedHelpIncome =>
+      'Expected income shows under \"To receive\" and only enters the balance when you mark it as received.';
 }
