@@ -141,19 +141,22 @@ class _LockGateState extends ConsumerState<LockGate>
   }
 
   /// The stated way out: nothing is recovered, the local data is erased and the app starts over.
-  Future<void> _recover(UserPrefs p) async {
+  ///
+  /// [sheetContext] is the lock screen's own context: this widget sits above the app Navigator, so
+  /// only the lock screen has a Navigator to show the sheets on.
+  Future<void> _recover(BuildContext sheetContext, UserPrefs p) async {
     final l = context.l10n;
     final container = ProviderScope.containerOf(context, listen: false);
     final go = await confirmSheet(
-      context,
+      sheetContext,
       title: p.pinEnabled ? l.pinForgotTitle : l.lockRecover,
       text: p.pinEnabled ? l.pinForgotText : l.lockRecoverText,
       confirmLabel: l.bootReset,
       cancelLabel: l.cancel,
     );
-    if (!go || !mounted) return;
+    if (!go || !mounted || !sheetContext.mounted) return;
     final sure = await confirmSheet(
-      context,
+      sheetContext,
       title: l.bootResetQ,
       text: l.bootResetText,
       confirmLabel: l.eraseConfirm,
@@ -282,7 +285,7 @@ class _LockGateState extends ConsumerState<LockGate>
                     label: p.pinEnabled ? l.pinForgot : l.lockRecover,
                     variant: SButtonVariant.ghost,
                     compact: true,
-                    onPressed: () => _recover(p),
+                    onPressed: () => _recover(context, p),
                   ),
                 ],
               ),

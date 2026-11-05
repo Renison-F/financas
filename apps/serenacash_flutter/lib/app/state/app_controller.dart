@@ -525,6 +525,11 @@ class AppController extends AsyncNotifier<AppState> {
     if (base.amountCents <= 0) {
       throw AppError(errAmount ?? 'Informe um valor maior que zero.');
     }
+    // A day that does not exist would be stored as text and silently fall out of every month.
+    if (!isValidISODate(input.date) ||
+        (input.dueDate != null && !isValidISODate(input.dueDate!))) {
+      throw AppError('Data inválida.');
+    }
     if (base.kind == TransactionKind.transfer &&
         (base.accountId == null ||
             base.toAccountId == null ||
@@ -653,6 +658,13 @@ class AppController extends AsyncNotifier<AppState> {
   }) async {
     final t = _s.ledger.transactionById(id);
     if (t == null) return;
+    // Only what is still pending can be paid. Without this, "paying" part of an entry that was already
+    // settled would turn it back into a partial payment and hand the difference back to the balance.
+    if (t.status != TransactionStatus.planned &&
+        t.status != TransactionStatus.partiallyPaid) {
+      return;
+    }
+    if (paidCents != null && paidCents <= 0) return;
     final paid = paidCents ?? t.amountCents;
     final total =
         (t.status == TransactionStatus.partiallyPaid ? (t.paidCents ?? 0) : 0) +

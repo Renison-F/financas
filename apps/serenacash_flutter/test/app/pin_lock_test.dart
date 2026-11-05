@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:serenacash/data/security/secret_store.dart';
 import 'package:serenacash/app/app.dart';
 import 'package:serenacash/app/di.dart';
 import 'package:serenacash/data/notifications/bill_reminders.dart';
@@ -116,6 +117,64 @@ void main() {
       await tester.tap(find.text('Usar PIN'));
       await _pumpReal(tester);
       expect(find.text('Bloqueado'), findsNothing);
+    },
+  );
+
+  testWidgets(
+    'lock screen: five wrong PINs start a pause, the field is disabled and the way out is stated',
+    (tester) async {
+      await setPhone(tester);
+      final app = TestApp();
+      addTearDown(app.dispose);
+      await app.db.into(app.db.kv).insert(KvCompanionFactory.onboarded());
+      await tester.pumpWidget(_appWithFastPin(app));
+      for (var i = 0; i < 30; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+      await tester.pumpAndSettle();
+
+      await _openSettings(tester);
+      await tester.tap(find.text('Proteger com PIN'));
+      await tester.pumpAndSettle();
+      await _answerPinDialog(tester, '4826');
+      await _answerPinDialog(tester, '4826');
+      await _pumpReal(tester);
+      expect(find.text('Bloqueado'), findsOneWidget);
+
+      Future<void> wrong() async {
+        await tester.enterText(find.byType(TextField), '0000');
+        await tester.tap(find.text('Usar PIN'));
+        await _pumpReal(tester);
+      }
+
+      await wrong();
+      await wrong();
+      expect(find.text('PIN incorreto.'), findsOneWidget);
+      await wrong();
+      // The last free tries are counted out loud.
+      expect(find.textContaining('Restam 2 tentativas'), findsOneWidget);
+      await wrong();
+      expect(find.textContaining('Resta 1 tentativa'), findsOneWidget);
+      await wrong();
+      expect(find.textContaining('Muitas tentativas'), findsOneWidget);
+      expect(tester.widget<TextField>(find.byType(TextField)).enabled, isFalse);
+
+      // The right PIN is not accepted during the pause.
+      await tester.tap(find.text('Usar PIN'), warnIfMissed: false);
+      await _pumpReal(tester);
+      expect(find.text('Bloqueado'), findsOneWidget);
+      expect(find.byType(HomeScreen), findsNothing);
+
+      // The way out is explained before anything is erased, and cancelling changes nothing.
+      await tester.tap(find.text('Esqueci o PIN'));
+      await tester.pumpAndSettle();
+      expect(find.text('O PIN não pode ser recuperado'), findsOneWidget);
+      expect(find.text('Apagar dados e recomeçar'), findsOneWidget);
+      await tester.tap(find.text('Cancelar'));
+      await tester.pumpAndSettle();
+      expect(find.text('Bloqueado'), findsOneWidget);
+      expect(await app.secrets.read(SecretKeys.pinVerifier), isNotNull);
+      expect(tester.takeException(), isNull);
     },
   );
 }

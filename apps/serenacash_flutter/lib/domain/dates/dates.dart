@@ -124,3 +124,15 @@ List<MonthKey> monthKeysBetween(MonthKey startKey, MonthKey endKey) {
   }
   return out;
 }
+
+/// Whether [s] is a real calendar day written as YYYY-MM-DD ("2026-02-30" is not).
+bool isValidISODate(String s) {
+  final m = RegExp(r'^(\d{4})-(\d{2})-(\d{2})$').firstMatch(s);
+  if (m == null) return false;
+  final y = int.parse(m.group(1)!),
+      mo = int.parse(m.group(2)!),
+      d = int.parse(m.group(3)!);
+  if (mo < 1 || mo > 12 || d < 1) return false;
+  final dt = DateTime.utc(y, mo, d);
+  return dt.year == y && dt.month == mo && dt.day == d;
+}
