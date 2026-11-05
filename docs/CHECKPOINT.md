@@ -1,5 +1,7 @@
 # Checkpoint de desenvolvimento — 2026-11-04
 
+> **Arquivo histórico.** Este checkpoint é da versão React Native/Expo. O trabalho atual é o app Flutter na branch `refactor/flutter-serenacash`; o checkpoint em vigor é `docs/flutter-migration/CHECKPOINT.md`.
+
 Branch: `claude/wonderful-knuth-30ejqq`. Leia este arquivo antes de continuar em outra sessão.
 
 ## Decisões fechadas

@@ -1,8 +1,64 @@
 # CHECKPOINT — migração Flutter
 
+> **Leia primeiro a seção abaixo.** O desenvolvimento está suspenso desde 05/11/2026: o usuário está testando o app no celular dele. Não implemente, não refatore, não corrija e não gere APK até ele voltar com a lista de problemas.
+
+## HOMOLOGAÇÃO FÍSICA EM ANDAMENTO — AGUARDANDO RETORNO DO USUÁRIO
+
+Registrado em 05/11/2026. O usuário instalou o APK no celular Android dele e está executando pessoalmente a homologação. O trabalho será retomado a partir da lista de erros, capturas e sugestões que ele trouxer.
+
+### Build em homologação
+
+| | |
+|---|---|
+| Arquivo | `E:\SerenaCash\homologacao\serenacash-0.1.0+2-homologacao-bae5d9f.apk` |
+| Versão / build | 0.1.0 / 2 (`pubspec.yaml`: `0.1.0+2`) |
+| Commit do código | `bae5d9feb17ef109be857594846d7eb143be90f7` (`bae5d9f`), branch `refactor/flutter-serenacash` |
+| Application ID | `br.com.serenacash.mobile` |
+| Variante | release (R8, não depurável), assinada com a chave de debug deste PC |
+| Tamanho | 128.335.257 bytes |
+| SHA-256 do APK | `63c3ac06120f9cda29e43a0117e84acbe99cccfa2bcf1836b425cfb705726912` |
+| SHA-256 do certificado | `e7c911bbedaec660d221b1e37d98cafe1e3d83116d8fd5d90aa0c1fd6eee16e5` |
+
+O SHA-256 foi recalculado no encerramento e confere com o `LEIA-ME.md` da mesma pasta. Na pasta há também o APK debug do mesmo commit (`serenacash-0.1.0+2-debug-bae5d9f.apk`, SHA-256 `d37d9796cdc6e1918fba38fd5ceddad635791a8b0f0b2eca16d1c71173248c46`).
+
+**A confirmar na volta:** qual dos dois arquivos foi instalado no celular (a orientação foi instalar o de homologação), o modelo do aparelho e a versão do Android. O app mostra só "0.1.0" no rodapé do menu, sem o número do build nem o commit, então os dois APKs não se distinguem por dentro do app. Com o celular no USB: `adb shell dumpsys package br.com.serenacash.mobile` (o de homologação tem `versionCode=2` e não tem a flag `DEBUGGABLE`).
+
+**Não mexer nesta build:** os dois APKs e o `LEIA-ME.md` de `E:\SerenaCash\homologacao\` ficam como estão. Commits feitos depois de `bae5d9f` durante a suspensão são só de documentação e não mudam o aplicativo.
+
+### Estado no encerramento (05/11/2026)
+
+- Git: branch `refactor/flutter-serenacash`, árvore limpa, sem stash, sem worktree extra, sem arquivo novo fora do controle de versão. O código do app está em `bae5d9f`, igual em local e em `origin`. `origin/main` segue em `e080f12`, sem merge.
+- Testes automatizados: 399 aprovados, 0 falhas, 0 ignorados (domínio 288, dados 48, app 55, desempenho 8); `dart format` sem alterações; `flutter analyze --fatal-infos` sem avisos. `integration_test` aprovado no emulador, em instalação isolada. Detalhe em `09-TESTES.md`.
+- CI (`flutter.yml`) em `bae5d9f`: execução 42035033218 aprovada nos dois jobs ("format · analyze · test" e "build apk (debug)"), conferida pela API pública no encerramento. Artefatos `serenacash-debug-apk` e `coverage` disponíveis até 03/02/2027. Execuções anteriores aprovadas: 42032501762 (`71c0871`) e 42018380546 (`dd7a081`).
+- Correções concluídas e retestadas nesta rodada: 1 P0, 4 P1 e 8 P2 (lista na seção "Homologação avançada" abaixo e em `10-HOMOLOGACAO.md`). Nenhum P0 ou P1 conhecido em aberto.
+- Auditoria de segurança: `docs/security/AUDITORIA_FLUTTER.md`, com os achados S1 a S12 corrigidos, os controles verificados no emulador, a análise estática do APK, as dependências (177 pacotes do pub.dev sem vulnerabilidade conhecida na OSV) e o que não foi executado: MobSF, ferramentas dedicadas (gitleaks, semgrep, jadx), biometria real, câmera e OCR reais, compras na loja, resistência a root e instrumentação, iOS, licenças das bibliotecas nativas. Não há declaração de conformidade integral com o MASVS.
+- Emulador `serenacash_api35`: tem instalado o mesmo APK de homologação, com os dados fictícios preservados. Não apagar nem reinstalar sem autorização.
+- Fora do repositório, em `E:\SerenaCash\`: `relatorio-etapa4.md` (relatório e parecer "apto com ressalvas"), `homologacao\` (APKs, `LEIA-ME.md`, `CHECKLIST-APARELHO.md`), `etapa4\` (logs de build, medições) e `screens\` (capturas).
+
+### Como retomar quando o usuário voltar
+
+1. Ler esta seção e `15-RETORNO_HOMOLOGACAO_FISICA.md`. Confirmar com o usuário qual APK está no celular, o aparelho e a versão do Android.
+2. Registrar cada item que ele trouxer em `15-RETORNO_HOMOLOGACAO_FISICA.md`, com as palavras dele e a evidência (captura, passo a passo), antes de investigar.
+3. Classificar (P0 a P3) e ordenar: segurança, integridade financeira, estabilidade, experiência de uso.
+4. Para cada defeito: reproduzir no emulador com a mesma build (`bae5d9f`), achar a causa, escrever o teste que falha e só então corrigir. Explicar a causa e pedir aprovação antes de alterar código, salvo autorização nova e explícita.
+5. Uma correção por commit, na branch `refactor/flutter-serenacash`. Sem merge na `main`, sem force push. Envio ao GitHub é pedido à parte.
+6. A build nova precisa ser identificável: subir o número do build (`0.1.0+3`), nomear o arquivo com versão, build e commit, e registrar o SHA-256. Compilada neste PC, ela instala por cima da atual e mantém os dados do celular.
+7. Antes de entregar: gates completos, conferir que o APK não é a build do `integration_test` (ver `09-TESTES.md`), instalar no emulador e abrir pelo ícone.
+
+Regras que continuam valendo: só dados fictícios; não apagar dados do emulador nem do aparelho (`pm clear`, desinstalar, limpar banco) sem autorização específica; não usar a chave definitiva da loja; não registrar credenciais; não declarar resultado sem evidência; não marcar teste físico que o usuário não fez.
+
+### Pendências registradas, não iniciadas
+
+- **Privatizar o repositório:** `Renison-F/financas` continua público (conferido em 05/11/2026). É uma ação do dono na configuração do GitHub. Efeito colateral a tratar junto: a consulta do CI pela API pública deixa de funcionar sem credencial, e os artefatos passam a exigir login.
+- **Atualizar os READMEs:** o `README.md` da raiz ainda descreve o app Expo/React Native e aponta para `docs/CHECKPOINT.md` (checkpoint antigo); `apps/serenacash_flutter/README.md` ainda é o texto padrão do Flutter.
+- **Mostrar build e commit dentro do app** (rodapé do menu ou Configurações), para identificar a versão instalada sem o computador. Sugestão minha, não pedida.
+- As demais pendências estão em "Pendências reais", no fim deste arquivo.
+
+## Contexto da migração
+
 - Origem congelada: `ae2c229c4977dcc6f78a19e7e4388cacced9d61b` (React Native/Expo, testes 100+18+11 verdes).
 - Branch: `refactor/flutter-serenacash`. Sem merge na main. Histórico preservado.
-- Flutter SDK: 3.47.9 em `/opt/flutter` (instalado nesta sessão a partir de storage.googleapis.com). Android SDK: **bloqueado** (dl.google.com 403). iOS: sem macOS.
+- Ambiente atual: Windows, descrito em `13-SETUP_WINDOWS.md` (Flutter 3.47.9, Android SDK e emulador `serenacash_api35`). A migração começou em um ambiente de nuvem sem Android SDK; os bloqueios citados nas seções M8–M10 abaixo são daquela fase. iOS: sem macOS.
 - Projeto: `apps/serenacash_flutter` (org `br.com.serenacash`, applicationId/bundle `br.com.serenacash.mobile`).
 - Fixtures de equivalência: `docs/flutter-migration/fixtures/*.json` (gerados por `packages/*/src/fixtures.gen.test.ts`).
 - Diretriz adicional de arquitetura do cliente incorporada em `00-PLANO_MESTRE.md` e `03-ARQUITETURA_FLUTTER.md` (ADR-03..08).
