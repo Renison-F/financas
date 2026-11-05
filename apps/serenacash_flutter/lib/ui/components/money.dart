@@ -15,7 +15,18 @@ String moneyAccessibilityLabel(int cents, {String currency = 'BRL'}) {
   return '${cents < 0 ? 'menos ' : ''}${parts.join(' e ')}';
 }
 
-enum MoneyRole { hero, headline, title, row, body, bodySmall }
+enum MoneyRole {
+  hero,
+  headline,
+  title,
+  row,
+  body,
+  bodySmall,
+  // Compact scale of the home screen.
+  heroFlat,
+  section,
+  dense,
+}
 
 /// Renders integer cents with tabular figures, explicit sign, color by the "Regra do Sinal",
 /// privacy mode (R$ ••••) and a spoken accessibility label. Hero role shows cents at 60% size.
@@ -30,6 +41,8 @@ class Money extends StatelessWidget {
     this.currency = 'BRL',
     required this.hidden,
     this.align = TextAlign.start,
+    this.spacedSign = false,
+    this.size,
   });
   final int cents;
   final MoneyRole role;
@@ -39,6 +52,12 @@ class Money extends StatelessWidget {
   final String currency;
   final bool hidden;
   final TextAlign align;
+
+  /// Writes the sign apart from the amount: "- R$ 186,40", "+ R$ 8.200,00".
+  final bool spacedSign;
+
+  /// Overrides the font size of the role.
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +71,14 @@ class Money extends StatelessWidget {
                   ? c.positive
                   : c.text)
             : c.text);
-    final text = formatBRL(cents, hidden: hidden, currency: currency);
+    final raw = formatBRL(cents, hidden: hidden, currency: currency);
+    final text = spacedSign && raw.startsWith('-')
+        ? '- ${raw.substring(1)}'
+        : raw;
     final label = hidden
         ? 'valor oculto'
         : moneyAccessibilityLabel(cents, currency: currency);
-    final plus = showPlus && cents > 0 ? '+' : '';
+    final plus = showPlus && cents > 0 ? (spacedSign ? '+ ' : '+') : '';
     final style = switch (role) {
       MoneyRole.hero => Type.moneyHero,
       MoneyRole.headline => Type.headline.copyWith(
@@ -72,7 +94,10 @@ class Money extends StatelessWidget {
       MoneyRole.bodySmall => Type.bodySmall.copyWith(
         fontFeatures: const [FontFeature.tabularFigures()],
       ),
-    }.copyWith(color: tone);
+      MoneyRole.heroFlat => Type.heroValue,
+      MoneyRole.section => Type.sectionValue,
+      MoneyRole.dense => Type.rowValue,
+    }.copyWith(color: tone, fontSize: size);
     if (role == MoneyRole.hero && !hidden) {
       final idx = text.lastIndexOf(',');
       final main = idx >= 0 ? text.substring(0, idx) : text;

@@ -13,6 +13,10 @@ String greetingFor(AppLocalizations l, int hour) => hour >= 5 && hour < 12
 
 String dayMonth(String iso) => '${iso.substring(8, 10)}/${iso.substring(5, 7)}';
 
+/// Day and abbreviated month, as on a card statement: "08 nov".
+String dayMonthShort(String iso, String locale) =>
+    '${iso.substring(8, 10)} ${monthLabelShort(iso.substring(0, 7), locale)}';
+
 String monthLabelShort(String key, String locale) {
   final d = DateTime(
     int.parse(key.substring(0, 4)),

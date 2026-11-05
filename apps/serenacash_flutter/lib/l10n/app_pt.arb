@@ -2253,7 +2253,7 @@
   "hideSecret": "Ocultar",
   "homeSetupTitle": "Configure seu saldo",
   "homeSetupText": "Adicione sua primeira conta para saber quanto pode gastar.",
-  "heroBalances": "Dinheiro nas contas",
+  "heroBalances": "Saldo em contas",
   "heroCommitted": "Compromissos",
   "heroPlannedIncome": "Inclui {value} de receitas previstas.",
   "@heroPlannedIncome": {
@@ -2360,5 +2360,17 @@
   },
   "homeLoading": "Carregando seus dados",
   "noSpendingYet": "Nenhum gasto neste período",
-  "noGoalYet": "Nenhuma meta criada"
+  "noGoalYet": "Nenhuma meta criada",
+  "greetingWithName": "{greeting}, {name}",
+  "@greetingWithName": {"placeholders": {"greeting": {"type": "String"}, "name": {"type": "String"}}},
+  "canSpendThisMonth": "Pode gastar neste mês",
+  "heroAfterCommitted": "Após os compromissos previstos",
+  "heroCommittedMonth": "Compromissos do mês",
+  "quickEntry": "Lançamento",
+  "invoiceCurrent": "Fatura atual",
+  "profile": "Perfil",
+  "yourName": "Seu nome",
+  "yourNameEmpty": "Não informado",
+  "yourNameLabel": "Como quer ser chamado",
+  "yourNameHelp": "Aparece na saudação da tela inicial. Fica só neste aparelho."
 }

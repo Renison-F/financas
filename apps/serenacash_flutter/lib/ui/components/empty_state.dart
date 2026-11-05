@@ -26,19 +26,19 @@ class EmptyRow extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 36,
-            height: 36,
+            width: 32,
+            height: 32,
             decoration: BoxDecoration(
               color: c.surfaceInset,
-              borderRadius: BorderRadius.circular(Radii.sm),
+              borderRadius: BorderRadius.circular(Spacing.xs),
             ),
-            child: Center(child: SIcon(icon, size: 20, color: c.textMuted)),
+            child: Center(child: SIcon(icon, size: 18, color: c.textMuted)),
           ),
           const SizedBox(width: Spacing.sm),
           Expanded(
             child: Text(
               title,
-              style: Type.bodySmall.copyWith(color: c.text),
+              style: Type.rowText.copyWith(color: c.text, fontSize: 14),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),

@@ -1,5 +1,6 @@
-/// Building blocks of the home screen: compact header, the "pode gastar" summary panel, quick actions and
-/// the due-date badge. All values come from [DashboardData]; nothing here computes money on its own.
+/// Building blocks of the home screen, sized after the reference mockup: compact header, the "pode gastar"
+/// summary panel, quick actions, section cards and their dense rows. All values come from
+/// [DashboardData]; nothing here computes money on its own.
 library;
 
 import 'package:flutter/material.dart';
@@ -12,7 +13,18 @@ import '../../domain/money/money.dart';
 import '../../ui/components/components.dart';
 import '../shared/format.dart';
 
-/// Greeting with the period as a quiet control underneath (opens period and layout options).
+/// Measures of the home screen (logical pixels).
+abstract final class HomeMetrics {
+  /// Side margin of the cards; the header text sits 4 px further in.
+  static const gutter = 12.0;
+  static const radius = Radii.md;
+  static const cardPadding = EdgeInsets.fromLTRB(14, 12, 14, 8);
+  static const tile = 32.0;
+  static const action = 40.0;
+}
+
+/// Greeting with the period as a quiet control underneath. The whole block opens the period and layout
+/// options, so the touch target is 48 px even though the period line is small.
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
     super.key,
@@ -28,64 +40,73 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final l = context.l10n;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          greeting,
-          style: Type.headline.copyWith(color: c.text, fontSize: 24),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        Semantics(
-          button: true,
-          label: l.periodControl(period),
-          excludeSemantics: true,
-          child: InkWell(
-            onTap: onPeriodTap,
-            borderRadius: BorderRadius.circular(Radii.sm),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(minHeight: Touch.target),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: Text(
-                      period,
-                      style: Type.bodySmall.copyWith(
-                        color: c.primary,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+    return Semantics(
+      button: true,
+      label: '$greeting. ${l.periodControl(period)}',
+      excludeSemantics: true,
+      child: InkWell(
+        onTap: onPeriodTap,
+        borderRadius: BorderRadius.circular(Radii.sm),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: Touch.target),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: Spacing.xxs),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  greeting,
+                  style: Type.title.copyWith(
+                    color: c.text,
+                    fontWeight: FontWeight.w700,
                   ),
-                  const SizedBox(width: Spacing.xxs),
-                  SIcon(SIconName.chevronDown, size: 18, color: c.primary),
-                ],
-              ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 2),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        period,
+                        style: Type.link.copyWith(color: c.primary),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const SizedBox(width: 2),
+                    SIcon(SIconName.chevronDown, size: 16, color: c.primary),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }
 
 /// The focal point of the home screen. With an account it shows "pode gastar" and the two figures that
-/// explain it, taken from the same lines the "Como calculamos" screen lists. Without an account the amount
-/// is unknown, so it asks for the first account instead of showing R$ 0,00.
+/// explain it, taken from the same lines the "Como calculamos" screen lists (tapping the panel opens it).
+/// Without an account the amount is unknown, so it asks for the first account instead of showing R$ 0,00.
 class SummaryPanel extends StatelessWidget {
   const SummaryPanel({
     super.key,
     required this.availability,
     required this.hidden,
+    required this.monthHorizon,
     required this.onExplain,
     required this.onAddAccount,
   });
   final Availability availability;
   final bool hidden;
+
+  /// The horizon is the end of the month, so the panel can say "neste mês" instead of a date.
+  final bool monthHorizon;
   final VoidCallback onExplain;
   final VoidCallback onAddAccount;
 
@@ -103,14 +124,17 @@ class SummaryPanel extends StatelessWidget {
           children: [
             Text(
               l.homeSetupTitle,
-              style: Type.headline.copyWith(color: c.onHero),
+              style: Type.title.copyWith(
+                color: c.onHero,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-            const SizedBox(height: Spacing.xs),
+            const SizedBox(height: Spacing.xxs),
             Text(
               l.homeSetupText,
-              style: Type.bodySmall.copyWith(color: c.onHeroMuted),
+              style: Type.rowText.copyWith(color: c.onHeroMuted),
             ),
-            const SizedBox(height: Spacing.md),
+            const SizedBox(height: Spacing.sm),
             _OnHeroButton(label: l.addAccount, onPressed: onAddAccount),
           ],
         ),
@@ -141,7 +165,7 @@ class SummaryPanel extends StatelessWidget {
         ? l.availNegative
         : av.status == AvailabilityStatus.tight
         ? l.availTight
-        : l.availOk;
+        : l.heroAfterCommitted;
 
     return Semantics(
       button: true,
@@ -153,64 +177,53 @@ class SummaryPanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l.canSpendUntil(date),
-              style: Type.label.copyWith(color: muted, fontSize: 14),
+              monthHorizon ? l.canSpendThisMonth : l.canSpendUntil(date),
+              style: Type.link.copyWith(color: fg),
             ),
-            const SizedBox(height: Spacing.xs),
+            const SizedBox(height: 2),
             // Large values and large text scale down instead of being cut.
             FittedBox(
               fit: BoxFit.scaleDown,
               alignment: AlignmentDirectional.centerStart,
               child: Money(
                 av.availableCents,
-                role: MoneyRole.hero,
+                role: MoneyRole.heroFlat,
                 color: fg,
                 hidden: hidden,
               ),
             ),
-            const SizedBox(height: Spacing.xs),
-            Text(message, style: Type.bodySmall.copyWith(color: muted)),
+            const SizedBox(height: 2),
+            Text(message, style: Type.rowMeta.copyWith(color: muted)),
             if (extraIncome != 0)
-              Padding(
-                padding: const EdgeInsets.only(top: Spacing.xxs),
-                child: Text(
-                  l.heroPlannedIncome(formatBRL(extraIncome, hidden: hidden)),
-                  style: Type.bodySmall.copyWith(color: muted),
-                ),
+              Text(
+                l.heroPlannedIncome(formatBRL(extraIncome, hidden: hidden)),
+                style: Type.rowMeta.copyWith(color: muted),
               ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: Spacing.sm),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Divider(height: 1, thickness: 1, color: divider),
             ),
-            _Figures(
-              left: (l.heroBalances, balances),
-              right: (l.heroCommitted, committed),
-              labelColor: muted,
-              valueColor: fg,
+            HomeFigures(
               dividerColor: divider,
-              hidden: hidden,
-            ),
-            const SizedBox(height: Spacing.sm),
-            // Wraps to two lines when the text scale leaves no room for both.
-            SizedBox(
-              width: double.infinity,
-              child: Wrap(
-                alignment: WrapAlignment.spaceBetween,
-                spacing: Spacing.sm,
-                runSpacing: Spacing.xxs,
-                children: [
-                  Text(
-                    av.mode == 'otimista' ? l.modeOptimistic : l.modePrudent,
-                    style: Type.label.copyWith(color: muted),
-                  ),
-                  Text(
-                    l.howWeCalculate,
-                    style: Type.label.copyWith(
-                      color: fg,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+              left: HomeFigure(
+                label: l.heroBalances,
+                labelColor: muted,
+                value: Money(
+                  balances,
+                  role: MoneyRole.dense,
+                  color: fg,
+                  hidden: hidden,
+                ),
+              ),
+              right: HomeFigure(
+                label: monthHorizon ? l.heroCommittedMonth : l.heroCommitted,
+                labelColor: muted,
+                value: Money(
+                  committed,
+                  role: MoneyRole.dense,
+                  color: fg,
+                  hidden: hidden,
+                ),
               ),
             ),
           ],
@@ -228,40 +241,44 @@ class _Panel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final body = Padding(
-      padding: const EdgeInsets.all(Spacing.lg - 4),
+      padding: const EdgeInsets.fromLTRB(18, 14, 18, 14),
       child: child,
     );
     return Material(
       color: color,
-      borderRadius: BorderRadius.circular(Radii.lg),
+      borderRadius: BorderRadius.circular(HomeMetrics.radius),
       clipBehavior: Clip.antiAlias,
       child: onTap == null ? body : InkWell(onTap: onTap, child: body),
     );
   }
 }
 
-/// Two labelled amounts side by side; stacked when the text scale or a narrow screen leaves no room.
-class _Figures extends StatelessWidget {
-  const _Figures({
-    required this.left,
-    required this.right,
+/// A small label over its value (a figure of the summary panel or of a card invoice).
+class HomeFigure extends StatelessWidget {
+  const HomeFigure({
+    super.key,
+    required this.label,
+    required this.value,
     required this.labelColor,
-    required this.valueColor,
-    required this.dividerColor,
-    required this.hidden,
+    this.labelWeight,
   });
-  final (String, int) left, right;
-  final Color labelColor, valueColor, dividerColor;
-  final bool hidden;
+  final String label;
+  final Widget value;
+  final Color labelColor;
+  final FontWeight? labelWeight;
 
-  // Label on top, amount at the bottom: when one label wraps, the two amounts still share a baseline.
-  Widget _figure((String, int) f) => Column(
+  // Label on top, value at the bottom: when one label wraps, the two values still share a baseline.
+  @override
+  Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Text(
-        f.$1,
-        style: Type.label.copyWith(color: labelColor),
+        label,
+        style: Type.rowMeta.copyWith(
+          color: labelColor,
+          fontWeight: labelWeight,
+        ),
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
       ),
@@ -269,29 +286,37 @@ class _Figures extends StatelessWidget {
       FittedBox(
         fit: BoxFit.scaleDown,
         alignment: AlignmentDirectional.centerStart,
-        child: Money(
-          f.$2,
-          role: MoneyRole.row,
-          color: valueColor,
-          hidden: hidden,
-        ),
+        child: value,
       ),
     ],
   );
+}
+
+/// Two figures side by side with a hairline between them; stacked when the text scale or a narrow
+/// screen leaves no room.
+class HomeFigures extends StatelessWidget {
+  const HomeFigures({
+    super.key,
+    required this.left,
+    required this.right,
+    required this.dividerColor,
+  });
+  final Widget left, right;
+  final Color dividerColor;
 
   @override
   Widget build(BuildContext context) {
     final scale = MediaQuery.textScalerOf(context).scale(1);
     return LayoutBuilder(
       builder: (context, box) {
-        if (box.maxWidth < 280 || scale > 1.4) {
+        if (box.maxWidth < 260 || scale > 1.4) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              IntrinsicHeight(child: _figure(left)),
-              const SizedBox(height: Spacing.sm),
-              IntrinsicHeight(child: _figure(right)),
+              IntrinsicHeight(child: left),
+              const SizedBox(height: Spacing.xs),
+              IntrinsicHeight(child: right),
             ],
           );
         }
@@ -299,7 +324,7 @@ class _Figures extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(child: _figure(left)),
+              Expanded(child: left),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Spacing.sm),
                 child: VerticalDivider(
@@ -308,7 +333,7 @@ class _Figures extends StatelessWidget {
                   color: dividerColor,
                 ),
               ),
-              Expanded(child: _figure(right)),
+              Expanded(child: right),
             ],
           ),
         );
@@ -330,17 +355,17 @@ class _OnHeroButton extends StatelessWidget {
       style: FilledButton.styleFrom(
         backgroundColor: c.onHero,
         foregroundColor: c.hero,
-        minimumSize: const Size(0, Touch.comfortable),
-        padding: const EdgeInsets.symmetric(horizontal: Spacing.lg - 4),
+        minimumSize: const Size(0, Touch.target),
+        padding: const EdgeInsets.symmetric(horizontal: Spacing.md),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Radii.md),
+          borderRadius: BorderRadius.circular(Radii.sm),
         ),
         elevation: 0,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SIcon(SIconName.plus, size: 20, color: c.hero),
+          SIcon(SIconName.plus, size: 18, color: c.hero),
           const SizedBox(width: Spacing.xs),
           Flexible(
             child: Text(
@@ -349,13 +374,7 @@ class _OnHeroButton extends StatelessWidget {
               // font is kept (same approach as SButton).
               style:
                   (Theme.of(context).textTheme.labelLarge ?? const TextStyle())
-                      .merge(
-                        Type.label.copyWith(
-                          fontSize: 16,
-                          color: c.hero,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      .merge(Type.rowTitle.copyWith(color: c.hero)),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -373,8 +392,7 @@ class QuickAction {
   final VoidCallback onTap;
 }
 
-/// Up to three shortcuts under the summary. They complement the "+" button (which adds a transaction)
-/// instead of repeating it.
+/// Up to three shortcuts under the summary: a tinted circle with the icon and a short label.
 class QuickActions extends StatelessWidget {
   const QuickActions({super.key, required this.actions});
   final List<QuickAction> actions;
@@ -396,34 +414,37 @@ class QuickActions extends StatelessWidget {
                 borderRadius: BorderRadius.circular(Radii.md),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: Spacing.xs,
+                    vertical: Spacing.xxs,
                     horizontal: Spacing.xxs,
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        width: Touch.target,
-                        height: Touch.target,
+                        width: HomeMetrics.action,
+                        height: HomeMetrics.action,
                         decoration: BoxDecoration(
                           color: c.primaryContainer,
                           shape: BoxShape.circle,
                         ),
                         child: Center(
-                          child: SIcon(
-                            a.icon,
-                            size: 24,
-                            color: c.onPrimaryContainer,
-                          ),
+                          child: SIcon(a.icon, size: 20, color: c.primary),
                         ),
                       ),
-                      const SizedBox(height: Spacing.xs),
-                      Text(
-                        a.label,
-                        style: Type.label.copyWith(color: c.text, fontSize: 14),
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                      const SizedBox(height: 6),
+                      // Three labels share the width: past 130% a single word would break in two.
+                      MediaQuery.withClampedTextScaling(
+                        maxScaleFactor: 1.3,
+                        child: Text(
+                          a.label,
+                          style: Type.rowMeta.copyWith(
+                            color: c.text,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
@@ -432,6 +453,239 @@ class QuickActions extends StatelessWidget {
             ),
           ),
       ],
+    );
+  }
+}
+
+/// White section card of the home screen. When [onTap] is given the whole card leads to the section's
+/// own screen (the link in its header is the visible cue), so the target is never smaller than the card.
+class HomeCard extends StatelessWidget {
+  const HomeCard({
+    super.key,
+    required this.child,
+    this.onTap,
+    this.semanticHint,
+    this.padding,
+  });
+  final Widget child;
+  final VoidCallback? onTap;
+  final String? semanticHint;
+  final EdgeInsetsGeometry? padding;
+  @override
+  Widget build(BuildContext context) => SCard(
+    radius: HomeMetrics.radius,
+    padding: padding ?? HomeMetrics.cardPadding,
+    onTap: onTap,
+    semanticHint: semanticHint,
+    child: child,
+  );
+}
+
+/// Section title with the "ver…" link on the right.
+class HomeSectionHeader extends StatelessWidget {
+  const HomeSectionHeader({super.key, required this.title, this.link});
+  final String title;
+  final String? link;
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: Type.sectionTitle.copyWith(color: c.text),
+              // Two lines keep the title readable at large text sizes next to the link.
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          if (link != null)
+            Padding(
+              padding: const EdgeInsets.only(left: Spacing.xs, top: 2),
+              child: Text(link!, style: Type.link.copyWith(color: c.primary)),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Dense row of a section: tinted icon tile, title, a line underneath and the value on the right.
+class HomeRow extends StatelessWidget {
+  const HomeRow({
+    super.key,
+    this.icon,
+    this.iconColor,
+    this.tileColor,
+    required this.title,
+    this.description,
+    this.trailing,
+    this.onTap,
+    this.chevron = false,
+    this.leading,
+    this.descriptionWidget,
+  });
+  final SIconName? icon;
+  final Color? iconColor;
+  final Color? tileColor;
+  final String title;
+  final String? description;
+  final Widget? trailing;
+  final VoidCallback? onTap;
+  final bool chevron;
+  final Widget? leading;
+
+  /// Shown under the title instead of [description] (a badge, for example).
+  final Widget? descriptionWidget;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final row = ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: Touch.target),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: LayoutBuilder(
+          builder: (context, box) => Row(
+            children: [
+              if (leading != null) ...[
+                leading!,
+                const SizedBox(width: Spacing.sm),
+              ] else if (icon != null) ...[
+                Container(
+                  width: HomeMetrics.tile,
+                  height: HomeMetrics.tile,
+                  decoration: BoxDecoration(
+                    color: tileColor ?? c.primaryContainer,
+                    borderRadius: BorderRadius.circular(Spacing.xs),
+                  ),
+                  child: Center(
+                    child: SIcon(
+                      icon!,
+                      size: 18,
+                      color: iconColor ?? c.primary,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: Spacing.sm),
+              ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: Type.rowTitle.copyWith(color: c.text),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    if (descriptionWidget != null)
+                      descriptionWidget!
+                    else if (description != null)
+                      Text(
+                        description!,
+                        style: Type.rowMeta.copyWith(color: c.textMuted),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                  ],
+                ),
+              ),
+              if (trailing != null) ...[
+                const SizedBox(width: Spacing.xs),
+                // A very large amount (or large text) scales down instead of pushing the title out.
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: box.maxWidth * 0.5),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: trailing!,
+                  ),
+                ),
+              ],
+              if (chevron) ...[
+                const SizedBox(width: 4),
+                SIcon(SIconName.chevronRight, size: 18, color: c.primary),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+    if (onTap == null) return row;
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(Radii.sm),
+        child: row,
+      ),
+    );
+  }
+}
+
+/// Hairline used between rows and blocks of a section card.
+class HomeDivider extends StatelessWidget {
+  const HomeDivider({super.key});
+  @override
+  Widget build(BuildContext context) =>
+      Divider(height: 1, thickness: 1, color: context.colors.surfaceInset);
+}
+
+/// [rows] with a hairline between each pair.
+List<Widget> dividedRows(List<Widget> rows) => [
+  for (var i = 0; i < rows.length; i++) ...[
+    if (i > 0) const HomeDivider(),
+    rows[i],
+  ],
+];
+
+/// Small drawing of a credit card: a solid card in the action color with its stripe.
+class CardGlyph extends StatelessWidget {
+  const CardGlyph({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return SizedBox(
+      width: HomeMetrics.tile,
+      height: HomeMetrics.tile,
+      child: Center(
+        child: Container(
+          width: 32,
+          height: 22,
+          decoration: BoxDecoration(
+            color: c.primary,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Stack(
+            children: [
+              Positioned(
+                left: 0,
+                right: 0,
+                top: 5,
+                height: 4,
+                child: ColoredBox(color: c.onPrimary.withValues(alpha: 0.55)),
+              ),
+              Positioned(
+                left: 5,
+                bottom: 4,
+                width: 9,
+                height: 3,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: c.onPrimary.withValues(alpha: 0.85),
+                    borderRadius: BorderRadius.circular(1.5),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -465,7 +719,7 @@ class DueBadge extends StatelessWidget {
     if (tone == DueTone.normal) {
       return Text(
         text,
-        style: Type.bodySmall.copyWith(color: c.textMuted),
+        style: Type.rowMeta.copyWith(color: c.textMuted),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
@@ -477,17 +731,18 @@ class DueBadge extends StatelessWidget {
       alignment: AlignmentDirectional.centerStart,
       child: Container(
         margin: const EdgeInsets.only(top: 2),
-        padding: const EdgeInsets.symmetric(
-          horizontal: Spacing.xs,
-          vertical: 2,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
         decoration: BoxDecoration(
           color: bg,
           borderRadius: BorderRadius.circular(Radii.xs),
         ),
         child: Text(
           text,
-          style: Type.label.copyWith(color: fg, fontWeight: FontWeight.w600),
+          style: Type.rowMeta.copyWith(
+            color: fg,
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+          ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -502,12 +757,11 @@ class HomeSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    Widget block(double h, {Color? color, double? width}) => Container(
+    Widget block(double h, {Color? color}) => Container(
       height: h,
-      width: width,
       decoration: BoxDecoration(
         color: color ?? c.surface,
-        borderRadius: BorderRadius.circular(Radii.lg),
+        borderRadius: BorderRadius.circular(HomeMetrics.radius),
       ),
     );
     return Semantics(
@@ -515,16 +769,16 @@ class HomeSkeleton extends StatelessWidget {
       liveRegion: true,
       child: ExcludeSemantics(
         child: Padding(
-          padding: const EdgeInsets.all(Spacing.md),
+          padding: const EdgeInsets.all(HomeMetrics.gutter),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: Spacing.xl),
-              block(200, color: c.surfaceInset),
-              const SizedBox(height: Spacing.md),
-              block(72),
+              const SizedBox(height: Touch.target + Spacing.md),
+              block(150, color: c.surfaceInset),
               const SizedBox(height: Spacing.sm),
-              block(72),
+              block(64),
+              const SizedBox(height: Spacing.sm),
+              block(160),
             ],
           ),
         ),

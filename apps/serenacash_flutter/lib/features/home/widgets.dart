@@ -54,21 +54,30 @@ class DashboardWidget extends ConsumerWidget {
     );
     Widget money(
       int cents, {
-      MoneyRole role = MoneyRole.row,
+      MoneyRole role = MoneyRole.dense,
       bool signed = false,
       Color? color,
     }) =>
         Money(cents, role: role, signed: signed, color: color, hidden: hidden);
     String brl(int v) => formatBRL(v, hidden: hidden);
     Widget muted(String s) =>
-        Text(s, style: Type.bodySmall.copyWith(color: c.textMuted));
+        Text(s, style: Type.rowMeta.copyWith(color: c.textMuted));
+    final cats = {
+      for (final k in ref.watch(ledgerProvider).categories) k.id: k,
+    };
+    // The icon the user's category carries; entries without a category use [fallback].
+    SIconName catIcon(Transaction t, SIconName fallback) {
+      final k = cats[t.categoryId];
+      return k == null ? fallback : iconByKey(k.icon, fallback: fallback);
+    }
+
     Widget txRow(
       Transaction t, {
       SIconName icon = SIconName.receipt,
       Color? iconColor,
       String? desc,
       Widget? right,
-    }) => ListRow(
+    }) => HomeRow(
       icon: icon,
       iconColor: iconColor,
       title: t.description.isEmpty ? l.bill : t.description,
@@ -84,11 +93,8 @@ class DashboardWidget extends ConsumerWidget {
       String title, [
       String? actionLabel,
       String? route,
-    ]) => SCard(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Spacing.md,
-        vertical: Spacing.xs,
-      ),
+    ]) => HomeCard(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
       child: EmptyRow(
         icon: icon,
         title: title,
@@ -135,20 +141,21 @@ class DashboardWidget extends ConsumerWidget {
         return SummaryPanel(
           availability: data.availability,
           hidden: hidden,
+          monthHorizon:
+              ref.watch(prefsProvider).availabilityHorizon == 'month_end',
           onExplain: () => go(Routes.available),
           onAddAccount: () => go('/accounts/new'),
         );
       case 'consolidated_balance':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/accounts'),
+          semanticHint: l.accounts,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.totalBalance,
-                action: action(l.accounts, '/accounts'),
-              ),
+              HomeSectionHeader(title: l.totalBalance, link: l.accounts),
               if (data.accounts.isNotEmpty)
-                money(data.consolidated, role: MoneyRole.headline, signed: true)
+                money(data.consolidated, role: MoneyRole.section, signed: true)
               else
                 EmptyState(
                   icon: SIconName.wallet,
@@ -160,14 +167,13 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'account_balances':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/accounts'),
+          semanticHint: l.all,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.balancesByAccount,
-                action: action(l.all, '/accounts'),
-              ),
+              HomeSectionHeader(title: l.balancesByAccount, link: l.all),
               if (data.accounts.isEmpty)
                 EmptyState(
                   icon: SIconName.wallet,
@@ -177,7 +183,7 @@ class DashboardWidget extends ConsumerWidget {
                 )
               else
                 for (final a in data.accounts)
-                  ListRow(
+                  HomeRow(
                     icon: a.account.type == 'cash'
                         ? SIconName.wallet
                         : SIconName.bank,
@@ -189,17 +195,16 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'income':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/transactions?kind=income'),
+          semanticHint: l.see,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.income,
-                action: action(l.see, '/transactions?kind=income'),
-              ),
+              HomeSectionHeader(title: l.income, link: l.see),
               money(
                 data.totals.incomeSettled,
-                role: MoneyRole.headline,
+                role: MoneyRole.section,
                 color: c.positive,
               ),
               muted(l.plannedLabel(brl(data.totals.incomePlanned))),
@@ -207,15 +212,14 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'expenses':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/transactions?kind=expense'),
+          semanticHint: l.see,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.expenses,
-                action: action(l.see, '/transactions?kind=expense'),
-              ),
-              money(data.totals.expenseSettled, role: MoneyRole.headline),
+              HomeSectionHeader(title: l.expenses, link: l.see),
+              money(data.totals.expenseSettled, role: MoneyRole.section),
               muted(
                 l.plannedAndCard(
                   brl(data.totals.expensePlanned),
@@ -230,16 +234,14 @@ class DashboardWidget extends ConsumerWidget {
         final pending = [...data.overdue, ...data.bills];
         final total = pending.fold<int>(0, (a, t) => a + pendingCents(t));
         const maxRows = 4;
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/bills'),
+          semanticHint: l.seeAllFem,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.billsToPay,
-                action: action(l.seeAllFem, '/bills'),
-              ),
-              money(total, role: MoneyRole.headline),
-              const SizedBox(height: 2),
+              HomeSectionHeader(title: l.billsToPay, link: l.seeAllFem),
+              money(total, role: MoneyRole.section),
               Text.rich(
                 TextSpan(
                   children: [
@@ -256,36 +258,44 @@ class DashboardWidget extends ConsumerWidget {
                       ),
                   ],
                 ),
-                style: Type.bodySmall.copyWith(color: c.textMuted),
+                style: Type.rowMeta.copyWith(color: c.textMuted),
               ),
-              const SizedBox(height: Spacing.xs),
-              for (final t in pending.take(maxRows))
-                () {
-                  final due = dueLabel(l, t.dueDate ?? t.date, data.today);
-                  final late = due.tone == DueTone.overdue;
-                  return ListRow(
-                    icon: late ? SIconName.alert : SIconName.receipt,
-                    iconColor: late ? c.negative : null,
-                    title: t.description.isEmpty ? l.bill : t.description,
-                    descriptionWidget: DueBadge(text: due.text, tone: due.tone),
-                    trailing: money(
-                      pendingCents(t),
-                      color: late ? c.negative : null,
-                    ),
-                    onTap: () => go('/transaction?id=${t.id}'),
-                  );
-                }(),
+              const SizedBox(height: Spacing.xxs),
+              ...dividedRows([
+                for (final t in pending.take(maxRows))
+                  () {
+                    final due = dueLabel(l, t.dueDate ?? t.date, data.today);
+                    final late = due.tone == DueTone.overdue;
+                    return HomeRow(
+                      icon: late
+                          ? SIconName.alert
+                          : catIcon(t, SIconName.receipt),
+                      iconColor: late ? c.negative : null,
+                      tileColor: late ? c.negativeContainer : null,
+                      title: t.description.isEmpty ? l.bill : t.description,
+                      descriptionWidget: DueBadge(
+                        text: due.text,
+                        tone: due.tone,
+                      ),
+                      trailing: money(
+                        pendingCents(t),
+                        color: late ? c.negative : null,
+                      ),
+                      onTap: () => go('/transaction?id=${t.id}'),
+                    );
+                  }(),
+              ]),
               if (pending.length > maxRows)
                 action(l.moreBills(pending.length - maxRows), '/bills'),
             ],
           ),
         );
       case 'overdue_bills':
-        return SCard(
+        return HomeCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(title: l.overdueBills),
+              HomeSectionHeader(title: l.overdueBills),
               if (data.overdue.isEmpty)
                 muted(l.noOverdue)
               else
@@ -301,14 +311,13 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'upcoming_due':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/calendar'),
+          semanticHint: l.calendar,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.next7days,
-                action: action(l.calendar, '/calendar'),
-              ),
+              HomeSectionHeader(title: l.next7days, link: l.calendar),
               if (data.next7.isEmpty)
                 muted(l.noDueNext7)
               else
@@ -324,23 +333,23 @@ class DashboardWidget extends ConsumerWidget {
       case 'cards_invoices':
         const maxCards = 2;
         final shown = data.cards.take(maxCards).toList();
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/cards'),
+          semanticHint: l.seeCards,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.cardsAndInvoices,
-                action: action(l.seeCards, '/cards'),
-              ),
+              HomeSectionHeader(title: l.cardsAndInvoices, link: l.seeCards),
               for (var i = 0; i < shown.length; i++) ...[
                 if (i > 0)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: Spacing.xs),
-                    child: Divider(height: 1, thickness: 1, color: c.border),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: Spacing.xs),
+                    child: HomeDivider(),
                   ),
                 _CardInvoice(
                   view: shown[i],
                   hidden: hidden,
+                  locale: locale,
                   onTap: () => go('/cards/${shown[i].card.id}'),
                 ),
               ],
@@ -351,29 +360,27 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'installments':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/cards/installments'),
+          semanticHint: l.details,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.installmentPurchases,
-                action: action(l.details, '/cards/installments'),
-              ),
-              money(data.installmentsFuture, role: MoneyRole.headline),
+              HomeSectionHeader(title: l.installmentPurchases, link: l.details),
+              money(data.installmentsFuture, role: MoneyRole.section),
               muted(l.committedFuture),
             ],
           ),
         );
       case 'monthly_budget':
         final g = data.globalBudget;
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/budgets'),
+          semanticHint: l.budgets,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.monthlyBudget,
-                action: action(l.budgets, '/budgets'),
-              ),
+              HomeSectionHeader(title: l.monthlyBudget, link: l.budgets),
               if (g != null) ...[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -411,7 +418,7 @@ class DashboardWidget extends ConsumerWidget {
                           children: [
                             Text(
                               b.category?.name ?? l.general,
-                              style: Type.bodySmall.copyWith(color: c.text),
+                              style: Type.rowText.copyWith(color: c.text),
                             ),
                             muted(
                               '${brl(b.spentCents)} ${l.ofLimit(brl(b.limitCents))}',
@@ -440,14 +447,13 @@ class DashboardWidget extends ConsumerWidget {
         );
       case 'spending_by_category':
         final total = data.categories.fold(0, (a, x) => a + x.cents);
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/reports/categories'),
+          semanticHint: l.report,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.spendingByCategory,
-                action: action(l.report, '/reports/categories'),
-              ),
+              HomeSectionHeader(title: l.spendingByCategory, link: l.report),
               if (data.categories.isEmpty)
                 EmptyState(
                   icon: SIconName.tag,
@@ -468,13 +474,13 @@ class DashboardWidget extends ConsumerWidget {
                             Flexible(
                               child: Text(
                                 x.name,
-                                style: Type.bodySmall.copyWith(color: c.text),
+                                style: Type.rowText.copyWith(color: c.text),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             Text(
                               '${brl(x.cents)} · ${x.percent.round()}%',
-                              style: Type.bodySmall.copyWith(
+                              style: Type.rowText.copyWith(
                                 color: c.text,
                                 fontFeatures: const [
                                   FontFeature.tabularFigures(),
@@ -518,14 +524,13 @@ class DashboardWidget extends ConsumerWidget {
                 : p.totals.expenseSettled,
           ),
         ].reduce((a, b) => a > b ? a : b);
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/reports/cashflow'),
+          semanticHint: l.cashflow,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.evolution,
-                action: action(l.cashflow, '/reports/cashflow'),
-              ),
+              HomeSectionHeader(title: l.evolution, link: l.cashflow),
               if (!data.hasTransactions)
                 EmptyState(
                   icon: SIconName.arrowUp,
@@ -608,11 +613,13 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'goals':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/goals'),
+          semanticHint: l.see,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(title: l.goals, action: action(l.see, '/goals')),
+              HomeSectionHeader(title: l.goals, link: l.see),
               if (data.goals.isEmpty)
                 EmptyState(
                   icon: SIconName.target,
@@ -636,7 +643,7 @@ class DashboardWidget extends ConsumerWidget {
                               Flexible(
                                 child: Text(
                                   g.goal.name,
-                                  style: Type.bodySmall.copyWith(color: c.text),
+                                  style: Type.rowText.copyWith(color: c.text),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -645,7 +652,7 @@ class DashboardWidget extends ConsumerWidget {
                               Flexible(
                                 child: Text(
                                   '${brl(g.savedCents)} ${l.ofLimit(brl(g.goal.targetCents))}',
-                                  style: Type.bodySmall.copyWith(
+                                  style: Type.rowText.copyWith(
                                     color: c.textMuted,
                                   ),
                                   maxLines: 1,
@@ -670,12 +677,14 @@ class DashboardWidget extends ConsumerWidget {
         final reserved = data.goals
             .where((g) => g.goal.reserved)
             .fold(0, (a, g) => a + g.savedCents);
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/goals'),
+          semanticHint: l.see,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(title: l.reserves, action: action(l.see, '/goals')),
-              money(reserved, role: MoneyRole.headline),
+              HomeSectionHeader(title: l.reserves, link: l.see),
+              money(reserved, role: MoneyRole.section),
               muted(l.reservesText),
             ],
           ),
@@ -685,12 +694,12 @@ class DashboardWidget extends ConsumerWidget {
         final rate = inc > 0
             ? ((inc - data.totals.expenseSettled) / inc * 100).round()
             : null;
-        return SCard(
+        return HomeCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(title: l.monthlySavings),
-              money(data.totals.net, role: MoneyRole.headline, signed: true),
+              HomeSectionHeader(title: l.monthlySavings),
+              money(data.totals.net, role: MoneyRole.section, signed: true),
               muted(
                 rate == null
                     ? l.registerIncomeForRate
@@ -700,19 +709,18 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'subscriptions':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/reports/recurring'),
+          semanticHint: l.see,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.subscriptions,
-                action: action(l.see, '/reports/recurring'),
-              ),
+              HomeSectionHeader(title: l.subscriptions, link: l.see),
               if (data.recurring.isEmpty)
                 muted(l.noRecurring)
               else
                 for (final r in data.recurring.take(5))
-                  ListRow(
+                  HomeRow(
                     icon: SIconName.receipt,
                     title: r.description,
                     description: l.monthsInARow(r.months.length),
@@ -722,11 +730,13 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'loans':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/loans'),
+          semanticHint: l.see,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(title: l.loans, action: action(l.see, '/loans')),
+              HomeSectionHeader(title: l.loans, link: l.see),
               if (data.loans.isEmpty)
                 EmptyState(
                   icon: SIconName.bank,
@@ -736,7 +746,7 @@ class DashboardWidget extends ConsumerWidget {
                 )
               else
                 for (final p in data.loans)
-                  ListRow(
+                  HomeRow(
                     icon: SIconName.bank,
                     title: p.loan.name,
                     description: p.nextDue != null
@@ -752,14 +762,13 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'calendar':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/calendar'),
+          semanticHint: l.open,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.calendar,
-                action: action(l.open, '/calendar'),
-              ),
+              HomeSectionHeader(title: l.calendar, link: l.open),
               muted(
                 '${l.calendarSummary(data.bills.length, dayMonth(data.horizonEnd))}${data.overdue.isNotEmpty ? l.overdueCount(data.overdue.length) : ''}',
               ),
@@ -767,64 +776,69 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'recent_transactions':
-        final categories = {
-          for (final k in ref.watch(ledgerProvider).categories) k.id: k.name,
-        };
         String day(String iso) => iso == data.today
             ? l.today
             : iso == addDays(data.today, -1)
             ? l.yesterday
             : dayMonth(iso);
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/transactions'),
+          semanticHint: l.seeAllMasc,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
+              HomeSectionHeader(
                 title: l.recentTransactions,
-                action: action(l.seeAllMasc, '/transactions'),
+                link: l.seeAllMasc,
               ),
-              for (final t in data.recent)
-                ListRow(
-                  icon: t.kind == TransactionKind.income
-                      ? SIconName.arrowDown
-                      : t.kind == TransactionKind.transfer
-                      ? SIconName.swap
-                      : t.kind == TransactionKind.cardPurchase
-                      ? SIconName.card
-                      : SIconName.arrowUp,
-                  title: t.description.isEmpty
-                      ? kindLabel(l, t.kind)
-                      : t.description,
-                  description:
-                      '${day(t.date)} · ${categories[t.categoryId] ?? kindLabel(l, t.kind)}${t.status == TransactionStatus.planned ? ' · ${l.planned}' : ''}',
-                  // Regra do Sinal: green marks money coming in; routine spending stays in the text color.
-                  trailing: Money(
-                    signedAmount(t),
-                    color: t.kind == TransactionKind.income
-                        ? c.positive
-                        : c.text,
-                    showPlus: t.kind == TransactionKind.income,
-                    hidden: hidden,
+              ...dividedRows([
+                for (final t in data.recent)
+                  HomeRow(
+                    icon: catIcon(
+                      t,
+                      t.kind == TransactionKind.income
+                          ? SIconName.arrowDown
+                          : t.kind == TransactionKind.transfer
+                          ? SIconName.swap
+                          : t.kind == TransactionKind.cardPurchase
+                          ? SIconName.card
+                          : SIconName.arrowUp,
+                    ),
+                    title: t.description.isEmpty
+                        ? kindLabel(l, t.kind)
+                        : t.description,
+                    description:
+                        '${day(t.date)} · ${cats[t.categoryId]?.name ?? kindLabel(l, t.kind)}${t.status == TransactionStatus.planned ? ' · ${l.planned}' : ''}',
+                    // Regra do Sinal: green marks money coming in; routine spending stays in the text color.
+                    trailing: Money(
+                      signedAmount(t),
+                      role: MoneyRole.dense,
+                      color: t.kind == TransactionKind.income
+                          ? c.positive
+                          : c.text,
+                      showPlus: t.kind == TransactionKind.income,
+                      spacedSign: true,
+                      hidden: hidden,
+                    ),
+                    onTap: () => go('/transaction?id=${t.id}'),
                   ),
-                  onTap: () => go('/transaction?id=${t.id}'),
-                ),
+              ]),
             ],
           ),
         );
       case 'recommendations':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/assistant'),
+          semanticHint: l.assistant,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.suggestions,
-                action: action(l.assistant, '/assistant'),
-              ),
+              HomeSectionHeader(title: l.suggestions, link: l.assistant),
               if (data.recommendations.isEmpty)
                 muted(l.allCalm)
               else
                 for (final r in data.recommendations)
-                  ListRow(
+                  HomeRow(
                     icon: r.severity == 'urgent'
                         ? SIconName.alert
                         : r.severity == 'attention'
@@ -843,14 +857,13 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'shopping_lists':
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/shopping'),
+          semanticHint: l.see,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
-                title: l.shoppingLists,
-                action: action(l.see, '/shopping'),
-              ),
+              HomeSectionHeader(title: l.shoppingLists, link: l.see),
               muted(
                 data.listCount > 0 ? l.listCount(data.listCount) : l.noListYet,
               ),
@@ -868,11 +881,11 @@ class DashboardWidget extends ConsumerWidget {
           ),
         );
       case 'shopping_assistant':
-        return SCard(
+        return HomeCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(title: l.shoppingAssistant),
+              HomeSectionHeader(title: l.shoppingAssistant),
               muted(
                 data.finishedSessions > 0
                     ? l.sessionsCount(data.finishedSessions)
@@ -905,13 +918,15 @@ class DashboardWidget extends ConsumerWidget {
                       100)
                   .round()
             : null;
-        return SCard(
+        return HomeCard(
+          onTap: () => go('/reports/indicators'),
+          semanticHint: l.methodology,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(
+              HomeSectionHeader(
                 title: l.advancedIndicators,
-                action: action(l.methodology, '/reports/indicators'),
+                link: l.methodology,
               ),
               KeyValueRow(
                 l.savingRate,
@@ -937,11 +952,11 @@ class DashboardWidget extends ConsumerWidget {
         );
       default:
         final def = dash.widgetById(id);
-        return SCard(
+        return HomeCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(title: def.title),
+              HomeSectionHeader(title: def.title),
               muted(def.description),
             ],
           ),
@@ -955,10 +970,12 @@ class _CardInvoice extends StatelessWidget {
   const _CardInvoice({
     required this.view,
     required this.hidden,
+    required this.locale,
     required this.onTap,
   });
   final CardView view;
   final bool hidden;
+  final String locale;
   final VoidCallback onTap;
 
   @override
@@ -967,111 +984,83 @@ class _CardInvoice extends StatelessWidget {
     final l = context.l10n;
     final inv = view.invoice;
     final late = inv.state == InvoiceState.overdue;
-    final labelStyle = Type.label.copyWith(color: c.textMuted);
+    final brand = view.card.brand?.trim() ?? '';
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(Radii.sm),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: Spacing.xxs),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: Touch.target),
+            child: Row(
               children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: c.primary,
-                    borderRadius: BorderRadius.circular(Radii.sm),
-                  ),
-                  child: Center(
-                    child: SIcon(SIconName.card, size: 22, color: c.onPrimary),
-                  ),
-                ),
+                const CardGlyph(),
                 const SizedBox(width: Spacing.sm),
                 Expanded(
-                  child: Text(
-                    view.card.name,
-                    style: Type.body.copyWith(
-                      color: c.text,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                SIcon(SIconName.chevronRight, size: 20, color: c.borderStrong),
-              ],
-            ),
-            const SizedBox(height: Spacing.sm),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        l.invoiceOf(invoiceStateLabel(l, inv.state)),
-                        style: late
-                            ? labelStyle.copyWith(
-                                color: c.negative,
-                                fontWeight: FontWeight.w600,
-                              )
-                            : labelStyle,
+                        view.card.name,
+                        style: Type.rowTitle.copyWith(color: c.text),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 2),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        alignment: AlignmentDirectional.centerStart,
-                        child: Money(
-                          inv.remainingCents,
-                          role: MoneyRole.title,
-                          color: late ? c.negative : null,
-                          hidden: hidden,
+                      if (brand.isNotEmpty)
+                        Text(
+                          brand,
+                          style: Type.rowMeta.copyWith(color: c.textMuted),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
                     ],
                   ),
                 ),
-                const SizedBox(width: Spacing.sm),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(l.invoiceDueLabel, style: labelStyle),
-                      const SizedBox(height: 2),
-                      Text(
-                        dayMonth(inv.dueDate),
-                        style: Type.title.copyWith(
-                          color: c.text,
-                          fontFeatures: const [FontFeature.tabularFigures()],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                SIcon(SIconName.chevronRight, size: 18, color: c.primary),
               ],
             ),
-            const SizedBox(height: Spacing.xs),
+          ),
+          const SizedBox(height: 2),
+          HomeFigures(
+            dividerColor: c.surfaceInset,
+            left: HomeFigure(
+              // "Fatura atual" while it is open; closed, overdue or paid say so.
+              label: inv.state == InvoiceState.open
+                  ? l.invoiceCurrent
+                  : l.invoiceOf(invoiceStateLabel(l, inv.state)),
+              labelColor: late ? c.negative : c.textMuted,
+              labelWeight: late ? FontWeight.w600 : null,
+              value: Money(
+                inv.remainingCents,
+                role: MoneyRole.section,
+                size: 17,
+                color: late ? c.negative : null,
+                hidden: hidden,
+              ),
+            ),
+            right: HomeFigure(
+              label: l.invoiceDueLabel,
+              labelColor: c.textMuted,
+              value: Text(
+                dayMonthShort(inv.dueDate, locale),
+                style: Type.sectionValue.copyWith(fontSize: 17, color: c.text),
+              ),
+            ),
+          ),
+          if (inv.state == InvoiceState.open) ...[
+            const Padding(
+              padding: EdgeInsets.only(top: Spacing.xs, bottom: 6),
+              child: HomeDivider(),
+            ),
             Text(
-              [
-                if (inv.state == InvoiceState.open)
-                  l.invoiceCloses(dayMonth(inv.closingDate)),
-                l.freeLimit(
-                  formatBRL(
-                    view.commitment.availableLimitCents,
-                    hidden: hidden,
-                  ),
-                ),
-              ].join(' · '),
-              style: Type.bodySmall.copyWith(color: c.textMuted),
+              l.invoiceCloses(dayMonthShort(inv.closingDate, locale)),
+              style: Type.rowMeta.copyWith(color: c.textMuted),
             ),
           ],
-        ),
+          const SizedBox(height: Spacing.xxs),
+        ],
       ),
     );
   }
@@ -1099,11 +1088,11 @@ class _WidgetBoundaryState extends State<WidgetBoundary> {
   Widget build(BuildContext context) {
     final l = context.l10n;
     if (_error != null) {
-      return SCard(
+      return HomeCard(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CardHeader(title: widget.title),
+            HomeSectionHeader(title: widget.title),
             EmptyState(
               icon: SIconName.alert,
               title: l.widgetLoadError,

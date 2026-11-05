@@ -16,6 +16,8 @@ class SScreen extends StatelessWidget {
     this.bottomPadding = 120,
     this.compactTitle = false,
     this.header,
+    this.gutter,
+    this.headerPadding = Spacing.sm,
   });
   final String title;
   final String? subtitle;
@@ -29,11 +31,17 @@ class SScreen extends StatelessWidget {
   /// Replaces the title/subtitle block (the header actions stay on the right).
   final Widget? header;
 
+  /// Side margin; defaults to 20 (16 on narrow screens).
+  final double? gutter;
+
+  /// Space above and below the header row.
+  final double headerPadding;
+
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final width = MediaQuery.sizeOf(context).width;
-    final gutter = width >= 400 ? 20.0 : 16.0;
+    final gutter = this.gutter ?? (width >= 400 ? 20.0 : 16.0);
     return Scaffold(
       backgroundColor: c.bg,
       floatingActionButton: fab,
@@ -48,9 +56,9 @@ class SScreen extends StatelessWidget {
                 SliverPadding(
                   padding: EdgeInsets.fromLTRB(
                     gutter,
-                    Spacing.sm,
+                    headerPadding,
                     gutter,
-                    Spacing.sm,
+                    headerPadding,
                   ),
                   sliver: SliverToBoxAdapter(
                     child: Row(

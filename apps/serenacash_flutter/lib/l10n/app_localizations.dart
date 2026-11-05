@@ -5921,7 +5921,7 @@ abstract class AppLocalizations {
   /// No description provided for @heroBalances.
   ///
   /// In pt, this message translates to:
-  /// **'Dinheiro nas contas'**
+  /// **'Saldo em contas'**
   String get heroBalances;
 
   /// No description provided for @heroCommitted.
@@ -6103,6 +6103,72 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Nenhuma meta criada'**
   String get noGoalYet;
+
+  /// No description provided for @greetingWithName.
+  ///
+  /// In pt, this message translates to:
+  /// **'{greeting}, {name}'**
+  String greetingWithName(String greeting, String name);
+
+  /// No description provided for @canSpendThisMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pode gastar neste mês'**
+  String get canSpendThisMonth;
+
+  /// No description provided for @heroAfterCommitted.
+  ///
+  /// In pt, this message translates to:
+  /// **'Após os compromissos previstos'**
+  String get heroAfterCommitted;
+
+  /// No description provided for @heroCommittedMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compromissos do mês'**
+  String get heroCommittedMonth;
+
+  /// No description provided for @quickEntry.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lançamento'**
+  String get quickEntry;
+
+  /// No description provided for @invoiceCurrent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fatura atual'**
+  String get invoiceCurrent;
+
+  /// No description provided for @profile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perfil'**
+  String get profile;
+
+  /// No description provided for @yourName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu nome'**
+  String get yourName;
+
+  /// No description provided for @yourNameEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não informado'**
+  String get yourNameEmpty;
+
+  /// No description provided for @yourNameLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como quer ser chamado'**
+  String get yourNameLabel;
+
+  /// No description provided for @yourNameHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aparece na saudação da tela inicial. Fica só neste aparelho.'**
+  String get yourNameHelp;
 }
 
 class _AppLocalizationsDelegate

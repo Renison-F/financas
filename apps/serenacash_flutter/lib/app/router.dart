@@ -374,9 +374,9 @@ class _TabsShell extends ConsumerWidget {
     final c = context.colors;
     final tabs = [
       (SIconName.home, l.tabHome),
-      (SIconName.list, l.tabTransactions),
+      (SIconName.plus, l.tabTransactions),
       (SIconName.cart, l.tabShopping),
-      (SIconName.plan, l.tabPlan),
+      (SIconName.chart, l.tabPlan),
       (SIconName.more, l.tabMore),
     ];
     // One undo listener for the whole shell: the tabs stay alive together, so a listener per tab
@@ -402,12 +402,8 @@ class _TabsShell extends ConsumerWidget {
               destinations: [
                 for (var i = 0; i < tabs.length; i++)
                   NavigationDestination(
-                    icon: SIcon(tabs[i].$1, color: c.textMuted),
-                    selectedIcon: SIcon(
-                      tabs[i].$1,
-                      color: c.onPrimaryContainer,
-                      filled: i == 0,
-                    ),
+                    icon: SIcon(tabs[i].$1, size: 22, color: c.textMuted),
+                    selectedIcon: SIcon(tabs[i].$1, size: 22, color: c.primary),
                     label: tabs[i].$2,
                   ),
               ],

@@ -2253,7 +2253,7 @@
   "hideSecret": "Hide",
   "homeSetupTitle": "Set up your balance",
   "homeSetupText": "Add your first account to see how much you can spend.",
-  "heroBalances": "Money in accounts",
+  "heroBalances": "Balance in accounts",
   "heroCommitted": "Committed",
   "heroPlannedIncome": "Includes {value} of planned income.",
   "@heroPlannedIncome": {
@@ -2360,5 +2360,17 @@
   },
   "homeLoading": "Loading your data",
   "noSpendingYet": "No spending in this period",
-  "noGoalYet": "No goal created"
+  "noGoalYet": "No goal created",
+  "greetingWithName": "{greeting}, {name}",
+  "@greetingWithName": {"placeholders": {"greeting": {"type": "String"}, "name": {"type": "String"}}},
+  "canSpendThisMonth": "Can spend this month",
+  "heroAfterCommitted": "After planned commitments",
+  "heroCommittedMonth": "Commitments this month",
+  "quickEntry": "Entry",
+  "invoiceCurrent": "Current invoice",
+  "profile": "Profile",
+  "yourName": "Your name",
+  "yourNameEmpty": "Not set",
+  "yourNameLabel": "What should we call you",
+  "yourNameHelp": "Shown in the greeting on the home screen. Stays on this device only."
 }

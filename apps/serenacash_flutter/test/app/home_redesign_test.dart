@@ -167,7 +167,7 @@ void main() {
     expect(find.text('Adicionar conta'), findsOneWidget);
     // Unknown is not zero: no "R$ 0,00" anywhere, and no "pode gastar" figure.
     expect(find.textContaining(_amount), findsNothing);
-    expect(find.textContaining('Pode gastar até'), findsNothing);
+    expect(find.textContaining('Pode gastar'), findsNothing);
     // The other sections are one line each.
     expect(find.text('Nenhuma conta prevista'), findsOneWidget);
     expect(find.text('Adicione seu primeiro cartão'), findsOneWidget);
@@ -198,7 +198,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Configure seu saldo'), findsNothing);
-      expect(find.textContaining('Pode gastar até'), findsOneWidget);
+      expect(find.text('Pode gastar neste mês'), findsOneWidget);
       expect(find.textContaining('1.500'), findsWidgets);
       expect(find.text('Nenhum lançamento ainda'), findsOneWidget);
       await screenshot(tester, 'home_no_movements_light');
@@ -212,26 +212,27 @@ void main() {
       await _boot(tester, demo: true);
 
       // Summary: the amount and the figures that explain it (5.480,50 − 3.140,00 = 2.340,50).
-      expect(find.textContaining('Pode gastar até'), findsOneWidget);
+      expect(find.text('Pode gastar neste mês'), findsOneWidget);
       final panel = find.byType(SummaryPanel);
       expect(
         find.descendant(of: panel, matching: find.textContaining('2.340')),
         findsOneWidget,
       );
-      expect(find.text('Dinheiro nas contas'), findsOneWidget);
+      expect(find.text('Saldo em contas'), findsOneWidget);
       expect(
         find.descendant(of: panel, matching: find.textContaining('5.480,50')),
         findsOneWidget,
       );
-      expect(find.text('Compromissos'), findsOneWidget);
+      expect(find.text('Compromissos do mês'), findsOneWidget);
+      expect(find.text('Após os compromissos previstos'), findsOneWidget);
       expect(
         find.descendant(of: panel, matching: find.textContaining('3.140,00')),
         findsOneWidget,
       );
 
-      // Quick actions: two accounts, so the middle one is the transfer.
+      // Quick actions, as in the reference.
+      expect(find.text('Lançamento'), findsOneWidget);
       expect(find.text('Conta a pagar'), findsOneWidget);
-      expect(find.text('Transferir'), findsOneWidget);
       expect(find.text('Contas'), findsOneWidget);
 
       // Bills: total pending, and due dates told apart in words.
@@ -254,7 +255,7 @@ void main() {
       );
       expect(find.text('Cartões e faturas'), findsOneWidget);
       expect(find.text('Ver cartões'), findsOneWidget);
-      expect(find.textContaining('850,00'), findsOneWidget);
+      expect(find.textContaining(RegExp(r'^R\$\s850,00$')), findsOneWidget);
       expect(find.text('Vencimento'), findsOneWidget);
 
       // Latest entries: income marked with a plus.
@@ -264,7 +265,8 @@ void main() {
         scrollable: find.byType(Scrollable).first,
       );
       expect(find.text('Últimos lançamentos'), findsOneWidget);
-      expect(find.textContaining('+R\$'), findsOneWidget);
+      expect(find.textContaining('+ R\$'), findsOneWidget);
+      expect(find.textContaining('- R\$'), findsWidgets);
       expect(find.textContaining('Hoje · Alimentação'), findsOneWidget);
       expect(tester.takeException(), isNull);
     },
@@ -327,11 +329,16 @@ void main() {
     await tester.tap(find.text('Cancelar'));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Transferir'));
+    await tester.tap(find.text('Lançamento'));
     await tester.pumpAndSettle();
     expect(find.byType(TransactionFormScreen), findsOneWidget);
-    expect(find.text('De'), findsOneWidget);
     await tester.tap(find.text('Cancelar'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Contas'));
+    await tester.pumpAndSettle();
+    expect(find.text('Conta corrente'), findsWidgets);
+    await tester.tap(find.byTooltip('Voltar'));
     await tester.pumpAndSettle();
 
     await tester.tap(find.byType(HomeHeader));

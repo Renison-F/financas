@@ -3449,7 +3449,7 @@ class AppLocalizationsPt extends AppLocalizations {
       'Adicione sua primeira conta para saber quanto pode gastar.';
 
   @override
-  String get heroBalances => 'Dinheiro nas contas';
+  String get heroBalances => 'Saldo em contas';
 
   @override
   String get heroCommitted => 'Compromissos';
@@ -3586,4 +3586,40 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get noGoalYet => 'Nenhuma meta criada';
+
+  @override
+  String greetingWithName(String greeting, String name) {
+    return '$greeting, $name';
+  }
+
+  @override
+  String get canSpendThisMonth => 'Pode gastar neste mês';
+
+  @override
+  String get heroAfterCommitted => 'Após os compromissos previstos';
+
+  @override
+  String get heroCommittedMonth => 'Compromissos do mês';
+
+  @override
+  String get quickEntry => 'Lançamento';
+
+  @override
+  String get invoiceCurrent => 'Fatura atual';
+
+  @override
+  String get profile => 'Perfil';
+
+  @override
+  String get yourName => 'Seu nome';
+
+  @override
+  String get yourNameEmpty => 'Não informado';
+
+  @override
+  String get yourNameLabel => 'Como quer ser chamado';
+
+  @override
+  String get yourNameHelp =>
+      'Aparece na saudação da tela inicial. Fica só neste aparelho.';
 }

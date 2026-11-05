@@ -13,7 +13,7 @@ List<Category> defaultCategories(String Function() newId, String now) {
     ('Compras', 'expense', 'tag', '#74848A'),
     ('Assinaturas', 'expense', 'receipt', '#0B5563'),
     ('Outros gastos', 'expense', 'more', '#4F5E61'),
-    ('Salário', 'income', 'bank', '#176B4E'),
+    ('Salário', 'income', 'wallet', '#176B4E'),
     ('Trabalho extra', 'income', 'sparkle', '#176B4E'),
     ('Rendimentos', 'income', 'arrow-up', '#176B4E'),
     ('Reembolsos', 'income', 'swap', '#176B4E'),

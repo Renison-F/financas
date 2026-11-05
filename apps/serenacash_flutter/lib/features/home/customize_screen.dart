@@ -88,7 +88,7 @@ class _CustomizeScreenState extends ConsumerState<CustomizeScreen> {
                         SChip(
                           label: l.restoreDefault,
                           onTap: () => setState(
-                            () => _layout = dash.defaultLayout.copyWith(
+                            () => _layout = homeDefaultLayout.copyWith(
                               privacyMode: _layout.privacyMode,
                             ),
                           ),

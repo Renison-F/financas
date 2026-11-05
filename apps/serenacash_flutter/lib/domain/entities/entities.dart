@@ -767,6 +767,7 @@ class UserPrefs {
     this.biometricLock = false,
     this.lockOnBackground = true,
     this.pinEnabled = false,
+    this.displayName = '',
   });
   final String locale;
   final String currency;
@@ -780,6 +781,9 @@ class UserPrefs {
   final bool biometricLock;
   final bool lockOnBackground;
   final bool pinEnabled;
+
+  /// How the user wants to be greeted; empty when not informed.
+  final String displayName;
   factory UserPrefs.fromJson(Map<String, dynamic> j) => UserPrefs(
     locale: j['locale'] as String? ?? 'pt-BR',
     currency: j['currency'] as String? ?? 'BRL',
@@ -794,6 +798,7 @@ class UserPrefs {
     biometricLock: j['biometricLock'] as bool? ?? false,
     lockOnBackground: j['lockOnBackground'] as bool? ?? true,
     pinEnabled: j['pinEnabled'] as bool? ?? false,
+    displayName: j['displayName'] as String? ?? '',
   );
   Map<String, dynamic> toJson() => {
     'locale': locale,
@@ -808,6 +813,8 @@ class UserPrefs {
     'biometricLock': biometricLock,
     'lockOnBackground': lockOnBackground,
     'pinEnabled': pinEnabled,
+    // Written only when set, so documents from before this field stay byte-identical.
+    if (displayName.isNotEmpty) 'displayName': displayName,
   };
   UserPrefs copyWith({
     String? locale,
@@ -822,6 +829,7 @@ class UserPrefs {
     bool? biometricLock,
     bool? lockOnBackground,
     bool? pinEnabled,
+    String? displayName,
   }) => UserPrefs(
     locale: locale ?? this.locale,
     currency: currency ?? this.currency,
@@ -837,6 +845,7 @@ class UserPrefs {
     biometricLock: biometricLock ?? this.biometricLock,
     lockOnBackground: lockOnBackground ?? this.lockOnBackground,
     pinEnabled: pinEnabled ?? this.pinEnabled,
+    displayName: displayName ?? this.displayName,
   );
 }
 

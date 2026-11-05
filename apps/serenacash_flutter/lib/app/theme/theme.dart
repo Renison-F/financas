@@ -170,9 +170,7 @@ ThemeData serenaTheme(Brightness brightness) {
           fontWeight: s.contains(WidgetState.selected)
               ? FontWeight.w600
               : FontWeight.w500,
-          color: s.contains(WidgetState.selected)
-              ? c.onPrimaryContainer
-              : c.textMuted,
+          color: s.contains(WidgetState.selected) ? c.primary : c.textMuted,
         ),
       ),
       iconTheme: WidgetStateProperty.resolveWith(
@@ -214,8 +212,10 @@ ThemeData serenaTheme(Brightness brightness) {
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: c.primary,
       foregroundColor: c.onPrimary,
-      elevation: 6,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      elevation: 3,
+      highlightElevation: 4,
+      shape: const CircleBorder(),
+      sizeConstraints: const BoxConstraints.tightFor(width: 52, height: 52),
     ),
     listTileTheme: ListTileThemeData(
       contentPadding: EdgeInsets.zero,

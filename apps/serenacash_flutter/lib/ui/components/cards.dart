@@ -12,6 +12,7 @@ class SCard extends StatelessWidget {
     this.padding,
     this.onTap,
     this.semanticHint,
+    this.radius,
   });
   final Widget child;
   final bool inset;
@@ -19,10 +20,15 @@ class SCard extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final VoidCallback? onTap;
   final String? semanticHint;
+
+  /// Corner radius; defaults to 20 (14 when inset).
+  final double? radius;
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    final radius = BorderRadius.circular(inset ? Radii.md : Radii.lg);
+    final radius = BorderRadius.circular(
+      this.radius ?? (inset ? Radii.md : Radii.lg),
+    );
     final body = Padding(
       padding: padding ?? EdgeInsets.all(inset ? Spacing.sm : Spacing.md),
       child: child,

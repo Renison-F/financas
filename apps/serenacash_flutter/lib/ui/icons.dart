@@ -49,6 +49,8 @@ enum SIconName {
   star,
   moon,
   sun,
+  layers,
+  chart,
 }
 
 sealed class _Shape {
@@ -172,7 +174,27 @@ const _shapes = <SIconName, List<_Shape>>{
       'M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4',
     ),
   ],
+  SIconName.layers: [
+    _P('M12 3.5l9 4.5-9 4.5-9-4.5z'),
+    _P('M3 12.2l9 4.5 9-4.5M3 16.4l9 4.5 9-4.5'),
+  ],
+  SIconName.chart: [_P('M4 20.5h16M7 17v-4M12 17V8M17 17V4.5')],
 };
+
+/// Icon stored on a category ("cart", "arrow-up"…); unknown keys fall back to [fallback].
+SIconName iconByKey(String key, {SIconName fallback = SIconName.tag}) {
+  final parts = key.split('-');
+  final camel =
+      parts.first +
+      parts
+          .skip(1)
+          .map((p) => p.isEmpty ? p : p[0].toUpperCase() + p.substring(1))
+          .join();
+  for (final n in SIconName.values) {
+    if (n.name == camel) return n;
+  }
+  return fallback;
+}
 
 class SIcon extends StatelessWidget {
   const SIcon(

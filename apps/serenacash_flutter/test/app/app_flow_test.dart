@@ -49,7 +49,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(HomeScreen), findsOneWidget);
-      expect(find.textContaining('Pode gastar até'), findsOneWidget);
+      expect(find.text('Pode gastar neste mês'), findsOneWidget);
       // R$ 2.500 − R$ 1.200 planned rent = R$ 1.300 available (hero shows integer part + cents separately)
       expect(find.textContaining('1.300'), findsWidgets);
       await screenshot(tester, 'home_light');

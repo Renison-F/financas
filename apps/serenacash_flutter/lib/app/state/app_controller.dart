@@ -79,7 +79,9 @@ class AppController extends AsyncNotifier<AppState> {
     final now = DateTime.now();
     return AppState(
       ledger: ledger,
-      layout: normalizeLayout(layoutRaw),
+      layout: layoutRaw == null
+          ? homeDefaultLayout
+          : normalizeLayout(layoutRaw),
       onboarded: onboarded,
       shoppingLists: await _shopping.lists(includeArchived: true),
       sessions: await _shopping.sessions(),
@@ -822,3 +824,16 @@ extension on Transaction {
     deletedAt: deletedAt,
   );
 }
+
+/// Home screen of someone who never customized it, in the order of the reference design: the latest
+/// entries come right after the cards. The domain's own default keeps the order of the original core
+/// (it is what a saved layout without an order falls back to).
+final homeDefaultLayout = defaultLayout.copyWith(
+  order: [
+    for (final id in defaultLayout.order)
+      if (id != 'recent_transactions') ...[
+        id,
+        if (id == 'cards_invoices') 'recent_transactions',
+      ],
+  ],
+);

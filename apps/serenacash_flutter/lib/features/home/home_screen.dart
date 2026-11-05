@@ -42,40 +42,37 @@ class HomeScreen extends ConsumerWidget {
             Localizations.localeOf(context).toString(),
           );
 
-    // The "+" button adds a transaction; these cover what it does not.
+    // Same three shortcuts as the reference: a new entry, a bill to pay, the accounts.
     final quick = QuickActions(
       actions: [
+        QuickAction(
+          SIconName.plus,
+          l.quickEntry,
+          () => context.push(Routes.transaction),
+        ),
         QuickAction(
           SIconName.calendar,
           l.quickBill,
           () => context.push('/transaction?kind=expense&planned=1'),
         ),
-        // A transfer needs two accounts; until then the slot records income.
-        if (data.accounts.length >= 2)
-          QuickAction(
-            SIconName.swap,
-            l.quickTransfer,
-            () => context.push('/transaction?kind=transfer'),
-          )
-        else
-          QuickAction(
-            SIconName.arrowDown,
-            l.quickIncome,
-            () => context.push('/transaction?kind=income'),
-          ),
         QuickAction(
-          SIconName.wallet,
+          SIconName.layers,
           l.quickAccounts,
           () => context.push('/accounts'),
         ),
       ],
     );
+    final name = ref.watch(prefsProvider.select((p) => p.displayName));
+    final hello = greetingFor(l, DateTime.now().hour);
+    final greeting = name.isEmpty ? hello : l.greetingWithName(hello, name);
     final hasSummary = layout.order.contains('available');
 
     return SScreen(
-      title: greetingFor(l, DateTime.now().hour),
+      title: greeting,
+      gutter: HomeMetrics.gutter,
+      headerPadding: Spacing.xs,
       header: HomeHeader(
-        greeting: greetingFor(l, DateTime.now().hour),
+        greeting: greeting,
         period: period,
         onPeriodTap: () => context.push(Routes.customize),
       ),
@@ -87,7 +84,8 @@ class HomeScreen extends ConsumerWidget {
               ctl.setPrefs((p) => p.copyWith(privacyMode: !hidden)),
         ),
         SIconButton(
-          icon: dark ? SIconName.sun : SIconName.moon,
+          // The icon shows the theme in use (sun in light), as in the reference.
+          icon: dark ? SIconName.moon : SIconName.sun,
           label: dark ? l.useLightTheme : l.useDarkTheme,
           onPressed: () =>
               ctl.setPrefs((p) => p.copyWith(theme: dark ? 'light' : 'dark')),

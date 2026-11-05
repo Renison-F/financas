@@ -3438,7 +3438,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Add your first account to see how much you can spend.';
 
   @override
-  String get heroBalances => 'Money in accounts';
+  String get heroBalances => 'Balance in accounts';
 
   @override
   String get heroCommitted => 'Committed';
@@ -3575,4 +3575,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noGoalYet => 'No goal created';
+
+  @override
+  String greetingWithName(String greeting, String name) {
+    return '$greeting, $name';
+  }
+
+  @override
+  String get canSpendThisMonth => 'Can spend this month';
+
+  @override
+  String get heroAfterCommitted => 'After planned commitments';
+
+  @override
+  String get heroCommittedMonth => 'Commitments this month';
+
+  @override
+  String get quickEntry => 'Entry';
+
+  @override
+  String get invoiceCurrent => 'Current invoice';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get yourName => 'Your name';
+
+  @override
+  String get yourNameEmpty => 'Not set';
+
+  @override
+  String get yourNameLabel => 'What should we call you';
+
+  @override
+  String get yourNameHelp =>
+      'Shown in the greeting on the home screen. Stays on this device only.';
 }

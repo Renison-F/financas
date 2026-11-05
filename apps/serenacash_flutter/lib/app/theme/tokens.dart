@@ -233,6 +233,58 @@ abstract final class Type {
     height: 1.33,
     fontWeight: FontWeight.w400,
   );
+
+  // Compact scale of the home screen (reference mockup): several sections share one screen, so its
+  // titles, rows and amounts are smaller than the reading scale above.
+  static const heroValue = TextStyle(
+    fontFamily: displayFont,
+    fontSize: 30,
+    height: 1.15,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.6,
+    fontFeatures: [FontFeature.tabularFigures()],
+  );
+  static const sectionTitle = TextStyle(
+    fontFamily: displayFont,
+    fontSize: 16,
+    height: 1.25,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.1,
+  );
+  static const sectionValue = TextStyle(
+    fontFamily: displayFont,
+    fontSize: 20,
+    height: 1.2,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.3,
+    fontFeatures: [FontFeature.tabularFigures()],
+  );
+  static const rowTitle = TextStyle(
+    fontSize: 14,
+    height: 1.3,
+    fontWeight: FontWeight.w600,
+  );
+  static const rowText = TextStyle(
+    fontSize: 13,
+    height: 1.35,
+    fontWeight: FontWeight.w400,
+  );
+  static const rowMeta = TextStyle(
+    fontSize: 12,
+    height: 1.3,
+    fontWeight: FontWeight.w400,
+  );
+  static const rowValue = TextStyle(
+    fontSize: 14,
+    height: 1.3,
+    fontWeight: FontWeight.w600,
+    fontFeatures: [FontFeature.tabularFigures()],
+  );
+  static const link = TextStyle(
+    fontSize: 13,
+    height: 1.3,
+    fontWeight: FontWeight.w600,
+  );
 }
 
 extension SerenaContext on BuildContext {

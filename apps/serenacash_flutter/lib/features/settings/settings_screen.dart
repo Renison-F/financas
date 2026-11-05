@@ -64,6 +64,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     builder: (_) => _PinDialog(title: title, label: label),
   );
 
+  Future<void> _editName(String current) async {
+    final name = await showDialog<String>(
+      context: context,
+      builder: (_) => _NameDialog(initial: current),
+    );
+    if (name == null) return;
+    await ref
+        .read(appControllerProvider.notifier)
+        .setPrefs((x) => x.copyWith(displayName: name.trim()));
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
@@ -77,6 +88,23 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       compactTitle: true,
       showBack: true,
       children: [
+        SCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CardHeader(title: l.profile),
+              ListRow(
+                icon: SIconName.edit,
+                title: l.yourName,
+                description: p.displayName.isEmpty
+                    ? l.yourNameEmpty
+                    : p.displayName,
+                chevron: true,
+                onTap: () => _editName(p.displayName),
+              ),
+            ],
+          ),
+        ),
         SCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -332,6 +360,54 @@ class _PinDialogState extends State<_PinDialog> {
         keyboardType: TextInputType.number,
         maxLength: 8,
         decoration: InputDecoration(labelText: widget.label),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(l.cancel),
+        ),
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(_ctl.text),
+          child: Text(l.ok),
+        ),
+      ],
+    );
+  }
+}
+
+/// Asks how the user wants to be greeted on the home screen. Owns its controller.
+class _NameDialog extends StatefulWidget {
+  const _NameDialog({required this.initial});
+  final String initial;
+  @override
+  State<_NameDialog> createState() => _NameDialogState();
+}
+
+class _NameDialogState extends State<_NameDialog> {
+  late final _ctl = TextEditingController(text: widget.initial);
+
+  @override
+  void dispose() {
+    _ctl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    return AlertDialog(
+      title: Text(l.yourName),
+      content: TextField(
+        controller: _ctl,
+        autofocus: true,
+        textCapitalization: TextCapitalization.words,
+        maxLength: 30,
+        decoration: InputDecoration(
+          labelText: l.yourNameLabel,
+          helperText: l.yourNameHelp,
+          helperMaxLines: 2,
+        ),
+        onSubmitted: (v) => Navigator.of(context).pop(v),
       ),
       actions: [
         TextButton(
