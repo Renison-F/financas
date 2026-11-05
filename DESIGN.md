@@ -37,51 +37,81 @@ colors:
 typography:
   display:
     fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
-    fontSize: "40px"
-    fontWeight: 600
-    lineHeight: 1.05
+    fontSize: "30px"
+    fontWeight: 700
+    lineHeight: 1.1
     letterSpacing: "-0.02em"
   headline:
     fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
-    fontSize: "28px"
-    fontWeight: 600
-    lineHeight: 1.15
+    fontSize: "22px"
+    fontWeight: 700
+    lineHeight: 1.2
     letterSpacing: "-0.015em"
   title:
     fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
-    fontSize: "20px"
-    fontWeight: 600
+    fontSize: "16px"
+    fontWeight: 700
     lineHeight: 1.25
-    letterSpacing: "-0.01em"
+    letterSpacing: "-0.005em"
   money-hero:
     fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
-    fontSize: "44px"
+    fontSize: "36px"
     fontWeight: 700
-    lineHeight: 1
+    lineHeight: 1.05
     letterSpacing: "-0.03em"
+  hero-value:
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif, tabular-nums"
+    fontSize: "30px"
+    fontWeight: 700
+    lineHeight: 1.15
+    letterSpacing: "-0.02em"
+  section-value:
+    fontFamily: "Bricolage Grotesque, system-ui, sans-serif, tabular-nums"
+    fontSize: "20px"
+    fontWeight: 700
+    lineHeight: 1.2
+    letterSpacing: "-0.015em"
   body:
-    fontFamily: "system-ui (SF Pro / Roboto)"
-    fontSize: "17px"
-    fontWeight: 400
-    lineHeight: 1.4
-    letterSpacing: "0em"
-  body-small:
     fontFamily: "system-ui (SF Pro / Roboto)"
     fontSize: "15px"
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: "0em"
-  label:
+  body-small:
     fontFamily: "system-ui (SF Pro / Roboto)"
     fontSize: "13px"
+    fontWeight: 400
+    lineHeight: 1.35
+    letterSpacing: "0em"
+  row-title:
+    fontFamily: "system-ui (SF Pro / Roboto)"
+    fontSize: "14px"
+    fontWeight: 600
+    lineHeight: 1.3
+    letterSpacing: "0em"
+  row-meta:
+    fontFamily: "system-ui (SF Pro / Roboto)"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.3
+    letterSpacing: "0em"
+  label:
+    fontFamily: "system-ui (SF Pro / Roboto)"
+    fontSize: "12px"
     fontWeight: 500
     lineHeight: 1.3
     letterSpacing: "0.01em"
   money-row:
     fontFamily: "system-ui (SF Pro / Roboto), tabular-nums"
-    fontSize: "17px"
+    fontSize: "14px"
     fontWeight: 600
     lineHeight: 1.3
+    letterSpacing: "0em"
+  button:
+    fontFamily: "system-ui (SF Pro / Roboto)"
+    fontSize: "15px"
+    fontWeight: 600
+    lineHeight: 1.2
     letterSpacing: "0em"
 rounded:
   xs: "6px"
@@ -101,17 +131,17 @@ components:
   button-primary:
     backgroundColor: "{colors.sereno}"
     textColor: "{colors.branco}"
-    typography: "{typography.label}"
-    rounded: "{rounded.md}"
-    padding: "14px 20px"
-    height: "52px"
+    typography: "{typography.button}"
+    rounded: "{rounded.sm}"
+    padding: "12px 18px"
+    height: "48px"
   button-primary-pressed:
     backgroundColor: "{colors.sereno-profundo}"
   button-secondary:
     backgroundColor: "{colors.sereno-claro}"
     textColor: "{colors.sereno-profundo}"
-    rounded: "{rounded.md}"
-    height: "52px"
+    rounded: "{rounded.sm}"
+    height: "48px"
   button-ghost:
     backgroundColor: "transparent"
     textColor: "{colors.sereno}"
@@ -119,22 +149,22 @@ components:
   button-destructive:
     backgroundColor: "{colors.coral-claro}"
     textColor: "{colors.coral}"
-    rounded: "{rounded.md}"
-    height: "52px"
+    rounded: "{rounded.sm}"
+    height: "48px"
   card:
     backgroundColor: "{colors.branco}"
-    rounded: "{rounded.lg}"
-    padding: "16px"
+    rounded: "{rounded.md}"
+    padding: "12px 14px"
   card-inset:
     backgroundColor: "{colors.bruma}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.sm}"
     padding: "12px"
   input:
     backgroundColor: "{colors.branco}"
     textColor: "{colors.grafite}"
     rounded: "{rounded.sm}"
-    padding: "12px 14px"
-    height: "52px"
+    padding: "12px 12px"
+    height: "48px"
   chip:
     backgroundColor: "{colors.bruma}"
     textColor: "{colors.grafite}"
@@ -146,7 +176,7 @@ components:
     textColor: "{colors.sereno-profundo}"
   tab-bar:
     backgroundColor: "{colors.branco}"
-    height: "56px"
+    height: "64px"
 ---
 
 # Design System: SerenaCash
@@ -204,22 +234,28 @@ Uma paleta de água e névoa ao amanhecer: fundo frio e claro, tinta grafite esv
 **Character:** Bricolage Grotesque tem terminais levemente irregulares e um "g" de dois andares que dão calor e identidade sem perder legibilidade em números grandes; a fonte do sistema no corpo mantém o app nativo e acessível.
 
 ### Hierarchy
-- **Money Hero** (700, 44 px, 1.0, -0.03em): "pode gastar" e total do carrinho. Um por tela. Reduz para 36 px antes de quebrar linha em escala 200%.
-- **Display** (600, 40 px, 1.05): onboarding e paywall.
-- **Headline** (600, 28 px, 1.15): título de tela de topo.
-- **Title** (600, 20 px, 1.25): seções e cartões.
-- **Body** (400, 17 px, 1.4): texto corrente; 65–75 caracteres por linha.
-- **Body Small** (400, 15 px, 1.4): descrições em listas.
-- **Label** (500, 13 px, 1.3, +0.01em, caixa normal): rótulos, legendas, chips. Nunca caixa alta com tracking largo.
-- **Money Row** (600, 17 px, tabular): valores à direita em listas.
+Uma escala compacta para o app inteiro, definida pela tela inicial: títulos na fonte de exibição, linhas e valores na fonte do sistema.
+- **Money Hero** (700, 36 px, 1.05): total do carrinho e valores de destaque em telas de detalhe.
+- **Hero Value** (700, 30 px, 1.15, tabular): "pode gastar" no painel-resumo; centavos no mesmo tamanho.
+- **Display** (700, 30 px, 1.1): onboarding e paywall.
+- **Headline** (700, 22 px, 1.2): título de tela de aba; 20 px na saudação da tela inicial; 18 px em telas empilhadas, folhas e diálogos.
+- **Title** (700, 16 px, 1.25): seções e cartões.
+- **Section Value** (700, 20 px, tabular): total logo abaixo do título de uma seção.
+- **Body** (400, 15 px, 1.4): texto corrente e campos; 65–75 caracteres por linha.
+- **Body Small** (400, 13 px, 1.35): textos de apoio.
+- **Row Title** (600, 14 px) e **Row Meta** (400, 12 px): título e linha de apoio em listas.
+- **Label** (500, 12 px, 1.3, caixa normal): rótulos de campo, legendas, cabeçalhos de grupo. Nunca caixa alta com tracking largo.
+- **Money Row** (600, 14 px, tabular): valores à direita em listas.
+- **Link** (600, 13 px) e **Button** (600, 15 px): "Ver todas" e rótulos de botão.
 
 ### Named Rules
 **A Regra dos Centavos.** Centavos sempre exibidos; em Money Hero com 60% do tamanho e peso 500.
+**A Regra do Sinal Separado.** Em listas de lançamentos o sinal vem separado do valor ("- R$ 186,40", "+ R$ 8.200,00"); receita em Verde, gasto rotineiro na cor do texto.
 **A Regra do Título Sem Rótulo.** Nenhum kicker acima de títulos.
 
 ## Layout
 
-Grade de 4 px; coluna única com gutter de 16 px (20 px em telas ≥ 400 pt); largura máxima 600 pt em tablets. Ritmo vertical: 8 px dentro de grupos, 16 px entre elementos relacionados, 24 px entre seções, 32 px acima de títulos de seção. Listas densas (56 px por linha). A tela inicial é uma lista de widgets com 12 px entre eles, cada um com altura própria. Barra de abas inferior com 5 destinos (Início, Lançamentos, Compras, Planejar, Mais); botão de ação principal flutuante nas abas Início e Lançamentos. Safe areas e insets do teclado sempre aplicados.
+Grade de 4 px; coluna única com margem lateral de 12 px para cartões e listas (o texto do cabeçalho entra mais 4 px); largura máxima 600 pt em tablets. Ritmo vertical: 12 px entre cartões, 6 px entre o título de uma seção e o conteúdo, 8 px dentro de grupos. Listas densas (48 px por linha, com fio de 1 px Bruma entre linhas de um mesmo cartão). A tela inicial é uma lista de seções com 12 px entre elas. Barra inferior com os quatro destinos frequentes (Início, Lançamentos, Compras, Planejar) e a entrada do menu lateral; botão "+" circular flutuante nas abas Início e Lançamentos. Safe areas e insets do teclado sempre aplicados.
 
 ## Elevation & Depth
 
@@ -234,12 +270,12 @@ Profundidade tonal: cartões Branco sobre Névoa, insets Bruma dentro de Branco.
 
 ## Shapes
 
-Cantos arredondados contínuos: 6 px em chips pequenos e barras, 10 px em campos, 14 px em botões, 20 px em cartões e folhas. A **marca de hoje** é uma linha vertical de 2 px com uma pequena onda de 10×4 px no topo, em Aurora, desenhada sobre trilhos de 12 px. Bordas de 1 px apenas em campos e divisores; nunca "border-left" colorida. Ícones: traço 1,75 px, terminais arredondados, grade 24 px.
+Cantos arredondados contínuos: 6 px em etiquetas e barras, 8 px no quadro de ícone, 10 px em campos e botões, 14 px em cartões e no painel-resumo, 20 px em folhas, diálogos e no menu lateral. A **marca de hoje** é uma linha vertical de 2 px com uma pequena onda de 10×4 px no topo, em Aurora, desenhada sobre trilhos de 12 px. Bordas de 1 px apenas em campos e divisores; nunca "border-left" colorida. Ícones: traço 1,75 px, terminais arredondados, grade 24 px.
 
 ## Components
 
 ### Buttons
-- **Shape:** 14 px de raio; altura 52 px (44 px ghost); texto Label 500 em 16 px.
+- **Shape:** 10 px de raio; altura 48 px (44 px ghost e compacto); texto Button 600 em 15 px (13 px no compacto).
 - **Primary:** Sereno com texto Branco; pressionado Sereno-profundo com escala 0,98 em 120 ms.
 - **Secondary:** Sereno-claro com texto Sereno-profundo.
 - **Ghost:** transparente com texto Sereno ("Ver tudo", "Explicar").
@@ -247,30 +283,38 @@ Cantos arredondados contínuos: 6 px em chips pequenos e barras, 10 px em campos
 - **Disabled:** opacidade 0,4; **Loading:** spinner substitui o texto mantendo a largura.
 
 ### Chips
-- **Style:** Bruma, texto Grafite, raio pill, 36 px.
+- **Style:** Bruma, texto Grafite em 13 px, raio pill, 36 px. Vários filtros ficam em uma linha que rola para o lado, sem empurrar a lista.
 - **State:** selecionado Sereno-claro/Sereno-profundo com check; filtros são chips, ações nunca.
 
 ### Cards / Containers
-- **Corner Style:** 20 px. **Background:** Branco / Noite-superfície. **Shadow:** nenhuma. **Border:** nenhuma. **Padding:** 16 px; cabeçalho com Title à esquerda e ação ghost à direita.
+- **Corner Style:** 14 px. **Background:** Branco / Noite-superfície. **Shadow:** nenhuma. **Border:** nenhuma. **Padding:** 14 px nas laterais e 12 px em cima e embaixo; cabeçalho com Title à esquerda e, à direita, uma ação ghost ou um link ("Ver todas"). Quando o cartão leva a uma tela própria, o cartão inteiro é o alvo de toque e o link é só o sinal visível.
 
 ### Inputs / Fields
-- **Style:** Branco com contorno 1 px Fio-forte, raio 10 px, altura 52 px; rótulo Label acima.
+- **Style:** Branco com contorno 1 px Fio-forte, raio 10 px, altura 48 px; rótulo Label acima.
 - **Focus:** contorno 2 px Sereno. **Error:** contorno Coral e mensagem que nomeia problema e correção.
 - **Money input:** teclado numérico, máscara pt-BR, centavos sempre visíveis, prefixo "R$" em Cinza-mar.
 
 ### Navigation
-- **Tab bar:** Branco, 64 px + safe area, 5 itens, ícone 24 px e rótulo 11 px; a aba ativa ganha uma pílula Sereno-claro atrás do ícone, com ícone e rótulo em Sereno-profundo. Os rótulos acompanham a fonte do sistema só até o ponto em que "Lançamentos" ainda cabe sem quebrar.
+- **Barra inferior:** Branco, 64 px + safe area, 5 itens, ícone 22 px e rótulo 11 px (10 px abaixo de 360 pt); a aba ativa ganha uma pílula Sereno-claro atrás do ícone, com ícone e rótulo em Sereno. O quinto item, "Menu", abre o menu lateral e nunca fica selecionado.
+- **Menu lateral:** gaveta à esquerda (até 320 pt, cantos de 20 px à direita, fundo Névoa) com a marca, o plano e os destinos em grupos com rótulo Label: Principal, Movimentações, Planejamento, Cadastros, Análises, Dados e Aplicativo. Linhas de 44 px com ícone de 20 px; a seção atual fica em pílula Sereno-claro. Só entram destinos que existem. Abre pelo item "Menu" e pelo gesto na borda; fecha antes de abrir o destino.
+- **Botão "+":** círculo Sereno de 52 px. Abre a folha "Adicionar" com os tipos de inclusão, cada um com nome e explicação (despesa, receita, transferência, compra no cartão, conta a pagar, conta a receber). Navegar e criar nunca se misturam.
 - **Headers:** iOS large title colapsável; Android top app bar Material 3. Voltar sempre do sistema.
 - **Sheets:** bottom sheet para tarefas curtas; tela cheia para fluxos longos (sessão de compras com câmera).
 
 ### Painel-resumo "pode gastar" (tela inicial)
-Superfície sólida em **Sereno** (#0B5563; no escuro **Noite-sereno-container** #123F48), raio 20 px, texto Branco e texto de apoio tingido da própria cor (#CDE6EA), nunca cinza. Ordem: rótulo "Pode gastar até dd/mm", valor em Money Hero, uma linha de explicação, um fio e dois valores que explicam o número (**Dinheiro nas contas** e **Compromissos**), tirados das mesmas linhas da tela "Como calculamos"; rodapé com o modo (prudente/otimista) e "Como calculamos ›". O painel inteiro é tocável. Quando o valor é negativo o painel vira Coral-claro com texto Coral. Sem conta cadastrada o valor é desconhecido: o painel mostra "Configure seu saldo", uma frase e o botão "Adicionar conta", nunca R$ 0,00. Valores longos e fonte grande reduzem a escala em vez de cortar; em tela estreita ou fonte acima de 140% os dois valores empilham.
+Superfície sólida em **Sereno** (#0B5563; no escuro **Noite-sereno-container** #123F48), raio 14 px, texto Branco e texto de apoio tingido da própria cor (#CDE6EA), nunca cinza. Ordem: rótulo "Pode gastar neste mês" (ou "Pode gastar até dd/mm" quando o horizonte não é o fim do mês), valor em Hero Value, uma linha de explicação ("Após os compromissos previstos", ou o aviso de aperto), um fio e dois valores que explicam o número (**Saldo em contas** e **Compromissos do mês**), tirados das mesmas linhas da tela "Como calculamos". O painel inteiro é tocável e abre essa tela. Quando o valor é negativo o painel vira Coral-claro com texto Coral. Sem conta cadastrada o valor é desconhecido: o painel mostra "Configure seu saldo", uma frase e o botão "Adicionar conta", nunca R$ 0,00. Valores longos e fonte grande reduzem a escala em vez de cortar; em tela estreita ou fonte acima de 140% os dois valores empilham.
 
 ### Ações rápidas (tela inicial)
-Até três atalhos logo abaixo do painel: ícone de 24 px em círculo Sereno-claro de 48 px e rótulo de até duas linhas. Complementam o botão flutuante "+" (que adiciona um lançamento) em vez de repeti-lo: "Conta a pagar", "Transferir" (ou "Receita" enquanto houver menos de duas contas) e "Contas".
+Três atalhos logo abaixo do painel: ícone de 20 px em círculo Sereno-claro de 40 px e rótulo de 12 px em até duas linhas: "Lançamento" (abre a folha "Adicionar"), "Conta a pagar" e "Contas".
+
+### Linha de lista
+48 px no mínimo: quadro de ícone de 32 px (raio 8 px, Sereno-claro com ícone Sereno, ou a cor da categoria a 14%), Row Title, Row Meta ou etiqueta embaixo, valor em Money Row à direita. O valor reduz a escala antes de empurrar o título.
+
+### Categoria
+Cada categoria tem cor e ícone próprios, escolhidos em uma paleta de 13 cores (sem roxo) e em uma biblioteca de ícones com busca por palavras ("mercado", "saúde"). A marca da categoria é o ícone na cor dela sobre um quadro da mesma cor a 14%; arquivada, fica em Cinza-mar sobre Bruma. Subcategoria aparece recuada sob a principal e, fora da árvore, como "Principal › Subcategoria". O seletor é uma folha com busca, criação pelo nome digitado e "+" para subcategoria.
 
 ### Linha vazia
-Seção sem dados na tela inicial é uma linha só: ícone em quadro Bruma, o que falta ("Nenhuma conta prevista", "Adicione seu primeiro cartão") e uma ação ghost à direita. Evita empilhar cartões altos de instrução no primeiro acesso.
+Seção sem dados na tela inicial é uma linha só: ícone em quadro Bruma de 32 px, o que falta ("Nenhuma conta prevista", "Adicione seu primeiro cartão") e uma ação ghost à direita. Evita empilhar cartões altos de instrução no primeiro acesso.
 
 ### Vencimento
 Em listas de contas a pagar, "Atrasada desde dd/mm" (Coral sobre Coral-claro) e "Vence hoje"/"Vence amanhã" (Âmbar sobre Âmbar-claro) aparecem como etiqueta de raio 6 px; os demais vencimentos são texto Cinza-mar ("Vence em 3 dias", "Vence dd/mm"). Cor e texto sempre juntos.

@@ -71,6 +71,7 @@ class CategoryColorPicker extends StatelessWidget {
       children: [
         for (final h in categoryPalette)
           Semantics(
+            container: true,
             selected: h.toUpperCase() == value.toUpperCase(),
             button: true,
             label: colorName(context.l10n, h),
@@ -160,6 +161,10 @@ class _CategoryIconPickerState extends State<CategoryIconPicker> {
             children: [
               for (final i in found)
                 Semantics(
+                  key: ValueKey(i.icon),
+                  // Its own node, always: when the search leaves a single icon, a non-container
+                  // annotation is absorbed by the surrounding node and the button is never announced.
+                  container: true,
                   selected: i.icon == widget.value,
                   button: true,
                   label: i.keywords.split(' ').first,
@@ -229,6 +234,7 @@ Future<CategoryChoice?> showCategoryPicker(
   bool allowCreate = true,
 }) => showModalBottomSheet<CategoryChoice>(
   context: context,
+  useRootNavigator: true,
   isScrollControlled: true,
   useSafeArea: true,
   builder: (_) => _CategoryPickerSheet(

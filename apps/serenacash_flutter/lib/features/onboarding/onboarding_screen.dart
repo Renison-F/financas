@@ -48,7 +48,14 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     setState(() => _busy = true);
     try {
       if (_step == 1) {
+        // Going back a step, or reopening the app in the middle of the setup, must update the account
+        // that was already created instead of adding a second one with the same balance.
+        _accountId ??= s.ledger.accounts
+            .where((a) => a.deletedAt == null)
+            .firstOrNull
+            ?.id;
         final a = await ctl.saveAccount(
+          id: _accountId,
           name: _accountName.text.trim().isEmpty
               ? l.mainAccount
               : _accountName.text.trim(),
@@ -62,6 +69,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         for (final e in _bills.entries) {
           final cents = e.value;
           if (cents == null || cents <= 0) continue;
+          // Already registered in an earlier pass through this step.
+          if (s.ledger.transactions.any(
+            (t) =>
+                t.deletedAt == null &&
+                t.description == e.key &&
+                t.status == TransactionStatus.planned,
+          )) {
+            continue;
+          }
           final catName = _fixed(l).where((f) => f.$1 == e.key).firstOrNull?.$2;
           final cat = s.ledger.categories
               .where((x) => x.name == catName)
@@ -84,6 +100,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       if (_step == 3) {
         if (_limit != null && _limit! > 0) {
           await ctl.saveCard(
+            // Same rule as the account: a card from an interrupted setup is updated, not repeated.
+            id: s.ledger.cards
+                .where((x) => x.deletedAt == null)
+                .firstOrNull
+                ?.id,
             name: _cardName.text.trim().isEmpty
                 ? l.card
                 : _cardName.text.trim(),
@@ -231,68 +252,75 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         ],
       ),
     };
-    return Scaffold(
-      backgroundColor: c.bg,
-      body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 600),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                Spacing.md,
-                Spacing.lg,
-                Spacing.md,
-                Spacing.md,
-              ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: _step == 0
-                        ? content
-                        : SingleChildScrollView(
-                            keyboardDismissBehavior:
-                                ScrollViewKeyboardDismissBehavior.onDrag,
-                            child: content,
-                          ),
-                  ),
-                  const SizedBox(height: Spacing.md),
-                  Semantics(
-                    label: 'Passo ${_step + 1} de 4',
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        for (var i = 0; i < 4; i++)
-                          Container(
-                            width: i == _step ? 20 : 8,
-                            height: 8,
-                            margin: const EdgeInsets.symmetric(horizontal: 3),
-                            decoration: BoxDecoration(
-                              color: i == _step ? c.primary : c.border,
-                              borderRadius: BorderRadius.circular(4),
+    // The system back button returns one step; only the first step leaves the app.
+    return PopScope(
+      canPop: _step == 0,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop && !_busy) setState(() => _step--);
+      },
+      child: Scaffold(
+        backgroundColor: c.bg,
+        body: SafeArea(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  Spacing.md,
+                  Spacing.lg,
+                  Spacing.md,
+                  Spacing.md,
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: _step == 0
+                          ? content
+                          : SingleChildScrollView(
+                              keyboardDismissBehavior:
+                                  ScrollViewKeyboardDismissBehavior.onDrag,
+                              child: content,
                             ),
-                          ),
-                      ],
                     ),
-                  ),
-                  const SizedBox(height: Spacing.md),
-                  SButton(
-                    label: _step == 0
-                        ? l.onbStart
-                        : _step == 3
-                        ? l.finish
-                        : l.continue_,
-                    fullWidth: true,
-                    loading: _busy,
-                    onPressed: _next,
-                  ),
-                  if (_step > 0)
+                    const SizedBox(height: Spacing.md),
+                    Semantics(
+                      label: 'Passo ${_step + 1} de 4',
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for (var i = 0; i < 4; i++)
+                            Container(
+                              width: i == _step ? 20 : 8,
+                              height: 8,
+                              margin: const EdgeInsets.symmetric(horizontal: 3),
+                              decoration: BoxDecoration(
+                                color: i == _step ? c.primary : c.border,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: Spacing.md),
                     SButton(
-                      label: l.skip,
-                      variant: SButtonVariant.ghost,
+                      label: _step == 0
+                          ? l.onbStart
+                          : _step == 3
+                          ? l.finish
+                          : l.continue_,
                       fullWidth: true,
-                      onPressed: _busy ? null : _skip,
+                      loading: _busy,
+                      onPressed: _next,
                     ),
-                ],
+                    if (_step > 0)
+                      SButton(
+                        label: l.skip,
+                        variant: SButtonVariant.ghost,
+                        fullWidth: true,
+                        onPressed: _busy ? null : _skip,
+                      ),
+                  ],
+                ),
               ),
             ),
           ),

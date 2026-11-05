@@ -21,6 +21,9 @@ class SChip extends StatelessWidget {
     final c = context.colors;
     final fg = selected ? c.onPrimaryContainer : c.text;
     return Semantics(
+      // Its own node even when it is the only chip of a field: otherwise the field label absorbs it
+      // and assistive technology activates the middle of the field instead of the chip.
+      container: true,
       selected: selected,
       button: true,
       child: Material(

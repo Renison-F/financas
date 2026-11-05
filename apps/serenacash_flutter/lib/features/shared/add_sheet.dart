@@ -50,6 +50,8 @@ Future<void> showAddSheet(BuildContext context) async {
   ];
   final route = await showModalBottomSheet<String>(
     context: context,
+    // Over the whole screen, bottom bar included: this is a choice to make, not part of the tab.
+    useRootNavigator: true,
     isScrollControlled: true,
     useSafeArea: true,
     builder: (ctx) => Padding(

@@ -354,6 +354,9 @@ void main() {
         find.byWidgetPredicate((w) => w is SIcon && w.name == SIconName.cart),
         findsNothing,
       );
+      // The remaining button is announced by what it is, not by what used to be in its place.
+      expect(find.bySemanticsLabel('pet'), findsOneWidget);
+      expect(find.bySemanticsLabel('etiqueta'), findsNothing);
       await tester.tap(paw);
       await tester.pumpAndSettle();
       await screenshot(tester, 'category_form_light');
