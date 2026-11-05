@@ -843,13 +843,6 @@ class AppController extends AsyncNotifier<AppState> {
       _s.copyWith(entitlements: e, access: resolveAccess(e, DateTime.now())),
     );
   }
-
-  Future<void> eraseEverything() async {
-    await _ledger.purgeAll();
-    await _shopping.purgeAll();
-    ref.invalidateSelf();
-    await future;
-  }
 }
 
 extension on Transaction {

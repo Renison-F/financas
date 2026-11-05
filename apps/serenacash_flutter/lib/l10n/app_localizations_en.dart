@@ -3966,4 +3966,89 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get plannedHelpIncome =>
       'Expected income shows under \"To receive\" and only enters the balance when you mark it as received.';
+
+  @override
+  String get bootKeyMissing =>
+      'The key that protects your data is no longer on this device, so the database cannot be opened. This happens, for example, when the app data is copied from another device.';
+
+  @override
+  String get bootKeyInvalid =>
+      'The key that protects your data is damaged, so the database cannot be opened.';
+
+  @override
+  String get bootGeneric =>
+      'The protected database did not open. It may be a passing device failure or a damaged file.';
+
+  @override
+  String get bootRecoverHelp =>
+      'Try again first. If it keeps failing, the way out is to erase the data on this device and start over; afterwards you can restore a backup exported by SerenaCash.';
+
+  @override
+  String get bootRetry => 'Try again';
+
+  @override
+  String get bootReset => 'Erase data and start over';
+
+  @override
+  String get bootResetQ => 'Erase the data on this device?';
+
+  @override
+  String get bootResetText =>
+      'Everything SerenaCash keeps on this device will be erased and cannot be recovered from here. A backup exported earlier remains valid and can be restored afterwards.';
+
+  @override
+  String bootDetails(String detail) {
+    return 'Technical detail: $detail';
+  }
+
+  @override
+  String pinLockedFor(String time) {
+    return 'Too many attempts. Try again in $time.';
+  }
+
+  @override
+  String pinAttemptsLeft(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Wrong PIN. $n attempts left before a pause.',
+      one: 'Wrong PIN. 1 attempt left before a pause.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pinForgot => 'I forgot the PIN';
+
+  @override
+  String get pinForgotTitle => 'The PIN cannot be recovered';
+
+  @override
+  String get pinForgotText =>
+      'SerenaCash does not keep the PIN anywhere it could be read from, nor sends anything off the device. Without the PIN, the only way out is to erase the data on this device and start over. If you exported a backup, you can restore it afterwards.';
+
+  @override
+  String get pinCurrent => 'Current PIN';
+
+  @override
+  String get pinDisableTitle => 'Confirm the PIN to turn it off';
+
+  @override
+  String get lockScreenProtected =>
+      'With the lock on, the app also hides its content in the recent apps list and blocks screenshots.';
+
+  @override
+  String get lockRecover => 'I cannot unlock';
+
+  @override
+  String get lockRecoverText =>
+      'If the device unlock no longer works here, the only way out is to erase the data on this device and start over. If you exported a backup, you can restore it afterwards.';
+
+  @override
+  String get biometricConfirmToEnable =>
+      'Confirm on the device to turn the lock on';
+
+  @override
+  String get biometricNotEnabled =>
+      'Could not confirm on the device; the lock was not turned on. Set up a screen lock or biometrics in Android and try again.';
 }

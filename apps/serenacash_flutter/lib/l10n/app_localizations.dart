@@ -6721,6 +6721,132 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Receitas previstas aparecem em \"A receber\" e só entram no saldo quando você marcar como recebidas.'**
   String get plannedHelpIncome;
+
+  /// No description provided for @bootKeyMissing.
+  ///
+  /// In pt, this message translates to:
+  /// **'A chave que protege seus dados não está mais neste aparelho, então o banco não pode ser aberto. Isso acontece, por exemplo, quando os dados do app são copiados de outro aparelho.'**
+  String get bootKeyMissing;
+
+  /// No description provided for @bootKeyInvalid.
+  ///
+  /// In pt, this message translates to:
+  /// **'A chave que protege seus dados está danificada, então o banco não pode ser aberto.'**
+  String get bootKeyInvalid;
+
+  /// No description provided for @bootGeneric.
+  ///
+  /// In pt, this message translates to:
+  /// **'O banco de dados protegido não abriu. Pode ser uma falha passageira do aparelho ou um arquivo danificado.'**
+  String get bootGeneric;
+
+  /// No description provided for @bootRecoverHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tente de novo primeiro. Se continuar, a saída é apagar os dados deste aparelho e recomeçar; depois você pode restaurar um backup exportado pelo SerenaCash.'**
+  String get bootRecoverHelp;
+
+  /// No description provided for @bootRetry.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tentar de novo'**
+  String get bootRetry;
+
+  /// No description provided for @bootReset.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar dados e recomeçar'**
+  String get bootReset;
+
+  /// No description provided for @bootResetQ.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar os dados deste aparelho?'**
+  String get bootResetQ;
+
+  /// No description provided for @bootResetText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tudo o que está guardado no SerenaCash neste aparelho será apagado e não poderá ser recuperado daqui. Um backup exportado antes continua valendo e pode ser restaurado depois.'**
+  String get bootResetText;
+
+  /// No description provided for @bootDetails.
+  ///
+  /// In pt, this message translates to:
+  /// **'Detalhe técnico: {detail}'**
+  String bootDetails(String detail);
+
+  /// No description provided for @pinLockedFor.
+  ///
+  /// In pt, this message translates to:
+  /// **'Muitas tentativas. Tente de novo em {time}.'**
+  String pinLockedFor(String time);
+
+  /// No description provided for @pinAttemptsLeft.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n, plural, one{PIN incorreto. Resta 1 tentativa antes de uma pausa.} other{PIN incorreto. Restam {n} tentativas antes de uma pausa.}}'**
+  String pinAttemptsLeft(int n);
+
+  /// No description provided for @pinForgot.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esqueci o PIN'**
+  String get pinForgot;
+
+  /// No description provided for @pinForgotTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'O PIN não pode ser recuperado'**
+  String get pinForgotTitle;
+
+  /// No description provided for @pinForgotText.
+  ///
+  /// In pt, this message translates to:
+  /// **'O SerenaCash não guarda o PIN em nenhum lugar de onde ele possa ser lido, nem envia nada para fora do aparelho. Sem o PIN, a única saída é apagar os dados deste aparelho e recomeçar. Se você exportou um backup, pode restaurá-lo depois.'**
+  String get pinForgotText;
+
+  /// No description provided for @pinCurrent.
+  ///
+  /// In pt, this message translates to:
+  /// **'PIN atual'**
+  String get pinCurrent;
+
+  /// No description provided for @pinDisableTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirme o PIN para desativar'**
+  String get pinDisableTitle;
+
+  /// No description provided for @lockScreenProtected.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com o bloqueio ativado, o app também esconde o conteúdo na lista de apps recentes e impede capturas de tela.'**
+  String get lockScreenProtected;
+
+  /// No description provided for @lockRecover.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não consigo desbloquear'**
+  String get lockRecover;
+
+  /// No description provided for @lockRecoverText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Se o desbloqueio do aparelho não funciona mais aqui, a única saída é apagar os dados deste aparelho e recomeçar. Se você exportou um backup, pode restaurá-lo depois.'**
+  String get lockRecoverText;
+
+  /// No description provided for @biometricConfirmToEnable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirme no aparelho para ativar o bloqueio'**
+  String get biometricConfirmToEnable;
+
+  /// No description provided for @biometricNotEnabled.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não foi possível confirmar no aparelho; o bloqueio não foi ativado. Configure um bloqueio de tela ou biometria no Android e tente de novo.'**
+  String get biometricNotEnabled;
 }
 
 class _AppLocalizationsDelegate

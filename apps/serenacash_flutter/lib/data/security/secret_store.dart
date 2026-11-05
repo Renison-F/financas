@@ -14,6 +14,7 @@ abstract final class SecretKeys {
   static const databaseKey = 'serenacash.db.key.v1';
   static const pinVerifier = 'serenacash.pin.verifier.v1';
   static const deviceId = 'serenacash.device.id.v1';
+  static const pinAttempts = 'serenacash.pin.attempts.v1';
 }
 
 class KeystoreSecretStore implements SecretStore {

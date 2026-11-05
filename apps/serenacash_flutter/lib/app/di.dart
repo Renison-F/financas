@@ -5,7 +5,6 @@ library;
 import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../data/backup/backup_service.dart';
@@ -14,7 +13,7 @@ import '../data/database/drift_change_log.dart';
 import '../data/database/drift_ledger_repository.dart';
 import '../data/database/drift_preferences_store.dart';
 import '../data/database/drift_shopping_repository.dart';
-import '../data/security/db_key.dart';
+import '../data/security/local_vault.dart';
 import '../data/security/pin.dart';
 import '../data/security/secret_store.dart';
 import '../domain/ports/ports.dart';
@@ -38,18 +37,39 @@ final deviceIdProvider = FutureProvider<String>((ref) async {
   return id;
 });
 
-/// Opens the encrypted database. Overridden in tests with `AppDatabase.inMemory()`.
-final databaseProvider = FutureProvider<AppDatabase>((ref) async {
-  final key = await DatabaseKeyManager(ref.watch(secretStoreProvider))
-      .getOrCreate();
+/// The encrypted database file and its key. Overridden in tests with a temporary directory.
+final localVaultProvider = FutureProvider<LocalVault>((ref) async {
   final dir = await getApplicationSupportDirectory();
   await Directory(dir.path).create(recursive: true);
-  final db = AppDatabase(
-    encryptedExecutor(p.join(dir.path, 'serenacash.db'), key),
-  );
+  return LocalVault(store: ref.watch(secretStoreProvider), directory: dir);
+});
+
+/// Opens the encrypted database. Overridden in tests with `AppDatabase.inMemory()`.
+///
+/// Fails closed: a database whose key is missing or damaged is not opened and no key is generated for
+/// it ([VaultError]); the boot screen explains it and offers to erase the local data.
+final databaseProvider = FutureProvider<AppDatabase>((ref) async {
+  final vault = await ref.watch(localVaultProvider.future);
+  final key = await vault.resolveKey();
+  final db = AppDatabase(encryptedExecutor(vault.databaseFile.path, key));
   ref.onDispose(db.close);
   return db;
 });
+
+/// Erases everything this app keeps on the device: the database files, the database key and the PIN.
+/// The database is closed first; afterwards the providers rebuild on an empty database with a new key.
+Future<void> eraseLocalData(ProviderContainer container) async {
+  try {
+    final db = await container.read(databaseProvider.future);
+    await db.close();
+  } catch (_) {
+    // The database may be exactly what failed to open; erasing it is still the point.
+  }
+  final vault = await container.read(localVaultProvider.future);
+  await vault.erase();
+  await container.read(pinManagerProvider).clear();
+  container.invalidate(databaseProvider);
+}
 
 final changeLogProvider = FutureProvider<ChangeLog>(
   (ref) async => DriftChangeLog(await ref.watch(databaseProvider.future)),

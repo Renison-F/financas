@@ -3978,4 +3978,89 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get plannedHelpIncome =>
       'Receitas previstas aparecem em \"A receber\" e só entram no saldo quando você marcar como recebidas.';
+
+  @override
+  String get bootKeyMissing =>
+      'A chave que protege seus dados não está mais neste aparelho, então o banco não pode ser aberto. Isso acontece, por exemplo, quando os dados do app são copiados de outro aparelho.';
+
+  @override
+  String get bootKeyInvalid =>
+      'A chave que protege seus dados está danificada, então o banco não pode ser aberto.';
+
+  @override
+  String get bootGeneric =>
+      'O banco de dados protegido não abriu. Pode ser uma falha passageira do aparelho ou um arquivo danificado.';
+
+  @override
+  String get bootRecoverHelp =>
+      'Tente de novo primeiro. Se continuar, a saída é apagar os dados deste aparelho e recomeçar; depois você pode restaurar um backup exportado pelo SerenaCash.';
+
+  @override
+  String get bootRetry => 'Tentar de novo';
+
+  @override
+  String get bootReset => 'Apagar dados e recomeçar';
+
+  @override
+  String get bootResetQ => 'Apagar os dados deste aparelho?';
+
+  @override
+  String get bootResetText =>
+      'Tudo o que está guardado no SerenaCash neste aparelho será apagado e não poderá ser recuperado daqui. Um backup exportado antes continua valendo e pode ser restaurado depois.';
+
+  @override
+  String bootDetails(String detail) {
+    return 'Detalhe técnico: $detail';
+  }
+
+  @override
+  String pinLockedFor(String time) {
+    return 'Muitas tentativas. Tente de novo em $time.';
+  }
+
+  @override
+  String pinAttemptsLeft(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'PIN incorreto. Restam $n tentativas antes de uma pausa.',
+      one: 'PIN incorreto. Resta 1 tentativa antes de uma pausa.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pinForgot => 'Esqueci o PIN';
+
+  @override
+  String get pinForgotTitle => 'O PIN não pode ser recuperado';
+
+  @override
+  String get pinForgotText =>
+      'O SerenaCash não guarda o PIN em nenhum lugar de onde ele possa ser lido, nem envia nada para fora do aparelho. Sem o PIN, a única saída é apagar os dados deste aparelho e recomeçar. Se você exportou um backup, pode restaurá-lo depois.';
+
+  @override
+  String get pinCurrent => 'PIN atual';
+
+  @override
+  String get pinDisableTitle => 'Confirme o PIN para desativar';
+
+  @override
+  String get lockScreenProtected =>
+      'Com o bloqueio ativado, o app também esconde o conteúdo na lista de apps recentes e impede capturas de tela.';
+
+  @override
+  String get lockRecover => 'Não consigo desbloquear';
+
+  @override
+  String get lockRecoverText =>
+      'Se o desbloqueio do aparelho não funciona mais aqui, a única saída é apagar os dados deste aparelho e recomeçar. Se você exportou um backup, pode restaurá-lo depois.';
+
+  @override
+  String get biometricConfirmToEnable =>
+      'Confirme no aparelho para ativar o bloqueio';
+
+  @override
+  String get biometricNotEnabled =>
+      'Não foi possível confirmar no aparelho; o bloqueio não foi ativado. Configure um bloqueio de tela ou biometria no Android e tente de novo.';
 }

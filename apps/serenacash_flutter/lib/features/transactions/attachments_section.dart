@@ -1,21 +1,17 @@
 /// Attachments of a saved transaction: photo (camera) or file, stored as bytes inside the encrypted database.
 library;
 
-import 'dart:io';
-
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../app/app.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/theme/tokens.dart';
+import '../../data/files/file_service.dart';
 import '../../domain/entities/entities.dart';
 import '../../ui/components/components.dart';
 
@@ -86,15 +82,10 @@ class _AttachmentsSectionState extends ConsumerState<AttachmentsSection> {
         .read(appControllerProvider.notifier)
         .attachmentBytes(a.id);
     if (bytes == null) return;
-    final dir = await getTemporaryDirectory();
-    final file = File(p.join(dir.path, a.fileName));
-    await file.writeAsBytes(bytes, flush: true);
-    await SharePlus.instance.share(
-      ShareParams(
-        files: [XFile(file.path, mimeType: a.mimeType)],
-        subject: a.fileName,
-      ),
-    );
+    // Through the file service: the decrypted copy is removed as soon as the share sheet closes.
+    await ref
+        .read(fileServiceProvider)
+        .shareBytes(a.fileName, bytes, a.mimeType);
   }
 
   @override

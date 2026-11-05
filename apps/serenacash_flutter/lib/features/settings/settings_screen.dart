@@ -35,8 +35,58 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         .catchError((_) {});
   }
 
+  /// Asks for the PIN in use before it is changed or removed. An unlocked app left on a table must
+  /// not be enough to take the lock away. Wrong answers count as attempts, as on the lock screen.
+  Future<bool> _confirmCurrentPin(String title) async {
+    final l = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
+    final pins = ref.read(pinManagerProvider);
+    if (!await pins.isSet()) return true;
+    if (!mounted) return false;
+    final current = await _askPin(title, l.pinCurrent);
+    if (current == null) return false;
+    final r = await pins.check(current);
+    if (r.ok) return true;
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          r.lockedFor != null
+              ? l.pinLockedFor(lockCountdown(r.lockedFor!))
+              : l.pinWrong,
+        ),
+      ),
+    );
+    return false;
+  }
+
+  /// The lock is only turned on after the device proves it can unlock; otherwise the next launch
+  /// would stop at a lock screen nobody can pass.
+  Future<void> _enableBiometricLock() async {
+    final l = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
+    var ok = false;
+    try {
+      ok = await ref
+          .read(localAuthProvider)
+          .authenticate(
+            localizedReason: l.biometricConfirmToEnable,
+            biometricOnly: false,
+          );
+    } catch (_) {
+      ok = false;
+    }
+    if (!ok) {
+      messenger.showSnackBar(SnackBar(content: Text(l.biometricNotEnabled)));
+      return;
+    }
+    await ref
+        .read(appControllerProvider.notifier)
+        .setPrefs((x) => x.copyWith(biometricLock: true));
+  }
+
   Future<void> _setPin() async {
     final l = context.l10n;
+    if (!await _confirmCurrentPin(l.changePin) || !mounted) return;
     final pin = await _askPin(l.setPin, l.pinLabel);
     if (pin == null || !mounted) return;
     final confirm = await _askPin(l.confirmPin, l.pinLabel);
@@ -241,8 +291,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 label: l.biometricLock,
                 value: p.biometricLock,
                 help: _bio ? l.biometricAvailable : l.biometricNotAvailable,
-                onChanged: (v) =>
-                    ctl.setPrefs((x) => x.copyWith(biometricLock: v)),
+                onChanged: (v) => v
+                    ? _enableBiometricLock()
+                    : ctl.setPrefs((x) => x.copyWith(biometricLock: false)),
               ),
               ToggleRow(
                 label: l.pinLock,
@@ -252,6 +303,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   if (v) {
                     await _setPin();
                   } else {
+                    if (!await _confirmCurrentPin(l.pinDisableTitle)) return;
                     await ref.read(pinManagerProvider).clear();
                     await ctl.setPrefs((x) => x.copyWith(pinEnabled: false));
                   }
@@ -265,6 +317,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     variant: SButtonVariant.ghost,
                     compact: true,
                     onPressed: _setPin,
+                  ),
+                ),
+              if (p.pinEnabled || p.biometricLock)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: Spacing.xs),
+                  child: Text(
+                    l.lockScreenProtected,
+                    style: Type.caption.copyWith(color: c.textMuted),
                   ),
                 ),
               ToggleRow(

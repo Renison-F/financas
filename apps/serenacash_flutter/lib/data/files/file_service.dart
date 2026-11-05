@@ -21,12 +21,32 @@ class PickedText {
 abstract interface class FileService {
   Future<PickedText?> pickTextFile();
   Future<void> shareText(String fileName, String text, String mimeType);
+  Future<void> shareBytes(String fileName, List<int> bytes, String mimeType);
   Future<void> sharePdf(String fileName, List<int> bytes);
 }
 
 final fileServiceProvider = Provider<FileService>((_) => PlatformFileService());
 
 class PlatformFileService implements FileService {
+  /// Exports and attachments are written here only for as long as the share sheet needs them.
+  static Future<Directory> _shareDir() async {
+    final tmp = await getTemporaryDirectory();
+    return Directory(p.join(tmp.path, 'compartilhar')).create(recursive: true);
+  }
+
+  /// Removes anything a previous share left behind (the app was killed while the sheet was open, or
+  /// the receiving app was still reading). Called when the app starts.
+  static Future<void> purgeShared() async {
+    try {
+      final dir = await _shareDir();
+      await for (final f in dir.list()) {
+        await f.delete(recursive: true);
+      }
+    } catch (_) {
+      // Nothing to clean, or no temporary directory on this platform.
+    }
+  }
+
   @override
   Future<PickedText?> pickTextFile() async {
     final files = await FilePicker.pickFiles(type: FileType.any);
@@ -43,16 +63,33 @@ class PlatformFileService implements FileService {
   }
 
   @override
-  Future<void> shareText(String fileName, String text, String mimeType) async {
-    final dir = await getTemporaryDirectory();
-    final file = File(p.join(dir.path, fileName));
-    await file.writeAsString(text, flush: true);
-    await SharePlus.instance.share(
-      ShareParams(
-        files: [XFile(file.path, mimeType: mimeType)],
-        subject: fileName,
-      ),
-    );
+  Future<void> shareText(String fileName, String text, String mimeType) =>
+      shareBytes(fileName, utf8.encode(text), mimeType);
+
+  @override
+  Future<void> shareBytes(
+    String fileName,
+    List<int> bytes,
+    String mimeType,
+  ) async {
+    final dir = await _shareDir();
+    // Only the last path segment: a name coming from data must not escape the folder.
+    final file = File(p.join(dir.path, p.basename(fileName)));
+    await file.writeAsBytes(bytes, flush: true);
+    try {
+      await SharePlus.instance.share(
+        ShareParams(
+          files: [XFile(file.path, mimeType: mimeType)],
+          subject: fileName,
+        ),
+      );
+    } finally {
+      // The share call returns when the sheet closes; the copy in the cache is no longer needed.
+      // If the receiving app is still reading, the next start cleans up ([purgeShared]).
+      try {
+        await file.delete();
+      } catch (_) {}
+    }
   }
 
   @override

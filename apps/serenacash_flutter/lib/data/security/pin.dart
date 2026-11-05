@@ -56,18 +56,47 @@ bool constantTimeEquals(List<int> a, List<int> b) {
   return diff == 0;
 }
 
+/// Result of one PIN attempt at the lock screen.
+class PinCheck {
+  const PinCheck({required this.ok, this.lockedFor, this.attemptsLeft});
+  final bool ok;
+
+  /// Set while attempts are paused; the PIN was not even compared.
+  final Duration? lockedFor;
+
+  /// Wrong attempts still allowed before the next pause.
+  final int? attemptsLeft;
+}
+
 class PinManager {
-  PinManager(this.store, {this.params = const PinKdfParams(), Random? rng})
-    : _rng = rng ?? Random.secure();
+  PinManager(
+    this.store, {
+    this.params = const PinKdfParams(),
+    Random? rng,
+    DateTime Function()? now,
+  }) : _rng = rng ?? Random.secure(),
+       _now = now ?? DateTime.now;
   final SecretStore store;
   final PinKdfParams params;
   final Random _rng;
-
+  final DateTime Function() _now;
   static final _pinRe = RegExp(r'^\d{4,8}$');
+
+  /// Wrong attempts allowed before the first pause.
+  static const freeAttempts = 5;
+
+  /// Pause after the 5th, 6th, 7th… consecutive wrong attempt. A 4-digit PIN has 10.000 combinations;
+  /// with these pauses a person guessing by hand gets about 30 tries in the first day.
+  static const pauses = [
+    Duration(seconds: 30),
+    Duration(minutes: 1),
+    Duration(minutes: 5),
+    Duration(minutes: 15),
+    Duration(hours: 1),
+  ];
 
   Future<bool> isSet() async =>
       (await store.read(SecretKeys.pinVerifier)) != null;
-
   Future<void> setPin(String pin) async {
     if (!_pinRe.hasMatch(pin)) {
       throw ArgumentError('PIN deve ter de 4 a 8 dígitos');
@@ -83,6 +112,7 @@ class PinManager {
         'v': 1,
       }),
     );
+    await store.delete(SecretKeys.pinAttempts);
   }
 
   Future<bool> verify(String pin) async {
@@ -98,5 +128,64 @@ class PinManager {
     return constantTimeEquals(hash, base64Decode(j['hash'] as String));
   }
 
-  Future<void> clear() => store.delete(SecretKeys.pinVerifier);
+  Future<({int failures, int lockedUntilMs})> _attempts() async {
+    final raw = await store.read(SecretKeys.pinAttempts);
+    if (raw == null) return (failures: 0, lockedUntilMs: 0);
+    try {
+      final j = jsonDecode(raw) as Map<String, dynamic>;
+      return (
+        failures: (j['failures'] as num).toInt(),
+        lockedUntilMs: (j['lockedUntilMs'] as num).toInt(),
+      );
+    } catch (_) {
+      // An unreadable counter must not unlock anything: treat it as the strictest state.
+      return (
+        failures: freeAttempts + pauses.length,
+        lockedUntilMs: _now().add(pauses.last).millisecondsSinceEpoch,
+      );
+    }
+  }
+
+  /// How long attempts are still paused, or null when the PIN can be tried now.
+  Future<Duration?> lockedFor() async {
+    final a = await _attempts();
+    final left = a.lockedUntilMs - _now().millisecondsSinceEpoch;
+    return left > 0 ? Duration(milliseconds: left) : null;
+  }
+
+  /// One attempt at the lock screen. The counter lives in the keystore, so closing the app or
+  /// restarting the phone does not give the attempts back.
+  Future<PinCheck> check(String pin) async {
+    final locked = await lockedFor();
+    if (locked != null) return PinCheck(ok: false, lockedFor: locked);
+    if (await verify(pin)) {
+      await store.delete(SecretKeys.pinAttempts);
+      return const PinCheck(ok: true);
+    }
+    final failures = (await _attempts()).failures + 1;
+    Duration? pause;
+    if (failures >= freeAttempts) {
+      final i = failures - freeAttempts;
+      pause = pauses[i < pauses.length ? i : pauses.length - 1];
+    }
+    await store.write(
+      SecretKeys.pinAttempts,
+      jsonEncode({
+        'failures': failures,
+        'lockedUntilMs': pause == null
+            ? 0
+            : _now().add(pause).millisecondsSinceEpoch,
+      }),
+    );
+    return PinCheck(
+      ok: false,
+      lockedFor: pause,
+      attemptsLeft: pause == null ? freeAttempts - failures : 0,
+    );
+  }
+
+  Future<void> clear() async {
+    await store.delete(SecretKeys.pinVerifier);
+    await store.delete(SecretKeys.pinAttempts);
+  }
 }

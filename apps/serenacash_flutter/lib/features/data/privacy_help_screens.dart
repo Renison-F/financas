@@ -6,7 +6,6 @@ import '../../app/app.dart';
 import '../../app/di.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/theme/tokens.dart';
-import '../../data/security/db_key.dart';
 import '../../ui/components/components.dart';
 import '../shared/stack_screen.dart';
 
@@ -55,6 +54,10 @@ class PrivacyScreen extends ConsumerWidget {
                 icon: SIconName.trash,
                 fullWidth: true,
                 onPressed: () async {
+                  final container = ProviderScope.containerOf(
+                    context,
+                    listen: false,
+                  );
                   final ok = await confirmSheet(
                     context,
                     title: l.eraseQ,
@@ -63,12 +66,11 @@ class PrivacyScreen extends ConsumerWidget {
                     cancelLabel: l.cancel,
                   );
                   if (!ok) return;
-                  await ref
-                      .read(appControllerProvider.notifier)
-                      .eraseEverything();
-                  await ref.read(pinManagerProvider).clear();
-                  await DatabaseKeyManager(ref.read(secretStoreProvider))
-                      .destroy();
+                  // File, key and PIN go together: destroying only the key would leave an
+                  // encrypted file that nothing can open on the next launch.
+                  await eraseLocalData(container);
+                  container.invalidate(appControllerProvider);
+                  await container.read(appControllerProvider.future);
                   if (context.mounted) context.go('/onboarding');
                 },
               ),

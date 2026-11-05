@@ -128,6 +128,7 @@ class SecretField extends StatefulWidget {
     this.textInputAction,
     this.onChanged,
     this.onSubmitted,
+    this.enabled = true,
   });
   final String label;
   final TextEditingController controller;
@@ -140,6 +141,7 @@ class SecretField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
+  final bool enabled;
   @override
   State<SecretField> createState() => _SecretFieldState();
 }
@@ -157,6 +159,7 @@ class _SecretFieldState extends State<SecretField> {
     textInputAction: widget.textInputAction,
     onChanged: widget.onChanged,
     onSubmitted: widget.onSubmitted,
+    enabled: widget.enabled,
     obscureText: _hidden,
     suffix: IconButton(
       tooltip: _hidden ? widget.showLabel : widget.hideLabel,
