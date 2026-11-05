@@ -27,7 +27,6 @@ import '../features/home/available_screen.dart';
 import '../features/home/customize_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/loans/loans_screen.dart';
-import '../features/more/more_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/plan/plan_screen.dart';
 import '../features/reports/reports_screens.dart';
@@ -37,6 +36,7 @@ import '../features/transactions/transaction_form_screen.dart';
 import '../features/transactions/transactions_screen.dart';
 import '../ui/icons.dart';
 import 'app.dart';
+import 'app_drawer.dart';
 import 'state/app_controller.dart';
 import 'theme/tokens.dart';
 
@@ -47,7 +47,6 @@ abstract final class Routes {
   static const transactions = '/transactions';
   static const shopping = '/shopping';
   static const plan = '/plan';
-  static const more = '/more';
   static const onboarding = '/onboarding';
   static const transaction = '/transaction';
   static const customize = '/customize';
@@ -120,11 +119,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(
             routes: [
               GoRoute(path: Routes.plan, builder: (c, s) => const PlanScreen()),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(path: Routes.more, builder: (c, s) => const MoreScreen()),
             ],
           ),
         ],
@@ -363,26 +357,40 @@ final routerProvider = Provider<GoRouter>((ref) {
 Page<void> _modal(GoRouterState s, Widget child) =>
     MaterialPage(key: s.pageKey, fullscreenDialog: true, child: child);
 
-class _TabsShell extends ConsumerWidget {
+class _TabsShell extends ConsumerStatefulWidget {
   const _TabsShell({required this.shell});
   final StatefulNavigationShell shell;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_TabsShell> createState() => _TabsShellState();
+}
+
+class _TabsShellState extends ConsumerState<_TabsShell> {
+  final _scaffold = GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    final shell = widget.shell;
     final app = ref.watch(appControllerProvider);
     if (!app.hasValue) return BootScreen(error: app.error);
     final l = AppLocalizations.of(context);
     final c = context.colors;
+    // The four frequent destinations, then the entry to the side menu (never a selected tab).
     final tabs = [
       (SIconName.home, l.tabHome),
       (SIconName.plus, l.tabTransactions),
       (SIconName.cart, l.tabShopping),
       (SIconName.chart, l.tabPlan),
-      (SIconName.more, l.tabMore),
+      (SIconName.menu, l.navMenu),
     ];
+    const menuIndex = 4;
+    void goTab(int i) =>
+        shell.goBranch(i, initialLocation: i == shell.currentIndex);
     // One undo listener for the whole shell: the tabs stay alive together, so a listener per tab
     // would queue the same SnackBar once per tab.
     return UndoHost(
       child: Scaffold(
+        key: _scaffold,
+        drawer: AppDrawer(currentTab: shell.currentIndex, onSelectTab: goTab),
         body: shell,
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
@@ -395,18 +403,42 @@ class _TabsShell extends ConsumerWidget {
             maxScaleFactor: MediaQuery.sizeOf(context).width >= 400
                 ? 1.15
                 : 1.0,
-            child: NavigationBar(
-              selectedIndex: shell.currentIndex,
-              onDestinationSelected: (i) =>
-                  shell.goBranch(i, initialLocation: i == shell.currentIndex),
-              destinations: [
-                for (var i = 0; i < tabs.length; i++)
-                  NavigationDestination(
-                    icon: SIcon(tabs[i].$1, size: 22, color: c.textMuted),
-                    selectedIcon: SIcon(tabs[i].$1, size: 22, color: c.primary),
-                    label: tabs[i].$2,
-                  ),
-              ],
+            child: NavigationBarTheme(
+              data: NavigationBarTheme.of(context).copyWith(
+                // On the narrowest phones the longest label needs a slightly smaller size.
+                labelTextStyle: MediaQuery.sizeOf(context).width < 360
+                    ? WidgetStateProperty.resolveWith(
+                        (s) => Type.label.copyWith(
+                          fontSize: 10,
+                          letterSpacing: 0,
+                          fontWeight: s.contains(WidgetState.selected)
+                              ? FontWeight.w600
+                              : FontWeight.w500,
+                          color: s.contains(WidgetState.selected)
+                              ? c.primary
+                              : c.textMuted,
+                        ),
+                      )
+                    : null,
+              ),
+              child: NavigationBar(
+                selectedIndex: shell.currentIndex,
+                onDestinationSelected: (i) => i == menuIndex
+                    ? _scaffold.currentState?.openDrawer()
+                    : goTab(i),
+                destinations: [
+                  for (var i = 0; i < tabs.length; i++)
+                    NavigationDestination(
+                      icon: SIcon(tabs[i].$1, size: 22, color: c.textMuted),
+                      selectedIcon: SIcon(
+                        tabs[i].$1,
+                        size: 22,
+                        color: c.primary,
+                      ),
+                      label: tabs[i].$2,
+                    ),
+                ],
+              ),
             ),
           ),
         ),

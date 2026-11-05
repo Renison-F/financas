@@ -11,18 +11,7 @@ import 'package:serenacash/features/transactions/transaction_form_screen.dart';
 import 'harness.dart';
 import 'kv_factory.dart';
 
-Future<void> openMore(WidgetTester tester, String row) async {
-  await tester.tap(find.text('Mais'));
-  await tester.pumpAndSettle();
-  await tester.scrollUntilVisible(
-    find.text(row),
-    200,
-    scrollable: find.byType(Scrollable).first,
-  );
-  await tester.pumpAndSettle();
-  await tester.tap(find.text(row));
-  await tester.pumpAndSettle();
-}
+Future<void> openMore(WidgetTester tester, String row) => openMenu(tester, row);
 
 Future<void> typeMoney(WidgetTester tester, String label, String digits) async {
   final field = find
@@ -89,8 +78,7 @@ void main() {
       // card purchase in 3 installments through the form
       await tester.tap(find.text('Início'));
       await tester.pumpAndSettle();
-      await tester.tap(find.byTooltip('Adicionar lançamento'));
-      await tester.pumpAndSettle();
+      await addEntry(tester);
       expect(find.byType(TransactionFormScreen), findsOneWidget);
       await tester.tap(find.text('Cartão').first);
       await tester.pumpAndSettle();

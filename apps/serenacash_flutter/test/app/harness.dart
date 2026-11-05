@@ -83,3 +83,41 @@ Future<void> screenshot(WidgetTester tester, String name) async {
     matchesGoldenFile('goldens/$name.png'),
   );
 }
+
+/// Opens the side menu from the bottom bar and, when [row] is given, taps that destination.
+Future<void> openMenu(WidgetTester tester, [String? row]) async {
+  await tester.tap(find.text('Menu'));
+  await tester.pumpAndSettle();
+  if (row != null) await tapMenuRow(tester, row);
+}
+
+/// Taps a destination of the open side menu, scrolling the menu until it is visible.
+Future<void> tapMenuRow(WidgetTester tester, String row) async {
+  final drawer = find.byType(Drawer);
+  final item = find.descendant(of: drawer, matching: find.text(row));
+  await tester.scrollUntilVisible(
+    item,
+    200,
+    scrollable: find
+        .descendant(of: drawer, matching: find.byType(Scrollable))
+        .first,
+  );
+  await tester.pumpAndSettle();
+  await tester.tap(item);
+  await tester.pumpAndSettle();
+}
+
+/// Taps the "+" button and picks one kind of entry in the sheet it opens.
+Future<void> addEntry(WidgetTester tester, [String option = 'Despesa']) async {
+  await tester.tap(find.byTooltip('Adicionar'));
+  await tester.pumpAndSettle();
+  await pickAddOption(tester, option);
+}
+
+/// Picks one kind of entry in the open "Adicionar" sheet.
+Future<void> pickAddOption(WidgetTester tester, String option) async {
+  await tester.tap(
+    find.descendant(of: find.byType(BottomSheet), matching: find.text(option)),
+  );
+  await tester.pumpAndSettle();
+}

@@ -329,8 +329,11 @@ void main() {
     await tester.tap(find.text('Cancelar'));
     await tester.pumpAndSettle();
 
+    // "Lançamento" asks which kind of entry, the same sheet the "+" button opens.
     await tester.tap(find.text('Lançamento'));
     await tester.pumpAndSettle();
+    expect(find.text('Conta a receber'), findsOneWidget);
+    await pickAddOption(tester, 'Receita');
     expect(find.byType(TransactionFormScreen), findsOneWidget);
     await tester.tap(find.text('Cancelar'));
     await tester.pumpAndSettle();

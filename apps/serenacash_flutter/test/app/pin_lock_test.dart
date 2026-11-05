@@ -43,16 +43,7 @@ Future<void> _pumpReal(WidgetTester tester) async {
 }
 
 Future<void> _openSettings(WidgetTester tester) async {
-  await tester.tap(find.text('Mais'));
-  await tester.pumpAndSettle();
-  await tester.scrollUntilVisible(
-    find.text('Configurações'),
-    200,
-    scrollable: find.byType(Scrollable).first,
-  );
-  await tester.pumpAndSettle();
-  await tester.tap(find.text('Configurações'));
-  await tester.pumpAndSettle();
+  await openMenu(tester, 'Configurações');
   expect(find.byType(SettingsScreen), findsOneWidget);
   await tester.scrollUntilVisible(
     find.text('Proteger com PIN'),

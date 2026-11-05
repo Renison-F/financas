@@ -9,6 +9,7 @@ import '../../app/state/dashboard_data.dart';
 import '../../app/theme/tokens.dart';
 import '../../domain/dashboard/widgets.dart' as dash;
 import '../../ui/components/components.dart';
+import '../shared/add_sheet.dart';
 import '../shared/format.dart';
 import 'home_parts.dart';
 import 'widgets.dart';
@@ -45,11 +46,7 @@ class HomeScreen extends ConsumerWidget {
     // Same three shortcuts as the reference: a new entry, a bill to pay, the accounts.
     final quick = QuickActions(
       actions: [
-        QuickAction(
-          SIconName.plus,
-          l.quickEntry,
-          () => context.push(Routes.transaction),
-        ),
+        QuickAction(SIconName.plus, l.quickEntry, () => showAddSheet(context)),
         QuickAction(
           SIconName.calendar,
           l.quickBill,
@@ -91,10 +88,7 @@ class HomeScreen extends ConsumerWidget {
               ctl.setPrefs((p) => p.copyWith(theme: dark ? 'light' : 'dark')),
         ),
       ],
-      fab: AddFab(
-        label: l.addTransaction,
-        onPressed: () => context.push(Routes.transaction),
-      ),
+      fab: AddFab(label: l.addTitle, onPressed: () => showAddSheet(context)),
       children: [
         if (!hasSummary) quick,
         for (final id in layout.order) ...[

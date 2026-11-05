@@ -12,6 +12,7 @@ import '../../domain/ledger/ledger.dart';
 import '../../domain/money/money.dart';
 import '../../domain/reports/reports.dart';
 import '../../ui/components/components.dart';
+import '../shared/add_sheet.dart';
 import '../shared/format.dart';
 
 class TransactionsScreen extends ConsumerStatefulWidget {
@@ -70,8 +71,8 @@ class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
     return Scaffold(
       backgroundColor: c.bg,
       floatingActionButton: AddFab(
-        label: l.addTransaction,
-        onPressed: () => context.push(Routes.transaction),
+        label: l.addTitle,
+        onPressed: () => showAddSheet(context),
       ),
       body: SafeArea(
         bottom: false,

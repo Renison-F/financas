@@ -52,6 +52,8 @@ void main() {
       300,
       scrollable: find.byType(Scrollable).first,
     );
+    await tester.ensureVisible(find.text('Excluir este e os próximos'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Excluir este e os próximos'));
     await tester.pumpAndSettle();
     await tester.tap(find.widgetWithText(SButton, 'Excluir'));
@@ -78,8 +80,7 @@ void main() {
         tester.platformDispatcher.textScaleFactorTestValue = scale;
         addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
         await tester.pumpAndSettle();
-        await tester.tap(find.byTooltip('Adicionar lançamento'));
-        await tester.pumpAndSettle();
+        await addEntry(tester);
         final cancel = tester.renderObject<RenderParagraph>(
           find.text('Cancelar'),
         );
@@ -105,10 +106,7 @@ void main() {
     await pumpApp(tester, app);
     final handle = tester.ensureSemantics();
 
-    await tester.tap(find.text('Mais'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Contas e carteiras'));
-    await tester.pumpAndSettle();
+    await openMenu(tester, 'Contas e carteiras');
     await tester.tap(find.text('Nova'));
     await tester.pumpAndSettle();
 
@@ -130,15 +128,7 @@ void main() {
     await app.db.into(app.db.kv).insert(KvCompanionFactory.onboarded());
     await pumpApp(tester, app);
 
-    await tester.tap(find.text('Mais'));
-    await tester.pumpAndSettle();
-    await tester.scrollUntilVisible(
-      find.text('Exportar e backup'),
-      200,
-      scrollable: find.byType(Scrollable).first,
-    );
-    await tester.tap(find.text('Exportar e backup'));
-    await tester.pumpAndSettle();
+    await openMenu(tester, 'Exportar e backup');
     await tester.scrollUntilVisible(
       find.byType(SecretField),
       200,

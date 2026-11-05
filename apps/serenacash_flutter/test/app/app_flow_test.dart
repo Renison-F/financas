@@ -55,8 +55,7 @@ void main() {
       await screenshot(tester, 'home_light');
 
       // new expense through the FAB
-      await tester.tap(find.byTooltip('Adicionar lançamento'));
-      await tester.pumpAndSettle();
+      await addEntry(tester);
       expect(find.byType(TransactionFormScreen), findsOneWidget);
       await tester.enterText(
         find.widgetWithText(TextField, '0,00').first,
@@ -77,17 +76,9 @@ void main() {
       await screenshot(tester, 'transactions_light');
 
       // dark theme via settings
-      await tester.tap(find.text('Mais'));
-      await tester.pumpAndSettle();
-      await screenshot(tester, 'more_light');
-      await tester.scrollUntilVisible(
-        find.text('Configurações'),
-        200,
-        scrollable: find.byType(Scrollable).first,
-      );
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Configurações'));
-      await tester.pumpAndSettle();
+      await openMenu(tester);
+      await screenshot(tester, 'menu_light');
+      await tapMenuRow(tester, 'Configurações');
       await tester.tap(find.text('Escuro'));
       await tester.pumpAndSettle();
       expect(

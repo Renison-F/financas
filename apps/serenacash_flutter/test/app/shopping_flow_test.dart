@@ -10,6 +10,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:serenacash/data/database/drift_ledger_repository.dart';
 import 'package:serenacash/domain/entities/entities.dart';
 
+import 'package:serenacash/ui/components/components.dart';
+
 import 'harness.dart';
 import 'kv_factory.dart';
 
@@ -209,15 +211,7 @@ void main() {
     addTearDown(app.dispose);
     await app.db.into(app.db.kv).insert(KvCompanionFactory.onboarded());
     await pumpApp(tester, app);
-    await tester.tap(find.text('Mais'));
-    await tester.pumpAndSettle();
-    await tester.scrollUntilVisible(
-      find.text('Histórico de alterações'),
-      200,
-      scrollable: find.byType(Scrollable).first,
-    );
-    await tester.tap(find.text('Histórico de alterações'));
-    await tester.pumpAndSettle();
+    await openMenu(tester, 'Histórico de alterações');
     expect(find.byType(HistoryScreen), findsOneWidget);
     expect(find.textContaining('Categoria · salvo'), findsWidgets);
     await screenshot(tester, 'history_light');
@@ -230,7 +224,16 @@ void main() {
       200,
       scrollable: find.byType(Scrollable).first,
     );
-    await tester.tap(find.widgetWithText(TextButton, 'Ver').last);
+    final seeAnnual = find.descendant(
+      of: find.ancestor(
+        of: find.text('Planejamento anual'),
+        matching: find.byType(SCard),
+      ),
+      matching: find.text('Ver'),
+    );
+    await tester.ensureVisible(seeAnnual);
+    await tester.pumpAndSettle();
+    await tester.tap(seeAnnual);
     await tester.pumpAndSettle();
     expect(find.byType(AnnualScreen), findsOneWidget);
     await screenshot(tester, 'annual_light');
