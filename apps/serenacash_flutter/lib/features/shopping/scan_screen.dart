@@ -76,21 +76,38 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _generation++;
-    unawaited(_camera?.dispose());
-    unawaited(_scanner?.dispose());
+    unawaited(_release(_camera));
+    unawaited(_release(_scanner));
     super.dispose();
   }
 
+  bool _releasedForBackground = false;
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // The camera belongs to whoever is on screen: out of the foreground it is released at once.
-    if (state == AppLifecycleState.inactive ||
-        state == AppLifecycleState.paused ||
+    // The camera belongs to whoever is on screen: once the app is out of sight it is released.
+    // "inactive" alone is not out of sight: the permission question, the notification shade and a
+    // system dialog all pass through it with this screen still showing, and restarting the camera
+    // there would open a second one while the first is still answering.
+    if (state == AppLifecycleState.paused ||
         state == AppLifecycleState.hidden) {
-      unawaited(_stop());
-    } else if (state == AppLifecycleState.resumed) {
+      if (!_releasedForBackground) {
+        _releasedForBackground = true;
+        unawaited(_stop());
+      }
+    } else if (state == AppLifecycleState.resumed && _releasedForBackground) {
+      _releasedForBackground = false;
       unawaited(_start());
     }
+  }
+
+  /// Releasing a camera that never finished opening throws on some devices; there is nothing to
+  /// do about it, and it must not surface as an unhandled error.
+  static Future<void> _release(Object? controller) async {
+    try {
+      if (controller is CameraController) await controller.dispose();
+      if (controller is MobileScannerController) await controller.dispose();
+    } catch (_) {}
   }
 
   Future<void> _stop() async {
@@ -99,8 +116,8 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
     _camera = null;
     _scanner = null;
     if (mounted) setState(() => _torch = false);
-    await cam?.dispose();
-    await scan?.dispose();
+    await _release(cam);
+    await _release(scan);
   }
 
   Future<void> _start() async {
@@ -123,7 +140,7 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
           BarcodeFormat.qrCode,
         ],
       );
-      if (mine != _generation || !mounted) return unawaited(s.dispose());
+      if (mine != _generation || !mounted) return unawaited(_release(s));
       setState(() => _scanner = s);
       return;
     }
@@ -143,11 +160,11 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
         imageFormatGroup: ImageFormatGroup.jpeg,
       );
       await cam.initialize();
-      if (mine != _generation || !mounted) return unawaited(cam.dispose());
+      if (mine != _generation || !mounted) return unawaited(_release(cam));
       final min = await cam.getMinZoomLevel(),
           max = await cam.getMaxZoomLevel();
       await cam.setFlashMode(FlashMode.off);
-      if (mine != _generation || !mounted) return unawaited(cam.dispose());
+      if (mine != _generation || !mounted) return unawaited(_release(cam));
       setState(() {
         _camera = cam;
         _minZoom = min;
@@ -155,14 +172,14 @@ class _ScanScreenState extends ConsumerState<ScanScreen>
         _zoom = min;
       });
     } on CameraException catch (e) {
-      unawaited(cam?.dispose());
+      unawaited(_release(cam));
       if (mine != _generation || !mounted) return;
       setState(() {
         _denied = e.code.contains('AccessDenied');
         _cameraProblem = e.code;
       });
     } catch (_) {
-      unawaited(cam?.dispose());
+      unawaited(_release(cam));
       if (mine != _generation || !mounted) return;
       setState(() => _cameraProblem = 'unknown');
     }
