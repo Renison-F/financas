@@ -76,6 +76,12 @@ divergência monetária. Testes Dart totais: 279 (fixtures + invariantes).
 | D4 | `formatBRL` | Usa `NumberFormat('pt_BR')` do `intl` com NBSP entre `R$` e o valor, igual ao `Intl.NumberFormat` do JS. `-0` normalizado para `0`. | Mesma saída; implementação diferente. |
 | D5 | `pricetag.dart` | Ordenação de candidatos com desempate por índice. | Reproduz a ordem estável do V8 sem depender de detalhe de implementação. |
 
+| D6 | `assistant.dart` | "Onde estou gastando mais?" devolve o ranking com o **total do mês** como valor e o título "Maiores gastos por categoria"; a origem devolvia só a maior categoria. | Ocorrência 010 da homologação física. O teste de fixtures registra a diferença esperada. |
+| D7 | `assistant.dart` | "Como está o mês?" tem título "Resultado do mês"; a origem usava "Mês sereno/atenção/agitado". | Ocorrência 026 (linguagem). |
+| D8 | `assistant.dart` | Novas intenções `where_to_save` e parâmetro `period`; a palavra "mês" sozinha deixou de significar pedido de resumo. | Ocorrência 010. |
+| D9 | `budgets.dart` | Orçamento recorrente só vale a partir de `validFrom` (ou do mês de criação) e até `validUntil`. A origem aplicava o modelo a qualquer mês. As fixtures continuam passando porque os modelos delas não têm data de criação. | Ocorrência 012. |
+| D10 | `loans.dart`, `cart.dart`, `dashboard/widgets.dart` | Sistemas `american`, `bullet` e `free`; direção do empréstimo; preço de atacado condicionado na linha do carrinho; seis widgets novos em `extraWidgets`, fora do catálogo original de 24. | Ocorrências 006, 007, 016 e 027. Campos novos só são gravados quando diferentes do padrão, então os documentos da origem continuam idênticos. |
+
 Nenhuma divergência monetária foi ignorada. Nenhum bug do TS foi reproduzido conscientemente além dos
 listados como corrigidos (D3).
 

@@ -2,7 +2,20 @@
 
 Suíte: `apps/serenacash_flutter/test` + fixtures TS→Dart em `docs/flutter-migration/fixtures`.
 
-## Contagem real (execução de 05/11/2026, commit desta alteração)
+## Contagem real (execução de 10/11/2026, commit `f1b3b47`)
+
+| Resultado | Qtde |
+|---|---|
+| Aprovados | 566 |
+| Ignorados (`skip`) | 0 |
+| Com falha | 0 |
+| **Total executado** | **566** |
+
+Por camada: domínio 365, dados 54, app 139, desempenho 8. `dart format --set-exit-if-changed lib test integration_test tool` → 0 alterações em 197 arquivos; `flutter analyze --fatal-infos` → "No issues found!"; `flutter test` → `+566: All tests passed!`. Os testes novos desta rodada estão em "Testes da rodada de retorno da homologação física", no fim deste arquivo.
+
+A tabela abaixo é a da execução anterior e fica como histórico.
+
+## Contagem anterior (execução de 05/11/2026)
 
 | Resultado | Qtde |
 |---|---|
@@ -76,3 +89,35 @@ O teste de integração roda em uma instalação isolada para não apagar os dad
 SERENA_APP_ID_SUFFIX=.itest flutter test integration_test -d emulator-5554
 ```
 
+## Testes da rodada de retorno da homologação física (10/11/2026)
+
+De 399 para 566 testes. Cada arquivo abaixo nasceu de ocorrências do registro `15-RETORNO_HOMOLOGACAO_FISICA.md`.
+
+| Arquivo | Ocorrências | O que prova | Testes |
+|---|---|---|---|
+| `test/app/physical_return_test.dart` | 001–005, 011 | Folhas respeitam a barra do sistema (três botões, gestos, fonte grande, tela de 320 pt); troca de tipo mantém o que foi digitado; "Nova conta" dentro da transferência; calendário; confirmação do aparelho por estado (confirmada, cancelada, sem cadastro, sem hardware, bloqueada) | 15 |
+| `test/app/planning_validity_test.dart` | 012 | Orçamento e meta só aparecem a partir de quando existem; alterar o limite não reescreve meses passados; encerrar não apaga o histórico | 10 |
+| `test/app/shopping_review_test.dart` | 015–019, 021, 023, 025 | Revisão do item: cursor estável, conferência obrigatória em leitura duvidosa, atacado só com quantidade mínima, evidência gravada, estados da leitura de código | 9 |
+| `test/app/loans_flex_test.dart` | 006, 007 | Americano, pagamento único, dívida "quando der" com pagamentos livres, recusa de pagamento acima do saldo, empréstimo concedido como ativo | 16 |
+| `test/app/daily_control_test.dart` | 027, 029–031 | Controle diário, limite e meta com vigência, dias futuros só como previsto, cartões novos da tela inicial | 13 |
+| `test/app/appearance_test.dart` | 009, 026, 032 | Seis paletas com contraste mínimo conferido por cálculo, densidade, restauração, textos sem os termos antigos | 8 |
+| `test/domain/label_analysis_test.dart` | 015, 016 | As oito etiquetas fotografadas pelo usuário, com a saída real do OCR guardada em `test/fixtures/labels/` | 9 |
+| `test/domain/receipt_test.dart` | 020 | Leitura do cupom e pareamento com o carrinho: igual, divergente, suspeita, sem par | 13 |
+| `test/domain/assistant_intents_test.dart` | 010 | Perguntas do usuário, com erro de digitação, período e pedido de economia | 14 |
+| `test/domain/shares_test.dart` | 008, 013 | Percentuais somam exatamente 100,0% (maiores restos) | 5 |
+| `test/domain/voice_test.dart` | 022 | Frases ditadas viram nome, quantidade, unidade e preço; valor ambíguo é perguntado | 10 |
+| `test/domain/price_timeline_test.dart` | 024 | Evolução do preço, comparando só a mesma unidade | 4 |
+| `test/data/migration_test.dart` | — | Esquema 1 → 2 → 3 → 4 com dados, conferido contra os retratos de `drift_schemas/` | 4 |
+| `test/data/backup_shopping_test.dart` | 019, 020 | Fotos de evidência e linhas de cupom vão e voltam no backup; foto adulterada é recusada | 6 |
+
+Testes existentes ajustados de propósito, sem afrouxar a regra testada: `pin_lock_test.dart` (o bloqueio ligado na sessão vale a partir da próxima ida ao segundo plano), `reports_assistant_billing_test.dart` (duas respostas do assistente divergem da origem; ver D6 e D7 em `02`), `shopping_flow_test.dart`, `modules_flow_test.dart`, `app_flow_test.dart` e `home_redesign_test.dart` (telas que mudaram).
+
+### O que os testes automatizados não cobrem nesta rodada
+
+- Câmera real, foco, aquecimento e leitura de etiquetas e códigos em loja.
+- Reconhecimento de voz: o serviço do aparelho é substituído por um dublê nos testes.
+- Leitura de um cupom fiscal fotografado: o pareamento é testado com texto, não com a foto de um cupom.
+- Biometria com a digital do usuário e o teclado do aparelho dele.
+- `integration_test` não foi executado de novo nesta rodada; no aparelho virtual foram feitos o ensaio de atualização e os roteiros manuais descritos em `15`.
+
+Ferramentas de desenvolvimento, fora da suíte: `integration_test/tools/ocr_dump_test.dart` roda o OCR do aparelho sobre fotos locais e `tool/ocr_fixtures.py` transforma a saída nas fixtures de etiqueta. As fotos não entram no repositório.

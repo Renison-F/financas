@@ -55,3 +55,23 @@ Instalação isolada para testes que apagam dados: `SERENA_APP_ID_SUFFIX=.seg fl
 
 Depois de `flutter test integration_test`, o arquivo `app-debug.apk` do diretório de build é o do teste. Gere o build de novo antes de distribuir e confira que `kernel_blob.bin` não contém `integration_test/app_test.dart`.
 
+## Build 0.2.0+3 (10/11/2026)
+
+| | Homologação | Debug |
+|---|---|---|
+| Arquivo | `E:\SerenaCash\homologacao-0.2.0\serenacash-0.2.0+3-homologacao-f1b3b47.apk` | `…\serenacash-0.2.0+3-debug-f1b3b47.apk` |
+| Comando | `flutter build apk --release` | `flutter build apk --debug` |
+| Tamanho | 132.755.640 bytes | 254.588.599 bytes |
+| SHA-256 | `d0de4b2c34976863d6c42ab84048225d3d7ec7f82d744d0d6dd80243b84a18c8` | `5cca23ea6f06d9bc7c9d5ef6eb1d1120f99e7d78b5653613a58015fa944bdf65` |
+
+Commit do código `f1b3b47`, `versionName 0.2.0`, `versionCode 3`, Application ID `br.com.serenacash.mobile`, `minSdk 24`, `targetSdk 36`, certificado "Android Debug" desta máquina (`e7c911bb…16e5`), o mesmo da build 0.1.0+2. O número do build aparece no rodapé do menu ("versão 0.2.0 (build 3)").
+
+Permissões novas em relação à 0.1.0+2: `RECORD_AUDIO` (ditar item) e `WRITE_EXTERNAL_STORAGE` com `maxSdkVersion=28`, declarada pelo plugin da câmera (o Android acrescenta `READ_EXTERNAL_STORAGE` por implicação). O app não pede acesso a armazenamento em tempo de execução.
+
+Dependências novas: `camera` e `speech_to_text`. O arquivo de debug foi conferido: não é a build do `integration_test`.
+
+O CI não rodou sobre estes commits: eles estão só neste computador até o envio ser autorizado.
+
+### Instalar por cima da versão anterior
+
+A build 0.2.0+3 atualiza a 0.1.0+2 sem desinstalar, desde que as duas tenham sido compiladas neste PC (mesmo certificado). Roteiro e resultado do ensaio em `15-RETORNO_HOMOLOGACAO_FISICA.md`, "Atualização sobre a versão anterior". Exporte um backup cifrado antes; não existe caminho de volta para a 0.1.0.

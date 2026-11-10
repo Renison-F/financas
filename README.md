@@ -1,27 +1,39 @@
 # SerenaCash
 
-Aplicativo de finanças pessoais e compras de supermercado para Android e iOS, mobile-first e offline-first. Nome e identidade definidos em novembro de 2026 (histórico em `docs/03-marca-naming.md`).
+Aplicativo de finanças pessoais e compras de supermercado para Android e iOS, feito para funcionar sem internet, com os dados cifrados no aparelho.
 
-**Estado atual:** núcleo financeiro, compras e monetização implementados com testes de domínio e preview web verificado; validação em dispositivos físicos, compras reais nas lojas e OCR em build nativo ainda pendentes. Detalhes em `docs/CHECKPOINT.md` e `docs/07-matriz-funcionalidades.md`.
+**O produto é o app Flutter** em `apps/serenacash_flutter`. O app Expo/React Native (`apps/mobile`, `packages/`) é a origem da migração: fica congelado como referência de regras e de fixtures, e não recebe mais funcionalidades.
+
+**Estado atual (10/11/2026):** build de homologação 0.2.0+3 entregue para reteste em aparelho físico, depois de uma primeira rodada de testes no celular. Nada está publicado nas lojas. iOS não foi compilado nem testado. O estado real, com o que está pendente, fica em `docs/flutter-migration/CHECKPOINT.md`.
 
 ## Estrutura
 ```
-apps/mobile/        app Expo SDK 58 (React Native 0.88, Expo Router, SQLite)
-packages/core/      domínio financeiro puro (centavos inteiros, cartões, orçamentos, empréstimos, relatórios, importação, direitos)
-packages/shopping/  domínio de compras (unidades, carrinho, códigos, parser de etiquetas, listas, histórico de preços, sessão)
-docs/               produto, pesquisa, marca, UX, arquitetura, regras, planos, testes, guias
-brand/              identidade visual (SVG) e gerador de ícones
-index.html          app legado (referência funcional; não é mais o produto)
+apps/serenacash_flutter/   app Flutter (produto): domínio, banco cifrado, telas, testes
+docs/flutter-migration/    plano, arquitetura, dados, testes, homologação e checkpoint do app Flutter
+docs/security/             auditoria de segurança do app Flutter
+apps/mobile/               app Expo/React Native (legado, congelado)
+packages/core, shopping/   domínio em TypeScript (legado; origem das fixtures de equivalência)
+docs/01 … 13               documentos da fase React Native (históricos)
+brand/                     identidade visual (SVG) e gerador de ícones
+index.html                 protótipo antigo (referência funcional)
 ```
 
-## Comandos
+## Comandos (app Flutter)
 ```bash
-pnpm install
-pnpm -r test          # Vitest (core, shopping) + Jest (mobile)
-pnpm -r typecheck
-cd apps/mobile && npx expo start   # Expo Go: tudo exceto OCR e compras reais
+cd apps/serenacash_flutter && flutter pub get
 ```
-Build nativo (câmera + OCR + compras): `docs/11-guia-build.md`. Publicação: `docs/12-guia-publicacao.md`.
+```bash
+dart run build_runner build --delete-conflicting-outputs && flutter gen-l10n
+```
+```bash
+dart format --set-exit-if-changed lib test && flutter analyze --fatal-infos && flutter test
+```
+```bash
+flutter build apk --release
+```
+Ambiente Windows, variantes de APK e CI: `docs/flutter-migration/13-SETUP_WINDOWS.md` e `11-BUILD_CI.md`.
 
 ## Documentação
-`PRODUCT.md` · `DESIGN.md` · `docs/01` auditoria · `docs/02` mercado · `docs/03` naming · `docs/04` identidade · `docs/05` UX · `docs/06` arquitetura · `docs/07` regras e matriz · `docs/08` planos · `docs/09` testes · `docs/10` QA · `docs/11` build · `docs/12` publicação · `docs/CHECKPOINT.md`
+`PRODUCT.md` · `DESIGN.md` · `docs/flutter-migration/CHECKPOINT.md` (comece por aqui) · `03` arquitetura · `05` dados e migrações · `06` segurança · `07` compras e OCR · `09` testes · `14` checklist de aparelho · `15` retorno da homologação física · `docs/security/AUDITORIA_FLUTTER.md`
+
+`docs/CHECKPOINT.md` é o checkpoint da fase React Native e está marcado como histórico.

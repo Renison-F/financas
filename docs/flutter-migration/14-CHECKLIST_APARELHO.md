@@ -23,7 +23,7 @@ Com o bloqueio do app ativado (PIN ou biometria), capturas de tela ficam bloquea
 | ID | Procedimento | Resultado esperado | Resultado obtido | Situação | Observações, evidência, defeito |
 |---|---|---|---|---|---|
 | A01 | Instalar o APK de homologação. | Instala sem erro; ícone "SerenaCash" com a marca na gaveta de apps. | | | |
-| A02 | Abrir pelo ícone. | Tela de abertura com a marca e, em seguida, "Seu dinheiro em paz." (passo 1 de 4). | | | |
+| A02 | Abrir pelo ícone. | Tela de abertura com a marca e, em seguida, "Saiba quanto você pode gastar." (passo 1 de 4). | | | |
 | A03 | Fazer o onboarding com uma conta fictícia de R$ 1.234,56, uma conta fixa e um cartão. | Chega à tela inicial; "Pode gastar neste mês" desconta a conta fixa. | | | |
 | A04 | No passo 3 do onboarding, usar o botão voltar do aparelho. | Volta para o passo 2, não sai do app. | | | |
 | A05 | Fechar o app pela lista de recentes e abrir de novo. | Abre direto na tela inicial, com os mesmos valores. | | | |
@@ -163,6 +163,57 @@ Com o bloqueio do app ativado (PIN ou biometria), capturas de tela ficam bloquea
 | I08 | Tela de planos (Menu > SerenaCash Plus). | Neste APK a loja não está configurada: cada plano mostra "Preço e compra disponíveis na versão publicada nas lojas.", sem botão de compra, e "Restaurar compras" fica desabilitado. | | | |
 | I09 | Compra de teste (sandbox) e restauração de assinatura. | **Bloqueado** até existirem produtos na loja e chave do RevenueCat. | | B | Depende de configuração comercial. |
 
+## J. Reteste das ocorrências da homologação física (build 0.2.0+3)
+
+Um teste por ocorrência do registro `15-RETORNO_HOMOLOGACAO_FISICA.md`. A coluna "ID" da ocorrência liga cada teste ao relato original. Todos estão **PENDENTE NO DISPOSITIVO DO USUÁRIO**: nenhum foi executado em aparelho físico.
+
+| ID | Ocorrência | Procedimento | Resultado esperado | Resultado obtido | Situação | Observações, evidência, defeito |
+|---|---|---|---|---|---|---|
+| J01 | — | Instalar o APK 0.2.0 (build 3) **por cima** da versão 0.1.0 que já está no celular, sem desinstalar. Antes, exportar um backup cifrado. | Instala sem erro e abre com todos os dados de antes. No fim do menu aparece "versão 0.2.0 (build 3)". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J02 | 001 | Com a navegação de três botões, tocar em "+" na tela inicial. | As seis opções aparecem inteiras, a última ("Conta a receber") acima da barra do Android, e todas respondem ao toque. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J03 | 001 | Repetir J02 com a fonte do Android no maior tamanho. | A lista rola dentro da folha; nenhuma opção fica atrás da barra. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J04 | 002 | Em "Despesa", digitar valor, descrição e categoria; em "Forma de pagamento", tocar em "Cartão de crédito". | Valor, descrição e categoria continuam; aparece a escolha do cartão. Ao salvar, o saldo da conta não muda. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J05 | 002 | Em "Transferência" com uma conta só, tocar em Salvar; depois trocar para "Despesa". | O aviso de duas contas aparece na transferência e some ao trocar para despesa. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J06 | 003 | Em "Transferência", tocar em "Nova conta" no campo "Para", cadastrar e salvar. | Volta para a transferência com o que estava digitado e a conta nova selecionada em "Para". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J07 | 004 | Em "Conta a pagar", tocar no ícone de calendário do vencimento e escolher um dia. | Abre o calendário nas cores do app; a data escolhida aparece no campo; digitar à mão continua funcionando. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J08 | 005 | Em "Novo empréstimo", tocar no calendário do primeiro vencimento. | Mesmo calendário de J07. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J09 | 006 | Cadastrar um empréstimo "Americano" de R$ 10.000,00 a 1% ao mês em 3 parcelas. | Prévia: 3 parcelas, R$ 100,00 nas duas primeiras e R$ 10.100,00 na última. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J10 | 007 | Cadastrar uma dívida "Quando der" de R$ 40.000,00 sem juros; registrar pagamentos de R$ 500,00 e de R$ 2.000,00. | Saldo R$ 39.500,00 e depois R$ 37.500,00; nenhuma conta prevista foi criada; o extrato lista os dois pagamentos. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J11 | 007 | Na mesma dívida, tentar registrar um pagamento maior que o saldo. | O app recusa e informa o valor que quita a dívida. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J12 | 008 | Lançar despesas em duas categorias e olhar a tela inicial. | Cartão "Gastos por categoria" com o anel e, ao lado, cada categoria com o percentual. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J13 | 013 | Abrir Relatórios > Gastos por categoria e tocar em uma fatia ou em uma linha. | Anel com os percentuais somando 100,0%; a fatia tocada fica em destaque e o centro mostra o valor dela. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J14 | 010 | No Assistente, perguntar "No que mais gastei esse mês?". | Ranking de categorias com valor e percentual, não o resumo do mês. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J15 | 010 | Perguntar "no que posso ecomizar" (com o erro de digitação). | Resposta sobre onde o gasto se concentra; não "Não entendi". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J16 | 011 | Em Configurações, ligar "Pedir confirmação do aparelho ao abrir" e confirmar com a digital ou o bloqueio de tela. | O prompt do Android aparece; depois de confirmar, a opção fica ligada e o app continua aberto. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J17 | 011 | Com a opção ligada, mandar o app para o segundo plano e voltar. | Pede a confirmação; com a digital certa, abre; cancelar deixa na tela "Bloqueado", sem mensagem de erro. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J18 | 011 | Desligar a opção. | Pede a confirmação do aparelho antes de desligar. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J19 | 012 | Abrir Planejamento anual e ir para 2025. | Sem orçamento e sem meta em 2025, com o aviso de que não há registros. Em 2026, o orçamento aparece só a partir do mês em que foi criado. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J20 | 014 | Em uma compra, tocar em "Etiqueta". | A câmera abre dentro do app, com o total do carrinho no topo; nenhum outro aplicativo de câmera é aberto. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J21 | 014 | Ler 20 etiquetas seguidas usando "Adicionar e ler a próxima". | Nenhum travamento, câmera presa ou aquecimento anormal; cada leitura volta ao leitor em um toque. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J22 | 014 | Com o leitor aberto, ir para a tela inicial do Android e voltar ao app. | A prévia da câmera volta sozinha. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J23 | 015 | Ler a etiqueta de um cartaz com slogan (como a do abacaxi ou do papel higiênico). | O nome proposto é a descrição do produto, não o slogan nem o rodapé. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J24 | 016 | Ler uma etiqueta com preço por quilo em letras pequenas (como a dos cookies). | O preço proposto é o do item; o preço por quilo aparece só como informação de comparação. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J25 | 016 | Ler uma etiqueta com atacado e varejo (como a da água). | Preço proposto: varejo. O atacado aparece como opção "a partir de N un" e só vale quando a quantidade chega a N. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J26 | 016 | Ler uma etiqueta difícil (reflexo, risco sobre o preço). | Se a leitura sair duvidosa, o botão de adicionar fica desligado até você conferir, corrigir ou marcar "Conferi o preço com a foto". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J27 | 017 | Na revisão, tocar em um texto marcado na foto com "Nome" selecionado; depois em um valor com "Preço" selecionado. | O texto tocado vira o nome; o valor tocado vira o preço. Dá para ampliar a foto com dois dedos. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J28 | 018 | Ler o código de barras de um produto nunca cadastrado; informar nome e preço; ler o mesmo código de novo. | Na primeira vez: "Código … lido", sem falar em falha. Na segunda: o produto do seu cadastro aparece com o nome. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J29 | 019 | Depois de adicionar um item lido pela etiqueta, finalizar a compra e abrir "Evidências". | A foto da etiqueta está lá, com o preço lido e o preço confirmado. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J30 | 023 | Na revisão de um item, tocar em "Foto do produto" e fotografar. | A foto aparece na revisão e depois em "Evidências", como "Produto". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J31 | 020 | Com a compra finalizada, tocar em "Conferir com o cupom fiscal" e fotografar o cupom. | Os itens do cupom aparecem pareados com o carrinho, com preço da gôndola e preço cobrado; diferenças em destaque; par duvidoso como "Suspeita de diferença". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J32 | 020 | Tocar em uma linha do cupom e trocar o item pareado. | O par muda e o resumo é recalculado. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J33 | 021 | Na revisão, tocar no meio do nome e digitar várias letras (teclado do aparelho, com sugestões ligadas). | O cursor fica onde foi colocado; não salta para o fim. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J34 | 025 | Na revisão, com o teclado aberto. | Título e botão "Adicionar ao carrinho" continuam visíveis; nada fica sob a barra de status nem sob o teclado. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J35 | 022 | Em uma compra, "Falar o item" > "Falar" e dizer "cinco quilos de arroz, vinte e nove reais". | A transcrição aparece; o app pergunta se R$ 29,00 é o total ou o preço por quilo; depois abre a revisão. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J36 | 022 | Negar a permissão do microfone. | Mensagem clara de que a voz não está disponível; dá para digitar o item. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J37 | 024 | Depois de duas compras com o mesmo produto, abrir Compras > Histórico de preços. | O produto aparece com as duas compras, a diferença em valor e em percentual. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J38 | 026 | Passear por orçamento, assistente, ajuda e boas-vindas. | Nenhuma ocorrência de "mês sereno", "agitado" ou parecidos. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J39 | 027 | Olhar a tela inicial e abrir "Personalizar tela inicial". | Cartões novos disponíveis (saldo do período, visão geral, controle diário, discriminação, recorrência, saúde financeira); dá para ocultar e reordenar. Se você já tinha personalizado a tela, eles estão na lista para adicionar. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J40 | 029/030 | Menu > Controle diário. | Gasto de hoje e de ontem, as duas médias, o mês dia a dia; dias futuros só com "previsto". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J41 | 031 | Em Controle diário, definir limite de R$ 100,00 e lançar uma despesa de R$ 35,00. | Disponível hoje: R$ 65,00. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J42 | 031 | Definir meta de economia de R$ 20,00 e guardar R$ 15,00 em uma meta. | Guardado hoje R$ 15,00; pendente R$ 5,00. Gastar menos que o limite não aumenta o "guardado". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J43 | 032 | Em Configurações, trocar a cor do aplicativo e a densidade. | O app inteiro muda na hora; receita, despesa e alerta mantêm as cores; "Restaurar aparência padrão" desfaz. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J44 | — | Exportar um backup cifrado depois de uma compra com fotos e restaurar. | As fotos de evidência e a conferência do cupom voltam junto. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+
 ## Resumo
 
 | Seção | Aprovados | Reprovados | Bloqueados | Não executados |
@@ -176,6 +227,7 @@ Com o bloqueio do app ativado (PIN ou biometria), capturas de tela ficam bloquea
 | G. Finanças | | | | |
 | H. Interface | | | | |
 | I. Externos | | | | |
+| J. Reteste das ocorrências 001–032 | | | | |
 
 Defeitos encontrados (um por linha: ID do teste, o que aconteceu, gravidade percebida):
 

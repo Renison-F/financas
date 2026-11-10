@@ -219,6 +219,9 @@ Uma paleta de água e névoa ao amanhecer: fundo frio e claro, tinta grafite esv
 - **Cinza-mar** (#4F5E61) / **Noite-cinza** (#A3B1B3): texto secundário (6,2:1 / 8,4:1).
 - **Fio** (#D3DCDA) / **Noite-fio** (#263437): divisores. **Fio-forte** (#74848A) / **Noite-fio-forte** (#71818A): contorno de campos (≥ 3:1).
 
+### Cores de aplicativo escolhidas pelo usuário
+Desde a build 0.2.0+3 o usuário pode trocar o Sereno por outra cor de ação: azul, verde, terracota, grafite ou vinho (`lib/app/theme/palettes.dart`). A troca alcança a cor de ação, os contêineres dela, o acento e o painel-resumo. Coral, Âmbar, Verde-sinal, texto e superfícies são os mesmos em todas. Cada par de cada paleta cumpre o contraste mínimo, em claro e em escuro, conferido por teste. A Regra da Única Voz continua valendo: uma cor de controle por vez.
+
 ### Named Rules
 **A Regra da Única Voz.** Sereno é a única cor de controle. Coral e Âmbar só aparecem com significado monetário; Aurora só no símbolo e na marca de hoje.
 **A Regra do Sinal.** Um valor em lista é Grafite por padrão; Verde-sinal apenas para entradas, Coral apenas para saídas atrasadas ou saldo negativo. A cor marca exceção, não rotina.

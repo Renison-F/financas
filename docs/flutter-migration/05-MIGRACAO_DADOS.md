@@ -31,10 +31,24 @@ Toda escrita do repositório roda em `transaction()`: ou tudo é gravado ou nada
 
 ## Migrações
 
-- `schemaVersion = 1`. O dump oficial está em `apps/serenacash_flutter/drift_schemas/drift_schema_v1.json`
-  (gerado por `dart run drift_dev schema dump`). Cada versão futura acrescenta um passo em
-  `_upgradeStep` e um teste de migração a partir do dump anterior; o `PRAGMA user_version` é
-  verificado em teste.
+- `schemaVersion = 4`. Há um retrato de cada versão em `apps/serenacash_flutter/drift_schemas/`
+  (`drift_schema_v1.json` a `v4.json`, gerados por `dart run drift_dev schema dump`). Cada versão
+  acrescenta um passo em `_upgradeStep` e um teste em `test/data/migration_test.dart`, que parte do
+  retrato anterior **com dados**, migra e confere o esquema resultante contra o retrato novo.
+
+| Versão | O que muda | Dados existentes |
+|---|---|---|
+| 2 | `budgets.valid_from`, `budgets.valid_until` | Orçamentos recorrentes passam a valer a partir do mês em que foram criados (mês local do aparelho). Orçamentos de um mês só não mudam. |
+| 3 | Quatro colunas opcionais em `shopping_session_lines` (preço lido, atacado e mínimo, preço cobrado); tabelas `shopping_evidence` e `shopping_receipt_lines` | Nada é reescrito; as tabelas novas começam vazias. |
+| 4 | `loans`: sistemas `american`, `bullet`, `free`; `term_months` pode ser 0; `direction`, `interest_mode`, `rate_period`, `rate_kind`, `rate_input_percent` | A tabela é recriada com as mesmas linhas; empréstimos existentes ficam como "eu devo", sem juros de dívida livre, taxa ao mês. |
+
+- Não há caminho de volta (downgrade): instalar uma versão antiga sobre um banco mais novo não é
+  suportado. A recuperação é pelo backup cifrado, exportado antes de atualizar.
+- Ensaio em aparelho virtual (10/11/2026): APK 0.1.0+2 instalado, com conta, despesa e orçamento;
+  APK 0.2.0+3 instalado por cima; o app abriu com os dados, o orçamento passou a valer de 11/2026 em
+  diante e 2025 apareceu vazio.
+- As metas diárias, a paleta e a densidade ficam nas preferências (`UserPrefs`), sem mudança de
+  esquema; só são gravadas quando diferentes do padrão.
 - Dados vindos do RN **não** são lidos do banco anterior (sandbox e esquema diferentes, ADR-08).
 
 ## Repositórios (ports do domínio)

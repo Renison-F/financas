@@ -77,3 +77,16 @@ A tela inicial passou a definir a linguagem de todas as telas. O que mudou no c�
 Acessibilidade: botões que podem aparecer sozinhos (ícone, cor, chip, linha tocável) declaram `container: true`; sem isso o Flutter funde a anotação com o nó vizinho e o botão deixa de ser anunciado.
 
 Capturas em `screenshots/` (`tour_*`, `categories_*`, `category_*`, `menu_light`, `transactions_light`, `home_*`).
+
+## Rodada 0.2.0+3 (10/11/2026)
+
+- **Folhas** (`lib/ui/components/sheets.dart`): toda folha modal passa por `showSSheet`, que reserva o maior entre o teclado e a barra do sistema. O Flutter só trata o topo e as laterais de uma folha; por isso a última opção ficava atrás dos três botões (ocorrência 001).
+- **Paletas** (`lib/app/theme/palettes.dart`): seis cores de aplicativo (`teal`, a padrão, `blue`, `green`, `terracotta`, `graphite`, `wine`), em claro e escuro. A paleta troca a cor de ação, seus contêineres, o acento e o painel-resumo. Receita, despesa, alerta, texto e superfícies não mudam. O contraste de cada par é conferido por cálculo em `appearance_test.dart`.
+- **Densidade**: confortável (padrão) e compacta (`context.compact`).
+- **Gráfico circular** (`lib/ui/components/donut.dart`): anel com legenda ao lado; percentuais com uma casa que somam 100,0% (`domain/reports/shares.dart`). Sempre acompanhado da lista com valor e percentual; a cor nunca é o único sinal.
+- **Campo de data**: digitação mais botão de calendário (`showDatePicker` com o tema do app).
+- **Linguagem**: "sereno", "atenção" e "agitado" saíram da interface; os textos dizem o fato ("Gasto dentro do previsto", "Resultado do mês"). O nome do produto continua SerenaCash.
+- **Tela inicial**: seis cartões novos (`extraWidgets`): saldo do período, visão geral do mês, controle diário, discriminação, recorrência e saúde financeira.
+- ARB: 1.430 chaves em pt-BR e en.
+
+Parcial, registrado em `15`: não há editor livre de cores, estilos de cartão, preferências de tipografia nem opção própria de movimento reduzido (o app segue a do sistema); os cartões da tela inicial não mudam de tamanho.

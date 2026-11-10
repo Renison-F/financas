@@ -1,6 +1,6 @@
 # Auditoria de segurança — SerenaCash Flutter
 
-Última atualização: 05/11/2026, sobre a branch `refactor/flutter-serenacash`. Referências: OWASP MASVS 2.x e MASTG.
+Última atualização: 10/11/2026 (seção 7, diferencial da build 0.2.0+3), sobre a branch `refactor/flutter-serenacash`. As seções 1 a 6 são da auditoria de 05/11/2026 sobre a build 0.1.0+2. Referências: OWASP MASVS 2.x e MASTG.
 
 Este documento registra o que foi verificado, como e com que resultado. **Não é uma declaração de conformidade com o MASVS.** Os controles marcados como verificados foram exercitados por teste automatizado, por inspeção do APK ou no emulador; o que depende de aparelho físico, de serviços de loja ou de ferramentas que não existem neste ambiente está listado como não executado.
 
@@ -105,3 +105,46 @@ Feita com `aapt2`, `apksigner` e inspeção do pacote.
 6. **Cópia do plugin de compartilhamento** pode ficar no cache por até 3 minutos (ou até a próxima abertura), para dar tempo ao app de destino de ler o arquivo.
 7. **Sem proteção contra root, instrumentação e reempacotamento.**
 8. **A chave de assinatura é a de debug.** Trocar pela chave definitiva exige reinstalar (os dados do aparelho não migram entre chaves; o backup resolve).
+
+## 7. Diferencial da build 0.2.0+3 (10/11/2026)
+
+Revisão do que mudou entre `bae5d9f` e `f1b3b47`. Não é uma auditoria nova: as seções 2 a 6 não foram repetidas por inteiro. Verificado por teste automatizado, por inspeção do APK final com `aapt2` e `apksigner`, e no aparelho virtual `serenacash_teste`.
+
+### Achados e correções
+
+| # | Gravidade | Achado | Situação | Evidência |
+|---|---|---|---|---|
+| S13 | P1 | A confirmação pelo aparelho (digital, rosto ou bloqueio de tela) nunca funcionava: a atividade principal era `FlutterActivity` e o plugin `local_auth` exige `FragmentActivity`. O app tratava o erro como "indisponível". Ocorrência 011. | Corrigido: `FlutterFragmentActivity`, tema AppCompat e uma mensagem para cada estado (confirmado, cancelado, sem cadastro, sem hardware, bloqueado por tentativas). | `physical_return_test.dart`; aparelho virtual com digital cadastrada: ligar, bloquear, abrir, cancelar. |
+| S14 | P2 | Desligar a confirmação do aparelho não pedia confirmação nenhuma. | Corrigido: pede a confirmação do aparelho antes de desligar. | Mesmo arquivo. |
+| S15 | P3 | Ligar o bloqueio durante o uso bloqueava o app na hora e pedia a confirmação duas vezes. | Corrigido: passa a valer na próxima ida ao segundo plano. | `pin_lock_test.dart`. |
+
+### Controles novos verificados
+
+- **Fotos de evidência** (etiqueta, produto, cupom): gravadas como BLOB dentro do banco SQLCipher, com SHA-256, tipo e limite de 8 MB por imagem. O arquivo temporário da captura é apagado depois de lido; depois de 20 capturas seguidas o cache do app estava vazio.
+- **Backup:** fotos e linhas de cupom entram no backup cifrado; na restauração o SHA-256 de cada foto é conferido e uma foto adulterada faz o backup inteiro ser recusado, sem alterar o banco (`backup_shopping_test.dart`).
+- **Câmera:** aberta só na tela de leitura, uma por vez, liberada ao sair de vista ou ir para o segundo plano. Permissão negada tem explicação e caminho manual. Sem erro no logcat em build de release.
+- **Texto lido** (OCR, cupom, voz, código): sempre tratado como dado. Nada é aberto, executado nem gravado sem revisão do usuário. Um QR com endereço não é aberto.
+- **Preço:** leitura duvidosa não entra no carrinho sem conferência explícita; preço de atacado só é aplicado com quantidade mínima.
+- **Migrações:** três passos, testados a partir de cada versão anterior com dados; nenhuma apaga ou reescreve valor monetário.
+
+### Superfície nova
+
+- **Microfone** (`RECORD_AUDIO`), pedido só ao tocar em "Falar". O app não grava nem guarda áudio. A transcrição é feita pelo serviço de voz do Android, que conforme o aparelho **pode enviar o áudio a um servidor do fornecedor do serviço**. O app avisa isso na tela antes de ouvir. Não foi forçado o reconhecimento só no aparelho, porque nem todo aparelho tem o idioma instalado; é uma decisão a rever.
+- **Armazenamento:** o plugin da câmera declara `WRITE_EXTERNAL_STORAGE` até o Android 9 (`maxSdkVersion=28`), e o Android acrescenta `READ_EXTERNAL_STORAGE` por implicação. O app não pede essas permissões em tempo de execução e não grava fora da área privada.
+- **Dependências novas:** `camera`, `speech_to_text` e as transitivas. 185 pacotes do pub.dev consultados na OSV em 10/11/2026: 0 vulnerabilidades conhecidas. A consulta não cobre bibliotecas nativas.
+- **Rede:** nenhuma chamada nova. O OCR e a leitura de códigos continuam embarcados; não há catálogo externo de produtos nem consulta de nota fiscal.
+- **Segredos:** varredura por padrões no diff da rodada, sem achados. As fotos de etiqueta do usuário não foram versionadas; só o texto que o OCR leu delas (`test/fixtures/labels/`), que é texto de etiqueta de supermercado.
+
+### Não executado nesta rodada
+
+- MobSF, análise dinâmica, ferramentas dedicadas, root e instrumentação (como na seção 5).
+- Reanálise completa de componentes exportados do APK novo: foram conferidos pacote, versão, SDKs, permissões e certificado.
+- Biometria com rosto; troca das credenciais biométricas com o bloqueio ligado.
+- Qualquer coisa em aparelho físico e em iOS.
+
+### Riscos residuais acrescentados
+
+9. **Áudio da fala pode sair do aparelho** pelo serviço de voz do sistema (ver acima). Mitigação: aviso na tela, uso opcional, digitação sempre disponível.
+10. **Fotos de evidência aumentam o banco e o backup.** Há limite por imagem, não por total; uma política de retenção (apagar evidências antigas) ainda não existe.
+11. **O cupom fotografado é lido por OCR**, sujeito a erro; por isso ele não altera a despesa e os pares duvidosos ficam como "suspeita".
+12. **Repositório público** com o histórico do projeto. Privatizar é ação do dono (passo a passo no `CHECKPOINT.md`).
