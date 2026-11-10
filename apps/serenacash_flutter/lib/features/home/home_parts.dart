@@ -31,16 +31,37 @@ class HomeHeader extends StatelessWidget {
     required this.greeting,
     required this.period,
     required this.onPeriodTap,
+    this.onPrevious,
+    this.onNext,
   });
   final String greeting;
   final String period;
   final VoidCallback onPeriodTap;
 
+  /// Steps to the month before and after the one on screen. Without them (a period that is not a
+  /// month) the arrows are not shown.
+  final VoidCallback? onPrevious, onNext;
+
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final l = context.l10n;
-    return Semantics(
+    Widget arrow(SIconName icon, String label, VoidCallback onTap) => Semantics(
+      container: true,
+      button: true,
+      label: label,
+      child: InkResponse(
+        onTap: onTap,
+        radius: 22,
+        child: SizedBox(
+          width: Touch.min,
+          height: Touch.min,
+          child: Center(child: SIcon(icon, size: 20, color: c.primary)),
+        ),
+      ),
+    );
+    final label = Semantics(
+      container: true,
       button: true,
       label: '$greeting. ${l.periodControl(period)}',
       excludeSemantics: true,
@@ -83,6 +104,14 @@ class HomeHeader extends StatelessWidget {
           ),
         ),
       ),
+    );
+    if (onPrevious == null || onNext == null) return label;
+    return Row(
+      children: [
+        Flexible(child: label),
+        arrow(SIconName.chevronLeft, l.homePrevMonth, onPrevious!),
+        arrow(SIconName.chevronRight, l.homeNextMonth, onNext!),
+      ],
     );
   }
 }

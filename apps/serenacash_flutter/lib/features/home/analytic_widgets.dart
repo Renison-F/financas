@@ -20,6 +20,7 @@ import '../../domain/money/money.dart';
 import '../../domain/reports/shares.dart';
 import '../../ui/components/components.dart';
 import 'home_parts.dart';
+import 'period_timeline.dart';
 
 const analyticWidgetIds = {
   'period_balance',
@@ -41,7 +42,7 @@ class AnalyticWidget extends ConsumerWidget {
     final hidden = ref.watch(privacyHiddenProvider);
     final targets = ref.watch(appControllerProvider.notifier).dailyTargets;
     return switch (id) {
-      'period_balance' => _PeriodBalance(
+      'period_balance' => PeriodBalanceCard(
         ledger: ledger,
         data: data,
         hidden: hidden,
@@ -106,162 +107,6 @@ class _Figure extends StatelessWidget {
   }
 }
 
-class _PeriodBalance extends StatelessWidget {
-  const _PeriodBalance({
-    required this.ledger,
-    required this.data,
-    required this.hidden,
-  });
-  final Ledger ledger;
-  final DashboardData data;
-  final bool hidden;
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    final c = context.colors;
-    final month = monthKeyOf(data.today);
-    if (ledger.accounts.where((a) => a.isActive).isEmpty) {
-      return HomeCard(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-        child: EmptyRow(
-          icon: SIconName.wallet,
-          title: l.homeNoAccountForBalance,
-          actionLabel: l.add,
-          onAction: () => context.push('/accounts/new'),
-        ),
-      );
-    }
-    final flow = dailyFlow(ledger, month, data.today);
-    final opening = openingBalance(ledger, month);
-    final current = consolidatedBalance(ledger, asOf: data.today);
-    final projected = flow.last.projectedBalanceCents ?? current;
-    final values = [
-      for (final d in flow) d.balanceCents ?? d.projectedBalanceCents ?? 0,
-    ];
-    final todayIndex = flow.indexWhere((d) => d.date == data.today);
-    return HomeCard(
-      onTap: () => context.push('/daily'),
-      semanticHint: l.dailyTitle,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          CardHeader(title: l.homePeriodBalance, link: l.homeDayByDay),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: _Figure(
-                  label: l.homeOpening,
-                  cents: opening,
-                  hidden: hidden,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _Figure(
-                  label: l.homeBalanceToday,
-                  cents: current,
-                  hidden: hidden,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _Figure(
-                  label: l.homeProjected,
-                  cents: projected,
-                  hidden: hidden,
-                  color: projected < 0 ? c.negative : null,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: Spacing.sm),
-          // Day by day: what happened is a solid line, what is only planned is dashed.
-          Semantics(
-            image: true,
-            label: l.homeTimelineLabel,
-            child: SizedBox(
-              height: 44,
-              child: CustomPaint(
-                painter: _LinePainter(
-                  values: values,
-                  splitAt: todayIndex < 0 ? values.length - 1 : todayIndex,
-                  color: c.primary,
-                  muted: c.textMuted,
-                  zero: c.border,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            l.homeProjectedNote,
-            style: Type.caption.copyWith(color: c.textMuted),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _LinePainter extends CustomPainter {
-  _LinePainter({
-    required this.values,
-    required this.splitAt,
-    required this.color,
-    required this.muted,
-    required this.zero,
-  });
-  final List<int> values;
-  final int splitAt;
-  final Color color, muted, zero;
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (values.length < 2) return;
-    final lo = values.reduce((a, b) => a < b ? a : b);
-    final hi = values.reduce((a, b) => a > b ? a : b);
-    final span = (hi - lo) == 0 ? 1 : (hi - lo);
-    Offset at(int i) => Offset(
-      size.width * i / (values.length - 1),
-      size.height - 3 - (size.height - 6) * (values[i] - lo) / span,
-    );
-    if (lo < 0 && hi > 0) {
-      final y = size.height - 3 - (size.height - 6) * (0 - lo) / span;
-      canvas.drawLine(
-        Offset(0, y),
-        Offset(size.width, y),
-        Paint()
-          ..color = zero
-          ..strokeWidth = 1,
-      );
-    }
-    final solid = Paint()
-      ..color = color
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
-    final path = Path()..moveTo(at(0).dx, at(0).dy);
-    for (var i = 1; i <= splitAt && i < values.length; i++) {
-      path.lineTo(at(i).dx, at(i).dy);
-    }
-    canvas.drawPath(path, solid);
-    final dashed = Paint()
-      ..color = muted
-      ..strokeWidth = 1.5;
-    for (var i = splitAt; i < values.length - 1; i++) {
-      final a = at(i), b = at(i + 1);
-      canvas.drawLine(a, Offset.lerp(a, b, 0.55)!, dashed);
-    }
-    if (splitAt >= 0 && splitAt < values.length) {
-      canvas.drawCircle(at(splitAt), 3.5, Paint()..color = color);
-    }
-  }
-
-  @override
-  bool shouldRepaint(_LinePainter old) =>
-      old.values != values || old.splitAt != splitAt || old.color != color;
-}
-
 class _Overview extends StatelessWidget {
   const _Overview({required this.data, required this.hidden});
   final DashboardData data;
@@ -288,7 +133,15 @@ class _Overview extends StatelessWidget {
       (a, x) =>
           a + x.commitment.currentInvoiceCents + x.commitment.closedUnpaidCents,
     );
-    Widget tile(Widget child, String route) => Expanded(
+    // Each indicator carries a mark in its own colour. The label says what it is; the colour and
+    // the icon only make the four easier to tell apart at a glance.
+    Widget tile(
+      Widget child,
+      String route, {
+      required SIconName icon,
+      required Color color,
+      required Color background,
+    }) => Expanded(
       child: InkWell(
         onTap: () => context.push(route),
         borderRadius: BorderRadius.circular(Radii.sm),
@@ -298,7 +151,21 @@ class _Overview extends StatelessWidget {
             color: c.surfaceInset,
             borderRadius: BorderRadius.circular(Radii.sm),
           ),
-          child: child,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ExcludeSemantics(
+                child: IconTile(
+                  icon: icon,
+                  color: color,
+                  background: background,
+                  size: 30,
+                ),
+              ),
+              const SizedBox(height: 6),
+              child,
+            ],
+          ),
         ),
       ),
     );
@@ -322,6 +189,9 @@ class _Overview extends StatelessWidget {
                         : null,
                   ),
                   '/transactions',
+                  icon: SIconName.arrowDown,
+                  color: c.positive,
+                  background: c.positiveContainer,
                 ),
                 const SizedBox(width: 8),
                 tile(
@@ -334,6 +204,9 @@ class _Overview extends StatelessWidget {
                         : null,
                   ),
                   '/reports/categories',
+                  icon: SIconName.arrowUp,
+                  color: c.negative,
+                  background: c.negativeContainer,
                 ),
               ],
             ),
@@ -353,6 +226,9 @@ class _Overview extends StatelessWidget {
                     note: l.homeResultNote,
                   ),
                   '/reports/cashflow',
+                  icon: SIconName.swap,
+                  color: c.onPrimaryContainer,
+                  background: c.primaryContainer,
                 ),
                 const SizedBox(width: 8),
                 tile(
@@ -365,6 +241,9 @@ class _Overview extends StatelessWidget {
                         : l.homeCardInvoicesNote,
                   ),
                   '/cards',
+                  icon: SIconName.card,
+                  color: c.warning,
+                  background: c.warningContainer,
                 ),
               ],
             ),

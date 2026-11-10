@@ -5325,4 +5325,124 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get motionHint =>
       'Reduced: screens and sheets appear without sliding.';
+
+  @override
+  String get homeOpeningProjected => 'Expected at the start';
+
+  @override
+  String get homeClosing => 'Closing balance';
+
+  @override
+  String get homeClosingProjected => 'Expected at the end';
+
+  @override
+  String get homeChange => 'Change in the month';
+
+  @override
+  String get homeChangeProjected => 'Expected change';
+
+  @override
+  String get timelineViewBalance => 'Balance';
+
+  @override
+  String get timelineViewFlow => 'In and out';
+
+  @override
+  String get timelineFlowLabel =>
+      'Money in and out day by day: filled bars for what happened, outlined bars for what is planned.';
+
+  @override
+  String get timelineNoDay => 'No day selected';
+
+  @override
+  String get timelineHint =>
+      'Touch a day on the chart to see its balance and entries.';
+
+  @override
+  String timelineToday(String date) {
+    return 'today, $date';
+  }
+
+  @override
+  String timelineBalance(String value) {
+    return 'balance $value';
+  }
+
+  @override
+  String timelineProjected(String value) {
+    return 'expected balance $value';
+  }
+
+  @override
+  String timelineReceived(String value) {
+    return 'received $value';
+  }
+
+  @override
+  String timelineSpent(String value) {
+    return 'spent $value';
+  }
+
+  @override
+  String timelineToReceive(String value) {
+    return 'to receive $value';
+  }
+
+  @override
+  String timelineToPay(String value) {
+    return 'to pay $value';
+  }
+
+  @override
+  String get timelineOpenDay => 'See the day\'s entries';
+
+  @override
+  String get timelineClear => 'Clear';
+
+  @override
+  String get timelineDayEmpty => 'No entries on this day.';
+
+  @override
+  String get timelinePlanned => 'planned';
+
+  @override
+  String get timelineAddOnDay => 'New entry on this day';
+
+  @override
+  String get homePrevMonth => 'Previous month';
+
+  @override
+  String get homeNextMonth => 'Next month';
+
+  @override
+  String homeBackToToday(String month) {
+    return 'Back to $month';
+  }
+
+  @override
+  String homeOtherMonthNote(String month) {
+    return 'You are looking at $month. \"Can spend\" and account balances are always today\'s.';
+  }
+
+  @override
+  String widgetCompact(String name) {
+    return 'Shrink $name';
+  }
+
+  @override
+  String widgetExpand(String name) {
+    return 'Enlarge $name';
+  }
+
+  @override
+  String get widgetSizeHint =>
+      'Reduced: the card takes one line, with the title and the main figure.';
+
+  @override
+  String widgetOpen(String name) {
+    return 'Open $name';
+  }
+
+  @override
+  String get widgetSizeReduced => 'Reduced size';
 }

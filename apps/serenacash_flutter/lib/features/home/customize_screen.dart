@@ -22,6 +22,14 @@ class _CustomizeScreenState extends ConsumerState<CustomizeScreen> {
       .requireValue
       .layout;
 
+  void _toggleSize(String id) => setState(
+    () => _layout = dash.setWidgetCompact(
+      _layout,
+      id,
+      !_layout.compact.contains(id),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
@@ -117,74 +125,120 @@ class _CustomizeScreenState extends ConsumerState<CustomizeScreen> {
                             padding: const EdgeInsets.only(bottom: 8),
                             child: SCard(
                               padding: const EdgeInsets.all(Spacing.sm),
-                              child: Row(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  ReorderableDragStartListener(
-                                    index: i,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: Spacing.xs,
-                                      ),
-                                      child: SIcon(
-                                        SIconName.drag,
-                                        color: c.borderStrong,
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      dash.widgetById(_layout.order[i]).title,
-                                      style: Type.body.copyWith(color: c.text),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  SIconButton(
-                                    icon: SIconName.chevronUp,
-                                    label: l.moveUp(
-                                      dash.widgetById(_layout.order[i]).title,
-                                    ),
-                                    color: c.primary,
-                                    size: 20,
-                                    onPressed: i == 0
-                                        ? null
-                                        : () => setState(
-                                            () => _layout = dash.moveWidgetBy(
-                                              _layout,
-                                              _layout.order[i],
-                                              -1,
-                                            ),
+                                  Row(
+                                    children: [
+                                      ReorderableDragStartListener(
+                                        index: i,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                            right: Spacing.xs,
                                           ),
-                                  ),
-                                  SIconButton(
-                                    icon: SIconName.chevronDown,
-                                    label: l.moveDown(
-                                      dash.widgetById(_layout.order[i]).title,
-                                    ),
-                                    color: c.primary,
-                                    size: 20,
-                                    onPressed: i == _layout.order.length - 1
-                                        ? null
-                                        : () => setState(
-                                            () => _layout = dash.moveWidgetBy(
-                                              _layout,
-                                              _layout.order[i],
-                                              1,
-                                            ),
+                                          child: SIcon(
+                                            SIconName.drag,
+                                            color: c.borderStrong,
                                           ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          dash
+                                              .widgetById(_layout.order[i])
+                                              .title,
+                                          style: Type.body.copyWith(
+                                            color: c.text,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      SIconButton(
+                                        icon: SIconName.chevronUp,
+                                        label: l.moveUp(
+                                          dash
+                                              .widgetById(_layout.order[i])
+                                              .title,
+                                        ),
+                                        color: c.primary,
+                                        size: 20,
+                                        onPressed: i == 0
+                                            ? null
+                                            : () => setState(
+                                                () =>
+                                                    _layout = dash.moveWidgetBy(
+                                                      _layout,
+                                                      _layout.order[i],
+                                                      -1,
+                                                    ),
+                                              ),
+                                      ),
+                                      SIconButton(
+                                        icon: SIconName.chevronDown,
+                                        label: l.moveDown(
+                                          dash
+                                              .widgetById(_layout.order[i])
+                                              .title,
+                                        ),
+                                        color: c.primary,
+                                        size: 20,
+                                        onPressed: i == _layout.order.length - 1
+                                            ? null
+                                            : () => setState(
+                                                () =>
+                                                    _layout = dash.moveWidgetBy(
+                                                      _layout,
+                                                      _layout.order[i],
+                                                      1,
+                                                    ),
+                                              ),
+                                      ),
+                                      SIconButton(
+                                        icon: SIconName.eyeOff,
+                                        label: l.hideWidget(
+                                          dash
+                                              .widgetById(_layout.order[i])
+                                              .title,
+                                        ),
+                                        color: c.primary,
+                                        size: 20,
+                                        onPressed: () => setState(
+                                          () => _layout = dash.hideWidget(
+                                            _layout,
+                                            _layout.order[i],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  SIconButton(
-                                    icon: SIconName.eyeOff,
-                                    label: l.hideWidget(
-                                      dash.widgetById(_layout.order[i]).title,
-                                    ),
-                                    color: c.primary,
-                                    size: 20,
-                                    onPressed: () => setState(
-                                      () => _layout = dash.hideWidget(
-                                        _layout,
+                                  // The size of the card: full, or reduced to one line.
+                                  Semantics(
+                                    container: true,
+                                    button: true,
+                                    excludeSemantics: true,
+                                    label:
+                                        _layout.compact.contains(
+                                          _layout.order[i],
+                                        )
+                                        ? l.widgetExpand(
+                                            dash
+                                                .widgetById(_layout.order[i])
+                                                .title,
+                                          )
+                                        : l.widgetCompact(
+                                            dash
+                                                .widgetById(_layout.order[i])
+                                                .title,
+                                          ),
+                                    onTap: () => _toggleSize(_layout.order[i]),
+                                    child: SChip(
+                                      label: l.widgetSizeReduced,
+                                      selected: _layout.compact.contains(
                                         _layout.order[i],
                                       ),
+                                      onTap: () =>
+                                          _toggleSize(_layout.order[i]),
                                     ),
                                   ),
                                 ],

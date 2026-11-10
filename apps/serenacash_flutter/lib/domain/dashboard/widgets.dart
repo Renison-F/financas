@@ -319,8 +319,12 @@ class DashboardLayout {
     this.selectedMonth,
     this.accountIds,
     this.privacyMode = false,
+    this.compact = const {},
   });
   final List<String> order;
+
+  /// Widgets the user keeps in the reduced size: one line with the title and the main figure.
+  final Set<String> compact;
   final String period; // current_month | last_30_days | selected_month
   final String? selectedMonth;
   final List<String>? accountIds;
@@ -332,6 +336,8 @@ class DashboardLayout {
     'accountIds': accountIds,
     'privacyMode': privacyMode,
     'version': 1,
+    // Written only when used, so layouts from before this field stay byte-identical.
+    if (compact.isNotEmpty) 'compact': compact.toList()..sort(),
   };
   DashboardLayout copyWith({
     List<String>? order,
@@ -340,7 +346,9 @@ class DashboardLayout {
     List<String>? accountIds,
     bool clearAccounts = false,
     bool? privacyMode,
+    Set<String>? compact,
   }) => DashboardLayout(
+    compact: compact ?? this.compact,
     order: order ?? this.order,
     period: period ?? this.period,
     selectedMonth: selectedMonth ?? this.selectedMonth,
@@ -375,6 +383,12 @@ DashboardLayout moveWidgetBy(DashboardLayout l, String id, int delta) {
   return from < 0 ? l : moveWidget(l, id, from + delta);
 }
 
+/// Puts a widget in the reduced size or back in the full one.
+DashboardLayout setWidgetCompact(DashboardLayout l, String id, bool compact) =>
+    l.copyWith(
+      compact: compact ? {...l.compact, id} : ({...l.compact}..remove(id)),
+    );
+
 List<String> hiddenWidgets(DashboardLayout l) =>
     allWidgetIds.where((w) => !l.order.contains(w)).toList();
 
@@ -394,7 +408,11 @@ DashboardLayout normalizeLayout(Object? raw) {
       ? p as String
       : 'current_month';
   final ids = r['accountIds'];
+  final compact = r['compact'];
   return DashboardLayout(
+    compact: compact is List
+        ? compact.whereType<String>().where(allWidgetIds.contains).toSet()
+        : const {},
     order: order,
     period: period,
     selectedMonth: r['selectedMonth'] is String

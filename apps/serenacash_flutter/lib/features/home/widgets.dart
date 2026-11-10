@@ -510,6 +510,11 @@ class DashboardWidget extends ConsumerWidget {
                 : p.totals.expenseSettled,
           ),
         ].reduce((a, b) => a > b ? a : b);
+        // The bars keep their height; the month label under them grows with the text size, so the
+        // chart never clips it. "Compact charts" makes the bars shorter.
+        final barHeight = context.look.compactCharts ? 60.0 : 96.0;
+        final labelHeight =
+            MediaQuery.textScalerOf(context).scale(12) * 1.5 + 2;
         return HomeCard(
           onTap: () => go('/reports/cashflow'),
           semanticHint: l.cashflow,
@@ -525,7 +530,7 @@ class DashboardWidget extends ConsumerWidget {
                 )
               else
                 SizedBox(
-                  height: 120,
+                  height: barHeight + labelHeight,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -535,7 +540,7 @@ class DashboardWidget extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               SizedBox(
-                                height: 96,
+                                height: barHeight,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -548,8 +553,10 @@ class DashboardWidget extends ConsumerWidget {
                                       child: Container(
                                         width: 10,
                                         height:
-                                            (p.totals.incomeSettled / max * 96)
-                                                .clamp(2, 96)
+                                            (p.totals.incomeSettled /
+                                                    max *
+                                                    barHeight)
+                                                .clamp(2, barHeight)
                                                 .toDouble(),
                                         decoration: BoxDecoration(
                                           color: c.positive,
@@ -568,8 +575,10 @@ class DashboardWidget extends ConsumerWidget {
                                       child: Container(
                                         width: 10,
                                         height:
-                                            (p.totals.expenseSettled / max * 96)
-                                                .clamp(2, 96)
+                                            (p.totals.expenseSettled /
+                                                    max *
+                                                    barHeight)
+                                                .clamp(2, barHeight)
                                                 .toDouble(),
                                         decoration: BoxDecoration(
                                           color: c.primary,
@@ -583,10 +592,14 @@ class DashboardWidget extends ConsumerWidget {
                                 ),
                               ),
                               const SizedBox(height: 4),
-                              Text(
-                                monthLabelShort(p.totals.month, locale),
-                                style: Type.caption.copyWith(
-                                  color: c.textMuted,
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  monthLabelShort(p.totals.month, locale),
+                                  maxLines: 1,
+                                  style: Type.caption.copyWith(
+                                    color: c.textMuted,
+                                  ),
                                 ),
                               ),
                             ],

@@ -93,8 +93,11 @@ List<DayFlow> dailyFlow(Ledger ledger, MonthKey month, ISODate today) {
     }
   }
   final out = <DayFlow>[];
-  final todayBalance = consolidatedBalance(ledger, asOf: today);
-  var projected = todayBalance;
+  // The projection starts from today's balance. A month that has not begun starts from what is
+  // expected on its eve: today's balance plus everything planned between tomorrow and that day.
+  var projected = compareISO(first, today) > 0
+      ? projectedBalance(ledger, addDays(first, -1), today)
+      : consolidatedBalance(ledger, asOf: today);
   for (var d = first; compareISO(d, last) <= 0; d = addDays(d, 1)) {
     final past = compareISO(d, today) <= 0;
     if (!past) {
@@ -118,6 +121,32 @@ List<DayFlow> dailyFlow(Ledger ledger, MonthKey month, ISODate today) {
 /// Money in the accounts when the month began (end of the day before its first day).
 Cents openingBalance(Ledger ledger, MonthKey month) =>
     consolidatedBalance(ledger, asOf: addDays(startOfMonth(month), -1));
+
+/// Balance at the end of [date]. Up to [today] it is the real balance. After today it is today's
+/// balance plus what is planned to come in and minus what is planned to go out from tomorrow to
+/// [date]: a sum of what is recorded, not a forecast of behaviour.
+Cents projectedBalance(Ledger ledger, ISODate date, ISODate today) {
+  if (compareISO(date, today) <= 0) {
+    return consolidatedBalance(ledger, asOf: date);
+  }
+  var total = consolidatedBalance(ledger, asOf: today);
+  for (final t in ledger.transactions) {
+    if (!isActive(t)) continue;
+    if (compareISO(t.date, today) <= 0 || compareISO(t.date, date) > 0) {
+      continue;
+    }
+    if (isIncomeLike(t)) total = addCents(total, pendingCents(t));
+    if (t.kind == TransactionKind.expense) {
+      total = addCents(total, -pendingCents(t));
+    }
+  }
+  return total;
+}
+
+/// The entries of one day, in the order they were recorded: what the day view of the timeline lists.
+List<Transaction> entriesOn(Ledger ledger, ISODate date) =>
+    ledger.transactions.where((t) => isActive(t) && t.date == date).toList()
+      ..sort((a, b) => a.createdAt.compareTo(b.createdAt));
 
 class DailySummary {
   const DailySummary({

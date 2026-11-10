@@ -8945,6 +8945,192 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Reduzido: telas e folhas aparecem sem deslizar.'**
   String get motionHint;
+
+  /// No description provided for @homeOpeningProjected.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto no início'**
+  String get homeOpeningProjected;
+
+  /// No description provided for @homeClosing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo final'**
+  String get homeClosing;
+
+  /// No description provided for @homeClosingProjected.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto no fim'**
+  String get homeClosingProjected;
+
+  /// No description provided for @homeChange.
+  ///
+  /// In pt, this message translates to:
+  /// **'Variação no mês'**
+  String get homeChange;
+
+  /// No description provided for @homeChangeProjected.
+  ///
+  /// In pt, this message translates to:
+  /// **'Variação prevista'**
+  String get homeChangeProjected;
+
+  /// No description provided for @timelineViewBalance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo'**
+  String get timelineViewBalance;
+
+  /// No description provided for @timelineViewFlow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entradas e saídas'**
+  String get timelineViewFlow;
+
+  /// No description provided for @timelineFlowLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entradas e saídas dia a dia: barras cheias para o que aconteceu, contornadas para o que está previsto.'**
+  String get timelineFlowLabel;
+
+  /// No description provided for @timelineNoDay.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum dia selecionado'**
+  String get timelineNoDay;
+
+  /// No description provided for @timelineHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Toque em um dia do gráfico para ver o saldo e os lançamentos dele.'**
+  String get timelineHint;
+
+  /// No description provided for @timelineToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'hoje, {date}'**
+  String timelineToday(String date);
+
+  /// No description provided for @timelineBalance.
+  ///
+  /// In pt, this message translates to:
+  /// **'saldo {value}'**
+  String timelineBalance(String value);
+
+  /// No description provided for @timelineProjected.
+  ///
+  /// In pt, this message translates to:
+  /// **'saldo previsto {value}'**
+  String timelineProjected(String value);
+
+  /// No description provided for @timelineReceived.
+  ///
+  /// In pt, this message translates to:
+  /// **'recebido {value}'**
+  String timelineReceived(String value);
+
+  /// No description provided for @timelineSpent.
+  ///
+  /// In pt, this message translates to:
+  /// **'gasto {value}'**
+  String timelineSpent(String value);
+
+  /// No description provided for @timelineToReceive.
+  ///
+  /// In pt, this message translates to:
+  /// **'a receber {value}'**
+  String timelineToReceive(String value);
+
+  /// No description provided for @timelineToPay.
+  ///
+  /// In pt, this message translates to:
+  /// **'a pagar {value}'**
+  String timelineToPay(String value);
+
+  /// No description provided for @timelineOpenDay.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver lançamentos do dia'**
+  String get timelineOpenDay;
+
+  /// No description provided for @timelineClear.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limpar'**
+  String get timelineClear;
+
+  /// No description provided for @timelineDayEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum lançamento neste dia.'**
+  String get timelineDayEmpty;
+
+  /// No description provided for @timelinePlanned.
+  ///
+  /// In pt, this message translates to:
+  /// **'previsto'**
+  String get timelinePlanned;
+
+  /// No description provided for @timelineAddOnDay.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo lançamento neste dia'**
+  String get timelineAddOnDay;
+
+  /// No description provided for @homePrevMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mês anterior'**
+  String get homePrevMonth;
+
+  /// No description provided for @homeNextMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mês seguinte'**
+  String get homeNextMonth;
+
+  /// No description provided for @homeBackToToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Voltar para {month}'**
+  String homeBackToToday(String month);
+
+  /// No description provided for @homeOtherMonthNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você está vendo {month}. \"Pode gastar\" e os saldos das contas são sempre os de hoje.'**
+  String homeOtherMonthNote(String month);
+
+  /// No description provided for @widgetCompact.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reduzir {name}'**
+  String widgetCompact(String name);
+
+  /// No description provided for @widgetExpand.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ampliar {name}'**
+  String widgetExpand(String name);
+
+  /// No description provided for @widgetSizeHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reduzido: o cartão ocupa uma linha, com o título e o número principal.'**
+  String get widgetSizeHint;
+
+  /// No description provided for @widgetOpen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Abrir {name}'**
+  String widgetOpen(String name);
+
+  /// No description provided for @widgetSizeReduced.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tamanho reduzido'**
+  String get widgetSizeReduced;
 }
 
 class _AppLocalizationsDelegate

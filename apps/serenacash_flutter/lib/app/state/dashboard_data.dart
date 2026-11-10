@@ -167,12 +167,26 @@ DashboardData computeDashboard(
   );
 }
 
+/// The month the home screen is looking at when the user steps back or forward with the arrows of
+/// the header. Null follows the period saved in the layout. It is not saved: the app always opens
+/// on the present.
+class HomeMonth extends Notifier<String?> {
+  @override
+  String? build() => null;
+  void show(String? month) => state = month;
+}
+
+final homeMonthProvider = NotifierProvider<HomeMonth, String?>(HomeMonth.new);
+
 final dashboardDataProvider = Provider<DashboardData?>((ref) {
   final s = ref.watch(appControllerProvider).value;
   if (s == null) return null;
+  final month = ref.watch(homeMonthProvider);
   return computeDashboard(
     s.ledger,
-    s.layout,
+    month == null || month == monthKeyOf(s.today)
+        ? s.layout
+        : s.layout.copyWith(period: 'selected_month', selectedMonth: month),
     s.today,
     s.shoppingLists.where((l) => !l.archived).length,
     s.sessions.where((x) => x.status == 'finished').length,

@@ -8,9 +8,11 @@ import '../../app/state/app_controller.dart';
 import '../../app/state/dashboard_data.dart';
 import '../../app/theme/tokens.dart';
 import '../../domain/dashboard/widgets.dart' as dash;
+import '../../domain/dates/dates.dart';
 import '../../ui/components/components.dart';
 import '../shared/add_sheet.dart';
 import '../shared/format.dart';
+import 'compact_widget.dart';
 import 'home_parts.dart';
 import 'widgets.dart';
 
@@ -36,12 +38,18 @@ class HomeScreen extends ConsumerWidget {
     }
     final ctl = ref.read(appControllerProvider.notifier);
     final dark = Theme.of(context).brightness == Brightness.dark;
-    final period = layout.period == 'last_30_days'
-        ? l.next30days
-        : monthLabelLong(
-            data.month,
-            Localizations.localeOf(context).toString(),
-          );
+    final locale = Localizations.localeOf(context).toString();
+    final byMonth = layout.period != 'last_30_days';
+    final period = byMonth ? monthLabelLong(data.month, locale) : l.next30days;
+    // The arrows of the header look at another month without changing what is saved: the app
+    // always opens on the present.
+    final thisMonth = monthKeyOf(data.today);
+    final elsewhere = byMonth && data.month != thisMonth;
+    void show(String month) => ref
+        .read(homeMonthProvider.notifier)
+        .show(
+          month == thisMonth && layout.period == 'current_month' ? null : month,
+        );
 
     // Same three shortcuts as the reference: a new entry, a bill to pay, the accounts.
     final quick = QuickActions(
@@ -72,6 +80,8 @@ class HomeScreen extends ConsumerWidget {
         greeting: greeting,
         period: period,
         onPeriodTap: () => context.push(Routes.customize),
+        onPrevious: byMonth ? () => show(addMonthsToKey(data.month, -1)) : null,
+        onNext: byMonth ? () => show(addMonthsToKey(data.month, 1)) : null,
       ),
       actions: [
         SIconButton(
@@ -90,12 +100,33 @@ class HomeScreen extends ConsumerWidget {
       ],
       fab: AddFab(label: l.addTitle, onPressed: () => showAddSheet(context)),
       children: [
+        if (elsewhere)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: Spacing.xxs),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l.homeOtherMonthNote(period),
+                  style: Type.caption.copyWith(color: c.textMuted),
+                ),
+                SButton(
+                  label: l.homeBackToToday(monthLabelLong(thisMonth, locale)),
+                  variant: SButtonVariant.ghost,
+                  compact: true,
+                  onPressed: () => show(thisMonth),
+                ),
+              ],
+            ),
+          ),
         if (!hasSummary) quick,
         for (final id in layout.order) ...[
           WidgetBoundary(
             key: ValueKey(id),
             title: dash.widgetById(id).title,
-            child: DashboardWidget(id: id, data: data),
+            child: layout.compact.contains(id)
+                ? CompactWidget(id: id, data: data, hidden: hidden)
+                : DashboardWidget(id: id, data: data),
           ),
           if (id == 'available') quick,
         ],
