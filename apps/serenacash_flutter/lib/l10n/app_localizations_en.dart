@@ -5708,4 +5708,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String receiptAdjusted(String value) {
     return 'Expense updated to $value.';
   }
+
+  @override
+  String get catalogTitle => 'Barcode and catalogue';
+
+  @override
+  String get catalogToggle =>
+      'Look products up in an open catalogue on the internet';
+
+  @override
+  String get catalogHelp =>
+      'Off, nothing leaves the device: a code you never registered asks for the name. On, the app sends only the barcode number to Open Food Facts (openfoodfacts.org, an open database) and suggests the product name for you to check. Price, store and purchases are never sent, and a price never comes from the catalogue.';
+
+  @override
+  String catalogFound(String source) {
+    return 'Name suggested by the open catalogue $source. Check it against the package before adding.';
+  }
+
+  @override
+  String catalogNotFound(String source) {
+    return 'The catalogue $source does not have this code. Enter the name; it stays in your own register.';
+  }
+
+  @override
+  String catalogFailed(String source) {
+    return 'The catalogue $source could not be reached now (no internet or service down). Enter the name.';
+  }
+
+  @override
+  String get catalogOffHint =>
+      'Looking products up in an open catalogue on the internet is off. It can be turned on in Settings.';
 }

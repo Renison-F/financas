@@ -5718,4 +5718,34 @@ class AppLocalizationsPt extends AppLocalizations {
   String receiptAdjusted(String value) {
     return 'Despesa atualizada para $value.';
   }
+
+  @override
+  String get catalogTitle => 'Código de barras e catálogo';
+
+  @override
+  String get catalogToggle =>
+      'Consultar um catálogo aberto de produtos pela internet';
+
+  @override
+  String get catalogHelp =>
+      'Desligado, nada sai do aparelho: um código que você nunca cadastrou pede o nome. Ligado, o app envia só o número do código de barras ao Open Food Facts (openfoodfacts.org, base aberta) e sugere o nome do produto para você conferir. Preço, loja e compras nunca são enviados, e o preço nunca vem do catálogo.';
+
+  @override
+  String catalogFound(String source) {
+    return 'Nome sugerido pelo catálogo aberto $source. Confira com a embalagem antes de adicionar.';
+  }
+
+  @override
+  String catalogNotFound(String source) {
+    return 'O catálogo $source não tem este código. Informe o nome; ele fica no seu cadastro.';
+  }
+
+  @override
+  String catalogFailed(String source) {
+    return 'Não foi possível consultar o catálogo $source agora (sem internet ou serviço fora do ar). Informe o nome.';
+  }
+
+  @override
+  String get catalogOffHint =>
+      'A consulta a um catálogo aberto pela internet está desligada. Ela pode ser ligada nas Configurações.';
 }

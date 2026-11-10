@@ -3060,5 +3060,15 @@
   "receiptAdjustNote": "Valor ajustado pelo cupom fiscal em {date}. Antes: {value}.",
   "@receiptAdjustNote": {"placeholders": {"date": {"type": "String"}, "value": {"type": "String"}}},
   "receiptAdjusted": "Despesa atualizada para {value}.",
-  "@receiptAdjusted": {"placeholders": {"value": {"type": "String"}}}
+  "@receiptAdjusted": {"placeholders": {"value": {"type": "String"}}},
+  "catalogTitle": "Código de barras e catálogo",
+  "catalogToggle": "Consultar um catálogo aberto de produtos pela internet",
+  "catalogHelp": "Desligado, nada sai do aparelho: um código que você nunca cadastrou pede o nome. Ligado, o app envia só o número do código de barras ao Open Food Facts (openfoodfacts.org, base aberta) e sugere o nome do produto para você conferir. Preço, loja e compras nunca são enviados, e o preço nunca vem do catálogo.",
+  "catalogFound": "Nome sugerido pelo catálogo aberto {source}. Confira com a embalagem antes de adicionar.",
+  "@catalogFound": {"placeholders": {"source": {"type": "String"}}},
+  "catalogNotFound": "O catálogo {source} não tem este código. Informe o nome; ele fica no seu cadastro.",
+  "@catalogNotFound": {"placeholders": {"source": {"type": "String"}}},
+  "catalogFailed": "Não foi possível consultar o catálogo {source} agora (sem internet ou serviço fora do ar). Informe o nome.",
+  "@catalogFailed": {"placeholders": {"source": {"type": "String"}}},
+  "catalogOffHint": "A consulta a um catálogo aberto pela internet está desligada. Ela pode ser ligada nas Configurações."
 }

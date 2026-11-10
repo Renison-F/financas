@@ -13,6 +13,7 @@ import '../../app/app.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/state/app_state.dart';
 import '../../app/theme/tokens.dart';
+import '../../data/catalog/product_catalog.dart';
 import '../../domain/billing/billing.dart';
 import '../../domain/entities/entities.dart';
 import '../../domain/money/money.dart';
@@ -113,53 +114,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
       return;
     }
     if (scan.kind == 'barcode' && scan.barcode != null) {
-      // Reading the digits and knowing the product are two separate facts. The code was read; what
-      // is said next depends on whether this device already knows a product with it.
-      final b = scan.barcode!;
-      final code = b.gtin ?? b.raw;
-      final found = findProduct(
-        s.products,
-        barcode: code,
-        store: session.store,
-      );
-      final hist = found == null
-          ? null
-          : priceHistory(s.observations, found.product.id);
-      final listItem = list?.items
-          .where(
-            (i) =>
-                i.barcode == code ||
-                (found != null && i.productId == found.product.id),
-          )
-          .firstOrNull;
-      _review(
-        ItemDraft(
-          name: found?.product.name ?? listItem?.name ?? '',
-          brand: found?.product.brand,
-          unit: found?.product.defaultUnit ?? 'un',
-          quantity: listItem != null ? _q(listItem.quantity) : '1',
-          unitPriceCents: hist?.lastCents ?? listItem?.estimatedUnitPriceCents,
-          barcode: code,
-          productId: found?.product.id,
-          priceSource: hist?.lastCents != null ? 'history' : 'manual',
-          notes: [
-            if (found != null)
-              l.codeFound(code)
-            else if (b.valid)
-              l.codeDecodedUnknown(code)
-            else
-              l.codeNotStandard(code),
-            if (hist?.lastCents != null && hist?.lastAt != null)
-              l.codeLastPrice(
-                formatBRL(hist!.lastCents!),
-                dayMonth(hist.lastAt!.substring(0, 10)),
-              ),
-          ],
-          warnings: [if (b.kind == 'gs1_variable_measure') l.scaleCodeWarn],
-          listItemId: listItem?.id,
-          fromScanner: true,
-        ),
-      );
+      unawaited(_reviewBarcode(scan.barcode!, s, list));
       return;
     }
     final a = scan.analysis;
@@ -220,6 +175,86 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
         photo: scan.photo,
         page: scan.page,
         analysis: a,
+        fromScanner: true,
+      ),
+    );
+  }
+
+  /// A barcode that was read. Reading the digits and knowing the product are two separate facts:
+  /// the code was read; what is said next depends on whether this device already knows a product
+  /// with it. When it does not, and only if the user turned the option on, an open catalogue on
+  /// the internet is asked for a name. Whatever comes back is a suggestion to confirm.
+  Future<void> _reviewBarcode(
+    ParsedBarcode b,
+    AppState s,
+    ShoppingList? list,
+  ) async {
+    final l = context.l10n;
+    final session = _session!;
+    final code = b.gtin ?? b.raw;
+    final found = findProduct(s.products, barcode: code, store: session.store);
+    final hist = found == null
+        ? null
+        : priceHistory(s.observations, found.product.id);
+    final listItem = list?.items
+        .where(
+          (i) =>
+              i.barcode == code ||
+              (found != null && i.productId == found.product.id),
+        )
+        .firstOrNull;
+    CatalogLookup? remote;
+    final catalog = ref.read(productCatalogProvider);
+    final mayAsk =
+        found == null &&
+        listItem == null &&
+        b.valid &&
+        b.kind != 'gs1_variable_measure' &&
+        isLookupCode(code);
+    if (mayAsk && s.ledger.prefs.productLookup) {
+      // Holds other readings while the answer is on its way (a few seconds at most).
+      setState(() => _reviewing = true);
+      remote = await catalog.lookup(code);
+      if (!mounted) return;
+    }
+    final suggested = remote?.product;
+    await _review(
+      ItemDraft(
+        name:
+            found?.product.name ??
+            listItem?.name ??
+            suggested?.suggestedName ??
+            '',
+        brand: found?.product.brand ?? suggested?.brand,
+        unit: found?.product.defaultUnit ?? 'un',
+        quantity: listItem != null ? _q(listItem.quantity) : '1',
+        unitPriceCents: hist?.lastCents ?? listItem?.estimatedUnitPriceCents,
+        barcode: code,
+        productId: found?.product.id,
+        priceSource: hist?.lastCents != null ? 'history' : 'manual',
+        notes: [
+          if (found != null)
+            l.codeFound(code)
+          else if (b.valid)
+            l.codeDecodedUnknown(code)
+          else
+            l.codeNotStandard(code),
+          if (remote != null)
+            switch (remote.status) {
+              CatalogStatus.found => l.catalogFound(catalog.sourceName),
+              CatalogStatus.notFound => l.catalogNotFound(catalog.sourceName),
+              CatalogStatus.failed => l.catalogFailed(catalog.sourceName),
+            }
+          else if (mayAsk)
+            l.catalogOffHint,
+          if (hist?.lastCents != null && hist?.lastAt != null)
+            l.codeLastPrice(
+              formatBRL(hist!.lastCents!),
+              dayMonth(hist.lastAt!.substring(0, 10)),
+            ),
+        ],
+        warnings: [if (b.kind == 'gs1_variable_measure') l.scaleCodeWarn],
+        listItemId: listItem?.id,
         fromScanner: true,
       ),
     );

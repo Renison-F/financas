@@ -645,6 +645,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              CardHeader(title: l.catalogTitle),
+              // Off by default: without this choice nothing about a purchase leaves the device.
+              ToggleRow(
+                label: l.catalogToggle,
+                value: p.productLookup,
+                help: l.catalogHelp,
+                onChanged: (v) =>
+                    ctl.setPrefs((x) => x.copyWith(productLookup: v)),
+              ),
+            ],
+          ),
+        ),
+        SCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               CardHeader(title: l.reminders),
               Text(
                 l.remindersText,

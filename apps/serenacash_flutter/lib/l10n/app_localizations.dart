@@ -9563,6 +9563,48 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Despesa atualizada para {value}.'**
   String receiptAdjusted(String value);
+
+  /// No description provided for @catalogTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Código de barras e catálogo'**
+  String get catalogTitle;
+
+  /// No description provided for @catalogToggle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Consultar um catálogo aberto de produtos pela internet'**
+  String get catalogToggle;
+
+  /// No description provided for @catalogHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desligado, nada sai do aparelho: um código que você nunca cadastrou pede o nome. Ligado, o app envia só o número do código de barras ao Open Food Facts (openfoodfacts.org, base aberta) e sugere o nome do produto para você conferir. Preço, loja e compras nunca são enviados, e o preço nunca vem do catálogo.'**
+  String get catalogHelp;
+
+  /// No description provided for @catalogFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome sugerido pelo catálogo aberto {source}. Confira com a embalagem antes de adicionar.'**
+  String catalogFound(String source);
+
+  /// No description provided for @catalogNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'O catálogo {source} não tem este código. Informe o nome; ele fica no seu cadastro.'**
+  String catalogNotFound(String source);
+
+  /// No description provided for @catalogFailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não foi possível consultar o catálogo {source} agora (sem internet ou serviço fora do ar). Informe o nome.'**
+  String catalogFailed(String source);
+
+  /// No description provided for @catalogOffHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'A consulta a um catálogo aberto pela internet está desligada. Ela pode ser ligada nas Configurações.'**
+  String get catalogOffHint;
 }
 
 class _AppLocalizationsDelegate
