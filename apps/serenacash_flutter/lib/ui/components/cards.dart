@@ -35,12 +35,43 @@ class SCard extends StatelessWidget {
           (inset ? const EdgeInsets.all(Spacing.sm) : Layout.cardPadding),
       child: child,
     );
-    final box = Material(
-      color: color ?? (inset ? c.surfaceInset : c.surface),
-      borderRadius: radius,
+    // The style chosen by the user applies to the cards that sit on the screen background. An inset
+    // card, or one with a colour of its own, is a part of another card and keeps its look.
+    final style = inset || color != null
+        ? CardStyle.flat
+        : context.look.cardStyle;
+    final material = Material(
+      color:
+          color ??
+          (inset
+              ? c.surfaceInset
+              : style == CardStyle.tinted
+              ? Color.alphaBlend(c.primary.withValues(alpha: 0.06), c.surface)
+              : c.surface),
+      shape: RoundedRectangleBorder(
+        borderRadius: radius,
+        side: style == CardStyle.outlined
+            ? BorderSide(color: c.borderStrong)
+            : BorderSide.none,
+      ),
       clipBehavior: Clip.antiAlias,
       child: onTap == null ? body : InkWell(onTap: onTap, child: body),
     );
+    final box = style == CardStyle.elevated
+        ? DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: radius,
+              boxShadow: [
+                BoxShadow(
+                  color: c.shadow,
+                  blurRadius: 14,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: material,
+          )
+        : material;
     return onTap == null
         ? box
         : Semantics(button: true, hint: semanticHint, child: box);

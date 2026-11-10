@@ -17,6 +17,10 @@ Future<T?> showSSheet<T>(
   useRootNavigator: useRootNavigator,
   isScrollControlled: true,
   useSafeArea: true,
+  // With reduced motion the sheet appears in place instead of sliding up.
+  sheetAnimationStyle: MediaQuery.disableAnimationsOf(context)
+      ? AnimationStyle.noAnimation
+      : null,
   builder: (ctx) => SheetInsets(child: Builder(builder: builder)),
 );
 

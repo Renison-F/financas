@@ -521,7 +521,7 @@ class _CollapsibleState extends State<Collapsible> {
           ),
         ),
         AnimatedSize(
-          duration: Motion.base,
+          duration: context.motion(Motion.base),
           alignment: Alignment.topCenter,
           child: _open
               ? Padding(

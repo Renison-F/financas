@@ -824,6 +824,14 @@ class UserPrefs {
     this.dailyTargets = const [],
     this.palette = 'teal',
     this.density = 'comfortable',
+    this.customPrimary,
+    this.customAccent,
+    this.cardStyle = 'flat',
+    this.chartStyle = 'detailed',
+    this.motion = 'system',
+    this.textSize = 'standard',
+    this.productLookup = false,
+    this.dailyAlerts = true,
   });
   final String locale;
   final String currency;
@@ -851,6 +859,29 @@ class UserPrefs {
 
   /// `comfortable` or `compact` spacing of lists and cards.
   final String density;
+
+  /// The two colours of the palette the user made (`palette == 'custom'`), as 0xAARRGGBB. Every
+  /// other tone is derived from them, with the contrast checked.
+  final int? customPrimary, customAccent;
+
+  /// `flat` (default), `outlined`, `elevated` or `tinted` cards.
+  final String cardStyle;
+
+  /// `detailed` (default) or `compact` charts.
+  final String chartStyle;
+
+  /// `system` follows the accessibility setting of the device; `reduced` turns transitions off.
+  final String motion;
+
+  /// `standard`, `large` or `larger`: multiplies the text size of the device, never replaces it.
+  final String textSize;
+
+  /// Consent to look a barcode up in an open product catalogue on the internet. Off by default:
+  /// without it nothing about a purchase leaves the device.
+  final bool productLookup;
+
+  /// Notices when a daily spending limit is passed or a saving target is still open.
+  final bool dailyAlerts;
   factory UserPrefs.fromJson(Map<String, dynamic> j) => UserPrefs(
     locale: j['locale'] as String? ?? 'pt-BR',
     currency: j['currency'] as String? ?? 'BRL',
@@ -872,6 +903,14 @@ class UserPrefs {
     ],
     palette: j['palette'] as String? ?? 'teal',
     density: j['density'] as String? ?? 'comfortable',
+    customPrimary: (j['customPrimary'] as num?)?.toInt(),
+    customAccent: (j['customAccent'] as num?)?.toInt(),
+    cardStyle: j['cardStyle'] as String? ?? 'flat',
+    chartStyle: j['chartStyle'] as String? ?? 'detailed',
+    motion: j['motion'] as String? ?? 'system',
+    textSize: j['textSize'] as String? ?? 'standard',
+    productLookup: j['productLookup'] as bool? ?? false,
+    dailyAlerts: j['dailyAlerts'] as bool? ?? true,
   );
   Map<String, dynamic> toJson() => {
     'locale': locale,
@@ -891,6 +930,14 @@ class UserPrefs {
     if (dailyTargets.isNotEmpty) 'dailyTargets': dailyTargets,
     if (palette != 'teal') 'palette': palette,
     if (density != 'comfortable') 'density': density,
+    'customPrimary': ?customPrimary,
+    'customAccent': ?customAccent,
+    if (cardStyle != 'flat') 'cardStyle': cardStyle,
+    if (chartStyle != 'detailed') 'chartStyle': chartStyle,
+    if (motion != 'system') 'motion': motion,
+    if (textSize != 'standard') 'textSize': textSize,
+    if (productLookup) 'productLookup': true,
+    if (!dailyAlerts) 'dailyAlerts': false,
   };
   UserPrefs copyWith({
     String? locale,
@@ -909,6 +956,14 @@ class UserPrefs {
     List<Map<String, dynamic>>? dailyTargets,
     String? palette,
     String? density,
+    int? customPrimary,
+    int? customAccent,
+    String? cardStyle,
+    String? chartStyle,
+    String? motion,
+    String? textSize,
+    bool? productLookup,
+    bool? dailyAlerts,
   }) => UserPrefs(
     locale: locale ?? this.locale,
     currency: currency ?? this.currency,
@@ -928,6 +983,14 @@ class UserPrefs {
     dailyTargets: dailyTargets ?? this.dailyTargets,
     palette: palette ?? this.palette,
     density: density ?? this.density,
+    customPrimary: customPrimary ?? this.customPrimary,
+    customAccent: customAccent ?? this.customAccent,
+    cardStyle: cardStyle ?? this.cardStyle,
+    chartStyle: chartStyle ?? this.chartStyle,
+    motion: motion ?? this.motion,
+    textSize: textSize ?? this.textSize,
+    productLookup: productLookup ?? this.productLookup,
+    dailyAlerts: dailyAlerts ?? this.dailyAlerts,
   );
 }
 

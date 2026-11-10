@@ -9,7 +9,7 @@ import 'di.dart';
 import 'reminders_host.dart';
 import 'router.dart';
 import 'state/app_controller.dart';
-import 'theme/theme.dart';
+import 'theme/appearance.dart';
 import 'theme/tokens.dart';
 
 export '../l10n/app_localizations.dart';
@@ -38,16 +38,8 @@ class SerenaCashApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'SerenaCash',
       debugShowCheckedModeBanner: false,
-      theme: serenaTheme(
-        Brightness.light,
-        palette: prefs.palette,
-        compact: prefs.density == 'compact',
-      ),
-      darkTheme: serenaTheme(
-        Brightness.dark,
-        palette: prefs.palette,
-        compact: prefs.density == 'compact',
-      ),
+      theme: themeFor(Brightness.light, prefs),
+      darkTheme: themeFor(Brightness.dark, prefs),
       themeMode: mode,
       locale: locale,
       localizationsDelegates: const [
@@ -58,8 +50,11 @@ class SerenaCashApp extends ConsumerWidget {
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router,
-      builder: (context, child) =>
-          RemindersHost(child: LockGate(child: child ?? const SizedBox())),
+      builder: (context, child) => AppearanceMedia(
+        textSize: prefs.textSize,
+        reduceMotion: prefs.motion == 'reduced',
+        child: RemindersHost(child: LockGate(child: child ?? const SizedBox())),
+      ),
     );
   }
 }

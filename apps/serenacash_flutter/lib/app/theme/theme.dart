@@ -7,13 +7,37 @@ import 'package:flutter/material.dart';
 import 'palettes.dart';
 import 'tokens.dart';
 
+/// Plays the platform transition, or none when motion is reduced (by the device or in the app).
+class _MotionAwareTransitions extends PageTransitionsBuilder {
+  const _MotionAwareTransitions(this.platform);
+  final PageTransitionsBuilder platform;
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) => MediaQuery.disableAnimationsOf(context)
+      ? child
+      : platform.buildTransitions(
+          route,
+          context,
+          animation,
+          secondaryAnimation,
+          child,
+        );
+}
+
 ThemeData serenaTheme(
   Brightness brightness, {
   String palette = 'teal',
   bool compact = false,
+  CustomSeeds? custom,
+  SerenaLook look = const SerenaLook(),
 }) {
   // The palette changes the accent; the colours that carry meaning are the same in all of them.
-  final c = colorsFor(brightness, palette);
+  final c = colorsFor(brightness, palette, custom: custom);
   final scheme = ColorScheme(
     brightness: brightness,
     primary: c.primary,
@@ -66,7 +90,7 @@ ThemeData serenaTheme(
     scaffoldBackgroundColor: c.bg,
     canvasColor: c.bg,
     textTheme: text,
-    extensions: [c],
+    extensions: [c, look],
     splashFactory: InkSparkle.splashFactory,
     appBarTheme: AppBarTheme(
       backgroundColor: c.bg,
@@ -246,8 +270,12 @@ ThemeData serenaTheme(
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
-        TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
-        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.android: _MotionAwareTransitions(
+          PredictiveBackPageTransitionsBuilder(),
+        ),
+        TargetPlatform.iOS: _MotionAwareTransitions(
+          CupertinoPageTransitionsBuilder(),
+        ),
       },
     ),
   );

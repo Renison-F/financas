@@ -33,6 +33,7 @@ import '../features/onboarding/onboarding_screen.dart';
 import '../features/plan/plan_screen.dart';
 import '../features/reports/reports_screens.dart';
 import '../features/settings/settings_screen.dart';
+import '../features/settings/theme_editor_screen.dart';
 import '../features/shopping/shopping_tab.dart';
 import '../features/transactions/transaction_form_screen.dart';
 import '../features/transactions/transactions_screen.dart';
@@ -54,6 +55,7 @@ abstract final class Routes {
   static const customize = '/customize';
   static const available = '/available';
   static const settings = '/settings';
+  static const themeEditor = '/settings/theme';
 }
 
 class _RouterNotifier extends ChangeNotifier {
@@ -153,6 +155,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: Routes.settings,
         parentNavigatorKey: _rootKey,
         builder: (c, s) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: Routes.themeEditor,
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const ThemeEditorScreen(),
       ),
       GoRoute(
         path: '/accounts',

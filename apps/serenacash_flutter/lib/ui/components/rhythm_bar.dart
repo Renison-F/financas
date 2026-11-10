@@ -51,7 +51,7 @@ class RhythmBar extends StatelessWidget {
                       ),
                     ),
                     AnimatedContainer(
-                      duration: Motion.base,
+                      duration: context.motion(Motion.base),
                       width: box.maxWidth * pct / 100,
                       decoration: BoxDecoration(
                         color: fill,

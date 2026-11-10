@@ -55,7 +55,7 @@ class DonutChart extends StatelessWidget {
   final bool compact;
   final String? semanticLabel;
 
-  int? _hit(Offset p) {
+  int? _hit(Offset p, double diameter) {
     final c = Offset(diameter / 2, diameter / 2);
     final d = p - c;
     final r = d.distance;
@@ -73,6 +73,11 @@ class DonutChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    // "Compact charts" in the appearance settings: a smaller ring; the legend keeps every row,
+    // because the text is what says the numbers.
+    final diameter = context.look.compactCharts
+        ? (this.diameter * 0.74).roundToDouble()
+        : this.diameter;
     final ring = Semantics(
       image: true,
       label:
@@ -82,7 +87,7 @@ class DonutChart extends StatelessWidget {
         onTapUp: onSelect == null
             ? null
             : (d) {
-                final i = _hit(d.localPosition);
+                final i = _hit(d.localPosition, diameter);
                 onSelect!(i == selected ? null : i);
               },
         child: SizedBox(

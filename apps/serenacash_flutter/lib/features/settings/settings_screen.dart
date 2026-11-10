@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../app/app.dart';
 import '../../app/di.dart';
+import '../../app/router.dart';
 import '../../app/state/app_controller.dart';
+import '../../app/theme/appearance.dart';
 import '../../app/theme/palettes.dart';
 import '../../app/theme/tokens.dart';
 import '../../data/notifications/bill_reminders.dart';
@@ -161,6 +164,23 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final ctl = ref.read(appControllerProvider.notifier);
     Widget label(String s) =>
         Text(s, style: Type.label.copyWith(color: c.textMuted));
+    // One choice among a few, as chips that wrap: it never overflows with large text.
+    Widget choice(
+      List<(String, String)> options,
+      String value,
+      ValueChanged<String> onChanged,
+    ) => Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        for (final o in options)
+          SChip(
+            label: o.$2,
+            selected: o.$1 == value,
+            onTap: () => onChanged(o.$1),
+          ),
+      ],
+    );
     return SScreen(
       title: l.settingsTitle,
       compactTitle: true,
@@ -295,9 +315,105 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         );
                       },
                     ),
+                  // The palette made by the user: chosen like the others once it exists; the first
+                  // touch opens the editor, where it is created.
+                  Builder(
+                    builder: (context) {
+                      final seeds = customSeedsOf(p);
+                      final selected = p.palette == customPaletteId;
+                      final swatch = seeds == null
+                          ? null
+                          : colorsFor(
+                              Theme.of(context).brightness,
+                              customPaletteId,
+                              custom: seeds,
+                            );
+                      return Semantics(
+                        container: true,
+                        button: true,
+                        selected: selected,
+                        label: seeds == null
+                            ? l.paletteCustomCreate
+                            : l.paletteCustom,
+                        child: InkWell(
+                          onTap: seeds == null
+                              ? () => context.push(Routes.themeEditor)
+                              : () => ctl.setPrefs(
+                                  (x) => x.copyWith(palette: customPaletteId),
+                                ),
+                          borderRadius: BorderRadius.circular(Radii.sm),
+                          child: Container(
+                            width: 96,
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: selected ? c.primary : c.border,
+                                width: selected ? 2 : 1,
+                              ),
+                              borderRadius: BorderRadius.circular(Radii.sm),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (swatch == null)
+                                  SIcon(
+                                    SIconName.plus,
+                                    size: 22,
+                                    color: c.primary,
+                                  )
+                                else
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 11,
+                                        backgroundColor: swatch.primary,
+                                        child: selected
+                                            ? SIcon(
+                                                SIconName.check,
+                                                size: 14,
+                                                color: swatch.onPrimary,
+                                              )
+                                            : null,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      CircleAvatar(
+                                        radius: 6,
+                                        backgroundColor: swatch.accent,
+                                      ),
+                                    ],
+                                  ),
+                                const SizedBox(height: 4),
+                                ExcludeSemantics(
+                                  child: Text(
+                                    seeds == null
+                                        ? l.paletteCustomCreate
+                                        : l.paletteCustom,
+                                    style: Type.caption.copyWith(color: c.text),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
-              const SizedBox(height: Spacing.sm),
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: SButton(
+                  label: l.themeEditorTitle,
+                  icon: SIconName.edit,
+                  variant: SButtonVariant.ghost,
+                  compact: true,
+                  onPressed: () => context.push(Routes.themeEditor),
+                ),
+              ),
+              const SizedBox(height: Spacing.xs),
               label(l.densityLabel),
               const SizedBox(height: 8),
               Segmented<String>(
@@ -308,17 +424,68 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 value: p.density == 'compact' ? 'compact' : 'comfortable',
                 onChanged: (v) => ctl.setPrefs((x) => x.copyWith(density: v)),
               ),
-              if (p.palette != 'teal' || p.density != 'comfortable')
+              const SizedBox(height: Spacing.sm),
+              label(l.cardStyleLabel),
+              const SizedBox(height: 8),
+              choice(
+                [
+                  ('flat', l.cardStyleFlat),
+                  ('outlined', l.cardStyleOutlined),
+                  ('elevated', l.cardStyleElevated),
+                  ('tinted', l.cardStyleTinted),
+                ],
+                p.cardStyle,
+                (v) => ctl.setPrefs((x) => x.copyWith(cardStyle: v)),
+              ),
+              const SizedBox(height: Spacing.sm),
+              label(l.chartStyleLabel),
+              const SizedBox(height: 8),
+              choice(
+                [
+                  ('detailed', l.chartStyleDetailed),
+                  ('compact', l.chartStyleCompact),
+                ],
+                p.chartStyle,
+                (v) => ctl.setPrefs((x) => x.copyWith(chartStyle: v)),
+              ),
+              const SizedBox(height: Spacing.sm),
+              label(l.textSizeLabel),
+              const SizedBox(height: 8),
+              choice(
+                [
+                  ('standard', l.textSizeStandard),
+                  ('large', l.textSizeLarge),
+                  ('larger', l.textSizeLarger),
+                ],
+                p.textSize,
+                (v) => ctl.setPrefs((x) => x.copyWith(textSize: v)),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                l.textSizeHint,
+                style: Type.caption.copyWith(color: c.textMuted),
+              ),
+              const SizedBox(height: Spacing.sm),
+              label(l.motionLabel),
+              const SizedBox(height: 8),
+              choice(
+                [('system', l.motionSystem), ('reduced', l.motionReduced)],
+                p.motion,
+                (v) => ctl.setPrefs((x) => x.copyWith(motion: v)),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                l.motionHint,
+                style: Type.caption.copyWith(color: c.textMuted),
+              ),
+              if (!isDefaultAppearance(p))
                 Align(
                   alignment: AlignmentDirectional.centerStart,
                   child: SButton(
                     label: l.appearanceReset,
                     variant: SButtonVariant.ghost,
                     compact: true,
-                    onPressed: () => ctl.setPrefs(
-                      (x) =>
-                          x.copyWith(palette: 'teal', density: 'comfortable'),
-                    ),
+                    onPressed: () => ctl.setPrefs(withDefaultAppearance),
                   ),
                 ),
               const SizedBox(height: Spacing.sm),

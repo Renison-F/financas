@@ -5198,4 +5198,141 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get priceNotInflation =>
       'Variação observada do preço deste produto nas suas compras. Não é um índice de inflação.';
+
+  @override
+  String get paletteCustom => 'Personalizada';
+
+  @override
+  String get paletteCustomCreate => 'Criar a sua';
+
+  @override
+  String get paletteCustomEdit => 'Editar as cores da paleta personalizada';
+
+  @override
+  String get themeEditorTitle => 'Editor de tema';
+
+  @override
+  String get themeEditorIntro =>
+      'Escolha a cor principal e a cor de destaque. Veja o resultado abaixo antes de aplicar.';
+
+  @override
+  String get themeEditorNote =>
+      'As cores de receita, despesa e alerta são as mesmas em qualquer tema. No tema escuro o app usa um tom mais claro das cores escolhidas.';
+
+  @override
+  String get themePrimary => 'Cor principal';
+
+  @override
+  String get themeAccent => 'Cor de destaque';
+
+  @override
+  String get themeHue => 'Matiz';
+
+  @override
+  String get themeSaturation => 'Saturação';
+
+  @override
+  String get themeLightness => 'Luminosidade';
+
+  @override
+  String themeHexOf(String name) {
+    return 'Código da cor: $name';
+  }
+
+  @override
+  String themeContrastOk(String ratio) {
+    return 'Leitura adequada no tema claro (contraste $ratio:1).';
+  }
+
+  @override
+  String themePrimaryTooLight(String ratio) {
+    return 'Clara demais para botões e links: contraste $ratio:1, o mínimo é 4,5:1. Escolha um tom mais escuro.';
+  }
+
+  @override
+  String themeAccentTooLight(String ratio) {
+    return 'Clara demais para ícones e gráficos: contraste $ratio:1, o mínimo é 3:1. Escolha um tom mais escuro.';
+  }
+
+  @override
+  String get themeFix => 'Ajustar para o tom legível mais próximo';
+
+  @override
+  String get themeApply => 'Aplicar este tema';
+
+  @override
+  String get themeRevert => 'Desfazer alterações';
+
+  @override
+  String get themeUseDefault => 'Voltar para a cor padrão do SerenaCash';
+
+  @override
+  String get themePreview => 'Prévia do tema';
+
+  @override
+  String get themePreviewPanel => 'Painel de resumo';
+
+  @override
+  String get themePreviewRow => 'Linha de lista';
+
+  @override
+  String get themePreviewLink => 'Ver todas';
+
+  @override
+  String get themePreviewChip => 'Selecionado';
+
+  @override
+  String get themePreviewButton => 'Botão principal';
+
+  @override
+  String get cardStyleLabel => 'Estilo dos cartões';
+
+  @override
+  String get cardStyleFlat => 'Plano';
+
+  @override
+  String get cardStyleOutlined => 'Com contorno';
+
+  @override
+  String get cardStyleElevated => 'Com sombra';
+
+  @override
+  String get cardStyleTinted => 'Com cor';
+
+  @override
+  String get chartStyleLabel => 'Gráficos';
+
+  @override
+  String get chartStyleDetailed => 'Detalhados';
+
+  @override
+  String get chartStyleCompact => 'Compactos';
+
+  @override
+  String get textSizeLabel => 'Tamanho do texto';
+
+  @override
+  String get textSizeStandard => 'Padrão';
+
+  @override
+  String get textSizeLarge => 'Grande';
+
+  @override
+  String get textSizeLarger => 'Maior';
+
+  @override
+  String get textSizeHint =>
+      'Soma-se ao tamanho de fonte escolhido no Android.';
+
+  @override
+  String get motionLabel => 'Movimento';
+
+  @override
+  String get motionSystem => 'Como no aparelho';
+
+  @override
+  String get motionReduced => 'Reduzido';
+
+  @override
+  String get motionHint => 'Reduzido: telas e folhas aparecem sem deslizar.';
 }

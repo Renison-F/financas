@@ -8693,6 +8693,258 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Variação observada do preço deste produto nas suas compras. Não é um índice de inflação.'**
   String get priceNotInflation;
+
+  /// No description provided for @paletteCustom.
+  ///
+  /// In pt, this message translates to:
+  /// **'Personalizada'**
+  String get paletteCustom;
+
+  /// No description provided for @paletteCustomCreate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar a sua'**
+  String get paletteCustomCreate;
+
+  /// No description provided for @paletteCustomEdit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar as cores da paleta personalizada'**
+  String get paletteCustomEdit;
+
+  /// No description provided for @themeEditorTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editor de tema'**
+  String get themeEditorTitle;
+
+  /// No description provided for @themeEditorIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha a cor principal e a cor de destaque. Veja o resultado abaixo antes de aplicar.'**
+  String get themeEditorIntro;
+
+  /// No description provided for @themeEditorNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'As cores de receita, despesa e alerta são as mesmas em qualquer tema. No tema escuro o app usa um tom mais claro das cores escolhidas.'**
+  String get themeEditorNote;
+
+  /// No description provided for @themePrimary.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cor principal'**
+  String get themePrimary;
+
+  /// No description provided for @themeAccent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cor de destaque'**
+  String get themeAccent;
+
+  /// No description provided for @themeHue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Matiz'**
+  String get themeHue;
+
+  /// No description provided for @themeSaturation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saturação'**
+  String get themeSaturation;
+
+  /// No description provided for @themeLightness.
+  ///
+  /// In pt, this message translates to:
+  /// **'Luminosidade'**
+  String get themeLightness;
+
+  /// No description provided for @themeHexOf.
+  ///
+  /// In pt, this message translates to:
+  /// **'Código da cor: {name}'**
+  String themeHexOf(String name);
+
+  /// No description provided for @themeContrastOk.
+  ///
+  /// In pt, this message translates to:
+  /// **'Leitura adequada no tema claro (contraste {ratio}:1).'**
+  String themeContrastOk(String ratio);
+
+  /// No description provided for @themePrimaryTooLight.
+  ///
+  /// In pt, this message translates to:
+  /// **'Clara demais para botões e links: contraste {ratio}:1, o mínimo é 4,5:1. Escolha um tom mais escuro.'**
+  String themePrimaryTooLight(String ratio);
+
+  /// No description provided for @themeAccentTooLight.
+  ///
+  /// In pt, this message translates to:
+  /// **'Clara demais para ícones e gráficos: contraste {ratio}:1, o mínimo é 3:1. Escolha um tom mais escuro.'**
+  String themeAccentTooLight(String ratio);
+
+  /// No description provided for @themeFix.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ajustar para o tom legível mais próximo'**
+  String get themeFix;
+
+  /// No description provided for @themeApply.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aplicar este tema'**
+  String get themeApply;
+
+  /// No description provided for @themeRevert.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desfazer alterações'**
+  String get themeRevert;
+
+  /// No description provided for @themeUseDefault.
+  ///
+  /// In pt, this message translates to:
+  /// **'Voltar para a cor padrão do SerenaCash'**
+  String get themeUseDefault;
+
+  /// No description provided for @themePreview.
+  ///
+  /// In pt, this message translates to:
+  /// **'Prévia do tema'**
+  String get themePreview;
+
+  /// No description provided for @themePreviewPanel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Painel de resumo'**
+  String get themePreviewPanel;
+
+  /// No description provided for @themePreviewRow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Linha de lista'**
+  String get themePreviewRow;
+
+  /// No description provided for @themePreviewLink.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver todas'**
+  String get themePreviewLink;
+
+  /// No description provided for @themePreviewChip.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selecionado'**
+  String get themePreviewChip;
+
+  /// No description provided for @themePreviewButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Botão principal'**
+  String get themePreviewButton;
+
+  /// No description provided for @cardStyleLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Estilo dos cartões'**
+  String get cardStyleLabel;
+
+  /// No description provided for @cardStyleFlat.
+  ///
+  /// In pt, this message translates to:
+  /// **'Plano'**
+  String get cardStyleFlat;
+
+  /// No description provided for @cardStyleOutlined.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com contorno'**
+  String get cardStyleOutlined;
+
+  /// No description provided for @cardStyleElevated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com sombra'**
+  String get cardStyleElevated;
+
+  /// No description provided for @cardStyleTinted.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com cor'**
+  String get cardStyleTinted;
+
+  /// No description provided for @chartStyleLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gráficos'**
+  String get chartStyleLabel;
+
+  /// No description provided for @chartStyleDetailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Detalhados'**
+  String get chartStyleDetailed;
+
+  /// No description provided for @chartStyleCompact.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compactos'**
+  String get chartStyleCompact;
+
+  /// No description provided for @textSizeLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tamanho do texto'**
+  String get textSizeLabel;
+
+  /// No description provided for @textSizeStandard.
+  ///
+  /// In pt, this message translates to:
+  /// **'Padrão'**
+  String get textSizeStandard;
+
+  /// No description provided for @textSizeLarge.
+  ///
+  /// In pt, this message translates to:
+  /// **'Grande'**
+  String get textSizeLarge;
+
+  /// No description provided for @textSizeLarger.
+  ///
+  /// In pt, this message translates to:
+  /// **'Maior'**
+  String get textSizeLarger;
+
+  /// No description provided for @textSizeHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Soma-se ao tamanho de fonte escolhido no Android.'**
+  String get textSizeHint;
+
+  /// No description provided for @motionLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Movimento'**
+  String get motionLabel;
+
+  /// No description provided for @motionSystem.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como no aparelho'**
+  String get motionSystem;
+
+  /// No description provided for @motionReduced.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reduzido'**
+  String get motionReduced;
+
+  /// No description provided for @motionHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reduzido: telas e folhas aparecem sem deslizar.'**
+  String get motionHint;
 }
 
 class _AppLocalizationsDelegate

@@ -184,6 +184,39 @@ abstract final class Motion {
       slow = Duration(milliseconds: 320);
 }
 
+/// How the surface of a card is drawn. The content, the radius and the padding are the same in all.
+enum CardStyle { flat, outlined, elevated, tinted }
+
+CardStyle cardStyleOf(String id) => switch (id) {
+  'outlined' => CardStyle.outlined,
+  'elevated' => CardStyle.elevated,
+  'tinted' => CardStyle.tinted,
+  _ => CardStyle.flat,
+};
+
+/// The appearance choices that are not colours: card style and chart detail. They travel in the
+/// theme so that every screen, sheet and dialog gets them without being told.
+@immutable
+class SerenaLook extends ThemeExtension<SerenaLook> {
+  const SerenaLook({
+    this.cardStyle = CardStyle.flat,
+    this.compactCharts = false,
+  });
+  final CardStyle cardStyle;
+  final bool compactCharts;
+
+  @override
+  SerenaLook copyWith({CardStyle? cardStyle, bool? compactCharts}) =>
+      SerenaLook(
+        cardStyle: cardStyle ?? this.cardStyle,
+        compactCharts: compactCharts ?? this.compactCharts,
+      );
+
+  @override
+  SerenaLook lerp(SerenaLook? other, double t) =>
+      t < 0.5 || other == null ? this : other;
+}
+
 const displayFont = 'BricolageGrotesque';
 
 /// Type roles from DESIGN.md. One compact scale for the whole app, set by the home screen: titles in
@@ -303,4 +336,15 @@ extension SerenaContext on BuildContext {
 
   /// Compact density chosen by the user: rows and cards take less room, touch targets keep 44 dp.
   bool get compact => Theme.of(this).visualDensity == VisualDensity.compact;
+
+  /// Card style and chart detail chosen by the user.
+  SerenaLook get look =>
+      Theme.of(this).extension<SerenaLook>() ?? const SerenaLook();
+
+  /// True when transitions must not play: the device asks for it, or the user did in the app
+  /// (the app puts that choice in the same [MediaQuery] flag).
+  bool get reduceMotion => MediaQuery.disableAnimationsOf(this);
+
+  /// [duration], or no time at all when motion is reduced.
+  Duration motion(Duration duration) => reduceMotion ? Duration.zero : duration;
 }
