@@ -82,6 +82,9 @@ divergência monetária. Testes Dart totais: 279 (fixtures + invariantes).
 | D9 | `budgets.dart` | Orçamento recorrente só vale a partir de `validFrom` (ou do mês de criação) e até `validUntil`. A origem aplicava o modelo a qualquer mês. As fixtures continuam passando porque os modelos delas não têm data de criação. | Ocorrência 012. |
 | D10 | `loans.dart`, `cart.dart`, `dashboard/widgets.dart` | Sistemas `american`, `bullet` e `free`; direção do empréstimo; preço de atacado condicionado na linha do carrinho; seis widgets novos em `extraWidgets`, fora do catálogo original de 24. | Ocorrências 006, 007, 016 e 027. Campos novos só são gravados quando diferentes do padrão, então os documentos da origem continuam idênticos. |
 
+| D11 | `dashboard/widgets.dart`, `daily.dart`, `reminders.dart` | O layout guarda quais cartões estão em tamanho reduzido (`compact`); a meta diária ganha categoria, dias da semana e meta associada; os lembretes passam a incluir valores a receber, faturas e metas com data. A origem não tinha nenhum dos três. | Ocorrências 027 e 029–031. Os campos novos só são gravados quando usados; as fixtures da origem continuam passando. |
+| D12 | `daily.dart` | A projeção de um mês que ainda não começou parte do saldo previsto para a véspera (saldo de hoje mais o que está registrado até lá). | Achado N-05 ao criar a navegação por mês; o mês atual não muda. |
+
 Nenhuma divergência monetária foi ignorada. Nenhum bug do TS foi reproduzido conscientemente além dos
 listados como corrigidos (D3).
 

@@ -1,6 +1,6 @@
 # SerenaCash (Flutter)
 
-Finanças pessoais e compras de supermercado, sem depender de internet. Versão `0.2.0+3`, em homologação. Application ID `br.com.serenacash.mobile`.
+Finanças pessoais e compras de supermercado, sem depender de internet. Versão `0.2.0+4`, em homologação. Application ID `br.com.serenacash.mobile`.
 
 ## O que tem aqui
 ```

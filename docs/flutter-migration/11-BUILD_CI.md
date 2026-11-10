@@ -75,3 +75,11 @@ O CI não rodou sobre estes commits: eles estão só neste computador até o env
 ### Instalar por cima da versão anterior
 
 A build 0.2.0+3 atualiza a 0.1.0+2 sem desinstalar, desde que as duas tenham sido compiladas neste PC (mesmo certificado). Roteiro e resultado do ensaio em `15-RETORNO_HOMOLOGACAO_FISICA.md`, "Atualização sobre a versão anterior". Exporte um backup cifrado antes; não existe caminho de volta para a 0.1.0.
+
+## Build 0.2.0+4 (10/11/2026)
+
+Completa as ocorrências que a 0.2.0+3 deixou parciais. `versionName 0.2.0`, `versionCode 4`, mesmo Application ID, mesmos SDKs, mesmo certificado de debug deste PC: instala por cima da 0.1.0+2 e da 0.2.0+3. Não há migração de banco entre a 0.2.0+3 e a 0.2.0+4.
+
+Sem permissão nova e sem dependência nova. A consulta opcional ao catálogo usa a permissão de internet que já existia.
+
+Arquivos, tamanhos e SHA-256: no `CHECKPOINT.md` e no `LEIA-ME.md` da pasta `E:\SerenaCash\homologacao-0.2.0+4\`.

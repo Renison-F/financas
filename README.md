@@ -4,7 +4,7 @@ Aplicativo de finanças pessoais e compras de supermercado para Android e iOS, f
 
 **O produto é o app Flutter** em `apps/serenacash_flutter`. O app Expo/React Native (`apps/mobile`, `packages/`) é a origem da migração: fica congelado como referência de regras e de fixtures, e não recebe mais funcionalidades.
 
-**Estado atual (10/11/2026):** build de homologação 0.2.0+3 entregue para reteste em aparelho físico, depois de uma primeira rodada de testes no celular. Nada está publicado nas lojas. iOS não foi compilado nem testado. O estado real, com o que está pendente, fica em `docs/flutter-migration/CHECKPOINT.md`.
+**Estado atual (10/11/2026):** build de homologação 0.2.0+4 entregue para reteste em aparelho físico, depois de uma primeira rodada de testes no celular. Nada está publicado nas lojas. iOS não foi compilado nem testado. O estado real, com o que está pendente, fica em `docs/flutter-migration/CHECKPOINT.md`.
 
 ## Estrutura
 ```

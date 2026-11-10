@@ -45,3 +45,10 @@ O que as seções acima descrevem como "captura foto (`image_picker`)" e "contag
 Gabarito com a leitura real do OCR nas oito fotos do usuário: nome 8/8, preço do item 7/8; a que falhou (o OCR leu outro valor) cai na revisão obrigatória. Esse número descreve essas oito fotos, não a precisão em geral.
 
 Não validado em loja: câmera real, vinte leituras seguidas no aparelho do usuário, cupom fotografado, voz.
+
+## Complemento da build 0.2.0+4
+
+- **Reler uma área da foto (017):** `data/ocr/region_reader.dart` recorta o trecho marcado da foto original (`cropImage`, ampliação de até 3×), grava um arquivo temporário, roda o OCR e apaga o arquivo. `features/shopping/region_layer.dart` é o retângulo: desenhado por arrasto, movido e ajustado pelos cantos, guardado em frações da foto. O reconhecedor de gesto aceita o toque de imediato, para a lista não rolar.
+- **Catálogo aberto, opcional (018):** `data/catalog/product_catalog.dart`. Porta `ProductCatalog`, implementação `OpenFoodFactsCatalog` com `dart:io` (sem dependência nova), HTTPS, tempo limite de 6 s, resposta de no máximo 64 KB, sem seguir redirecionamento. Só dígitos de 8, 12, 13 ou 14 posições são enviados. Três resultados: encontrado, não encontrado, falha. Controlado por `UserPrefs.productLookup`, desligado por padrão. Os dados do Open Food Facts têm licença ODbL; o app mostra a origem em cada sugestão.
+- **Cupom e despesa (020):** `AppController.adjustAmountFromReceipt` e `canAdjustFromReceipt`. Só por ação do usuário, com o total conferido; anota o valor anterior.
+- **Metadados das fotos:** `data/media/image_metadata.dart` remove EXIF, XMP, IPTC e comentários de JPEG sem recodificar a imagem; mantém só a orientação. Vale para evidências e anexos.

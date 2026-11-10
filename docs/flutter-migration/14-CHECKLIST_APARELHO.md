@@ -163,13 +163,13 @@ Com o bloqueio do app ativado (PIN ou biometria), capturas de tela ficam bloquea
 | I08 | Tela de planos (Menu > SerenaCash Plus). | Neste APK a loja não está configurada: cada plano mostra "Preço e compra disponíveis na versão publicada nas lojas.", sem botão de compra, e "Restaurar compras" fica desabilitado. | | | |
 | I09 | Compra de teste (sandbox) e restauração de assinatura. | **Bloqueado** até existirem produtos na loja e chave do RevenueCat. | | B | Depende de configuração comercial. |
 
-## J. Reteste das ocorrências da homologação física (build 0.2.0+3)
+## J. Reteste das ocorrências da homologação física (build 0.2.0+4)
 
 Um teste por ocorrência do registro `15-RETORNO_HOMOLOGACAO_FISICA.md`. A coluna "ID" da ocorrência liga cada teste ao relato original. Todos estão **PENDENTE NO DISPOSITIVO DO USUÁRIO**: nenhum foi executado em aparelho físico.
 
 | ID | Ocorrência | Procedimento | Resultado esperado | Resultado obtido | Situação | Observações, evidência, defeito |
 |---|---|---|---|---|---|---|
-| J01 | — | Instalar o APK 0.2.0 (build 3) **por cima** da versão 0.1.0 que já está no celular, sem desinstalar. Antes, exportar um backup cifrado. | Instala sem erro e abre com todos os dados de antes. No fim do menu aparece "versão 0.2.0 (build 3)". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J01 | — | Instalar o APK 0.2.0 (build 4) **por cima** da versão que já está no celular (0.1.0 ou 0.2.0 build 3), sem desinstalar. Antes, exportar um backup cifrado. | Instala sem erro e abre com todos os dados de antes. No fim do menu aparece "versão 0.2.0 (build 4)". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
 | J02 | 001 | Com a navegação de três botões, tocar em "+" na tela inicial. | As seis opções aparecem inteiras, a última ("Conta a receber") acima da barra do Android, e todas respondem ao toque. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
 | J03 | 001 | Repetir J02 com a fonte do Android no maior tamanho. | A lista rola dentro da folha; nenhuma opção fica atrás da barra. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
 | J04 | 002 | Em "Despesa", digitar valor, descrição e categoria; em "Forma de pagamento", tocar em "Cartão de crédito". | Valor, descrição e categoria continuam; aparece a escolha do cartão. Ao salvar, o saldo da conta não muda. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
@@ -213,6 +213,26 @@ Um teste por ocorrência do registro `15-RETORNO_HOMOLOGACAO_FISICA.md`. A colun
 | J42 | 031 | Definir meta de economia de R$ 20,00 e guardar R$ 15,00 em uma meta. | Guardado hoje R$ 15,00; pendente R$ 5,00. Gastar menos que o limite não aumenta o "guardado". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
 | J43 | 032 | Em Configurações, trocar a cor do aplicativo e a densidade. | O app inteiro muda na hora; receita, despesa e alerta mantêm as cores; "Restaurar aparência padrão" desfaz. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
 | J44 | — | Exportar um backup cifrado depois de uma compra com fotos e restaurar. | As fotos de evidência e a conferência do cupom voltam junto. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J45 | 017 | Na revisão de uma etiqueta, tocar em "Marcar uma área para reler", arrastar o dedo sobre o nome do produto na foto e tocar em "Ler a área marcada". | O retângulo aparece onde o dedo passou, a lista não rola e a foto não se move. O nome lido entra no campo. Dá para ajustar pelos cantos antes de ler. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J46 | 017 | Repetir com "Preço" selecionado, marcando uma área com dois valores (varejo e atacado). | O app mostra os dois valores para escolher; não escolhe sozinho. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J47 | 018 | Em Configurações, ligar "Consultar um catálogo aberto de produtos pela internet". Com internet, ler o código de barras de um produto industrializado nunca cadastrado. | A revisão abre com um nome sugerido e o aviso de que veio do Open Food Facts. Sem preço. Dá para corrigir o nome. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J48 | 018 | Com a opção ligada, em modo avião, ler outro código nunca cadastrado. | Mensagem de que não foi possível consultar; o cadastro manual continua funcionando. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J49 | 018 | Desligar a opção e ler um código nunca cadastrado. | Nenhuma consulta é feita; a revisão pede o nome e lembra que a opção existe. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J50 | 020 | Depois de conferir um cupom cujo total difere da despesa registrada, tocar em "Atualizar a despesa pelo cupom", conferir o valor e confirmar. | A despesa passa a ter o valor confirmado; nas observações dela fica anotado o valor anterior. Sem tocar no botão, nada muda. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J51 | 027 | Na tela inicial, tocar nas setas ao lado do mês. | Os cartões passam a mostrar o mês anterior ou o seguinte, com um aviso e o botão de voltar ao mês atual. Fechar e abrir o app: volta ao mês atual. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J52 | 027 | No cartão "Saldo do período", tocar em um dia do gráfico e em "Ver lançamentos do dia". | Aparecem saldo, recebido e gasto daquele dia; a lista abre os lançamentos dele. Dias futuros dizem "previsto". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J53 | 027 | No mesmo cartão, trocar para "Entradas e saídas". | Barras por dia: cheias para o que aconteceu, contornadas para o que está previsto. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J54 | 027 | Em "Personalizar tela inicial", marcar "Tamanho reduzido" em dois cartões e salvar. | Na tela inicial esses cartões ocupam uma linha, com o número principal. Desmarcar devolve o tamanho normal. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J55 | 029 | Em Controle diário, escolher uma categoria no primeiro cartão. | Os gastos passam a ser só os da categoria; recebido e saldos não mudam. As comparações de 7 dias aparecem, ou "sem registro". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J56 | 030 | No cartão "Fluxo de caixa", escolher uma conta, andar um mês para trás e para frente e trocar entre "Realizado", "Previsto" e "Realizado + previsto". | A lista de dias e os saldos acompanham a conta e o mês escolhidos; mês futuro aparece como previsto. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J57 | 031 | Definir um limite de R$ 30,00 para uma categoria, só em sábado e domingo. Antes de salvar, ler a simulação. | A simulação diz quanto soma no mês e em quantos dias passados o gasto teria ficado dentro. Depois de salvar, o limite aparece em "Limites por categoria", com "Só em: Sáb, Dom". | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J58 | 031 | Com um limite diário de R$ 50,00, lançar uma despesa de R$ 65,00 hoje e voltar à tela inicial. | Um aviso no topo: "Limite diário ultrapassado em R$ 15,00." Desligando o aviso no Controle diário, ele some. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J59 | 031 | Definir uma meta diária de economia ligada a uma meta específica e guardar dinheiro em outra meta. | O valor guardado na outra meta não conta para a meta diária. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J60 | — | Em Configurações > Lembretes, permitir avisos. Cadastrar uma conta a receber para amanhã e uma conta a pagar para amanhã. | No dia seguinte, às 9 h (pode atrasar até uma hora), um aviso de cada. Desligando "Valores a receber", só o da conta a pagar chega. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J61 | 032 | Em Configurações, abrir "Editor de tema", escolher um amarelo bem claro como cor principal. | O app avisa que a cor é clara demais, mostra o contraste e não deixa aplicar. "Ajustar para o tom legível mais próximo" libera o botão. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J62 | 032 | Aplicar uma cor própria e passear pelo app, em claro e em escuro. | Botões, links e painel-resumo usam a cor escolhida; receitas, despesas e alertas mantêm as cores de sempre; tudo legível. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J63 | 032 | Trocar o estilo dos cartões (contorno, sombra, cor), os gráficos (compactos), o tamanho do texto (maior) e o movimento (reduzido). | Cada troca vale na hora, em todas as telas. Com movimento reduzido, telas e folhas aparecem sem deslizar. Nada cortado com o texto maior. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
+| J64 | — | Anexar a um lançamento uma foto da galeria tirada com a localização ligada. Exportar o anexo e ver os detalhes do arquivo em outro app. | O arquivo exportado não traz a localização. | | PENDENTE NO DISPOSITIVO DO USUÁRIO | |
 
 ## Resumo
 

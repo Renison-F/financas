@@ -222,6 +222,8 @@ Uma paleta de água e névoa ao amanhecer: fundo frio e claro, tinta grafite esv
 ### Cores de aplicativo escolhidas pelo usuário
 Desde a build 0.2.0+3 o usuário pode trocar o Sereno por outra cor de ação: azul, verde, terracota, grafite ou vinho (`lib/app/theme/palettes.dart`). A troca alcança a cor de ação, os contêineres dela, o acento e o painel-resumo. Coral, Âmbar, Verde-sinal, texto e superfícies são os mesmos em todas. Cada par de cada paleta cumpre o contraste mínimo, em claro e em escuro, conferido por teste. A Regra da Única Voz continua valendo: uma cor de controle por vez.
 
+Desde a build 0.2.0+4 há também o **editor de tema**: o usuário escolhe a cor principal e a cor de destaque. Uma cor que não chega a 4,5:1 sobre Névoa é recusada, com o contraste medido e a oferta do tom legível mais próximo; os demais tons são derivados e sempre legíveis. O usuário também escolhe o estilo dos cartões (plano, contorno, sombra, cor), gráficos detalhados ou compactos, o tamanho do texto e o movimento reduzido. A Regra da Névoa admite, por escolha do usuário, cartões com contorno, sombra suave ou um toque da cor principal; o padrão continua sendo o cartão plano.
+
 ### Named Rules
 **A Regra da Única Voz.** Sereno é a única cor de controle. Coral e Âmbar só aparecem com significado monetário; Aurora só no símbolo e na marca de hoje.
 **A Regra do Sinal.** Um valor em lista é Grafite por padrão; Verde-sinal apenas para entradas, Coral apenas para saídas atrasadas ou saldo negativo. A cor marca exceção, não rotina.

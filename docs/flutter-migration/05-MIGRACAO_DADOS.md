@@ -49,6 +49,15 @@ Toda escrita do repositório roda em `transaction()`: ou tudo é gravado ou nada
   diante e 2025 apareceu vazio.
 - As metas diárias, a paleta e a densidade ficam nas preferências (`UserPrefs`), sem mudança de
   esquema; só são gravadas quando diferentes do padrão.
+- Build 0.2.0+4: **o esquema continua na versão 4**; nenhuma migração nova. Tudo o que entrou é
+  preferência ou layout, gravado só quando usado: cores da paleta personalizada, estilo dos cartões,
+  gráficos, tamanho do texto, movimento, consulta ao catálogo, aviso de limite, lembretes silenciados
+  (`UserPrefs`); categoria, dias da semana e meta associada de cada meta diária (`DailyTarget`);
+  cartões em tamanho reduzido (`DashboardLayout.compact`). Preferências antigas leem os padrões e um
+  documento sem os campos novos continua byte a byte igual (`theme_editor_test.dart`,
+  `home_timeline_test.dart`). Uma instalação 0.2.0+3 atualiza para a 0.2.0+4 sem passo de banco.
+- Fotos guardadas (evidências e anexos) passam a ser gravadas sem metadados. As que já estavam no
+  banco não são reescritas: reescrever mudaria o SHA-256 registrado de uma evidência.
 - Dados vindos do RN **não** são lidos do banco anterior (sandbox e esquema diferentes, ADR-08).
 
 ## Repositórios (ports do domínio)

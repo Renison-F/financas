@@ -1,6 +1,6 @@
 # Auditoria de segurança — SerenaCash Flutter
 
-Última atualização: 10/11/2026 (seção 7, diferencial da build 0.2.0+3), sobre a branch `refactor/flutter-serenacash`. As seções 1 a 6 são da auditoria de 05/11/2026 sobre a build 0.1.0+2. Referências: OWASP MASVS 2.x e MASTG.
+Última atualização: 10/11/2026 (seção 7, diferencial da build 0.2.0+3; seção 8, diferencial da build 0.2.0+4), sobre a branch `refactor/flutter-serenacash`. As seções 1 a 6 são da auditoria de 05/11/2026 sobre a build 0.1.0+2. Referências: OWASP MASVS 2.x e MASTG.
 
 Este documento registra o que foi verificado, como e com que resultado. **Não é uma declaração de conformidade com o MASVS.** Os controles marcados como verificados foram exercitados por teste automatizado, por inspeção do APK ou no emulador; o que depende de aparelho físico, de serviços de loja ou de ferramentas que não existem neste ambiente está listado como não executado.
 
@@ -148,3 +148,38 @@ Revisão do que mudou entre `bae5d9f` e `f1b3b47`. Não é uma auditoria nova: a
 10. **Fotos de evidência aumentam o banco e o backup.** Há limite por imagem, não por total; uma política de retenção (apagar evidências antigas) ainda não existe.
 11. **O cupom fotografado é lido por OCR**, sujeito a erro; por isso ele não altera a despesa e os pares duvidosos ficam como "suspeita".
 12. **Repositório público** com o histórico do projeto. Privatizar é ação do dono (passo a passo no `CHECKPOINT.md`).
+
+## 8. Diferencial da build 0.2.0+4 (10/11/2026)
+
+Revisão do que mudou entre `f1b3b47` e a build 0.2.0+4. Mesma ressalva da seção 7: não é uma auditoria nova.
+
+### Achado corrigido
+
+| # | Gravidade | Achado | Situação | Evidência |
+|---|---|---|---|---|
+| S16 | P2 (privacidade) | Uma foto de cupom escolhida da galeria, ou um anexo de lançamento, podia levar posição GPS, modelo do aparelho e data nos metadados para dentro do banco e dos backups. O seletor de imagens copia o EXIF ao redimensionar. | Corrigido: evidências e anexos em JPEG são gravados sem EXIF, XMP, IPTC e comentários; a imagem não é recodificada e só a orientação é mantida. Fotos já guardadas não são reescritas. | `test/data/image_metadata_test.dart`. |
+
+### Superfície nova: consulta opcional pela internet
+
+É a primeira função do app que envia algo relacionado a uma compra para fora do aparelho. Por isso:
+
+- **Desligada por padrão**, ligada só por escolha do usuário em Configurações, com o texto que diz o que sai.
+- **O que sai:** o número do código de barras, em uma requisição HTTPS para `world.openfoodfacts.org`. Nada sobre preço, loja, quantidade, conta ou usuário. O cabeçalho identifica só o aplicativo ("SerenaCash/0.2 (Android)").
+- **O que o terceiro fica sabendo:** que alguém, naquele endereço IP, consultou aquele produto naquele momento. É um dado de consumo; a política de privacidade precisa citá-lo antes de uma versão de loja.
+- **Entrada:** só dígitos com 8, 12, 13 ou 14 posições chegam à URL; códigos de balança e códigos inválidos não são enviados.
+- **Saída:** a resposta é tratada como texto de terceiro: tamanho máximo de 64 KB, tempo limite de 6 s, sem seguir redirecionamento, campos de tipo errado ignorados, textos cortados em 120 caracteres. Vira sugestão de nome em um campo editável; nunca um preço, nunca algo executado ou aberto.
+- **Tráfego em claro** continua proibido pelo padrão do Android. Não há fixação de certificado.
+- **Sem dependência nova:** usa `dart:io`.
+
+### Outros pontos
+
+- **Releitura de uma área da foto:** o recorte vira um arquivo temporário na área privada do app, apagado logo depois da leitura, inclusive quando a leitura falha.
+- **Lembretes:** os avisos de valores a receber, faturas e metas mostram descrição e valor na tela de bloqueio, como os de contas (risco residual 1). Um aviso só abre rotas conhecidas do app (`isReminderRoute`); qualquer outro texto em um aviso é ignorado.
+- **Despesa pelo cupom:** muda um valor financeiro, então só acontece por ação do usuário, com os dois valores na tela, e deixa o valor anterior anotado.
+- **Preferências novas** são lidas com valores padrão e nunca derrubam o app quando desconhecidas; a paleta personalizada é derivada com contraste garantido mesmo se vier de um backup editado à mão.
+- **Dependências:** nenhuma nova nesta build. Consulta à OSV repetida em 10/11/2026 (185 pacotes, 0 vulnerabilidades conhecidas).
+
+### Riscos residuais acrescentados
+
+13. **Consulta ao catálogo revela consumo a um terceiro**, quando ligada. Mitigação: desligada por padrão, texto claro, cadastro local evita repetir a consulta.
+14. **Fotos antigas** (guardadas antes desta build) mantêm os metadados que tinham.

@@ -90,3 +90,14 @@ Capturas em `screenshots/` (`tour_*`, `categories_*`, `category_*`, `menu_light`
 - ARB: 1.430 chaves em pt-BR e en.
 
 Parcial, registrado em `15`: não há editor livre de cores, estilos de cartão, preferências de tipografia nem opção própria de movimento reduzido (o app segue a do sistema); os cartões da tela inicial não mudam de tamanho.
+
+## Complemento da build 0.2.0+4
+
+O item "Parcial" da seção anterior deixou de valer.
+
+- **Editor de tema** (`features/settings/theme_editor_screen.dart`): cor principal e cor de destaque por matiz, saturação, luminosidade ou código; prévia (`ThemePreview`) em claro e escuro; desfazer; voltar ao padrão.
+- **Derivação e trava** (`app/theme/palettes.dart`): `customColors` deriva todos os tons das duas cores; `ensureContrast` leva cada par de texto a 4,5:1 mantendo o matiz; `readableOnLight` e `visibleOnLight` são o que o editor exige antes de aplicar.
+- **`SerenaLook`** (extensão do tema, `tokens.dart`): estilo dos cartões (`CardStyle.flat`, `outlined`, `elevated`, `tinted`) e gráficos compactos. `SCard` aplica o estilo aos cartões que ficam sobre o fundo da tela; cartões internos e cartões com cor própria não mudam.
+- **`AppearanceMedia`** (`app/theme/appearance.dart`): tamanho do texto (multiplica o do aparelho, teto de 2×) e movimento reduzido, aplicados acima de todas as telas, folhas e diálogos. `context.motion(d)` zera durações; as transições de página e as folhas respeitam a opção do app e a do aparelho.
+- **Tela inicial:** `period_timeline.dart` (cartão de saldo com linha do tempo interativa), `compact_widget.dart` (cartão em tamanho reduzido), cabeçalho com setas de mês, visão geral com marca de cor por indicador.
+- ARB: 1.581 chaves em pt-BR e en.

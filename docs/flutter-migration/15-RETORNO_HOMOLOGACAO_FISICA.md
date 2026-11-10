@@ -35,6 +35,8 @@ O estado do projeto está em `CHECKPOINT.md`. O roteiro de reteste no aparelho e
 
 Nenhum item está "aprovado no aparelho": isso só o reteste do usuário diz.
 
+**Rodada de complemento (10/11/2026, build 0.2.0+4).** A primeira entrega desta rodada (build 0.2.0+3) deixou cinco ocorrências parciais (009, 017, 027, 028, 032) e lacunas em 018, 020 e 029–031. O usuário mandou completar tudo antes de retestar. Não há mais ocorrência com estado `parcial`. O que não pode ser decidido aqui, por depender do aparelho ou de terceiros, está em "O que continua fora do alcance deste ambiente", no fim.
+
 ## Matriz 001–032
 
 | ID | Relato | Prioridade | Estado | Commit |
@@ -47,7 +49,7 @@ Nenhum item está "aprovado no aparelho": isso só o reteste do usuário diz.
 | 006 | Outros sistemas de empréstimo | P2 | corrigido | `870747a` |
 | 007 | Dívida sem parcelas nem prazo | P1/P2 | corrigido | `870747a` |
 | 008 | Gráfico de despesas por categoria na tela inicial | P2 | aprovado automatizado | `050f043` |
-| 009 | Interface neutra demais | P2 | parcial | `a761971` |
+| 009 | Interface neutra demais | P2 | aprovado automatizado | `a761971`, `764476e`, `96668f9` |
 | 010 | Assistente: ranking de gastos e onde economizar | P1 | corrigido | `edfe1e7` |
 | 011 | Biometria não habilita | P1 | aprovado automatizado · aguarda teste físico | `5db0075`, `9b31f7c` |
 | 012 | Orçamento e meta de 2026 em 2025 | P1 | aprovado automatizado | `ddafeeb` |
@@ -55,22 +57,22 @@ Nenhum item está "aprovado no aparelho": isso só o reteste do usuário diz.
 | 014 | Leitor de etiquetas abre outra câmera | P1 | aprovado automatizado · aguarda teste físico | `20ac26f`, `c774347` |
 | 015 | OCR escolhe slogan como nome | P1 | corrigido · aguarda teste físico | `20ac26f` |
 | 016 | OCR escolhe preço errado | P1 | corrigido · aguarda teste físico | `20ac26f` |
-| 017 | Apontar nome e preço na imagem | P2 | parcial · aguarda teste físico | `20ac26f` |
-| 018 | Código lido tratado como falha | P1 | corrigido · aguarda teste físico | `20ac26f` |
+| 017 | Apontar nome e preço na imagem | P2 | corrigido · aguarda teste físico | `20ac26f`, `228ef04` |
+| 018 | Código lido tratado como falha | P1 | corrigido · aguarda teste físico | `20ac26f`, `84b1321` |
 | 019 | Foto da gôndola como comprovação | P2 | corrigido | `20ac26f`, `211c06e` |
-| 020 | Conferência com o cupom fiscal | P2 | corrigido · aguarda teste físico | `20ac26f` |
+| 020 | Conferência com o cupom fiscal | P2 | corrigido · aguarda teste físico | `20ac26f`, `878d992` |
 | 021 | Cursor salta ao corrigir o nome | P1 | corrigido · aguarda teste físico | `cd9b7e8` |
 | 022 | Itens por voz | P2 | corrigido · aguarda teste físico | `814b5bb` |
 | 023 | Foto do produto ligada ao preço | P2 | corrigido | `20ac26f` |
 | 024 | Histórico e evolução de preços | P2 | corrigido | `449e3db` |
 | 025 | Teclado e barras encobrem campos | P1/P2 | aprovado automatizado · aguarda teste físico | `cd9b7e8` |
 | 026 | Tirar "mês sereno", "agitado" e parecidos | regra global | corrigido | `870747a`, `edfe1e7`, `a761971` |
-| 027 | Tela inicial analítica e modular | P2 | parcial | `0f3e994` |
-| 028 | Refinar a identidade da tela inicial | regra global | parcial | `0f3e994`, `a761971` |
-| 029 | Gastos diários e limites | P2 | corrigido | `0f3e994` |
-| 030 | Receitas diárias e evolução dia a dia | P2 | corrigido | `0f3e994` |
-| 031 | Metas diárias de gasto e de economia | P2 | corrigido | `0f3e994` |
-| 032 | Personalização de cor, tema e aparência | P2 | parcial | `a761971` |
+| 027 | Tela inicial analítica e modular | P2 | aprovado automatizado | `0f3e994`, `96668f9` |
+| 028 | Refinar a identidade da tela inicial | regra global | aprovado automatizado | `0f3e994`, `a761971`, `96668f9` |
+| 029 | Gastos diários e limites | P2 | aprovado automatizado | `0f3e994`, `b1a0a7e` |
+| 030 | Receitas diárias e evolução dia a dia | P2 | aprovado automatizado | `0f3e994`, `b1a0a7e` |
+| 031 | Metas diárias de gasto e de economia | P2 | aprovado automatizado | `0f3e994`, `b1a0a7e` |
+| 032 | Personalização de cor, tema e aparência | P2 | aprovado automatizado | `a761971`, `764476e` |
 
 As evidências do usuário ficam em `docs/SerenaCash_Fable_5_2_Pacote_Com_Referencias/referencias/` na máquina dele. A pasta não foi incluída no controle de versão: o repositório é público e ela traz capturas de um aplicativo de terceiros. As fotos de etiqueta também não foram commitadas; o que entrou no repositório foi a leitura do OCR sobre elas (`test/fixtures/labels/*.json`, só texto e posições).
 
@@ -85,6 +87,10 @@ As evidências do usuário ficam em `docs/SerenaCash_Fable_5_2_Pacote_Com_Refere
 | N-02 | Desligar a confirmação do aparelho não pedia confirmação | corrigido | `9b31f7c` |
 | N-03 | O diálogo de permissão da câmera reiniciava o leitor e terminava em "Câmera indisponível" (achado no aparelho virtual) | corrigido | `c774347` |
 | N-04 | O backup levava as compras e deixava para trás fotos e cupom | corrigido | `211c06e` |
+| N-05 | A projeção de um mês que ainda não começou partia do saldo de hoje, ignorando o que está previsto até lá (achado ao criar a navegação por mês) | corrigido | `96668f9` |
+| N-06 | O gráfico de evolução cortava o rótulo do mês com texto muito grande | corrigido | `96668f9` |
+| N-07 | Foto de cupom escolhida da galeria podia levar posição GPS e outros metadados para o banco e os backups | corrigido | `215bba3` |
+| N-08 | Lembretes só cobriam contas a pagar; valores a receber, faturas e metas com data ficavam sem aviso | corrigido | `b1a0a7e` |
 
 ## Relatório por ocorrência
 
@@ -130,9 +136,16 @@ As evidências do usuário ficam em `docs/SerenaCash_Fable_5_2_Pacote_Com_Refere
 - **Estado:** 008 aprovado automatizado; 013 corrigido.
 
 ### 009, 028 e 032 — Cor, identidade e personalização
-- **Entregue:** seis paletas (petróleo, azul, verde, terracota, grafite, vinho) em claro e escuro, densidade confortável ou compacta, restaurar padrão; efeito imediato em todo o app. As cores de receita, despesa e alerta não mudam com a paleta. Todos os pares de cor usados passam no contraste WCAG AA, verificado por teste. Cores de categoria no gráfico e nos cartões novos.
-- **Não entregue:** editor de cor livre, estilos de cartão, preferências de tipografia, opção própria de movimento reduzido, redesenho completo da tela inicial segundo as capturas de referência.
-- **Estado:** parcial.
+- **Paletas:** seis prontas (petróleo, azul, verde, terracota, grafite, vinho) e uma **feita pelo usuário** no editor de tema: cor principal e cor de destaque, por matiz, saturação, luminosidade ou código `#RRGGBB`, com prévia em claro e escuro, desfazer e voltar ao padrão.
+- **Trava de contraste:** uma cor que não dá leitura é recusada, com o contraste medido na tela (mínimo 4,5:1 para texto e 3:1 para ícones e gráficos) e um botão que leva ao tom legível mais próximo, mantendo o matiz. Todos os tons derivados (contêineres, painel-resumo, tema escuro) são levados a 4,5:1 por construção; o teste cobre dez cores difíceis, entre elas branco, preto, amarelo vivo e cinza médio, nos dois temas.
+- **Sinal financeiro:** receita, despesa, alerta, texto e superfícies são os mesmos em qualquer paleta, inclusive na personalizada.
+- **Estilo dos cartões:** plano, com contorno, com sombra ou com cor. **Gráficos:** detalhados ou compactos. **Densidade:** confortável ou compacta.
+- **Tipografia:** tamanho do texto padrão, grande ou maior, somado ao tamanho de fonte do Android e com teto de duas vezes o tamanho de projeto. A família tipográfica é a da marca e não é escolhida pelo usuário.
+- **Movimento:** "como no aparelho" ou "reduzido"; reduzido, telas e folhas aparecem sem deslizar. A opção de acessibilidade do aparelho também passa a ser respeitada nas transições, o que antes não acontecia.
+- **Alcance:** tudo viaja no tema, então vale em todas as telas, folhas, calendário, leitor e tela de bloqueio. "Restaurar aparência padrão" desfaz tudo e mantém as cores personalizadas disponíveis.
+- **Identidade da tela inicial (028/009):** marca de cor por indicador na visão geral, linha do tempo com dois modos, cabeçalho com mês navegável e cartões em dois tamanhos. A estrutura aprovada antes (painel "pode gastar", ações rápidas, cartões) foi mantida de propósito.
+- **Testes:** `test/app/theme_editor_test.dart` (32) e `appearance_test.dart`; tela de 320 pt com texto a 1,6 × "maior" sem estouro.
+- **Estado:** aprovado automatizado. No aparelho: conferir legibilidade e gosto.
 
 ### 010 — Assistente
 - **Causa:** qualquer pergunta com a palavra "mês" era lida como pedido de resumo do mês, antes de chegar à regra do ranking; "economizar" não tinha regra, e um erro de digitação derrubava a pergunta.
@@ -180,13 +193,18 @@ As evidências do usuário ficam em `docs/SerenaCash_Fable_5_2_Pacote_Com_Refere
 - **Estado:** corrigido · aguarda teste físico.
 
 ### 017 — Apontar nome e preço na imagem
-- **Entregue:** a tela de revisão mostra a foto com cada linha lida marcada; tocar em uma linha a usa como nome (ou a junta ao nome) ou como preço. Zoom por pinça.
-- **Não entregue:** desenhar um retângulo livre e reprocessar só aquela área.
-- **Estado:** parcial · aguarda teste físico.
+- **Entregue:** a revisão mostra a foto com cada linha lida marcada; tocar em uma linha a usa como nome ou como preço. Além disso, "Marcar uma área para reler": o usuário arrasta um retângulo sobre a foto, ajusta pelos cantos ou move, e pede a leitura só daquele trecho.
+- **Como funciona:** o trecho é recortado da foto original, ampliado até três vezes (letra pequena lê melhor), lido pelo OCR do aparelho e descartado. A foto guardada como evidência não muda. No modo Nome, o texto lido vira a descrição. No modo Preço, um valor é usado; vários são oferecidos para escolha; nenhum é dito junto com o texto lido. Nada é preenchido quando nada é lido.
+- **Gesto:** a marcação começa no primeiro toque, sem rolar a lista nem mover a foto. Para letra pequena, ampliar a foto antes de marcar.
+- **Testes:** `test/app/region_read_test.dart` (7): recorte real sobre uma imagem, ordem de leitura, valores, arrasto, mover e redimensionar, falhas.
+- **Não validado aqui:** a qualidade da releitura em etiquetas reais, que depende do OCR do aparelho.
+- **Estado:** corrigido · aguarda teste físico.
 
 ### 018 — Código de barras
-- **Correção:** qualquer código decodificado volta para a compra. Três mensagens distintas: produto do cadastro; código lido e ainda não cadastrado (o produto fica cadastrado com ele ao confirmar); código que não fecha como EAN/UPC (guardado como lido). QR Code só é usado para a chave do cupom, como texto; nenhum link é aberto.
-- **Não incluído:** catálogo externo de produtos.
+- **Correção:** qualquer código decodificado volta para a compra. Mensagens distintas: produto do cadastro; código lido e ainda não cadastrado (o produto fica cadastrado com ele ao confirmar); código que não fecha como EAN/UPC (guardado como lido). QR Code só é usado para a chave do cupom, como texto; nenhum link é aberto.
+- **Catálogo externo, opcional:** em Configurações há "Consultar um catálogo aberto de produtos pela internet", **desligado por padrão**. Ligado, um código que não está no cadastro é consultado no Open Food Facts: só o número do código é enviado; volta uma sugestão de nome (marca e tamanho, quando houver) para conferir. Preço nunca vem do catálogo. "Não está no catálogo" e "não foi possível consultar" são mensagens diferentes. Depois de confirmado, o produto fica no cadastro local e não é consultado de novo. Códigos de balança e códigos inválidos nunca são enviados.
+- **Verificação:** o formato da resposta foi conferido contra o serviço real em 10/11/2026 (produto existente e código inexistente). O app não foi exercitado com rede no aparelho virtual.
+- **Testes:** `test/app/catalog_lookup_test.dart` (5).
 - **Estado:** corrigido · aguarda teste físico.
 
 ### 019 e 023 — Fotos como evidência
@@ -196,8 +214,10 @@ As evidências do usuário ficam em `docs/SerenaCash_Fable_5_2_Pacote_Com_Refere
 ### 020 — Cupom fiscal
 - **Correção:** fotografar ou escolher a foto do cupom; as linhas são lidas no aparelho, pareadas com o carrinho e comparadas. Par sólido com preço diferente vira "diferença"; par fraco vira "suspeita" e pede decisão; o usuário pode trocar ou desfazer um par. O preço do carrinho não é reescrito.
 - **Caso da vela:** gôndola R$ 11,99, cupom R$ 14,99 → diferença de R$ 3,00, coberto por teste.
-- **Não testado:** leitura de um cupom real fotografado (os testes usam o texto das linhas).
-- **Decisão em aberto:** a despesa já registrada não é alterada pelo cupom.
+- **Cupom e despesa:** a tela mostra a soma dos itens lidos ao lado da despesa registrada. Se diferem, o usuário pode "Atualizar a despesa pelo cupom": vê os dois valores, confere ou corrige o total e confirma. O valor anterior fica anotado na despesa. O cupom nunca altera a despesa sozinho; lançamento parcelado, recorrente ou pago em parte não é tocado.
+- **Privacidade:** a foto é guardada sem metadados (posição GPS, aparelho, data); os dados da imagem não são recodificados.
+- **Testes:** `receipt_test.dart`, `shopping_review_test.dart`, `test/app/receipt_adjust_test.dart` (4), `test/data/image_metadata_test.dart` (4).
+- **Não testado:** leitura de um cupom real fotografado (os testes usam o texto das linhas). Consulta da NFC-e pela chave de acesso não existe: exigiria serviço de terceiros.
 - **Estado:** corrigido · aguarda teste físico.
 
 ### 021 — Cursor
@@ -225,17 +245,27 @@ As evidências do usuário ficam em `docs/SerenaCash_Fable_5_2_Pacote_Com_Refere
 - **Estado:** corrigido.
 
 ### 027 — Tela inicial analítica
-- **Entregue:** seis cartões novos, personalizáveis como os demais: saldo do período (inicial, hoje, previsto, com linha dia a dia), visão geral, controle diário, discriminação por estado, despesas por recorrência e saúde financeira por critérios, sem nota. Estado vazio em uma linha, nunca zeros.
-- **Não entregue:** redimensionar cartões; cabeçalho com linha do tempo navegável; gráficos de evolução novos além dos que já existiam.
+- **Cartões:** saldo do período, visão geral, controle diário, discriminação por estado, despesas por recorrência e saúde financeira por critérios, sem nota, além dos 24 que já existiam (evolução, economia mensal, categorias, vencimentos e outros). Estado vazio em uma linha, nunca zeros.
+- **Mês navegável:** setas no cabeçalho mostram o mês anterior e o seguinte. É um olhar, não uma configuração: nada é salvo e o app sempre abre no presente. Fora do mês atual, um aviso diz que "pode gastar" e os saldos das contas são sempre os de hoje.
+- **Linha do tempo:** o cartão de saldo tem duas visões (saldo; entradas e saídas). Tocar ou arrastar sobre o gráfico escolhe um dia e mostra saldo, recebido, gasto, a receber e a pagar; "Ver lançamentos do dia" abre os lançamentos daquele dia e permite lançar nele. Passado é linha cheia e barra cheia; previsto é tracejado e barra contornada. Para leitor de tela, o gráfico é um controle que anda dia a dia.
+- **Passado, presente e futuro com nomes diferentes:** inicial, saldo hoje, previsto no fim; em mês passado, inicial, saldo final e variação; em mês futuro, tudo dito como previsto.
+- **Tamanho dos cartões:** cada cartão pode ficar em "tamanho reduzido" (uma linha, com o número principal quando existe) em "Personalizar tela inicial". A escolha é salva com o layout.
 - **Quem já personalizou a tela inicial** mantém a ordem que escolheu; os cartões novos ficam em "Personalizar tela inicial".
-- **Estado:** parcial.
+- **Testes:** `test/app/home_timeline_test.dart` (7).
+- **Estado:** aprovado automatizado.
 
 ### 029, 030 e 031 — Controle diário
-- **Correção:** tela "Controle diário" e cartão na tela inicial. Gasto de hoje e de ontem, as duas médias nomeadas, comparação com os mesmos dias do mês anterior; mês dia a dia com saldo real até hoje e projeção marcada depois; limite diário e meta diária de economia com vigência.
-- **Regras:** a soma dos dias fecha com o total do mês; compra no cartão conta no dia da compra; economia só conta depósito em meta; sobra de um dia só passa ao seguinte se o usuário ligar.
+- **Gastos do dia:** hoje, ontem, mês, as duas médias nomeadas e os mesmos dias do mês anterior, para todos os gastos ou para **uma categoria** (com as subcategorias).
+- **Comparações:** últimos 7 dias, 7 dias anteriores e o mesmo dia da semana passada, sempre períodos iguais; onde não há registro, a tela diz "sem registro" em vez de zero. Também a soma do mês se cada dia restante custar a média dos dias até aqui, apresentada como conta sobre o passado, não como previsão.
+- **Fluxo de caixa:** por **conta** ou de todas, de **qualquer mês** (setas), em três visões: realizado, previsto, realizado + previsto. Com uma conta escolhida, compras no cartão ficam de fora, e a tela explica por quê.
+- **Limites:** geral, **por categoria** e **só em dias da semana escolhidos**, cada um com vigência, histórico e encerramento próprios; sobra de um dia só passa ao seguinte se o usuário ligar. **Simulação:** ao digitar um valor, a tela diz quanto ele soma no mês e em quantos dos dias já passados o gasto teria ficado dentro dele; nada é gravado.
+- **Meta de economia:** pode contar só o que for guardado em uma meta escolhida. Gastar menos que o limite continua não sendo economia. Simulação do valor no mês e em 365 dias.
+- **Avisos:** quando um limite é ultrapassado, a tela inicial mostra o fato e o valor, sem julgamento; pode ser desligado.
+- **Regras:** a soma dos dias fecha com o total do mês; as partes por categoria somam o todo; compra no cartão conta no dia da compra.
 - **Aceite do briefing:** limite R$ 100, gasto R$ 35, disponível R$ 65; meta R$ 20, guardado R$ 15, pendente R$ 5.
-- **Não entregue:** limite por categoria e por dia da semana existem no domínio e estão testados, mas a tela só define o limite geral; alertas por notificação.
-- **Estado:** corrigido.
+- **Lembretes (onda D, item 6):** contas a pagar e parcelas, valores a receber, faturas de cartão em aberto e metas com data. Um aviso por compromisso na véspera e outro no dia, sem duplicar; cada tipo pode ser silenciado em Configurações.
+- **Testes:** `daily_control_test.dart` (13) e `test/app/daily_complete_test.dart` (12).
+- **Estado:** aprovado automatizado. Avisos do sistema (notificações) só no aparelho.
 
 ## Atualização sobre a versão anterior
 
@@ -250,13 +280,27 @@ Capturas: `E:\SerenaCash\screens\etapa5\` (`c01` a `c03`, `d01`).
 
 O que o ensaio **não** prova: a atualização no celular do usuário, com os dados reais dele. O caminho é o mesmo (mesmo certificado, mesmas migrações, cobertas também por `test/data/migration_test.dart`), mas o resultado só existe depois do teste J01 do checklist. Antes de instalar, exportar um backup cifrado pela versão atual. Não há volta: a versão 0.1.0 não abre um banco já migrado.
 
-## Decisões de produto em aberto
+## Decisões de produto para confirmar
 
-| Assunto | O que foi adotado | O que falta decidir |
+Todas têm um padrão conservador já implementado; nenhuma impede o uso.
+
+| Assunto | O que foi adotado | O que confirmar |
 |---|---|---|
-| Juros de dívida informal | Opcionais; mês de 30 dias, proporcional aos dias | Se a convenção atende, ou se deve haver capitalização só mensal |
-| Cupom e despesa registrada | O cupom não altera a despesa | Oferecer "atualizar a despesa para o valor do cupom"? |
-| Preço de atacado | Só aplicado com quantidade mínima lida na etiqueta e aceita pelo usuário | — |
-| Sobra do limite diário | Não passa de um dia para o outro, salvo opção | — |
-| Assistente | Duas respostas divergem de propósito das fixtures da origem | — |
+| Juros de dívida informal | Opcionais; mês de 30 dias, proporcional aos dias, juros antes do principal | Se a convenção atende |
+| Cupom e despesa registrada | O cupom nunca altera sozinho; o usuário pode atualizar, conferindo o total | — |
+| Catálogo externo | Open Food Facts, só com a opção ligada; desligado por padrão | Se a opção deve existir na versão de loja (exige citar na política de privacidade) |
+| Voz | Serviço de voz do Android, com aviso de que pode usar a internet | Exigir reconhecimento só no aparelho? |
+| Previsto e contas atrasadas | "Previsto" soma o que está registrado de amanhã em diante; uma conta vencida e não paga não entra | Se contas atrasadas devem reduzir o previsto |
+| Tipografia | Tamanho escolhido pelo usuário; família fixa da marca | — |
 | Privatização do repositório | Não executada (sem credencial); passos no `CHECKPOINT.md` | Executar no GitHub |
+
+## O que continua fora do alcance deste ambiente
+
+Não são itens parciais: são coisas que só o aparelho físico ou terceiros podem decidir.
+
+- Tudo o que depende do celular do usuário: câmera, foco e aquecimento; etiquetas e códigos em loja; cupom fotografado; voz; digital; teclado Samsung; barra de três botões; notificações.
+- iOS: nada foi compilado nem testado (sem macOS).
+- Segurança: MobSF, análise dinâmica, root e instrumentação.
+- Consulta da NFC-e pela chave de acesso e Open Finance: dependem de serviços de terceiros.
+- Lojas, assinatura definitiva e política de privacidade publicada: dependem do cliente.
+

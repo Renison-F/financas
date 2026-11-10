@@ -1,62 +1,57 @@
 # CHECKPOINT — migração Flutter
 
-> **Leia primeiro a seção abaixo.** A segunda rodada foi entregue em 10/11/2026: as 32 ocorrências do teste físico foram tratadas e há uma build nova (0.2.0+3) esperando o reteste no celular do usuário. Nada desta rodada está aprovado em aparelho físico.
+> **Leia primeiro a seção abaixo.** Em 10/11/2026 as 32 ocorrências do teste físico foram tratadas por inteiro e há uma build (0.2.0+4) esperando o reteste no celular do usuário. Não há ocorrência parcial. Nada está aprovado em aparelho físico.
 
-## BUILD 0.2.0+3 ENTREGUE — AGUARDANDO RETESTE FÍSICO DO USUÁRIO
+## BUILD 0.2.0+4 ENTREGUE — AGUARDANDO RETESTE FÍSICO DO USUÁRIO
 
-Registrado em 10/11/2026. O usuário concluiu a homologação física da build 0.1.0+2 e trouxe 32 ocorrências (pacote `docs/SerenaCash_Fable_5_2_Pacote_Com_Referencias/`, fora do controle de versão). O registro, a causa, a correção e o estado de cada uma estão em `15-RETORNO_HOMOLOGACAO_FISICA.md`; o roteiro de reteste é a seção J de `14-CHECKLIST_APARELHO.md` (44 testes, todos "PENDENTE NO DISPOSITIVO DO USUÁRIO").
+Registrado em 10/11/2026. O usuário concluiu a homologação física da build 0.1.0+2 e trouxe 32 ocorrências (pacote `docs/SerenaCash_Fable_5_2_Pacote_Com_Referencias/`, fora do controle de versão). A primeira entrega (0.2.0+3) deixou cinco ocorrências parciais; o usuário mandou completar tudo antes de retestar, documentar, enviar ao GitHub e só então gerar a build. Foi o que se fez. O registro, a causa, a correção e o estado de cada ocorrência estão em `15-RETORNO_HOMOLOGACAO_FISICA.md`; o roteiro de reteste é a seção J de `14-CHECKLIST_APARELHO.md` (64 testes, todos "PENDENTE NO DISPOSITIVO DO USUÁRIO").
 
 ### Build para reteste
 
-| | |
-|---|---|
-| Arquivo | `E:\SerenaCash\homologacao-0.2.0\serenacash-0.2.0+3-homologacao-f1b3b47.apk` |
-| Versão / build | 0.2.0 / 3 (`pubspec.yaml`: `0.2.0+3`); o menu do app mostra "versão 0.2.0 (build 3)" |
-| Commit do código | `f1b3b47ff558eb490488258fe9fb553c18b706ae` (`f1b3b47`), branch `refactor/flutter-serenacash` |
-| Application ID | `br.com.serenacash.mobile` |
-| Variante | release (R8, não depurável), assinada com a chave de debug deste PC |
-| Tamanho | 132.755.640 bytes |
-| SHA-256 do APK | `d0de4b2c34976863d6c42ab84048225d3d7ec7f82d744d0d6dd80243b84a18c8` |
-| SHA-256 do certificado | `e7c911bbedaec660d221b1e37d98cafe1e3d83116d8fd5d90aa0c1fd6eee16e5` (o mesmo da 0.1.0+2) |
+<!-- build -->
+A build é gerada a partir do commit de código `cef0929`, depois do envio desta documentação ao GitHub. Arquivo, tamanho e SHA-256 são registrados aqui em seguida.
+<!-- /build -->
 
-Na mesma pasta: o APK debug do mesmo commit (`serenacash-0.2.0+3-debug-f1b3b47.apk`, SHA-256 `5cca23ea6f06d9bc7c9d5ef6eb1d1120f99e7d78b5653613a58015fa944bdf65`), `LEIA-ME.md` e `CHECKLIST-APARELHO.md`. Não há link de download: os arquivos existem só neste computador.
-
-A build anterior continua intacta em `E:\SerenaCash\homologacao\` e deve ficar assim até a nova ser validada no celular.
+A build 0.2.0+3 (`E:\SerenaCash\homologacao-0.2.0\`) e a 0.1.0+2 (`E:\SerenaCash\homologacao\`) continuam intactas. A 0.2.0+3 não precisa ser testada: a 0.2.0+4 contém tudo o que ela tinha.
 
 ### Estado em 10/11/2026
 
-- Git: 17 commits depois de `54c6c99`, de `dadb36d` a `f1b3b47`, mais o commit de documentação que contém este texto. Todos **locais**: `origin/refactor/flutter-serenacash` está em `54c6c99`. Enviar ao GitHub é pedido à parte; o envio dispara o CI. `main` não foi tocada.
-- Testes: 566 aprovados, 0 falhas, 0 ignorados (domínio 365, dados 54, app 139, desempenho 8); `dart format` sem alterações; `flutter analyze --fatal-infos` sem avisos. Detalhe em `09-TESTES.md`.
-- Banco: esquema na versão 4 (era 1). Migrações testadas a partir de cada retrato, com dados, e ensaiadas no aparelho virtual instalando a 0.2.0+3 por cima da 0.1.0+2: os dados foram preservados. Detalhe em `05-MIGRACAO_DADOS.md`.
-- Segurança: diferencial da rodada na seção 7 de `docs/security/AUDITORIA_FLUTTER.md`. 185 pacotes do pub.dev sem vulnerabilidade conhecida na OSV em 10/11/2026.
-- Aparelho virtual de validação: `serenacash_teste` (Android 15, três botões, uma digital cadastrada, bloqueio de tela fictício). Tem a build final instalada, com dados fictícios do ensaio de atualização. O emulador de homologação `serenacash_api35` **não foi ligado nem alterado** nesta rodada e segue com a 0.1.0+2 e os dados de antes.
-- Fora do repositório, em `E:\SerenaCash\`: `relatorio-etapa5.md` (relatório e parecer), `homologacao-0.2.0\`, `etapa5\` (logs de build) e `screens\etapa5\` (capturas).
+- Git: branch `refactor/flutter-serenacash`, enviada ao GitHub. `main` não foi tocada; sem merge, sem force push.
+- Testes: 637 aprovados, 0 falhas, 0 ignorados (domínio 365, dados 58, app 206, desempenho 8); `dart format` sem alterações; `flutter analyze --fatal-infos` sem avisos. Detalhe em `09-TESTES.md`.
+- CI: aprovado em `ee5c63d` (build 0.2.0+3), execução 42752550490, nos dois jobs. <!-- ci -->O envio desta build dispara nova execução; o resultado é registrado aqui em seguida.<!-- /ci -->
+- Banco: esquema na versão 4. A 0.2.0+4 não tem migração nova; o que entrou é preferência e layout. Detalhe em `05-MIGRACAO_DADOS.md`.
+- Segurança: diferenciais nas seções 7 e 8 de `docs/security/AUDITORIA_FLUTTER.md`. 185 pacotes do pub.dev sem vulnerabilidade conhecida na OSV em 10/11/2026.
+- Aparelho virtual de validação: `serenacash_teste` (Android 15, três botões, uma digital cadastrada, bloqueio de tela fictício). Recebeu a 0.2.0+4 por cima da 0.2.0+3, com os dados fictícios preservados. O emulador de homologação `serenacash_api35` **não foi ligado nem alterado**.
+- Fora do repositório, em `E:\SerenaCash\`: `relatorio-etapa6.md` (relatório e parecer), `homologacao-0.2.0+4\`, `etapa6\` (logs de build) e `screens\etapa6\` (capturas).
 
 ### Estado das 32 ocorrências
 
-Nenhuma está "aprovada no aparelho": isso só o reteste do usuário decide.
+Nenhuma está "aprovada no aparelho": isso só o reteste do usuário decide. Nenhuma está parcial.
 
-- **Corrigidas ou implementadas, com teste automatizado e validação no aparelho virtual quando possível:** 001–008, 010–016, 018–026, 029–031.
-- **Parciais, com o que falta descrito em `15`:** 009, 028 e 032 (aparência: há paletas, densidade e restauração; não há editor livre de cores, estilos de cartão, tipografia nem redesenho completo da tela inicial), 017 (ajuste da leitura por toque nas linhas lidas; sem recorte livre nem reprocessamento), 027 (cartões novos; sem redimensionar e sem linha do tempo navegável).
-- **Só o aparelho físico decide:** câmera, foco e aquecimento em vinte leituras (014), etiquetas reais em loja (015, 016), código de barras real (018), cupom fotografado (020), teclado Samsung (021), voz (022), biometria com a digital do usuário (011), barra de três botões do aparelho dele (001).
+- **Com teste automatizado e conferidas no aparelho virtual:** 001, 003, 004, 008, 009, 011, 012, 014, 025, 027 a 032.
+- **Com teste automatizado:** 002, 005, 006, 007, 010, 013, 015 a 024, 026.
+- **Só o aparelho físico decide:** câmera, foco e aquecimento em vinte leituras (014); etiquetas reais em loja e releitura de área (015, 016, 017); código de barras real e catálogo com internet (018); cupom fotografado (020); teclado Samsung (021); voz (022); digital do usuário (011); barra de três botões do aparelho dele (001); avisos chegando na hora (lembretes).
 
 ### Como retomar
 
 1. Ler esta seção, `15-RETORNO_HOMOLOGACAO_FISICA.md` e a seção J de `14-CHECKLIST_APARELHO.md`.
 2. Perguntar ao usuário o resultado do J01 (atualização por cima) antes de qualquer outra coisa: se falhar, é P0.
 3. Registrar cada retorno com o ID da ocorrência (sub-IDs permitidos, como 016-B), nas palavras dele, antes de investigar.
-4. Reproduzir no aparelho virtual `serenacash_teste` com a build `f1b3b47`, achar a causa, escrever o teste que falha e só então corrigir.
-5. Uma correção por commit, na branch `refactor/flutter-serenacash`. Sem merge na `main`, sem force push. Envio ao GitHub é pedido à parte.
-6. Build seguinte: subir o número do build (`0.2.0+4`), nomear o arquivo com versão, build e commit, registrar o SHA-256 e conferir que instala por cima da 0.2.0+3.
+4. Reproduzir no aparelho virtual `serenacash_teste` com a build entregue, achar a causa, escrever o teste que falha e só então corrigir.
+5. Uma correção por commit, na branch `refactor/flutter-serenacash`. Sem merge na `main`, sem force push.
+6. Build seguinte: subir o número do build (`0.2.0+5`), nomear o arquivo com versão, build e commit, registrar o SHA-256 e conferir que instala por cima.
 
 Regras que continuam valendo: só dados fictícios; não apagar dados do emulador nem do aparelho (`pm clear`, desinstalar, limpar banco) sem autorização específica; não usar a chave definitiva da loja; não registrar credenciais; não declarar resultado sem tê-lo obtido; não publicar nas lojas; não introduzir IA paga, Firebase ou PostgreSQL sem autorização.
 
-### Decisões que dependem do usuário
+### Decisões para o usuário confirmar
 
-- **Juros da dívida informal:** adotado mês de 30 dias, proporcional aos dias, juros antes do principal. Confirmar ou trocar.
-- **Cupom e despesa:** o cupom não altera a despesa já registrada. Oferecer "atualizar a despesa para o valor do cupom"?
-- **Aparência:** até onde ir (editor livre de cores, estilos de cartão, tipografia) depois de ver as seis paletas no aparelho.
-- **Pacote de referências:** `docs/SerenaCash_Fable_5_2_Pacote_Com_Referencias/` tem capturas de aplicativos de terceiros e as fotos do usuário. Não foi incluído em commit; o repositório é público. Decidir se fica fora do Git (recomendado) ou vai para um lugar privado.
+Todas têm um padrão conservador já implementado (tabela em `15`, "Decisões de produto para confirmar"):
+
+- **Juros da dívida informal:** mês de 30 dias, proporcional aos dias, juros antes do principal.
+- **Catálogo aberto de produtos:** existe, desligado por padrão. Manter a opção em uma versão de loja exige citar o Open Food Facts na política de privacidade.
+- **Voz:** serviço de voz do Android, com aviso de que pode usar a internet.
+- **Contas atrasadas e "previsto":** uma conta vencida e não paga não entra no saldo previsto.
+- **Pacote de referências:** `docs/SerenaCash_Fable_5_2_Pacote_Com_Referencias/` tem capturas de aplicativos de terceiros e as fotos do usuário. Não foi incluído em commit; o repositório é público.
 
 ### Pendências administrativas
 
@@ -65,13 +60,12 @@ Regras que continuam valendo: só dados fictícios; não apagar dados do emulado
   2. No fim da página, em "Danger Zone", "Change repository visibility" → "Change to private" e confirmar com o nome do repositório.
   3. Antes de confirmar, olhar em Settings → Integrations e em Settings → Pages se há algo que dependa de o repositório ser público; não remover nada às cegas.
   Efeitos: estrelas e observadores são removidos; forks públicos se desligam; os minutos do GitHub Actions passam a contar na cota da conta; a consulta do CI pela API pública deixa de funcionar sem credencial (o resultado passa a ser conferido pelo site).
-- **READMEs:** atualizados nesta rodada (raiz e `apps/serenacash_flutter`).
-- **Mostrar build dentro do app:** feito (rodapé do menu). O commit não aparece no app; está no nome do arquivo.
 - As demais pendências estão em "Pendências reais", no fim deste arquivo.
 
-### Rodada anterior (05/11/2026), para referência
+### Rodadas anteriores, para referência
 
-Build 0.1.0+2, commit `bae5d9f`, `E:\SerenaCash\homologacao\serenacash-0.1.0+2-homologacao-bae5d9f.apk`, SHA-256 `63c3ac06120f9cda29e43a0117e84acbe99cccfa2bcf1836b425cfb705726912`, mesmo certificado. Foi a build que o usuário testou no celular. 399 testes na época. CI aprovado em `bae5d9f` (execução 42035033218).
+- **0.2.0+3** (10/11/2026): commit `f1b3b47`, `E:\SerenaCash\homologacao-0.2.0\serenacash-0.2.0+3-homologacao-f1b3b47.apk`, SHA-256 `d0de4b2c34976863d6c42ab84048225d3d7ec7f82d744d0d6dd80243b84a18c8`. Primeira entrega desta rodada, com cinco ocorrências parciais. 566 testes.
+- **0.1.0+2** (05/11/2026): commit `bae5d9f`, `E:\SerenaCash\homologacao\serenacash-0.1.0+2-homologacao-bae5d9f.apk`, SHA-256 `63c3ac06120f9cda29e43a0117e84acbe99cccfa2bcf1836b425cfb705726912`. Foi a build que o usuário testou no celular. 399 testes.
 
 ## Contexto da migração
 
@@ -148,22 +142,20 @@ issues, `dart format` sem alterações. Detalhes e divergências em `02-EQUIVALE
 - Build 0.1.0+2. APKs de debug e de homologação em `E:\SerenaCash\homologacao\`.
 
 ## Pendências reais
-- Reteste físico da build 0.2.0+3: seção J de `14-CHECKLIST_APARELHO.md`. Câmera, OCR em loja, código de barras, cupom, voz, biometria e teclado do aparelho do usuário não têm resultado.
-- Itens parciais da rodada: 009, 017, 027, 028 e 032 (ver `15`). Limite diário por categoria e por dia da semana existe só no domínio, sem tela.
-- Cupom fiscal: lido por foto e OCR. Não há consulta à NFC-e pela chave de acesso nem atualização da despesa pelo cupom.
-- Catálogo de produtos: só o cadastro local do usuário; nenhum catálogo externo.
-- iOS: sem macOS neste ambiente; nada desta rodada foi compilado ou testado em iOS (as descrições de uso de câmera, microfone e voz foram acrescentadas ao `Info.plist`).
+- Reteste físico da build 0.2.0+4: seção J de `14-CHECKLIST_APARELHO.md`. Câmera, OCR em loja, releitura de área, código de barras, catálogo com internet, cupom, voz, biometria, teclado e avisos do aparelho do usuário não têm resultado.
+- Cupom fiscal: lido por foto e OCR. Não há consulta à NFC-e pela chave de acesso (exigiria serviço de terceiros).
+- iOS: sem macOS neste ambiente; nada foi compilado ou testado em iOS.
 - TalkBack ligado não foi testado; os nós de acessibilidade foram conferidos pela árvore do sistema (uiautomator).
 - Final do cartão ("Final 4582" no mockup): o app não guarda esse dado; exigiria um campo novo e uma migração do banco.
 - Fora do escopo, por exigirem evolução própria: Open Finance, sincronização em nuvem, perfis, assistente de IA generativa, edição em lote, lançamento em várias categorias, antecipar e reabrir fatura.
-- Segurança não executada: MobSF e análise dinâmica, ferramentas dedicadas, root e instrumentação (ver `AUDITORIA_FLUTTER.md`, seções 5 e 7).
-- Lojas/RevenueCat, assinatura de release e política de privacidade publicada dependem do cliente. A política precisa citar câmera, microfone e fotos de evidência guardadas no aparelho.
+- Segurança não executada: MobSF e análise dinâmica, ferramentas dedicadas, root e instrumentação (ver `AUDITORIA_FLUTTER.md`, seções 5, 7 e 8).
+- Lojas/RevenueCat, assinatura de release e política de privacidade publicada dependem do cliente. A política precisa citar câmera, microfone, fotos de evidência guardadas no aparelho e, se a opção for mantida, a consulta ao Open Food Facts.
 - Lembretes usam alarmes inexatos (podem atrasar até 1 h); alarmes exatos exigem permissão sujeita à política da loja.
-- CI não rodou sobre os commits desta rodada (não enviados).
+- Fotos guardadas antes da 0.2.0+4 mantêm os metadados que tinham.
 
 ## Próximos passos
-1. Usuário: exportar backup, instalar a 0.2.0+3 por cima e executar a seção J do checklist.
+1. Usuário: exportar backup, instalar a 0.2.0+4 por cima e executar a seção J do checklist.
 2. Tratar o retorno do reteste, uma ocorrência por commit.
-3. Decidir os itens de "Decisões que dependem do usuário".
+3. Confirmar os itens de "Decisões para o usuário confirmar".
 4. Configurar lojas/RevenueCat (ação do cliente) e assinar release.
 5. Após paridade validada em aparelho, decidir remoção do código RN.

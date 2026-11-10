@@ -2,7 +2,18 @@
 
 Suíte: `apps/serenacash_flutter/test` + fixtures TS→Dart em `docs/flutter-migration/fixtures`.
 
-## Contagem real (execução de 10/11/2026, commit `f1b3b47`)
+## Contagem real (execução de 10/11/2026, build 0.2.0+4)
+
+| Resultado | Qtde |
+|---|---|
+| Aprovados | 637 |
+| Ignorados (`skip`) | 0 |
+| Com falha | 0 |
+| **Total executado** | **637** |
+
+Por camada: domínio 365, dados 58, app 206, desempenho 8. `dart format --set-exit-if-changed lib test integration_test tool` → 0 alterações em 213 arquivos; `flutter analyze --fatal-infos` → "No issues found!"; `flutter test` → `+637: All tests passed!`. O CI aprovou o commit `ee5c63d` (build 0.2.0+3) nos dois jobs, execução 42752550490. Os testes acrescentados no complemento estão em "Testes do complemento (build 0.2.0+4)", no fim deste arquivo.
+
+## Contagem da build 0.2.0+3 (execução de 10/11/2026, commit `f1b3b47`)
 
 | Resultado | Qtde |
 |---|---|
@@ -121,3 +132,23 @@ Testes existentes ajustados de propósito, sem afrouxar a regra testada: `pin_lo
 - `integration_test` não foi executado de novo nesta rodada; no aparelho virtual foram feitos o ensaio de atualização e os roteiros manuais descritos em `15`.
 
 Ferramentas de desenvolvimento, fora da suíte: `integration_test/tools/ocr_dump_test.dart` roda o OCR do aparelho sobre fotos locais e `tool/ocr_fixtures.py` transforma a saída nas fixtures de etiqueta. As fotos não entram no repositório.
+
+## Testes do complemento (build 0.2.0+4)
+
+De 566 para 637 testes. Cada arquivo fecha uma parte que a build 0.2.0+3 tinha deixado parcial.
+
+| Arquivo | Ocorrências | O que prova | Testes |
+|---|---|---|---|
+| `test/app/theme_editor_test.dart` | 032 | Dez cores difíceis (branco, preto, amarelo vivo, cinza médio…) viram paletas em que todo par de texto chega a 4,5:1, em claro e escuro; cor ilegível é recusada e corrigida mantendo o matiz; sinal financeiro não segue a paleta; preferências novas com padrão e ida e volta; teto do tamanho do texto; estilo de cartão, texto e movimento chegam a todas as telas; editor em 320 pt com texto a 1,6 × "maior" | 32 |
+| `test/app/home_timeline_test.dart` | 027, 028, 009 | Projeção de mês futuro parte do previsto para a véspera; tamanho reduzido salvo com o layout; setas de mês não alteram o que está salvo; cartão de saldo nomeia passado, presente e futuro; toque em um dia mostra os fatos e abre os lançamentos; todos os 30 cartões em 320 pt com texto grande nos três estilos de cartão | 7 |
+| `test/app/region_read_test.dart` | 017 | Recorte real sobre uma imagem (parte certa, ampliada, original intacto); ordem de leitura; valores com qualquer separador; marcar, mover e redimensionar; um valor, vários valores, nenhum; falhas ditas sem preencher nada | 7 |
+| `test/app/daily_complete_test.dart` | 029–031 | Partes por categoria somam o todo; fluxo de uma conta; comparações entre períodos iguais com "sem registro"; limite por categoria e por dia da semana; simulação sem gravar; meta ligada a uma reserva; lembretes por tipo, sem duplicar, só com rotas conhecidas; aviso na tela inicial; tela inteira em 320 pt | 12 |
+| `test/app/receipt_adjust_test.dart` | 020 | Valor, pago e saldo seguem o cupom; valor anterior anotado; pedido repetido não muda nada; parcelado, pago em parte, receita e valores inválidos são recusados; na tela, nada muda sem confirmação | 4 |
+| `test/app/catalog_lookup_test.dart` | 018 | Leitura da resposta do catálogo (encontrado, não encontrado, malformado, campos de tipo errado, texto longo); só dígitos de código de produto são enviados; desligado por padrão não consulta; encontrado sugere, falha e ausência dizem coisas diferentes; código já cadastrado não é consultado de novo | 5 |
+| `test/data/image_metadata_test.dart` | — | Posição, textos e dados do aparelho saem do JPEG; os dados da imagem ficam byte a byte iguais; orientação mantida nas duas ordens de bytes; arquivo que não é JPEG bem formado volta como veio | 4 |
+
+Testes existentes ajustados de propósito: `shopping_review_test.dart` rola até os campos, porque a revisão ganhou o controle de marcar área sob a foto. Nenhuma regra testada foi afrouxada.
+
+Validação no aparelho virtual `serenacash_teste` (Android 15, três botões), com o APK de release: atualização da 0.2.0+3 para a 0.2.0+4 por cima, com os dados preservados; tela inicial com setas de mês, toque em um dia do gráfico, lançamentos do dia e as duas visões; visão geral com marcas de cor; editor de tema recusando uma cor clara (contraste 1,1:1) e liberando depois do ajuste (4,7:1); estilo de cartão com sombra; tema próprio aplicado; controle diário com filtros e comparações. Sem erro no logcat. Capturas em `E:\SerenaCash\screens\etapa6\`.
+
+Não exercitado no aparelho virtual nesta rodada: marcar área sobre uma foto real e reler, consulta ao catálogo com rede, cupom fotografado, lembretes chegando na hora. São itens do checklist físico (J45 a J64).
