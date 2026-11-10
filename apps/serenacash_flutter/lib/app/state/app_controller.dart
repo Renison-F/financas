@@ -5,6 +5,7 @@ library;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/billing/billing.dart';
+import '../../domain/budgets/budgets.dart' show budgetStartMonth;
 import '../../domain/cards/cards.dart';
 import '../../domain/categories/categories.dart';
 import '../../domain/dashboard/widgets.dart';
@@ -47,7 +48,12 @@ class AppController extends AsyncNotifier<AppState> {
 
   String newId() => _ids.newId();
   String nowISO() => _clock.nowISO();
-  String today() => todayISO();
+
+  /// Today's local calendar date, read from the same injected clock as every timestamp, so a test
+  /// (or a replayed scenario) can move through months and years.
+  String today() => todayISO(_localNow);
+  DateTime _localNow() =>
+      DateTime.tryParse(_clock.nowISO())?.toLocal() ?? DateTime.now();
 
   @override
   Future<AppState> build() async {
@@ -91,7 +97,7 @@ class AppController extends AsyncNotifier<AppState> {
       entitlements: entitlements,
       access: resolveAccess(entitlements, now),
       undo: state.value?.undo,
-      today: todayISO(),
+      today: today(),
     );
   }
 
@@ -343,15 +349,52 @@ class AppController extends AsyncNotifier<AppState> {
     bool? rollover,
   }) => _mutate(() async {
     final now = nowISO();
+    final thisMonth = monthKeyOf(_s.today);
     final ex = id == null
         ? null
         : _s.ledger.budgets.where((b) => b.id == id).firstOrNull;
+    final recurring = (month ?? ex?.month) == null;
+    final startedBefore =
+        ex != null &&
+        ex.month == null &&
+        (budgetStartMonth(ex)?.compareTo(thisMonth) ?? -1) < 0;
+    // A new limit for a recurring budget that already covered past months starts a new period:
+    // the months behind keep the limit they were lived with.
+    if (ex != null && startedBefore && ex.limitCents != limitCents) {
+      await _ledger.upsertBudget(
+        Budget(
+          id: ex.id,
+          categoryId: ex.categoryId,
+          limitCents: ex.limitCents,
+          rollover: ex.rollover,
+          validFrom: ex.validFrom ?? budgetStartMonth(ex),
+          validUntil: thisMonth,
+          createdAt: ex.createdAt,
+          updatedAt: now,
+        ),
+      );
+      final next = Budget(
+        id: newId(),
+        categoryId: categoryId ?? ex.categoryId,
+        limitCents: limitCents,
+        rollover: rollover ?? ex.rollover,
+        validFrom: thisMonth,
+        createdAt: now,
+        updatedAt: now,
+      );
+      await _ledger.upsertBudget(next);
+      return next;
+    }
     final b = Budget(
       id: ex?.id ?? newId(),
       categoryId: categoryId ?? ex?.categoryId,
       limitCents: limitCents,
       month: month ?? ex?.month,
       rollover: rollover ?? ex?.rollover ?? false,
+      validFrom: recurring
+          ? (ex?.validFrom ?? (ex == null ? thisMonth : budgetStartMonth(ex)))
+          : null,
+      validUntil: ex?.validUntil,
       createdAt: ex?.createdAt ?? now,
       updatedAt: now,
     );
@@ -359,8 +402,29 @@ class AppController extends AsyncNotifier<AppState> {
     return b;
   });
 
-  Future<void> deleteBudget(String id) =>
-      _mutate(() => _ledger.softDelete(EntityTypes.budget, id));
+  /// A recurring budget that covered past months is ended, not erased: those months keep it.
+  Future<void> deleteBudget(String id) => _mutate(() async {
+    final ex = _s.ledger.budgets.where((b) => b.id == id).firstOrNull;
+    final thisMonth = monthKeyOf(_s.today);
+    if (ex != null &&
+        ex.month == null &&
+        (budgetStartMonth(ex)?.compareTo(thisMonth) ?? 0) < 0) {
+      await _ledger.upsertBudget(
+        Budget(
+          id: ex.id,
+          categoryId: ex.categoryId,
+          limitCents: ex.limitCents,
+          rollover: ex.rollover,
+          validFrom: ex.validFrom ?? budgetStartMonth(ex),
+          validUntil: thisMonth,
+          createdAt: ex.createdAt,
+          updatedAt: nowISO(),
+        ),
+      );
+      return;
+    }
+    await _ledger.softDelete(EntityTypes.budget, id);
+  });
 
   Future<Goal> saveGoal({
     String? id,

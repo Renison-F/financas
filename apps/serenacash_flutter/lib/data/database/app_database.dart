@@ -1,4 +1,4 @@
-/// Drift database. Schema v1. Opened through [openEncryptedDatabase] in production (SQLCipher) and
+/// Drift database. Schema v2 (v1 → v2 in [AppDatabase._upgradeStep]). Opened through [openEncryptedDatabase] in production (SQLCipher) and
 /// through [AppDatabase.inMemory] in tests.
 library;
 
@@ -45,7 +45,7 @@ class AppDatabase extends _$AppDatabase {
   /// Unencrypted in-memory database for unit tests only.
   AppDatabase.inMemory() : super(NativeDatabase.memory());
 
-  static const currentSchemaVersion = 1;
+  static const currentSchemaVersion = 2;
 
   @override
   int get schemaVersion => currentSchemaVersion;
@@ -76,6 +76,25 @@ class AppDatabase extends _$AppDatabase {
 
   Future<void> _upgradeStep(Migrator m, int version) async {
     switch (version) {
+      case 2:
+        // Recurring budgets get the months they are in force. What already exists starts in the
+        // month it was created (the device's local month, the one the user saw), never earlier.
+        await m.addColumn(budgets, budgets.validFrom);
+        await m.addColumn(budgets, budgets.validUntil);
+        final rows = await customSelect(
+          'SELECT id, created_at FROM budgets WHERE month IS NULL',
+        ).get();
+        for (final r in rows) {
+          final created = DateTime.tryParse(r.read<String>('created_at'));
+          if (created == null) continue;
+          final local = created.toLocal();
+          final month =
+              '${local.year.toString().padLeft(4, '0')}-${local.month.toString().padLeft(2, '0')}';
+          await customStatement(
+            'UPDATE budgets SET valid_from = ? WHERE id = ?',
+            [month, r.read<String>('id')],
+          );
+        }
       default:
         throw StateError('Migração desconhecida para a versão $version');
     }

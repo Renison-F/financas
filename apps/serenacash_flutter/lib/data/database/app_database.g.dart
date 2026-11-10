@@ -7772,6 +7772,28 @@ class $BudgetsTable extends Budgets with TableInfo<$BudgetsTable, BudgetRow> {
     ),
     defaultValue: const Constant(false),
   );
+  static const VerificationMeta _validFromMeta = const VerificationMeta(
+    'validFrom',
+  );
+  @override
+  late final GeneratedColumn<String> validFrom = GeneratedColumn<String>(
+    'valid_from',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _validUntilMeta = const VerificationMeta(
+    'validUntil',
+  );
+  @override
+  late final GeneratedColumn<String> validUntil = GeneratedColumn<String>(
+    'valid_until',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     createdAt,
@@ -7785,6 +7807,8 @@ class $BudgetsTable extends Budgets with TableInfo<$BudgetsTable, BudgetRow> {
     limitCents,
     month,
     rollover,
+    validFrom,
+    validUntil,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -7869,6 +7893,18 @@ class $BudgetsTable extends Budgets with TableInfo<$BudgetsTable, BudgetRow> {
         rollover.isAcceptableOrUnknown(data['rollover']!, _rolloverMeta),
       );
     }
+    if (data.containsKey('valid_from')) {
+      context.handle(
+        _validFromMeta,
+        validFrom.isAcceptableOrUnknown(data['valid_from']!, _validFromMeta),
+      );
+    }
+    if (data.containsKey('valid_until')) {
+      context.handle(
+        _validUntilMeta,
+        validUntil.isAcceptableOrUnknown(data['valid_until']!, _validUntilMeta),
+      );
+    }
     return context;
   }
 
@@ -7922,6 +7958,14 @@ class $BudgetsTable extends Budgets with TableInfo<$BudgetsTable, BudgetRow> {
         DriftSqlType.bool,
         data['${effectivePrefix}rollover'],
       )!,
+      validFrom: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}valid_from'],
+      ),
+      validUntil: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}valid_until'],
+      ),
     );
   }
 
@@ -7943,6 +7987,8 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
   final int limitCents;
   final String? month;
   final bool rollover;
+  final String? validFrom;
+  final String? validUntil;
   const BudgetRow({
     required this.createdAt,
     required this.updatedAt,
@@ -7955,6 +8001,8 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
     required this.limitCents,
     this.month,
     required this.rollover,
+    this.validFrom,
+    this.validUntil,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -7976,6 +8024,12 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
       map['month'] = Variable<String>(month);
     }
     map['rollover'] = Variable<bool>(rollover);
+    if (!nullToAbsent || validFrom != null) {
+      map['valid_from'] = Variable<String>(validFrom);
+    }
+    if (!nullToAbsent || validUntil != null) {
+      map['valid_until'] = Variable<String>(validUntil);
+    }
     return map;
   }
 
@@ -7998,6 +8052,12 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
           ? const Value.absent()
           : Value(month),
       rollover: Value(rollover),
+      validFrom: validFrom == null && nullToAbsent
+          ? const Value.absent()
+          : Value(validFrom),
+      validUntil: validUntil == null && nullToAbsent
+          ? const Value.absent()
+          : Value(validUntil),
     );
   }
 
@@ -8018,6 +8078,8 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
       limitCents: serializer.fromJson<int>(json['limitCents']),
       month: serializer.fromJson<String?>(json['month']),
       rollover: serializer.fromJson<bool>(json['rollover']),
+      validFrom: serializer.fromJson<String?>(json['validFrom']),
+      validUntil: serializer.fromJson<String?>(json['validUntil']),
     );
   }
   @override
@@ -8035,6 +8097,8 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
       'limitCents': serializer.toJson<int>(limitCents),
       'month': serializer.toJson<String?>(month),
       'rollover': serializer.toJson<bool>(rollover),
+      'validFrom': serializer.toJson<String?>(validFrom),
+      'validUntil': serializer.toJson<String?>(validUntil),
     };
   }
 
@@ -8050,6 +8114,8 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
     int? limitCents,
     Value<String?> month = const Value.absent(),
     bool? rollover,
+    Value<String?> validFrom = const Value.absent(),
+    Value<String?> validUntil = const Value.absent(),
   }) => BudgetRow(
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
@@ -8062,6 +8128,8 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
     limitCents: limitCents ?? this.limitCents,
     month: month.present ? month.value : this.month,
     rollover: rollover ?? this.rollover,
+    validFrom: validFrom.present ? validFrom.value : this.validFrom,
+    validUntil: validUntil.present ? validUntil.value : this.validUntil,
   );
   BudgetRow copyWithCompanion(BudgetsCompanion data) {
     return BudgetRow(
@@ -8080,6 +8148,10 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
           : this.limitCents,
       month: data.month.present ? data.month.value : this.month,
       rollover: data.rollover.present ? data.rollover.value : this.rollover,
+      validFrom: data.validFrom.present ? data.validFrom.value : this.validFrom,
+      validUntil: data.validUntil.present
+          ? data.validUntil.value
+          : this.validUntil,
     );
   }
 
@@ -8096,7 +8168,9 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
           ..write('categoryId: $categoryId, ')
           ..write('limitCents: $limitCents, ')
           ..write('month: $month, ')
-          ..write('rollover: $rollover')
+          ..write('rollover: $rollover, ')
+          ..write('validFrom: $validFrom, ')
+          ..write('validUntil: $validUntil')
           ..write(')'))
         .toString();
   }
@@ -8114,6 +8188,8 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
     limitCents,
     month,
     rollover,
+    validFrom,
+    validUntil,
   );
   @override
   bool operator ==(Object other) =>
@@ -8129,7 +8205,9 @@ class BudgetRow extends DataClass implements Insertable<BudgetRow> {
           other.categoryId == this.categoryId &&
           other.limitCents == this.limitCents &&
           other.month == this.month &&
-          other.rollover == this.rollover);
+          other.rollover == this.rollover &&
+          other.validFrom == this.validFrom &&
+          other.validUntil == this.validUntil);
 }
 
 class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
@@ -8144,6 +8222,8 @@ class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
   final Value<int> limitCents;
   final Value<String?> month;
   final Value<bool> rollover;
+  final Value<String?> validFrom;
+  final Value<String?> validUntil;
   final Value<int> rowid;
   const BudgetsCompanion({
     this.createdAt = const Value.absent(),
@@ -8157,6 +8237,8 @@ class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
     this.limitCents = const Value.absent(),
     this.month = const Value.absent(),
     this.rollover = const Value.absent(),
+    this.validFrom = const Value.absent(),
+    this.validUntil = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   BudgetsCompanion.insert({
@@ -8171,6 +8253,8 @@ class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
     required int limitCents,
     this.month = const Value.absent(),
     this.rollover = const Value.absent(),
+    this.validFrom = const Value.absent(),
+    this.validUntil = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : createdAt = Value(createdAt),
        updatedAt = Value(updatedAt),
@@ -8188,6 +8272,8 @@ class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
     Expression<int>? limitCents,
     Expression<String>? month,
     Expression<bool>? rollover,
+    Expression<String>? validFrom,
+    Expression<String>? validUntil,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -8202,6 +8288,8 @@ class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
       if (limitCents != null) 'limit_cents': limitCents,
       if (month != null) 'month': month,
       if (rollover != null) 'rollover': rollover,
+      if (validFrom != null) 'valid_from': validFrom,
+      if (validUntil != null) 'valid_until': validUntil,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -8218,6 +8306,8 @@ class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
     Value<int>? limitCents,
     Value<String?>? month,
     Value<bool>? rollover,
+    Value<String?>? validFrom,
+    Value<String?>? validUntil,
     Value<int>? rowid,
   }) {
     return BudgetsCompanion(
@@ -8232,6 +8322,8 @@ class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
       limitCents: limitCents ?? this.limitCents,
       month: month ?? this.month,
       rollover: rollover ?? this.rollover,
+      validFrom: validFrom ?? this.validFrom,
+      validUntil: validUntil ?? this.validUntil,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -8272,6 +8364,12 @@ class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
     if (rollover.present) {
       map['rollover'] = Variable<bool>(rollover.value);
     }
+    if (validFrom.present) {
+      map['valid_from'] = Variable<String>(validFrom.value);
+    }
+    if (validUntil.present) {
+      map['valid_until'] = Variable<String>(validUntil.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -8292,6 +8390,8 @@ class BudgetsCompanion extends UpdateCompanion<BudgetRow> {
           ..write('limitCents: $limitCents, ')
           ..write('month: $month, ')
           ..write('rollover: $rollover, ')
+          ..write('validFrom: $validFrom, ')
+          ..write('validUntil: $validUntil, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();

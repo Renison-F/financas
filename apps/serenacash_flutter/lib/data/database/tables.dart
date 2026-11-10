@@ -188,6 +188,9 @@ class Budgets extends Table with SyncColumns {
       integer().check(limitCents.isBiggerOrEqualValue(0))();
   TextColumn get month => text().nullable()();
   BoolColumn get rollover => boolean().withDefault(const Constant(false))();
+  // v2: first and (exclusive) last month a recurring budget is in force.
+  TextColumn get validFrom => text().nullable()();
+  TextColumn get validUntil => text().nullable()();
   @override
   Set<Column<Object>> get primaryKey => {id};
 }

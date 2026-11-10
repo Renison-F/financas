@@ -553,6 +553,8 @@ class Budget {
     required this.limitCents,
     this.month,
     required this.rollover,
+    this.validFrom,
+    this.validUntil,
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
@@ -560,8 +562,18 @@ class Budget {
   final Id id;
   final Id? categoryId;
   final Cents limitCents;
+
+  /// Set for a budget of one specific month; null for a recurring one.
   final String? month;
   final bool rollover;
+
+  /// First month (`YYYY-MM`) a recurring budget is in force. A budget never applies to months
+  /// before it existed: a limit set this year says nothing about last year.
+  final String? validFrom;
+
+  /// First month the recurring budget is no longer in force (it was replaced or ended). The months
+  /// before it keep the limit they had.
+  final String? validUntil;
   final String createdAt;
   final String updatedAt;
   final String? deletedAt;
@@ -571,6 +583,8 @@ class Budget {
     limitCents: (j['limitCents'] as num).toInt(),
     month: j['month'] as String?,
     rollover: j['rollover'] as bool? ?? false,
+    validFrom: j['validFrom'] as String?,
+    validUntil: j['validUntil'] as String?,
     createdAt: j['createdAt'] as String? ?? '',
     updatedAt: j['updatedAt'] as String? ?? '',
     deletedAt: j['deletedAt'] as String?,
@@ -581,6 +595,8 @@ class Budget {
     'limitCents': limitCents,
     if (month != null) 'month': month,
     'rollover': rollover,
+    if (validFrom != null) 'validFrom': validFrom,
+    if (validUntil != null) 'validUntil': validUntil,
     'createdAt': createdAt,
     'updatedAt': updatedAt,
     if (deletedAt != null) 'deletedAt': deletedAt,

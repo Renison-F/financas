@@ -45,10 +45,31 @@ class BudgetStatus {
   };
 }
 
-/// Month-specific budget first, then the template.
+/// The first month a recurring budget counts from: the one stated, or the month it was created.
+/// Null when neither is known (data imported without dates), which leaves it without a lower bound.
+MonthKey? budgetStartMonth(Budget b) {
+  if (b.month != null) return b.month;
+  if (b.validFrom != null) return b.validFrom;
+  return b.createdAt.length >= 7 ? b.createdAt.substring(0, 7) : null;
+}
+
+/// Whether a budget is in force in [month]. A budget of one month, only in that month. A recurring
+/// one, from the month it started until the month it was replaced or ended: looking at an earlier
+/// year must not show a limit that did not exist then.
+bool budgetInForce(Budget b, MonthKey month) {
+  if (b.deletedAt != null) return false;
+  if (b.month != null) return b.month == month;
+  final from = budgetStartMonth(b);
+  if (from != null && month.compareTo(from) < 0) return false;
+  final until = b.validUntil;
+  if (until != null && month.compareTo(until) >= 0) return false;
+  return true;
+}
+
+/// Month-specific budget first, then the recurring one in force that month.
 Budget? budgetFor(Ledger ledger, Id? categoryId, MonthKey month) {
   final candidates = ledger.budgets
-      .where((b) => b.deletedAt == null && b.categoryId == categoryId)
+      .where((b) => b.categoryId == categoryId && budgetInForce(b, month))
       .toList();
   return candidates.where((b) => b.month == month).firstOrNull ??
       candidates.where((b) => b.month == null).firstOrNull;
@@ -136,7 +157,7 @@ List<BudgetStatus> budgetsForMonth(
   ISODate today,
 ) {
   final indexed = ledger.budgets
-      .where((b) => b.deletedAt == null)
+      .where((b) => budgetInForce(b, month))
       .toList()
       .asMap()
       .entries
@@ -151,7 +172,6 @@ List<BudgetStatus> budgetsForMonth(
   final out = <BudgetStatus>[];
   for (final e in indexed) {
     final b = e.value;
-    if (b.month != null && b.month != month) continue;
     final key = b.categoryId ?? '__global__';
     if (!keys.add(key)) continue;
     out.add(budgetStatus(ledger, b, month, today));
