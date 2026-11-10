@@ -7,6 +7,7 @@ import 'dart:typed_data';
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/media/image_metadata.dart';
 import '../../domain/billing/billing.dart';
 import '../../domain/budgets/budgets.dart' show budgetStartMonth;
 import '../../domain/cards/cards.dart';
@@ -1049,6 +1050,9 @@ class AppController extends AsyncNotifier<AppState> {
     List<OcrBox>? ocr,
     String mimeType = 'image/jpeg',
   }) async {
+    // What is kept is the picture, not where and when the phone says it was taken: a photo chosen
+    // from the gallery can carry the GPS position in its metadata. The pixels are not touched.
+    bytes = stripImageMetadata(bytes);
     final e = Evidence(
       id: newId(),
       sessionId: sessionId,

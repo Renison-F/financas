@@ -1,6 +1,8 @@
 /// Attachments of a saved transaction: photo (camera) or file, stored as bytes inside the encrypted database.
 library;
 
+import 'dart:typed_data';
+
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ import '../../app/app.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/theme/tokens.dart';
 import '../../data/files/file_service.dart';
+import '../../data/media/image_metadata.dart';
 import '../../domain/entities/entities.dart';
 import '../../ui/components/components.dart';
 
@@ -28,8 +31,11 @@ class _AttachmentsSectionState extends ConsumerState<AttachmentsSection> {
   String? _error;
   bool _busy = false;
 
-  Future<void> _add(List<int> bytes, String fileName, String mime) async {
+  Future<void> _add(List<int> raw, String fileName, String mime) async {
     final l = context.l10n;
+    // A photo keeps its picture and loses its metadata (GPS position, device, date) before it is
+    // stored; other kinds of file are kept exactly as they are.
+    final bytes = stripImageMetadata(Uint8List.fromList(raw));
     if (bytes.length > maxAttachmentBytes) {
       return setState(() => _error = l.attachmentTooBig);
     }
