@@ -4659,4 +4659,380 @@ class AppLocalizationsEn extends AppLocalizations {
   String chartOthersCount(int n) {
     return '$n smaller categories';
   }
+
+  @override
+  String get homeNoAccountForBalance =>
+      'Add an account to see the balance of the period';
+
+  @override
+  String get homePeriodBalance => 'Balance of the period';
+
+  @override
+  String get homeDayByDay => 'Day by day';
+
+  @override
+  String get homeOpening => 'Opening';
+
+  @override
+  String get homeBalanceToday => 'Balance today';
+
+  @override
+  String get homeProjected => 'Projected at month end';
+
+  @override
+  String get homeTimelineLabel =>
+      'Balance line day by day: solid up to today, dashed for what is only planned.';
+
+  @override
+  String get homeProjectedNote =>
+      'Projected = today\'s balance + what is to be received − what is to be paid until month end. Only what is already recorded counts.';
+
+  @override
+  String get homeOverview => 'Month overview';
+
+  @override
+  String get homeIncomeReceived => 'Income received';
+
+  @override
+  String get homeExpensePaid => 'Expenses made';
+
+  @override
+  String homePlannedMore(String value) {
+    return '+ $value planned';
+  }
+
+  @override
+  String get homeResult => 'Result';
+
+  @override
+  String get homeResultNote =>
+      'Income − expenses of the month. Not the account balance.';
+
+  @override
+  String get homeCardInvoices => 'Open statements';
+
+  @override
+  String get homeCardInvoicesNote =>
+      'Current and closed statements not yet paid.';
+
+  @override
+  String get homeNoCards => 'No card registered.';
+
+  @override
+  String get homeNoEntriesMonth => 'No entries this month';
+
+  @override
+  String get homeBreakdown => 'Month breakdown';
+
+  @override
+  String get homeBreakdownExpenses => 'Expenses';
+
+  @override
+  String get homeBreakdownIncome => 'Income';
+
+  @override
+  String get homePaid => 'Made';
+
+  @override
+  String get homeUpcoming => 'Upcoming';
+
+  @override
+  String get homeOverdue => 'Overdue';
+
+  @override
+  String get homeReceived => 'Received';
+
+  @override
+  String get homeToReceive => 'To receive';
+
+  @override
+  String get homeLateIncome => 'Late';
+
+  @override
+  String get homeRecurrenceTitle => 'Expenses by recurrence';
+
+  @override
+  String get homeRecurring => 'Recurring';
+
+  @override
+  String get homeInstallments => 'In installments';
+
+  @override
+  String get homeSingle => 'One-off';
+
+  @override
+  String get homeHealth => 'Financial health of the month';
+
+  @override
+  String get homeHealthNoData =>
+      'Not enough data: without income and expenses recorded this month there is nothing to assess.';
+
+  @override
+  String get homeHealthNote =>
+      'Objective criteria on what is recorded. Not a score and not investment advice.';
+
+  @override
+  String get healthResult => 'Result of the month';
+
+  @override
+  String healthResultOk(String value) {
+    return 'income exceeds expenses by $value';
+  }
+
+  @override
+  String healthResultBad(String value) {
+    return 'expenses exceed income by $value';
+  }
+
+  @override
+  String get healthOverdue => 'Overdue bills';
+
+  @override
+  String get healthOverdueOk => 'none';
+
+  @override
+  String healthOverdueBad(int n, String value) {
+    return '$n open, adding up to $value';
+  }
+
+  @override
+  String get healthCards => 'Card limit in use';
+
+  @override
+  String healthCardsUse(int percent) {
+    return '$percent% of the limit committed';
+  }
+
+  @override
+  String get healthNoBasis => 'no card with a limit registered';
+
+  @override
+  String get healthBudget => 'Month budget';
+
+  @override
+  String healthBudgetUse(String spent, String limit) {
+    return '$spent of $limit';
+  }
+
+  @override
+  String get healthNoBudget => 'no budget set';
+
+  @override
+  String get dailyTitle => 'Daily control';
+
+  @override
+  String get dailyReceivedToday => 'Received today';
+
+  @override
+  String get dailySpentToday => 'Spent today';
+
+  @override
+  String get dailyResultToday => 'Result of the day';
+
+  @override
+  String dailyYesterdayAndAverage(String yesterday, String average) {
+    return 'Yesterday: $yesterday spent · month average: $average per calendar day';
+  }
+
+  @override
+  String dailyLimitLine(String limit, String left) {
+    return 'Today\'s limit $limit · $left left';
+  }
+
+  @override
+  String dailyLimitOver(String limit, String over) {
+    return 'Today\'s limit $limit · $over over the limit';
+  }
+
+  @override
+  String get dailyLimitBar => 'Spending of the day against the limit';
+
+  @override
+  String dailySavingLine(String target, String saved, String pending) {
+    return 'Saving target $target · set aside $saved · pending $pending';
+  }
+
+  @override
+  String dailySavingMet(String target, String saved) {
+    return 'Saving target $target · set aside $saved · reached today';
+  }
+
+  @override
+  String get dailyNoTargets => 'Set a daily limit or a saving target';
+
+  @override
+  String get dailySpending => 'Spending of the day';
+
+  @override
+  String get dailySpentYesterday => 'Spent yesterday';
+
+  @override
+  String get dailySpentMonth => 'Spent this month so far';
+
+  @override
+  String dailyAverageCalendar(int n) {
+    return 'Average per calendar day ($n days)';
+  }
+
+  @override
+  String dailyAverageSpending(int n) {
+    return 'Average per day with spending ($n days)';
+  }
+
+  @override
+  String get dailyNoPreviousMonth =>
+      'No entries in the previous month: nothing to compare with.';
+
+  @override
+  String dailyPreviousMonth(int n, String value) {
+    return 'In the same $n days of the previous month: $value spent.';
+  }
+
+  @override
+  String get dailyCashflow => 'Daily cash flow';
+
+  @override
+  String get dailyOpening => 'Balance at the start of the month';
+
+  @override
+  String get dailyReceivedMonth => 'Received this month so far';
+
+  @override
+  String get dailyBalanceToday => 'Balance today';
+
+  @override
+  String get dailyBalanceNote =>
+      'The balance is the money in the accounts. A card purchase counts as spending of the day but only moves the balance when the statement is paid; so opening + received − spent may not equal today\'s balance.';
+
+  @override
+  String get dailyViewDone => 'Actual';
+
+  @override
+  String get dailyViewBoth => 'Actual + planned';
+
+  @override
+  String dailyDayIn(String value) {
+    return 'received $value';
+  }
+
+  @override
+  String dailyDayOut(String value) {
+    return 'spent $value';
+  }
+
+  @override
+  String dailyDayPlannedIn(String value) {
+    return 'to receive $value';
+  }
+
+  @override
+  String dailyDayPlannedOut(String value) {
+    return 'to pay $value';
+  }
+
+  @override
+  String get dailyDayNothing => 'no movement';
+
+  @override
+  String dailyDayProjected(String value) {
+    return '$value projected';
+  }
+
+  @override
+  String dailyShowAllDays(int n) {
+    return 'See all $n days';
+  }
+
+  @override
+  String get dailyLimitTitle => 'Daily spending limit';
+
+  @override
+  String get dailyLimitNone =>
+      'No limit set. With a limit, the app shows how much of the day is still available and on how many days of the month it was kept.';
+
+  @override
+  String dailyLimitCurrent(String date) {
+    return 'Limit per day (since $date)';
+  }
+
+  @override
+  String get dailyLimitCarried => 'Left over from earlier days';
+
+  @override
+  String get dailyLimitLeft => 'Available today';
+
+  @override
+  String get dailyLimitExceeded => 'Over the limit today';
+
+  @override
+  String dailyLimitHistory(int within, int total) {
+    return 'This month: within the limit on $within of $total days with a limit in force.';
+  }
+
+  @override
+  String get dailyLimitNew => 'Limit per day';
+
+  @override
+  String get dailyLimitChange => 'New limit per day';
+
+  @override
+  String get dailyLimitHelp =>
+      'Applies from today. Past days stay compared with the limit they had.';
+
+  @override
+  String get dailyCarry => 'Add what was left from earlier days';
+
+  @override
+  String get dailyCarryHelp =>
+      'Off, each day starts from the full limit. On, what was not spent (or what went over) moves to the next day, within the month.';
+
+  @override
+  String get dailyLimitSave => 'Set limit from today';
+
+  @override
+  String get dailyLimitEnd => 'End the limit';
+
+  @override
+  String get dailySavingTitle => 'Daily saving target';
+
+  @override
+  String get dailySavingRule =>
+      'Only money actually set aside counts: deposits into goals. Spending less than the limit is not counted as saving.';
+
+  @override
+  String dailySavingCurrent(String date) {
+    return 'Target per day (since $date)';
+  }
+
+  @override
+  String get dailySavingConfirmed => 'Set aside today';
+
+  @override
+  String get dailySavingPending => 'Pending today';
+
+  @override
+  String dailySavingHistory(String saved, String target, int days) {
+    return 'This month: $saved set aside of $target planned over $days days with a target in force.';
+  }
+
+  @override
+  String get dailySavingNew => 'Set aside per day';
+
+  @override
+  String get dailySavingChange => 'New target per day';
+
+  @override
+  String get dailySavingSave => 'Set target from today';
+
+  @override
+  String get dailySavingDeposit => 'Deposit into a goal';
+
+  @override
+  String get dailySavingEnd => 'End the daily target';
+
+  @override
+  String get dailyEmpty => 'No movement this month';
+
+  @override
+  String get dailySetLimit => 'Set limit';
 }

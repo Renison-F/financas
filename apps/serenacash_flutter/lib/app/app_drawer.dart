@@ -66,6 +66,7 @@ class AppDrawer extends ConsumerWidget {
           _Item(SIconName.target, l.goals, route: '/goals'),
           _Item(SIconName.bank, l.loans, route: '/loans'),
           _Item(SIconName.calendar, l.annualPlanning, route: '/plan/annual'),
+          _Item(SIconName.chart, l.dailyTitle, route: '/daily'),
         ],
       ),
       (

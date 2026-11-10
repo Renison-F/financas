@@ -9,6 +9,7 @@ import '../features/accounts/account_form_screen.dart';
 import '../features/annual/annual_screen.dart';
 import '../features/history/history_screen.dart';
 import '../features/shopping/list_screens.dart';
+import '../features/daily/daily_screen.dart';
 import '../features/shopping/scan_screen.dart';
 import '../features/shopping/session_screen.dart';
 import '../features/accounts/accounts_screen.dart';
@@ -314,6 +315,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/plan/annual',
         parentNavigatorKey: _rootKey,
         builder: (c, s) => const AnnualScreen(),
+      ),
+      GoRoute(
+        path: '/daily',
+        parentNavigatorKey: _rootKey,
+        builder: (c, s) => const DailyScreen(),
       ),
       GoRoute(
         path: '/shopping/list/new',

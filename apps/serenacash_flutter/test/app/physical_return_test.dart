@@ -3,6 +3,8 @@
 /// 011 (confirmação do aparelho), 012 (planejamento anual) e 021 (cursor).
 library;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
@@ -788,8 +790,10 @@ void main() {
           .toList();
       final food = cats[0], shop = cats[1];
       Future<void> openReport() async {
-        GoRouter.of(tester.element(find.byType(HomeScreen)))
-            .push('/reports/categories');
+        unawaited(
+          GoRouter.of(tester.element(find.byType(HomeScreen)))
+              .push('/reports/categories'),
+        );
         await tester.pumpAndSettle();
       }
 

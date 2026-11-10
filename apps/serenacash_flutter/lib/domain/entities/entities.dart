@@ -821,6 +821,9 @@ class UserPrefs {
     this.lockOnBackground = true,
     this.pinEnabled = false,
     this.displayName = '',
+    this.dailyTargets = const [],
+    this.palette = 'teal',
+    this.density = 'comfortable',
   });
   final String locale;
   final String currency;
@@ -837,6 +840,17 @@ class UserPrefs {
 
   /// How the user wants to be greeted; empty when not informed.
   final String displayName;
+
+  /// Daily spending limits and saving targets, each with the period it was in force
+  /// (`DailyTarget.toJson`). Kept as plain maps here so the entities do not depend on that module.
+  final List<Map<String, dynamic>> dailyTargets;
+
+  /// Colour palette of the interface (`teal`, `blue`, `green`, `terracotta`, `graphite`, `wine`).
+  /// It changes the accent of the app, never the meaning of income, expense and warning colours.
+  final String palette;
+
+  /// `comfortable` or `compact` spacing of lists and cards.
+  final String density;
   factory UserPrefs.fromJson(Map<String, dynamic> j) => UserPrefs(
     locale: j['locale'] as String? ?? 'pt-BR',
     currency: j['currency'] as String? ?? 'BRL',
@@ -852,6 +866,12 @@ class UserPrefs {
     lockOnBackground: j['lockOnBackground'] as bool? ?? true,
     pinEnabled: j['pinEnabled'] as bool? ?? false,
     displayName: j['displayName'] as String? ?? '',
+    dailyTargets: [
+      for (final t in j['dailyTargets'] as List? ?? const [])
+        Map<String, dynamic>.from(t as Map),
+    ],
+    palette: j['palette'] as String? ?? 'teal',
+    density: j['density'] as String? ?? 'comfortable',
   );
   Map<String, dynamic> toJson() => {
     'locale': locale,
@@ -868,6 +888,9 @@ class UserPrefs {
     'pinEnabled': pinEnabled,
     // Written only when set, so documents from before this field stay byte-identical.
     if (displayName.isNotEmpty) 'displayName': displayName,
+    if (dailyTargets.isNotEmpty) 'dailyTargets': dailyTargets,
+    if (palette != 'teal') 'palette': palette,
+    if (density != 'comfortable') 'density': density,
   };
   UserPrefs copyWith({
     String? locale,
@@ -883,6 +906,9 @@ class UserPrefs {
     bool? lockOnBackground,
     bool? pinEnabled,
     String? displayName,
+    List<Map<String, dynamic>>? dailyTargets,
+    String? palette,
+    String? density,
   }) => UserPrefs(
     locale: locale ?? this.locale,
     currency: currency ?? this.currency,
@@ -899,6 +925,9 @@ class UserPrefs {
     lockOnBackground: lockOnBackground ?? this.lockOnBackground,
     pinEnabled: pinEnabled ?? this.pinEnabled,
     displayName: displayName ?? this.displayName,
+    dailyTargets: dailyTargets ?? this.dailyTargets,
+    palette: palette ?? this.palette,
+    density: density ?? this.density,
   );
 }
 

@@ -20,6 +20,7 @@ import '../../domain/money/money.dart';
 import '../../domain/reports/shares.dart';
 import '../../ui/components/components.dart';
 import '../shared/format.dart';
+import 'analytic_widgets.dart';
 import 'home_parts.dart';
 
 String invoiceStateLabel(AppLocalizations l, InvoiceState s) => switch (s) {
@@ -42,6 +43,9 @@ class DashboardWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (analyticWidgetIds.contains(id)) {
+      return AnalyticWidget(id: id, data: data);
+    }
     final l = context.l10n;
     final c = context.colors;
     final hidden = ref.watch(privacyHiddenProvider);

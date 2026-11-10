@@ -11,6 +11,7 @@ import '../../domain/billing/billing.dart';
 import '../../domain/budgets/budgets.dart' show budgetStartMonth;
 import '../../domain/cards/cards.dart';
 import '../../domain/categories/categories.dart';
+import '../../domain/daily/daily.dart';
 import '../../domain/dashboard/widgets.dart';
 import '../../domain/dates/dates.dart' hide Clock;
 import '../../domain/entities/entities.dart';
@@ -597,6 +598,43 @@ class AppController extends AsyncNotifier<AppState> {
     return t;
   });
 
+  // ---------- daily targets ----------
+
+  List<DailyTarget> get dailyTargets => [
+    for (final t in _s.ledger.prefs.dailyTargets) DailyTarget.fromJson(t),
+  ];
+
+  /// Sets the daily spending limit or the daily saving target from today on. The one in force is
+  /// ended today, so the days already lived keep the target they had.
+  Future<void> setDailyTarget({
+    required String kind,
+    required int amountCents,
+    String? categoryId,
+    List<int> weekdays = const [],
+    bool carryOver = false,
+  }) {
+    final next = DailyTarget(
+      id: newId(),
+      kind: kind,
+      amountCents: amountCents,
+      categoryId: categoryId,
+      weekdays: weekdays,
+      validFrom: _s.today,
+      carryOver: carryOver,
+    );
+    final all = setTarget(dailyTargets, next, _s.today);
+    return setPrefs(
+      (p) => p.copyWith(dailyTargets: [for (final t in all) t.toJson()]),
+    );
+  }
+
+  Future<void> endDailyTarget(String kind, {String? categoryId}) {
+    final all = endTarget(dailyTargets, kind, _s.today, categoryId: categoryId);
+    return setPrefs(
+      (p) => p.copyWith(dailyTargets: [for (final t in all) t.toJson()]),
+    );
+  }
+
   // ---------- transactions ----------
 
   Future<List<Transaction>> saveTransaction(
@@ -1056,7 +1094,14 @@ final homeDefaultLayout = defaultLayout.copyWith(
     for (final id in defaultLayout.order)
       if (id != 'recent_transactions') ...[
         id,
+        // Right under "pode gastar": where the money stands, the month at a glance and today.
+        if (id == 'available') ...[
+          'period_balance',
+          'overview',
+          'daily_control',
+        ],
         if (id == 'cards_invoices') 'recent_transactions',
+        if (id == 'spending_by_category') 'breakdown',
       ],
   ],
 );

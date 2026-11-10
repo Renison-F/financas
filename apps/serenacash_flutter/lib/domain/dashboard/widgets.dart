@@ -216,8 +216,69 @@ const widgets = <WidgetDefinition>[
   ),
 ];
 
+/// Widgets added after the migration. They are kept apart from [widgets], which mirrors the
+/// original catalog one to one, and are part of everything else: layouts, presets, customization.
+const extraWidgets = <WidgetDefinition>[
+  WidgetDefinition(
+    id: 'period_balance',
+    title: 'Saldo do período',
+    description: 'Saldo inicial, saldo de hoje e previsto para o fim do mês.',
+    requires: ['accounts'],
+    route: '/daily',
+    size: 'tall',
+  ),
+  WidgetDefinition(
+    id: 'overview',
+    title: 'Visão geral',
+    description: 'Receitas, despesas, resultado e cartões do mês.',
+    requires: ['transactions'],
+    route: '/reports/cashflow',
+    size: 'tall',
+  ),
+  WidgetDefinition(
+    id: 'daily_control',
+    title: 'Controle diário',
+    description: 'Gasto e recebido hoje, limite do dia e meta de economia.',
+    requires: ['transactions'],
+    route: '/daily',
+    size: 'regular',
+  ),
+  WidgetDefinition(
+    id: 'breakdown',
+    title: 'Discriminação do mês',
+    description:
+        'Despesas pagas, a vencer e vencidas; receitas recebidas e a receber.',
+    requires: ['transactions'],
+    route: '/bills',
+    size: 'regular',
+  ),
+  WidgetDefinition(
+    id: 'recurrence',
+    title: 'Despesas por recorrência',
+    description: 'Quanto do mês é recorrente, parcelado ou avulso.',
+    requires: ['transactions'],
+    route: '/reports/recurring',
+    size: 'regular',
+  ),
+  WidgetDefinition(
+    id: 'financial_health',
+    title: 'Saúde financeira',
+    description:
+        'Critérios objetivos do mês, cada um com o dado em que se apoia.',
+    requires: ['transactions'],
+    route: '/reports/indicators',
+    size: 'regular',
+  ),
+];
+
+/// The original catalog, in its original order (checked against the origin's fixtures).
 final widgetIds = widgets.map((w) => w.id).toList();
-WidgetDefinition widgetById(String id) => widgets.firstWhere((w) => w.id == id);
+
+/// Every widget the home screen can show.
+final allWidgets = <WidgetDefinition>[...widgets, ...extraWidgets];
+final allWidgetIds = allWidgets.map((w) => w.id).toList();
+WidgetDefinition widgetById(String id) =>
+    allWidgets.firstWhere((w) => w.id == id);
 
 class Preset {
   const Preset(this.title, this.description, this.widgets);
@@ -241,7 +302,7 @@ final presets = <String, Preset>{
     'Pode gastar, contas e últimos lançamentos.',
     ['available', 'bills_to_pay', 'recent_transactions'],
   ),
-  'complete': Preset('Completo', 'Todos os widgets.', widgetIds),
+  'complete': Preset('Completo', 'Todos os widgets.', allWidgetIds),
   'shopping': const Preset('Supermercado', 'Compras em primeiro lugar.', [
     'shopping_assistant',
     'shopping_lists',
@@ -315,14 +376,18 @@ DashboardLayout moveWidgetBy(DashboardLayout l, String id, int delta) {
 }
 
 List<String> hiddenWidgets(DashboardLayout l) =>
-    widgetIds.where((w) => !l.order.contains(w)).toList();
+    allWidgetIds.where((w) => !l.order.contains(w)).toList();
 
 /// Sanitizes a layout loaded from storage: drops unknown ids, de-duplicates, fills defaults.
 DashboardLayout normalizeLayout(Object? raw) {
   final r = raw is Map<String, dynamic> ? raw : const <String, dynamic>{};
   final rawOrder = r['order'];
   final order = rawOrder is List
-      ? rawOrder.whereType<String>().where(widgetIds.contains).toSet().toList()
+      ? rawOrder
+            .whereType<String>()
+            .where(allWidgetIds.contains)
+            .toSet()
+            .toList()
       : [...defaultLayout.order];
   final p = r['period'];
   final period = (p == 'last_30_days' || p == 'selected_month')

@@ -7805,6 +7805,636 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'{n} categorias menores'**
   String chartOthersCount(int n);
+
+  /// No description provided for @homeNoAccountForBalance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cadastre uma conta para ver o saldo do período'**
+  String get homeNoAccountForBalance;
+
+  /// No description provided for @homePeriodBalance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo do período'**
+  String get homePeriodBalance;
+
+  /// No description provided for @homeDayByDay.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dia a dia'**
+  String get homeDayByDay;
+
+  /// No description provided for @homeOpening.
+  ///
+  /// In pt, this message translates to:
+  /// **'Inicial'**
+  String get homeOpening;
+
+  /// No description provided for @homeBalanceToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo hoje'**
+  String get homeBalanceToday;
+
+  /// No description provided for @homeProjected.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto no fim do mês'**
+  String get homeProjected;
+
+  /// No description provided for @homeTimelineLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Linha do saldo dia a dia: contínua até hoje, tracejada no que está apenas previsto.'**
+  String get homeTimelineLabel;
+
+  /// No description provided for @homeProjectedNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto = saldo de hoje + o que está a receber − o que está a pagar até o fim do mês. Só entra o que já foi registrado.'**
+  String get homeProjectedNote;
+
+  /// No description provided for @homeOverview.
+  ///
+  /// In pt, this message translates to:
+  /// **'Visão geral do mês'**
+  String get homeOverview;
+
+  /// No description provided for @homeIncomeReceived.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receitas recebidas'**
+  String get homeIncomeReceived;
+
+  /// No description provided for @homeExpensePaid.
+  ///
+  /// In pt, this message translates to:
+  /// **'Despesas efetivadas'**
+  String get homeExpensePaid;
+
+  /// No description provided for @homePlannedMore.
+  ///
+  /// In pt, this message translates to:
+  /// **'+ {value} previstos'**
+  String homePlannedMore(String value);
+
+  /// No description provided for @homeResult.
+  ///
+  /// In pt, this message translates to:
+  /// **'Resultado'**
+  String get homeResult;
+
+  /// No description provided for @homeResultNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receitas − despesas do mês. Não é o saldo das contas.'**
+  String get homeResultNote;
+
+  /// No description provided for @homeCardInvoices.
+  ///
+  /// In pt, this message translates to:
+  /// **'Faturas em aberto'**
+  String get homeCardInvoices;
+
+  /// No description provided for @homeCardInvoicesNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fatura atual e fechadas ainda não pagas.'**
+  String get homeCardInvoicesNote;
+
+  /// No description provided for @homeNoCards.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum cartão cadastrado.'**
+  String get homeNoCards;
+
+  /// No description provided for @homeNoEntriesMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum lançamento neste mês'**
+  String get homeNoEntriesMonth;
+
+  /// No description provided for @homeBreakdown.
+  ///
+  /// In pt, this message translates to:
+  /// **'Discriminação do mês'**
+  String get homeBreakdown;
+
+  /// No description provided for @homeBreakdownExpenses.
+  ///
+  /// In pt, this message translates to:
+  /// **'Despesas'**
+  String get homeBreakdownExpenses;
+
+  /// No description provided for @homeBreakdownIncome.
+  ///
+  /// In pt, this message translates to:
+  /// **'Receitas'**
+  String get homeBreakdownIncome;
+
+  /// No description provided for @homePaid.
+  ///
+  /// In pt, this message translates to:
+  /// **'Efetivadas'**
+  String get homePaid;
+
+  /// No description provided for @homeUpcoming.
+  ///
+  /// In pt, this message translates to:
+  /// **'A vencer'**
+  String get homeUpcoming;
+
+  /// No description provided for @homeOverdue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vencidas'**
+  String get homeOverdue;
+
+  /// No description provided for @homeReceived.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recebidas'**
+  String get homeReceived;
+
+  /// No description provided for @homeToReceive.
+  ///
+  /// In pt, this message translates to:
+  /// **'A receber'**
+  String get homeToReceive;
+
+  /// No description provided for @homeLateIncome.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atrasadas'**
+  String get homeLateIncome;
+
+  /// No description provided for @homeRecurrenceTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Despesas por recorrência'**
+  String get homeRecurrenceTitle;
+
+  /// No description provided for @homeRecurring.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recorrentes'**
+  String get homeRecurring;
+
+  /// No description provided for @homeInstallments.
+  ///
+  /// In pt, this message translates to:
+  /// **'Parceladas'**
+  String get homeInstallments;
+
+  /// No description provided for @homeSingle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Avulsas'**
+  String get homeSingle;
+
+  /// No description provided for @homeHealth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saúde financeira do mês'**
+  String get homeHealth;
+
+  /// No description provided for @homeHealthNoData.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dados insuficientes: sem receitas e despesas registradas neste mês não há o que avaliar.'**
+  String get homeHealthNoData;
+
+  /// No description provided for @homeHealthNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Critérios objetivos sobre o que está registrado. Não é uma nota nem uma recomendação de investimento.'**
+  String get homeHealthNote;
+
+  /// No description provided for @healthResult.
+  ///
+  /// In pt, this message translates to:
+  /// **'Resultado do mês'**
+  String get healthResult;
+
+  /// No description provided for @healthResultOk.
+  ///
+  /// In pt, this message translates to:
+  /// **'receitas superam despesas em {value}'**
+  String healthResultOk(String value);
+
+  /// No description provided for @healthResultBad.
+  ///
+  /// In pt, this message translates to:
+  /// **'despesas superam receitas em {value}'**
+  String healthResultBad(String value);
+
+  /// No description provided for @healthOverdue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Contas vencidas'**
+  String get healthOverdue;
+
+  /// No description provided for @healthOverdueOk.
+  ///
+  /// In pt, this message translates to:
+  /// **'nenhuma'**
+  String get healthOverdueOk;
+
+  /// No description provided for @healthOverdueBad.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} em aberto, somando {value}'**
+  String healthOverdueBad(int n, String value);
+
+  /// No description provided for @healthCards.
+  ///
+  /// In pt, this message translates to:
+  /// **'Uso do limite dos cartões'**
+  String get healthCards;
+
+  /// No description provided for @healthCardsUse.
+  ///
+  /// In pt, this message translates to:
+  /// **'{percent}% do limite comprometido'**
+  String healthCardsUse(int percent);
+
+  /// No description provided for @healthNoBasis.
+  ///
+  /// In pt, this message translates to:
+  /// **'sem cartão com limite cadastrado'**
+  String get healthNoBasis;
+
+  /// No description provided for @healthBudget.
+  ///
+  /// In pt, this message translates to:
+  /// **'Orçamento do mês'**
+  String get healthBudget;
+
+  /// No description provided for @healthBudgetUse.
+  ///
+  /// In pt, this message translates to:
+  /// **'{spent} de {limit}'**
+  String healthBudgetUse(String spent, String limit);
+
+  /// No description provided for @healthNoBudget.
+  ///
+  /// In pt, this message translates to:
+  /// **'sem orçamento definido'**
+  String get healthNoBudget;
+
+  /// No description provided for @dailyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Controle diário'**
+  String get dailyTitle;
+
+  /// No description provided for @dailyReceivedToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recebido hoje'**
+  String get dailyReceivedToday;
+
+  /// No description provided for @dailySpentToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gasto hoje'**
+  String get dailySpentToday;
+
+  /// No description provided for @dailyResultToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Resultado do dia'**
+  String get dailyResultToday;
+
+  /// No description provided for @dailyYesterdayAndAverage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ontem: {yesterday} gastos · média do mês: {average} por dia corrido'**
+  String dailyYesterdayAndAverage(String yesterday, String average);
+
+  /// No description provided for @dailyLimitLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite de hoje {limit} · disponível {left}'**
+  String dailyLimitLine(String limit, String left);
+
+  /// No description provided for @dailyLimitOver.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite de hoje {limit} · {over} acima do limite'**
+  String dailyLimitOver(String limit, String over);
+
+  /// No description provided for @dailyLimitBar.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gasto do dia em relação ao limite'**
+  String get dailyLimitBar;
+
+  /// No description provided for @dailySavingLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meta de economia {target} · guardado {saved} · pendente {pending}'**
+  String dailySavingLine(String target, String saved, String pending);
+
+  /// No description provided for @dailySavingMet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meta de economia {target} · guardado {saved} · atingida hoje'**
+  String dailySavingMet(String target, String saved);
+
+  /// No description provided for @dailyNoTargets.
+  ///
+  /// In pt, this message translates to:
+  /// **'Definir limite diário ou meta de economia'**
+  String get dailyNoTargets;
+
+  /// No description provided for @dailySpending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gastos do dia'**
+  String get dailySpending;
+
+  /// No description provided for @dailySpentYesterday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gasto ontem'**
+  String get dailySpentYesterday;
+
+  /// No description provided for @dailySpentMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gasto no mês até hoje'**
+  String get dailySpentMonth;
+
+  /// No description provided for @dailyAverageCalendar.
+  ///
+  /// In pt, this message translates to:
+  /// **'Média por dia corrido ({n} dias)'**
+  String dailyAverageCalendar(int n);
+
+  /// No description provided for @dailyAverageSpending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Média por dia com gasto ({n} dias)'**
+  String dailyAverageSpending(int n);
+
+  /// No description provided for @dailyNoPreviousMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem lançamentos no mês anterior: não há com o que comparar.'**
+  String get dailyNoPreviousMonth;
+
+  /// No description provided for @dailyPreviousMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nos mesmos {n} dias do mês anterior: {value} gastos.'**
+  String dailyPreviousMonth(int n, String value);
+
+  /// No description provided for @dailyCashflow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fluxo de caixa diário'**
+  String get dailyCashflow;
+
+  /// No description provided for @dailyOpening.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo no início do mês'**
+  String get dailyOpening;
+
+  /// No description provided for @dailyReceivedMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recebido no mês até hoje'**
+  String get dailyReceivedMonth;
+
+  /// No description provided for @dailyBalanceToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo hoje'**
+  String get dailyBalanceToday;
+
+  /// No description provided for @dailyBalanceNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'O saldo é o dinheiro nas contas. Compra no cartão conta como gasto do dia, mas só mexe no saldo quando a fatura é paga; por isso saldo inicial + recebido − gasto pode não bater com o saldo de hoje.'**
+  String get dailyBalanceNote;
+
+  /// No description provided for @dailyViewDone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Realizado'**
+  String get dailyViewDone;
+
+  /// No description provided for @dailyViewBoth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Realizado + previsto'**
+  String get dailyViewBoth;
+
+  /// No description provided for @dailyDayIn.
+  ///
+  /// In pt, this message translates to:
+  /// **'recebido {value}'**
+  String dailyDayIn(String value);
+
+  /// No description provided for @dailyDayOut.
+  ///
+  /// In pt, this message translates to:
+  /// **'gasto {value}'**
+  String dailyDayOut(String value);
+
+  /// No description provided for @dailyDayPlannedIn.
+  ///
+  /// In pt, this message translates to:
+  /// **'a receber {value}'**
+  String dailyDayPlannedIn(String value);
+
+  /// No description provided for @dailyDayPlannedOut.
+  ///
+  /// In pt, this message translates to:
+  /// **'a pagar {value}'**
+  String dailyDayPlannedOut(String value);
+
+  /// No description provided for @dailyDayNothing.
+  ///
+  /// In pt, this message translates to:
+  /// **'sem movimento'**
+  String get dailyDayNothing;
+
+  /// No description provided for @dailyDayProjected.
+  ///
+  /// In pt, this message translates to:
+  /// **'{value} previsto'**
+  String dailyDayProjected(String value);
+
+  /// No description provided for @dailyShowAllDays.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver os {n} dias'**
+  String dailyShowAllDays(int n);
+
+  /// No description provided for @dailyLimitTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite diário de gastos'**
+  String get dailyLimitTitle;
+
+  /// No description provided for @dailyLimitNone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum limite definido. Com um limite, o app mostra quanto do dia ainda está disponível e em quantos dias do mês ele foi respeitado.'**
+  String get dailyLimitNone;
+
+  /// No description provided for @dailyLimitCurrent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite por dia (desde {date})'**
+  String dailyLimitCurrent(String date);
+
+  /// No description provided for @dailyLimitCarried.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sobra dos dias anteriores'**
+  String get dailyLimitCarried;
+
+  /// No description provided for @dailyLimitLeft.
+  ///
+  /// In pt, this message translates to:
+  /// **'Disponível hoje'**
+  String get dailyLimitLeft;
+
+  /// No description provided for @dailyLimitExceeded.
+  ///
+  /// In pt, this message translates to:
+  /// **'Acima do limite hoje'**
+  String get dailyLimitExceeded;
+
+  /// No description provided for @dailyLimitHistory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Neste mês: dentro do limite em {within} de {total} dias com limite em vigor.'**
+  String dailyLimitHistory(int within, int total);
+
+  /// No description provided for @dailyLimitNew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite por dia'**
+  String get dailyLimitNew;
+
+  /// No description provided for @dailyLimitChange.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo limite por dia'**
+  String get dailyLimitChange;
+
+  /// No description provided for @dailyLimitHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vale a partir de hoje. Os dias que já passaram continuam comparados com o limite que tinham.'**
+  String get dailyLimitHelp;
+
+  /// No description provided for @dailyCarry.
+  ///
+  /// In pt, this message translates to:
+  /// **'Somar a sobra dos dias anteriores'**
+  String get dailyCarry;
+
+  /// No description provided for @dailyCarryHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desligado, cada dia começa do limite cheio. Ligado, o que não foi gasto (ou o que passou do limite) passa para o dia seguinte, dentro do mês.'**
+  String get dailyCarryHelp;
+
+  /// No description provided for @dailyLimitSave.
+  ///
+  /// In pt, this message translates to:
+  /// **'Definir limite a partir de hoje'**
+  String get dailyLimitSave;
+
+  /// No description provided for @dailyLimitEnd.
+  ///
+  /// In pt, this message translates to:
+  /// **'Encerrar o limite'**
+  String get dailyLimitEnd;
+
+  /// No description provided for @dailySavingTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meta diária de economia'**
+  String get dailySavingTitle;
+
+  /// No description provided for @dailySavingRule.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só conta o dinheiro realmente separado: os depósitos em metas. Gastar menos que o limite não é contado como economia.'**
+  String get dailySavingRule;
+
+  /// No description provided for @dailySavingCurrent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meta por dia (desde {date})'**
+  String dailySavingCurrent(String date);
+
+  /// No description provided for @dailySavingConfirmed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Guardado hoje'**
+  String get dailySavingConfirmed;
+
+  /// No description provided for @dailySavingPending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pendente hoje'**
+  String get dailySavingPending;
+
+  /// No description provided for @dailySavingHistory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Neste mês: {saved} guardados de {target} previstos em {days} dias com meta em vigor.'**
+  String dailySavingHistory(String saved, String target, int days);
+
+  /// No description provided for @dailySavingNew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Guardar por dia'**
+  String get dailySavingNew;
+
+  /// No description provided for @dailySavingChange.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova meta por dia'**
+  String get dailySavingChange;
+
+  /// No description provided for @dailySavingSave.
+  ///
+  /// In pt, this message translates to:
+  /// **'Definir meta a partir de hoje'**
+  String get dailySavingSave;
+
+  /// No description provided for @dailySavingDeposit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Guardar em uma meta'**
+  String get dailySavingDeposit;
+
+  /// No description provided for @dailySavingEnd.
+  ///
+  /// In pt, this message translates to:
+  /// **'Encerrar a meta diária'**
+  String get dailySavingEnd;
+
+  /// No description provided for @dailyEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem movimento neste mês'**
+  String get dailyEmpty;
+
+  /// No description provided for @dailySetLimit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Definir limite'**
+  String get dailySetLimit;
 }
 
 class _AppLocalizationsDelegate

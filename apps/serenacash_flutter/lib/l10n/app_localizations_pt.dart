@@ -4670,4 +4670,379 @@ class AppLocalizationsPt extends AppLocalizations {
   String chartOthersCount(int n) {
     return '$n categorias menores';
   }
+
+  @override
+  String get homeNoAccountForBalance =>
+      'Cadastre uma conta para ver o saldo do período';
+
+  @override
+  String get homePeriodBalance => 'Saldo do período';
+
+  @override
+  String get homeDayByDay => 'Dia a dia';
+
+  @override
+  String get homeOpening => 'Inicial';
+
+  @override
+  String get homeBalanceToday => 'Saldo hoje';
+
+  @override
+  String get homeProjected => 'Previsto no fim do mês';
+
+  @override
+  String get homeTimelineLabel =>
+      'Linha do saldo dia a dia: contínua até hoje, tracejada no que está apenas previsto.';
+
+  @override
+  String get homeProjectedNote =>
+      'Previsto = saldo de hoje + o que está a receber − o que está a pagar até o fim do mês. Só entra o que já foi registrado.';
+
+  @override
+  String get homeOverview => 'Visão geral do mês';
+
+  @override
+  String get homeIncomeReceived => 'Receitas recebidas';
+
+  @override
+  String get homeExpensePaid => 'Despesas efetivadas';
+
+  @override
+  String homePlannedMore(String value) {
+    return '+ $value previstos';
+  }
+
+  @override
+  String get homeResult => 'Resultado';
+
+  @override
+  String get homeResultNote =>
+      'Receitas − despesas do mês. Não é o saldo das contas.';
+
+  @override
+  String get homeCardInvoices => 'Faturas em aberto';
+
+  @override
+  String get homeCardInvoicesNote => 'Fatura atual e fechadas ainda não pagas.';
+
+  @override
+  String get homeNoCards => 'Nenhum cartão cadastrado.';
+
+  @override
+  String get homeNoEntriesMonth => 'Nenhum lançamento neste mês';
+
+  @override
+  String get homeBreakdown => 'Discriminação do mês';
+
+  @override
+  String get homeBreakdownExpenses => 'Despesas';
+
+  @override
+  String get homeBreakdownIncome => 'Receitas';
+
+  @override
+  String get homePaid => 'Efetivadas';
+
+  @override
+  String get homeUpcoming => 'A vencer';
+
+  @override
+  String get homeOverdue => 'Vencidas';
+
+  @override
+  String get homeReceived => 'Recebidas';
+
+  @override
+  String get homeToReceive => 'A receber';
+
+  @override
+  String get homeLateIncome => 'Atrasadas';
+
+  @override
+  String get homeRecurrenceTitle => 'Despesas por recorrência';
+
+  @override
+  String get homeRecurring => 'Recorrentes';
+
+  @override
+  String get homeInstallments => 'Parceladas';
+
+  @override
+  String get homeSingle => 'Avulsas';
+
+  @override
+  String get homeHealth => 'Saúde financeira do mês';
+
+  @override
+  String get homeHealthNoData =>
+      'Dados insuficientes: sem receitas e despesas registradas neste mês não há o que avaliar.';
+
+  @override
+  String get homeHealthNote =>
+      'Critérios objetivos sobre o que está registrado. Não é uma nota nem uma recomendação de investimento.';
+
+  @override
+  String get healthResult => 'Resultado do mês';
+
+  @override
+  String healthResultOk(String value) {
+    return 'receitas superam despesas em $value';
+  }
+
+  @override
+  String healthResultBad(String value) {
+    return 'despesas superam receitas em $value';
+  }
+
+  @override
+  String get healthOverdue => 'Contas vencidas';
+
+  @override
+  String get healthOverdueOk => 'nenhuma';
+
+  @override
+  String healthOverdueBad(int n, String value) {
+    return '$n em aberto, somando $value';
+  }
+
+  @override
+  String get healthCards => 'Uso do limite dos cartões';
+
+  @override
+  String healthCardsUse(int percent) {
+    return '$percent% do limite comprometido';
+  }
+
+  @override
+  String get healthNoBasis => 'sem cartão com limite cadastrado';
+
+  @override
+  String get healthBudget => 'Orçamento do mês';
+
+  @override
+  String healthBudgetUse(String spent, String limit) {
+    return '$spent de $limit';
+  }
+
+  @override
+  String get healthNoBudget => 'sem orçamento definido';
+
+  @override
+  String get dailyTitle => 'Controle diário';
+
+  @override
+  String get dailyReceivedToday => 'Recebido hoje';
+
+  @override
+  String get dailySpentToday => 'Gasto hoje';
+
+  @override
+  String get dailyResultToday => 'Resultado do dia';
+
+  @override
+  String dailyYesterdayAndAverage(String yesterday, String average) {
+    return 'Ontem: $yesterday gastos · média do mês: $average por dia corrido';
+  }
+
+  @override
+  String dailyLimitLine(String limit, String left) {
+    return 'Limite de hoje $limit · disponível $left';
+  }
+
+  @override
+  String dailyLimitOver(String limit, String over) {
+    return 'Limite de hoje $limit · $over acima do limite';
+  }
+
+  @override
+  String get dailyLimitBar => 'Gasto do dia em relação ao limite';
+
+  @override
+  String dailySavingLine(String target, String saved, String pending) {
+    return 'Meta de economia $target · guardado $saved · pendente $pending';
+  }
+
+  @override
+  String dailySavingMet(String target, String saved) {
+    return 'Meta de economia $target · guardado $saved · atingida hoje';
+  }
+
+  @override
+  String get dailyNoTargets => 'Definir limite diário ou meta de economia';
+
+  @override
+  String get dailySpending => 'Gastos do dia';
+
+  @override
+  String get dailySpentYesterday => 'Gasto ontem';
+
+  @override
+  String get dailySpentMonth => 'Gasto no mês até hoje';
+
+  @override
+  String dailyAverageCalendar(int n) {
+    return 'Média por dia corrido ($n dias)';
+  }
+
+  @override
+  String dailyAverageSpending(int n) {
+    return 'Média por dia com gasto ($n dias)';
+  }
+
+  @override
+  String get dailyNoPreviousMonth =>
+      'Sem lançamentos no mês anterior: não há com o que comparar.';
+
+  @override
+  String dailyPreviousMonth(int n, String value) {
+    return 'Nos mesmos $n dias do mês anterior: $value gastos.';
+  }
+
+  @override
+  String get dailyCashflow => 'Fluxo de caixa diário';
+
+  @override
+  String get dailyOpening => 'Saldo no início do mês';
+
+  @override
+  String get dailyReceivedMonth => 'Recebido no mês até hoje';
+
+  @override
+  String get dailyBalanceToday => 'Saldo hoje';
+
+  @override
+  String get dailyBalanceNote =>
+      'O saldo é o dinheiro nas contas. Compra no cartão conta como gasto do dia, mas só mexe no saldo quando a fatura é paga; por isso saldo inicial + recebido − gasto pode não bater com o saldo de hoje.';
+
+  @override
+  String get dailyViewDone => 'Realizado';
+
+  @override
+  String get dailyViewBoth => 'Realizado + previsto';
+
+  @override
+  String dailyDayIn(String value) {
+    return 'recebido $value';
+  }
+
+  @override
+  String dailyDayOut(String value) {
+    return 'gasto $value';
+  }
+
+  @override
+  String dailyDayPlannedIn(String value) {
+    return 'a receber $value';
+  }
+
+  @override
+  String dailyDayPlannedOut(String value) {
+    return 'a pagar $value';
+  }
+
+  @override
+  String get dailyDayNothing => 'sem movimento';
+
+  @override
+  String dailyDayProjected(String value) {
+    return '$value previsto';
+  }
+
+  @override
+  String dailyShowAllDays(int n) {
+    return 'Ver os $n dias';
+  }
+
+  @override
+  String get dailyLimitTitle => 'Limite diário de gastos';
+
+  @override
+  String get dailyLimitNone =>
+      'Nenhum limite definido. Com um limite, o app mostra quanto do dia ainda está disponível e em quantos dias do mês ele foi respeitado.';
+
+  @override
+  String dailyLimitCurrent(String date) {
+    return 'Limite por dia (desde $date)';
+  }
+
+  @override
+  String get dailyLimitCarried => 'Sobra dos dias anteriores';
+
+  @override
+  String get dailyLimitLeft => 'Disponível hoje';
+
+  @override
+  String get dailyLimitExceeded => 'Acima do limite hoje';
+
+  @override
+  String dailyLimitHistory(int within, int total) {
+    return 'Neste mês: dentro do limite em $within de $total dias com limite em vigor.';
+  }
+
+  @override
+  String get dailyLimitNew => 'Limite por dia';
+
+  @override
+  String get dailyLimitChange => 'Novo limite por dia';
+
+  @override
+  String get dailyLimitHelp =>
+      'Vale a partir de hoje. Os dias que já passaram continuam comparados com o limite que tinham.';
+
+  @override
+  String get dailyCarry => 'Somar a sobra dos dias anteriores';
+
+  @override
+  String get dailyCarryHelp =>
+      'Desligado, cada dia começa do limite cheio. Ligado, o que não foi gasto (ou o que passou do limite) passa para o dia seguinte, dentro do mês.';
+
+  @override
+  String get dailyLimitSave => 'Definir limite a partir de hoje';
+
+  @override
+  String get dailyLimitEnd => 'Encerrar o limite';
+
+  @override
+  String get dailySavingTitle => 'Meta diária de economia';
+
+  @override
+  String get dailySavingRule =>
+      'Só conta o dinheiro realmente separado: os depósitos em metas. Gastar menos que o limite não é contado como economia.';
+
+  @override
+  String dailySavingCurrent(String date) {
+    return 'Meta por dia (desde $date)';
+  }
+
+  @override
+  String get dailySavingConfirmed => 'Guardado hoje';
+
+  @override
+  String get dailySavingPending => 'Pendente hoje';
+
+  @override
+  String dailySavingHistory(String saved, String target, int days) {
+    return 'Neste mês: $saved guardados de $target previstos em $days dias com meta em vigor.';
+  }
+
+  @override
+  String get dailySavingNew => 'Guardar por dia';
+
+  @override
+  String get dailySavingChange => 'Nova meta por dia';
+
+  @override
+  String get dailySavingSave => 'Definir meta a partir de hoje';
+
+  @override
+  String get dailySavingDeposit => 'Guardar em uma meta';
+
+  @override
+  String get dailySavingEnd => 'Encerrar a meta diária';
+
+  @override
+  String get dailyEmpty => 'Sem movimento neste mês';
+
+  @override
+  String get dailySetLimit => 'Definir limite';
 }

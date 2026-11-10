@@ -200,6 +200,12 @@ void main() {
       expect(find.text('Configure seu saldo'), findsNothing);
       expect(find.text('Pode gastar neste mês'), findsOneWidget);
       expect(find.textContaining('1.500'), findsWidgets);
+      // the balance of the period sits right under the summary, so the list is further down
+      await tester.scrollUntilVisible(
+        find.text('Nenhum lançamento ainda'),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
       expect(find.text('Nenhum lançamento ainda'), findsOneWidget);
       await screenshot(tester, 'home_no_movements_light');
     },
@@ -242,7 +248,7 @@ void main() {
         scrollable: find.byType(Scrollable).first,
       );
       expect(find.text('Contas a pagar'), findsOneWidget);
-      expect(find.textContaining('1.290,00'), findsOneWidget);
+      expect(find.textContaining('1.290,00'), findsWidgets);
       expect(find.text('Vence amanhã'), findsOneWidget);
       expect(find.text('Vence em 3 dias'), findsOneWidget);
       expect(find.text('Ver todas'), findsOneWidget);
