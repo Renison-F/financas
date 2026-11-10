@@ -2973,5 +2973,18 @@
   "widgetSizeHint": "Reduzido: o cartão ocupa uma linha, com o título e o número principal.",
   "widgetOpen": "Abrir {name}",
   "@widgetOpen": {"placeholders": {"name": {"type": "String"}}},
-  "widgetSizeReduced": "Tamanho reduzido"
+  "widgetSizeReduced": "Tamanho reduzido",
+  "regionStart": "Marcar uma área para reler",
+  "regionRead": "Ler a área marcada",
+  "regionReading": "Lendo…",
+  "regionStop": "Cancelar marcação",
+  "regionDefines": "A área marcada define",
+  "regionHint": "Arraste o dedo sobre a foto para marcar o trecho e arraste um canto para ajustar. Se a letra for pequena, amplie a foto antes de marcar.",
+  "regionLayer": "Área de marcação sobre a foto da etiqueta",
+  "regionNothingRead": "Nada foi lido nessa área. Marque uma área maior, ou digite o que está escrito.",
+  "regionNoPrice": "Não há um preço nessa área. Foi lido: \"{text}\".",
+  "@regionNoPrice": {"placeholders": {"text": {"type": "String"}}},
+  "regionManyPrices": "Há mais de um valor nessa área. Escolha o preço do item:",
+  "regionUnavailable": "A leitura de texto não está disponível neste aparelho. Digite o nome e o preço.",
+  "regionFailed": "Não foi possível ler essa área. Tente de novo ou digite o que está escrito."
 }

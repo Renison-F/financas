@@ -8,13 +8,16 @@ library;
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/app.dart';
 import '../../app/theme/tokens.dart';
 import '../../data/ocr/ocr_service.dart';
+import '../../data/ocr/region_reader.dart';
 import '../../domain/money/money.dart';
 import '../../domain/shopping/shopping.dart';
 import '../../ui/components/components.dart';
+import 'region_layer.dart';
 import 'scan_screen.dart';
 
 /// The item being reviewed. Mutable on purpose: the review screen edits it in place and the session
@@ -115,14 +118,22 @@ Future<ReviewOutcome> showItemReview(
   return r ?? ReviewOutcome.cancel;
 }
 
-class ItemReviewScreen extends StatefulWidget {
+class ItemReviewScreen extends ConsumerStatefulWidget {
   const ItemReviewScreen({super.key, required this.draft});
   final ItemDraft draft;
   @override
-  State<ItemReviewScreen> createState() => _ItemReviewScreenState();
+  ConsumerState<ItemReviewScreen> createState() => _ItemReviewScreenState();
 }
 
-class _ItemReviewScreenState extends State<ItemReviewScreen> {
+/// Amounts written in a piece of text read from a label ("9,99", "R$ 16.99", "4 , 99").
+List<int> pricesIn(String text) => [
+  for (final m in RegExp(
+    r'(\d{1,4})\s*[,.]\s*[,.]?\s*(\d{2})(?!\d)',
+  ).allMatches(text))
+    int.parse(m[1]!) * 100 + int.parse(m[2]!),
+];
+
+class _ItemReviewScreenState extends ConsumerState<ItemReviewScreen> {
   // One controller per field for the whole life of the screen. Creating a controller on every
   // rebuild is what used to throw the cursor to the end at each key typed in the middle of a name.
   late final _name = TextEditingController(text: widget.draft.name);
@@ -133,6 +144,13 @@ class _ItemReviewScreenState extends State<ItemReviewScreen> {
   final List<int> _nameLines = [];
   int? _priceLine;
   String? _pickMessage;
+
+  /// Marking a region of the photo to be read again: on or off, the region (fractions of the
+  /// photo), whether a reading is running and the amounts found when there was more than one.
+  bool _marking = false;
+  Rect? _region;
+  bool _readingRegion = false;
+  List<int> _regionPrices = const [];
 
   ItemDraft get d => widget.draft;
 
@@ -202,13 +220,59 @@ class _ItemReviewScreenState extends State<ItemReviewScreen> {
       });
       return;
     }
-    final m = RegExp(r'(\d{1,4})\s*[,.]\s*[,.]?\s*(\d{2})(?!\d)')
-        .firstMatch(line.text);
-    if (m == null) {
+    final found = pricesIn(line.text);
+    if (found.isEmpty) {
       setState(() => _pickMessage = l.reviewNoPriceInLine);
       return;
     }
-    _setPrice(int.parse(m[1]!) * 100 + int.parse(m[2]!), line: i);
+    _setPrice(found.first, line: i);
+  }
+
+  /// Reads again only the region the user marked. In "name" mode what is read becomes the
+  /// description; in "price" mode the amount found becomes the price, and when there is more than
+  /// one the user chooses. Nothing is filled in when nothing was read.
+  Future<void> _readRegion() async {
+    final region = _region, photo = d.photo;
+    if (region == null || photo == null || _readingRegion) return;
+    final l = context.l10n;
+    setState(() {
+      _readingRegion = true;
+      _pickMessage = null;
+      _regionPrices = const [];
+    });
+    try {
+      final lines = await ref.read(regionReaderProvider).read(photo, region);
+      if (!mounted) return;
+      final text = lines.map((x) => x.text.trim()).where((x) => x.isNotEmpty);
+      if (text.isEmpty) {
+        setState(() => _pickMessage = l.regionNothingRead);
+      } else if (_pick == 'name') {
+        setState(() {
+          _nameLines.clear();
+          _setName(text.join(' '));
+          _marking = false;
+        });
+      } else {
+        final found = pricesIn(text.join('  ')).toSet().toList();
+        if (found.isEmpty) {
+          setState(() => _pickMessage = l.regionNoPrice(text.join(' ')));
+        } else if (found.length == 1) {
+          _setPrice(found.single);
+          setState(() => _marking = false);
+        } else {
+          setState(() {
+            _regionPrices = found;
+            _pickMessage = l.regionManyPrices;
+          });
+        }
+      }
+    } on OcrUnavailable {
+      if (mounted) setState(() => _pickMessage = l.regionUnavailable);
+    } catch (_) {
+      if (mounted) setState(() => _pickMessage = l.regionFailed);
+    } finally {
+      if (mounted) setState(() => _readingRegion = false);
+    }
   }
 
   Future<void> _addProductPhoto() async {
@@ -274,25 +338,93 @@ class _ItemReviewScreenState extends State<ItemReviewScreen> {
                       nameLines: _nameLines,
                       priceLine: _priceLine,
                       onTapLine: _tapLine,
+                      marking: _marking,
+                      region: _region,
+                      onRegion: (r) => setState(() {
+                        _region = r;
+                        _regionPrices = const [];
+                      }),
                     ),
-                    if (d.page != null && d.page!.lines.isNotEmpty) ...[
+                    const SizedBox(height: Spacing.xs),
+                    Field(
+                      label: _marking ? l.regionDefines : l.reviewTapDefines,
+                      help:
+                          _pickMessage ??
+                          (_marking ? l.regionHint : l.reviewPhotoHint),
+                      child: Segmented<String>(
+                        options: [
+                          ('name', l.reviewPickName),
+                          ('price', l.reviewPickPrice),
+                        ],
+                        value: _pick,
+                        onChanged: (v) => setState(() {
+                          _pick = v;
+                          _pickMessage = null;
+                          _regionPrices = const [];
+                        }),
+                      ),
+                    ),
+                    if (_regionPrices.isNotEmpty) ...[
                       const SizedBox(height: Spacing.xs),
-                      Field(
-                        label: l.reviewTapDefines,
-                        help: _pickMessage ?? l.reviewPhotoHint,
-                        child: Segmented<String>(
-                          options: [
-                            ('name', l.reviewPickName),
-                            ('price', l.reviewPickPrice),
-                          ],
-                          value: _pick,
-                          onChanged: (v) => setState(() {
-                            _pick = v;
-                            _pickMessage = null;
-                          }),
-                        ),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: [
+                          for (final cents in _regionPrices)
+                            SChip(
+                              label: formatBRL(cents),
+                              onTap: () {
+                                _setPrice(cents);
+                                setState(() {
+                                  _regionPrices = const [];
+                                  _marking = false;
+                                });
+                              },
+                            ),
+                        ],
                       ),
                     ],
+                    const SizedBox(height: Spacing.xs),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      children: [
+                        if (!_marking)
+                          SButton(
+                            label: l.regionStart,
+                            icon: SIconName.edit,
+                            variant: SButtonVariant.secondary,
+                            compact: true,
+                            onPressed: () => setState(() {
+                              _marking = true;
+                              _pickMessage = null;
+                            }),
+                          )
+                        else ...[
+                          SButton(
+                            label: _readingRegion
+                                ? l.regionReading
+                                : l.regionRead,
+                            icon: SIconName.search,
+                            compact: true,
+                            onPressed: _region == null || _readingRegion
+                                ? null
+                                : _readRegion,
+                          ),
+                          SButton(
+                            label: l.regionStop,
+                            variant: SButtonVariant.ghost,
+                            compact: true,
+                            onPressed: () => setState(() {
+                              _marking = false;
+                              _region = null;
+                              _regionPrices = const [];
+                              _pickMessage = null;
+                            }),
+                          ),
+                        ],
+                      ],
+                    ),
                     const SizedBox(height: Spacing.sm),
                   ],
                   for (final w in [...d.warnings, ...?a?.reviewReasons])
@@ -675,12 +807,21 @@ class _LabelPhoto extends StatelessWidget {
     required this.nameLines,
     required this.priceLine,
     required this.onTapLine,
+    required this.marking,
+    required this.region,
+    required this.onRegion,
   });
   final Uint8List photo;
   final OcrPage? page;
   final List<int> nameLines;
   final int? priceLine;
   final ValueChanged<int> onTapLine;
+
+  /// While marking, dragging on the photo draws the region instead of moving the photo, and the
+  /// lines already read are not tappable (two fingers still zoom).
+  final bool marking;
+  final Rect? region;
+  final ValueChanged<Rect> onRegion;
 
   @override
   Widget build(BuildContext context) {
@@ -698,6 +839,10 @@ class _LabelPhoto extends StatelessWidget {
             borderRadius: BorderRadius.circular(Radii.sm),
             child: InteractiveViewer(
               maxScale: 5,
+              // While marking, the finger draws the region: the photo stays where it is. Zoom in
+              // first if the print is small; the region is drawn on the enlarged photo.
+              panEnabled: !marking,
+              scaleEnabled: !marking,
               child: LayoutBuilder(
                 builder: (context, box) {
                   final scale = p == null ? 1.0 : box.maxWidth / p.width;
@@ -711,7 +856,15 @@ class _LabelPhoto extends StatelessWidget {
                           semanticLabel: l.evidenceLabel,
                         ),
                       ),
-                      if (p != null)
+                      if (marking)
+                        Positioned.fill(
+                          child: RegionLayer(
+                            region: region,
+                            onChanged: onRegion,
+                            semanticLabel: l.regionLayer,
+                          ),
+                        ),
+                      if (p != null && !marking)
                         for (var i = 0; i < p.lines.length; i++)
                           Positioned(
                             left: p.lines[i].left * scale - 3,

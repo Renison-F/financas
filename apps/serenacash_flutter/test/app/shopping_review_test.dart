@@ -122,6 +122,7 @@ void main() {
             .text,
         '9,99',
       );
+      await _show(tester, find.textContaining('Varejo R\$'));
       expect(find.textContaining('Varejo R\$'), findsOneWidget);
       expect(find.textContaining('Por litro'), findsWidgets);
       final wholesale = find.textContaining('a partir de 3 un');
@@ -264,6 +265,7 @@ void main() {
     await tester.tap(find.bySemanticsLabel('8,99').first);
     await tester.pumpAndSettle();
     expect(find.textContaining('não tem um preço'), findsNothing);
+    await _show(tester, find.widgetWithText(TextField, '0,00'));
     expect(
       tester
           .widget<TextField>(find.widgetWithText(TextField, '0,00'))
@@ -345,6 +347,7 @@ void main() {
     (tester) async {
       final (app, c) = await _startPurchase(tester);
       await _scan(tester, c, _label('etiqueta-vela-1199'));
+      await _show(tester, find.widgetWithText(TextField, '0,00'));
       await tester.enterText(find.widgetWithText(TextField, '0,00'), '1199');
       await tester.pumpAndSettle();
       await tester.tap(find.text('Adicionar ao carrinho'));

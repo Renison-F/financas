@@ -9131,6 +9131,78 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Tamanho reduzido'**
   String get widgetSizeReduced;
+
+  /// No description provided for @regionStart.
+  ///
+  /// In pt, this message translates to:
+  /// **'Marcar uma área para reler'**
+  String get regionStart;
+
+  /// No description provided for @regionRead.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ler a área marcada'**
+  String get regionRead;
+
+  /// No description provided for @regionReading.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lendo…'**
+  String get regionReading;
+
+  /// No description provided for @regionStop.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cancelar marcação'**
+  String get regionStop;
+
+  /// No description provided for @regionDefines.
+  ///
+  /// In pt, this message translates to:
+  /// **'A área marcada define'**
+  String get regionDefines;
+
+  /// No description provided for @regionHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arraste o dedo sobre a foto para marcar o trecho e arraste um canto para ajustar. Se a letra for pequena, amplie a foto antes de marcar.'**
+  String get regionHint;
+
+  /// No description provided for @regionLayer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Área de marcação sobre a foto da etiqueta'**
+  String get regionLayer;
+
+  /// No description provided for @regionNothingRead.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada foi lido nessa área. Marque uma área maior, ou digite o que está escrito.'**
+  String get regionNothingRead;
+
+  /// No description provided for @regionNoPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não há um preço nessa área. Foi lido: \"{text}\".'**
+  String regionNoPrice(String text);
+
+  /// No description provided for @regionManyPrices.
+  ///
+  /// In pt, this message translates to:
+  /// **'Há mais de um valor nessa área. Escolha o preço do item:'**
+  String get regionManyPrices;
+
+  /// No description provided for @regionUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'A leitura de texto não está disponível neste aparelho. Digite o nome e o preço.'**
+  String get regionUnavailable;
+
+  /// No description provided for @regionFailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não foi possível ler essa área. Tente de novo ou digite o que está escrito.'**
+  String get regionFailed;
 }
 
 class _AppLocalizationsDelegate

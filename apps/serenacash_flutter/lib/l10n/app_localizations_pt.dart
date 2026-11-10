@@ -5455,4 +5455,47 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get widgetSizeReduced => 'Tamanho reduzido';
+
+  @override
+  String get regionStart => 'Marcar uma área para reler';
+
+  @override
+  String get regionRead => 'Ler a área marcada';
+
+  @override
+  String get regionReading => 'Lendo…';
+
+  @override
+  String get regionStop => 'Cancelar marcação';
+
+  @override
+  String get regionDefines => 'A área marcada define';
+
+  @override
+  String get regionHint =>
+      'Arraste o dedo sobre a foto para marcar o trecho e arraste um canto para ajustar. Se a letra for pequena, amplie a foto antes de marcar.';
+
+  @override
+  String get regionLayer => 'Área de marcação sobre a foto da etiqueta';
+
+  @override
+  String get regionNothingRead =>
+      'Nada foi lido nessa área. Marque uma área maior, ou digite o que está escrito.';
+
+  @override
+  String regionNoPrice(String text) {
+    return 'Não há um preço nessa área. Foi lido: \"$text\".';
+  }
+
+  @override
+  String get regionManyPrices =>
+      'Há mais de um valor nessa área. Escolha o preço do item:';
+
+  @override
+  String get regionUnavailable =>
+      'A leitura de texto não está disponível neste aparelho. Digite o nome e o preço.';
+
+  @override
+  String get regionFailed =>
+      'Não foi possível ler essa área. Tente de novo ou digite o que está escrito.';
 }

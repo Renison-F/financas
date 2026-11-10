@@ -2973,5 +2973,18 @@
   "widgetSizeHint": "Reduced: the card takes one line, with the title and the main figure.",
   "widgetOpen": "Open {name}",
   "@widgetOpen": {"placeholders": {"name": {"type": "String"}}},
-  "widgetSizeReduced": "Reduced size"
+  "widgetSizeReduced": "Reduced size",
+  "regionStart": "Mark an area to read again",
+  "regionRead": "Read the marked area",
+  "regionReading": "Reading…",
+  "regionStop": "Cancel marking",
+  "regionDefines": "The marked area defines",
+  "regionHint": "Drag a finger over the photo to mark the part, and drag a corner to adjust. If the print is small, zoom in on the photo before marking.",
+  "regionLayer": "Marking area over the photo of the label",
+  "regionNothingRead": "Nothing was read in that area. Mark a larger area, or type what is written.",
+  "regionNoPrice": "There is no price in that area. What was read: \"{text}\".",
+  "@regionNoPrice": {"placeholders": {"text": {"type": "String"}}},
+  "regionManyPrices": "There is more than one amount in that area. Choose the price of the item:",
+  "regionUnavailable": "Text reading is not available on this device. Type the name and the price.",
+  "regionFailed": "That area could not be read. Try again or type what is written."
 }
