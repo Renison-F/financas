@@ -109,7 +109,9 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
                       children: [
                         Flexible(
                           child: Text(
-                            b.label,
+                            b.detail == null
+                                ? b.label
+                                : '${b.label} · ${b.detail}',
                             style: Type.caption.copyWith(color: c.textMuted),
                           ),
                         ),

@@ -15,9 +15,12 @@ import '../reports/reports.dart';
 import '../text/normalize.dart';
 
 class BasisLine {
-  const BasisLine(this.label, this.cents);
+  const BasisLine(this.label, this.cents, {this.detail});
   final String label;
   final Cents cents;
+
+  /// What the line weighs in the answer (share of the total, number of entries).
+  final String? detail;
   Map<String, dynamic> toJson() => {'label': label, 'cents': cents};
 }
 
@@ -46,14 +49,23 @@ class Answer {
 }
 
 class DetectedIntent {
-  const DetectedIntent(this.intent, {this.category, this.amountCents});
+  const DetectedIntent(
+    this.intent, {
+    this.category,
+    this.amountCents,
+    this.period,
+  });
   final String intent;
   final String? category;
   final Cents? amountCents;
+
+  /// `last_month` when the question names the previous month; null for the current one.
+  final String? period;
   Map<String, dynamic> toJson() => {
     'intent': intent,
     if (category != null) 'category': category,
     if (amountCents != null) 'amountCents': amountCents,
+    if (period != null) 'period': period,
   };
 }
 
@@ -68,14 +80,44 @@ final _bills = RegExp(
   r'(vence|vencem|pagar|contas).*(semana|dias|hoje|amanha)',
 );
 final _bills2 = RegExp(r'quais contas');
-final _where = RegExp(r'onde (estou )?gast|maior gasto|gastando mais|pra onde');
+// "Where does the money go": a ranking of categories, however the question is worded.
+final _where = RegExp(
+  r'onde (eu |estou |foi que |e que |mais )*(gast|vai|foi)|(no|em|com|do) que (eu |mais |estou )*gast|'
+  r'gast\w* mais|mais gast|maior(es)? (gasto|despesa|categoria)|pra onde|para onde|'
+  r'principais (gastos|despesas)|ranking|(despesas|gastos) por categoria|categoria que mais',
+);
+const _spendWords = [
+  'gastei',
+  'gastar',
+  'gasto',
+  'gastos',
+  'gastando',
+  'despesa',
+  'despesas',
+];
+final _rankWords = RegExp(r'\b(mais|maior|maiores|onde|ranking|principais)\b');
+// "Where can I save": verbs of spending less, typos included.
+const _saveWords = [
+  'economizar',
+  'economizo',
+  'poupar',
+  'cortar',
+  'reduzir',
+  'diminuir',
+  'enxugar',
+];
+final _saveRe = RegExp(r'gastar menos|gasto menos|sobrar mais');
+final _lastMonth = RegExp(r'mes passado|ultimo mes|mes anterior');
 final _cat = RegExp(
   r'(?:gastei|gasto|gastando) (?:com|em|no|na) ([a-z ]+?)(?:\?|$| este| esse| neste| no mes)',
 );
 final _organize = RegExp(r'organizar|comecar|por onde|dica|ajuda');
 final _goal = RegExp(r'meta|objetivo|reserva|falta para');
 final _inst = RegExp(r'parcela|comprometid|parcelad');
-final _month = RegExp(r'como estou|situacao|mes|sereno');
+final _month = RegExp(
+  r'como estou|como (esta|vai|anda|foi) (o |meu |este |esse )?mes|situacao|resumo|'
+  r'resultado do mes|balanco|como (estao|andam) (as |minhas )*(contas|financas)',
+);
 
 DetectedIntent detectIntent(String question) {
   final q = normalizeText(question);
@@ -93,8 +135,16 @@ DetectedIntent detectIntent(String question) {
   if (_bills.hasMatch(q) || _bills2.hasMatch(q)) {
     return const DetectedIntent('bills_this_week');
   }
-  if (_where.hasMatch(q)) return const DetectedIntent('where_spending_most');
+  final period = _lastMonth.hasMatch(q) ? 'last_month' : null;
+  if (_saveRe.hasMatch(q) || hasWordLike(q, _saveWords)) {
+    return DetectedIntent('where_to_save', period: period);
+  }
   final c = _cat.firstMatch(q);
+  // "gastei com mercado" names a category; "no que mais gastei" asks for the ranking.
+  final ranking =
+      _where.hasMatch(q) ||
+      (c == null && hasWordLike(q, _spendWords) && _rankWords.hasMatch(q));
+  if (ranking) return DetectedIntent('where_spending_most', period: period);
   if (c != null) {
     return DetectedIntent('spent_on_category', category: c.group(1)!.trim());
   }
@@ -107,9 +157,29 @@ DetectedIntent detectIntent(String question) {
 
 String _dm(ISODate d) => '${d.substring(8, 10)}/${d.substring(5, 7)}';
 
+const _monthNames = [
+  'janeiro',
+  'fevereiro',
+  'março',
+  'abril',
+  'maio',
+  'junho',
+  'julho',
+  'agosto',
+  'setembro',
+  'outubro',
+  'novembro',
+  'dezembro',
+];
+String _monthName(MonthKey m) =>
+    '${_monthNames[int.parse(m.substring(5, 7)) - 1]} de ${m.substring(0, 4)}';
+
 Answer answer(Ledger ledger, String question, ISODate today) {
   final d = detectIntent(question);
-  final month = monthKeyOf(today);
+  final thisMonth = monthKeyOf(today);
+  final month = d.period == 'last_month'
+      ? addMonthsToKey(thisMonth, -1)
+      : thisMonth;
   switch (d.intent) {
     case 'can_spend':
       final av = availability(ledger, today: today);
@@ -165,16 +235,106 @@ Answer answer(Ledger ledger, String question, ISODate today) {
         route: '/bills',
       );
     case 'where_spending_most':
+      // The same query the category report runs: settled expenses of the month, subcategories
+      // added to their category. Planned expenses are left out, and the answer says so.
       final cats = expensesByCategory(ledger, month, rollUp: true);
-      final top = cats.firstOrNull;
+      final total = sumCents(cats.map((c) => c.cents));
+      final shown = cats.take(5).toList();
+      final rest = cats.skip(5).toList();
+      final ranking = [
+        for (var i = 0; i < shown.length; i++)
+          '${i + 1}. ${shown[i].name}: ${formatBRL(shown[i].cents)} (${_fmtPct(shown[i].percent)}%)',
+      ].join('; ');
       return Answer(
         intent: d.intent,
-        title: 'Onde o dinheiro está indo',
-        cents: top?.cents,
-        text: top != null
-            ? 'Neste mês, ${top.name} é a maior categoria: ${formatBRL(top.cents)} (${_fmtPct(top.percent)}% das despesas).'
-            : 'Ainda não há despesas registradas neste mês.',
-        basis: cats.take(5).map((c) => BasisLine(c.name, -c.cents)).toList(),
+        title: 'Maiores gastos por categoria',
+        cents: cats.isEmpty ? null : total,
+        text: cats.isEmpty
+            ? 'Não há despesas efetivadas em ${_monthName(month)}.'
+            : 'Em ${_monthName(month)}, as despesas efetivadas somam ${formatBRL(total)} em ${cats.length} ${cats.length == 1 ? 'categoria' : 'categorias'}. $ranking. Despesas previstas não entram nesta conta.',
+        basis: [
+          for (final c in shown)
+            BasisLine(
+              c.name,
+              -c.cents,
+              detail:
+                  '${_fmtPct(c.percent)}% · ${c.count} ${c.count == 1 ? 'lançamento' : 'lançamentos'}',
+            ),
+          if (rest.isNotEmpty)
+            BasisLine(
+              'Outras ${rest.length}',
+              -sumCents(rest.map((c) => c.cents)),
+            ),
+        ],
+        route: '/reports/categories',
+      );
+    case 'where_to_save':
+      final cats = expensesByCategory(ledger, month, rollUp: true);
+      final total = sumCents(cats.map((c) => c.cents));
+      if (cats.isEmpty || total <= 0) {
+        return Answer(
+          intent: d.intent,
+          title: 'Faltam dados para sugerir',
+          text:
+              'Não há despesas efetivadas em ${_monthName(month)}, então não há o que comparar. Registre os gastos do mês${d.period == null ? ' ou pergunte "Onde posso economizar no mês passado?"' : ''}.',
+          basis: const [],
+          route: '/transactions',
+        );
+      }
+      final parts = <String>[];
+      final top = cats.take(3).toList();
+      parts.add(
+        'Em ${_monthName(month)}, o que mais pesa: ${top.map((c) => '${c.name} (${formatBRL(c.cents)}, ${_fmtPct(c.percent)}%)').join(', ')}.',
+      );
+      final over = budgetsForMonth(
+        ledger,
+        month,
+        today,
+      ).where((s) => s.pace != PaceStatus.sereno).toList();
+      if (over.isNotEmpty) {
+        parts.add(
+          'Acima do previsto no orçamento: ${over.map((s) => '${s.category?.name ?? 'orçamento do mês'} (${formatBRL(s.spentCents)} de ${formatBRL(s.limitCents)})').join(', ')}.',
+        );
+      }
+      final previousMonth = addMonthsToKey(month, -1);
+      final previous = {
+        for (final c in expensesByCategory(ledger, previousMonth, rollUp: true))
+          c.categoryId: c.cents,
+      };
+      if (previous.isEmpty) {
+        parts.add(
+          'Não há despesas em ${_monthName(previousMonth)} para comparar a evolução.',
+        );
+      } else {
+        final rises = [
+          for (final c in cats)
+            if (previous[c.categoryId] != null &&
+                c.cents > previous[c.categoryId]!)
+              (c.name, c.cents - previous[c.categoryId]!),
+        ]..sort((a, b) => b.$2.compareTo(a.$2));
+        if (rises.isNotEmpty) {
+          parts.add(
+            'Subiram em relação a ${_monthName(previousMonth)}: ${rises.take(2).map((r) => '${r.$1} (+${formatBRL(r.$2)})').join(', ')}.',
+          );
+        }
+      }
+      final rec = recurringExpenses(ledger, month);
+      if (rec.isNotEmpty) {
+        parts.add(
+          '${rec.length} ${rec.length == 1 ? 'gasto se repete' : 'gastos se repetem'} todo mês e ${rec.length == 1 ? 'soma' : 'somam'} ${formatBRL(sumCents(rec.map((r) => r.amountCents)))}; vale conferir se ainda fazem sentido.',
+        );
+      }
+      parts.add(
+        'O app mostra onde o dinheiro se concentra; o que reduzir é uma decisão sua.',
+      );
+      return Answer(
+        intent: d.intent,
+        title: 'Onde há espaço para reduzir',
+        text: parts.join(' '),
+        basis: [
+          for (final c in top)
+            BasisLine(c.name, -c.cents, detail: '${_fmtPct(c.percent)}%'),
+        ],
         route: '/reports/categories',
       );
     case 'spent_on_category':
@@ -191,7 +351,7 @@ Answer answer(Ledger ledger, String question, ISODate today) {
         cents: hit?.cents ?? 0,
         text: hit != null
             ? 'Você gastou ${formatBRL(hit.cents)} com ${hit.name} neste mês (${hit.count} lançamento(s)).'
-            : 'Não encontrei uma categoria parecida com "$cat". Veja a lista de categorias em Mais.',
+            : 'Não encontrei despesas de uma categoria parecida com "$cat" neste mês. A lista de categorias está no menu.',
         basis: hit != null ? [BasisLine(hit.name, -hit.cents)] : const [],
         route: '/reports/categories',
       );
@@ -245,18 +405,13 @@ Answer answer(Ledger ledger, String question, ISODate today) {
     case 'month_status':
       final t = monthTotals(ledger, month);
       final statuses = budgetsForMonth(ledger, month, today);
-      final worst = statuses.any((s) => s.pace == PaceStatus.agitado)
-          ? 'agitado'
-          : statuses.any((s) => s.pace == PaceStatus.atencao)
-          ? 'atenção'
-          : 'sereno';
       int n(PaceStatus p) => statuses.where((s) => s.pace == p).length;
       return Answer(
         intent: d.intent,
-        title: 'Mês $worst',
+        title: 'Resultado do mês',
         cents: t.net,
         text:
-            'Até agora: ${formatBRL(t.incomeSettled)} recebidos e ${formatBRL(t.expenseSettled)} gastos (saldo do mês ${formatBRL(t.net)}). ${statuses.isNotEmpty ? 'Orçamentos: ${n(PaceStatus.sereno)} serenos, ${n(PaceStatus.atencao)} em atenção, ${n(PaceStatus.agitado)} agitados.' : 'Crie orçamentos para acompanhar o ritmo.'}',
+            'Em ${_monthName(month)}: ${formatBRL(t.incomeSettled)} recebidos e ${formatBRL(t.expenseSettled)} gastos, resultado de ${formatBRL(t.net)}. ${statuses.isNotEmpty ? 'Orçamentos: ${n(PaceStatus.sereno)} dentro do previsto, ${n(PaceStatus.atencao)} pouco acima e ${n(PaceStatus.agitado)} acima do previsto.' : 'Sem orçamento definido para comparar.'}',
         basis: [
           BasisLine('Receitas', t.incomeSettled),
           BasisLine('Despesas', -t.expenseSettled),
@@ -272,17 +427,34 @@ Answer answer(Ledger ledger, String question, ISODate today) {
         route: '/budgets',
       );
     default:
-      return const Answer(
+      // Examples drawn from what this user actually has, instead of one fixed list.
+      final examples = [
+        '"No que mais gastei este mês?"',
+        '"Onde posso economizar?"',
+        if (ledger.transactions.any(
+          (t) => isActive(t) && t.status == TransactionStatus.planned,
+        ))
+          '"Quais contas vencem esta semana?"',
+        if (ledger.cards.any((c) => !c.archived))
+          '"Quanto tenho comprometido em parcelas?"',
+        if (ledger.goals.any((g) => g.isActive))
+          '"Quanto falta para minha meta?"',
+        '"Posso comprar algo de 300,00?"',
+      ];
+      return Answer(
         intent: 'unknown',
         title: 'Não entendi',
-        text: 'Posso responder sobre: quanto pode gastar, contas da semana, onde você mais gasta, quanto gastou em uma categoria, se uma compra cabe, metas, parcelas e como está o mês.',
-        basis: [],
+        text:
+            'Não reconheci essa pergunta. Experimente, por exemplo: ${examples.take(4).join(', ')}. Para ver tudo, abra os relatórios no menu.',
+        basis: const [],
       );
   }
 }
 
-String _fmtPct(double v) =>
-    v == v.roundToDouble() ? v.toInt().toString() : v.toString();
+/// Percent with a decimal comma, as money is written here.
+String _fmtPct(double v) => v == v.roundToDouble()
+    ? v.toInt().toString()
+    : v.toString().replaceAll('.', ',');
 
 class Recommendation {
   const Recommendation({

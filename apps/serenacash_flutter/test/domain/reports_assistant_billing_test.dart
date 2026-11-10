@@ -85,9 +85,24 @@ void main() {
     }
   });
   group('assistant fixtures', () {
+    // The fixtures were generated from the React Native app. Two answers changed on purpose after
+    // the physical homologation (docs/flutter-migration/02-EQUIVALENCIA_DOMINIO.md): the ranking
+    // of categories reports the total of the month instead of the top category alone (010), and
+    // the month is no longer given a mood ("Mês agitado") as a title (026). Everything else in
+    // those two answers still has to match the origin.
+    const intended = <String, Map<String, dynamic>>{
+      'answer "Onde estou gastando mais?"': {
+        'title': 'Maiores gastos por categoria',
+        'cents': 135000,
+      },
+      'answer "Como está o mês?"': {'title': 'Resultado do mês'},
+    };
     for (final c in loadFixtures('assistant')) {
       test(c.name, () {
         final i = c.inputMap;
+        final expected = intended.containsKey(c.name)
+            ? {...c.expected as Map<String, dynamic>, ...intended[c.name]!}
+            : c.expected;
         dynamic actual;
         if (c.name.startsWith('intent')) {
           actual = detectIntent(i['question'] as String).toJson();
@@ -104,9 +119,9 @@ void main() {
           ).map((r) => {'id': r.id, 'severity': r.severity}).toList();
         }
         expect(
-          jsonEquals(actual, c.expected),
+          jsonEquals(actual, expected),
           isTrue,
-          reason: 'expected ${c.expected}\n got $actual',
+          reason: 'expected $expected\n got $actual',
         );
       });
     }
