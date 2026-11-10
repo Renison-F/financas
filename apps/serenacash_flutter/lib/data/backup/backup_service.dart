@@ -7,6 +7,7 @@ library;
 
 import 'dart:convert';
 
+import 'package:crypto/crypto.dart' as crypto;
 import 'package:drift/drift.dart';
 
 import '../../domain/entities/entities.dart';
@@ -88,15 +89,55 @@ class BackupService {
     doc['recurrenceRules'] = rules.map((r) => r.toJson()).toList();
     final shop = shopping;
     if (shop != null) {
+      final sessions = await shop.sessions(limit: _allSessions);
+      // Evidence photos and receipt lines travel with the purchases they belong to. The photos go
+      // as they were captured; with the encrypted backup they are encrypted with everything else.
+      final evidence = <Map<String, dynamic>>[];
+      final receiptLines = <Map<String, dynamic>>[];
+      for (final s in sessions) {
+        for (final e in await shop.evidenceOf(s.id)) {
+          final bytes = await shop.evidenceBytes(e.id);
+          if (bytes == null) continue;
+          evidence.add({
+            'id': e.id,
+            'sessionId': e.sessionId,
+            if (e.lineId != null) 'lineId': e.lineId,
+            'role': e.role,
+            'mimeType': e.mimeType,
+            'sha256': e.sha256,
+            if (e.width != null) 'width': e.width,
+            if (e.height != null) 'height': e.height,
+            'capturedAt': e.capturedAt,
+            if (e.ocr != null) 'ocr': e.ocr!.map((b) => b.toJson()).toList(),
+            'dataBase64': base64Encode(bytes),
+          });
+        }
+        for (final r in await shop.receiptLines(s.id)) {
+          receiptLines.add({
+            'id': r.id,
+            'sessionId': s.id,
+            'rawText': r.rawText,
+            'description': r.description,
+            'quantity': r.quantity,
+            'unit': r.unit,
+            if (r.unitPriceCents != null) 'unitPriceCents': r.unitPriceCents,
+            'totalCents': r.totalCents,
+            if (r.code != null) 'code': r.code,
+            if (r.matchedLineId != null) 'matchedLineId': r.matchedLineId,
+            'matchStatus': r.matchStatus,
+            if (r.matchScore != null) 'matchScore': r.matchScore,
+          });
+        }
+      }
       doc['shopping'] = {
         'lists': [
           for (final x in await shop.lists(includeArchived: true)) x.toJson(),
         ],
-        'sessions': [
-          for (final x in await shop.sessions(limit: _allSessions)) x.toJson(),
-        ],
+        'sessions': [for (final x in sessions) x.toJson()],
         'products': [for (final x in await shop.products()) x.toJson()],
         'observations': [for (final x in await shop.observations()) x.toJson()],
+        if (evidence.isNotEmpty) 'evidence': evidence,
+        if (receiptLines.isNotEmpty) 'receiptLines': receiptLines,
       };
     }
     return jsonEncode(doc);
@@ -238,6 +279,8 @@ class BackupService {
     var sessions = const <ShoppingSession>[];
     var products = const <Product>[];
     var observations = const <PriceObservation>[];
+    var evidence = const <(Evidence, Uint8List)>[];
+    var receiptLines = const <(String, ReceiptLine)>[];
     final hasShopping = shop != null && shopDoc is Map<String, dynamic>;
     if (hasShopping) {
       try {
@@ -249,6 +292,55 @@ class BackupService {
         sessions = read('sessions', ShoppingSession.fromJson);
         products = read('products', Product.fromJson);
         observations = read('observations', PriceObservation.fromJson);
+        evidence = read('evidence', (j) {
+          final bytes = base64Decode(j['dataBase64'] as String);
+          // A photo that does not match its own digest was damaged or swapped: the restore stops.
+          if (crypto.sha256.convert(bytes).toString() != j['sha256']) {
+            throw const FormatException('foto de evidência não confere');
+          }
+          return (
+            Evidence(
+              id: j['id'] as String,
+              sessionId: j['sessionId'] as String,
+              lineId: j['lineId'] as String?,
+              role: j['role'] as String,
+              mimeType: j['mimeType'] as String,
+              sizeBytes: bytes.length,
+              sha256: j['sha256'] as String,
+              width: (j['width'] as num?)?.toInt(),
+              height: (j['height'] as num?)?.toInt(),
+              capturedAt: j['capturedAt'] as String,
+              ocr: j['ocr'] == null
+                  ? null
+                  : [
+                      for (final b in j['ocr'] as List)
+                        OcrBox.fromJson(b as Map<String, dynamic>),
+                    ],
+            ),
+            bytes,
+          );
+        });
+        var position = 0;
+        receiptLines = read(
+          'receiptLines',
+          (j) => (
+            j['sessionId'] as String,
+            ReceiptLine(
+              id: j['id'] as String,
+              position: position++,
+              rawText: j['rawText'] as String,
+              description: j['description'] as String,
+              quantity: (j['quantity'] as num).toDouble(),
+              unit: j['unit'] as String,
+              unitPriceCents: (j['unitPriceCents'] as num?)?.toInt(),
+              totalCents: (j['totalCents'] as num).toInt(),
+              code: j['code'] as String?,
+              matchedLineId: j['matchedLineId'] as String?,
+              matchStatus: j['matchStatus'] as String,
+              matchScore: (j['matchScore'] as num?)?.toDouble(),
+            ),
+          ),
+        );
       } catch (e) {
         return _save(
           ImportReport(
@@ -282,6 +374,16 @@ class BackupService {
             await shop.upsertSession(x);
           }
           await shop.addObservations(observations);
+          for (final (e, bytes) in evidence) {
+            await shop.saveEvidence(e, bytes);
+          }
+          final bySession = <String, List<ReceiptLine>>{};
+          for (final (sessionId, line) in receiptLines) {
+            bySession.putIfAbsent(sessionId, () => []).add(line);
+          }
+          for (final entry in bySession.entries) {
+            await shop.replaceReceiptLines(entry.key, entry.value);
+          }
         }
         for (final a in atts) {
           try {
