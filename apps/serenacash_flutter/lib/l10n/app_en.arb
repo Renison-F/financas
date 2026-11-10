@@ -3044,5 +3044,21 @@
   "weekday4": "Thu",
   "weekday5": "Fri",
   "weekday6": "Sat",
-  "weekday7": "Sun"
+  "weekday7": "Sun",
+  "receiptExpenseTitle": "Receipt and registered expense",
+  "receiptItemsTotal": "Sum of the items read on the receipt",
+  "receiptExpenseRegistered": "Expense registered for this purchase",
+  "receiptNoExpense": "This purchase has no registered expense. Nothing to update.",
+  "receiptExpenseSame": "The expense already has the amount of the receipt.",
+  "receiptExpenseDiffers": "The amounts differ. The receipt does not change the expense on its own: if the receipt total is right, you can update it.",
+  "receiptExpenseLocked": "This expense cannot be adjusted from the receipt (it is in instalments, recurring or partly paid). Edit the entry if needed.",
+  "receiptAdjust": "Update the expense from the receipt",
+  "receiptAdjustText": "The registered expense is {value}. Check the total printed on the receipt below: the reading may have missed an item. The earlier amount is kept in the notes of the expense.",
+  "@receiptAdjustText": {"placeholders": {"value": {"type": "String"}}},
+  "receiptAdjustField": "Receipt total",
+  "receiptAdjustConfirm": "Update the expense",
+  "receiptAdjustNote": "Amount adjusted from the receipt on {date}. Before: {value}.",
+  "@receiptAdjustNote": {"placeholders": {"date": {"type": "String"}, "value": {"type": "String"}}},
+  "receiptAdjusted": "Expense updated to {value}.",
+  "@receiptAdjusted": {"placeholders": {"value": {"type": "String"}}}
 }

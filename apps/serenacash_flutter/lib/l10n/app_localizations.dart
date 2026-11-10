@@ -9485,6 +9485,84 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Dom'**
   String get weekday7;
+
+  /// No description provided for @receiptExpenseTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cupom e despesa registrada'**
+  String get receiptExpenseTitle;
+
+  /// No description provided for @receiptItemsTotal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Soma dos itens lidos no cupom'**
+  String get receiptItemsTotal;
+
+  /// No description provided for @receiptExpenseRegistered.
+  ///
+  /// In pt, this message translates to:
+  /// **'Despesa registrada desta compra'**
+  String get receiptExpenseRegistered;
+
+  /// No description provided for @receiptNoExpense.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esta compra não tem uma despesa registrada. Nada a atualizar.'**
+  String get receiptNoExpense;
+
+  /// No description provided for @receiptExpenseSame.
+  ///
+  /// In pt, this message translates to:
+  /// **'A despesa já tem o valor do cupom.'**
+  String get receiptExpenseSame;
+
+  /// No description provided for @receiptExpenseDiffers.
+  ///
+  /// In pt, this message translates to:
+  /// **'Os valores são diferentes. O cupom não altera a despesa sozinho: se o total do cupom estiver certo, você pode atualizar.'**
+  String get receiptExpenseDiffers;
+
+  /// No description provided for @receiptExpenseLocked.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esta despesa não pode ser ajustada pelo cupom (é parcelada, recorrente ou está paga em parte). Edite o lançamento, se precisar.'**
+  String get receiptExpenseLocked;
+
+  /// No description provided for @receiptAdjust.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atualizar a despesa pelo cupom'**
+  String get receiptAdjust;
+
+  /// No description provided for @receiptAdjustText.
+  ///
+  /// In pt, this message translates to:
+  /// **'A despesa registrada é de {value}. Confira abaixo o total impresso no cupom: a leitura pode ter deixado algum item de fora. O valor anterior fica anotado na despesa.'**
+  String receiptAdjustText(String value);
+
+  /// No description provided for @receiptAdjustField.
+  ///
+  /// In pt, this message translates to:
+  /// **'Total do cupom'**
+  String get receiptAdjustField;
+
+  /// No description provided for @receiptAdjustConfirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atualizar a despesa'**
+  String get receiptAdjustConfirm;
+
+  /// No description provided for @receiptAdjustNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Valor ajustado pelo cupom fiscal em {date}. Antes: {value}.'**
+  String receiptAdjustNote(String date, String value);
+
+  /// No description provided for @receiptAdjusted.
+  ///
+  /// In pt, this message translates to:
+  /// **'Despesa atualizada para {value}.'**
+  String receiptAdjusted(String value);
 }
 
 class _AppLocalizationsDelegate

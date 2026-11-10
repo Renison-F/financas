@@ -18,6 +18,7 @@ import '../../app/app.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/theme/tokens.dart';
 import '../../data/ocr/ocr_service.dart';
+import '../../domain/entities/entities.dart';
 import '../../domain/money/money.dart';
 import '../../domain/shopping/shopping.dart';
 import '../../ui/components/components.dart';
@@ -301,6 +302,167 @@ class _ReceiptScreenState extends ConsumerState<ReceiptScreen> {
     });
   }
 
+  /// The expense registered for this purchase next to what the receipt adds up to, and the way to
+  /// bring the first to the second. Nothing changes without the user asking and confirming.
+  Widget _expenseCard(Reconciliation rec) {
+    final l = context.l10n;
+    final c = context.colors;
+    final hidden = ref.watch(privacyHiddenProvider);
+    final session = _session;
+    final ledger = ref.watch(ledgerProvider);
+    final tx = session?.transactionId == null
+        ? null
+        : ledger.transactionById(session!.transactionId!);
+    final receiptTotal = sumCents(rec.lines.map((r) => r.totalCents));
+    if (rec.lines.isEmpty) return const SizedBox.shrink();
+    String brl(int v) => formatBRL(v, hidden: hidden);
+    Widget row(String label, String value) => Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(label, style: Type.rowText.copyWith(color: c.text)),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            value,
+            style: Type.rowText.copyWith(
+              color: c.text,
+              fontWeight: FontWeight.w600,
+              fontFeatures: const [FontFeature.tabularFigures()],
+            ),
+          ),
+        ],
+      ),
+    );
+    return SCard(
+      padding: const EdgeInsets.all(Spacing.sm),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            l.receiptExpenseTitle,
+            style: Type.rowTitle.copyWith(color: c.text),
+          ),
+          const SizedBox(height: 4),
+          row(l.receiptItemsTotal, brl(receiptTotal)),
+          if (tx == null || tx.deletedAt != null)
+            Text(
+              l.receiptNoExpense,
+              style: Type.caption.copyWith(color: c.textMuted),
+            )
+          else ...[
+            row(l.receiptExpenseRegistered, brl(tx.amountCents)),
+            if (tx.amountCents == receiptTotal)
+              Text(
+                l.receiptExpenseSame,
+                style: Type.caption.copyWith(color: c.textMuted),
+              )
+            else if (!AppController.canAdjustFromReceipt(tx))
+              Text(
+                l.receiptExpenseLocked,
+                style: Type.caption.copyWith(color: c.textMuted),
+              )
+            else ...[
+              Text(
+                l.receiptExpenseDiffers,
+                style: Type.caption.copyWith(color: c.textMuted),
+              ),
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: SButton(
+                  label: l.receiptAdjust,
+                  variant: SButtonVariant.secondary,
+                  compact: true,
+                  onPressed: () => _adjustExpense(tx, receiptTotal),
+                ),
+              ),
+            ],
+          ],
+        ],
+      ),
+    );
+  }
+
+  Future<void> _adjustExpense(Transaction tx, int receiptTotal) async {
+    final l = context.l10n;
+    final amount = await showSSheet<int>(
+      context,
+      useRootNavigator: true,
+      builder: (sheet) {
+        int? value = receiptTotal;
+        return StatefulBuilder(
+          builder: (context, setSheet) => Padding(
+            padding: const EdgeInsets.fromLTRB(
+              Spacing.md,
+              0,
+              Spacing.md,
+              Spacing.sm,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Semantics(
+                  header: true,
+                  child: Text(
+                    l.receiptAdjust,
+                    style: Type.title.copyWith(color: context.colors.text),
+                  ),
+                ),
+                const SizedBox(height: Spacing.xs),
+                Text(
+                  l.receiptAdjustText(formatBRL(tx.amountCents)),
+                  style: Type.bodySmall.copyWith(
+                    color: context.colors.textMuted,
+                  ),
+                ),
+                const SizedBox(height: Spacing.sm),
+                MoneyField(
+                  label: l.receiptAdjustField,
+                  cents: value,
+                  onChanged: (v) => setSheet(() => value = v),
+                ),
+                const SizedBox(height: Spacing.sm),
+                SButton(
+                  label: l.receiptAdjustConfirm,
+                  fullWidth: true,
+                  onPressed: (value ?? 0) <= 0 || value == tx.amountCents
+                      ? null
+                      : () => Navigator.of(sheet).pop(value),
+                ),
+                SButton(
+                  label: l.cancel,
+                  variant: SButtonVariant.ghost,
+                  fullWidth: true,
+                  onPressed: () => Navigator.of(sheet).pop(),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    if (amount == null || !mounted) return;
+    final ok = await _ctl.adjustAmountFromReceipt(
+      tx.id,
+      amount,
+      note: l.receiptAdjustNote(
+        fmtDateBR(ref.read(todayProvider)),
+        formatBRL(tx.amountCents),
+      ),
+    );
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          ok ? l.receiptAdjusted(formatBRL(amount)) : l.receiptExpenseLocked,
+        ),
+      ),
+    );
+    setState(() {});
+  }
+
   /// Stores the pairing and records, on each cart line with a settled pair, the price charged.
   /// The price the user confirmed at the shelf is never overwritten.
   Future<void> _store(List<ReceiptLine> lines) async {
@@ -564,6 +726,7 @@ class _ReceiptScreenState extends ConsumerState<ReceiptScreen> {
               ],
             ),
           ),
+          _expenseCard(rec),
           for (final r in rec.lines)
             Builder(
               builder: (context) {

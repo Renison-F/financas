@@ -3044,5 +3044,21 @@
   "weekday4": "Qui",
   "weekday5": "Sex",
   "weekday6": "Sáb",
-  "weekday7": "Dom"
+  "weekday7": "Dom",
+  "receiptExpenseTitle": "Cupom e despesa registrada",
+  "receiptItemsTotal": "Soma dos itens lidos no cupom",
+  "receiptExpenseRegistered": "Despesa registrada desta compra",
+  "receiptNoExpense": "Esta compra não tem uma despesa registrada. Nada a atualizar.",
+  "receiptExpenseSame": "A despesa já tem o valor do cupom.",
+  "receiptExpenseDiffers": "Os valores são diferentes. O cupom não altera a despesa sozinho: se o total do cupom estiver certo, você pode atualizar.",
+  "receiptExpenseLocked": "Esta despesa não pode ser ajustada pelo cupom (é parcelada, recorrente ou está paga em parte). Edite o lançamento, se precisar.",
+  "receiptAdjust": "Atualizar a despesa pelo cupom",
+  "receiptAdjustText": "A despesa registrada é de {value}. Confira abaixo o total impresso no cupom: a leitura pode ter deixado algum item de fora. O valor anterior fica anotado na despesa.",
+  "@receiptAdjustText": {"placeholders": {"value": {"type": "String"}}},
+  "receiptAdjustField": "Total do cupom",
+  "receiptAdjustConfirm": "Atualizar a despesa",
+  "receiptAdjustNote": "Valor ajustado pelo cupom fiscal em {date}. Antes: {value}.",
+  "@receiptAdjustNote": {"placeholders": {"date": {"type": "String"}, "value": {"type": "String"}}},
+  "receiptAdjusted": "Despesa atualizada para {value}.",
+  "@receiptAdjusted": {"placeholders": {"value": {"type": "String"}}}
 }

@@ -5670,4 +5670,52 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get weekday7 => 'Dom';
+
+  @override
+  String get receiptExpenseTitle => 'Cupom e despesa registrada';
+
+  @override
+  String get receiptItemsTotal => 'Soma dos itens lidos no cupom';
+
+  @override
+  String get receiptExpenseRegistered => 'Despesa registrada desta compra';
+
+  @override
+  String get receiptNoExpense =>
+      'Esta compra não tem uma despesa registrada. Nada a atualizar.';
+
+  @override
+  String get receiptExpenseSame => 'A despesa já tem o valor do cupom.';
+
+  @override
+  String get receiptExpenseDiffers =>
+      'Os valores são diferentes. O cupom não altera a despesa sozinho: se o total do cupom estiver certo, você pode atualizar.';
+
+  @override
+  String get receiptExpenseLocked =>
+      'Esta despesa não pode ser ajustada pelo cupom (é parcelada, recorrente ou está paga em parte). Edite o lançamento, se precisar.';
+
+  @override
+  String get receiptAdjust => 'Atualizar a despesa pelo cupom';
+
+  @override
+  String receiptAdjustText(String value) {
+    return 'A despesa registrada é de $value. Confira abaixo o total impresso no cupom: a leitura pode ter deixado algum item de fora. O valor anterior fica anotado na despesa.';
+  }
+
+  @override
+  String get receiptAdjustField => 'Total do cupom';
+
+  @override
+  String get receiptAdjustConfirm => 'Atualizar a despesa';
+
+  @override
+  String receiptAdjustNote(String date, String value) {
+    return 'Valor ajustado pelo cupom fiscal em $date. Antes: $value.';
+  }
+
+  @override
+  String receiptAdjusted(String value) {
+    return 'Despesa atualizada para $value.';
+  }
 }

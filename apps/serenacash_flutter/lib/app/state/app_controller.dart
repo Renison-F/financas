@@ -841,6 +841,40 @@ class AppController extends AsyncNotifier<AppState> {
     await _mutate(() => _ledger.upsertTransaction(next));
   }
 
+  /// Whether the amount of [t] may be replaced by the total of a receipt: a single expense (or a
+  /// single card purchase), not part of an instalment plan or of a recurrence, and not half paid.
+  static bool canAdjustFromReceipt(Transaction t) =>
+      t.deletedAt == null &&
+      (t.kind == TransactionKind.expense ||
+          t.kind == TransactionKind.cardPurchase) &&
+      t.installment == null &&
+      t.seriesId == null &&
+      t.status != TransactionStatus.partiallyPaid &&
+      t.status != TransactionStatus.cancelled;
+
+  /// Changes the amount of the expense of a purchase to the total of its receipt. It is never done
+  /// on its own: the user asks for it, sees both amounts and confirms the new one. The change is
+  /// written in the notes of the expense with [note], so the earlier amount is not lost. Returns
+  /// false, changing nothing, when the expense cannot be adjusted.
+  Future<bool> adjustAmountFromReceipt(
+    String transactionId,
+    int amountCents, {
+    required String note,
+  }) async {
+    final t = _s.ledger.transactionById(transactionId);
+    if (t == null || amountCents <= 0 || !canAdjustFromReceipt(t)) return false;
+    if (t.amountCents == amountCents) return true;
+    final next = t.copyWith(
+      amountCents: amountCents,
+      // A settled expense is paid in full: what was paid follows the amount.
+      paidCents: t.paidCents == null ? null : amountCents,
+      notes: [if ((t.notes ?? '').trim().isNotEmpty) t.notes!, note].join('\n'),
+      updatedAt: nowISO(),
+    );
+    await _mutate(() => _ledger.upsertTransaction(next));
+    return true;
+  }
+
   Future<void> deleteTransaction(
     String id, {
     bool series = false,

@@ -5659,4 +5659,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get weekday7 => 'Sun';
+
+  @override
+  String get receiptExpenseTitle => 'Receipt and registered expense';
+
+  @override
+  String get receiptItemsTotal => 'Sum of the items read on the receipt';
+
+  @override
+  String get receiptExpenseRegistered => 'Expense registered for this purchase';
+
+  @override
+  String get receiptNoExpense =>
+      'This purchase has no registered expense. Nothing to update.';
+
+  @override
+  String get receiptExpenseSame =>
+      'The expense already has the amount of the receipt.';
+
+  @override
+  String get receiptExpenseDiffers =>
+      'The amounts differ. The receipt does not change the expense on its own: if the receipt total is right, you can update it.';
+
+  @override
+  String get receiptExpenseLocked =>
+      'This expense cannot be adjusted from the receipt (it is in instalments, recurring or partly paid). Edit the entry if needed.';
+
+  @override
+  String get receiptAdjust => 'Update the expense from the receipt';
+
+  @override
+  String receiptAdjustText(String value) {
+    return 'The registered expense is $value. Check the total printed on the receipt below: the reading may have missed an item. The earlier amount is kept in the notes of the expense.';
+  }
+
+  @override
+  String get receiptAdjustField => 'Receipt total';
+
+  @override
+  String get receiptAdjustConfirm => 'Update the expense';
+
+  @override
+  String receiptAdjustNote(String date, String value) {
+    return 'Amount adjusted from the receipt on $date. Before: $value.';
+  }
+
+  @override
+  String receiptAdjusted(String value) {
+    return 'Expense updated to $value.';
+  }
 }
