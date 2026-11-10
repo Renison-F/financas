@@ -43,6 +43,21 @@ Future<void> _pumpReal(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
+/// The app goes to the background and comes back, which is when a lock that is on takes effect.
+Future<void> _background(WidgetTester tester) async {
+  for (final state in const [
+    AppLifecycleState.inactive,
+    AppLifecycleState.hidden,
+    AppLifecycleState.paused,
+    AppLifecycleState.hidden,
+    AppLifecycleState.inactive,
+    AppLifecycleState.resumed,
+  ]) {
+    tester.binding.handleAppLifecycleStateChanged(state);
+  }
+  await tester.pumpAndSettle();
+}
+
 Future<void> _openSettings(WidgetTester tester) async {
   await openMenu(tester, 'Configurações');
   expect(find.byType(SettingsScreen), findsOneWidget);
@@ -97,7 +112,10 @@ void main() {
       await _pumpReal(tester);
       expect(tester.takeException(), isNull);
 
-      // Enabling the PIN locks the app.
+      // Whoever just typed the PIN twice is not asked for it again: the app stays open and locks
+      // when it comes back from the background.
+      expect(find.text('Bloqueado'), findsNothing);
+      await _background(tester);
       expect(find.text('Bloqueado'), findsOneWidget);
       final lock = find.byWidgetPredicate(
         (w) => w is SIcon && w.name == SIconName.lock && w.size == 40,
@@ -139,6 +157,7 @@ void main() {
       await _answerPinDialog(tester, '4826');
       await _answerPinDialog(tester, '4826');
       await _pumpReal(tester);
+      await _background(tester);
       expect(find.text('Bloqueado'), findsOneWidget);
 
       Future<void> wrong() async {
@@ -197,10 +216,8 @@ void main() {
       await _answerPinDialog(tester, '4826');
       await _answerPinDialog(tester, '4826');
       await _pumpReal(tester);
-      // Unlock: the settings screen is still underneath.
-      await tester.enterText(find.byType(TextField), '4826');
-      await tester.tap(find.text('Usar PIN'));
-      await _pumpReal(tester);
+      // Setting the PIN does not lock the app on the spot: the settings screen is still there.
+      expect(find.text('Bloqueado'), findsNothing);
       expect(find.byType(SettingsScreen), findsOneWidget);
 
       await tester.tap(find.text('Proteger com PIN'));
@@ -239,9 +256,6 @@ void main() {
       await tester.pumpAndSettle();
       await _answerPinDialog(tester, '4826');
       await _answerPinDialog(tester, '4826');
-      await _pumpReal(tester);
-      await tester.enterText(find.byType(TextField), '4826');
-      await tester.tap(find.text('Usar PIN'));
       await _pumpReal(tester);
       // System back (the header with the back arrow is scrolled out of view).
       await tester.binding.handlePopRoute();

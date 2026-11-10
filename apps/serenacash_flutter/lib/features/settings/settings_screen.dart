@@ -6,6 +6,7 @@ import '../../app/di.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/theme/tokens.dart';
 import '../../data/notifications/bill_reminders.dart';
+import '../../data/security/device_auth.dart';
 import '../../ui/components/components.dart';
 import '../security/lock_gate.dart';
 
@@ -22,17 +23,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    ref
-        .read(localAuthProvider)
-        .isDeviceSupported()
-        .then((ok) async {
-          if (!ok) return;
-          final kinds = await ref
-              .read(localAuthProvider)
-              .getAvailableBiometrics();
-          if (mounted) setState(() => _bio = kinds.isNotEmpty);
-        })
-        .catchError((_) {});
+    ref.read(deviceAuthProvider).hasBiometrics().then((has) {
+      if (mounted) setState(() => _bio = has);
+    });
   }
 
   /// Asks for the PIN in use before it is changed or removed. An unlocked app left on a table must
@@ -64,19 +57,29 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _enableBiometricLock() async {
     final l = context.l10n;
     final messenger = ScaffoldMessenger.of(context);
-    var ok = false;
-    try {
-      ok = await ref
-          .read(localAuthProvider)
-          .authenticate(
-            localizedReason: l.biometricConfirmToEnable,
-            biometricOnly: false,
-          );
-    } catch (_) {
-      ok = false;
-    }
-    if (!ok) {
-      messenger.showSnackBar(SnackBar(content: Text(l.biometricNotEnabled)));
+    final device = ref.read(deviceAuthProvider);
+    final status = await device.confirm(l.biometricConfirmToEnable);
+    if (status != DeviceAuthStatus.confirmed) {
+      // Each reason gets its own words, and the one the user can fix leads to where it is fixed.
+      final text = switch (status) {
+        DeviceAuthStatus.canceled => l.bioCanceled,
+        DeviceAuthStatus.failed => l.bioFailedEnable,
+        DeviceAuthStatus.notSetUp => l.bioNotSetUp,
+        DeviceAuthStatus.noHardware => l.bioNoHardware,
+        DeviceAuthStatus.lockedOut => l.bioLockedOut,
+        _ => l.bioUnavailableNow,
+      };
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(text),
+          action: status == DeviceAuthStatus.notSetUp
+              ? SnackBarAction(
+                  label: l.bioOpenSettings,
+                  onPressed: device.openSecuritySettings,
+                )
+              : null,
+        ),
+      );
       return;
     }
     await ref

@@ -7,19 +7,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:local_auth/local_auth.dart';
 
 import '../../app/app.dart';
 import '../../app/di.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/theme/tokens.dart';
+import '../../data/security/device_auth.dart';
 import '../../data/security/window_security.dart';
 import '../../domain/entities/entities.dart';
 import '../../ui/components/components.dart';
-
-final localAuthProvider = Provider<LocalAuthentication>(
-  (_) => LocalAuthentication(),
-);
 
 /// "1:05" for a pause still running.
 String lockCountdown(Duration d) {
@@ -40,6 +36,7 @@ class _LockGateState extends ConsumerState<LockGate>
   bool _unlocked = false;
   bool _tried = false;
   String? _error;
+  bool _needsDeviceSetup = false;
   final _pin = TextEditingController();
 
   /// Remaining pause after too many wrong PINs; refreshed every second while it lasts.
@@ -47,6 +44,7 @@ class _LockGateState extends ConsumerState<LockGate>
   Timer? _ticker;
   bool _pauseChecked = false;
   bool? _secureApplied;
+  bool? _wasRequired;
 
   bool get _required {
     final p = ref.read(prefsProvider);
@@ -83,21 +81,25 @@ class _LockGateState extends ConsumerState<LockGate>
 
   Future<void> _biometrics() async {
     final l = context.l10n;
-    setState(() => _error = null);
-    try {
-      final auth = ref.read(localAuthProvider);
-      final ok = await auth.authenticate(
-        localizedReason: l.unlockPrompt,
-        biometricOnly: false,
-      );
-      if (!mounted) return;
-      setState(() {
-        _unlocked = ok;
-        _error = ok ? null : l.biometricFailed;
-      });
-    } catch (_) {
-      if (mounted) setState(() => _error = l.biometricUnavailable);
-    }
+    setState(() {
+      _error = null;
+      _needsDeviceSetup = false;
+    });
+    final status = await ref.read(deviceAuthProvider).confirm(l.unlockPrompt);
+    if (!mounted) return;
+    setState(() {
+      _unlocked = status == DeviceAuthStatus.confirmed;
+      _needsDeviceSetup = status == DeviceAuthStatus.notSetUp;
+      _error = switch (status) {
+        // Closing the prompt is a choice, not an error: the lock screen simply stays.
+        DeviceAuthStatus.confirmed || DeviceAuthStatus.canceled => null,
+        DeviceAuthStatus.failed => l.biometricFailed,
+        DeviceAuthStatus.notSetUp => l.unlockNotSetUp,
+        DeviceAuthStatus.noHardware => l.biometricUnavailable,
+        DeviceAuthStatus.lockedOut => l.bioLockedOut,
+        DeviceAuthStatus.unavailable => l.bioUnavailableNow,
+      };
+    });
   }
 
   void _watchPause(Duration? pause) {
@@ -196,6 +198,10 @@ class _LockGateState extends ConsumerState<LockGate>
       _secureApplied = required;
       unawaited(ref.read(windowSecurityProvider).setSecure(required));
     }
+    // A lock turned on while the app is in use starts counting from the next time the app is
+    // opened or comes back: whoever just confirmed their identity to turn it on is not asked again.
+    if (_wasRequired == false && required) _unlocked = true;
+    _wasRequired = required;
     if (!required || _unlocked) return _gate(locked: false);
     if (p.biometricLock && !_tried) {
       _tried = true;
@@ -300,6 +306,16 @@ class _LockGateState extends ConsumerState<LockGate>
                       onPressed: _biometrics,
                       fullWidth: true,
                     ),
+                    if (_needsDeviceSetup) ...[
+                      const SizedBox(height: Spacing.xs),
+                      SButton(
+                        label: l.bioOpenSettings,
+                        variant: SButtonVariant.secondary,
+                        fullWidth: true,
+                        onPressed: () =>
+                            ref.read(deviceAuthProvider).openSecuritySettings(),
+                      ),
+                    ],
                   ],
                   const SizedBox(height: Spacing.sm),
                   SButton(
