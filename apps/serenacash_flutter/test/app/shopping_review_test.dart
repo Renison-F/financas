@@ -17,6 +17,7 @@ import 'package:serenacash/features/shopping/item_review_screen.dart';
 import 'package:serenacash/features/shopping/receipt_screen.dart';
 import 'package:serenacash/features/shopping/scan_result.dart';
 import 'package:serenacash/features/shopping/session_screen.dart';
+import 'package:serenacash/features/shopping/voice_sheet.dart';
 
 import 'harness.dart';
 import 'kv_factory.dart';
@@ -401,4 +402,129 @@ void main() {
       );
     },
   );
+
+  testWidgets(
+    '022: a dictated item asks what the amount means and still goes through the review',
+    (tester) async {
+      await setPhone(tester);
+      final voice = _FakeVoice(['5 kg de', '5 kg de arroz, 29 reais']);
+      final app = TestApp(
+        overrides: [voiceInputProvider.overrideWithValue(voice)],
+      );
+      addTearDown(app.dispose);
+      await app.db.into(app.db.kv).insert(KvCompanionFactory.onboarded());
+      await pumpApp(tester, app);
+      await tester.tap(find.text('Compras'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Iniciar compra'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Começar'));
+      await tester.pumpAndSettle();
+      final c = ProviderScope.containerOf(
+        tester.element(find.byType(SessionScreen)),
+      );
+
+      await tester.tap(find.text('Falar o item'));
+      await tester.pumpAndSettle();
+      // the microphone only opens after the user is told what happens with the speech
+      expect(find.textContaining('não grava nem guarda áudio'), findsOneWidget);
+      expect(voice.listening, isFalse);
+      await tester.tap(find.text('Falar'));
+      await tester.pumpAndSettle();
+      expect(find.text('5 kg de arroz, 29 reais'), findsOneWidget);
+      expect(
+        find.textContaining('é o total ou o preço de cada unidade'),
+        findsOneWidget,
+      );
+      // nothing is in the cart yet
+      expect(
+        c.read(appControllerProvider).requireValue.sessions.single.lines,
+        isEmpty,
+      );
+
+      await tester.tap(find.textContaining('É o total'));
+      await tester.pumpAndSettle();
+      expect(find.byType(ItemReviewScreen), findsOneWidget);
+      expect(
+        find.textContaining('Ditado: "5 kg de arroz, 29 reais"'),
+        findsOneWidget,
+      );
+      expect(
+        tester.widget<TextField>(find.byType(TextField).first).controller!.text,
+        'Arroz',
+      );
+      expect(
+        find.textContaining('29,00'),
+        findsOneWidget,
+      ); // subtotal = the total that was said
+      await tester.tap(find.text('Adicionar ao carrinho'));
+      await tester.pumpAndSettle();
+      final line = c
+          .read(appControllerProvider)
+          .requireValue
+          .sessions
+          .single
+          .lines
+          .single;
+      expect(line.name, 'Arroz');
+      expect(line.unit, 'kg');
+      expect(line.quantity, 5);
+      expect(line.unitPriceCents, 580);
+      expect(lineTotal(line).netCents, 2900);
+      expect(voice.stopped, isTrue, reason: 'o microfone é liberado ao fechar');
+    },
+  );
+
+  testWidgets(
+    '022: without a microphone the sheet says so and nothing breaks',
+    (tester) async {
+      await setPhone(tester);
+      final app = TestApp(
+        overrides: [
+          voiceInputProvider.overrideWithValue(
+            _FakeVoice(const [], available: false),
+          ),
+        ],
+      );
+      addTearDown(app.dispose);
+      await app.db.into(app.db.kv).insert(KvCompanionFactory.onboarded());
+      await pumpApp(tester, app);
+      await tester.tap(find.text('Compras'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Iniciar compra'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Começar'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Falar o item'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Falar'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('não está disponível'), findsOneWidget);
+      await tester.tap(find.text('Cancelar'));
+      await tester.pumpAndSettle();
+      expect(find.byType(SessionScreen), findsOneWidget);
+    },
+  );
+}
+
+class _FakeVoice implements VoiceInput {
+  _FakeVoice(this.phrases, {this.available = true});
+  final List<String> phrases;
+  final bool available;
+  bool listening = false, stopped = false;
+  @override
+  Future<bool> prepare() async => available;
+  @override
+  Future<void> listen(void Function(String text, bool isFinal) onText) async {
+    listening = true;
+    for (var i = 0; i < phrases.length; i++) {
+      onText(phrases[i], i == phrases.length - 1);
+    }
+  }
+
+  @override
+  Future<void> stop() async {
+    listening = false;
+    stopped = true;
+  }
 }

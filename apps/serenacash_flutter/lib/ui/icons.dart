@@ -27,6 +27,7 @@ enum SIconName {
   eyeOff,
   camera,
   barcode,
+  mic,
   flash,
   flashOff,
   settings,
@@ -157,6 +158,10 @@ const _shapes = <SIconName, List<_Shape>>{
     _C(12, 13, 3.2),
   ],
   SIconName.barcode: [_P('M4 6v12M8 6v12M11 6v12M14 6v12M17 6v12M20 6v12')],
+  SIconName.mic: [
+    _P('M12 3a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z'),
+    _P('M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6'),
+  ],
   SIconName.flash: [_P('M13 2L5 13h6l-1 9 8-11h-6z')],
   SIconName.flashOff: [
     _P('M13 2L8.5 8.2M5 13h6l-1 9 4.8-6.6M3 3l18 18M12.5 9H18l-2.6 3.6'),

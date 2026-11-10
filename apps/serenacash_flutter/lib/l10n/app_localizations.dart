@@ -8501,6 +8501,108 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Restaurar aparência padrão'**
   String get appearanceReset;
+
+  /// No description provided for @voiceBtn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Falar o item'**
+  String get voiceBtn;
+
+  /// No description provided for @voiceTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ditar um item'**
+  String get voiceTitle;
+
+  /// No description provided for @voiceIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'Diga o produto, a quantidade e o preço. Exemplo: \"5 quilos de arroz, 29 reais\".'**
+  String get voiceIntro;
+
+  /// No description provided for @voicePrivacy.
+  ///
+  /// In pt, this message translates to:
+  /// **'O app não grava nem guarda áudio. A fala é transformada em texto pelo serviço de voz do Android, que conforme o aparelho pode usar a internet. O item só entra no carrinho depois que você conferir.'**
+  String get voicePrivacy;
+
+  /// No description provided for @voiceStart.
+  ///
+  /// In pt, this message translates to:
+  /// **'Falar'**
+  String get voiceStart;
+
+  /// No description provided for @voiceListening.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ouvindo…'**
+  String get voiceListening;
+
+  /// No description provided for @voiceNothing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada foi entendido.'**
+  String get voiceNothing;
+
+  /// No description provided for @voiceDone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Terminei de falar'**
+  String get voiceDone;
+
+  /// No description provided for @voiceAgain.
+  ///
+  /// In pt, this message translates to:
+  /// **'Falar de novo'**
+  String get voiceAgain;
+
+  /// No description provided for @voiceUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'O reconhecimento de voz não está disponível: a permissão do microfone foi negada ou o aparelho não tem serviço de voz. Você pode liberar o microfone nas configurações do Android ou digitar o item.'**
+  String get voiceUnavailable;
+
+  /// No description provided for @voiceUnderstood.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entendido: {name} · {quantity} · {price}'**
+  String voiceUnderstood(String name, String quantity, String price);
+
+  /// No description provided for @voiceNoPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'sem preço'**
+  String get voiceNoPrice;
+
+  /// No description provided for @voiceAmbiguous.
+  ///
+  /// In pt, this message translates to:
+  /// **'{amount} é o total ou o preço de cada unidade?'**
+  String voiceAmbiguous(String amount);
+
+  /// No description provided for @voiceIsTotal.
+  ///
+  /// In pt, this message translates to:
+  /// **'É o total ({each} por {unit})'**
+  String voiceIsTotal(String each, String unit);
+
+  /// No description provided for @voiceIsEach.
+  ///
+  /// In pt, this message translates to:
+  /// **'É {amount} por {unit}'**
+  String voiceIsEach(String amount, String unit);
+
+  /// No description provided for @voiceReview.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conferir o item'**
+  String get voiceReview;
+
+  /// No description provided for @voiceHeard.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ditado: \"{text}\". Confira nome, quantidade e preço.'**
+  String voiceHeard(String text);
 }
 
 class _AppLocalizationsDelegate

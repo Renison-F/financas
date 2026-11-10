@@ -5078,4 +5078,68 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get appearanceReset => 'Restaurar aparência padrão';
+
+  @override
+  String get voiceBtn => 'Falar o item';
+
+  @override
+  String get voiceTitle => 'Ditar um item';
+
+  @override
+  String get voiceIntro =>
+      'Diga o produto, a quantidade e o preço. Exemplo: \"5 quilos de arroz, 29 reais\".';
+
+  @override
+  String get voicePrivacy =>
+      'O app não grava nem guarda áudio. A fala é transformada em texto pelo serviço de voz do Android, que conforme o aparelho pode usar a internet. O item só entra no carrinho depois que você conferir.';
+
+  @override
+  String get voiceStart => 'Falar';
+
+  @override
+  String get voiceListening => 'Ouvindo…';
+
+  @override
+  String get voiceNothing => 'Nada foi entendido.';
+
+  @override
+  String get voiceDone => 'Terminei de falar';
+
+  @override
+  String get voiceAgain => 'Falar de novo';
+
+  @override
+  String get voiceUnavailable =>
+      'O reconhecimento de voz não está disponível: a permissão do microfone foi negada ou o aparelho não tem serviço de voz. Você pode liberar o microfone nas configurações do Android ou digitar o item.';
+
+  @override
+  String voiceUnderstood(String name, String quantity, String price) {
+    return 'Entendido: $name · $quantity · $price';
+  }
+
+  @override
+  String get voiceNoPrice => 'sem preço';
+
+  @override
+  String voiceAmbiguous(String amount) {
+    return '$amount é o total ou o preço de cada unidade?';
+  }
+
+  @override
+  String voiceIsTotal(String each, String unit) {
+    return 'É o total ($each por $unit)';
+  }
+
+  @override
+  String voiceIsEach(String amount, String unit) {
+    return 'É $amount por $unit';
+  }
+
+  @override
+  String get voiceReview => 'Conferir o item';
+
+  @override
+  String voiceHeard(String text) {
+    return 'Ditado: \"$text\". Confira nome, quantidade e preço.';
+  }
 }

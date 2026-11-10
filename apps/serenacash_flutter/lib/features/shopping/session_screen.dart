@@ -22,6 +22,7 @@ import '../shared/format.dart';
 import 'item_review_screen.dart';
 import 'receipt_screen.dart';
 import 'scan_result.dart';
+import 'voice_sheet.dart';
 
 class SessionScreen extends ConsumerStatefulWidget {
   const SessionScreen({super.key, this.id, this.listId});
@@ -227,6 +228,25 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
   static String _q(double v) => v == v.roundToDouble()
       ? v.toInt().toString()
       : v.toString().replaceAll('.', ',');
+
+  /// Dictation fills the review form; it never adds to the cart on its own.
+  Future<void> _dictate() async {
+    final l = context.l10n;
+    final r = await showVoiceSheet(context);
+    if (r == null || !mounted) return;
+    final item = r.item;
+    final q = item.quantity;
+    await _review(
+      ItemDraft(
+        name: item.name,
+        unit: item.unit,
+        quantity: _q(q),
+        unitPriceCents: item.unitPriceCents(amountIsTotal: r.amountIsTotal),
+        priceSource: 'manual',
+        notes: [l.voiceHeard(item.transcript)],
+      ),
+    );
+  }
 
   /// Opens the review of one item over the cart; the item only enters the cart when confirmed there.
   Future<void> _review(ItemDraft d) async {
@@ -966,6 +986,15 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 4),
+                    SButton(
+                      label: l.voiceBtn,
+                      icon: SIconName.mic,
+                      variant: SButtonVariant.secondary,
+                      compact: true,
+                      fullWidth: true,
+                      onPressed: _dictate,
                     ),
                     SButton(
                       label: l.finishPurchase,
