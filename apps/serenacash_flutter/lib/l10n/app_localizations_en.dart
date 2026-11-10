@@ -302,17 +302,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String monthPace(String pace) {
-    return 'Month $pace';
+    return 'Spending $pace';
   }
 
   @override
-  String get paceSereno => 'serene';
+  String get paceSereno => 'within plan';
 
   @override
-  String get paceAtencao => 'needs attention';
+  String get paceAtencao => 'slightly above plan';
 
   @override
-  String get paceAgitado => 'agitated';
+  String get paceAgitado => 'above plan';
 
   @override
   String get general => 'General';
@@ -451,7 +451,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get assistant => 'Assistant';
 
   @override
-  String get allCalm => 'All calm here.';
+  String get allCalm => 'No alerts right now.';
 
   @override
   String get shoppingLists => 'Shopping lists';
@@ -1192,7 +1192,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageSystem => 'Device';
 
   @override
-  String get onbWelcomeTitle => 'Your money at peace.';
+  String get onbWelcomeTitle => 'Know how much you can spend.';
 
   @override
   String get onbWelcomeText =>
@@ -1645,11 +1645,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noBudgetListText =>
-      'Set a limit for a category or the whole month. Today\'s mark shows whether the pace is serene.';
+      'Set a limit for a category or the whole month. Today\'s mark shows whether spending follows what is planned for the day.';
 
   @override
   String get budgetRules =>
-      'Serene: spending up to today\'s mark. Attention: up to 10 points above. Agitated: beyond that or over the limit. Subcategories add up into the parent category budget.';
+      'Within plan: spending up to today\'s mark. Slightly above: up to 10 points beyond the mark. Above plan: beyond that or over the limit. Subcategories add up into the parent category budget.';
 
   @override
   String get editBudget => 'Edit budget';
@@ -2223,7 +2223,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get suggestionsForYou => 'Suggestions for you';
 
   @override
-  String get allCalmNoSuggestion => 'All calm. No suggestion right now.';
+  String get allCalmNoSuggestion => 'No suggestion right now.';
 
   @override
   String get assistantRules =>
@@ -2511,7 +2511,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faq4a =>
-      'On budget bars, the small wave shows where spending should be today (proportional to the days of the month). Before it: serene. Up to 10 points after: attention. Beyond that or over the limit: agitated.';
+      'On budget bars, the mark shows where spending would be today if spread evenly over the days of the month. Before it: within plan. Up to 10 points after: slightly above. Beyond that or over the limit: above plan.';
 
   @override
   String get faq5q => 'Planned × settled';
@@ -3172,7 +3172,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cameraPermissionText =>
-      'To read price tags and barcodes, SerenaCash needs the camera. Images are not kept or sent.';
+      'To read price labels and bar codes, SerenaCash needs the camera. Label photos stay only on this device, inside the encrypted database, and are sent nowhere. If the permission was denied before, allow the camera in Android settings.';
 
   @override
   String get allowCamera => 'Allow camera';
@@ -4434,4 +4434,218 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get receiptMissingHelp =>
       'They may be outside the photo, have been read under another name or not have gone through the till.';
+
+  @override
+  String loanLineFree(String system, String paid) {
+    return '$system · $paid paid';
+  }
+
+  @override
+  String get loanPaidShare => 'Share of the principal already paid';
+
+  @override
+  String get loanFreeNote => 'No installments or due date: paid when possible.';
+
+  @override
+  String get loanSystemAmericanShort => 'American';
+
+  @override
+  String get loanSystemBulletShort => 'Single payment';
+
+  @override
+  String get loanSystemFreeShort => 'No installments';
+
+  @override
+  String get loanLentTag => 'Lent';
+
+  @override
+  String get loanDirection => 'Who owes';
+
+  @override
+  String get loanBorrowed => 'I owe';
+
+  @override
+  String get loanLent => 'I am owed';
+
+  @override
+  String get loanMode => 'How it is paid';
+
+  @override
+  String get loanModeScheduled => 'With installments';
+
+  @override
+  String get loanModeFree => 'When possible';
+
+  @override
+  String get loanModeFreeHelp =>
+      'No number of installments and no term. Each payment is recorded when it happens, for whatever amount.';
+
+  @override
+  String get loanCreditor => 'Creditor (who I owe)';
+
+  @override
+  String get loanDebtor => 'Debtor (who owes me)';
+
+  @override
+  String get loanLentAmount => 'Amount I lent';
+
+  @override
+  String get loanSystemAmerican => 'American (periodic interest)';
+
+  @override
+  String get loanSystemBullet => 'Single payment at the end';
+
+  @override
+  String get loanSystemPriceHelp =>
+      'Equal installments; at the start most of it is interest.';
+
+  @override
+  String get loanSystemSacHelp =>
+      'Equal amortization each month; the installment falls over time.';
+
+  @override
+  String get loanSystemAmericanHelp =>
+      'Each month only the interest on the whole amount is paid; the principal goes with the last installment.';
+
+  @override
+  String get loanSystemBulletHelp =>
+      'Nothing is paid until the end of the term; at maturity the principal is paid with interest compounded month by month.';
+
+  @override
+  String get loanInterest => 'Interest';
+
+  @override
+  String get loanInterestNone => 'No interest';
+
+  @override
+  String get loanInterestSimple => 'Simple interest';
+
+  @override
+  String get loanInterestCompound => 'Compound interest';
+
+  @override
+  String get loanInterestNoneHelp =>
+      'The balance only changes when there is a payment. Time adds nothing.';
+
+  @override
+  String get loanInterestSimpleHelp =>
+      'Interest on the principal still owed, in proportion to the days (30-day month). Each payment covers interest first, then principal.';
+
+  @override
+  String get loanInterestCompoundHelp =>
+      'Interest on the whole balance, unpaid interest included, in proportion to the days (30-day month). Each payment covers interest first, then principal.';
+
+  @override
+  String get loanRateYear => 'Interest (% per year)';
+
+  @override
+  String get loanTermMonths => 'Term (months)';
+
+  @override
+  String get loanRateStated => 'The contract rate is';
+
+  @override
+  String get loanRatePerMonth => 'Per month';
+
+  @override
+  String get loanRatePerYearEffective => 'Per year, effective';
+
+  @override
+  String get loanRatePerYearNominal => 'Per year, nominal';
+
+  @override
+  String loanRateEquivalent(String rate) {
+    return 'Equals $rate% per month, the rate used in the calculations.';
+  }
+
+  @override
+  String get loanOriginDate => 'Date the debt began';
+
+  @override
+  String get loanHandoverLabel => 'Loan granted';
+
+  @override
+  String get loanRegisterHandover => 'Record the money leaving the account';
+
+  @override
+  String get loanRegisterHandoverHelp =>
+      'Turn on if the amount left the account today.';
+
+  @override
+  String get loanFormErrBasic => 'Enter the name and the amount.';
+
+  @override
+  String get loanFormErrRate => 'Enter the interest rate.';
+
+  @override
+  String get loanFormErrTerm =>
+      'Enter the number of installments, from 1 to 480.';
+
+  @override
+  String get loanOwedToYou => 'Owed to you';
+
+  @override
+  String loanFreeSummary(String principal, String date, String paid) {
+    return 'Original amount $principal on $date · $paid already paid';
+  }
+
+  @override
+  String loanFreeInterestLine(
+    String mode,
+    String rate,
+    String accrued,
+    String paid,
+  ) {
+    return '$mode at $rate% per month · $accrued of interest due today · $paid of interest already paid';
+  }
+
+  @override
+  String get loanFreeNoInterest =>
+      'No interest: the balance only changes with payments.';
+
+  @override
+  String get loanRegisterPayment => 'Record payment';
+
+  @override
+  String get loanRegisterReceipt => 'Record receipt';
+
+  @override
+  String loanSettleWith(String value) {
+    return 'Settle: fill in $value';
+  }
+
+  @override
+  String get loanFreePayNote =>
+      'The payment leaves the account chosen in the registration and does not count as an expense of the month: it is money being paid back.';
+
+  @override
+  String loanPayTooMuch(String owed) {
+    return 'The amount is larger than the balance on that date ($owed). To settle, record $owed.';
+  }
+
+  @override
+  String loanPaymentOf(String name) {
+    return 'Payment: $name';
+  }
+
+  @override
+  String loanReceiptOf(String name) {
+    return 'Receipt: $name';
+  }
+
+  @override
+  String get loanStatement => 'Statement';
+
+  @override
+  String get loanNoPaymentsYet => 'No payments recorded yet.';
+
+  @override
+  String loanEventSplit(String interest, String principal, String balance) {
+    return '$interest interest · $principal principal · balance $balance';
+  }
+
+  @override
+  String loanEventBalance(String balance) {
+    return 'Balance after: $balance';
+  }
 }

@@ -423,10 +423,10 @@ void main() {
     // a message from a failed attempt goes away as soon as the form is edited
     await tester.tap(find.text('Salvar'));
     await tester.pumpAndSettle();
-    expect(find.textContaining('Preencha nome, valor'), findsOneWidget);
-    await tester.enterText(find.byType(TextField).at(1), '4000000');
+    expect(find.text('Informe o nome e o valor.'), findsOneWidget);
+    await tester.enterText(find.byType(TextField).at(2), '4000000');
     await tester.pumpAndSettle();
-    expect(find.textContaining('Preencha nome, valor'), findsNothing);
+    expect(find.text('Informe o nome e o valor.'), findsNothing);
 
     await tester.ensureVisible(find.byTooltip('Abrir calendário'));
     await tester.pumpAndSettle();
@@ -708,6 +708,62 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(ItemReviewScreen), findsNothing);
       expect(find.text('Vela'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    '007: a debt paid when possible: 40.000 without interest, 500 then 2.000',
+    (tester) async {
+      await setPhone(tester);
+      await _bootOnboarded(tester);
+      final c = _container(tester);
+      await c
+          .read(appControllerProvider.notifier)
+          .saveAccount(
+            name: 'c6',
+            type: 'checking',
+            openingBalanceCents: 500000,
+          );
+      await tester.pumpAndSettle();
+      await openMenu(tester, 'Empréstimos');
+      await tester.tap(find.text('Novo').first);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Quando der'));
+      await tester.pumpAndSettle();
+      // no rate, no number of installments and no first due date are asked for
+      expect(find.text('Juros (% ao mês)'), findsNothing);
+      expect(find.text('Parcelas'), findsNothing);
+      expect(find.text('Primeiro vencimento'), findsNothing);
+      expect(find.text('Data de origem da dívida'), findsOneWidget);
+      await tester.enterText(find.byType(TextField).at(0), 'casa');
+      await tester.enterText(find.byType(TextField).at(2), '4000000');
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Salvar'));
+      await tester.pumpAndSettle();
+      final loan = c.read(ledgerProvider).loans.single;
+      expect(loan.system, 'free');
+      expect(loan.termMonths, 0);
+      expect(c.read(ledgerProvider).transactions, isEmpty);
+
+      await tester.tap(find.text('casa'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('40.000,00'), findsWidgets);
+      expect(find.textContaining('Sem juros'), findsOneWidget);
+      Future<void> pay(String digits) async {
+        await tester.enterText(find.byType(TextField).first, digits);
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Registrar pagamento').last);
+        await tester.pumpAndSettle();
+      }
+
+      await pay('50000');
+      expect(find.textContaining('39.500,00'), findsWidgets);
+      await pay('200000');
+      expect(find.textContaining('37.500,00'), findsWidgets);
+      // more than the balance is refused, saying what settles the debt
+      await pay('9999999');
+      expect(find.textContaining('maior que o saldo'), findsOneWidget);
+      expect(c.read(ledgerProvider).transactions.length, 2);
     },
   );
 }

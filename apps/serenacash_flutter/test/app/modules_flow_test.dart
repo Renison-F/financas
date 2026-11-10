@@ -160,8 +160,15 @@ void main() {
     await typeMoney(tester, 'Valor emprestado', '1000000');
     await tester.enterText(find.widgetWithText(TextField, '1,99').first, '2');
     await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text('Prévia'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
     expect(find.text('Prévia'), findsOneWidget);
     await screenshot(tester, 'loan_form_light');
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, 3000));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Salvar'));
     await tester.pumpAndSettle();
     expect(find.text('Carro'), findsWidgets);
@@ -197,7 +204,7 @@ void main() {
     await tester.tap(find.text('Ver tudo'));
     await tester.pumpAndSettle();
     expect(find.byType(BudgetsScreen), findsOneWidget);
-    expect(find.textContaining('sereno'), findsWidgets);
+    expect(find.textContaining('dentro do previsto'), findsWidgets);
     await screenshot(tester, 'budgets_light');
   });
 }

@@ -16,6 +16,7 @@ import '../../domain/dates/dates.dart' hide Clock;
 import '../../domain/entities/entities.dart';
 import '../../domain/ledger/ledger.dart';
 import '../../domain/loans/loans.dart';
+import '../../domain/money/money.dart' show formatBRL;
 import '../../domain/ports/ports.dart' hide Clock;
 import '../../domain/ports/clock.dart' show Clock;
 import '../../domain/recurrence/recurrence.dart';
@@ -474,6 +475,11 @@ class AppController extends AsyncNotifier<AppState> {
     int? upfrontFeesCents,
     String? accountId,
     bool? archived,
+    String? direction,
+    String? interestMode,
+    String? ratePeriod,
+    String? rateKind,
+    double? rateInputPercent,
     bool registerDisbursement = false,
     bool createInstallments = false,
     required String disbursementLabel,
@@ -495,6 +501,11 @@ class AppController extends AsyncNotifier<AppState> {
       upfrontFeesCents: upfrontFeesCents ?? ex?.upfrontFeesCents ?? 0,
       accountId: accountId ?? ex?.accountId,
       archived: archived ?? ex?.archived ?? false,
+      direction: direction ?? ex?.direction ?? 'borrowed',
+      interestMode: interestMode ?? ex?.interestMode ?? 'none',
+      ratePeriod: ratePeriod ?? ex?.ratePeriod ?? 'month',
+      rateKind: rateKind ?? ex?.rateKind ?? 'effective',
+      rateInputPercent: rateInputPercent ?? ex?.rateInputPercent,
       createdAt: ex?.createdAt ?? now,
       updatedAt: now,
     );
@@ -504,7 +515,8 @@ class AppController extends AsyncNotifier<AppState> {
       txs.add(
         Transaction(
           id: newId(),
-          kind: TransactionKind.loanDisbursement,
+          // Borrowed: the money comes in. Lent: the money goes out.
+          kind: handoverKind(loan),
           amountCents: loan.principalCents,
           currency: _s.ledger.prefs.currency,
           date: today(),
@@ -517,24 +529,26 @@ class AppController extends AsyncNotifier<AppState> {
         ),
       );
     }
-    if (createInstallments) {
+    // A debt without a schedule gets no planned installments: it has no due dates to plan.
+    if (createInstallments && loan.system != 'free') {
       final groupId = newId();
-      for (final row in buildSchedule(loan)) {
+      final rows = buildSchedule(loan);
+      for (final row in rows) {
         txs.add(
           Transaction(
             id: newId(),
-            kind: TransactionKind.loanPayment,
+            kind: repaymentKind(loan),
             amountCents: row.installmentCents,
             currency: _s.ledger.prefs.currency,
             date: row.dueDate,
             dueDate: row.dueDate,
-            description: '${loan.name} ${row.number}/${loan.termMonths}',
+            description: '${loan.name} ${row.number}/${rows.length}',
             accountId: loan.accountId,
             loanId: loan.id,
             status: TransactionStatus.planned,
             installment: Installment(
               number: row.number,
-              of: loan.termMonths,
+              of: rows.length,
               groupId: groupId,
             ),
             createdAt: now,
@@ -545,6 +559,42 @@ class AppController extends AsyncNotifier<AppState> {
     }
     if (txs.isNotEmpty) await _ledger.upsertTransactions(txs);
     return loan;
+  });
+
+  /// Registers a payment of a loan outside its schedule: any amount, any date. For a debt without
+  /// a schedule this is the only way it is paid. A payment larger than what is owed on that date
+  /// is refused with the amount that settles the debt, instead of leaving a negative balance.
+  Future<Transaction> registerLoanPayment({
+    required String loanId,
+    required int amountCents,
+    required String date,
+    String? accountId,
+    required String description,
+    required String Function(String owed) tooMuchMessage,
+    required String invalidAmountMessage,
+  }) => _mutate(() async {
+    final loan = _s.ledger.loanById(loanId);
+    if (loan == null) throw AppError('Empréstimo não encontrado.');
+    if (amountCents <= 0) throw AppError(invalidAmountMessage);
+    if (!isValidISODate(date)) throw AppError('Data inválida.');
+    final owed = loanPosition(_s.ledger, loan, date).outstandingCents;
+    if (amountCents > owed) throw AppError(tooMuchMessage(formatBRL(owed)));
+    final now = nowISO();
+    final t = Transaction(
+      id: newId(),
+      kind: repaymentKind(loan),
+      amountCents: amountCents,
+      currency: _s.ledger.prefs.currency,
+      date: date,
+      description: description,
+      accountId: accountId ?? loan.accountId,
+      loanId: loan.id,
+      status: TransactionStatus.settled,
+      createdAt: now,
+      updatedAt: now,
+    );
+    await _ledger.upsertTransactions([t]);
+    return t;
   });
 
   // ---------- transactions ----------

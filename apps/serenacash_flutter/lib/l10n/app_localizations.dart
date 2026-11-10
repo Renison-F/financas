@@ -641,25 +641,25 @@ abstract class AppLocalizations {
   /// No description provided for @monthPace.
   ///
   /// In pt, this message translates to:
-  /// **'Mês {pace}'**
+  /// **'Gasto {pace}'**
   String monthPace(String pace);
 
   /// No description provided for @paceSereno.
   ///
   /// In pt, this message translates to:
-  /// **'sereno'**
+  /// **'dentro do previsto'**
   String get paceSereno;
 
   /// No description provided for @paceAtencao.
   ///
   /// In pt, this message translates to:
-  /// **'em atenção'**
+  /// **'pouco acima do previsto'**
   String get paceAtencao;
 
   /// No description provided for @paceAgitado.
   ///
   /// In pt, this message translates to:
-  /// **'agitado'**
+  /// **'acima do previsto'**
   String get paceAgitado;
 
   /// No description provided for @general.
@@ -905,7 +905,7 @@ abstract class AppLocalizations {
   /// No description provided for @allCalm.
   ///
   /// In pt, this message translates to:
-  /// **'Tudo sereno por aqui.'**
+  /// **'Nenhum alerta no momento.'**
   String get allCalm;
 
   /// No description provided for @shoppingLists.
@@ -2243,7 +2243,7 @@ abstract class AppLocalizations {
   /// No description provided for @onbWelcomeTitle.
   ///
   /// In pt, this message translates to:
-  /// **'Seu dinheiro em paz.'**
+  /// **'Saiba quanto você pode gastar.'**
   String get onbWelcomeTitle;
 
   /// No description provided for @onbWelcomeText.
@@ -3035,13 +3035,13 @@ abstract class AppLocalizations {
   /// No description provided for @noBudgetListText.
   ///
   /// In pt, this message translates to:
-  /// **'Defina um limite para uma categoria ou para o mês inteiro. A marca de hoje mostra se o ritmo está sereno.'**
+  /// **'Defina um limite para uma categoria ou para o mês inteiro. A marca de hoje mostra se o gasto acompanha o previsto para o dia.'**
   String get noBudgetListText;
 
   /// No description provided for @budgetRules.
   ///
   /// In pt, this message translates to:
-  /// **'Sereno: gasto até a marca de hoje. Atenção: até 10 pontos acima. Agitado: além disso ou acima do limite. Subcategorias somam no orçamento da categoria-mãe.'**
+  /// **'Dentro do previsto: gasto até a marca de hoje. Pouco acima: até 10 pontos além da marca. Acima do previsto: além disso ou acima do limite. Subcategorias somam no orçamento da categoria-mãe.'**
   String get budgetRules;
 
   /// No description provided for @editBudget.
@@ -3983,7 +3983,7 @@ abstract class AppLocalizations {
   /// No description provided for @allCalmNoSuggestion.
   ///
   /// In pt, this message translates to:
-  /// **'Tudo sereno. Nenhuma sugestão agora.'**
+  /// **'Nenhuma sugestão agora.'**
   String get allCalmNoSuggestion;
 
   /// No description provided for @assistantRules.
@@ -4481,7 +4481,7 @@ abstract class AppLocalizations {
   /// No description provided for @faq4a.
   ///
   /// In pt, this message translates to:
-  /// **'Nas barras de orçamento, a pequena onda mostra onde o gasto deveria estar hoje (proporcional aos dias do mês). Antes dela: sereno. Até 10 pontos depois: atenção. Além disso ou acima do limite: agitado.'**
+  /// **'Nas barras de orçamento, a marca mostra onde o gasto estaria hoje se fosse distribuído por igual nos dias do mês. Antes dela: dentro do previsto. Até 10 pontos depois: pouco acima. Além disso ou acima do limite: acima do previsto.'**
   String get faq4a;
 
   /// No description provided for @faq5q.
@@ -5627,7 +5627,7 @@ abstract class AppLocalizations {
   /// No description provided for @cameraPermissionText.
   ///
   /// In pt, this message translates to:
-  /// **'Para ler etiquetas de preço e códigos de barras, o SerenaCash precisa da câmera. As imagens não são guardadas nem enviadas.'**
+  /// **'Para ler etiquetas de preço e códigos de barras, o SerenaCash precisa da câmera. As fotos de etiqueta ficam só neste aparelho, dentro do banco cifrado, e não são enviadas a lugar nenhum. Se a permissão foi negada antes, libere a câmera nas configurações do Android.'**
   String get cameraPermissionText;
 
   /// No description provided for @allowCamera.
@@ -7428,6 +7428,365 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Podem ter ficado fora da foto, ter sido lidos com outro nome ou não ter passado no caixa.'**
   String get receiptMissingHelp;
+
+  /// No description provided for @loanLineFree.
+  ///
+  /// In pt, this message translates to:
+  /// **'{system} · {paid} pagos'**
+  String loanLineFree(String system, String paid);
+
+  /// No description provided for @loanPaidShare.
+  ///
+  /// In pt, this message translates to:
+  /// **'Parte do principal já paga'**
+  String get loanPaidShare;
+
+  /// No description provided for @loanFreeNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem parcelas nem vencimento: pago quando possível.'**
+  String get loanFreeNote;
+
+  /// No description provided for @loanSystemAmericanShort.
+  ///
+  /// In pt, this message translates to:
+  /// **'Americano'**
+  String get loanSystemAmericanShort;
+
+  /// No description provided for @loanSystemBulletShort.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pagamento único'**
+  String get loanSystemBulletShort;
+
+  /// No description provided for @loanSystemFreeShort.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem parcelas'**
+  String get loanSystemFreeShort;
+
+  /// No description provided for @loanLentTag.
+  ///
+  /// In pt, this message translates to:
+  /// **'Emprestei'**
+  String get loanLentTag;
+
+  /// No description provided for @loanDirection.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quem deve'**
+  String get loanDirection;
+
+  /// No description provided for @loanBorrowed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Eu devo'**
+  String get loanBorrowed;
+
+  /// No description provided for @loanLent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Devem a mim'**
+  String get loanLent;
+
+  /// No description provided for @loanMode.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como será pago'**
+  String get loanMode;
+
+  /// No description provided for @loanModeScheduled.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com parcelas'**
+  String get loanModeScheduled;
+
+  /// No description provided for @loanModeFree.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quando der'**
+  String get loanModeFree;
+
+  /// No description provided for @loanModeFreeHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem número de parcelas e sem prazo. Cada pagamento é registrado quando acontece, com o valor que for.'**
+  String get loanModeFreeHelp;
+
+  /// No description provided for @loanCreditor.
+  ///
+  /// In pt, this message translates to:
+  /// **'Credor (para quem devo)'**
+  String get loanCreditor;
+
+  /// No description provided for @loanDebtor.
+  ///
+  /// In pt, this message translates to:
+  /// **'Devedor (quem me deve)'**
+  String get loanDebtor;
+
+  /// No description provided for @loanLentAmount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Valor que emprestei'**
+  String get loanLentAmount;
+
+  /// No description provided for @loanSystemAmerican.
+  ///
+  /// In pt, this message translates to:
+  /// **'Americano (juros periódicos)'**
+  String get loanSystemAmerican;
+
+  /// No description provided for @loanSystemBullet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pagamento único no fim'**
+  String get loanSystemBullet;
+
+  /// No description provided for @loanSystemPriceHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Parcelas iguais; no começo quase tudo é juro.'**
+  String get loanSystemPriceHelp;
+
+  /// No description provided for @loanSystemSacHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Amortização igual todo mês; a parcela cai com o tempo.'**
+  String get loanSystemSacHelp;
+
+  /// No description provided for @loanSystemAmericanHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todo mês paga-se só o juro sobre o valor inteiro; o principal vai junto com a última parcela.'**
+  String get loanSystemAmericanHelp;
+
+  /// No description provided for @loanSystemBulletHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada é pago até o fim do prazo; no vencimento paga-se o principal com os juros acumulados mês a mês.'**
+  String get loanSystemBulletHelp;
+
+  /// No description provided for @loanInterest.
+  ///
+  /// In pt, this message translates to:
+  /// **'Juros'**
+  String get loanInterest;
+
+  /// No description provided for @loanInterestNone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem juros'**
+  String get loanInterestNone;
+
+  /// No description provided for @loanInterestSimple.
+  ///
+  /// In pt, this message translates to:
+  /// **'Juros simples'**
+  String get loanInterestSimple;
+
+  /// No description provided for @loanInterestCompound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Juros compostos'**
+  String get loanInterestCompound;
+
+  /// No description provided for @loanInterestNoneHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'O saldo só muda quando há pagamento. O tempo não acrescenta nada.'**
+  String get loanInterestNoneHelp;
+
+  /// No description provided for @loanInterestSimpleHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Juro sobre o principal ainda devido, proporcional aos dias (mês de 30 dias). Cada pagamento cobre primeiro o juro, depois o principal.'**
+  String get loanInterestSimpleHelp;
+
+  /// No description provided for @loanInterestCompoundHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Juro sobre o saldo inteiro, inclusive juro não pago, proporcional aos dias (mês de 30 dias). Cada pagamento cobre primeiro o juro, depois o principal.'**
+  String get loanInterestCompoundHelp;
+
+  /// No description provided for @loanRateYear.
+  ///
+  /// In pt, this message translates to:
+  /// **'Juros (% ao ano)'**
+  String get loanRateYear;
+
+  /// No description provided for @loanTermMonths.
+  ///
+  /// In pt, this message translates to:
+  /// **'Prazo (meses)'**
+  String get loanTermMonths;
+
+  /// No description provided for @loanRateStated.
+  ///
+  /// In pt, this message translates to:
+  /// **'A taxa do contrato é'**
+  String get loanRateStated;
+
+  /// No description provided for @loanRatePerMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ao mês'**
+  String get loanRatePerMonth;
+
+  /// No description provided for @loanRatePerYearEffective.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ao ano, efetiva'**
+  String get loanRatePerYearEffective;
+
+  /// No description provided for @loanRatePerYearNominal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ao ano, nominal'**
+  String get loanRatePerYearNominal;
+
+  /// No description provided for @loanRateEquivalent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Equivale a {rate}% ao mês, a taxa usada nos cálculos.'**
+  String loanRateEquivalent(String rate);
+
+  /// No description provided for @loanOriginDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Data de origem da dívida'**
+  String get loanOriginDate;
+
+  /// No description provided for @loanHandoverLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Empréstimo concedido'**
+  String get loanHandoverLabel;
+
+  /// No description provided for @loanRegisterHandover.
+  ///
+  /// In pt, this message translates to:
+  /// **'Registrar a saída do dinheiro da conta'**
+  String get loanRegisterHandover;
+
+  /// No description provided for @loanRegisterHandoverHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ligue se o valor saiu da conta hoje.'**
+  String get loanRegisterHandoverHelp;
+
+  /// No description provided for @loanFormErrBasic.
+  ///
+  /// In pt, this message translates to:
+  /// **'Informe o nome e o valor.'**
+  String get loanFormErrBasic;
+
+  /// No description provided for @loanFormErrRate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Informe a taxa de juros (use vírgula para decimais).'**
+  String get loanFormErrRate;
+
+  /// No description provided for @loanFormErrTerm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Informe o número de parcelas, de 1 a 480.'**
+  String get loanFormErrTerm;
+
+  /// No description provided for @loanOwedToYou.
+  ///
+  /// In pt, this message translates to:
+  /// **'A receber'**
+  String get loanOwedToYou;
+
+  /// No description provided for @loanFreeSummary.
+  ///
+  /// In pt, this message translates to:
+  /// **'Valor original {principal} em {date} · {paid} já pagos'**
+  String loanFreeSummary(String principal, String date, String paid);
+
+  /// No description provided for @loanFreeInterestLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'{mode} de {rate}% ao mês · {accrued} de juros a pagar hoje · {paid} de juros já pagos'**
+  String loanFreeInterestLine(
+    String mode,
+    String rate,
+    String accrued,
+    String paid,
+  );
+
+  /// No description provided for @loanFreeNoInterest.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem juros: o saldo só muda com pagamentos.'**
+  String get loanFreeNoInterest;
+
+  /// No description provided for @loanRegisterPayment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Registrar pagamento'**
+  String get loanRegisterPayment;
+
+  /// No description provided for @loanRegisterReceipt.
+  ///
+  /// In pt, this message translates to:
+  /// **'Registrar recebimento'**
+  String get loanRegisterReceipt;
+
+  /// No description provided for @loanSettleWith.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quitar: preencher {value}'**
+  String loanSettleWith(String value);
+
+  /// No description provided for @loanFreePayNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'O pagamento sai da conta escolhida no cadastro e não conta como despesa do mês: é devolução de dinheiro emprestado.'**
+  String get loanFreePayNote;
+
+  /// No description provided for @loanPayTooMuch.
+  ///
+  /// In pt, this message translates to:
+  /// **'O valor é maior que o saldo da dívida nessa data ({owed}). Para quitar, registre {owed}.'**
+  String loanPayTooMuch(String owed);
+
+  /// No description provided for @loanPaymentOf.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pagamento: {name}'**
+  String loanPaymentOf(String name);
+
+  /// No description provided for @loanReceiptOf.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recebimento: {name}'**
+  String loanReceiptOf(String name);
+
+  /// No description provided for @loanStatement.
+  ///
+  /// In pt, this message translates to:
+  /// **'Extrato'**
+  String get loanStatement;
+
+  /// No description provided for @loanNoPaymentsYet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum pagamento registrado ainda.'**
+  String get loanNoPaymentsYet;
+
+  /// No description provided for @loanEventSplit.
+  ///
+  /// In pt, this message translates to:
+  /// **'{interest} de juros · {principal} do principal · saldo {balance}'**
+  String loanEventSplit(String interest, String principal, String balance);
+
+  /// No description provided for @loanEventBalance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo depois: {balance}'**
+  String loanEventBalance(String balance);
 }
 
 class _AppLocalizationsDelegate

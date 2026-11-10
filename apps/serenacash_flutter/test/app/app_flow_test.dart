@@ -24,7 +24,7 @@ void main() {
       await pumpApp(tester, app);
 
       expect(find.byType(OnboardingScreen), findsOneWidget);
-      expect(find.text('Seu dinheiro em paz.'), findsOneWidget);
+      expect(find.text('Saiba quanto você pode gastar.'), findsOneWidget);
       await screenshot(tester, 'onboarding_welcome_light');
 
       await tester.tap(find.text('Começar'));

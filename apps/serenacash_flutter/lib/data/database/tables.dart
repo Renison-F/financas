@@ -220,14 +220,31 @@ class Loans extends Table with SyncColumns {
       integer().check(principalCents.isBiggerOrEqualValue(0))();
   RealColumn get monthlyRatePercent =>
       real().check(monthlyRatePercent.isBiggerOrEqualValue(0))();
+  // v4: 0 for a debt without a schedule.
   IntColumn get termMonths =>
-      integer().check(termMonths.isBiggerThanValue(0))();
-  TextColumn get system => text().check(system.isIn(['price', 'sac']))();
+      integer().check(termMonths.isBiggerOrEqualValue(0))();
+  TextColumn get system => text().check(
+    system.isIn(['price', 'sac', 'american', 'bullet', 'free']),
+  )();
   TextColumn get firstDueDate => text()();
   IntColumn get monthlyFeeCents => integer().withDefault(const Constant(0))();
   IntColumn get upfrontFeesCents => integer().withDefault(const Constant(0))();
   TextColumn get accountId => text().nullable().references(Accounts, #id)();
   BoolColumn get archived => boolean().withDefault(const Constant(false))();
+  // v4: who owes whom, interest of a debt without schedule, and how the rate was stated.
+  TextColumn get direction => text()
+      .withDefault(const Constant('borrowed'))
+      .check(direction.isIn(['borrowed', 'lent']))();
+  TextColumn get interestMode => text()
+      .withDefault(const Constant('none'))
+      .check(interestMode.isIn(['none', 'simple', 'compound']))();
+  TextColumn get ratePeriod => text()
+      .withDefault(const Constant('month'))
+      .check(ratePeriod.isIn(['month', 'year']))();
+  TextColumn get rateKind => text()
+      .withDefault(const Constant('effective'))
+      .check(rateKind.isIn(['effective', 'nominal']))();
+  RealColumn get rateInputPercent => real().nullable()();
   @override
   Set<Column<Object>> get primaryKey => {id};
 }

@@ -678,17 +678,44 @@ class Loan {
     required this.upfrontFeesCents,
     this.accountId,
     required this.archived,
+    this.direction = 'borrowed',
+    this.interestMode = 'none',
+    this.ratePeriod = 'month',
+    this.rateKind = 'effective',
+    this.rateInputPercent,
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
   });
   final Id id;
   final String name;
+
+  /// The other party: who lent the money, or who it was lent to.
   final String? lender;
   final Cents principalCents;
+
+  /// The effective monthly rate every calculation uses. When the contract states the rate another
+  /// way, [rateInputPercent], [ratePeriod] and [rateKind] keep what was typed.
   final double monthlyRatePercent;
+
+  /// Number of installments; 0 for a debt without a schedule (`free`).
   final int termMonths;
-  final String system; // price | sac
+
+  /// `price` | `sac` | `american` (interest each period, principal at the end) | `bullet` (one
+  /// payment at the end) | `free` (no schedule: paid when possible).
+  final String system;
+
+  /// `borrowed` (the user owes) or `lent` (the user is owed).
+  final String direction;
+
+  /// For a `free` debt: `none`, `simple` or `compound` interest at [monthlyRatePercent].
+  final String interestMode;
+
+  /// How the rate was stated: per `month` or per `year`; `effective` or `nominal` (a nominal yearly
+  /// rate is divided by 12, an effective one is converted by compounding).
+  final String ratePeriod;
+  final String rateKind;
+  final double? rateInputPercent;
   final String firstDueDate;
   final Cents monthlyFeeCents;
   final Cents upfrontFeesCents;
@@ -711,6 +738,11 @@ class Loan {
     upfrontFeesCents: (j['upfrontFeesCents'] as num?)?.toInt() ?? 0,
     accountId: j['accountId'] as String?,
     archived: j['archived'] as bool? ?? false,
+    direction: j['direction'] as String? ?? 'borrowed',
+    interestMode: j['interestMode'] as String? ?? 'none',
+    ratePeriod: j['ratePeriod'] as String? ?? 'month',
+    rateKind: j['rateKind'] as String? ?? 'effective',
+    rateInputPercent: (j['rateInputPercent'] as num?)?.toDouble(),
     createdAt: j['createdAt'] as String? ?? '',
     updatedAt: j['updatedAt'] as String? ?? '',
     deletedAt: j['deletedAt'] as String?,
@@ -728,6 +760,11 @@ class Loan {
     'upfrontFeesCents': upfrontFeesCents,
     if (accountId != null) 'accountId': accountId,
     'archived': archived,
+    if (direction != 'borrowed') 'direction': direction,
+    if (interestMode != 'none') 'interestMode': interestMode,
+    if (ratePeriod != 'month') 'ratePeriod': ratePeriod,
+    if (rateKind != 'effective') 'rateKind': rateKind,
+    if (rateInputPercent != null) 'rateInputPercent': rateInputPercent,
     'createdAt': createdAt,
     'updatedAt': updatedAt,
     if (deletedAt != null) 'deletedAt': deletedAt,

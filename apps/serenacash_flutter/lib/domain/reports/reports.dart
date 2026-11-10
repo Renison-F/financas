@@ -440,16 +440,22 @@ List<NetWorthPoint> netWorth(
         .where((c) => !c.archived)
         .map((c) => cardCommitment(ledger, c, asOf).outstandingCents),
   );
+  // What the user borrowed is a debt; what the user lent is owed to them and counts as an asset.
   final loanDebt = sumCents(
     ledger.loans
-        .where((l) => !l.archived)
+        .where((l) => !l.archived && l.direction != 'lent')
+        .map((l) => loanPosition(ledger, l, asOf).outstandingCents),
+  );
+  final lentOut = sumCents(
+    ledger.loans
+        .where((l) => !l.archived && l.direction == 'lent')
         .map((l) => loanPosition(ledger, l, asOf).outstandingCents),
   );
   return NetWorthPoint(
     month: m,
-    assetsCents: assets,
+    assetsCents: assets + lentOut,
     debtsCents: cardDebt + loanDebt,
-    netCents: assets - cardDebt - loanDebt,
+    netCents: assets + lentOut - cardDebt - loanDebt,
   );
 }).toList();
 

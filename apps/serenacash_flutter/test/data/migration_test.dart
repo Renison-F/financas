@@ -106,4 +106,39 @@ void main() {
       await db.close();
     },
   );
+
+  test(
+    'v3 → v4: loans keep their rows and gain direction, interest and rate',
+    () async {
+      final schema = await verifier.schemaAt(3);
+      schema.rawDatabase.execute(
+        "INSERT INTO loans (id, name, lender, principal_cents, monthly_rate_percent, "
+        "term_months, system, first_due_date, monthly_fee_cents, upfront_fees_cents, "
+        "account_id, archived, created_at, updated_at, deleted_at, version, device_id, dirty) "
+        "VALUES ('l1', 'casa', 'banco', 4000000, 1.99, 48, 'price', '2027-08-20', 0, 0, "
+        "NULL, 0, '2026-11-07T15:00:00.000Z', '2026-11-07T15:00:00.000Z', NULL, 1, 'local', 1)",
+      );
+      final db = AppDatabase(schema.newConnection());
+      await verifier.migrateAndValidate(db, 4);
+      final row = await db.select(db.loans).getSingle();
+      expect(row.name, 'casa');
+      expect(row.principalCents, 4000000);
+      expect(row.monthlyRatePercent, 1.99);
+      expect(row.termMonths, 48);
+      expect(row.system, 'price');
+      expect(row.direction, 'borrowed');
+      expect(row.interestMode, 'none');
+      expect(row.ratePeriod, 'month');
+      expect(row.rateKind, 'effective');
+      expect(row.rateInputPercent, isNull);
+      // the new systems and a debt without a term are now accepted by the table
+      await db.customStatement(
+        "INSERT INTO loans (id, name, principal_cents, monthly_rate_percent, term_months, "
+        "system, first_due_date, created_at, updated_at) "
+        "VALUES ('l2', 'livre', 100000, 0, 0, 'free', '2026-11-07', 'x', 'x')",
+      );
+      expect(await db.integrityCheck(), isEmpty);
+      await db.close();
+    },
+  );
 }

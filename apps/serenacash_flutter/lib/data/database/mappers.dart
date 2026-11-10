@@ -301,6 +301,11 @@ LoansCompanion loanToRow(Loan l, Stamp s) => LoansCompanion(
   upfrontFeesCents: Value(l.upfrontFeesCents),
   accountId: _v(l.accountId),
   archived: Value(l.archived),
+  direction: Value(l.direction),
+  interestMode: Value(l.interestMode),
+  ratePeriod: Value(l.ratePeriod),
+  rateKind: Value(l.rateKind),
+  rateInputPercent: _v(l.rateInputPercent),
   createdAt: Value(l.createdAt),
   updatedAt: Value(s.now),
   deletedAt: _v(l.deletedAt),
@@ -309,6 +314,11 @@ LoansCompanion loanToRow(Loan l, Stamp s) => LoansCompanion(
   dirty: const Value(true),
 );
 Loan loanFromRow(LoanRow r) => Loan(
+  direction: r.direction,
+  interestMode: r.interestMode,
+  ratePeriod: r.ratePeriod,
+  rateKind: r.rateKind,
+  rateInputPercent: r.rateInputPercent,
   id: r.id,
   name: r.name,
   lender: r.lender,

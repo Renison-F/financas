@@ -387,7 +387,10 @@ Answer answer(Ledger ledger, String question, ISODate today) {
         future += all;
         basis.add(BasisLine(c.name, -all));
       }
-      for (final l in ledger.loans.where((l) => !l.archived)) {
+      // Money the user lent is owed to them: it is not a commitment of theirs.
+      for (final l in ledger.loans.where(
+        (l) => !l.archived && l.direction != 'lent',
+      )) {
         final p = loanPosition(ledger, l, today);
         future += p.outstandingCents;
         basis.add(BasisLine(l.name, -p.outstandingCents));

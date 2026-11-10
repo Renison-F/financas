@@ -4177,7 +4177,7 @@ class $LoansTable extends Loans with TableInfo<$LoansTable, LoanRow> {
     'term_months',
     aliasedName,
     false,
-    check: () => ComparableExpr(termMonths).isBiggerThanValue(0),
+    check: () => ComparableExpr(termMonths).isBiggerOrEqualValue(0),
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
@@ -4187,7 +4187,7 @@ class $LoansTable extends Loans with TableInfo<$LoansTable, LoanRow> {
     'system',
     aliasedName,
     false,
-    check: () => system.isIn(['price', 'sac']),
+    check: () => system.isIn(['price', 'sac', 'american', 'bullet', 'free']),
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
@@ -4255,6 +4255,69 @@ class $LoansTable extends Loans with TableInfo<$LoansTable, LoanRow> {
     ),
     defaultValue: const Constant(false),
   );
+  static const VerificationMeta _directionMeta = const VerificationMeta(
+    'direction',
+  );
+  @override
+  late final GeneratedColumn<String> direction = GeneratedColumn<String>(
+    'direction',
+    aliasedName,
+    false,
+    check: () => direction.isIn(['borrowed', 'lent']),
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('borrowed'),
+  );
+  static const VerificationMeta _interestModeMeta = const VerificationMeta(
+    'interestMode',
+  );
+  @override
+  late final GeneratedColumn<String> interestMode = GeneratedColumn<String>(
+    'interest_mode',
+    aliasedName,
+    false,
+    check: () => interestMode.isIn(['none', 'simple', 'compound']),
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('none'),
+  );
+  static const VerificationMeta _ratePeriodMeta = const VerificationMeta(
+    'ratePeriod',
+  );
+  @override
+  late final GeneratedColumn<String> ratePeriod = GeneratedColumn<String>(
+    'rate_period',
+    aliasedName,
+    false,
+    check: () => ratePeriod.isIn(['month', 'year']),
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('month'),
+  );
+  static const VerificationMeta _rateKindMeta = const VerificationMeta(
+    'rateKind',
+  );
+  @override
+  late final GeneratedColumn<String> rateKind = GeneratedColumn<String>(
+    'rate_kind',
+    aliasedName,
+    false,
+    check: () => rateKind.isIn(['effective', 'nominal']),
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('effective'),
+  );
+  static const VerificationMeta _rateInputPercentMeta = const VerificationMeta(
+    'rateInputPercent',
+  );
+  @override
+  late final GeneratedColumn<double> rateInputPercent = GeneratedColumn<double>(
+    'rate_input_percent',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     createdAt,
@@ -4275,6 +4338,11 @@ class $LoansTable extends Loans with TableInfo<$LoansTable, LoanRow> {
     upfrontFeesCents,
     accountId,
     archived,
+    direction,
+    interestMode,
+    ratePeriod,
+    rateKind,
+    rateInputPercent,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -4426,6 +4494,42 @@ class $LoansTable extends Loans with TableInfo<$LoansTable, LoanRow> {
         archived.isAcceptableOrUnknown(data['archived']!, _archivedMeta),
       );
     }
+    if (data.containsKey('direction')) {
+      context.handle(
+        _directionMeta,
+        direction.isAcceptableOrUnknown(data['direction']!, _directionMeta),
+      );
+    }
+    if (data.containsKey('interest_mode')) {
+      context.handle(
+        _interestModeMeta,
+        interestMode.isAcceptableOrUnknown(
+          data['interest_mode']!,
+          _interestModeMeta,
+        ),
+      );
+    }
+    if (data.containsKey('rate_period')) {
+      context.handle(
+        _ratePeriodMeta,
+        ratePeriod.isAcceptableOrUnknown(data['rate_period']!, _ratePeriodMeta),
+      );
+    }
+    if (data.containsKey('rate_kind')) {
+      context.handle(
+        _rateKindMeta,
+        rateKind.isAcceptableOrUnknown(data['rate_kind']!, _rateKindMeta),
+      );
+    }
+    if (data.containsKey('rate_input_percent')) {
+      context.handle(
+        _rateInputPercentMeta,
+        rateInputPercent.isAcceptableOrUnknown(
+          data['rate_input_percent']!,
+          _rateInputPercentMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -4507,6 +4611,26 @@ class $LoansTable extends Loans with TableInfo<$LoansTable, LoanRow> {
         DriftSqlType.bool,
         data['${effectivePrefix}archived'],
       )!,
+      direction: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}direction'],
+      )!,
+      interestMode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}interest_mode'],
+      )!,
+      ratePeriod: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}rate_period'],
+      )!,
+      rateKind: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}rate_kind'],
+      )!,
+      rateInputPercent: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}rate_input_percent'],
+      ),
     );
   }
 
@@ -4535,6 +4659,11 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
   final int upfrontFeesCents;
   final String? accountId;
   final bool archived;
+  final String direction;
+  final String interestMode;
+  final String ratePeriod;
+  final String rateKind;
+  final double? rateInputPercent;
   const LoanRow({
     required this.createdAt,
     required this.updatedAt,
@@ -4554,6 +4683,11 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
     required this.upfrontFeesCents,
     this.accountId,
     required this.archived,
+    required this.direction,
+    required this.interestMode,
+    required this.ratePeriod,
+    required this.rateKind,
+    this.rateInputPercent,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -4582,6 +4716,13 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
       map['account_id'] = Variable<String>(accountId);
     }
     map['archived'] = Variable<bool>(archived);
+    map['direction'] = Variable<String>(direction);
+    map['interest_mode'] = Variable<String>(interestMode);
+    map['rate_period'] = Variable<String>(ratePeriod);
+    map['rate_kind'] = Variable<String>(rateKind);
+    if (!nullToAbsent || rateInputPercent != null) {
+      map['rate_input_percent'] = Variable<double>(rateInputPercent);
+    }
     return map;
   }
 
@@ -4611,6 +4752,13 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
           ? const Value.absent()
           : Value(accountId),
       archived: Value(archived),
+      direction: Value(direction),
+      interestMode: Value(interestMode),
+      ratePeriod: Value(ratePeriod),
+      rateKind: Value(rateKind),
+      rateInputPercent: rateInputPercent == null && nullToAbsent
+          ? const Value.absent()
+          : Value(rateInputPercent),
     );
   }
 
@@ -4640,6 +4788,11 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
       upfrontFeesCents: serializer.fromJson<int>(json['upfrontFeesCents']),
       accountId: serializer.fromJson<String?>(json['accountId']),
       archived: serializer.fromJson<bool>(json['archived']),
+      direction: serializer.fromJson<String>(json['direction']),
+      interestMode: serializer.fromJson<String>(json['interestMode']),
+      ratePeriod: serializer.fromJson<String>(json['ratePeriod']),
+      rateKind: serializer.fromJson<String>(json['rateKind']),
+      rateInputPercent: serializer.fromJson<double?>(json['rateInputPercent']),
     );
   }
   @override
@@ -4664,6 +4817,11 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
       'upfrontFeesCents': serializer.toJson<int>(upfrontFeesCents),
       'accountId': serializer.toJson<String?>(accountId),
       'archived': serializer.toJson<bool>(archived),
+      'direction': serializer.toJson<String>(direction),
+      'interestMode': serializer.toJson<String>(interestMode),
+      'ratePeriod': serializer.toJson<String>(ratePeriod),
+      'rateKind': serializer.toJson<String>(rateKind),
+      'rateInputPercent': serializer.toJson<double?>(rateInputPercent),
     };
   }
 
@@ -4686,6 +4844,11 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
     int? upfrontFeesCents,
     Value<String?> accountId = const Value.absent(),
     bool? archived,
+    String? direction,
+    String? interestMode,
+    String? ratePeriod,
+    String? rateKind,
+    Value<double?> rateInputPercent = const Value.absent(),
   }) => LoanRow(
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
@@ -4705,6 +4868,13 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
     upfrontFeesCents: upfrontFeesCents ?? this.upfrontFeesCents,
     accountId: accountId.present ? accountId.value : this.accountId,
     archived: archived ?? this.archived,
+    direction: direction ?? this.direction,
+    interestMode: interestMode ?? this.interestMode,
+    ratePeriod: ratePeriod ?? this.ratePeriod,
+    rateKind: rateKind ?? this.rateKind,
+    rateInputPercent: rateInputPercent.present
+        ? rateInputPercent.value
+        : this.rateInputPercent,
   );
   LoanRow copyWithCompanion(LoansCompanion data) {
     return LoanRow(
@@ -4738,6 +4908,17 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
           : this.upfrontFeesCents,
       accountId: data.accountId.present ? data.accountId.value : this.accountId,
       archived: data.archived.present ? data.archived.value : this.archived,
+      direction: data.direction.present ? data.direction.value : this.direction,
+      interestMode: data.interestMode.present
+          ? data.interestMode.value
+          : this.interestMode,
+      ratePeriod: data.ratePeriod.present
+          ? data.ratePeriod.value
+          : this.ratePeriod,
+      rateKind: data.rateKind.present ? data.rateKind.value : this.rateKind,
+      rateInputPercent: data.rateInputPercent.present
+          ? data.rateInputPercent.value
+          : this.rateInputPercent,
     );
   }
 
@@ -4761,13 +4942,18 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
           ..write('monthlyFeeCents: $monthlyFeeCents, ')
           ..write('upfrontFeesCents: $upfrontFeesCents, ')
           ..write('accountId: $accountId, ')
-          ..write('archived: $archived')
+          ..write('archived: $archived, ')
+          ..write('direction: $direction, ')
+          ..write('interestMode: $interestMode, ')
+          ..write('ratePeriod: $ratePeriod, ')
+          ..write('rateKind: $rateKind, ')
+          ..write('rateInputPercent: $rateInputPercent')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     createdAt,
     updatedAt,
     deletedAt,
@@ -4786,7 +4972,12 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
     upfrontFeesCents,
     accountId,
     archived,
-  );
+    direction,
+    interestMode,
+    ratePeriod,
+    rateKind,
+    rateInputPercent,
+  ]);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -4808,7 +4999,12 @@ class LoanRow extends DataClass implements Insertable<LoanRow> {
           other.monthlyFeeCents == this.monthlyFeeCents &&
           other.upfrontFeesCents == this.upfrontFeesCents &&
           other.accountId == this.accountId &&
-          other.archived == this.archived);
+          other.archived == this.archived &&
+          other.direction == this.direction &&
+          other.interestMode == this.interestMode &&
+          other.ratePeriod == this.ratePeriod &&
+          other.rateKind == this.rateKind &&
+          other.rateInputPercent == this.rateInputPercent);
 }
 
 class LoansCompanion extends UpdateCompanion<LoanRow> {
@@ -4830,6 +5026,11 @@ class LoansCompanion extends UpdateCompanion<LoanRow> {
   final Value<int> upfrontFeesCents;
   final Value<String?> accountId;
   final Value<bool> archived;
+  final Value<String> direction;
+  final Value<String> interestMode;
+  final Value<String> ratePeriod;
+  final Value<String> rateKind;
+  final Value<double?> rateInputPercent;
   final Value<int> rowid;
   const LoansCompanion({
     this.createdAt = const Value.absent(),
@@ -4850,6 +5051,11 @@ class LoansCompanion extends UpdateCompanion<LoanRow> {
     this.upfrontFeesCents = const Value.absent(),
     this.accountId = const Value.absent(),
     this.archived = const Value.absent(),
+    this.direction = const Value.absent(),
+    this.interestMode = const Value.absent(),
+    this.ratePeriod = const Value.absent(),
+    this.rateKind = const Value.absent(),
+    this.rateInputPercent = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   LoansCompanion.insert({
@@ -4871,6 +5077,11 @@ class LoansCompanion extends UpdateCompanion<LoanRow> {
     this.upfrontFeesCents = const Value.absent(),
     this.accountId = const Value.absent(),
     this.archived = const Value.absent(),
+    this.direction = const Value.absent(),
+    this.interestMode = const Value.absent(),
+    this.ratePeriod = const Value.absent(),
+    this.rateKind = const Value.absent(),
+    this.rateInputPercent = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : createdAt = Value(createdAt),
        updatedAt = Value(updatedAt),
@@ -4900,6 +5111,11 @@ class LoansCompanion extends UpdateCompanion<LoanRow> {
     Expression<int>? upfrontFeesCents,
     Expression<String>? accountId,
     Expression<bool>? archived,
+    Expression<String>? direction,
+    Expression<String>? interestMode,
+    Expression<String>? ratePeriod,
+    Expression<String>? rateKind,
+    Expression<double>? rateInputPercent,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -4922,6 +5138,11 @@ class LoansCompanion extends UpdateCompanion<LoanRow> {
       if (upfrontFeesCents != null) 'upfront_fees_cents': upfrontFeesCents,
       if (accountId != null) 'account_id': accountId,
       if (archived != null) 'archived': archived,
+      if (direction != null) 'direction': direction,
+      if (interestMode != null) 'interest_mode': interestMode,
+      if (ratePeriod != null) 'rate_period': ratePeriod,
+      if (rateKind != null) 'rate_kind': rateKind,
+      if (rateInputPercent != null) 'rate_input_percent': rateInputPercent,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -4945,6 +5166,11 @@ class LoansCompanion extends UpdateCompanion<LoanRow> {
     Value<int>? upfrontFeesCents,
     Value<String?>? accountId,
     Value<bool>? archived,
+    Value<String>? direction,
+    Value<String>? interestMode,
+    Value<String>? ratePeriod,
+    Value<String>? rateKind,
+    Value<double?>? rateInputPercent,
     Value<int>? rowid,
   }) {
     return LoansCompanion(
@@ -4966,6 +5192,11 @@ class LoansCompanion extends UpdateCompanion<LoanRow> {
       upfrontFeesCents: upfrontFeesCents ?? this.upfrontFeesCents,
       accountId: accountId ?? this.accountId,
       archived: archived ?? this.archived,
+      direction: direction ?? this.direction,
+      interestMode: interestMode ?? this.interestMode,
+      ratePeriod: ratePeriod ?? this.ratePeriod,
+      rateKind: rateKind ?? this.rateKind,
+      rateInputPercent: rateInputPercent ?? this.rateInputPercent,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -5027,6 +5258,21 @@ class LoansCompanion extends UpdateCompanion<LoanRow> {
     if (archived.present) {
       map['archived'] = Variable<bool>(archived.value);
     }
+    if (direction.present) {
+      map['direction'] = Variable<String>(direction.value);
+    }
+    if (interestMode.present) {
+      map['interest_mode'] = Variable<String>(interestMode.value);
+    }
+    if (ratePeriod.present) {
+      map['rate_period'] = Variable<String>(ratePeriod.value);
+    }
+    if (rateKind.present) {
+      map['rate_kind'] = Variable<String>(rateKind.value);
+    }
+    if (rateInputPercent.present) {
+      map['rate_input_percent'] = Variable<double>(rateInputPercent.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -5054,6 +5300,11 @@ class LoansCompanion extends UpdateCompanion<LoanRow> {
           ..write('upfrontFeesCents: $upfrontFeesCents, ')
           ..write('accountId: $accountId, ')
           ..write('archived: $archived, ')
+          ..write('direction: $direction, ')
+          ..write('interestMode: $interestMode, ')
+          ..write('ratePeriod: $ratePeriod, ')
+          ..write('rateKind: $rateKind, ')
+          ..write('rateInputPercent: $rateInputPercent, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
