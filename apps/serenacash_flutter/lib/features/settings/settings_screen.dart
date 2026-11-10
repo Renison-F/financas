@@ -87,6 +87,30 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         .setPrefs((x) => x.copyWith(biometricLock: true));
   }
 
+  /// Turning the lock off is also confirmed by the device, as turning the PIN off asks for the PIN:
+  /// an unlocked phone left on a table must not be enough to remove the protection.
+  Future<void> _disableBiometricLock() async {
+    final l = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
+    final status = await ref
+        .read(deviceAuthProvider)
+        .confirm(l.biometricConfirmToDisable);
+    // With no screen lock left on the device there is nothing to confirm against; keeping the app
+    // lock on would only lock the owner out.
+    const allowed = {
+      DeviceAuthStatus.confirmed,
+      DeviceAuthStatus.notSetUp,
+      DeviceAuthStatus.noHardware,
+    };
+    if (!allowed.contains(status)) {
+      messenger.showSnackBar(SnackBar(content: Text(l.bioDisableDenied)));
+      return;
+    }
+    await ref
+        .read(appControllerProvider.notifier)
+        .setPrefs((x) => x.copyWith(biometricLock: false));
+  }
+
   Future<void> _setPin() async {
     final l = context.l10n;
     if (!await _confirmCurrentPin(l.changePin) || !mounted) return;
@@ -294,9 +318,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 label: l.biometricLock,
                 value: p.biometricLock,
                 help: _bio ? l.biometricAvailable : l.biometricNotAvailable,
-                onChanged: (v) => v
-                    ? _enableBiometricLock()
-                    : ctl.setPrefs((x) => x.copyWith(biometricLock: false)),
+                onChanged: (v) =>
+                    v ? _enableBiometricLock() : _disableBiometricLock(),
               ),
               ToggleRow(
                 label: l.pinLock,

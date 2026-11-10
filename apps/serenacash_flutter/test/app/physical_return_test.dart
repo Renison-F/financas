@@ -450,6 +450,8 @@ void main() {
       DeviceAuthStatus.lockedOut,
       DeviceAuthStatus.unavailable,
       DeviceAuthStatus.confirmed,
+      DeviceAuthStatus.canceled,
+      DeviceAuthStatus.confirmed,
     ]);
     await _bootOnboarded(
       tester,
@@ -496,6 +498,19 @@ void main() {
     expect(device.asked, 5);
     expect(find.text('Desbloquear'), findsNothing);
     expect(toggle, findsOneWidget);
+
+    // turning it off is confirmed by the device too
+    await tester.tap(toggle);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.textContaining('o bloqueio continua ativado'), findsOneWidget);
+    expect(c.read(prefsProvider).biometricLock, isTrue);
+    ScaffoldMessenger.of(tester.element(toggle)).clearSnackBars();
+    await tester.pumpAndSettle();
+    await tester.tap(toggle);
+    await tester.pumpAndSettle();
+    expect(c.read(prefsProvider).biometricLock, isFalse);
+    expect(device.asked, 7);
   });
 
   test(
