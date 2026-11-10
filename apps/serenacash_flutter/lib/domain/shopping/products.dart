@@ -319,3 +319,48 @@ PriceVariation? priceVariation(PriceHistory history, Cents currentCents) {
     last,
   );
 }
+
+/// One price of a product at a moment, with how it moved since the purchase before it.
+class PricePoint {
+  const PricePoint({
+    required this.observation,
+    this.changeCents,
+    this.changePerMille,
+  });
+  final PriceObservation observation;
+
+  /// Difference to the previous observation of the same unit. Null for the first one.
+  final Cents? changeCents;
+
+  /// The same difference in tenths of a percent of the previous price.
+  final int? changePerMille;
+}
+
+/// The prices paid for one product over time, oldest first, comparing only like with like: an
+/// observation is compared with the previous one **in the same unit** (a price per kilo is never
+/// set against a price per pack). This is the observed variation of this product's price in the
+/// places the user bought it; it is not an inflation index.
+List<PricePoint> priceTimeline(
+  List<PriceObservation> observations,
+  String productId,
+) {
+  final own = observations.where((o) => o.productId == productId).toList()
+    ..sort((a, b) => a.observedAt.compareTo(b.observedAt));
+  final lastByUnit = <String, PriceObservation>{};
+  final out = <PricePoint>[];
+  for (final o in own) {
+    final prev = lastByUnit[o.unit];
+    final diff = prev == null ? null : o.unitPriceCents - prev.unitPriceCents;
+    out.add(
+      PricePoint(
+        observation: o,
+        changeCents: diff,
+        changePerMille: diff == null || prev!.unitPriceCents == 0
+            ? null
+            : (diff * 1000 / prev.unitPriceCents).round(),
+      ),
+    );
+    lastByUnit[o.unit] = o;
+  }
+  return out;
+}

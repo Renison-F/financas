@@ -8603,6 +8603,96 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Ditado: \"{text}\". Confira nome, quantidade e preço.'**
   String voiceHeard(String text);
+
+  /// No description provided for @priceHistoryTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Histórico de preços'**
+  String get priceHistoryTitle;
+
+  /// No description provided for @priceHistoryIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'O que você pagou por cada produto, compra após compra. A comparação é sempre com a compra anterior do mesmo produto na mesma unidade.'**
+  String get priceHistoryIntro;
+
+  /// No description provided for @priceHistorySearch.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar produto'**
+  String get priceHistorySearch;
+
+  /// No description provided for @priceHistoryEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum preço registrado ainda'**
+  String get priceHistoryEmpty;
+
+  /// No description provided for @priceHistoryEmptyText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Os preços entram aqui quando você finaliza uma compra.'**
+  String get priceHistoryEmptyText;
+
+  /// No description provided for @priceHistoryOpen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver as compras deste produto'**
+  String get priceHistoryOpen;
+
+  /// No description provided for @priceFirst.
+  ///
+  /// In pt, this message translates to:
+  /// **'primeiro registro'**
+  String get priceFirst;
+
+  /// No description provided for @priceSame.
+  ///
+  /// In pt, this message translates to:
+  /// **'mesmo preço da compra anterior'**
+  String get priceSame;
+
+  /// No description provided for @priceUp.
+  ///
+  /// In pt, this message translates to:
+  /// **'{value} a mais{percent}'**
+  String priceUp(String value, String percent);
+
+  /// No description provided for @priceDown.
+  ///
+  /// In pt, this message translates to:
+  /// **'{value} a menos{percent}'**
+  String priceDown(String value, String percent);
+
+  /// No description provided for @priceOnePoint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Um registro só: ainda não há evolução para mostrar.'**
+  String get priceOnePoint;
+
+  /// No description provided for @priceRange.
+  ///
+  /// In pt, this message translates to:
+  /// **'Menor {min} · maior {max} em {n} registros'**
+  String priceRange(String min, String max, int n);
+
+  /// No description provided for @pricePromo.
+  ///
+  /// In pt, this message translates to:
+  /// **'em promoção'**
+  String get pricePromo;
+
+  /// No description provided for @priceByStore.
+  ///
+  /// In pt, this message translates to:
+  /// **'Último preço por loja: {stores}'**
+  String priceByStore(String stores);
+
+  /// No description provided for @priceNotInflation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Variação observada do preço deste produto nas suas compras. Não é um índice de inflação.'**
+  String get priceNotInflation;
 }
 
 class _AppLocalizationsDelegate

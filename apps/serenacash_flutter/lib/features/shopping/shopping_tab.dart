@@ -106,7 +106,15 @@ class ShoppingTab extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CardHeader(title: l.previousPurchases),
+              CardHeader(
+                title: l.previousPurchases,
+                action: SButton(
+                  label: l.priceHistoryTitle,
+                  variant: SButtonVariant.ghost,
+                  compact: true,
+                  onPressed: () => context.push('/shopping/prices'),
+                ),
+              ),
               if (finished.isEmpty)
                 Text(
                   l.previousPurchasesText,

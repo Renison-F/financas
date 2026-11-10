@@ -5142,4 +5142,61 @@ class AppLocalizationsPt extends AppLocalizations {
   String voiceHeard(String text) {
     return 'Ditado: \"$text\". Confira nome, quantidade e preço.';
   }
+
+  @override
+  String get priceHistoryTitle => 'Histórico de preços';
+
+  @override
+  String get priceHistoryIntro =>
+      'O que você pagou por cada produto, compra após compra. A comparação é sempre com a compra anterior do mesmo produto na mesma unidade.';
+
+  @override
+  String get priceHistorySearch => 'Buscar produto';
+
+  @override
+  String get priceHistoryEmpty => 'Nenhum preço registrado ainda';
+
+  @override
+  String get priceHistoryEmptyText =>
+      'Os preços entram aqui quando você finaliza uma compra.';
+
+  @override
+  String get priceHistoryOpen => 'Ver as compras deste produto';
+
+  @override
+  String get priceFirst => 'primeiro registro';
+
+  @override
+  String get priceSame => 'mesmo preço da compra anterior';
+
+  @override
+  String priceUp(String value, String percent) {
+    return '$value a mais$percent';
+  }
+
+  @override
+  String priceDown(String value, String percent) {
+    return '$value a menos$percent';
+  }
+
+  @override
+  String get priceOnePoint =>
+      'Um registro só: ainda não há evolução para mostrar.';
+
+  @override
+  String priceRange(String min, String max, int n) {
+    return 'Menor $min · maior $max em $n registros';
+  }
+
+  @override
+  String get pricePromo => 'em promoção';
+
+  @override
+  String priceByStore(String stores) {
+    return 'Último preço por loja: $stores';
+  }
+
+  @override
+  String get priceNotInflation =>
+      'Variação observada do preço deste produto nas suas compras. Não é um índice de inflação.';
 }

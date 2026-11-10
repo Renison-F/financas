@@ -5132,4 +5132,61 @@ class AppLocalizationsEn extends AppLocalizations {
   String voiceHeard(String text) {
     return 'Dictated: \"$text\". Check name, quantity and price.';
   }
+
+  @override
+  String get priceHistoryTitle => 'Price history';
+
+  @override
+  String get priceHistoryIntro =>
+      'What you paid for each product, purchase after purchase. The comparison is always with the previous purchase of the same product in the same unit.';
+
+  @override
+  String get priceHistorySearch => 'Search product';
+
+  @override
+  String get priceHistoryEmpty => 'No price recorded yet';
+
+  @override
+  String get priceHistoryEmptyText =>
+      'Prices show up here when you finish a purchase.';
+
+  @override
+  String get priceHistoryOpen => 'See the purchases of this product';
+
+  @override
+  String get priceFirst => 'first record';
+
+  @override
+  String get priceSame => 'same price as the previous purchase';
+
+  @override
+  String priceUp(String value, String percent) {
+    return '$value more$percent';
+  }
+
+  @override
+  String priceDown(String value, String percent) {
+    return '$value less$percent';
+  }
+
+  @override
+  String get priceOnePoint =>
+      'A single record: there is no evolution to show yet.';
+
+  @override
+  String priceRange(String min, String max, int n) {
+    return 'Lowest $min · highest $max over $n records';
+  }
+
+  @override
+  String get pricePromo => 'on promotion';
+
+  @override
+  String priceByStore(String stores) {
+    return 'Last price by store: $stores';
+  }
+
+  @override
+  String get priceNotInflation =>
+      'Observed variation of this product\'s price in your purchases. Not an inflation index.';
 }
