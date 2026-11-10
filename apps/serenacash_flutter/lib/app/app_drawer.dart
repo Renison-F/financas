@@ -13,7 +13,9 @@ import 'router.dart';
 import 'state/app_controller.dart';
 import 'theme/tokens.dart';
 
-const appVersion = '0.1.0';
+/// Version and build number as in pubspec.yaml, shown in the menu so the installed build can be told
+/// apart without a computer (a test checks the two stay equal).
+const appVersion = '0.2.0 (build 3)';
 
 class _Item {
   const _Item(this.icon, this.label, {this.route, this.tab});

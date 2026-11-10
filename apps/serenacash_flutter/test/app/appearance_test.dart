@@ -8,6 +8,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:serenacash/app/app_drawer.dart';
 import 'package:serenacash/app/state/app_controller.dart';
 import 'package:serenacash/app/theme/palettes.dart';
 import 'package:serenacash/app/theme/theme.dart';
@@ -208,4 +209,12 @@ void main() {
       }
     },
   );
+
+  test('the version shown in the menu is the one in pubspec.yaml', () {
+    final line = File('pubspec.yaml')
+        .readAsLinesSync()
+        .firstWhere((l) => l.startsWith('version:'));
+    final m = RegExp(r'version:\s*(\S+)\+(\d+)').firstMatch(line)!;
+    expect(appVersion, '${m[1]} (build ${m[2]})');
+  });
 }
