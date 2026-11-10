@@ -2718,7 +2718,7 @@
   "homePlannedMore": "+ {value} planned",
   "@homePlannedMore": {"placeholders": {"value": {"type": "String"}}},
   "homeResult": "Result",
-  "homeResultNote": "Income − expenses of the month. Not the account balance.",
+  "homeResultNote": "Income − expenses. Not the balance.",
   "homeCardInvoices": "Open statements",
   "homeCardInvoicesNote": "Current and closed statements not yet paid.",
   "homeNoCards": "No card registered.",

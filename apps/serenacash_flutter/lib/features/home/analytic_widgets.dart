@@ -98,7 +98,7 @@ class _Figure extends StatelessWidget {
           Text(
             note!,
             style: Type.caption.copyWith(color: c.textMuted),
-            maxLines: 2,
+            maxLines: 4,
             overflow: TextOverflow.ellipsis,
           ),
       ],
@@ -307,61 +307,67 @@ class _Overview extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CardHeader(title: l.homeOverview),
-          Row(
-            children: [
-              tile(
-                _Figure(
-                  label: l.homeIncomeReceived,
-                  cents: t.incomeSettled,
-                  hidden: hidden,
-                  color: c.positive,
-                  note: t.incomePlanned > 0
-                      ? l.homePlannedMore(brl(t.incomePlanned))
-                      : null,
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                tile(
+                  _Figure(
+                    label: l.homeIncomeReceived,
+                    cents: t.incomeSettled,
+                    hidden: hidden,
+                    color: c.positive,
+                    note: t.incomePlanned > 0
+                        ? l.homePlannedMore(brl(t.incomePlanned))
+                        : null,
+                  ),
+                  '/transactions',
                 ),
-                '/transactions',
-              ),
-              const SizedBox(width: 8),
-              tile(
-                _Figure(
-                  label: l.homeExpensePaid,
-                  cents: t.expenseSettled,
-                  hidden: hidden,
-                  note: t.expensePlanned > 0
-                      ? l.homePlannedMore(brl(t.expensePlanned))
-                      : null,
+                const SizedBox(width: 8),
+                tile(
+                  _Figure(
+                    label: l.homeExpensePaid,
+                    cents: t.expenseSettled,
+                    hidden: hidden,
+                    note: t.expensePlanned > 0
+                        ? l.homePlannedMore(brl(t.expensePlanned))
+                        : null,
+                  ),
+                  '/reports/categories',
                 ),
-                '/reports/categories',
-              ),
-            ],
+              ],
+            ),
           ),
           const SizedBox(height: 8),
-          Row(
-            children: [
-              tile(
-                _Figure(
-                  label: l.homeResult,
-                  cents: t.net,
-                  hidden: hidden,
-                  signed: true,
-                  color: t.net < 0 ? c.negative : null,
-                  note: l.homeResultNote,
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                tile(
+                  _Figure(
+                    label: l.homeResult,
+                    cents: t.net,
+                    hidden: hidden,
+                    signed: true,
+                    color: t.net < 0 ? c.negative : null,
+                    note: l.homeResultNote,
+                  ),
+                  '/reports/cashflow',
                 ),
-                '/reports/cashflow',
-              ),
-              const SizedBox(width: 8),
-              tile(
-                _Figure(
-                  label: l.homeCardInvoices,
-                  cents: invoices,
-                  hidden: hidden,
-                  note: data.cards.isEmpty
-                      ? l.homeNoCards
-                      : l.homeCardInvoicesNote,
+                const SizedBox(width: 8),
+                tile(
+                  _Figure(
+                    label: l.homeCardInvoices,
+                    cents: invoices,
+                    hidden: hidden,
+                    note: data.cards.isEmpty
+                        ? l.homeNoCards
+                        : l.homeCardInvoicesNote,
+                  ),
+                  '/cards',
                 ),
-                '/cards',
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

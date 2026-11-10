@@ -4716,8 +4716,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get homeResult => 'Resultado';
 
   @override
-  String get homeResultNote =>
-      'Receitas − despesas do mês. Não é o saldo das contas.';
+  String get homeResultNote => 'Receitas − despesas. Não é o saldo.';
 
   @override
   String get homeCardInvoices => 'Faturas em aberto';
@@ -4726,7 +4725,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get homeCardInvoicesNote => 'Fatura atual e fechadas ainda não pagas.';
 
   @override
-  String get homeNoCards => 'Nenhum cartão cadastrado.';
+  String get homeNoCards => 'Sem cartão cadastrado.';
 
   @override
   String get homeNoEntriesMonth => 'Nenhum lançamento neste mês';

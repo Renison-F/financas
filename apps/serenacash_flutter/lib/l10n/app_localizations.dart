@@ -7887,7 +7887,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeResultNote.
   ///
   /// In pt, this message translates to:
-  /// **'Receitas − despesas do mês. Não é o saldo das contas.'**
+  /// **'Receitas − despesas. Não é o saldo.'**
   String get homeResultNote;
 
   /// No description provided for @homeCardInvoices.
@@ -7905,7 +7905,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeNoCards.
   ///
   /// In pt, this message translates to:
-  /// **'Nenhum cartão cadastrado.'**
+  /// **'Sem cartão cadastrado.'**
   String get homeNoCards;
 
   /// No description provided for @homeNoEntriesMonth.

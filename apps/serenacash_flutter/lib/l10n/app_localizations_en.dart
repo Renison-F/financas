@@ -4705,8 +4705,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeResult => 'Result';
 
   @override
-  String get homeResultNote =>
-      'Income − expenses of the month. Not the account balance.';
+  String get homeResultNote => 'Income − expenses. Not the balance.';
 
   @override
   String get homeCardInvoices => 'Open statements';
