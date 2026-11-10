@@ -9,7 +9,18 @@ Registrado em 10/11/2026. O usuário concluiu a homologação física da build 0
 ### Build para reteste
 
 <!-- build -->
-A build é gerada a partir do commit de código `cef0929`, depois do envio desta documentação ao GitHub. Arquivo, tamanho e SHA-256 são registrados aqui em seguida.
+| | |
+|---|---|
+| Arquivo | `E:\SerenaCash\homologacao-0.2.0+4\serenacash-0.2.0+4-homologacao-cef0929.apk` |
+| Versão / build | 0.2.0 / 4 (`pubspec.yaml`: `0.2.0+4`); o menu do app mostra "versão 0.2.0 (build 4)" |
+| Commit do código | `cef0929`, branch `refactor/flutter-serenacash` (os commits depois dele são só de documentação) |
+| Application ID | `br.com.serenacash.mobile` |
+| Variante | release (R8, não depurável), assinada com a chave de debug deste PC |
+| Tamanho | 134.394.040 bytes |
+| SHA-256 do APK | `0837370a2ac0cda63ca05248744669cf362418921e373e1d48d74b2f5c9e951d` |
+| SHA-256 do certificado | `e7c911bbedaec660d221b1e37d98cafe1e3d83116d8fd5d90aa0c1fd6eee16e5` (o mesmo da 0.1.0+2 e da 0.2.0+3) |
+
+Na mesma pasta: o APK debug do mesmo commit (`serenacash-0.2.0+4-debug-cef0929.apk`, SHA-256 `4758dbed4455c80b56f7f404490ca3afca2e3f2a4b4149784fa94f1f0069f451`), `LEIA-ME.md` e `CHECKLIST-APARELHO.md`. Não há link de download: os arquivos existem só neste computador.
 <!-- /build -->
 
 A build 0.2.0+3 (`E:\SerenaCash\homologacao-0.2.0\`) e a 0.1.0+2 (`E:\SerenaCash\homologacao\`) continuam intactas. A 0.2.0+3 não precisa ser testada: a 0.2.0+4 contém tudo o que ela tinha.
@@ -18,7 +29,7 @@ A build 0.2.0+3 (`E:\SerenaCash\homologacao-0.2.0\`) e a 0.1.0+2 (`E:\SerenaCash
 
 - Git: branch `refactor/flutter-serenacash`, enviada ao GitHub. `main` não foi tocada; sem merge, sem force push.
 - Testes: 637 aprovados, 0 falhas, 0 ignorados (domínio 365, dados 58, app 206, desempenho 8); `dart format` sem alterações; `flutter analyze --fatal-infos` sem avisos. Detalhe em `09-TESTES.md`.
-- CI: aprovado em `ee5c63d` (build 0.2.0+3), execução 42752550490, nos dois jobs. <!-- ci -->O envio desta build dispara nova execução; o resultado é registrado aqui em seguida.<!-- /ci -->
+- CI: aprovado em `ee5c63d` (build 0.2.0+3), execução 42752550490, nos dois jobs. <!-- ci -->Aprovado também em `5009c25` (build 0.2.0+4), execução 42761550386, nos dois jobs ("format · analyze · test" e "build apk (debug)").<!-- /ci -->
 - Banco: esquema na versão 4. A 0.2.0+4 não tem migração nova; o que entrou é preferência e layout. Detalhe em `05-MIGRACAO_DADOS.md`.
 - Segurança: diferenciais nas seções 7 e 8 de `docs/security/AUDITORIA_FLUTTER.md`. 185 pacotes do pub.dev sem vulnerabilidade conhecida na OSV em 10/11/2026.
 - Aparelho virtual de validação: `serenacash_teste` (Android 15, três botões, uma digital cadastrada, bloqueio de tela fictício). Recebeu a 0.2.0+4 por cima da 0.2.0+3, com os dados fictícios preservados. O emulador de homologação `serenacash_api35` **não foi ligado nem alterado**.

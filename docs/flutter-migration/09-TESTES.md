@@ -11,7 +11,7 @@ Suíte: `apps/serenacash_flutter/test` + fixtures TS→Dart em `docs/flutter-mig
 | Com falha | 0 |
 | **Total executado** | **637** |
 
-Por camada: domínio 365, dados 58, app 206, desempenho 8. `dart format --set-exit-if-changed lib test integration_test tool` → 0 alterações em 213 arquivos; `flutter analyze --fatal-infos` → "No issues found!"; `flutter test` → `+637: All tests passed!`. O CI aprovou o commit `ee5c63d` (build 0.2.0+3) nos dois jobs, execução 42752550490. Os testes acrescentados no complemento estão em "Testes do complemento (build 0.2.0+4)", no fim deste arquivo.
+Por camada: domínio 365, dados 58, app 206, desempenho 8. `dart format --set-exit-if-changed lib test integration_test tool` → 0 alterações em 213 arquivos; `flutter analyze --fatal-infos` → "No issues found!"; `flutter test` → `+637: All tests passed!`. O CI aprovou o commit `5009c25` (build 0.2.0+4) nos dois jobs, execução 42761550386; antes, o `ee5c63d` (build 0.2.0+3), execução 42752550490. Os testes acrescentados no complemento estão em "Testes do complemento (build 0.2.0+4)", no fim deste arquivo.
 
 ## Contagem da build 0.2.0+3 (execução de 10/11/2026, commit `f1b3b47`)
 

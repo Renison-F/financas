@@ -82,4 +82,10 @@ Completa as ocorrências que a 0.2.0+3 deixou parciais. `versionName 0.2.0`, `ve
 
 Sem permissão nova e sem dependência nova. A consulta opcional ao catálogo usa a permissão de internet que já existia.
 
-Arquivos, tamanhos e SHA-256: no `CHECKPOINT.md` e no `LEIA-ME.md` da pasta `E:\SerenaCash\homologacao-0.2.0+4\`.
+| | Homologação | Debug |
+|---|---|---|
+| Arquivo | `E:\SerenaCash\homologacao-0.2.0+4\serenacash-0.2.0+4-homologacao-cef0929.apk` | `…\serenacash-0.2.0+4-debug-cef0929.apk` |
+| Tamanho | 134.394.040 bytes | 254.765.607 bytes |
+| SHA-256 | `0837370a2ac0cda63ca05248744669cf362418921e373e1d48d74b2f5c9e951d` | `4758dbed4455c80b56f7f404490ca3afca2e3f2a4b4149784fa94f1f0069f451` |
+
+Commit do código `cef0929`; os commits depois dele são só de documentação. Certificado `e7c911bb…16e5`. O arquivo de debug foi conferido: não é a build do `integration_test`. CI aprovado em `5009c25` (execução 42761550386), que contém o mesmo código.
