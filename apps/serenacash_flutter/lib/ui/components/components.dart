@@ -3,6 +3,7 @@ export '../icons.dart';
 export 'buttons.dart';
 export 'cards.dart';
 export 'chips.dart';
+export 'donut.dart';
 export 'empty_state.dart';
 export 'fields.dart';
 export 'list_row.dart';

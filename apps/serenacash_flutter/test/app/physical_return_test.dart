@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:serenacash/app/state/app_controller.dart';
 import 'package:serenacash/app/state/app_state.dart';
 import 'package:serenacash/data/security/device_auth.dart';
@@ -16,6 +17,7 @@ import 'package:serenacash/features/accounts/account_form_screen.dart';
 import 'package:serenacash/features/home/home_screen.dart';
 import 'package:serenacash/features/shopping/item_review_screen.dart';
 import 'package:serenacash/features/transactions/transaction_form_screen.dart';
+import 'package:serenacash/ui/components/components.dart';
 
 import 'harness.dart';
 import 'kv_factory.dart';
@@ -764,6 +766,85 @@ void main() {
       await pay('9999999');
       expect(find.textContaining('maior que o saldo'), findsOneWidget);
       expect(c.read(ledgerProvider).transactions.length, 2);
+    },
+  );
+
+  testWidgets(
+    '008/013: home and report show the same ring of expenses by category',
+    (tester) async {
+      await setPhone(tester);
+      await _bootOnboarded(tester);
+      final c = _container(tester);
+      final ctl = c.read(appControllerProvider.notifier);
+      final acc = await ctl.saveAccount(
+        name: 'c6',
+        type: 'checking',
+        openingBalanceCents: 100000,
+      );
+      final cats = c
+          .read(ledgerProvider)
+          .categories
+          .where((x) => x.kind == 'expense' && x.parentId == null)
+          .toList();
+      final food = cats[0], shop = cats[1];
+      Future<void> openReport() async {
+        GoRouter.of(tester.element(find.byType(HomeScreen)))
+            .push('/reports/categories');
+        await tester.pumpAndSettle();
+      }
+
+      Future<void> spend(int cents, String categoryId) => ctl.saveTransaction(
+        TransactionInput(
+          kind: TransactionKind.expense,
+          amountCents: cents,
+          date: c.read(todayProvider),
+          description: 'compra',
+          accountId: acc.id,
+          categoryId: categoryId,
+        ),
+      );
+
+      // an empty month: no ring anywhere, said in words
+      await openReport();
+      expect(find.byType(DonutChart), findsNothing);
+      expect(find.textContaining('Sem despesas'), findsOneWidget);
+      await tester.tap(find.byTooltip('Voltar'));
+      await tester.pumpAndSettle();
+
+      await spend(4500, food.id);
+      await spend(100, shop.id);
+      await tester.pumpAndSettle();
+
+      await openReport();
+      expect(find.byType(DonutChart), findsOneWidget);
+      // percentages that add up to 100,0%, each with its amount, in text
+      expect(find.textContaining('97,8%'), findsOneWidget);
+      expect(find.textContaining('2,2%'), findsOneWidget);
+      final report = tester.widget<DonutChart>(find.byType(DonutChart));
+      expect(report.slices.map((x) => x.share), ['97,8%', '2,2%']);
+      expect(report.slices.first.label, food.name);
+      expect(report.centerLabel, 'Total');
+      // touching a row of the legend highlights the slice and shows its amount in the middle
+      await tester.tap(find.textContaining('97,8%'));
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<DonutChart>(find.byType(DonutChart)).centerLabel,
+        food.name,
+      );
+      // planned expenses are an explicit filter, off by default
+      expect(find.text('Incluir previstos'), findsOneWidget);
+      await tester.tap(find.byTooltip('Voltar'));
+      await tester.pumpAndSettle();
+
+      // and the home card draws the same slices from the same data
+      await tester.scrollUntilVisible(
+        find.byType(DonutChart),
+        300,
+        scrollable: find.byType(Scrollable).first,
+      );
+      final home = tester.widget<DonutChart>(find.byType(DonutChart));
+      expect(home.slices.map((x) => x.share), ['97,8%', '2,2%']);
+      expect(home.slices.first.label, food.name);
     },
   );
 }

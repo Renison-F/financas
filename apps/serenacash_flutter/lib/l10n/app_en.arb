@@ -2699,5 +2699,9 @@
   "loanEventSplit": "{interest} interest · {principal} principal · balance {balance}",
   "@loanEventSplit": {"placeholders": {"interest": {"type": "String"}, "principal": {"type": "String"}, "balance": {"type": "String"}}},
   "loanEventBalance": "Balance after: {balance}",
-  "@loanEventBalance": {"placeholders": {"balance": {"type": "String"}}}
+  "@loanEventBalance": {"placeholders": {"balance": {"type": "String"}}},
+  "chartTotal": "Total",
+  "chartOthers": "Others",
+  "chartOthersCount": "{n} smaller categories",
+  "@chartOthersCount": {"placeholders": {"n": {"type": "int"}}}
 }

@@ -4648,4 +4648,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String loanEventBalance(String balance) {
     return 'Balance after: $balance';
   }
+
+  @override
+  String get chartTotal => 'Total';
+
+  @override
+  String get chartOthers => 'Others';
+
+  @override
+  String chartOthersCount(int n) {
+    return '$n smaller categories';
+  }
 }

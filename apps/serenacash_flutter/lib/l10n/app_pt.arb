@@ -2699,5 +2699,9 @@
   "loanEventSplit": "{interest} de juros · {principal} do principal · saldo {balance}",
   "@loanEventSplit": {"placeholders": {"interest": {"type": "String"}, "principal": {"type": "String"}, "balance": {"type": "String"}}},
   "loanEventBalance": "Saldo depois: {balance}",
-  "@loanEventBalance": {"placeholders": {"balance": {"type": "String"}}}
+  "@loanEventBalance": {"placeholders": {"balance": {"type": "String"}}},
+  "chartTotal": "Total",
+  "chartOthers": "Outras",
+  "chartOthersCount": "{n} categorias menores",
+  "@chartOthersCount": {"placeholders": {"n": {"type": "int"}}}
 }

@@ -144,11 +144,9 @@ DashboardData computeDashboard(
     installmentsFuture: cards.fold(0, (a, c) => a + c.commitment.futureCents),
     budgets: budgets,
     globalBudget: budgets.where((b) => b.budget.categoryId == null).firstOrNull,
-    categories: expensesByCategory(
-      ledger,
-      month,
-      rollUp: true,
-    ).take(6).toList(),
+    // Every category, not the top few: the chart groups the small ones itself and its total has to
+    // be the total of the month, the same the report shows.
+    categories: expensesByCategory(ledger, month, rollUp: true),
     cashflow: cashflow(ledger, month, 6),
     goals: ledger.goals
         .where((g) => !g.archived && g.deletedAt == null)

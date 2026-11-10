@@ -11,6 +11,8 @@ import '../../domain/ledger/ledger.dart';
 import '../../domain/loans/loans.dart';
 import '../../domain/money/money.dart';
 import '../../domain/reports/reports.dart';
+import '../../domain/reports/shares.dart';
+import '../accounts/account_form_screen.dart' show colorFromHex;
 import '../../ui/components/components.dart';
 import '../accounts/account_form_screen.dart';
 import '../budgets/budgets_screen.dart';
@@ -389,6 +391,8 @@ class _CategoriesReportScreenState
     extends ConsumerState<CategoriesReportScreen> {
   late String _month = monthKeyOf(ref.read(todayProvider));
   bool _rollUp = true;
+  // The slice highlighted on the ring; cleared when the data under it changes.
+  int? _slice;
   bool _planned = false;
   @override
   Widget build(BuildContext context) {
@@ -403,6 +407,7 @@ class _CategoriesReportScreenState
       includePlanned: _planned,
     );
     final total = rows.fold(0, (a, r) => a + r.cents);
+    final slices = categorySlices(rows, otherLabel: l.chartOthers);
     String brl(int v) => formatBRL(v, hidden: hidden);
     // Grouped view: each category also shows how its amount splits among its subcategories. The parts
     // are a breakdown of the category total, never added to it again.
@@ -432,7 +437,10 @@ class _CategoriesReportScreenState
               ToggleRow(
                 label: l.groupSubcategories,
                 value: _rollUp,
-                onChanged: (v) => setState(() => _rollUp = v),
+                onChanged: (v) => setState(() {
+                  _rollUp = v;
+                  _slice = null;
+                }),
               ),
               ToggleRow(
                 label: l.includePlanned,
@@ -451,6 +459,48 @@ class _CategoriesReportScreenState
                 style: Type.title.copyWith(color: c.text),
               ),
               const SizedBox(height: Spacing.sm),
+              // The ring shows the shares; every slice is also a row of text below it. With nothing
+              // spent there is no ring: an empty month is said in words.
+              if (slices.isNotEmpty) ...[
+                DonutChart(
+                  diameter: 168,
+                  centerLabel: _slice != null && _slice! < slices.length
+                      ? slices[_slice!].name
+                      : l.chartTotal,
+                  centerValue: brl(
+                    _slice != null && _slice! < slices.length
+                        ? slices[_slice!].cents
+                        : total,
+                  ),
+                  selected: _slice,
+                  onSelect: (i) => setState(() => _slice = i),
+                  slices: [
+                    for (final x in slices)
+                      DonutSlice(
+                        label: x.name,
+                        value: brl(x.cents),
+                        share: '${perMilleLabel(x.perMille)}%',
+                        color: colorFromHex(x.color, c.primary),
+                        detail: x.isOther
+                            ? l.chartOthersCount(x.members.length)
+                            : null,
+                      ),
+                  ],
+                ),
+                if (_slice != null &&
+                    _slice! < slices.length &&
+                    slices[_slice!].isOther)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4, bottom: 4),
+                    child: Text(
+                      slices[_slice!].members
+                          .map((m) => '${m.name} ${brl(m.cents)}')
+                          .join(' · '),
+                      style: Type.caption.copyWith(color: c.textMuted),
+                    ),
+                  ),
+                Divider(height: Spacing.lg, color: c.border),
+              ],
               if (rows.isEmpty)
                 Text(
                   l.noExpensesMonth,

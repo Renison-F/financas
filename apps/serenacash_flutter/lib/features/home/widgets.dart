@@ -17,6 +17,7 @@ import '../../domain/dashboard/widgets.dart' as dash;
 import '../../domain/entities/entities.dart';
 import '../../domain/ledger/ledger.dart';
 import '../../domain/money/money.dart';
+import '../../domain/reports/shares.dart';
 import '../../ui/components/components.dart';
 import '../shared/format.dart';
 import 'home_parts.dart';
@@ -462,56 +463,37 @@ class DashboardWidget extends ConsumerWidget {
                   onAction: () => go('/transaction?kind=expense'),
                 )
               else
-                for (final x in data.categories)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                x.name,
-                                style: Type.rowText.copyWith(color: c.text),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            Text(
-                              '${brl(x.cents)} · ${x.percent.round()}%',
-                              style: Type.rowText.copyWith(
-                                color: c.text,
-                                fontFeatures: const [
-                                  FontFeature.tabularFigures(),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 4),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: SizedBox(
-                            height: 8,
-                            child: Stack(
-                              children: [
-                                Container(color: c.surfaceInset),
-                                FractionallySizedBox(
-                                  widthFactor: total > 0
-                                      ? (x.cents / total).clamp(0, 1).toDouble()
-                                      : 0,
-                                  child: Container(
-                                    color: _hex(x.color, c.primary),
-                                  ),
-                                ),
-                              ],
-                            ),
+                Builder(
+                  builder: (context) {
+                    // Same query and same slices as the category report: the two cannot disagree.
+                    final slices = categorySlices(
+                      data.categories,
+                      maxSlices: 5,
+                      otherLabel: l.chartOthers,
+                    );
+                    if (slices.isEmpty) {
+                      return Text(
+                        l.noExpensesMonth,
+                        style: Type.bodySmall.copyWith(color: c.textMuted),
+                      );
+                    }
+                    return DonutChart(
+                      compact: true,
+                      diameter: 116,
+                      centerLabel: l.chartTotal,
+                      centerValue: brl(total),
+                      slices: [
+                        for (final x in slices)
+                          DonutSlice(
+                            label: x.name,
+                            value: brl(x.cents),
+                            share: '${perMilleLabel(x.perMille)}%',
+                            color: _hex(x.color, c.primary),
                           ),
-                        ),
                       ],
-                    ),
-                  ),
+                    );
+                  },
+                ),
             ],
           ),
         );

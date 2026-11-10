@@ -7787,6 +7787,24 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Saldo depois: {balance}'**
   String loanEventBalance(String balance);
+
+  /// No description provided for @chartTotal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Total'**
+  String get chartTotal;
+
+  /// No description provided for @chartOthers.
+  ///
+  /// In pt, this message translates to:
+  /// **'Outras'**
+  String get chartOthers;
+
+  /// No description provided for @chartOthersCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{n} categorias menores'**
+  String chartOthersCount(int n);
 }
 
 class _AppLocalizationsDelegate
