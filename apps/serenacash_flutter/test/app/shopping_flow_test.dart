@@ -188,26 +188,38 @@ void main() {
           .set(ScanResult.barcode(parseBarcode('7891000100103')));
       await tester.pumpAndSettle();
       expect(find.text('Confirmar item'), findsOneWidget);
-      expect(
-        find.text('Produto novo: informe o nome e o preço da etiqueta.'),
-        findsOneWidget,
-      );
+      expect(find.textContaining('Código 7891000100103 lido'), findsOneWidget);
       // a reading that arrives while an item is under review waits for that review to close
       container
           .read(scanResultProvider.notifier)
           .set(
             ScanResult.label(
-              parsePriceTag(const [
-                OCRLine(text: 'LEITE INTEGRAL 1L', height: 16),
-                OCRLine(text: 'R\$ 5,49', height: 44),
+              analysis: analyzeLabel(const [
+                OcrBox(
+                  text: 'LEITE INTEGRAL 1L',
+                  left: 10,
+                  top: 10,
+                  width: 200,
+                  height: 16,
+                  confidence: 0.9,
+                ),
+                OcrBox(
+                  text: 'R\$ 5,49',
+                  left: 10,
+                  top: 40,
+                  width: 120,
+                  height: 44,
+                  confidence: 0.9,
+                ),
               ]),
             ),
           );
       await tester.pumpAndSettle();
-      expect(find.textContaining('Confiança da leitura'), findsNothing);
+      expect(find.text('LEITE INTEGRAL 1L'), findsNothing);
       await tester.tap(find.text('Cancelar'));
       await tester.pumpAndSettle();
-      expect(find.textContaining('Confiança da leitura'), findsOneWidget);
+      expect(find.text('LEITE INTEGRAL 1L'), findsOneWidget);
+      expect(find.textContaining('Varejo'), findsOneWidget);
     },
   );
 

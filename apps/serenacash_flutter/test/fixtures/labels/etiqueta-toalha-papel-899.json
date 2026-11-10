@@ -1,0 +1,98 @@
+{
+ "image": "etiqueta-toalha-papel-899.jpg",
+ "width": 960,
+ "height": 1280,
+ "ocrMs": 587,
+ "lines": [
+  {
+   "text": "oiete",
+   "block": 0,
+   "left": 281,
+   "top": 145,
+   "width": 170,
+   "height": 113,
+   "confidence": 0.316,
+   "angle": -21.7
+  },
+  {
+   "text": "TOALHA PAPEL",
+   "block": 1,
+   "left": 298,
+   "top": 435,
+   "width": 248,
+   "height": 33,
+   "confidence": 0.763,
+   "angle": -1.0
+  },
+  {
+   "text": "COQUETEL C/1UN 180F",
+   "block": 1,
+   "left": 233,
+   "top": 467,
+   "width": 380,
+   "height": 39,
+   "confidence": 0.776,
+   "angle": -1.2
+  },
+  {
+   "text": "*36942*",
+   "block": 2,
+   "left": 211,
+   "top": 873,
+   "width": 50,
+   "height": 11,
+   "confidence": 0.638,
+   "angle": 0.0
+  },
+  {
+   "text": "VAREJO R$",
+   "block": 3,
+   "left": 368,
+   "top": 575,
+   "width": 124,
+   "height": 30,
+   "confidence": 0.784,
+   "angle": 0.0
+  },
+  {
+   "text": "8,99",
+   "block": 4,
+   "left": 288,
+   "top": 646,
+   "width": 284,
+   "height": 122,
+   "confidence": 0.864,
+   "angle": -1.6
+  },
+  {
+   "text": "OFERTA VÁLIDA DE 06/11/2026 ATE 15/11/2026",
+   "block": 5,
+   "left": 295,
+   "top": 833,
+   "width": 276,
+   "height": 26,
+   "confidence": 0.825,
+   "angle": -2.7
+  },
+  {
+   "text": "VALIDADE:",
+   "block": 5,
+   "left": 458,
+   "top": 857,
+   "width": 58,
+   "height": 13,
+   "confidence": 0.714,
+   "angle": 2.1
+  },
+  {
+   "text": "Couetet",
+   "block": 6,
+   "left": 761,
+   "top": 114,
+   "width": 178,
+   "height": 108,
+   "confidence": 0.275,
+   "angle": -16.5
+  }
+ ]
+}

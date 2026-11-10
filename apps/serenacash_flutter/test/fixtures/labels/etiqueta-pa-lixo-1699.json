@@ -1,0 +1,88 @@
+{
+ "image": "etiqueta-pa-lixo-1699.jpg",
+ "width": 1280,
+ "height": 960,
+ "ocrMs": 425,
+ "lines": [
+  {
+   "text": "PA PI LIXO NOVICA CIPA PLUS",
+   "block": 0,
+   "left": 433,
+   "top": 333,
+   "width": 394,
+   "height": 36,
+   "confidence": 0.775,
+   "angle": 0.9
+  },
+  {
+   "text": "32227",
+   "block": 1,
+   "left": 429,
+   "top": 413,
+   "width": 15,
+   "height": 50,
+   "confidence": 0.887,
+   "angle": 90.0
+  },
+  {
+   "text": "VAREJO",
+   "block": 2,
+   "left": 463,
+   "top": 384,
+   "width": 110,
+   "height": 28,
+   "confidence": 0.838,
+   "angle": 0.0
+  },
+  {
+   "text": "R$",
+   "block": 3,
+   "left": 599,
+   "top": 423,
+   "width": 45,
+   "height": 39,
+   "confidence": 0.623,
+   "angle": 0.0
+  },
+  {
+   "text": "16,99",
+   "block": 4,
+   "left": 703,
+   "top": 391,
+   "width": 307,
+   "height": 117,
+   "confidence": 0.905,
+   "angle": 0.0
+  },
+  {
+   "text": "UN",
+   "block": 5,
+   "left": 1025,
+   "top": 438,
+   "width": 31,
+   "height": 21,
+   "confidence": 0.844,
+   "angle": 0.0
+  },
+  {
+   "text": "Preco por UNIDADE = R$1699 789Sae1016999",
+   "block": 6,
+   "left": 554,
+   "top": 497,
+   "width": 496,
+   "height": 26,
+   "confidence": 0.668,
+   "angle": 0.8
+  },
+  {
+   "text": "Costa Atacadao: Loja 12",
+   "block": 7,
+   "left": 908,
+   "top": 530,
+   "width": 177,
+   "height": 23,
+   "confidence": 0.66,
+   "angle": 1.6
+  }
+ ]
+}

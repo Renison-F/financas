@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:drift/drift.dart';
 
 import '../../domain/ports/change_log.dart';
@@ -258,8 +260,148 @@ class DriftShoppingRepository implements ShoppingRepository {
   );
 
   @override
+  Future<void> saveEvidence(Evidence e, Uint8List bytes) => db
+      .into(db.shoppingEvidence)
+      .insertOnConflictUpdate(
+        ShoppingEvidenceCompanion(
+          id: Value(e.id),
+          sessionId: Value(e.sessionId),
+          lineId: Value(e.lineId),
+          role: Value(e.role),
+          mimeType: Value(e.mimeType),
+          sizeBytes: Value(bytes.length),
+          sha256: Value(e.sha256),
+          width: Value(e.width),
+          height: Value(e.height),
+          data: Value(bytes),
+          capturedAt: Value(e.capturedAt),
+          ocrJson: Value(
+            e.ocr == null
+                ? null
+                : jsonEncode(e.ocr!.map((b) => b.toJson()).toList()),
+          ),
+        ),
+      );
+
+  /// Everything about the photos of a session except the bytes themselves.
+  @override
+  Future<List<Evidence>> evidenceOf(String sessionId) async {
+    final t = db.shoppingEvidence;
+    final rows =
+        await (db.selectOnly(t)
+              ..addColumns([
+                t.id,
+                t.sessionId,
+                t.lineId,
+                t.role,
+                t.mimeType,
+                t.sizeBytes,
+                t.sha256,
+                t.width,
+                t.height,
+                t.capturedAt,
+                t.ocrJson,
+              ])
+              ..where(t.sessionId.equals(sessionId))
+              ..orderBy([OrderingTerm.asc(t.capturedAt)]))
+            .get();
+    return [
+      for (final r in rows)
+        Evidence(
+          id: r.read(t.id)!,
+          sessionId: r.read(t.sessionId)!,
+          lineId: r.read(t.lineId),
+          role: r.read(t.role)!,
+          mimeType: r.read(t.mimeType)!,
+          sizeBytes: r.read(t.sizeBytes)!,
+          sha256: r.read(t.sha256)!,
+          width: r.read(t.width),
+          height: r.read(t.height),
+          capturedAt: r.read(t.capturedAt)!,
+          ocr: r.read(t.ocrJson) == null
+              ? null
+              : [
+                  for (final b in jsonDecode(r.read(t.ocrJson)!) as List)
+                    OcrBox.fromJson(b as Map<String, dynamic>),
+                ],
+        ),
+    ];
+  }
+
+  @override
+  Future<Uint8List?> evidenceBytes(String id) async {
+    final t = db.shoppingEvidence;
+    final row =
+        await (db.selectOnly(t)
+              ..addColumns([t.data])
+              ..where(t.id.equals(id)))
+            .getSingleOrNull();
+    return row?.read(t.data);
+  }
+
+  @override
+  Future<void> deleteEvidence(String id) =>
+      (db.delete(db.shoppingEvidence)..where((t) => t.id.equals(id))).go();
+
+  @override
+  Future<List<ReceiptLine>> receiptLines(String sessionId) async {
+    final rows =
+        await (db.select(db.shoppingReceiptLines)
+              ..where((t) => t.sessionId.equals(sessionId))
+              ..orderBy([(t) => OrderingTerm.asc(t.position)]))
+            .get();
+    return [
+      for (final r in rows)
+        ReceiptLine(
+          id: r.id,
+          position: r.position,
+          rawText: r.rawText,
+          description: r.description,
+          quantity: r.quantity,
+          unit: r.unit,
+          unitPriceCents: r.unitPriceCents,
+          totalCents: r.totalCents,
+          code: r.code,
+          matchedLineId: r.matchedLineId,
+          matchStatus: r.matchStatus,
+          matchScore: r.matchScore,
+        ),
+    ];
+  }
+
+  @override
+  Future<void> replaceReceiptLines(String sessionId, List<ReceiptLine> lines) =>
+      db.transaction(() async {
+        await (db.delete(
+          db.shoppingReceiptLines,
+        )..where((t) => t.sessionId.equals(sessionId))).go();
+        await db.batch((b) {
+          b.insertAll(db.shoppingReceiptLines, [
+            for (var i = 0; i < lines.length; i++)
+              ShoppingReceiptLinesCompanion(
+                id: Value(lines[i].id),
+                sessionId: Value(sessionId),
+                position: Value(i),
+                rawText: Value(lines[i].rawText),
+                description: Value(lines[i].description),
+                quantity: Value(lines[i].quantity),
+                unit: Value(lines[i].unit),
+                unitPriceCents: Value(lines[i].unitPriceCents),
+                totalCents: Value(lines[i].totalCents),
+                code: Value(lines[i].code),
+                matchedLineId: Value(lines[i].matchedLineId),
+                matchStatus: Value(lines[i].matchStatus),
+                matchScore: Value(lines[i].matchScore),
+              ),
+          ]);
+        });
+      });
+
+  @override
   Future<void> purgeAll() => db.transaction(() async {
     for (final t in <TableInfo<Table, dynamic>>[
+      db.shoppingReceiptLines,
+      db.shoppingEvidence,
       db.shoppingSessionEvents,
       db.shoppingSessionLines,
       db.shoppingSessions,

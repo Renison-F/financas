@@ -1,0 +1,88 @@
+{
+ "image": "etiqueta-pao-999.jpg",
+ "width": 960,
+ "height": 1280,
+ "ocrMs": 486,
+ "lines": [
+  {
+   "text": "PAO DE FORMA PULL.MAII 430(G TRAID",
+   "block": 0,
+   "left": 199,
+   "top": 541,
+   "width": 427,
+   "height": 23,
+   "confidence": 0.63,
+   "angle": 0.0
+  },
+  {
+   "text": "VAREJO",
+   "block": 1,
+   "left": 221,
+   "top": 572,
+   "width": 101,
+   "height": 34,
+   "confidence": 0.778,
+   "angle": -0.9
+  },
+  {
+   "text": "R$",
+   "block": 2,
+   "left": 348,
+   "top": 609,
+   "width": 40,
+   "height": 29,
+   "confidence": 0.66,
+   "angle": 0.0
+  },
+  {
+   "text": "9,99",
+   "block": 3,
+   "left": 491,
+   "top": 580,
+   "width": 196,
+   "height": 90,
+   "confidence": 0.802,
+   "angle": 0.0
+  },
+  {
+   "text": "Preoo por K 20,81",
+   "block": 4,
+   "left": 326,
+   "top": 663,
+   "width": 230,
+   "height": 17,
+   "confidence": 0.618,
+   "angle": -0.7
+  },
+  {
+   "text": "UN",
+   "block": 5,
+   "left": 709,
+   "top": 612,
+   "width": 27,
+   "height": 16,
+   "confidence": 0.771,
+   "angle": 0.0
+  },
+  {
+   "text": "916092360326",
+   "block": 6,
+   "left": 613,
+   "top": 666,
+   "width": 117,
+   "height": 11,
+   "confidence": 0.573,
+   "angle": 0.0
+  },
+  {
+   "text": "ote Ateosdno: Lofe 12",
+   "block": 6,
+   "left": 612,
+   "top": 685,
+   "width": 148,
+   "height": 12,
+   "confidence": 0.441,
+   "angle": 0.0
+  }
+ ]
+}

@@ -7014,6 +7014,420 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Ano futuro: só aparece o que já está previsto nos lançamentos e o orçamento que estiver em vigor.'**
   String get annualFutureNote;
+
+  /// No description provided for @biometricConfirmToDisable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirme no aparelho para desativar o bloqueio'**
+  String get biometricConfirmToDisable;
+
+  /// No description provided for @bioDisableDenied.
+  ///
+  /// In pt, this message translates to:
+  /// **'O aparelho não confirmou sua identidade; o bloqueio continua ativado.'**
+  String get bioDisableDenied;
+
+  /// No description provided for @takePhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tirar foto'**
+  String get takePhoto;
+
+  /// No description provided for @scanCart.
+  ///
+  /// In pt, this message translates to:
+  /// **'Carrinho {total}'**
+  String scanCart(String total);
+
+  /// No description provided for @scanCartBudget.
+  ///
+  /// In pt, this message translates to:
+  /// **'Carrinho {total} · cabe {left}'**
+  String scanCartBudget(String total, String left);
+
+  /// No description provided for @reviewTapDefines.
+  ///
+  /// In pt, this message translates to:
+  /// **'O toque na foto define'**
+  String get reviewTapDefines;
+
+  /// No description provided for @reviewPhotoHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Toque em um texto marcado na foto para usá-lo. Afaste dois dedos para ampliar.'**
+  String get reviewPhotoHint;
+
+  /// No description provided for @reviewPickName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome'**
+  String get reviewPickName;
+
+  /// No description provided for @reviewPickPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preço'**
+  String get reviewPickPrice;
+
+  /// No description provided for @reviewNoPriceInLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esse trecho não tem um preço. Toque no valor da etiqueta.'**
+  String get reviewNoPriceInLine;
+
+  /// No description provided for @reviewPrices.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preços lidos na etiqueta'**
+  String get reviewPrices;
+
+  /// No description provided for @reviewOtherNames.
+  ///
+  /// In pt, this message translates to:
+  /// **'Outros textos lidos'**
+  String get reviewOtherNames;
+
+  /// No description provided for @reviewConfirmPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conferi o preço com a foto'**
+  String get reviewConfirmPrice;
+
+  /// No description provided for @reviewConfirmPriceHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'A leitura deste preço ficou duvidosa. Compare com a etiqueta antes de adicionar.'**
+  String get reviewConfirmPriceHelp;
+
+  /// No description provided for @reviewNeedsCheck.
+  ///
+  /// In pt, this message translates to:
+  /// **'Revisão necessária: confira o preço na foto, corrija ou marque que conferiu.'**
+  String get reviewNeedsCheck;
+
+  /// No description provided for @priceRetail.
+  ///
+  /// In pt, this message translates to:
+  /// **'Varejo {value}'**
+  String priceRetail(String value);
+
+  /// No description provided for @priceWholesale.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atacado {value} a partir de {n} un'**
+  String priceWholesale(String value, int n);
+
+  /// No description provided for @priceWholesaleNoMin.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atacado {value}'**
+  String priceWholesaleNoMin(String value);
+
+  /// No description provided for @pricePerKg.
+  ///
+  /// In pt, this message translates to:
+  /// **'Por quilo: {value} (impresso para comparação; não é o preço do item)'**
+  String pricePerKg(String value);
+
+  /// No description provided for @pricePerLiter.
+  ///
+  /// In pt, this message translates to:
+  /// **'Por litro: {value} (impresso para comparação; não é o preço do item)'**
+  String pricePerLiter(String value);
+
+  /// No description provided for @pricePerPackUnit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Valor em letras pequenas: {value} (não é o preço do item)'**
+  String pricePerPackUnit(String value);
+
+  /// No description provided for @wholesaleHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vale só quando a quantidade no carrinho chegar a {n}. Abaixo disso conta o preço de varejo.'**
+  String wholesaleHelp(int n);
+
+  /// No description provided for @wholesaleNoMinHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'A etiqueta não mostra a partir de quantas unidades vale; por isso não é aplicado.'**
+  String get wholesaleNoMinHelp;
+
+  /// No description provided for @addAndScanNext.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar e ler a próxima'**
+  String get addAndScanNext;
+
+  /// No description provided for @addProductPhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Foto do produto'**
+  String get addProductPhoto;
+
+  /// No description provided for @replaceProductPhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Trocar foto do produto'**
+  String get replaceProductPhoto;
+
+  /// No description provided for @evidenceTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Evidências'**
+  String get evidenceTitle;
+
+  /// No description provided for @evidenceLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Etiqueta da gôndola'**
+  String get evidenceLabel;
+
+  /// No description provided for @evidenceProduct.
+  ///
+  /// In pt, this message translates to:
+  /// **'Produto'**
+  String get evidenceProduct;
+
+  /// No description provided for @evidenceReceipt.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cupom'**
+  String get evidenceReceipt;
+
+  /// No description provided for @evidenceNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'As fotos ficam só neste aparelho, dentro do banco cifrado. São um registro seu do que estava anunciado, não uma prova jurídica.'**
+  String get evidenceNote;
+
+  /// No description provided for @evidenceReadVsConfirmed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lido na etiqueta: {read} · confirmado por você: {confirmed}'**
+  String evidenceReadVsConfirmed(String read, String confirmed);
+
+  /// No description provided for @evidenceTakenAt.
+  ///
+  /// In pt, this message translates to:
+  /// **'Foto de {date}'**
+  String evidenceTakenAt(String date);
+
+  /// No description provided for @evidenceDelete.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar esta foto'**
+  String get evidenceDelete;
+
+  /// No description provided for @evidenceDeleteQ.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar a foto?'**
+  String get evidenceDeleteQ;
+
+  /// No description provided for @evidenceDeleteText.
+  ///
+  /// In pt, this message translates to:
+  /// **'A foto sai do aparelho e não pode ser recuperada. O item e o preço continuam no carrinho.'**
+  String get evidenceDeleteText;
+
+  /// No description provided for @codeFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Produto do seu cadastro, encontrado pelo código {code}.'**
+  String codeFound(String code);
+
+  /// No description provided for @codeDecodedUnknown.
+  ///
+  /// In pt, this message translates to:
+  /// **'Código {code} lido. Ele ainda não está no seu cadastro: informe nome e preço e o produto fica cadastrado com este código.'**
+  String codeDecodedUnknown(String code);
+
+  /// No description provided for @codeNotStandard.
+  ///
+  /// In pt, this message translates to:
+  /// **'O código {code} foi lido, mas não fecha como código de produto padrão (EAN/UPC). Ele fica guardado como está.'**
+  String codeNotStandard(String code);
+
+  /// No description provided for @codeLastPrice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Último preço registrado: {value}, em {date}. Confira o preço de hoje na etiqueta.'**
+  String codeLastPrice(String value, String date);
+
+  /// No description provided for @photoNoReading.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada foi lido na foto. Ela fica anexada ao item; informe nome e preço.'**
+  String get photoNoReading;
+
+  /// No description provided for @evidenceEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma foto nesta compra'**
+  String get evidenceEmpty;
+
+  /// No description provided for @evidenceEmptyText.
+  ///
+  /// In pt, this message translates to:
+  /// **'As fotos de etiqueta, de produto e do cupom aparecem aqui.'**
+  String get evidenceEmptyText;
+
+  /// No description provided for @evidenceOpen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Abrir a foto'**
+  String get evidenceOpen;
+
+  /// No description provided for @evidenceCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Evidências ({n})'**
+  String evidenceCount(int n);
+
+  /// No description provided for @receiptTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conferir cupom'**
+  String get receiptTitle;
+
+  /// No description provided for @receiptCheck.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conferir com o cupom fiscal'**
+  String get receiptCheck;
+
+  /// No description provided for @receiptIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fotografe o cupom ou escolha uma foto. O app lê os itens no aparelho, pareia com o carrinho e mostra o preço anunciado ao lado do preço cobrado. Nada sai do celular.'**
+  String get receiptIntro;
+
+  /// No description provided for @receiptPhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fotografar cupom'**
+  String get receiptPhoto;
+
+  /// No description provided for @receiptGallery.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolher foto'**
+  String get receiptGallery;
+
+  /// No description provided for @receiptSummary.
+  ///
+  /// In pt, this message translates to:
+  /// **'Anunciado × cobrado'**
+  String get receiptSummary;
+
+  /// No description provided for @receiptAnnouncedCharged.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nos itens pareados: {announced} anunciados na gôndola e {charged} cobrados.'**
+  String receiptAnnouncedCharged(String announced, String charged);
+
+  /// No description provided for @receiptNoDifference.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem diferença nos itens pareados'**
+  String get receiptNoDifference;
+
+  /// No description provided for @receiptChargedMore.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cobrado {value} a mais'**
+  String receiptChargedMore(String value);
+
+  /// No description provided for @receiptChargedLess.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cobrado {value} a menos'**
+  String receiptChargedLess(String value);
+
+  /// No description provided for @receiptSummaryNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'A comparação vale para os itens pareados. Descontos de caixa, ofertas com validade e itens por peso podem explicar uma diferença; confira as fotos antes de reclamar.'**
+  String get receiptSummaryNote;
+
+  /// No description provided for @receiptSeePhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver a foto do cupom'**
+  String get receiptSeePhoto;
+
+  /// No description provided for @receiptSeeShelfPhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver a foto da etiqueta'**
+  String get receiptSeeShelfPhoto;
+
+  /// No description provided for @receiptEqual.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preço igual ao anunciado'**
+  String get receiptEqual;
+
+  /// No description provided for @receiptDiffMore.
+  ///
+  /// In pt, this message translates to:
+  /// **'Diferença: {value} a mais por unidade'**
+  String receiptDiffMore(String value);
+
+  /// No description provided for @receiptDiffLess.
+  ///
+  /// In pt, this message translates to:
+  /// **'Diferença: {value} a menos por unidade'**
+  String receiptDiffLess(String value);
+
+  /// No description provided for @receiptSuspected.
+  ///
+  /// In pt, this message translates to:
+  /// **'Suspeita de diferença'**
+  String get receiptSuspected;
+
+  /// No description provided for @receiptSuspectedHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'O texto do cupom não basta para ter certeza de que é o mesmo item. Toque para confirmar ou trocar o par.'**
+  String get receiptSuspectedHelp;
+
+  /// No description provided for @receiptUnmatched.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem par no carrinho'**
+  String get receiptUnmatched;
+
+  /// No description provided for @receiptShelfVsTill.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name}: gôndola {shelf} · cupom {till}'**
+  String receiptShelfVsTill(String name, String shelf, String till);
+
+  /// No description provided for @receiptPairTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com qual item do carrinho esta linha combina?'**
+  String get receiptPairTitle;
+
+  /// No description provided for @receiptNoPair.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum (deixar sem par)'**
+  String get receiptNoPair;
+
+  /// No description provided for @receiptMissing.
+  ///
+  /// In pt, this message translates to:
+  /// **'No carrinho e não achados no cupom'**
+  String get receiptMissing;
+
+  /// No description provided for @receiptMissingHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Podem ter ficado fora da foto, ter sido lidos com outro nome ou não ter passado no caixa.'**
+  String get receiptMissingHelp;
 }
 
 class _AppLocalizationsDelegate

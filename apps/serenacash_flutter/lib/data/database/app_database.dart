@@ -1,4 +1,4 @@
-/// Drift database. Schema v2 (v1 → v2 in [AppDatabase._upgradeStep]). Opened through [openEncryptedDatabase] in production (SQLCipher) and
+/// Drift database. Schema v3 (steps in [AppDatabase._upgradeStep]). Opened through [openEncryptedDatabase] in production (SQLCipher) and
 /// through [AppDatabase.inMemory] in tests.
 library;
 
@@ -33,6 +33,8 @@ part 'app_database.g.dart';
     ShoppingSessions,
     ShoppingSessionLines,
     ShoppingSessionEvents,
+    ShoppingEvidence,
+    ShoppingReceiptLines,
     Kv,
     ChangeLogEntries,
     Conflicts,
@@ -45,7 +47,7 @@ class AppDatabase extends _$AppDatabase {
   /// Unencrypted in-memory database for unit tests only.
   AppDatabase.inMemory() : super(NativeDatabase.memory());
 
-  static const currentSchemaVersion = 2;
+  static const currentSchemaVersion = 3;
 
   @override
   int get schemaVersion => currentSchemaVersion;
@@ -95,6 +97,29 @@ class AppDatabase extends _$AppDatabase {
             [month, r.read<String>('id')],
           );
         }
+      case 3:
+        // Shelf evidence and receipt comparison: four optional columns on the cart lines and two
+        // new tables. Nothing existing is rewritten.
+        await m.addColumn(
+          shoppingSessionLines,
+          shoppingSessionLines.advertisedPriceCents,
+        );
+        await m.addColumn(
+          shoppingSessionLines,
+          shoppingSessionLines.wholesalePriceCents,
+        );
+        await m.addColumn(
+          shoppingSessionLines,
+          shoppingSessionLines.wholesaleMinQuantity,
+        );
+        await m.addColumn(
+          shoppingSessionLines,
+          shoppingSessionLines.chargedUnitPriceCents,
+        );
+        await m.createTable(shoppingEvidence);
+        await m.createIndex(idxEvidenceSession);
+        await m.createTable(shoppingReceiptLines);
+        await m.createIndex(idxReceiptLinesSession);
       default:
         throw StateError('Migração desconhecida para a versão $version');
     }

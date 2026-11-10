@@ -1,0 +1,108 @@
+{
+ "image": "etiqueta-abacaxi-899.jpg",
+ "width": 960,
+ "height": 1280,
+ "ocrMs": 1599,
+ "lines": [
+  {
+   "text": "cOSTA HORTIFRUTI",
+   "block": 0,
+   "left": 152,
+   "top": 119,
+   "width": 663,
+   "height": 173,
+   "confidence": 0.571,
+   "angle": -4.9
+  },
+  {
+   "text": "R$",
+   "block": 1,
+   "left": 151,
+   "top": 620,
+   "width": 38,
+   "height": 36,
+   "confidence": 0.664,
+   "angle": 0.0
+  },
+  {
+   "text": "ATACADÀO",
+   "block": 2,
+   "left": 194,
+   "top": 249,
+   "width": 83,
+   "height": 23,
+   "confidence": 0.685,
+   "angle": -5.1
+  },
+  {
+   "text": "*3393+",
+   "block": 3,
+   "left": 180,
+   "top": 968,
+   "width": 44,
+   "height": 15,
+   "confidence": 0.629,
+   "angle": 4.7
+  },
+  {
+   "text": "Tudo fresquinho da horta",
+   "block": 4,
+   "left": 389,
+   "top": 233,
+   "width": 362,
+   "height": 57,
+   "confidence": 0.828,
+   "angle": -4.0
+  },
+  {
+   "text": "ABACAXI UNIAO UN",
+   "block": 5,
+   "left": 253,
+   "top": 449,
+   "width": 429,
+   "height": 46,
+   "confidence": 0.782,
+   "angle": 0.0
+  },
+  {
+   "text": "8,99",
+   "block": 6,
+   "left": 262,
+   "top": 689,
+   "width": 382,
+   "height": 196,
+   "confidence": 0.702,
+   "angle": 2.7
+  },
+  {
+   "text": "UN",
+   "block": 7,
+   "left": 624,
+   "top": 936,
+   "width": 52,
+   "height": 31,
+   "confidence": 0.754,
+   "angle": 9.5
+  },
+  {
+   "text": "OEEPTA VÁLIDA DE 27/1o/2026 ATE 27/10/2026",
+   "block": 8,
+   "left": 271,
+   "top": 951,
+   "width": 374,
+   "height": 50,
+   "confidence": 0.735,
+   "angle": 5.5
+  },
+  {
+   "text": "VALIDADE:",
+   "block": 8,
+   "left": 480,
+   "top": 998,
+   "width": 78,
+   "height": 21,
+   "confidence": 0.818,
+   "angle": 6.2
+  }
+ ]
+}

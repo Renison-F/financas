@@ -2,9 +2,11 @@
 library;
 
 export 'cart.dart';
+export 'label.dart';
 export 'codes.dart';
 export 'lists.dart';
 export 'pricetag.dart';
 export 'products.dart';
+export 'receipt.dart';
 export 'session.dart';
 export 'units.dart';

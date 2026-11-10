@@ -384,6 +384,65 @@ class ShoppingSessionLines extends Table {
   TextColumn get listItemId => text().nullable()();
   BoolColumn get checked => boolean().withDefault(const Constant(false))();
   TextColumn get note => text().nullable()();
+  // v3: shelf evidence and receipt comparison.
+  IntColumn get advertisedPriceCents => integer().nullable()();
+  IntColumn get wholesalePriceCents => integer().nullable()();
+  IntColumn get wholesaleMinQuantity => integer().nullable()();
+  IntColumn get chargedUnitPriceCents => integer().nullable()();
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
+/// Photos kept as evidence of a purchase (shelf label, product, receipt). Like attachments, the
+/// bytes stay inside the encrypted database and never on the plain file system.
+@DataClassName('ShoppingEvidenceRow')
+@TableIndex(name: 'idx_evidence_session', columns: {#sessionId})
+class ShoppingEvidence extends Table {
+  TextColumn get id => text()();
+  TextColumn get sessionId =>
+      text().references(ShoppingSessions, #id, onDelete: KeyAction.cascade)();
+  // Not a foreign key: the lines of a session are rewritten as a whole on every save.
+  TextColumn get lineId => text().nullable()();
+  TextColumn get role =>
+      text().check(role.isIn(['label', 'product', 'receipt', 'other']))();
+  TextColumn get mimeType => text()();
+  IntColumn get sizeBytes =>
+      integer().check(sizeBytes.isBetweenValues(0, 8 * 1024 * 1024))();
+  TextColumn get sha256 => text().withLength(min: 64, max: 64)();
+  IntColumn get width => integer().nullable()();
+  IntColumn get height => integer().nullable()();
+  BlobColumn get data => blob()();
+  TextColumn get capturedAt => text()();
+  TextColumn get ocrJson => text().nullable()();
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
+@DataClassName('ShoppingReceiptLineRow')
+@TableIndex(name: 'idx_receipt_lines_session', columns: {#sessionId})
+class ShoppingReceiptLines extends Table {
+  TextColumn get id => text()();
+  TextColumn get sessionId =>
+      text().references(ShoppingSessions, #id, onDelete: KeyAction.cascade)();
+  IntColumn get position => integer()();
+  TextColumn get rawText => text()();
+  TextColumn get description => text()();
+  RealColumn get quantity => real()();
+  TextColumn get unit => text()();
+  IntColumn get unitPriceCents => integer().nullable()();
+  IntColumn get totalCents => integer()();
+  TextColumn get code => text().nullable()();
+  TextColumn get matchedLineId => text().nullable()();
+  TextColumn get matchStatus => text().check(
+    matchStatus.isIn([
+      'equal',
+      'divergent',
+      'suspected',
+      'confirmed',
+      'unmatched',
+    ]),
+  )();
+  RealColumn get matchScore => real().nullable()();
   @override
   Set<Column<Object>> get primaryKey => {id};
 }
@@ -472,6 +531,8 @@ const allTablesInDependencyOrder = <Type>[
   ShoppingSessions,
   ShoppingSessionLines,
   ShoppingSessionEvents,
+  ShoppingEvidence,
+  ShoppingReceiptLines,
   Kv,
   ChangeLogEntries,
   Conflicts,

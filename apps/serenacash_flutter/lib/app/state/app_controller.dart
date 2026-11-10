@@ -2,6 +2,9 @@
 /// RN `appStore` with the same rules (installments, series, settlement, invoices, undo, erase).
 library;
 
+import 'dart:typed_data';
+
+import 'package:crypto/crypto.dart' as crypto;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/billing/billing.dart';
@@ -907,6 +910,46 @@ class AppController extends AsyncNotifier<AppState> {
   Future<void> addPriceObservations(List<PriceObservation> obs) async {
     if (obs.isNotEmpty) await _mutate(() => _shopping.addObservations(obs));
   }
+
+  // Evidence photos and receipt lines are read on demand by the screens that show them; they are
+  // not part of the in-memory state, so a purchase with many photos does not weigh on every screen.
+
+  /// Stores a photo as evidence of a purchase. The digest is computed here, from the bytes kept.
+  Future<Evidence> saveEvidence({
+    required String sessionId,
+    String? lineId,
+    required String role,
+    required Uint8List bytes,
+    int? width,
+    int? height,
+    List<OcrBox>? ocr,
+    String mimeType = 'image/jpeg',
+  }) async {
+    final e = Evidence(
+      id: newId(),
+      sessionId: sessionId,
+      lineId: lineId,
+      role: role,
+      mimeType: mimeType,
+      sizeBytes: bytes.length,
+      sha256: crypto.sha256.convert(bytes).toString(),
+      width: width,
+      height: height,
+      capturedAt: nowISO(),
+      ocr: ocr,
+    );
+    await _shopping.saveEvidence(e, bytes);
+    return e;
+  }
+
+  Future<List<Evidence>> evidenceOf(String sessionId) =>
+      _shopping.evidenceOf(sessionId);
+  Future<Uint8List?> evidenceBytes(String id) => _shopping.evidenceBytes(id);
+  Future<void> deleteEvidence(String id) => _shopping.deleteEvidence(id);
+  Future<List<ReceiptLine>> receiptLines(String sessionId) =>
+      _shopping.receiptLines(sessionId);
+  Future<void> saveReceiptLines(String sessionId, List<ReceiptLine> lines) =>
+      _shopping.replaceReceiptLines(sessionId, lines);
 
   // ---------- billing / data ----------
 

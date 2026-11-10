@@ -69,4 +69,41 @@ void main() {
     expect(await db.integrityCheck(), isEmpty);
     await db.close();
   });
+
+  test(
+    'v2 → v3: carts keep their lines; evidence and receipt tables start empty',
+    () async {
+      final schema = await verifier.schemaAt(2);
+      final raw = schema.rawDatabase;
+      raw.execute(
+        "INSERT INTO shopping_sessions (id, store, list_id, budget_cents, status, "
+        "started_at, finished_at, transaction_id, receipt_access_key, "
+        "created_at, updated_at, deleted_at, version, device_id, dirty) "
+        "VALUES ('s1', 'teste', NULL, 70000, 'finished', '2026-11-08T21:07:00.000Z', "
+        "'2026-11-08T21:40:00.000Z', NULL, NULL, "
+        "'2026-11-08T21:07:00.000Z', '2026-11-08T21:40:00.000Z', NULL, 1, 'local', 1)",
+      );
+      raw.execute(
+        "INSERT INTO shopping_session_lines (id, session_id, position, product_id, name, "
+        "brand, barcode, unit, quantity, unit_price_cents, discount_cents, discount_percent, "
+        "promo_take, promo_pay, price_source, confidence, list_item_id, checked, note) "
+        "VALUES ('l1', 's1', 0, NULL, 'VELA FIAT LUX', NULL, NULL, 'un', 1, 1199, NULL, NULL, "
+        "NULL, NULL, 'label_ocr', 0.54, NULL, 1, NULL)",
+      );
+
+      final db = AppDatabase(schema.newConnection());
+      await verifier.migrateAndValidate(db, 3);
+
+      final line = await db.select(db.shoppingSessionLines).getSingle();
+      expect(line.name, 'VELA FIAT LUX');
+      expect(line.unitPriceCents, 1199);
+      expect(line.advertisedPriceCents, isNull);
+      expect(line.wholesalePriceCents, isNull);
+      expect(line.chargedUnitPriceCents, isNull);
+      expect(await db.select(db.shoppingEvidence).get(), isEmpty);
+      expect(await db.select(db.shoppingReceiptLines).get(), isEmpty);
+      expect(await db.integrityCheck(), isEmpty);
+      await db.close();
+    },
+  );
 }

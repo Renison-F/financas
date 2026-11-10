@@ -2,19 +2,33 @@
 /// [UnavailableOcr] makes the UI fall back to manual entry. Images never leave the device.
 library;
 
+import 'dart:io';
+import 'dart:ui' as ui;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
-import '../../domain/shopping/pricetag.dart';
+import '../../domain/shopping/label.dart';
 
 class OcrUnavailable implements Exception {
   const OcrUnavailable();
 }
 
+/// What was read on one photo: every line with its box, in pixels of a photo [width] × [height].
+class OcrPage {
+  const OcrPage({
+    required this.lines,
+    required this.width,
+    required this.height,
+  });
+  final List<OcrBox> lines;
+  final int width, height;
+}
+
 abstract interface class OcrService {
   bool get available;
-  Future<List<OCRLine>> recognize(String imagePath);
+  Future<OcrPage> read(String imagePath);
 }
 
 class UnavailableOcr implements OcrService {
@@ -22,8 +36,7 @@ class UnavailableOcr implements OcrService {
   @override
   bool get available => false;
   @override
-  Future<List<OCRLine>> recognize(String imagePath) =>
-      throw const OcrUnavailable();
+  Future<OcrPage> read(String imagePath) => throw const OcrUnavailable();
 }
 
 class MlKitOcr implements OcrService {
@@ -32,19 +45,35 @@ class MlKitOcr implements OcrService {
   @override
   bool get available => true;
   @override
-  Future<List<OCRLine>> recognize(String imagePath) async {
+  Future<OcrPage> read(String imagePath) async {
     final result = await _recognizer.processImage(
       InputImage.fromFilePath(imagePath),
     );
-    return [
-      for (final block in result.blocks)
-        for (final line in block.lines)
-          OCRLine(
-            text: line.text,
-            height: line.boundingBox.height,
-            y: line.boundingBox.top,
-          ),
-    ];
+    // The boxes come in the coordinates of the upright photo; its size is what places them on it.
+    final codec = await ui.instantiateImageCodec(
+      await File(imagePath).readAsBytes(),
+    );
+    final frame = await codec.getNextFrame();
+    final width = frame.image.width, height = frame.image.height;
+    frame.image.dispose();
+    codec.dispose();
+    return OcrPage(
+      width: width,
+      height: height,
+      lines: [
+        for (var b = 0; b < result.blocks.length; b++)
+          for (final line in result.blocks[b].lines)
+            OcrBox(
+              text: line.text,
+              block: b,
+              left: line.boundingBox.left,
+              top: line.boundingBox.top,
+              width: line.boundingBox.width,
+              height: line.boundingBox.height,
+              confidence: line.confidence,
+            ),
+      ],
+    );
   }
 }
 

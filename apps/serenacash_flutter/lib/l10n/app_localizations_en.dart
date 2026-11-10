@@ -4168,4 +4168,270 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get annualFutureNote =>
       'Future year: only what is already planned in the entries and the budget in force are shown.';
+
+  @override
+  String get biometricConfirmToDisable =>
+      'Confirm on the device to turn the lock off';
+
+  @override
+  String get bioDisableDenied =>
+      'The device did not confirm your identity; the lock stays on.';
+
+  @override
+  String get takePhoto => 'Take photo';
+
+  @override
+  String scanCart(String total) {
+    return 'Cart $total';
+  }
+
+  @override
+  String scanCartBudget(String total, String left) {
+    return 'Cart $total · $left left';
+  }
+
+  @override
+  String get reviewTapDefines => 'A tap on the photo sets';
+
+  @override
+  String get reviewPhotoHint =>
+      'Tap a marked text on the photo to use it. Pinch to zoom.';
+
+  @override
+  String get reviewPickName => 'Name';
+
+  @override
+  String get reviewPickPrice => 'Price';
+
+  @override
+  String get reviewNoPriceInLine =>
+      'That piece has no price. Tap the amount on the label.';
+
+  @override
+  String get reviewPrices => 'Prices read on the label';
+
+  @override
+  String get reviewOtherNames => 'Other texts read';
+
+  @override
+  String get reviewConfirmPrice => 'I checked the price against the photo';
+
+  @override
+  String get reviewConfirmPriceHelp =>
+      'The reading of this price is doubtful. Compare with the label before adding.';
+
+  @override
+  String get reviewNeedsCheck =>
+      'Review needed: check the price on the photo, fix it or mark it as checked.';
+
+  @override
+  String priceRetail(String value) {
+    return 'Retail $value';
+  }
+
+  @override
+  String priceWholesale(String value, int n) {
+    return 'Wholesale $value from $n units';
+  }
+
+  @override
+  String priceWholesaleNoMin(String value) {
+    return 'Wholesale $value';
+  }
+
+  @override
+  String pricePerKg(String value) {
+    return 'Per kilo: $value (printed for comparison; not the item price)';
+  }
+
+  @override
+  String pricePerLiter(String value) {
+    return 'Per liter: $value (printed for comparison; not the item price)';
+  }
+
+  @override
+  String pricePerPackUnit(String value) {
+    return 'Small print amount: $value (not the item price)';
+  }
+
+  @override
+  String wholesaleHelp(int n) {
+    return 'Applies only when the quantity in the cart reaches $n. Below that the retail price counts.';
+  }
+
+  @override
+  String get wholesaleNoMinHelp =>
+      'The label does not say from how many units it applies, so it is not applied.';
+
+  @override
+  String get addAndScanNext => 'Add and read the next';
+
+  @override
+  String get addProductPhoto => 'Product photo';
+
+  @override
+  String get replaceProductPhoto => 'Replace product photo';
+
+  @override
+  String get evidenceTitle => 'Evidence';
+
+  @override
+  String get evidenceLabel => 'Shelf label';
+
+  @override
+  String get evidenceProduct => 'Product';
+
+  @override
+  String get evidenceReceipt => 'Receipt';
+
+  @override
+  String get evidenceNote =>
+      'Photos stay only on this device, inside the encrypted database. They are your record of what was announced, not legal proof.';
+
+  @override
+  String evidenceReadVsConfirmed(String read, String confirmed) {
+    return 'Read on the label: $read · confirmed by you: $confirmed';
+  }
+
+  @override
+  String evidenceTakenAt(String date) {
+    return 'Photo from $date';
+  }
+
+  @override
+  String get evidenceDelete => 'Delete this photo';
+
+  @override
+  String get evidenceDeleteQ => 'Delete the photo?';
+
+  @override
+  String get evidenceDeleteText =>
+      'The photo leaves the device and cannot be recovered. The item and the price stay in the cart.';
+
+  @override
+  String codeFound(String code) {
+    return 'Product from your catalog, found by code $code.';
+  }
+
+  @override
+  String codeDecodedUnknown(String code) {
+    return 'Code $code read. It is not in your catalog yet: enter name and price and the product is saved with this code.';
+  }
+
+  @override
+  String codeNotStandard(String code) {
+    return 'Code $code was read, but it does not check as a standard product code (EAN/UPC). It is kept as is.';
+  }
+
+  @override
+  String codeLastPrice(String value, String date) {
+    return 'Last recorded price: $value, on $date. Check today\'s price on the label.';
+  }
+
+  @override
+  String get photoNoReading =>
+      'Nothing was read on the photo. It stays attached to the item; enter name and price.';
+
+  @override
+  String get evidenceEmpty => 'No photos in this purchase';
+
+  @override
+  String get evidenceEmptyText =>
+      'Label, product and receipt photos show up here.';
+
+  @override
+  String get evidenceOpen => 'Open the photo';
+
+  @override
+  String evidenceCount(int n) {
+    return 'Evidence ($n)';
+  }
+
+  @override
+  String get receiptTitle => 'Check receipt';
+
+  @override
+  String get receiptCheck => 'Check against the receipt';
+
+  @override
+  String get receiptIntro =>
+      'Photograph the receipt or pick a photo. The app reads the items on the device, pairs them with the cart and shows the announced price next to the charged price. Nothing leaves the phone.';
+
+  @override
+  String get receiptPhoto => 'Photograph receipt';
+
+  @override
+  String get receiptGallery => 'Pick a photo';
+
+  @override
+  String get receiptSummary => 'Announced × charged';
+
+  @override
+  String receiptAnnouncedCharged(String announced, String charged) {
+    return 'On paired items: $announced announced on the shelf and $charged charged.';
+  }
+
+  @override
+  String get receiptNoDifference => 'No difference on paired items';
+
+  @override
+  String receiptChargedMore(String value) {
+    return 'Charged $value more';
+  }
+
+  @override
+  String receiptChargedLess(String value) {
+    return 'Charged $value less';
+  }
+
+  @override
+  String get receiptSummaryNote =>
+      'The comparison covers paired items. Till discounts, offers with a validity and weighed items can explain a difference; check the photos before complaining.';
+
+  @override
+  String get receiptSeePhoto => 'See the receipt photo';
+
+  @override
+  String get receiptSeeShelfPhoto => 'See the label photo';
+
+  @override
+  String get receiptEqual => 'Same price as announced';
+
+  @override
+  String receiptDiffMore(String value) {
+    return 'Difference: $value more per unit';
+  }
+
+  @override
+  String receiptDiffLess(String value) {
+    return 'Difference: $value less per unit';
+  }
+
+  @override
+  String get receiptSuspected => 'Suspected difference';
+
+  @override
+  String get receiptSuspectedHelp =>
+      'The receipt text is not enough to be sure it is the same item. Tap to confirm or change the pair.';
+
+  @override
+  String get receiptUnmatched => 'No pair in the cart';
+
+  @override
+  String receiptShelfVsTill(String name, String shelf, String till) {
+    return '$name: shelf $shelf · receipt $till';
+  }
+
+  @override
+  String get receiptPairTitle => 'Which cart item does this line match?';
+
+  @override
+  String get receiptNoPair => 'None (leave unpaired)';
+
+  @override
+  String get receiptMissing => 'In the cart and not found on the receipt';
+
+  @override
+  String get receiptMissingHelp =>
+      'They may be outside the photo, have been read under another name or not have gone through the till.';
 }

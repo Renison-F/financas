@@ -529,6 +529,10 @@ ShoppingSessionLinesCompanion lineToRow(
   listItemId: _v(l.listItemId),
   checked: Value(l.checked),
   note: _v(l.note),
+  advertisedPriceCents: _v(l.advertisedPriceCents),
+  wholesalePriceCents: _v(l.wholesalePriceCents),
+  wholesaleMinQuantity: _v(l.wholesaleMinQuantity),
+  chargedUnitPriceCents: _v(l.chargedUnitPriceCents),
 );
 CartLine lineFromRow(ShoppingSessionLineRow r) => CartLine(
   id: r.id,
@@ -549,6 +553,10 @@ CartLine lineFromRow(ShoppingSessionLineRow r) => CartLine(
   listItemId: r.listItemId,
   checked: r.checked,
   note: r.note,
+  advertisedPriceCents: r.advertisedPriceCents,
+  wholesalePriceCents: r.wholesalePriceCents,
+  wholesaleMinQuantity: r.wholesaleMinQuantity,
+  chargedUnitPriceCents: r.chargedUnitPriceCents,
 );
 ShoppingSessionEventsCompanion eventToRow(String sessionId, SessionEvent e) =>
     ShoppingSessionEventsCompanion(

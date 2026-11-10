@@ -1,0 +1,98 @@
+{
+ "image": "etiqueta-cookies-499.jpg",
+ "width": 960,
+ "height": 1280,
+ "ocrMs": 524,
+ "lines": [
+  {
+   "text": "COOKIES BAUDUCC( MANI FC 96G CARAMELO",
+   "block": 0,
+   "left": 138,
+   "top": 453,
+   "width": 576,
+   "height": 56,
+   "confidence": 0.734,
+   "angle": 2.6
+  },
+  {
+   "text": "VAREJO",
+   "block": 1,
+   "left": 147,
+   "top": 499,
+   "width": 113,
+   "height": 35,
+   "confidence": 0.849,
+   "angle": 2.4
+  },
+  {
+   "text": "R$",
+   "block": 2,
+   "left": 273,
+   "top": 549,
+   "width": 47,
+   "height": 39,
+   "confidence": 0.568,
+   "angle": 0.0
+  },
+  {
+   "text": "4.99-",
+   "block": 3,
+   "left": 440,
+   "top": 510,
+   "width": 282,
+   "height": 125,
+   "confidence": 0.576,
+   "angle": 1.6
+  },
+  {
+   "text": "Pr",
+   "block": 4,
+   "left": 425,
+   "top": 626,
+   "width": 23,
+   "height": 17,
+   "confidence": 0.59,
+   "angle": 2.5
+  },
+  {
+   "text": "Preco por IILO = 4151,EI8",
+   "block": 4,
+   "left": 276,
+   "top": 647,
+   "width": 263,
+   "height": 24,
+   "confidence": 0.613,
+   "angle": 2.4
+  },
+  {
+   "text": "wntIcao Va lida ale 08/11/26",
+   "block": 5,
+   "left": 467,
+   "top": 628,
+   "width": 252,
+   "height": 27,
+   "confidence": 0.626,
+   "angle": 2.5
+  },
+  {
+   "text": "7391962071619",
+   "block": 6,
+   "left": 602,
+   "top": 661,
+   "width": 127,
+   "height": 19,
+   "confidence": 0.776,
+   "angle": 2.5
+  },
+  {
+   "text": "Cust: Atncadao: Loja 12",
+   "block": 6,
+   "left": 576,
+   "top": 684,
+   "width": 157,
+   "height": 21,
+   "confidence": 0.617,
+   "angle": 2.5
+  }
+ ]
+}

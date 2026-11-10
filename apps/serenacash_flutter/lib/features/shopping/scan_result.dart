@@ -1,28 +1,41 @@
+import 'dart:typed_data';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/ocr/ocr_service.dart';
 import '../../domain/shopping/shopping.dart';
 
 /// Hands a scan result from the camera screen back to the session screen.
 class ScanResult {
-  const ScanResult.label(this.reading)
+  /// A photographed label: the photo itself (kept as evidence), what was read on it and how that
+  /// was understood. [analysis] is null when no reading was possible; the photo still goes along.
+  const ScanResult.label({this.analysis, this.photo, this.page})
     : kind = 'label',
       barcode = null,
       nfceKey = null;
   const ScanResult.barcode(this.barcode)
     : kind = 'barcode',
-      reading = null,
+      analysis = null,
+      photo = null,
+      page = null,
       nfceKey = null;
   const ScanResult.nfce(this.nfceKey)
     : kind = 'nfce',
-      reading = null,
+      analysis = null,
+      photo = null,
+      page = null,
       barcode = null;
   const ScanResult.manual()
-    : kind = 'label',
-      reading = null,
+    : kind = 'manual',
+      analysis = null,
+      photo = null,
+      page = null,
       barcode = null,
       nfceKey = null;
   final String kind;
-  final PriceTagReading? reading;
+  final LabelAnalysis? analysis;
+  final Uint8List? photo;
+  final OcrPage? page;
   final ParsedBarcode? barcode;
   final String? nfceKey;
 }

@@ -1,0 +1,88 @@
+{
+ "image": "etiqueta-vela-1199.jpg",
+ "width": 960,
+ "height": 1280,
+ "ocrMs": 422,
+ "lines": [
+  {
+   "text": "VELA FIAT LUX N7 (BLN",
+   "block": 0,
+   "left": 243,
+   "top": 542,
+   "width": 271,
+   "height": 33,
+   "confidence": 0.722,
+   "angle": -2.0
+  },
+  {
+   "text": "VAREJO",
+   "block": 1,
+   "left": 251,
+   "top": 586,
+   "width": 97,
+   "height": 35,
+   "confidence": 0.84,
+   "angle": -3.3
+  },
+  {
+   "text": "R$",
+   "block": 2,
+   "left": 364,
+   "top": 629,
+   "width": 40,
+   "height": 33,
+   "confidence": 0.723,
+   "angle": 0.0
+  },
+  {
+   "text": "1.99-",
+   "block": 3,
+   "left": 473,
+   "top": 563,
+   "width": 297,
+   "height": 130,
+   "confidence": 0.541,
+   "angle": -2.3
+  },
+  {
+   "text": "Pruiticao Vallda ale 31/10/26",
+   "block": 4,
+   "left": 502,
+   "top": 677,
+   "width": 269,
+   "height": 26,
+   "confidence": 0.627,
+   "angle": -2.2
+  },
+  {
+   "text": "Preco por IDA E = R$1,30",
+   "block": 4,
+   "left": 368,
+   "top": 707,
+   "width": 272,
+   "height": 27,
+   "confidence": 0.679,
+   "angle": -2.4
+  },
+  {
+   "text": "739600792191",
+   "block": 5,
+   "left": 667,
+   "top": 704,
+   "width": 106,
+   "height": 17,
+   "confidence": 0.791,
+   "angle": -1.7
+  },
+  {
+   "text": "Costt Atacadao: Loja 12",
+   "block": 5,
+   "left": 646,
+   "top": 728,
+   "width": 148,
+   "height": 17,
+   "confidence": 0.639,
+   "angle": -1.1
+  }
+ ]
+}

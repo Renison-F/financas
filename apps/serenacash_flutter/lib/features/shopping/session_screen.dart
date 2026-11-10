@@ -2,6 +2,8 @@
 /// finish and optional (idempotent) expense registration.
 library;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,6 +20,7 @@ import '../../domain/shopping/shopping.dart';
 import '../../ui/components/components.dart';
 import '../shared/format.dart';
 import 'item_review_screen.dart';
+import 'receipt_screen.dart';
 import 'scan_result.dart';
 
 class SessionScreen extends ConsumerStatefulWidget {
@@ -35,6 +38,27 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
   bool _finishing = false;
   // One item is reviewed at a time; a new reading waits for the open review to close.
   bool _reviewing = false;
+  // Bumped when a photo is stored, so the evidence strip of the cart reloads.
+  int _evidenceVersion = 0;
+  int _evidenceLoaded = -1;
+  // Cart lines that have a photo, and how many photos the purchase has.
+  Set<String> _linesWithPhoto = const {};
+  int _photoCount = 0;
+
+  Future<void> _loadEvidence(String sessionId) async {
+    final version = _evidenceVersion;
+    final items = await _ctl.evidenceOf(sessionId);
+    if (!mounted || version != _evidenceVersion) return;
+    setState(() {
+      _evidenceLoaded = version;
+      _photoCount = items.length;
+      _linesWithPhoto = {
+        for (final e in items)
+          if (e.lineId != null) e.lineId!,
+      };
+    });
+  }
+
   bool _inited = false;
   int _ocrCount = 0;
 
@@ -81,7 +105,15 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
       );
       return;
     }
+    if (scan.kind == 'manual') {
+      _review(
+        ItemDraft(name: '', unit: 'un', quantity: '1', priceSource: 'manual'),
+      );
+      return;
+    }
     if (scan.kind == 'barcode' && scan.barcode != null) {
+      // Reading the digits and knowing the product are two separate facts. The code was read; what
+      // is said next depends on whether this device already knows a product with it.
       final b = scan.barcode!;
       final code = b.gtin ?? b.raw;
       final found = findProduct(
@@ -101,7 +133,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
           .firstOrNull;
       _review(
         ItemDraft(
-          name: found?.product.name ?? '',
+          name: found?.product.name ?? listItem?.name ?? '',
           brand: found?.product.brand,
           unit: found?.product.defaultUnit ?? 'un',
           quantity: listItem != null ? _q(listItem.quantity) : '1',
@@ -109,24 +141,39 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
           barcode: code,
           productId: found?.product.id,
           priceSource: hist?.lastCents != null ? 'history' : 'manual',
-          warnings: [
-            if (found == null) l.newProductWarn,
-            if (b.kind == 'gs1_variable_measure') l.scaleCodeWarn,
+          notes: [
+            if (found != null)
+              l.codeFound(code)
+            else if (b.valid)
+              l.codeDecodedUnknown(code)
+            else
+              l.codeNotStandard(code),
+            if (hist?.lastCents != null && hist?.lastAt != null)
+              l.codeLastPrice(
+                formatBRL(hist!.lastCents!),
+                dayMonth(hist.lastAt!.substring(0, 10)),
+              ),
           ],
+          warnings: [if (b.kind == 'gs1_variable_measure') l.scaleCodeWarn],
           listItemId: listItem?.id,
+          fromScanner: true,
         ),
       );
       return;
     }
-    final r = scan.reading;
-    if (r == null) {
+    final a = scan.analysis;
+    if (a == null) {
+      // No reading (engine unavailable or nothing legible): the photo still goes with the item.
       _review(
         ItemDraft(
           name: '',
           unit: 'un',
           quantity: '1',
           priceSource: 'manual',
-          warnings: [l.ocrUnavailableWarn],
+          photo: scan.photo,
+          page: scan.page,
+          notes: [scan.photo != null ? l.photoNoReading : l.ocrUnavailableWarn],
+          fromScanner: true,
         ),
       );
       return;
@@ -137,45 +184,42 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
       return;
     }
     _ocrCount++;
-    final found = r.barcode != null
-        ? findProduct(s.products, barcode: r.barcode)
-        : r.internalCode != null
-        ? findProduct(
-            s.products,
-            internalCode: r.internalCode,
-            store: session.store,
-          )
-        : r.name != null
-        ? findProduct(s.products, name: r.name)
+    final readName = a.name?.text;
+    final found = a.barcode != null
+        ? findProduct(s.products, barcode: a.barcode)
+        : readName != null
+        ? findProduct(s.products, name: readName)
         : null;
     final hist = found == null
         ? null
         : priceHistory(s.observations, found.product.id);
-    final variation = hist != null && r.priceCents != null
-        ? priceVariation(hist, r.priceCents!)
+    final variation = hist != null && a.price != null
+        ? priceVariation(hist, a.price!.cents)
         : null;
-    final warnings = [...r.warnings];
-    if (variation != null && variation.percent.abs() >= 10) {
-      warnings.add(
-        l.variationWarn(
-          '${variation.percent > 0 ? '+' : ''}${variation.percent}',
-          formatBRL(variation.vsCents),
-        ),
-      );
-    }
-    if (r.confidence < 0.75) warnings.add(l.lowConfidenceWarn);
     _review(
       ItemDraft(
-        name: found?.product.name ?? r.name ?? '',
-        unit: r.priceUnit,
+        // What is printed on this label wins over an older name in the catalog: the user is
+        // looking at the label.
+        name: readName ?? found?.product.name ?? '',
+        unit: a.unit,
         quantity: '1',
-        unitPriceCents: r.priceCents,
-        barcode: r.barcode,
+        unitPriceCents: a.price?.cents,
+        advertisedPriceCents: a.price?.cents,
+        barcode: a.barcode,
         productId: found?.product.id,
-        priceSource: 'label_ocr',
-        confidence: r.confidence,
-        warnings: warnings,
-        promoFromCents: r.promoFromCents,
+        priceSource: a.price != null ? 'label_ocr' : 'manual',
+        confidence: a.price?.confidence,
+        warnings: [
+          if (variation != null && variation.percent.abs() >= 10)
+            l.variationWarn(
+              '${variation.percent > 0 ? '+' : ''}${variation.percent}',
+              formatBRL(variation.vsCents),
+            ),
+        ],
+        photo: scan.photo,
+        page: scan.page,
+        analysis: a,
+        fromScanner: true,
       ),
     );
   }
@@ -187,11 +231,20 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
   /// Opens the review of one item over the cart; the item only enters the cart when confirmed there.
   Future<void> _review(ItemDraft d) async {
     setState(() => _reviewing = true);
-    final ok = await showItemReview(context, d);
+    final outcome = await showItemReview(context, d);
     if (!mounted) return;
     // Rebuilding here also picks up a reading that arrived while the review was open.
     setState(() => _reviewing = false);
-    if (ok) await _confirmDraft(d);
+    if (outcome == ReviewOutcome.cancel) return;
+    await _confirmDraft(d);
+    // Back to the scanner in one tap, for the next product on the shelf.
+    if (outcome == ReviewOutcome.addAndScanNext && mounted) {
+      unawaited(
+        context.push(
+          '/shopping/scan?mode=${d.photo != null ? 'label' : 'barcode'}',
+        ),
+      );
+    }
   }
 
   Future<void> _confirmDraft(ItemDraft d) async {
@@ -229,11 +282,36 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
       checked: true,
       discountPercent: d.discountPercent,
       promo: d.promo,
+      advertisedPriceCents: d.advertisedPriceCents,
+      wholesalePriceCents: d.wholesaleCents,
+      wholesaleMinQuantity: d.wholesaleMinQuantity,
+      chargedUnitPriceCents: d.chargedUnitPriceCents,
     );
     final next = d.lineId != null
         ? updateSessionLine(session, d.lineId!, (_) => line, _ctl.nowISO())
         : addToSession(session, line, _ctl.nowISO());
     await _persist(next);
+    // The photos are stored after the line exists, as taken, with what was read on them.
+    if (d.photo != null && d.lineId == null) {
+      await _ctl.saveEvidence(
+        sessionId: session.id,
+        lineId: line.id,
+        role: 'label',
+        bytes: d.photo!,
+        width: d.page?.width,
+        height: d.page?.height,
+        ocr: d.page?.lines,
+      );
+    }
+    if (d.productPhoto != null) {
+      await _ctl.saveEvidence(
+        sessionId: session.id,
+        lineId: line.id,
+        role: 'product',
+        bytes: d.productPhoto!,
+      );
+    }
+    if (mounted) setState(() => _evidenceVersion++);
     unawaitedHaptic();
   }
 
@@ -439,6 +517,10 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
         ),
       );
     }
+    if (_evidenceLoaded != _evidenceVersion) {
+      _evidenceLoaded = _evidenceVersion;
+      unawaited(_loadEvidence(session.id));
+    }
     final totals = sessionTotals(session);
     final readOnly = session.status == 'finished';
     final pva = list == null ? null : plannedVsActual(session, list);
@@ -621,6 +703,14 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                                         listItemId: line.listItemId,
                                         discountPercent: line.discountPercent,
                                         promo: line.promo,
+                                        advertisedPriceCents:
+                                            line.advertisedPriceCents,
+                                        wholesaleCents:
+                                            line.wholesalePriceCents,
+                                        wholesaleMinQuantity:
+                                            line.wholesaleMinQuantity,
+                                        chargedUnitPriceCents:
+                                            line.chargedUnitPriceCents,
                                       ),
                                     ),
                               child: Row(
@@ -647,6 +737,16 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                                       ],
                                     ),
                                   ),
+                                  if (_linesWithPhoto.contains(line.id))
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 6),
+                                      child: SIcon(
+                                        SIconName.camera,
+                                        size: 16,
+                                        color: c.textMuted,
+                                        semanticLabel: l.evidenceTitle,
+                                      ),
+                                    ),
                                   Money(t.netCents, hidden: hidden),
                                   if (!readOnly)
                                     SIconButton(
@@ -738,6 +838,44 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                                   ),
                                 ),
                               ),
+                            const SizedBox(height: Spacing.sm),
+                            // The purchase can be compared with the receipt after it is closed,
+                            // today or days later; the photos stay with it.
+                            SButton(
+                              label: l.receiptCheck,
+                              icon: SIconName.receipt,
+                              variant: SButtonVariant.secondary,
+                              fullWidth: true,
+                              onPressed: () async {
+                                await Navigator.of(context).push<void>(
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        ReceiptScreen(sessionId: session.id),
+                                  ),
+                                );
+                                if (mounted) {
+                                  setState(() => _evidenceVersion++);
+                                }
+                              },
+                            ),
+                            const SizedBox(height: Spacing.xs),
+                            SButton(
+                              label: l.evidenceCount(_photoCount),
+                              icon: SIconName.camera,
+                              variant: SButtonVariant.ghost,
+                              fullWidth: true,
+                              onPressed: () async {
+                                await Navigator.of(context).push<void>(
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        EvidenceScreen(sessionId: session.id),
+                                  ),
+                                );
+                                if (mounted) {
+                                  setState(() => _evidenceVersion++);
+                                }
+                              },
+                            ),
                             const SizedBox(height: Spacing.sm),
                             if (session.transactionId != null)
                               Text(

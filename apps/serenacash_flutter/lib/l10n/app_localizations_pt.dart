@@ -4179,4 +4179,271 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get annualFutureNote =>
       'Ano futuro: só aparece o que já está previsto nos lançamentos e o orçamento que estiver em vigor.';
+
+  @override
+  String get biometricConfirmToDisable =>
+      'Confirme no aparelho para desativar o bloqueio';
+
+  @override
+  String get bioDisableDenied =>
+      'O aparelho não confirmou sua identidade; o bloqueio continua ativado.';
+
+  @override
+  String get takePhoto => 'Tirar foto';
+
+  @override
+  String scanCart(String total) {
+    return 'Carrinho $total';
+  }
+
+  @override
+  String scanCartBudget(String total, String left) {
+    return 'Carrinho $total · cabe $left';
+  }
+
+  @override
+  String get reviewTapDefines => 'O toque na foto define';
+
+  @override
+  String get reviewPhotoHint =>
+      'Toque em um texto marcado na foto para usá-lo. Afaste dois dedos para ampliar.';
+
+  @override
+  String get reviewPickName => 'Nome';
+
+  @override
+  String get reviewPickPrice => 'Preço';
+
+  @override
+  String get reviewNoPriceInLine =>
+      'Esse trecho não tem um preço. Toque no valor da etiqueta.';
+
+  @override
+  String get reviewPrices => 'Preços lidos na etiqueta';
+
+  @override
+  String get reviewOtherNames => 'Outros textos lidos';
+
+  @override
+  String get reviewConfirmPrice => 'Conferi o preço com a foto';
+
+  @override
+  String get reviewConfirmPriceHelp =>
+      'A leitura deste preço ficou duvidosa. Compare com a etiqueta antes de adicionar.';
+
+  @override
+  String get reviewNeedsCheck =>
+      'Revisão necessária: confira o preço na foto, corrija ou marque que conferiu.';
+
+  @override
+  String priceRetail(String value) {
+    return 'Varejo $value';
+  }
+
+  @override
+  String priceWholesale(String value, int n) {
+    return 'Atacado $value a partir de $n un';
+  }
+
+  @override
+  String priceWholesaleNoMin(String value) {
+    return 'Atacado $value';
+  }
+
+  @override
+  String pricePerKg(String value) {
+    return 'Por quilo: $value (impresso para comparação; não é o preço do item)';
+  }
+
+  @override
+  String pricePerLiter(String value) {
+    return 'Por litro: $value (impresso para comparação; não é o preço do item)';
+  }
+
+  @override
+  String pricePerPackUnit(String value) {
+    return 'Valor em letras pequenas: $value (não é o preço do item)';
+  }
+
+  @override
+  String wholesaleHelp(int n) {
+    return 'Vale só quando a quantidade no carrinho chegar a $n. Abaixo disso conta o preço de varejo.';
+  }
+
+  @override
+  String get wholesaleNoMinHelp =>
+      'A etiqueta não mostra a partir de quantas unidades vale; por isso não é aplicado.';
+
+  @override
+  String get addAndScanNext => 'Adicionar e ler a próxima';
+
+  @override
+  String get addProductPhoto => 'Foto do produto';
+
+  @override
+  String get replaceProductPhoto => 'Trocar foto do produto';
+
+  @override
+  String get evidenceTitle => 'Evidências';
+
+  @override
+  String get evidenceLabel => 'Etiqueta da gôndola';
+
+  @override
+  String get evidenceProduct => 'Produto';
+
+  @override
+  String get evidenceReceipt => 'Cupom';
+
+  @override
+  String get evidenceNote =>
+      'As fotos ficam só neste aparelho, dentro do banco cifrado. São um registro seu do que estava anunciado, não uma prova jurídica.';
+
+  @override
+  String evidenceReadVsConfirmed(String read, String confirmed) {
+    return 'Lido na etiqueta: $read · confirmado por você: $confirmed';
+  }
+
+  @override
+  String evidenceTakenAt(String date) {
+    return 'Foto de $date';
+  }
+
+  @override
+  String get evidenceDelete => 'Apagar esta foto';
+
+  @override
+  String get evidenceDeleteQ => 'Apagar a foto?';
+
+  @override
+  String get evidenceDeleteText =>
+      'A foto sai do aparelho e não pode ser recuperada. O item e o preço continuam no carrinho.';
+
+  @override
+  String codeFound(String code) {
+    return 'Produto do seu cadastro, encontrado pelo código $code.';
+  }
+
+  @override
+  String codeDecodedUnknown(String code) {
+    return 'Código $code lido. Ele ainda não está no seu cadastro: informe nome e preço e o produto fica cadastrado com este código.';
+  }
+
+  @override
+  String codeNotStandard(String code) {
+    return 'O código $code foi lido, mas não fecha como código de produto padrão (EAN/UPC). Ele fica guardado como está.';
+  }
+
+  @override
+  String codeLastPrice(String value, String date) {
+    return 'Último preço registrado: $value, em $date. Confira o preço de hoje na etiqueta.';
+  }
+
+  @override
+  String get photoNoReading =>
+      'Nada foi lido na foto. Ela fica anexada ao item; informe nome e preço.';
+
+  @override
+  String get evidenceEmpty => 'Nenhuma foto nesta compra';
+
+  @override
+  String get evidenceEmptyText =>
+      'As fotos de etiqueta, de produto e do cupom aparecem aqui.';
+
+  @override
+  String get evidenceOpen => 'Abrir a foto';
+
+  @override
+  String evidenceCount(int n) {
+    return 'Evidências ($n)';
+  }
+
+  @override
+  String get receiptTitle => 'Conferir cupom';
+
+  @override
+  String get receiptCheck => 'Conferir com o cupom fiscal';
+
+  @override
+  String get receiptIntro =>
+      'Fotografe o cupom ou escolha uma foto. O app lê os itens no aparelho, pareia com o carrinho e mostra o preço anunciado ao lado do preço cobrado. Nada sai do celular.';
+
+  @override
+  String get receiptPhoto => 'Fotografar cupom';
+
+  @override
+  String get receiptGallery => 'Escolher foto';
+
+  @override
+  String get receiptSummary => 'Anunciado × cobrado';
+
+  @override
+  String receiptAnnouncedCharged(String announced, String charged) {
+    return 'Nos itens pareados: $announced anunciados na gôndola e $charged cobrados.';
+  }
+
+  @override
+  String get receiptNoDifference => 'Sem diferença nos itens pareados';
+
+  @override
+  String receiptChargedMore(String value) {
+    return 'Cobrado $value a mais';
+  }
+
+  @override
+  String receiptChargedLess(String value) {
+    return 'Cobrado $value a menos';
+  }
+
+  @override
+  String get receiptSummaryNote =>
+      'A comparação vale para os itens pareados. Descontos de caixa, ofertas com validade e itens por peso podem explicar uma diferença; confira as fotos antes de reclamar.';
+
+  @override
+  String get receiptSeePhoto => 'Ver a foto do cupom';
+
+  @override
+  String get receiptSeeShelfPhoto => 'Ver a foto da etiqueta';
+
+  @override
+  String get receiptEqual => 'Preço igual ao anunciado';
+
+  @override
+  String receiptDiffMore(String value) {
+    return 'Diferença: $value a mais por unidade';
+  }
+
+  @override
+  String receiptDiffLess(String value) {
+    return 'Diferença: $value a menos por unidade';
+  }
+
+  @override
+  String get receiptSuspected => 'Suspeita de diferença';
+
+  @override
+  String get receiptSuspectedHelp =>
+      'O texto do cupom não basta para ter certeza de que é o mesmo item. Toque para confirmar ou trocar o par.';
+
+  @override
+  String get receiptUnmatched => 'Sem par no carrinho';
+
+  @override
+  String receiptShelfVsTill(String name, String shelf, String till) {
+    return '$name: gôndola $shelf · cupom $till';
+  }
+
+  @override
+  String get receiptPairTitle =>
+      'Com qual item do carrinho esta linha combina?';
+
+  @override
+  String get receiptNoPair => 'Nenhum (deixar sem par)';
+
+  @override
+  String get receiptMissing => 'No carrinho e não achados no cupom';
+
+  @override
+  String get receiptMissingHelp =>
+      'Podem ter ficado fora da foto, ter sido lidos com outro nome ou não ter passado no caixa.';
 }

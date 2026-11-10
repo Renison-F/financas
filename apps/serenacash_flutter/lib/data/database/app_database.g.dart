@@ -13891,6 +13891,46 @@ class $ShoppingSessionLinesTable extends ShoppingSessionLines
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _advertisedPriceCentsMeta =
+      const VerificationMeta('advertisedPriceCents');
+  @override
+  late final GeneratedColumn<int> advertisedPriceCents = GeneratedColumn<int>(
+    'advertised_price_cents',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _wholesalePriceCentsMeta =
+      const VerificationMeta('wholesalePriceCents');
+  @override
+  late final GeneratedColumn<int> wholesalePriceCents = GeneratedColumn<int>(
+    'wholesale_price_cents',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _wholesaleMinQuantityMeta =
+      const VerificationMeta('wholesaleMinQuantity');
+  @override
+  late final GeneratedColumn<int> wholesaleMinQuantity = GeneratedColumn<int>(
+    'wholesale_min_quantity',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _chargedUnitPriceCentsMeta =
+      const VerificationMeta('chargedUnitPriceCents');
+  @override
+  late final GeneratedColumn<int> chargedUnitPriceCents = GeneratedColumn<int>(
+    'charged_unit_price_cents',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -13912,6 +13952,10 @@ class $ShoppingSessionLinesTable extends ShoppingSessionLines
     listItemId,
     checked,
     note,
+    advertisedPriceCents,
+    wholesalePriceCents,
+    wholesaleMinQuantity,
+    chargedUnitPriceCents,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -14067,6 +14111,42 @@ class $ShoppingSessionLinesTable extends ShoppingSessionLines
         note.isAcceptableOrUnknown(data['note']!, _noteMeta),
       );
     }
+    if (data.containsKey('advertised_price_cents')) {
+      context.handle(
+        _advertisedPriceCentsMeta,
+        advertisedPriceCents.isAcceptableOrUnknown(
+          data['advertised_price_cents']!,
+          _advertisedPriceCentsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('wholesale_price_cents')) {
+      context.handle(
+        _wholesalePriceCentsMeta,
+        wholesalePriceCents.isAcceptableOrUnknown(
+          data['wholesale_price_cents']!,
+          _wholesalePriceCentsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('wholesale_min_quantity')) {
+      context.handle(
+        _wholesaleMinQuantityMeta,
+        wholesaleMinQuantity.isAcceptableOrUnknown(
+          data['wholesale_min_quantity']!,
+          _wholesaleMinQuantityMeta,
+        ),
+      );
+    }
+    if (data.containsKey('charged_unit_price_cents')) {
+      context.handle(
+        _chargedUnitPriceCentsMeta,
+        chargedUnitPriceCents.isAcceptableOrUnknown(
+          data['charged_unit_price_cents']!,
+          _chargedUnitPriceCentsMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -14152,6 +14232,22 @@ class $ShoppingSessionLinesTable extends ShoppingSessionLines
         DriftSqlType.string,
         data['${effectivePrefix}note'],
       ),
+      advertisedPriceCents: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}advertised_price_cents'],
+      ),
+      wholesalePriceCents: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}wholesale_price_cents'],
+      ),
+      wholesaleMinQuantity: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}wholesale_min_quantity'],
+      ),
+      chargedUnitPriceCents: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}charged_unit_price_cents'],
+      ),
     );
   }
 
@@ -14182,6 +14278,10 @@ class ShoppingSessionLineRow extends DataClass
   final String? listItemId;
   final bool checked;
   final String? note;
+  final int? advertisedPriceCents;
+  final int? wholesalePriceCents;
+  final int? wholesaleMinQuantity;
+  final int? chargedUnitPriceCents;
   const ShoppingSessionLineRow({
     required this.id,
     required this.sessionId,
@@ -14202,6 +14302,10 @@ class ShoppingSessionLineRow extends DataClass
     this.listItemId,
     required this.checked,
     this.note,
+    this.advertisedPriceCents,
+    this.wholesalePriceCents,
+    this.wholesaleMinQuantity,
+    this.chargedUnitPriceCents,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -14245,6 +14349,18 @@ class ShoppingSessionLineRow extends DataClass
     if (!nullToAbsent || note != null) {
       map['note'] = Variable<String>(note);
     }
+    if (!nullToAbsent || advertisedPriceCents != null) {
+      map['advertised_price_cents'] = Variable<int>(advertisedPriceCents);
+    }
+    if (!nullToAbsent || wholesalePriceCents != null) {
+      map['wholesale_price_cents'] = Variable<int>(wholesalePriceCents);
+    }
+    if (!nullToAbsent || wholesaleMinQuantity != null) {
+      map['wholesale_min_quantity'] = Variable<int>(wholesaleMinQuantity);
+    }
+    if (!nullToAbsent || chargedUnitPriceCents != null) {
+      map['charged_unit_price_cents'] = Variable<int>(chargedUnitPriceCents);
+    }
     return map;
   }
 
@@ -14287,6 +14403,18 @@ class ShoppingSessionLineRow extends DataClass
           : Value(listItemId),
       checked: Value(checked),
       note: note == null && nullToAbsent ? const Value.absent() : Value(note),
+      advertisedPriceCents: advertisedPriceCents == null && nullToAbsent
+          ? const Value.absent()
+          : Value(advertisedPriceCents),
+      wholesalePriceCents: wholesalePriceCents == null && nullToAbsent
+          ? const Value.absent()
+          : Value(wholesalePriceCents),
+      wholesaleMinQuantity: wholesaleMinQuantity == null && nullToAbsent
+          ? const Value.absent()
+          : Value(wholesaleMinQuantity),
+      chargedUnitPriceCents: chargedUnitPriceCents == null && nullToAbsent
+          ? const Value.absent()
+          : Value(chargedUnitPriceCents),
     );
   }
 
@@ -14315,6 +14443,18 @@ class ShoppingSessionLineRow extends DataClass
       listItemId: serializer.fromJson<String?>(json['listItemId']),
       checked: serializer.fromJson<bool>(json['checked']),
       note: serializer.fromJson<String?>(json['note']),
+      advertisedPriceCents: serializer.fromJson<int?>(
+        json['advertisedPriceCents'],
+      ),
+      wholesalePriceCents: serializer.fromJson<int?>(
+        json['wholesalePriceCents'],
+      ),
+      wholesaleMinQuantity: serializer.fromJson<int?>(
+        json['wholesaleMinQuantity'],
+      ),
+      chargedUnitPriceCents: serializer.fromJson<int?>(
+        json['chargedUnitPriceCents'],
+      ),
     );
   }
   @override
@@ -14340,6 +14480,10 @@ class ShoppingSessionLineRow extends DataClass
       'listItemId': serializer.toJson<String?>(listItemId),
       'checked': serializer.toJson<bool>(checked),
       'note': serializer.toJson<String?>(note),
+      'advertisedPriceCents': serializer.toJson<int?>(advertisedPriceCents),
+      'wholesalePriceCents': serializer.toJson<int?>(wholesalePriceCents),
+      'wholesaleMinQuantity': serializer.toJson<int?>(wholesaleMinQuantity),
+      'chargedUnitPriceCents': serializer.toJson<int?>(chargedUnitPriceCents),
     };
   }
 
@@ -14363,6 +14507,10 @@ class ShoppingSessionLineRow extends DataClass
     Value<String?> listItemId = const Value.absent(),
     bool? checked,
     Value<String?> note = const Value.absent(),
+    Value<int?> advertisedPriceCents = const Value.absent(),
+    Value<int?> wholesalePriceCents = const Value.absent(),
+    Value<int?> wholesaleMinQuantity = const Value.absent(),
+    Value<int?> chargedUnitPriceCents = const Value.absent(),
   }) => ShoppingSessionLineRow(
     id: id ?? this.id,
     sessionId: sessionId ?? this.sessionId,
@@ -14387,6 +14535,18 @@ class ShoppingSessionLineRow extends DataClass
     listItemId: listItemId.present ? listItemId.value : this.listItemId,
     checked: checked ?? this.checked,
     note: note.present ? note.value : this.note,
+    advertisedPriceCents: advertisedPriceCents.present
+        ? advertisedPriceCents.value
+        : this.advertisedPriceCents,
+    wholesalePriceCents: wholesalePriceCents.present
+        ? wholesalePriceCents.value
+        : this.wholesalePriceCents,
+    wholesaleMinQuantity: wholesaleMinQuantity.present
+        ? wholesaleMinQuantity.value
+        : this.wholesaleMinQuantity,
+    chargedUnitPriceCents: chargedUnitPriceCents.present
+        ? chargedUnitPriceCents.value
+        : this.chargedUnitPriceCents,
   );
   ShoppingSessionLineRow copyWithCompanion(ShoppingSessionLinesCompanion data) {
     return ShoppingSessionLineRow(
@@ -14421,6 +14581,18 @@ class ShoppingSessionLineRow extends DataClass
           : this.listItemId,
       checked: data.checked.present ? data.checked.value : this.checked,
       note: data.note.present ? data.note.value : this.note,
+      advertisedPriceCents: data.advertisedPriceCents.present
+          ? data.advertisedPriceCents.value
+          : this.advertisedPriceCents,
+      wholesalePriceCents: data.wholesalePriceCents.present
+          ? data.wholesalePriceCents.value
+          : this.wholesalePriceCents,
+      wholesaleMinQuantity: data.wholesaleMinQuantity.present
+          ? data.wholesaleMinQuantity.value
+          : this.wholesaleMinQuantity,
+      chargedUnitPriceCents: data.chargedUnitPriceCents.present
+          ? data.chargedUnitPriceCents.value
+          : this.chargedUnitPriceCents,
     );
   }
 
@@ -14445,13 +14617,17 @@ class ShoppingSessionLineRow extends DataClass
           ..write('confidence: $confidence, ')
           ..write('listItemId: $listItemId, ')
           ..write('checked: $checked, ')
-          ..write('note: $note')
+          ..write('note: $note, ')
+          ..write('advertisedPriceCents: $advertisedPriceCents, ')
+          ..write('wholesalePriceCents: $wholesalePriceCents, ')
+          ..write('wholesaleMinQuantity: $wholesaleMinQuantity, ')
+          ..write('chargedUnitPriceCents: $chargedUnitPriceCents')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     id,
     sessionId,
     position,
@@ -14471,7 +14647,11 @@ class ShoppingSessionLineRow extends DataClass
     listItemId,
     checked,
     note,
-  );
+    advertisedPriceCents,
+    wholesalePriceCents,
+    wholesaleMinQuantity,
+    chargedUnitPriceCents,
+  ]);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -14494,7 +14674,11 @@ class ShoppingSessionLineRow extends DataClass
           other.confidence == this.confidence &&
           other.listItemId == this.listItemId &&
           other.checked == this.checked &&
-          other.note == this.note);
+          other.note == this.note &&
+          other.advertisedPriceCents == this.advertisedPriceCents &&
+          other.wholesalePriceCents == this.wholesalePriceCents &&
+          other.wholesaleMinQuantity == this.wholesaleMinQuantity &&
+          other.chargedUnitPriceCents == this.chargedUnitPriceCents);
 }
 
 class ShoppingSessionLinesCompanion
@@ -14518,6 +14702,10 @@ class ShoppingSessionLinesCompanion
   final Value<String?> listItemId;
   final Value<bool> checked;
   final Value<String?> note;
+  final Value<int?> advertisedPriceCents;
+  final Value<int?> wholesalePriceCents;
+  final Value<int?> wholesaleMinQuantity;
+  final Value<int?> chargedUnitPriceCents;
   final Value<int> rowid;
   const ShoppingSessionLinesCompanion({
     this.id = const Value.absent(),
@@ -14539,6 +14727,10 @@ class ShoppingSessionLinesCompanion
     this.listItemId = const Value.absent(),
     this.checked = const Value.absent(),
     this.note = const Value.absent(),
+    this.advertisedPriceCents = const Value.absent(),
+    this.wholesalePriceCents = const Value.absent(),
+    this.wholesaleMinQuantity = const Value.absent(),
+    this.chargedUnitPriceCents = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   ShoppingSessionLinesCompanion.insert({
@@ -14561,6 +14753,10 @@ class ShoppingSessionLinesCompanion
     this.listItemId = const Value.absent(),
     this.checked = const Value.absent(),
     this.note = const Value.absent(),
+    this.advertisedPriceCents = const Value.absent(),
+    this.wholesalePriceCents = const Value.absent(),
+    this.wholesaleMinQuantity = const Value.absent(),
+    this.chargedUnitPriceCents = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id),
        sessionId = Value(sessionId),
@@ -14590,6 +14786,10 @@ class ShoppingSessionLinesCompanion
     Expression<String>? listItemId,
     Expression<bool>? checked,
     Expression<String>? note,
+    Expression<int>? advertisedPriceCents,
+    Expression<int>? wholesalePriceCents,
+    Expression<int>? wholesaleMinQuantity,
+    Expression<int>? chargedUnitPriceCents,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -14612,6 +14812,14 @@ class ShoppingSessionLinesCompanion
       if (listItemId != null) 'list_item_id': listItemId,
       if (checked != null) 'checked': checked,
       if (note != null) 'note': note,
+      if (advertisedPriceCents != null)
+        'advertised_price_cents': advertisedPriceCents,
+      if (wholesalePriceCents != null)
+        'wholesale_price_cents': wholesalePriceCents,
+      if (wholesaleMinQuantity != null)
+        'wholesale_min_quantity': wholesaleMinQuantity,
+      if (chargedUnitPriceCents != null)
+        'charged_unit_price_cents': chargedUnitPriceCents,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -14636,6 +14844,10 @@ class ShoppingSessionLinesCompanion
     Value<String?>? listItemId,
     Value<bool>? checked,
     Value<String?>? note,
+    Value<int?>? advertisedPriceCents,
+    Value<int?>? wholesalePriceCents,
+    Value<int?>? wholesaleMinQuantity,
+    Value<int?>? chargedUnitPriceCents,
     Value<int>? rowid,
   }) {
     return ShoppingSessionLinesCompanion(
@@ -14658,6 +14870,11 @@ class ShoppingSessionLinesCompanion
       listItemId: listItemId ?? this.listItemId,
       checked: checked ?? this.checked,
       note: note ?? this.note,
+      advertisedPriceCents: advertisedPriceCents ?? this.advertisedPriceCents,
+      wholesalePriceCents: wholesalePriceCents ?? this.wholesalePriceCents,
+      wholesaleMinQuantity: wholesaleMinQuantity ?? this.wholesaleMinQuantity,
+      chargedUnitPriceCents:
+          chargedUnitPriceCents ?? this.chargedUnitPriceCents,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -14722,6 +14939,20 @@ class ShoppingSessionLinesCompanion
     if (note.present) {
       map['note'] = Variable<String>(note.value);
     }
+    if (advertisedPriceCents.present) {
+      map['advertised_price_cents'] = Variable<int>(advertisedPriceCents.value);
+    }
+    if (wholesalePriceCents.present) {
+      map['wholesale_price_cents'] = Variable<int>(wholesalePriceCents.value);
+    }
+    if (wholesaleMinQuantity.present) {
+      map['wholesale_min_quantity'] = Variable<int>(wholesaleMinQuantity.value);
+    }
+    if (chargedUnitPriceCents.present) {
+      map['charged_unit_price_cents'] = Variable<int>(
+        chargedUnitPriceCents.value,
+      );
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -14750,6 +14981,10 @@ class ShoppingSessionLinesCompanion
           ..write('listItemId: $listItemId, ')
           ..write('checked: $checked, ')
           ..write('note: $note, ')
+          ..write('advertisedPriceCents: $advertisedPriceCents, ')
+          ..write('wholesalePriceCents: $wholesalePriceCents, ')
+          ..write('wholesaleMinQuantity: $wholesaleMinQuantity, ')
+          ..write('chargedUnitPriceCents: $chargedUnitPriceCents, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -15154,6 +15389,1504 @@ class ShoppingSessionEventsCompanion
           ..write('type: $type, ')
           ..write('lineId: $lineId, ')
           ..write('detail: $detail')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ShoppingEvidenceTable extends ShoppingEvidence
+    with TableInfo<$ShoppingEvidenceTable, ShoppingEvidenceRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ShoppingEvidenceTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sessionIdMeta = const VerificationMeta(
+    'sessionId',
+  );
+  @override
+  late final GeneratedColumn<String> sessionId = GeneratedColumn<String>(
+    'session_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES shopping_sessions (id) ON DELETE CASCADE',
+    ),
+  );
+  static const VerificationMeta _lineIdMeta = const VerificationMeta('lineId');
+  @override
+  late final GeneratedColumn<String> lineId = GeneratedColumn<String>(
+    'line_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _roleMeta = const VerificationMeta('role');
+  @override
+  late final GeneratedColumn<String> role = GeneratedColumn<String>(
+    'role',
+    aliasedName,
+    false,
+    check: () => role.isIn(['label', 'product', 'receipt', 'other']),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _mimeTypeMeta = const VerificationMeta(
+    'mimeType',
+  );
+  @override
+  late final GeneratedColumn<String> mimeType = GeneratedColumn<String>(
+    'mime_type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sizeBytesMeta = const VerificationMeta(
+    'sizeBytes',
+  );
+  @override
+  late final GeneratedColumn<int> sizeBytes = GeneratedColumn<int>(
+    'size_bytes',
+    aliasedName,
+    false,
+    check: () => ComparableExpr(sizeBytes).isBetweenValues(0, 8 * 1024 * 1024),
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sha256Meta = const VerificationMeta('sha256');
+  @override
+  late final GeneratedColumn<String> sha256 = GeneratedColumn<String>(
+    'sha256',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(
+      minTextLength: 64,
+      maxTextLength: 64,
+    ),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _widthMeta = const VerificationMeta('width');
+  @override
+  late final GeneratedColumn<int> width = GeneratedColumn<int>(
+    'width',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _heightMeta = const VerificationMeta('height');
+  @override
+  late final GeneratedColumn<int> height = GeneratedColumn<int>(
+    'height',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _dataMeta = const VerificationMeta('data');
+  @override
+  late final GeneratedColumn<Uint8List> data = GeneratedColumn<Uint8List>(
+    'data',
+    aliasedName,
+    false,
+    type: DriftSqlType.blob,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _capturedAtMeta = const VerificationMeta(
+    'capturedAt',
+  );
+  @override
+  late final GeneratedColumn<String> capturedAt = GeneratedColumn<String>(
+    'captured_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _ocrJsonMeta = const VerificationMeta(
+    'ocrJson',
+  );
+  @override
+  late final GeneratedColumn<String> ocrJson = GeneratedColumn<String>(
+    'ocr_json',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    sessionId,
+    lineId,
+    role,
+    mimeType,
+    sizeBytes,
+    sha256,
+    width,
+    height,
+    data,
+    capturedAt,
+    ocrJson,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'shopping_evidence';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ShoppingEvidenceRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('session_id')) {
+      context.handle(
+        _sessionIdMeta,
+        sessionId.isAcceptableOrUnknown(data['session_id']!, _sessionIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sessionIdMeta);
+    }
+    if (data.containsKey('line_id')) {
+      context.handle(
+        _lineIdMeta,
+        lineId.isAcceptableOrUnknown(data['line_id']!, _lineIdMeta),
+      );
+    }
+    if (data.containsKey('role')) {
+      context.handle(
+        _roleMeta,
+        role.isAcceptableOrUnknown(data['role']!, _roleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_roleMeta);
+    }
+    if (data.containsKey('mime_type')) {
+      context.handle(
+        _mimeTypeMeta,
+        mimeType.isAcceptableOrUnknown(data['mime_type']!, _mimeTypeMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_mimeTypeMeta);
+    }
+    if (data.containsKey('size_bytes')) {
+      context.handle(
+        _sizeBytesMeta,
+        sizeBytes.isAcceptableOrUnknown(data['size_bytes']!, _sizeBytesMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sizeBytesMeta);
+    }
+    if (data.containsKey('sha256')) {
+      context.handle(
+        _sha256Meta,
+        sha256.isAcceptableOrUnknown(data['sha256']!, _sha256Meta),
+      );
+    } else if (isInserting) {
+      context.missing(_sha256Meta);
+    }
+    if (data.containsKey('width')) {
+      context.handle(
+        _widthMeta,
+        width.isAcceptableOrUnknown(data['width']!, _widthMeta),
+      );
+    }
+    if (data.containsKey('height')) {
+      context.handle(
+        _heightMeta,
+        height.isAcceptableOrUnknown(data['height']!, _heightMeta),
+      );
+    }
+    if (data.containsKey('data')) {
+      context.handle(
+        _dataMeta,
+        this.data.isAcceptableOrUnknown(data['data']!, _dataMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dataMeta);
+    }
+    if (data.containsKey('captured_at')) {
+      context.handle(
+        _capturedAtMeta,
+        capturedAt.isAcceptableOrUnknown(data['captured_at']!, _capturedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_capturedAtMeta);
+    }
+    if (data.containsKey('ocr_json')) {
+      context.handle(
+        _ocrJsonMeta,
+        ocrJson.isAcceptableOrUnknown(data['ocr_json']!, _ocrJsonMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ShoppingEvidenceRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ShoppingEvidenceRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      sessionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}session_id'],
+      )!,
+      lineId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}line_id'],
+      ),
+      role: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}role'],
+      )!,
+      mimeType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}mime_type'],
+      )!,
+      sizeBytes: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}size_bytes'],
+      )!,
+      sha256: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}sha256'],
+      )!,
+      width: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}width'],
+      ),
+      height: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}height'],
+      ),
+      data: attachedDatabase.typeMapping.read(
+        DriftSqlType.blob,
+        data['${effectivePrefix}data'],
+      )!,
+      capturedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}captured_at'],
+      )!,
+      ocrJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}ocr_json'],
+      ),
+    );
+  }
+
+  @override
+  $ShoppingEvidenceTable createAlias(String alias) {
+    return $ShoppingEvidenceTable(attachedDatabase, alias);
+  }
+}
+
+class ShoppingEvidenceRow extends DataClass
+    implements Insertable<ShoppingEvidenceRow> {
+  final String id;
+  final String sessionId;
+  final String? lineId;
+  final String role;
+  final String mimeType;
+  final int sizeBytes;
+  final String sha256;
+  final int? width;
+  final int? height;
+  final Uint8List data;
+  final String capturedAt;
+  final String? ocrJson;
+  const ShoppingEvidenceRow({
+    required this.id,
+    required this.sessionId,
+    this.lineId,
+    required this.role,
+    required this.mimeType,
+    required this.sizeBytes,
+    required this.sha256,
+    this.width,
+    this.height,
+    required this.data,
+    required this.capturedAt,
+    this.ocrJson,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['session_id'] = Variable<String>(sessionId);
+    if (!nullToAbsent || lineId != null) {
+      map['line_id'] = Variable<String>(lineId);
+    }
+    map['role'] = Variable<String>(role);
+    map['mime_type'] = Variable<String>(mimeType);
+    map['size_bytes'] = Variable<int>(sizeBytes);
+    map['sha256'] = Variable<String>(sha256);
+    if (!nullToAbsent || width != null) {
+      map['width'] = Variable<int>(width);
+    }
+    if (!nullToAbsent || height != null) {
+      map['height'] = Variable<int>(height);
+    }
+    map['data'] = Variable<Uint8List>(data);
+    map['captured_at'] = Variable<String>(capturedAt);
+    if (!nullToAbsent || ocrJson != null) {
+      map['ocr_json'] = Variable<String>(ocrJson);
+    }
+    return map;
+  }
+
+  ShoppingEvidenceCompanion toCompanion(bool nullToAbsent) {
+    return ShoppingEvidenceCompanion(
+      id: Value(id),
+      sessionId: Value(sessionId),
+      lineId: lineId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lineId),
+      role: Value(role),
+      mimeType: Value(mimeType),
+      sizeBytes: Value(sizeBytes),
+      sha256: Value(sha256),
+      width: width == null && nullToAbsent
+          ? const Value.absent()
+          : Value(width),
+      height: height == null && nullToAbsent
+          ? const Value.absent()
+          : Value(height),
+      data: Value(data),
+      capturedAt: Value(capturedAt),
+      ocrJson: ocrJson == null && nullToAbsent
+          ? const Value.absent()
+          : Value(ocrJson),
+    );
+  }
+
+  factory ShoppingEvidenceRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ShoppingEvidenceRow(
+      id: serializer.fromJson<String>(json['id']),
+      sessionId: serializer.fromJson<String>(json['sessionId']),
+      lineId: serializer.fromJson<String?>(json['lineId']),
+      role: serializer.fromJson<String>(json['role']),
+      mimeType: serializer.fromJson<String>(json['mimeType']),
+      sizeBytes: serializer.fromJson<int>(json['sizeBytes']),
+      sha256: serializer.fromJson<String>(json['sha256']),
+      width: serializer.fromJson<int?>(json['width']),
+      height: serializer.fromJson<int?>(json['height']),
+      data: serializer.fromJson<Uint8List>(json['data']),
+      capturedAt: serializer.fromJson<String>(json['capturedAt']),
+      ocrJson: serializer.fromJson<String?>(json['ocrJson']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'sessionId': serializer.toJson<String>(sessionId),
+      'lineId': serializer.toJson<String?>(lineId),
+      'role': serializer.toJson<String>(role),
+      'mimeType': serializer.toJson<String>(mimeType),
+      'sizeBytes': serializer.toJson<int>(sizeBytes),
+      'sha256': serializer.toJson<String>(sha256),
+      'width': serializer.toJson<int?>(width),
+      'height': serializer.toJson<int?>(height),
+      'data': serializer.toJson<Uint8List>(data),
+      'capturedAt': serializer.toJson<String>(capturedAt),
+      'ocrJson': serializer.toJson<String?>(ocrJson),
+    };
+  }
+
+  ShoppingEvidenceRow copyWith({
+    String? id,
+    String? sessionId,
+    Value<String?> lineId = const Value.absent(),
+    String? role,
+    String? mimeType,
+    int? sizeBytes,
+    String? sha256,
+    Value<int?> width = const Value.absent(),
+    Value<int?> height = const Value.absent(),
+    Uint8List? data,
+    String? capturedAt,
+    Value<String?> ocrJson = const Value.absent(),
+  }) => ShoppingEvidenceRow(
+    id: id ?? this.id,
+    sessionId: sessionId ?? this.sessionId,
+    lineId: lineId.present ? lineId.value : this.lineId,
+    role: role ?? this.role,
+    mimeType: mimeType ?? this.mimeType,
+    sizeBytes: sizeBytes ?? this.sizeBytes,
+    sha256: sha256 ?? this.sha256,
+    width: width.present ? width.value : this.width,
+    height: height.present ? height.value : this.height,
+    data: data ?? this.data,
+    capturedAt: capturedAt ?? this.capturedAt,
+    ocrJson: ocrJson.present ? ocrJson.value : this.ocrJson,
+  );
+  ShoppingEvidenceRow copyWithCompanion(ShoppingEvidenceCompanion data) {
+    return ShoppingEvidenceRow(
+      id: data.id.present ? data.id.value : this.id,
+      sessionId: data.sessionId.present ? data.sessionId.value : this.sessionId,
+      lineId: data.lineId.present ? data.lineId.value : this.lineId,
+      role: data.role.present ? data.role.value : this.role,
+      mimeType: data.mimeType.present ? data.mimeType.value : this.mimeType,
+      sizeBytes: data.sizeBytes.present ? data.sizeBytes.value : this.sizeBytes,
+      sha256: data.sha256.present ? data.sha256.value : this.sha256,
+      width: data.width.present ? data.width.value : this.width,
+      height: data.height.present ? data.height.value : this.height,
+      data: data.data.present ? data.data.value : this.data,
+      capturedAt: data.capturedAt.present
+          ? data.capturedAt.value
+          : this.capturedAt,
+      ocrJson: data.ocrJson.present ? data.ocrJson.value : this.ocrJson,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ShoppingEvidenceRow(')
+          ..write('id: $id, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('lineId: $lineId, ')
+          ..write('role: $role, ')
+          ..write('mimeType: $mimeType, ')
+          ..write('sizeBytes: $sizeBytes, ')
+          ..write('sha256: $sha256, ')
+          ..write('width: $width, ')
+          ..write('height: $height, ')
+          ..write('data: $data, ')
+          ..write('capturedAt: $capturedAt, ')
+          ..write('ocrJson: $ocrJson')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    sessionId,
+    lineId,
+    role,
+    mimeType,
+    sizeBytes,
+    sha256,
+    width,
+    height,
+    $driftBlobEquality.hash(data),
+    capturedAt,
+    ocrJson,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ShoppingEvidenceRow &&
+          other.id == this.id &&
+          other.sessionId == this.sessionId &&
+          other.lineId == this.lineId &&
+          other.role == this.role &&
+          other.mimeType == this.mimeType &&
+          other.sizeBytes == this.sizeBytes &&
+          other.sha256 == this.sha256 &&
+          other.width == this.width &&
+          other.height == this.height &&
+          $driftBlobEquality.equals(other.data, this.data) &&
+          other.capturedAt == this.capturedAt &&
+          other.ocrJson == this.ocrJson);
+}
+
+class ShoppingEvidenceCompanion extends UpdateCompanion<ShoppingEvidenceRow> {
+  final Value<String> id;
+  final Value<String> sessionId;
+  final Value<String?> lineId;
+  final Value<String> role;
+  final Value<String> mimeType;
+  final Value<int> sizeBytes;
+  final Value<String> sha256;
+  final Value<int?> width;
+  final Value<int?> height;
+  final Value<Uint8List> data;
+  final Value<String> capturedAt;
+  final Value<String?> ocrJson;
+  final Value<int> rowid;
+  const ShoppingEvidenceCompanion({
+    this.id = const Value.absent(),
+    this.sessionId = const Value.absent(),
+    this.lineId = const Value.absent(),
+    this.role = const Value.absent(),
+    this.mimeType = const Value.absent(),
+    this.sizeBytes = const Value.absent(),
+    this.sha256 = const Value.absent(),
+    this.width = const Value.absent(),
+    this.height = const Value.absent(),
+    this.data = const Value.absent(),
+    this.capturedAt = const Value.absent(),
+    this.ocrJson = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  ShoppingEvidenceCompanion.insert({
+    required String id,
+    required String sessionId,
+    this.lineId = const Value.absent(),
+    required String role,
+    required String mimeType,
+    required int sizeBytes,
+    required String sha256,
+    this.width = const Value.absent(),
+    this.height = const Value.absent(),
+    required Uint8List data,
+    required String capturedAt,
+    this.ocrJson = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       sessionId = Value(sessionId),
+       role = Value(role),
+       mimeType = Value(mimeType),
+       sizeBytes = Value(sizeBytes),
+       sha256 = Value(sha256),
+       data = Value(data),
+       capturedAt = Value(capturedAt);
+  static Insertable<ShoppingEvidenceRow> custom({
+    Expression<String>? id,
+    Expression<String>? sessionId,
+    Expression<String>? lineId,
+    Expression<String>? role,
+    Expression<String>? mimeType,
+    Expression<int>? sizeBytes,
+    Expression<String>? sha256,
+    Expression<int>? width,
+    Expression<int>? height,
+    Expression<Uint8List>? data,
+    Expression<String>? capturedAt,
+    Expression<String>? ocrJson,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (sessionId != null) 'session_id': sessionId,
+      if (lineId != null) 'line_id': lineId,
+      if (role != null) 'role': role,
+      if (mimeType != null) 'mime_type': mimeType,
+      if (sizeBytes != null) 'size_bytes': sizeBytes,
+      if (sha256 != null) 'sha256': sha256,
+      if (width != null) 'width': width,
+      if (height != null) 'height': height,
+      if (data != null) 'data': data,
+      if (capturedAt != null) 'captured_at': capturedAt,
+      if (ocrJson != null) 'ocr_json': ocrJson,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  ShoppingEvidenceCompanion copyWith({
+    Value<String>? id,
+    Value<String>? sessionId,
+    Value<String?>? lineId,
+    Value<String>? role,
+    Value<String>? mimeType,
+    Value<int>? sizeBytes,
+    Value<String>? sha256,
+    Value<int?>? width,
+    Value<int?>? height,
+    Value<Uint8List>? data,
+    Value<String>? capturedAt,
+    Value<String?>? ocrJson,
+    Value<int>? rowid,
+  }) {
+    return ShoppingEvidenceCompanion(
+      id: id ?? this.id,
+      sessionId: sessionId ?? this.sessionId,
+      lineId: lineId ?? this.lineId,
+      role: role ?? this.role,
+      mimeType: mimeType ?? this.mimeType,
+      sizeBytes: sizeBytes ?? this.sizeBytes,
+      sha256: sha256 ?? this.sha256,
+      width: width ?? this.width,
+      height: height ?? this.height,
+      data: data ?? this.data,
+      capturedAt: capturedAt ?? this.capturedAt,
+      ocrJson: ocrJson ?? this.ocrJson,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (sessionId.present) {
+      map['session_id'] = Variable<String>(sessionId.value);
+    }
+    if (lineId.present) {
+      map['line_id'] = Variable<String>(lineId.value);
+    }
+    if (role.present) {
+      map['role'] = Variable<String>(role.value);
+    }
+    if (mimeType.present) {
+      map['mime_type'] = Variable<String>(mimeType.value);
+    }
+    if (sizeBytes.present) {
+      map['size_bytes'] = Variable<int>(sizeBytes.value);
+    }
+    if (sha256.present) {
+      map['sha256'] = Variable<String>(sha256.value);
+    }
+    if (width.present) {
+      map['width'] = Variable<int>(width.value);
+    }
+    if (height.present) {
+      map['height'] = Variable<int>(height.value);
+    }
+    if (data.present) {
+      map['data'] = Variable<Uint8List>(data.value);
+    }
+    if (capturedAt.present) {
+      map['captured_at'] = Variable<String>(capturedAt.value);
+    }
+    if (ocrJson.present) {
+      map['ocr_json'] = Variable<String>(ocrJson.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ShoppingEvidenceCompanion(')
+          ..write('id: $id, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('lineId: $lineId, ')
+          ..write('role: $role, ')
+          ..write('mimeType: $mimeType, ')
+          ..write('sizeBytes: $sizeBytes, ')
+          ..write('sha256: $sha256, ')
+          ..write('width: $width, ')
+          ..write('height: $height, ')
+          ..write('data: $data, ')
+          ..write('capturedAt: $capturedAt, ')
+          ..write('ocrJson: $ocrJson, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ShoppingReceiptLinesTable extends ShoppingReceiptLines
+    with TableInfo<$ShoppingReceiptLinesTable, ShoppingReceiptLineRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ShoppingReceiptLinesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _sessionIdMeta = const VerificationMeta(
+    'sessionId',
+  );
+  @override
+  late final GeneratedColumn<String> sessionId = GeneratedColumn<String>(
+    'session_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES shopping_sessions (id) ON DELETE CASCADE',
+    ),
+  );
+  static const VerificationMeta _positionMeta = const VerificationMeta(
+    'position',
+  );
+  @override
+  late final GeneratedColumn<int> position = GeneratedColumn<int>(
+    'position',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _rawTextMeta = const VerificationMeta(
+    'rawText',
+  );
+  @override
+  late final GeneratedColumn<String> rawText = GeneratedColumn<String>(
+    'raw_text',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _descriptionMeta = const VerificationMeta(
+    'description',
+  );
+  @override
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+    'description',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _quantityMeta = const VerificationMeta(
+    'quantity',
+  );
+  @override
+  late final GeneratedColumn<double> quantity = GeneratedColumn<double>(
+    'quantity',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _unitMeta = const VerificationMeta('unit');
+  @override
+  late final GeneratedColumn<String> unit = GeneratedColumn<String>(
+    'unit',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _unitPriceCentsMeta = const VerificationMeta(
+    'unitPriceCents',
+  );
+  @override
+  late final GeneratedColumn<int> unitPriceCents = GeneratedColumn<int>(
+    'unit_price_cents',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _totalCentsMeta = const VerificationMeta(
+    'totalCents',
+  );
+  @override
+  late final GeneratedColumn<int> totalCents = GeneratedColumn<int>(
+    'total_cents',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _codeMeta = const VerificationMeta('code');
+  @override
+  late final GeneratedColumn<String> code = GeneratedColumn<String>(
+    'code',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _matchedLineIdMeta = const VerificationMeta(
+    'matchedLineId',
+  );
+  @override
+  late final GeneratedColumn<String> matchedLineId = GeneratedColumn<String>(
+    'matched_line_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _matchStatusMeta = const VerificationMeta(
+    'matchStatus',
+  );
+  @override
+  late final GeneratedColumn<String> matchStatus = GeneratedColumn<String>(
+    'match_status',
+    aliasedName,
+    false,
+    check: () => matchStatus.isIn([
+      'equal',
+      'divergent',
+      'suspected',
+      'confirmed',
+      'unmatched',
+    ]),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _matchScoreMeta = const VerificationMeta(
+    'matchScore',
+  );
+  @override
+  late final GeneratedColumn<double> matchScore = GeneratedColumn<double>(
+    'match_score',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    sessionId,
+    position,
+    rawText,
+    description,
+    quantity,
+    unit,
+    unitPriceCents,
+    totalCents,
+    code,
+    matchedLineId,
+    matchStatus,
+    matchScore,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'shopping_receipt_lines';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ShoppingReceiptLineRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('session_id')) {
+      context.handle(
+        _sessionIdMeta,
+        sessionId.isAcceptableOrUnknown(data['session_id']!, _sessionIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_sessionIdMeta);
+    }
+    if (data.containsKey('position')) {
+      context.handle(
+        _positionMeta,
+        position.isAcceptableOrUnknown(data['position']!, _positionMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_positionMeta);
+    }
+    if (data.containsKey('raw_text')) {
+      context.handle(
+        _rawTextMeta,
+        rawText.isAcceptableOrUnknown(data['raw_text']!, _rawTextMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_rawTextMeta);
+    }
+    if (data.containsKey('description')) {
+      context.handle(
+        _descriptionMeta,
+        description.isAcceptableOrUnknown(
+          data['description']!,
+          _descriptionMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_descriptionMeta);
+    }
+    if (data.containsKey('quantity')) {
+      context.handle(
+        _quantityMeta,
+        quantity.isAcceptableOrUnknown(data['quantity']!, _quantityMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_quantityMeta);
+    }
+    if (data.containsKey('unit')) {
+      context.handle(
+        _unitMeta,
+        unit.isAcceptableOrUnknown(data['unit']!, _unitMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_unitMeta);
+    }
+    if (data.containsKey('unit_price_cents')) {
+      context.handle(
+        _unitPriceCentsMeta,
+        unitPriceCents.isAcceptableOrUnknown(
+          data['unit_price_cents']!,
+          _unitPriceCentsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('total_cents')) {
+      context.handle(
+        _totalCentsMeta,
+        totalCents.isAcceptableOrUnknown(data['total_cents']!, _totalCentsMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_totalCentsMeta);
+    }
+    if (data.containsKey('code')) {
+      context.handle(
+        _codeMeta,
+        code.isAcceptableOrUnknown(data['code']!, _codeMeta),
+      );
+    }
+    if (data.containsKey('matched_line_id')) {
+      context.handle(
+        _matchedLineIdMeta,
+        matchedLineId.isAcceptableOrUnknown(
+          data['matched_line_id']!,
+          _matchedLineIdMeta,
+        ),
+      );
+    }
+    if (data.containsKey('match_status')) {
+      context.handle(
+        _matchStatusMeta,
+        matchStatus.isAcceptableOrUnknown(
+          data['match_status']!,
+          _matchStatusMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_matchStatusMeta);
+    }
+    if (data.containsKey('match_score')) {
+      context.handle(
+        _matchScoreMeta,
+        matchScore.isAcceptableOrUnknown(data['match_score']!, _matchScoreMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ShoppingReceiptLineRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ShoppingReceiptLineRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      sessionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}session_id'],
+      )!,
+      position: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}position'],
+      )!,
+      rawText: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}raw_text'],
+      )!,
+      description: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}description'],
+      )!,
+      quantity: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}quantity'],
+      )!,
+      unit: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}unit'],
+      )!,
+      unitPriceCents: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}unit_price_cents'],
+      ),
+      totalCents: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}total_cents'],
+      )!,
+      code: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}code'],
+      ),
+      matchedLineId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}matched_line_id'],
+      ),
+      matchStatus: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}match_status'],
+      )!,
+      matchScore: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}match_score'],
+      ),
+    );
+  }
+
+  @override
+  $ShoppingReceiptLinesTable createAlias(String alias) {
+    return $ShoppingReceiptLinesTable(attachedDatabase, alias);
+  }
+}
+
+class ShoppingReceiptLineRow extends DataClass
+    implements Insertable<ShoppingReceiptLineRow> {
+  final String id;
+  final String sessionId;
+  final int position;
+  final String rawText;
+  final String description;
+  final double quantity;
+  final String unit;
+  final int? unitPriceCents;
+  final int totalCents;
+  final String? code;
+  final String? matchedLineId;
+  final String matchStatus;
+  final double? matchScore;
+  const ShoppingReceiptLineRow({
+    required this.id,
+    required this.sessionId,
+    required this.position,
+    required this.rawText,
+    required this.description,
+    required this.quantity,
+    required this.unit,
+    this.unitPriceCents,
+    required this.totalCents,
+    this.code,
+    this.matchedLineId,
+    required this.matchStatus,
+    this.matchScore,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['session_id'] = Variable<String>(sessionId);
+    map['position'] = Variable<int>(position);
+    map['raw_text'] = Variable<String>(rawText);
+    map['description'] = Variable<String>(description);
+    map['quantity'] = Variable<double>(quantity);
+    map['unit'] = Variable<String>(unit);
+    if (!nullToAbsent || unitPriceCents != null) {
+      map['unit_price_cents'] = Variable<int>(unitPriceCents);
+    }
+    map['total_cents'] = Variable<int>(totalCents);
+    if (!nullToAbsent || code != null) {
+      map['code'] = Variable<String>(code);
+    }
+    if (!nullToAbsent || matchedLineId != null) {
+      map['matched_line_id'] = Variable<String>(matchedLineId);
+    }
+    map['match_status'] = Variable<String>(matchStatus);
+    if (!nullToAbsent || matchScore != null) {
+      map['match_score'] = Variable<double>(matchScore);
+    }
+    return map;
+  }
+
+  ShoppingReceiptLinesCompanion toCompanion(bool nullToAbsent) {
+    return ShoppingReceiptLinesCompanion(
+      id: Value(id),
+      sessionId: Value(sessionId),
+      position: Value(position),
+      rawText: Value(rawText),
+      description: Value(description),
+      quantity: Value(quantity),
+      unit: Value(unit),
+      unitPriceCents: unitPriceCents == null && nullToAbsent
+          ? const Value.absent()
+          : Value(unitPriceCents),
+      totalCents: Value(totalCents),
+      code: code == null && nullToAbsent ? const Value.absent() : Value(code),
+      matchedLineId: matchedLineId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(matchedLineId),
+      matchStatus: Value(matchStatus),
+      matchScore: matchScore == null && nullToAbsent
+          ? const Value.absent()
+          : Value(matchScore),
+    );
+  }
+
+  factory ShoppingReceiptLineRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ShoppingReceiptLineRow(
+      id: serializer.fromJson<String>(json['id']),
+      sessionId: serializer.fromJson<String>(json['sessionId']),
+      position: serializer.fromJson<int>(json['position']),
+      rawText: serializer.fromJson<String>(json['rawText']),
+      description: serializer.fromJson<String>(json['description']),
+      quantity: serializer.fromJson<double>(json['quantity']),
+      unit: serializer.fromJson<String>(json['unit']),
+      unitPriceCents: serializer.fromJson<int?>(json['unitPriceCents']),
+      totalCents: serializer.fromJson<int>(json['totalCents']),
+      code: serializer.fromJson<String?>(json['code']),
+      matchedLineId: serializer.fromJson<String?>(json['matchedLineId']),
+      matchStatus: serializer.fromJson<String>(json['matchStatus']),
+      matchScore: serializer.fromJson<double?>(json['matchScore']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'sessionId': serializer.toJson<String>(sessionId),
+      'position': serializer.toJson<int>(position),
+      'rawText': serializer.toJson<String>(rawText),
+      'description': serializer.toJson<String>(description),
+      'quantity': serializer.toJson<double>(quantity),
+      'unit': serializer.toJson<String>(unit),
+      'unitPriceCents': serializer.toJson<int?>(unitPriceCents),
+      'totalCents': serializer.toJson<int>(totalCents),
+      'code': serializer.toJson<String?>(code),
+      'matchedLineId': serializer.toJson<String?>(matchedLineId),
+      'matchStatus': serializer.toJson<String>(matchStatus),
+      'matchScore': serializer.toJson<double?>(matchScore),
+    };
+  }
+
+  ShoppingReceiptLineRow copyWith({
+    String? id,
+    String? sessionId,
+    int? position,
+    String? rawText,
+    String? description,
+    double? quantity,
+    String? unit,
+    Value<int?> unitPriceCents = const Value.absent(),
+    int? totalCents,
+    Value<String?> code = const Value.absent(),
+    Value<String?> matchedLineId = const Value.absent(),
+    String? matchStatus,
+    Value<double?> matchScore = const Value.absent(),
+  }) => ShoppingReceiptLineRow(
+    id: id ?? this.id,
+    sessionId: sessionId ?? this.sessionId,
+    position: position ?? this.position,
+    rawText: rawText ?? this.rawText,
+    description: description ?? this.description,
+    quantity: quantity ?? this.quantity,
+    unit: unit ?? this.unit,
+    unitPriceCents: unitPriceCents.present
+        ? unitPriceCents.value
+        : this.unitPriceCents,
+    totalCents: totalCents ?? this.totalCents,
+    code: code.present ? code.value : this.code,
+    matchedLineId: matchedLineId.present
+        ? matchedLineId.value
+        : this.matchedLineId,
+    matchStatus: matchStatus ?? this.matchStatus,
+    matchScore: matchScore.present ? matchScore.value : this.matchScore,
+  );
+  ShoppingReceiptLineRow copyWithCompanion(ShoppingReceiptLinesCompanion data) {
+    return ShoppingReceiptLineRow(
+      id: data.id.present ? data.id.value : this.id,
+      sessionId: data.sessionId.present ? data.sessionId.value : this.sessionId,
+      position: data.position.present ? data.position.value : this.position,
+      rawText: data.rawText.present ? data.rawText.value : this.rawText,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
+      quantity: data.quantity.present ? data.quantity.value : this.quantity,
+      unit: data.unit.present ? data.unit.value : this.unit,
+      unitPriceCents: data.unitPriceCents.present
+          ? data.unitPriceCents.value
+          : this.unitPriceCents,
+      totalCents: data.totalCents.present
+          ? data.totalCents.value
+          : this.totalCents,
+      code: data.code.present ? data.code.value : this.code,
+      matchedLineId: data.matchedLineId.present
+          ? data.matchedLineId.value
+          : this.matchedLineId,
+      matchStatus: data.matchStatus.present
+          ? data.matchStatus.value
+          : this.matchStatus,
+      matchScore: data.matchScore.present
+          ? data.matchScore.value
+          : this.matchScore,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ShoppingReceiptLineRow(')
+          ..write('id: $id, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('position: $position, ')
+          ..write('rawText: $rawText, ')
+          ..write('description: $description, ')
+          ..write('quantity: $quantity, ')
+          ..write('unit: $unit, ')
+          ..write('unitPriceCents: $unitPriceCents, ')
+          ..write('totalCents: $totalCents, ')
+          ..write('code: $code, ')
+          ..write('matchedLineId: $matchedLineId, ')
+          ..write('matchStatus: $matchStatus, ')
+          ..write('matchScore: $matchScore')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    sessionId,
+    position,
+    rawText,
+    description,
+    quantity,
+    unit,
+    unitPriceCents,
+    totalCents,
+    code,
+    matchedLineId,
+    matchStatus,
+    matchScore,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ShoppingReceiptLineRow &&
+          other.id == this.id &&
+          other.sessionId == this.sessionId &&
+          other.position == this.position &&
+          other.rawText == this.rawText &&
+          other.description == this.description &&
+          other.quantity == this.quantity &&
+          other.unit == this.unit &&
+          other.unitPriceCents == this.unitPriceCents &&
+          other.totalCents == this.totalCents &&
+          other.code == this.code &&
+          other.matchedLineId == this.matchedLineId &&
+          other.matchStatus == this.matchStatus &&
+          other.matchScore == this.matchScore);
+}
+
+class ShoppingReceiptLinesCompanion
+    extends UpdateCompanion<ShoppingReceiptLineRow> {
+  final Value<String> id;
+  final Value<String> sessionId;
+  final Value<int> position;
+  final Value<String> rawText;
+  final Value<String> description;
+  final Value<double> quantity;
+  final Value<String> unit;
+  final Value<int?> unitPriceCents;
+  final Value<int> totalCents;
+  final Value<String?> code;
+  final Value<String?> matchedLineId;
+  final Value<String> matchStatus;
+  final Value<double?> matchScore;
+  final Value<int> rowid;
+  const ShoppingReceiptLinesCompanion({
+    this.id = const Value.absent(),
+    this.sessionId = const Value.absent(),
+    this.position = const Value.absent(),
+    this.rawText = const Value.absent(),
+    this.description = const Value.absent(),
+    this.quantity = const Value.absent(),
+    this.unit = const Value.absent(),
+    this.unitPriceCents = const Value.absent(),
+    this.totalCents = const Value.absent(),
+    this.code = const Value.absent(),
+    this.matchedLineId = const Value.absent(),
+    this.matchStatus = const Value.absent(),
+    this.matchScore = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  ShoppingReceiptLinesCompanion.insert({
+    required String id,
+    required String sessionId,
+    required int position,
+    required String rawText,
+    required String description,
+    required double quantity,
+    required String unit,
+    this.unitPriceCents = const Value.absent(),
+    required int totalCents,
+    this.code = const Value.absent(),
+    this.matchedLineId = const Value.absent(),
+    required String matchStatus,
+    this.matchScore = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       sessionId = Value(sessionId),
+       position = Value(position),
+       rawText = Value(rawText),
+       description = Value(description),
+       quantity = Value(quantity),
+       unit = Value(unit),
+       totalCents = Value(totalCents),
+       matchStatus = Value(matchStatus);
+  static Insertable<ShoppingReceiptLineRow> custom({
+    Expression<String>? id,
+    Expression<String>? sessionId,
+    Expression<int>? position,
+    Expression<String>? rawText,
+    Expression<String>? description,
+    Expression<double>? quantity,
+    Expression<String>? unit,
+    Expression<int>? unitPriceCents,
+    Expression<int>? totalCents,
+    Expression<String>? code,
+    Expression<String>? matchedLineId,
+    Expression<String>? matchStatus,
+    Expression<double>? matchScore,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (sessionId != null) 'session_id': sessionId,
+      if (position != null) 'position': position,
+      if (rawText != null) 'raw_text': rawText,
+      if (description != null) 'description': description,
+      if (quantity != null) 'quantity': quantity,
+      if (unit != null) 'unit': unit,
+      if (unitPriceCents != null) 'unit_price_cents': unitPriceCents,
+      if (totalCents != null) 'total_cents': totalCents,
+      if (code != null) 'code': code,
+      if (matchedLineId != null) 'matched_line_id': matchedLineId,
+      if (matchStatus != null) 'match_status': matchStatus,
+      if (matchScore != null) 'match_score': matchScore,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  ShoppingReceiptLinesCompanion copyWith({
+    Value<String>? id,
+    Value<String>? sessionId,
+    Value<int>? position,
+    Value<String>? rawText,
+    Value<String>? description,
+    Value<double>? quantity,
+    Value<String>? unit,
+    Value<int?>? unitPriceCents,
+    Value<int>? totalCents,
+    Value<String?>? code,
+    Value<String?>? matchedLineId,
+    Value<String>? matchStatus,
+    Value<double?>? matchScore,
+    Value<int>? rowid,
+  }) {
+    return ShoppingReceiptLinesCompanion(
+      id: id ?? this.id,
+      sessionId: sessionId ?? this.sessionId,
+      position: position ?? this.position,
+      rawText: rawText ?? this.rawText,
+      description: description ?? this.description,
+      quantity: quantity ?? this.quantity,
+      unit: unit ?? this.unit,
+      unitPriceCents: unitPriceCents ?? this.unitPriceCents,
+      totalCents: totalCents ?? this.totalCents,
+      code: code ?? this.code,
+      matchedLineId: matchedLineId ?? this.matchedLineId,
+      matchStatus: matchStatus ?? this.matchStatus,
+      matchScore: matchScore ?? this.matchScore,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (sessionId.present) {
+      map['session_id'] = Variable<String>(sessionId.value);
+    }
+    if (position.present) {
+      map['position'] = Variable<int>(position.value);
+    }
+    if (rawText.present) {
+      map['raw_text'] = Variable<String>(rawText.value);
+    }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
+    }
+    if (quantity.present) {
+      map['quantity'] = Variable<double>(quantity.value);
+    }
+    if (unit.present) {
+      map['unit'] = Variable<String>(unit.value);
+    }
+    if (unitPriceCents.present) {
+      map['unit_price_cents'] = Variable<int>(unitPriceCents.value);
+    }
+    if (totalCents.present) {
+      map['total_cents'] = Variable<int>(totalCents.value);
+    }
+    if (code.present) {
+      map['code'] = Variable<String>(code.value);
+    }
+    if (matchedLineId.present) {
+      map['matched_line_id'] = Variable<String>(matchedLineId.value);
+    }
+    if (matchStatus.present) {
+      map['match_status'] = Variable<String>(matchStatus.value);
+    }
+    if (matchScore.present) {
+      map['match_score'] = Variable<double>(matchScore.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ShoppingReceiptLinesCompanion(')
+          ..write('id: $id, ')
+          ..write('sessionId: $sessionId, ')
+          ..write('position: $position, ')
+          ..write('rawText: $rawText, ')
+          ..write('description: $description, ')
+          ..write('quantity: $quantity, ')
+          ..write('unit: $unit, ')
+          ..write('unitPriceCents: $unitPriceCents, ')
+          ..write('totalCents: $totalCents, ')
+          ..write('code: $code, ')
+          ..write('matchedLineId: $matchedLineId, ')
+          ..write('matchStatus: $matchStatus, ')
+          ..write('matchScore: $matchScore, ')
+          ..write('rowid: $rowid')
           ..write(')'))
         .toString();
   }
@@ -16832,6 +18565,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $ShoppingSessionLinesTable(this);
   late final $ShoppingSessionEventsTable shoppingSessionEvents =
       $ShoppingSessionEventsTable(this);
+  late final $ShoppingEvidenceTable shoppingEvidence = $ShoppingEvidenceTable(
+    this,
+  );
+  late final $ShoppingReceiptLinesTable shoppingReceiptLines =
+      $ShoppingReceiptLinesTable(this);
   late final $KvTable kv = $KvTable(this);
   late final $ChangeLogEntriesTable changeLogEntries = $ChangeLogEntriesTable(
     this,
@@ -16926,6 +18664,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'idx_session_events_session',
     'CREATE INDEX idx_session_events_session ON shopping_session_events (session_id)',
   );
+  late final Index idxEvidenceSession = Index(
+    'idx_evidence_session',
+    'CREATE INDEX idx_evidence_session ON shopping_evidence (session_id)',
+  );
+  late final Index idxReceiptLinesSession = Index(
+    'idx_receipt_lines_session',
+    'CREATE INDEX idx_receipt_lines_session ON shopping_receipt_lines (session_id)',
+  );
   late final Index idxChangeLogSynced = Index(
     'idx_change_log_synced',
     'CREATE INDEX idx_change_log_synced ON change_log_entries (synced, at)',
@@ -16958,6 +18704,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     shoppingSessions,
     shoppingSessionLines,
     shoppingSessionEvents,
+    shoppingEvidence,
+    shoppingReceiptLines,
     kv,
     changeLogEntries,
     conflicts,
@@ -16984,6 +18732,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     idxSessionsStarted,
     idxSessionLinesSession,
     idxSessionEventsSession,
+    idxEvidenceSession,
+    idxReceiptLinesSession,
     idxChangeLogSynced,
     idxChangeLogEntity,
   ];
@@ -17044,6 +18794,20 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         limitUpdateKind: UpdateKind.delete,
       ),
       result: [TableUpdate('shopping_session_events', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'shopping_sessions',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('shopping_evidence', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'shopping_sessions',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('shopping_receipt_lines', kind: UpdateKind.delete)],
     ),
   ]);
   @override

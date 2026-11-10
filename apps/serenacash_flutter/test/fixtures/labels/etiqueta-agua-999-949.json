@@ -1,0 +1,158 @@
+{
+ "image": "etiqueta-agua-999-949.jpg",
+ "width": 960,
+ "height": 1280,
+ "ocrMs": 556,
+ "lines": [
+  {
+   "text": "AGUA S/GAS INDAIA PET EL",
+   "block": 0,
+   "left": 78,
+   "top": 594,
+   "width": 367,
+   "height": 29,
+   "confidence": 0.735,
+   "angle": 0.0
+  },
+  {
+   "text": "ATACADO",
+   "block": 1,
+   "left": 97,
+   "top": 638,
+   "width": 145,
+   "height": 39,
+   "confidence": 0.811,
+   "angle": 0.0
+  },
+  {
+   "text": "R$",
+   "block": 2,
+   "left": 99,
+   "top": 730,
+   "width": 38,
+   "height": 32,
+   "confidence": 0.639,
+   "angle": 0.0
+  },
+  {
+   "text": "A PARTIR DE 3 UN",
+   "block": 3,
+   "left": 102,
+   "top": 788,
+   "width": 152,
+   "height": 15,
+   "confidence": 0.831,
+   "angle": 0.0
+  },
+  {
+   "text": "9,.49",
+   "block": 4,
+   "left": 269,
+   "top": 686,
+   "width": 146,
+   "height": 78,
+   "confidence": 0.581,
+   "angle": 0.0
+  },
+  {
+   "text": "Preco por LITRO R$1,9",
+   "block": 5,
+   "left": 120,
+   "top": 812,
+   "width": 229,
+   "height": 18,
+   "confidence": 0.757,
+   "angle": 0.0
+  },
+  {
+   "text": "Coste Atacadno: Lojsa 12",
+   "block": 5,
+   "left": 110,
+   "top": 831,
+   "width": 174,
+   "height": 23,
+   "confidence": 0.639,
+   "angle": 1.4
+  },
+  {
+   "text": "FO UN",
+   "block": 6,
+   "left": 361,
+   "top": 766,
+   "width": 70,
+   "height": 19,
+   "confidence": 0.643,
+   "angle": 0.0
+  },
+  {
+   "text": "1523",
+   "block": 7,
+   "left": 393,
+   "top": 832,
+   "width": 37,
+   "height": 16,
+   "confidence": 0.774,
+   "angle": 0.0
+  },
+  {
+   "text": "R$",
+   "block": 8,
+   "left": 461,
+   "top": 737,
+   "width": 35,
+   "height": 32,
+   "confidence": 0.625,
+   "angle": 0.0
+  },
+  {
+   "text": "VAREJO",
+   "block": 9,
+   "left": 566,
+   "top": 646,
+   "width": 116,
+   "height": 29,
+   "confidence": 0.818,
+   "angle": 0.0
+  },
+  {
+   "text": "9,99",
+   "block": 10,
+   "left": 600,
+   "top": 708,
+   "width": 156,
+   "height": 84,
+   "confidence": 0.865,
+   "angle": 0.0
+  },
+  {
+   "text": "POR L",
+   "block": 11,
+   "left": 712,
+   "top": 785,
+   "width": 55,
+   "height": 19,
+   "confidence": 0.688,
+   "angle": 0.0
+  },
+  {
+   "text": "Pr aco por LITRO R$2,00",
+   "block": 12,
+   "left": 484,
+   "top": 806,
+   "width": 237,
+   "height": 20,
+   "confidence": 0.7,
+   "angle": 1.0
+  },
+  {
+   "text": "78964:15410503",
+   "block": 12,
+   "left": 543,
+   "top": 834,
+   "width": 141,
+   "height": 18,
+   "confidence": 0.727,
+   "angle": 1.2
+  }
+ ]
+}

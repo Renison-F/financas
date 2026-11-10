@@ -31,6 +31,10 @@ class CartLine {
     this.listItemId,
     required this.checked,
     this.note,
+    this.advertisedPriceCents,
+    this.wholesalePriceCents,
+    this.wholesaleMinQuantity,
+    this.chargedUnitPriceCents,
   });
   final String id;
   final String? productId;
@@ -49,6 +53,19 @@ class CartLine {
   final String? listItemId;
   final bool checked;
   final String? note;
+
+  /// The price read on the shelf label when the item was captured, before any correction by the
+  /// user. Kept next to [unitPriceCents] (the price the user confirmed) as part of the evidence.
+  final Cents? advertisedPriceCents;
+
+  /// A lower price the label offers from [wholesaleMinQuantity] units on. Only applied when the
+  /// quantity in the cart reaches that minimum.
+  final Cents? wholesalePriceCents;
+  final int? wholesaleMinQuantity;
+
+  /// The price of one unit on the store receipt, once the receipt was compared. It never replaces
+  /// [unitPriceCents]: both stay, and the difference is what the comparison shows.
+  final Cents? chargedUnitPriceCents;
   factory CartLine.fromJson(Map<String, dynamic> j) => CartLine(
     id: j['id'] as String,
     productId: j['productId'] as String?,
@@ -68,6 +85,10 @@ class CartLine {
     listItemId: j['listItemId'] as String?,
     checked: j['checked'] as bool? ?? false,
     note: j['note'] as String?,
+    advertisedPriceCents: (j['advertisedPriceCents'] as num?)?.toInt(),
+    wholesalePriceCents: (j['wholesalePriceCents'] as num?)?.toInt(),
+    wholesaleMinQuantity: (j['wholesaleMinQuantity'] as num?)?.toInt(),
+    chargedUnitPriceCents: (j['chargedUnitPriceCents'] as num?)?.toInt(),
   );
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -86,6 +107,13 @@ class CartLine {
     if (listItemId != null) 'listItemId': listItemId,
     'checked': checked,
     if (note != null) 'note': note,
+    if (advertisedPriceCents != null)
+      'advertisedPriceCents': advertisedPriceCents,
+    if (wholesalePriceCents != null) 'wholesalePriceCents': wholesalePriceCents,
+    if (wholesaleMinQuantity != null)
+      'wholesaleMinQuantity': wholesaleMinQuantity,
+    if (chargedUnitPriceCents != null)
+      'chargedUnitPriceCents': chargedUnitPriceCents,
   };
   CartLine copyWith({
     String? name,
@@ -101,8 +129,10 @@ class CartLine {
     String? productId,
     String? barcode,
     String? brand,
+    Cents? chargedUnitPriceCents,
     bool clearPromo = false,
     bool clearDiscount = false,
+    bool clearCharged = false,
   }) => CartLine(
     id: id,
     productId: productId ?? this.productId,
@@ -122,6 +152,12 @@ class CartLine {
     listItemId: listItemId,
     checked: checked ?? this.checked,
     note: note,
+    advertisedPriceCents: advertisedPriceCents,
+    wholesalePriceCents: wholesalePriceCents,
+    wholesaleMinQuantity: wholesaleMinQuantity,
+    chargedUnitPriceCents: clearCharged
+        ? null
+        : (chargedUnitPriceCents ?? this.chargedUnitPriceCents),
   );
 }
 
@@ -158,8 +194,15 @@ LineTotal lineTotal(CartLine line) {
     payable = qty - groups * (p.take - p.pay);
   }
   final gross = mulCents(line.unitPriceCents, qty, RoundingMode.halfUp);
+  // A wholesale price applies only when the quantity reaches its minimum; below it the retail
+  // price stands. What it saves shows as discount, like any other condition of the label.
+  final wholesale =
+      !def.measured &&
+      line.wholesalePriceCents != null &&
+      line.wholesaleMinQuantity != null &&
+      qty >= line.wholesaleMinQuantity!;
   final afterPromo = mulCents(
-    line.unitPriceCents,
+    wholesale ? line.wholesalePriceCents! : line.unitPriceCents,
     payable,
     RoundingMode.halfUp,
   );
