@@ -300,4 +300,7 @@ abstract final class Type {
 
 extension SerenaContext on BuildContext {
   SerenaColors get colors => Theme.of(this).extension<SerenaColors>()!;
+
+  /// Compact density chosen by the user: rows and cards take less room, touch targets keep 44 dp.
+  bool get compact => Theme.of(this).visualDensity == VisualDensity.compact;
 }

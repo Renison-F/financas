@@ -38,8 +38,16 @@ class SerenaCashApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'SerenaCash',
       debugShowCheckedModeBanner: false,
-      theme: serenaTheme(Brightness.light),
-      darkTheme: serenaTheme(Brightness.dark),
+      theme: serenaTheme(
+        Brightness.light,
+        palette: prefs.palette,
+        compact: prefs.density == 'compact',
+      ),
+      darkTheme: serenaTheme(
+        Brightness.dark,
+        palette: prefs.palette,
+        compact: prefs.density == 'compact',
+      ),
       themeMode: mode,
       locale: locale,
       localizationsDelegates: const [

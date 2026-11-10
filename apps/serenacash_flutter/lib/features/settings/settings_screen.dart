@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../app/app.dart';
 import '../../app/di.dart';
 import '../../app/state/app_controller.dart';
+import '../../app/theme/palettes.dart';
 import '../../app/theme/tokens.dart';
 import '../../data/notifications/bill_reminders.dart';
 import '../../data/security/device_auth.dart';
@@ -215,6 +216,111 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
                 ],
               ),
+              const SizedBox(height: Spacing.sm),
+              label(l.paletteLabel),
+              const SizedBox(height: 8),
+              // Each swatch is the action colour of that palette in the theme now on screen. The
+              // choice applies at once and can be undone the same way; income, expense and warning
+              // colours are the same in every palette.
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (final pal in palettes)
+                    Builder(
+                      builder: (context) {
+                        final swatch = colorsFor(
+                          Theme.of(context).brightness,
+                          pal.id,
+                        );
+                        final name = paletteName(l, pal.id);
+                        final selected = p.palette == pal.id;
+                        return Semantics(
+                          container: true,
+                          button: true,
+                          selected: selected,
+                          label: name,
+                          child: InkWell(
+                            onTap: () => ctl.setPrefs(
+                              (x) => x.copyWith(palette: pal.id),
+                            ),
+                            borderRadius: BorderRadius.circular(Radii.sm),
+                            child: Container(
+                              width: 96,
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: selected ? c.primary : c.border,
+                                  width: selected ? 2 : 1,
+                                ),
+                                borderRadius: BorderRadius.circular(Radii.sm),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 11,
+                                        backgroundColor: swatch.primary,
+                                        child: selected
+                                            ? SIcon(
+                                                SIconName.check,
+                                                size: 14,
+                                                color: swatch.onPrimary,
+                                              )
+                                            : null,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      CircleAvatar(
+                                        radius: 6,
+                                        backgroundColor: swatch.accent,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  ExcludeSemantics(
+                                    child: Text(
+                                      name,
+                                      style: Type.caption.copyWith(
+                                        color: c.text,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                ],
+              ),
+              const SizedBox(height: Spacing.sm),
+              label(l.densityLabel),
+              const SizedBox(height: 8),
+              Segmented<String>(
+                options: [
+                  ('comfortable', l.densityComfortable),
+                  ('compact', l.densityCompact),
+                ],
+                value: p.density == 'compact' ? 'compact' : 'comfortable',
+                onChanged: (v) => ctl.setPrefs((x) => x.copyWith(density: v)),
+              ),
+              if (p.palette != 'teal' || p.density != 'comfortable')
+                Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: SButton(
+                    label: l.appearanceReset,
+                    variant: SButtonVariant.ghost,
+                    compact: true,
+                    onPressed: () => ctl.setPrefs(
+                      (x) =>
+                          x.copyWith(palette: 'teal', density: 'comfortable'),
+                    ),
+                  ),
+                ),
               const SizedBox(height: Spacing.sm),
               label(l.language),
               const SizedBox(height: 8),
@@ -508,3 +614,12 @@ class _NameDialogState extends State<_NameDialog> {
     );
   }
 }
+
+String paletteName(AppLocalizations l, String id) => switch (id) {
+  'blue' => l.paletteBlue,
+  'green' => l.paletteGreen,
+  'terracotta' => l.paletteTerracotta,
+  'graphite' => l.paletteGraphite,
+  'wine' => l.paletteWine,
+  _ => l.paletteTeal,
+};

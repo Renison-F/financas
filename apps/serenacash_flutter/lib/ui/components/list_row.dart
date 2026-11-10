@@ -37,7 +37,9 @@ class ListRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final row = ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: Touch.target),
+      constraints: BoxConstraints(
+        minHeight: context.compact ? Touch.min : Touch.target,
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6),
         child: LayoutBuilder(

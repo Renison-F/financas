@@ -2832,5 +2832,16 @@
   "dailySavingDeposit": "Guardar em uma meta",
   "dailySavingEnd": "Encerrar a meta diária",
   "dailyEmpty": "Sem movimento neste mês",
-  "dailySetLimit": "Definir limite"
+  "dailySetLimit": "Definir limite",
+  "paletteLabel": "Cor do aplicativo",
+  "paletteTeal": "Petróleo",
+  "paletteBlue": "Azul",
+  "paletteGreen": "Verde",
+  "paletteTerracotta": "Terracota",
+  "paletteGraphite": "Grafite",
+  "paletteWine": "Vinho",
+  "densityLabel": "Densidade",
+  "densityComfortable": "Confortável",
+  "densityCompact": "Compacta",
+  "appearanceReset": "Restaurar aparência padrão"
 }

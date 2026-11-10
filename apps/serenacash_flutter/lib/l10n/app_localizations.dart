@@ -8435,6 +8435,72 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Definir limite'**
   String get dailySetLimit;
+
+  /// No description provided for @paletteLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cor do aplicativo'**
+  String get paletteLabel;
+
+  /// No description provided for @paletteTeal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Petróleo'**
+  String get paletteTeal;
+
+  /// No description provided for @paletteBlue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Azul'**
+  String get paletteBlue;
+
+  /// No description provided for @paletteGreen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Verde'**
+  String get paletteGreen;
+
+  /// No description provided for @paletteTerracotta.
+  ///
+  /// In pt, this message translates to:
+  /// **'Terracota'**
+  String get paletteTerracotta;
+
+  /// No description provided for @paletteGraphite.
+  ///
+  /// In pt, this message translates to:
+  /// **'Grafite'**
+  String get paletteGraphite;
+
+  /// No description provided for @paletteWine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vinho'**
+  String get paletteWine;
+
+  /// No description provided for @densityLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Densidade'**
+  String get densityLabel;
+
+  /// No description provided for @densityComfortable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confortável'**
+  String get densityComfortable;
+
+  /// No description provided for @densityCompact.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compacta'**
+  String get densityCompact;
+
+  /// No description provided for @appearanceReset.
+  ///
+  /// In pt, this message translates to:
+  /// **'Restaurar aparência padrão'**
+  String get appearanceReset;
 }
 
 class _AppLocalizationsDelegate

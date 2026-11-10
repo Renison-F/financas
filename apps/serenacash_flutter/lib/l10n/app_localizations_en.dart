@@ -5035,4 +5035,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dailySetLimit => 'Set limit';
+
+  @override
+  String get paletteLabel => 'App colour';
+
+  @override
+  String get paletteTeal => 'Teal';
+
+  @override
+  String get paletteBlue => 'Blue';
+
+  @override
+  String get paletteGreen => 'Green';
+
+  @override
+  String get paletteTerracotta => 'Terracotta';
+
+  @override
+  String get paletteGraphite => 'Graphite';
+
+  @override
+  String get paletteWine => 'Wine';
+
+  @override
+  String get densityLabel => 'Density';
+
+  @override
+  String get densityComfortable => 'Comfortable';
+
+  @override
+  String get densityCompact => 'Compact';
+
+  @override
+  String get appearanceReset => 'Restore default appearance';
 }

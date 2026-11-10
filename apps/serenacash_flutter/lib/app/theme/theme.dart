@@ -4,12 +4,16 @@ library;
 import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:flutter/material.dart';
 
+import 'palettes.dart';
 import 'tokens.dart';
 
-ThemeData serenaTheme(Brightness brightness) {
-  final c = brightness == Brightness.dark
-      ? SerenaColors.dark
-      : SerenaColors.light;
+ThemeData serenaTheme(
+  Brightness brightness, {
+  String palette = 'teal',
+  bool compact = false,
+}) {
+  // The palette changes the accent; the colours that carry meaning are the same in all of them.
+  final c = colorsFor(brightness, palette);
   final scheme = ColorScheme(
     brightness: brightness,
     primary: c.primary,
@@ -57,6 +61,7 @@ ThemeData serenaTheme(Brightness brightness) {
   return ThemeData(
     useMaterial3: true,
     brightness: brightness,
+    visualDensity: compact ? VisualDensity.compact : VisualDensity.standard,
     colorScheme: scheme,
     scaffoldBackgroundColor: c.bg,
     canvasColor: c.bg,

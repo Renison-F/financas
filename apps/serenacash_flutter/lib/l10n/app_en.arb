@@ -2832,5 +2832,16 @@
   "dailySavingDeposit": "Deposit into a goal",
   "dailySavingEnd": "End the daily target",
   "dailyEmpty": "No movement this month",
-  "dailySetLimit": "Set limit"
+  "dailySetLimit": "Set limit",
+  "paletteLabel": "App colour",
+  "paletteTeal": "Teal",
+  "paletteBlue": "Blue",
+  "paletteGreen": "Green",
+  "paletteTerracotta": "Terracotta",
+  "paletteGraphite": "Graphite",
+  "paletteWine": "Wine",
+  "densityLabel": "Density",
+  "densityComfortable": "Comfortable",
+  "densityCompact": "Compact",
+  "appearanceReset": "Restore default appearance"
 }
