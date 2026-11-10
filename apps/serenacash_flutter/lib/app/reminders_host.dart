@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/notifications/bill_reminders.dart';
 import '../domain/entities/entities.dart';
+import '../domain/reminders/reminders.dart';
 import 'router.dart';
 import 'state/app_controller.dart';
 
@@ -48,13 +49,15 @@ class _RemindersHostState extends ConsumerState<RemindersHost> {
     super.dispose();
   }
 
-  /// Only bill routes are honoured, and only for a bill that still exists.
+  /// Only the routes a reminder can carry are honoured, and an entry only while it still exists.
   void _open(String route) {
-    if (!mounted || !route.startsWith(_billRoute)) return;
+    if (!mounted || !isReminderRoute(route)) return;
     final app = ref.read(appControllerProvider).value;
     if (app == null || !app.onboarded) return;
-    final id = Uri.tryParse(route)?.queryParameters['id'];
-    if (id == null || app.ledger.transactionById(id) == null) return;
+    if (route.startsWith(_billRoute)) {
+      final id = Uri.tryParse(route)?.queryParameters['id'];
+      if (id == null || app.ledger.transactionById(id) == null) return;
+    }
     ref.read(routerProvider).push(route);
   }
 

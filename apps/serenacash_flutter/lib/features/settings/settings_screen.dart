@@ -11,6 +11,7 @@ import '../../app/theme/palettes.dart';
 import '../../app/theme/tokens.dart';
 import '../../data/notifications/bill_reminders.dart';
 import '../../data/security/device_auth.dart';
+import '../../domain/reminders/reminders.dart';
 import '../../ui/components/components.dart';
 import '../security/lock_gate.dart';
 
@@ -678,6 +679,27 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   child: Text(
                     _notif!,
                     style: Type.caption.copyWith(color: c.textMuted),
+                  ),
+                ),
+              const SizedBox(height: Spacing.xs),
+              // Each kind of reminder can be silenced on its own.
+              for (final (kind, text) in [
+                (ReminderKind.bill, l.remindBills),
+                (ReminderKind.receivable, l.remindReceivables),
+                (ReminderKind.invoice, l.remindInvoices),
+                (ReminderKind.goal, l.remindGoals),
+              ])
+                ToggleRow(
+                  label: text,
+                  value: !p.silencedReminders.contains(kind),
+                  onChanged: (on) => ctl.setPrefs(
+                    (x) => x.copyWith(
+                      silencedReminders: on
+                          ? (x.silencedReminders
+                                .where((k) => k != kind)
+                                .toList())
+                          : [...x.silencedReminders, kind],
+                    ),
                   ),
                 ),
             ],

@@ -2207,7 +2207,7 @@ abstract class AppLocalizations {
   /// No description provided for @remindersText.
   ///
   /// In pt, this message translates to:
-  /// **'Aviso local no dia anterior e no dia do vencimento das contas previstas (próximos 7 dias). Nada sai do aparelho.'**
+  /// **'Avisos na véspera e no dia: contas a pagar, valores a receber, faturas de cartão e metas com data. Um aviso por compromisso, sem repetir. São avisos locais: nada sai do aparelho.'**
   String get remindersText;
 
   /// No description provided for @enableReminders.
@@ -9203,6 +9203,288 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Não foi possível ler essa área. Tente de novo ou digite o que está escrito.'**
   String get regionFailed;
+
+  /// No description provided for @remindBills.
+  ///
+  /// In pt, this message translates to:
+  /// **'Contas a pagar e parcelas'**
+  String get remindBills;
+
+  /// No description provided for @remindReceivables.
+  ///
+  /// In pt, this message translates to:
+  /// **'Valores a receber'**
+  String get remindReceivables;
+
+  /// No description provided for @remindInvoices.
+  ///
+  /// In pt, this message translates to:
+  /// **'Faturas de cartão'**
+  String get remindInvoices;
+
+  /// No description provided for @remindGoals.
+  ///
+  /// In pt, this message translates to:
+  /// **'Metas com data'**
+  String get remindGoals;
+
+  /// No description provided for @dailyFilterCategory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Categoria: {name}'**
+  String dailyFilterCategory(String name);
+
+  /// No description provided for @dailyFilterAll.
+  ///
+  /// In pt, this message translates to:
+  /// **'todas'**
+  String get dailyFilterAll;
+
+  /// No description provided for @dailyFilterAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta: {name}'**
+  String dailyFilterAccount(String name);
+
+  /// No description provided for @dailyAllAccounts.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todas as contas'**
+  String get dailyAllAccounts;
+
+  /// No description provided for @dailyAllCategories.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todas as categorias'**
+  String get dailyAllCategories;
+
+  /// No description provided for @dailyFilteredNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com uma categoria escolhida, os gastos são só os dela. O que foi recebido e os saldos são sempre do total.'**
+  String get dailyFilteredNote;
+
+  /// No description provided for @dailyTrendTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Comparações'**
+  String get dailyTrendTitle;
+
+  /// No description provided for @dailyLast7.
+  ///
+  /// In pt, this message translates to:
+  /// **'Últimos 7 dias'**
+  String get dailyLast7;
+
+  /// No description provided for @dailyPrevious7.
+  ///
+  /// In pt, this message translates to:
+  /// **'7 dias anteriores'**
+  String get dailyPrevious7;
+
+  /// No description provided for @dailySameWeekday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Há uma semana, no mesmo dia'**
+  String get dailySameWeekday;
+
+  /// No description provided for @dailyNoData.
+  ///
+  /// In pt, this message translates to:
+  /// **'sem registro'**
+  String get dailyNoData;
+
+  /// No description provided for @dailyPace.
+  ///
+  /// In pt, this message translates to:
+  /// **'Se cada dia que falta custar a média dos dias até aqui, o mês soma {value} ({days} dias restantes). É uma conta sobre o que já aconteceu, não uma previsão.'**
+  String dailyPace(String value, int days);
+
+  /// No description provided for @dailyViewPlanned.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto'**
+  String get dailyViewPlanned;
+
+  /// No description provided for @dailyMonthOf.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dia a dia de {month}'**
+  String dailyMonthOf(String month);
+
+  /// No description provided for @dailyClosing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saldo no fim do mês'**
+  String get dailyClosing;
+
+  /// No description provided for @dailyClosingProjected.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto no fim do mês'**
+  String get dailyClosingProjected;
+
+  /// No description provided for @dailyOpeningProjected.
+  ///
+  /// In pt, this message translates to:
+  /// **'Previsto no início do mês'**
+  String get dailyOpeningProjected;
+
+  /// No description provided for @dailyNoDays.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum dia para mostrar nesta visão.'**
+  String get dailyNoDays;
+
+  /// No description provided for @dailyAccountNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com uma conta escolhida, compras no cartão ficam de fora: elas só passam por uma conta quando a fatura é paga.'**
+  String get dailyAccountNote;
+
+  /// No description provided for @dailyLimitScope.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vale para: {name}'**
+  String dailyLimitScope(String name);
+
+  /// No description provided for @dailyLimitAllSpending.
+  ///
+  /// In pt, this message translates to:
+  /// **'todos os gastos'**
+  String get dailyLimitAllSpending;
+
+  /// No description provided for @dailyLimitWeekdays.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dias da semana (nenhum marcado = todos os dias)'**
+  String get dailyLimitWeekdays;
+
+  /// No description provided for @dailyLimitOnDays.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só em: {days}'**
+  String dailyLimitOnDays(String days);
+
+  /// No description provided for @dailyLimitNotToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Hoje este limite não se aplica.'**
+  String get dailyLimitNotToday;
+
+  /// No description provided for @dailyLimitByCategory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limites por categoria'**
+  String get dailyLimitByCategory;
+
+  /// No description provided for @dailyLimitEndFor.
+  ///
+  /// In pt, this message translates to:
+  /// **'Encerrar o limite de {name}'**
+  String dailyLimitEndFor(String name);
+
+  /// No description provided for @dailySimLimit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com {value} por dia: {total} em {days} dias deste mês. Nos {checked} dias já passados, o gasto teria ficado dentro do limite em {within}.'**
+  String dailySimLimit(
+    String value,
+    String total,
+    int days,
+    int checked,
+    int within,
+  );
+
+  /// No description provided for @dailySimSaving.
+  ///
+  /// In pt, this message translates to:
+  /// **'Guardando {value} por dia: {month} neste mês e {year} em 365 dias, se todos os dias forem cumpridos.'**
+  String dailySimSaving(String value, String month, String year);
+
+  /// No description provided for @dailySavingScope.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta o que for guardado em: {name}'**
+  String dailySavingScope(String name);
+
+  /// No description provided for @dailySavingAnyGoal.
+  ///
+  /// In pt, this message translates to:
+  /// **'qualquer meta'**
+  String get dailySavingAnyGoal;
+
+  /// No description provided for @dailyAnyGoal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Qualquer meta'**
+  String get dailyAnyGoal;
+
+  /// No description provided for @dailyAlertsToggle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Avisar na tela inicial quando um limite diário for ultrapassado'**
+  String get dailyAlertsToggle;
+
+  /// No description provided for @dailyAlertGeneral.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite diário ultrapassado em {value}.'**
+  String dailyAlertGeneral(String value);
+
+  /// No description provided for @dailyAlertCategory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Limite diário de {name} ultrapassado em {value}.'**
+  String dailyAlertCategory(String name, String value);
+
+  /// No description provided for @dailyAlertOpen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver controle diário'**
+  String get dailyAlertOpen;
+
+  /// No description provided for @weekday1.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seg'**
+  String get weekday1;
+
+  /// No description provided for @weekday2.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ter'**
+  String get weekday2;
+
+  /// No description provided for @weekday3.
+  ///
+  /// In pt, this message translates to:
+  /// **'Qua'**
+  String get weekday3;
+
+  /// No description provided for @weekday4.
+  ///
+  /// In pt, this message translates to:
+  /// **'Qui'**
+  String get weekday4;
+
+  /// No description provided for @weekday5.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sex'**
+  String get weekday5;
+
+  /// No description provided for @weekday6.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sáb'**
+  String get weekday6;
+
+  /// No description provided for @weekday7.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dom'**
+  String get weekday7;
 }
 
 class _AppLocalizationsDelegate

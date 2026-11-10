@@ -7,8 +7,10 @@ import '../../app/router.dart';
 import '../../app/state/app_controller.dart';
 import '../../app/state/dashboard_data.dart';
 import '../../app/theme/tokens.dart';
+import '../../domain/daily/daily.dart';
 import '../../domain/dashboard/widgets.dart' as dash;
 import '../../domain/dates/dates.dart';
+import '../../domain/money/money.dart';
 import '../../ui/components/components.dart';
 import '../shared/add_sheet.dart';
 import '../shared/format.dart';
@@ -71,6 +73,12 @@ class HomeScreen extends ConsumerWidget {
     final hello = greetingFor(l, DateTime.now().hour);
     final greeting = name.isEmpty ? hello : l.greetingWithName(hello, name);
     final hasSummary = layout.order.contains('available');
+    // Daily limits passed today, when the user keeps this notice on. It states the fact and the
+    // amount; it does not judge.
+    final ledger = ref.watch(ledgerProvider);
+    final alerts = ledger.prefs.dailyAlerts
+        ? limitAlerts(ledger, ctl.dailyTargets, data.today)
+        : const <LimitAlert>[];
 
     return SScreen(
       title: greeting,
@@ -115,6 +123,48 @@ class HomeScreen extends ConsumerWidget {
                   variant: SButtonVariant.ghost,
                   compact: true,
                   onPressed: () => show(thisMonth),
+                ),
+              ],
+            ),
+          ),
+        if (alerts.isNotEmpty)
+          SCard(
+            color: c.warningContainer,
+            onTap: () => context.push('/daily'),
+            semanticHint: l.dailyAlertOpen,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: SIcon(SIconName.alert, size: 18, color: c.warning),
+                ),
+                const SizedBox(width: Spacing.xs),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (final a in alerts)
+                        Text(
+                          a.target.categoryId == null
+                              ? l.dailyAlertGeneral(
+                                  formatBRL(a.overCents, hidden: hidden),
+                                )
+                              : l.dailyAlertCategory(
+                                  ledger
+                                          .categoryById(a.target.categoryId)
+                                          ?.name ??
+                                      '—',
+                                  formatBRL(a.overCents, hidden: hidden),
+                                ),
+                          style: Type.rowText.copyWith(color: c.text),
+                        ),
+                      Text(
+                        l.dailyAlertOpen,
+                        style: Type.link.copyWith(color: c.text),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -832,6 +832,7 @@ class UserPrefs {
     this.textSize = 'standard',
     this.productLookup = false,
     this.dailyAlerts = true,
+    this.silencedReminders = const [],
   });
   final String locale;
   final String currency;
@@ -882,6 +883,9 @@ class UserPrefs {
 
   /// Notices when a daily spending limit is passed or a saving target is still open.
   final bool dailyAlerts;
+
+  /// Kinds of reminder the user turned off (`bill`, `receivable`, `invoice`, `goal`).
+  final List<String> silencedReminders;
   factory UserPrefs.fromJson(Map<String, dynamic> j) => UserPrefs(
     locale: j['locale'] as String? ?? 'pt-BR',
     currency: j['currency'] as String? ?? 'BRL',
@@ -911,6 +915,10 @@ class UserPrefs {
     textSize: j['textSize'] as String? ?? 'standard',
     productLookup: j['productLookup'] as bool? ?? false,
     dailyAlerts: j['dailyAlerts'] as bool? ?? true,
+    silencedReminders: [
+      for (final k in j['silencedReminders'] as List? ?? const [])
+        if (k is String) k,
+    ],
   );
   Map<String, dynamic> toJson() => {
     'locale': locale,
@@ -938,6 +946,7 @@ class UserPrefs {
     if (textSize != 'standard') 'textSize': textSize,
     if (productLookup) 'productLookup': true,
     if (!dailyAlerts) 'dailyAlerts': false,
+    if (silencedReminders.isNotEmpty) 'silencedReminders': silencedReminders,
   };
   UserPrefs copyWith({
     String? locale,
@@ -964,6 +973,7 @@ class UserPrefs {
     String? textSize,
     bool? productLookup,
     bool? dailyAlerts,
+    List<String>? silencedReminders,
   }) => UserPrefs(
     locale: locale ?? this.locale,
     currency: currency ?? this.currency,
@@ -991,6 +1001,7 @@ class UserPrefs {
     textSize: textSize ?? this.textSize,
     productLookup: productLookup ?? this.productLookup,
     dailyAlerts: dailyAlerts ?? this.dailyAlerts,
+    silencedReminders: silencedReminders ?? this.silencedReminders,
   );
 }
 

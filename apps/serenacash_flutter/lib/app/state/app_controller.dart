@@ -612,15 +612,17 @@ class AppController extends AsyncNotifier<AppState> {
     String? categoryId,
     List<int> weekdays = const [],
     bool carryOver = false,
+    String? goalId,
   }) {
     final next = DailyTarget(
       id: newId(),
       kind: kind,
       amountCents: amountCents,
       categoryId: categoryId,
-      weekdays: weekdays,
+      weekdays: [...weekdays]..sort(),
       validFrom: _s.today,
       carryOver: carryOver,
+      goalId: goalId,
     );
     final all = setTarget(dailyTargets, next, _s.today);
     return setPrefs(

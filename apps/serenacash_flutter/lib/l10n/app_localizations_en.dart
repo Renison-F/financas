@@ -1173,7 +1173,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get remindersText =>
-      'Local notice the day before and on the due date of planned bills (next 7 days). Nothing leaves the device.';
+      'Notices the day before and on the day: bills, amounts to receive, card invoices and goals with a date. One notice per commitment, never repeated. They are local notices: nothing leaves the device.';
 
   @override
   String get enableReminders => 'Enable due-date reminders';
@@ -5488,4 +5488,175 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get regionFailed =>
       'That area could not be read. Try again or type what is written.';
+
+  @override
+  String get remindBills => 'Bills and instalments';
+
+  @override
+  String get remindReceivables => 'Amounts to receive';
+
+  @override
+  String get remindInvoices => 'Card invoices';
+
+  @override
+  String get remindGoals => 'Goals with a date';
+
+  @override
+  String dailyFilterCategory(String name) {
+    return 'Category: $name';
+  }
+
+  @override
+  String get dailyFilterAll => 'all';
+
+  @override
+  String dailyFilterAccount(String name) {
+    return 'Account: $name';
+  }
+
+  @override
+  String get dailyAllAccounts => 'All accounts';
+
+  @override
+  String get dailyAllCategories => 'All categories';
+
+  @override
+  String get dailyFilteredNote =>
+      'With a category chosen, spending is only that category\'s. What was received and the balances are always of the total.';
+
+  @override
+  String get dailyTrendTitle => 'Comparisons';
+
+  @override
+  String get dailyLast7 => 'Last 7 days';
+
+  @override
+  String get dailyPrevious7 => 'Previous 7 days';
+
+  @override
+  String get dailySameWeekday => 'A week ago, same weekday';
+
+  @override
+  String get dailyNoData => 'no record';
+
+  @override
+  String dailyPace(String value, int days) {
+    return 'If each remaining day costs the average of the days so far, the month adds up to $value ($days days left). It is arithmetic on what already happened, not a forecast.';
+  }
+
+  @override
+  String get dailyViewPlanned => 'Planned';
+
+  @override
+  String dailyMonthOf(String month) {
+    return 'Day by day of $month';
+  }
+
+  @override
+  String get dailyClosing => 'Balance at the end of the month';
+
+  @override
+  String get dailyClosingProjected => 'Expected at the end of the month';
+
+  @override
+  String get dailyOpeningProjected => 'Expected at the start of the month';
+
+  @override
+  String get dailyNoDays => 'No day to show in this view.';
+
+  @override
+  String get dailyAccountNote =>
+      'With an account chosen, card purchases are left out: they only go through an account when the invoice is paid.';
+
+  @override
+  String dailyLimitScope(String name) {
+    return 'Applies to: $name';
+  }
+
+  @override
+  String get dailyLimitAllSpending => 'all spending';
+
+  @override
+  String get dailyLimitWeekdays => 'Weekdays (none marked = every day)';
+
+  @override
+  String dailyLimitOnDays(String days) {
+    return 'Only on: $days';
+  }
+
+  @override
+  String get dailyLimitNotToday => 'This limit does not apply today.';
+
+  @override
+  String get dailyLimitByCategory => 'Limits by category';
+
+  @override
+  String dailyLimitEndFor(String name) {
+    return 'End the limit of $name';
+  }
+
+  @override
+  String dailySimLimit(
+    String value,
+    String total,
+    int days,
+    int checked,
+    int within,
+  ) {
+    return 'With $value a day: $total over $days days of this month. In the $checked days already past, spending would have stayed within the limit on $within.';
+  }
+
+  @override
+  String dailySimSaving(String value, String month, String year) {
+    return 'Setting aside $value a day: $month this month and $year in 365 days, if every day is met.';
+  }
+
+  @override
+  String dailySavingScope(String name) {
+    return 'Counts what is set aside in: $name';
+  }
+
+  @override
+  String get dailySavingAnyGoal => 'any goal';
+
+  @override
+  String get dailyAnyGoal => 'Any goal';
+
+  @override
+  String get dailyAlertsToggle =>
+      'Show a notice on the home screen when a daily limit is passed';
+
+  @override
+  String dailyAlertGeneral(String value) {
+    return 'Daily limit passed by $value.';
+  }
+
+  @override
+  String dailyAlertCategory(String name, String value) {
+    return 'Daily limit of $name passed by $value.';
+  }
+
+  @override
+  String get dailyAlertOpen => 'See daily control';
+
+  @override
+  String get weekday1 => 'Mon';
+
+  @override
+  String get weekday2 => 'Tue';
+
+  @override
+  String get weekday3 => 'Wed';
+
+  @override
+  String get weekday4 => 'Thu';
+
+  @override
+  String get weekday5 => 'Fri';
+
+  @override
+  String get weekday6 => 'Sat';
+
+  @override
+  String get weekday7 => 'Sun';
 }

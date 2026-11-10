@@ -76,12 +76,24 @@ Cents spentOn(Ledger ledger, ISODate date, {Id? categoryId}) {
 
 /// Day by day of [month]. The balance starts from the real money in the accounts at the end of the
 /// day before the month; nothing is smoothed and no day is invented.
-List<DayFlow> dailyFlow(Ledger ledger, MonthKey month, ISODate today) {
+///
+/// With [accountId] only what moved that account is counted and the balance is the balance of that
+/// account. A card purchase belongs to no account until its invoice is paid, so it is left out.
+List<DayFlow> dailyFlow(
+  Ledger ledger,
+  MonthKey month,
+  ISODate today, {
+  Id? accountId,
+}) {
   final first = startOfMonth(month), last = endOfMonth(month);
   final income = <ISODate, int>{}, expense = <ISODate, int>{};
   final plannedIn = <ISODate, int>{}, plannedOut = <ISODate, int>{};
+  Cents balanceOn(ISODate d) => accountId == null
+      ? consolidatedBalance(ledger, asOf: d)
+      : accountBalance(ledger, accountId, d);
   for (final t in ledger.transactions) {
     if (!isActive(t) || monthKeyOf(t.date) != month) continue;
+    if (accountId != null && t.accountId != accountId) continue;
     if (isIncomeLike(t)) {
       income[t.date] = addCents(income[t.date] ?? 0, effectiveCents(t));
       plannedIn[t.date] = addCents(plannedIn[t.date] ?? 0, pendingCents(t));
@@ -96,8 +108,13 @@ List<DayFlow> dailyFlow(Ledger ledger, MonthKey month, ISODate today) {
   // The projection starts from today's balance. A month that has not begun starts from what is
   // expected on its eve: today's balance plus everything planned between tomorrow and that day.
   var projected = compareISO(first, today) > 0
-      ? projectedBalance(ledger, addDays(first, -1), today)
-      : consolidatedBalance(ledger, asOf: today);
+      ? projectedBalance(
+          ledger,
+          addDays(first, -1),
+          today,
+          accountId: accountId,
+        )
+      : balanceOn(today);
   for (var d = first; compareISO(d, last) <= 0; d = addDays(d, 1)) {
     final past = compareISO(d, today) <= 0;
     if (!past) {
@@ -110,7 +127,7 @@ List<DayFlow> dailyFlow(Ledger ledger, MonthKey month, ISODate today) {
         expenseCents: expense[d] ?? 0,
         plannedIncomeCents: plannedIn[d] ?? 0,
         plannedExpenseCents: plannedOut[d] ?? 0,
-        balanceCents: past ? consolidatedBalance(ledger, asOf: d) : null,
+        balanceCents: past ? balanceOn(d) : null,
         projectedBalanceCents: past ? null : projected,
       ),
     );
@@ -125,13 +142,20 @@ Cents openingBalance(Ledger ledger, MonthKey month) =>
 /// Balance at the end of [date]. Up to [today] it is the real balance. After today it is today's
 /// balance plus what is planned to come in and minus what is planned to go out from tomorrow to
 /// [date]: a sum of what is recorded, not a forecast of behaviour.
-Cents projectedBalance(Ledger ledger, ISODate date, ISODate today) {
-  if (compareISO(date, today) <= 0) {
-    return consolidatedBalance(ledger, asOf: date);
-  }
-  var total = consolidatedBalance(ledger, asOf: today);
+Cents projectedBalance(
+  Ledger ledger,
+  ISODate date,
+  ISODate today, {
+  Id? accountId,
+}) {
+  Cents balanceOn(ISODate d) => accountId == null
+      ? consolidatedBalance(ledger, asOf: d)
+      : accountBalance(ledger, accountId, d);
+  if (compareISO(date, today) <= 0) return balanceOn(date);
+  var total = balanceOn(today);
   for (final t in ledger.transactions) {
     if (!isActive(t)) continue;
+    if (accountId != null && t.accountId != accountId) continue;
     if (compareISO(t.date, today) <= 0 || compareISO(t.date, date) > 0) {
       continue;
     }
@@ -198,8 +222,189 @@ class DailySummary {
         );
 }
 
-DailySummary dailySummary(Ledger ledger, ISODate today) {
+/// Spent from [from] to [to], both included; optionally only one category.
+Cents spentBetween(Ledger ledger, ISODate from, ISODate to, {Id? categoryId}) {
+  var total = 0;
+  for (final t in ledger.transactions) {
+    if (!isActive(t)) continue;
+    if (compareISO(t.date, from) < 0 || compareISO(t.date, to) > 0) continue;
+    total = addCents(
+      total,
+      _expenseOf(t, categoryId: categoryId, ledger: ledger),
+    );
+  }
+  return total;
+}
+
+/// How spending is moving, from facts only. Every comparison is between periods of the same length;
+/// a period with nothing recorded before it is reported as "no data" (null), never as zero.
+class DailyTrend {
+  const DailyTrend({
+    required this.last7Cents,
+    required this.previous7Cents,
+    required this.sameWeekdayLastWeekCents,
+    required this.daysRemaining,
+    required this.monthAtCurrentPaceCents,
+  });
+
+  /// Today and the six days before it.
+  final Cents last7Cents;
+
+  /// The seven days before those; null when the ledger has nothing that old.
+  final Cents? previous7Cents;
+
+  /// Spent seven days ago; null when the ledger has nothing that old.
+  final Cents? sameWeekdayLastWeekCents;
+
+  /// Days of the month after today.
+  final int daysRemaining;
+
+  /// What the month adds up to if every remaining day costs the average of the days so far. It is
+  /// arithmetic on the past, shown as such; it is not a forecast of behaviour.
+  final Cents monthAtCurrentPaceCents;
+}
+
+DailyTrend dailyTrend(Ledger ledger, ISODate today, {Id? categoryId}) {
   final month = monthKeyOf(today);
+  final first = startOfMonth(month), last = endOfMonth(month);
+  final spentMonth = spentBetween(ledger, first, today, categoryId: categoryId);
+  final elapsed = diffDays(first, today) + 1;
+  final remaining = diffDays(today, last);
+  final average = divCents(spentMonth, elapsed.toDouble(), RoundingMode.halfUp);
+  ISODate? oldest;
+  for (final t in ledger.transactions) {
+    if (!isActive(t)) continue;
+    if (oldest == null || compareISO(t.date, oldest) < 0) oldest = t.date;
+  }
+  bool known(ISODate d) => oldest != null && compareISO(oldest, d) <= 0;
+  final weekAgo = addDays(today, -7);
+  return DailyTrend(
+    last7Cents: spentBetween(
+      ledger,
+      addDays(today, -6),
+      today,
+      categoryId: categoryId,
+    ),
+    previous7Cents: known(addDays(today, -13))
+        ? spentBetween(
+            ledger,
+            addDays(today, -13),
+            weekAgo,
+            categoryId: categoryId,
+          )
+        : null,
+    sameWeekdayLastWeekCents: known(weekAgo)
+        ? spentOn(ledger, weekAgo, categoryId: categoryId)
+        : null,
+    daysRemaining: remaining,
+    monthAtCurrentPaceCents: addCents(
+      spentMonth,
+      mulCents(average, remaining.toDouble(), RoundingMode.halfUp),
+    ),
+  );
+}
+
+/// What a daily limit of [amountCents] would have meant in the days of this month already lived,
+/// and what it adds up to in the whole month. Used to try a value before setting it.
+class LimitSimulation {
+  const LimitSimulation({
+    required this.daysInMonth,
+    required this.monthTotalCents,
+    required this.daysChecked,
+    required this.daysWithin,
+  });
+
+  /// Days of the month on which the limit would apply (its weekdays).
+  final int daysInMonth;
+  final Cents monthTotalCents;
+
+  /// Days up to today on which it would have applied, and on how many spending stayed within it.
+  final int daysChecked, daysWithin;
+}
+
+LimitSimulation simulateLimit(
+  Ledger ledger,
+  Cents amountCents,
+  ISODate today, {
+  Id? categoryId,
+  List<int> weekdays = const [],
+}) {
+  final month = monthKeyOf(today);
+  var inMonth = 0, checked = 0, within = 0;
+  for (
+    var d = startOfMonth(month);
+    compareISO(d, endOfMonth(month)) <= 0;
+    d = addDays(d, 1)
+  ) {
+    if (weekdays.isNotEmpty && !weekdays.contains(_weekday(d))) continue;
+    inMonth++;
+    if (compareISO(d, today) > 0) continue;
+    checked++;
+    if (spentOn(ledger, d, categoryId: categoryId) <= amountCents) within++;
+  }
+  return LimitSimulation(
+    daysInMonth: inMonth,
+    monthTotalCents: mulCents(
+      amountCents,
+      inMonth.toDouble(),
+      RoundingMode.halfUp,
+    ),
+    daysChecked: checked,
+    daysWithin: within,
+  );
+}
+
+/// A spending limit passed today.
+class LimitAlert {
+  const LimitAlert({required this.target, required this.day});
+  final DailyTarget target;
+  final SpendLimitDay day;
+  Cents get overCents => day.spentCents - day.availableCents;
+}
+
+/// The spending limits (general and by category) that today's spending went over. A day on which
+/// a limit does not apply raises nothing.
+List<LimitAlert> limitAlerts(
+  Ledger ledger,
+  List<DailyTarget> targets,
+  ISODate today,
+) {
+  final out = <LimitAlert>[];
+  final seen = <Id?>{};
+  for (final t in targets) {
+    if (t.kind != DailyTarget.spendLimit || !seen.add(t.categoryId)) continue;
+    final inForce = targetOn(
+      targets,
+      DailyTarget.spendLimit,
+      today,
+      categoryId: t.categoryId,
+    );
+    if (inForce == null) continue;
+    final day = spendLimitHistory(
+      ledger,
+      targets,
+      today,
+      categoryId: t.categoryId,
+    ).where((d) => d.date == today).firstOrNull;
+    if (day != null && !day.within) {
+      out.add(LimitAlert(target: inForce, day: day));
+    }
+  }
+  return out;
+}
+
+/// The categories that have (or had this month) a daily limit of their own.
+List<Id> limitedCategories(List<DailyTarget> targets) => {
+  for (final t in targets)
+    if (t.kind == DailyTarget.spendLimit && t.categoryId != null) t.categoryId!,
+}.toList();
+
+/// The month so far. With [categoryId] the spending figures are those of that category (and its
+/// subcategories); what was received and the balances are always of everything, because income
+/// and money in the accounts do not belong to an expense category.
+DailySummary dailySummary(Ledger ledger, ISODate today, {Id? categoryId}) {
+  final month = monthKeyOf(today);
+  final first = startOfMonth(month);
   final flow = dailyFlow(
     ledger,
     month,
@@ -210,20 +415,24 @@ DailySummary dailySummary(Ledger ledger, ISODate today) {
   final hasPrev = ledger.transactions.any(
     (t) => isActive(t) && monthKeyOf(t.date) == prevMonth,
   );
+  Cents spent(ISODate d) => spentOn(ledger, d, categoryId: categoryId);
   Cents? prevSameDays;
   if (hasPrev) {
-    final prevFlow = dailyFlow(ledger, prevMonth, today);
-    prevSameDays = sumCents(
-      prevFlow.take(flow.length).map((d) => d.expenseCents),
+    // The same number of days of the previous month, or the whole of it when it is shorter.
+    final prevFirst = startOfMonth(prevMonth), prevLast = endOfMonth(prevMonth);
+    final until = addDays(prevFirst, flow.length - 1);
+    prevSameDays = spentBetween(
+      ledger,
+      prevFirst,
+      compareISO(until, prevLast) > 0 ? prevLast : until,
+      categoryId: categoryId,
     );
   }
   DayFlow? on(ISODate d) => flow.where((x) => x.date == d).firstOrNull;
   return DailySummary(
     today: today,
-    spentTodayCents: on(today)?.expenseCents ?? 0,
-    spentYesterdayCents: monthKeyOf(yesterday) == month
-        ? (on(yesterday)?.expenseCents ?? 0)
-        : spentOn(ledger, yesterday),
+    spentTodayCents: spent(today),
+    spentYesterdayCents: spent(yesterday),
     receivedTodayCents: on(today)?.incomeCents ?? 0,
     receivedYesterdayCents: monthKeyOf(yesterday) == month
         ? (on(yesterday)?.incomeCents ?? 0)
@@ -234,10 +443,10 @@ DailySummary dailySummary(Ledger ledger, ISODate today) {
                 )
                 .map(effectiveCents),
           ),
-    spentMonthCents: sumCents(flow.map((d) => d.expenseCents)),
+    spentMonthCents: spentBetween(ledger, first, today, categoryId: categoryId),
     receivedMonthCents: sumCents(flow.map((d) => d.incomeCents)),
     daysElapsed: flow.length,
-    daysWithSpending: flow.where((d) => d.expenseCents > 0).length,
+    daysWithSpending: flow.where((d) => spent(d.date) > 0).length,
     openingBalanceCents: openingBalance(ledger, month),
     balanceTodayCents: consolidatedBalance(ledger, asOf: today),
     previousMonthSameDaysCents: prevSameDays,
@@ -255,8 +464,12 @@ class DailyTarget {
     required this.validFrom,
     this.validUntil,
     this.carryOver = false,
+    this.goalId,
   });
   final String id;
+
+  /// For a saving target: only deposits into this goal count. Null = any goal.
+  final Id? goalId;
 
   /// `spend_limit` (most that should be spent in a day) or `saving` (amount to set aside a day).
   final String kind;
@@ -291,6 +504,7 @@ class DailyTarget {
     validFrom: j['validFrom'] as String,
     validUntil: j['validUntil'] as String?,
     carryOver: j['carryOver'] as bool? ?? false,
+    goalId: j['goalId'] as String?,
   );
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -301,6 +515,7 @@ class DailyTarget {
     'validFrom': validFrom,
     if (validUntil != null) 'validUntil': validUntil,
     if (carryOver) 'carryOver': true,
+    if (goalId != null) 'goalId': goalId,
   };
 
   DailyTarget endedOn(ISODate day) => DailyTarget(
@@ -312,6 +527,7 @@ class DailyTarget {
     validFrom: validFrom,
     validUntil: day,
     carryOver: carryOver,
+    goalId: goalId,
   );
 }
 
@@ -338,6 +554,24 @@ DailyTarget? targetOn(
   for (final t in targets) {
     if (t.kind != kind || t.categoryId != categoryId) continue;
     if (!targetAppliesOn(t, day)) continue;
+    if (best == null || compareISO(t.validFrom, best.validFrom) > 0) best = t;
+  }
+  return best;
+}
+
+/// The target of a kind (and category) whose period includes [day], whether or not [day] is one of
+/// its weekdays: what the user has set, as opposed to what applies on that particular day.
+DailyTarget? targetSetOn(
+  List<DailyTarget> targets,
+  String kind,
+  ISODate day, {
+  Id? categoryId,
+}) {
+  DailyTarget? best;
+  for (final t in targets) {
+    if (t.kind != kind || t.categoryId != categoryId) continue;
+    if (compareISO(day, t.validFrom) < 0) continue;
+    if (t.validUntil != null && compareISO(day, t.validUntil!) >= 0) continue;
     if (best == null || compareISO(t.validFrom, best.validFrom) > 0) best = t;
   }
   return best;
@@ -451,10 +685,11 @@ class SavingDay {
   bool get met => confirmedCents >= targetCents;
 }
 
-Cents savedOn(Ledger ledger, ISODate date) {
+Cents savedOn(Ledger ledger, ISODate date, {Id? goalId}) {
   var total = 0;
   for (final t in ledger.transactions) {
     if (!isActive(t) || t.date != date) continue;
+    if (goalId != null && t.goalId != goalId) continue;
     if (t.kind == TransactionKind.goalDeposit) {
       total = addCents(total, effectiveCents(t));
     } else if (t.kind == TransactionKind.goalWithdrawal) {
@@ -483,7 +718,7 @@ List<SavingDay> savingHistory(
       SavingDay(
         date: d,
         targetCents: t.amountCents,
-        confirmedCents: savedOn(ledger, d),
+        confirmedCents: savedOn(ledger, d, goalId: t.goalId),
       ),
     );
   }

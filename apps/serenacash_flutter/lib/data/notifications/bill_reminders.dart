@@ -1,5 +1,6 @@
-/// Local reminders for bills due in the next 7 days: one notification per bill at 09:00 local time,
-/// the day before and on the day. No server, no push tokens. Idempotent (cancel-all then reschedule).
+/// Local reminders for what is due in the next 7 days (bills, amounts to receive, card invoices
+/// and goals with a date): one notification per commitment at 09:00 local time, the day before and
+/// on the day. No server, no push tokens. Idempotent (cancel-all then reschedule).
 library;
 
 import 'dart:async';
@@ -10,10 +11,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-import '../../domain/dates/dates.dart';
 import '../../domain/entities/entities.dart';
-import '../../domain/ledger/ledger.dart';
 import '../../domain/money/money.dart';
+import '../../domain/reminders/reminders.dart';
 
 abstract interface class BillReminders {
   /// Asks the system for permission (shows the system dialog when needed).
@@ -52,15 +52,36 @@ class NoopBillReminders implements BillReminders {
   Stream<String> get openedRoutes => const Stream.empty();
 }
 
+/// Title and text of the notice of one reminder. The amount is what is still open, never the
+/// balance of an account.
+({String title, String body}) reminderText(Reminder r) {
+  final when = r.onTheDay ? 'hoje' : 'amanhã';
+  final value = formatBRL(r.cents);
+  return switch (r.kind) {
+    ReminderKind.receivable => (
+      title:
+          '${r.subject.isEmpty ? 'Recebimento' : r.subject} previsto para $when',
+      body: '$value. Toque para confirmar quando receber.',
+    ),
+    ReminderKind.invoice => (
+      title: 'Fatura ${r.subject} vence $when',
+      body: '$value em aberto.',
+    ),
+    ReminderKind.goal => (
+      title: 'Meta ${r.subject}: a data é $when',
+      body: 'Faltam $value.',
+    ),
+    _ => (
+      title: '${r.subject.isEmpty ? 'Conta' : r.subject} vence $when',
+      body: '$value. Toque para marcar como paga.',
+    ),
+  };
+}
+
 class LocalBillReminders implements BillReminders {
-  LocalBillReminders({
-    FlutterLocalNotificationsPlugin? plugin,
-    this.labelTomorrow = 'vence amanhã',
-    this.labelToday = 'vence hoje',
-    this.tapHint = 'Toque para marcar como paga.',
-  }) : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
+  LocalBillReminders({FlutterLocalNotificationsPlugin? plugin})
+    : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
   final FlutterLocalNotificationsPlugin _plugin;
-  final String labelTomorrow, labelToday, tapHint;
   bool _initialized = false;
   bool _launchRouteTaken = false;
   final _opened = StreamController<String>.broadcast();
@@ -148,42 +169,44 @@ class LocalBillReminders implements BillReminders {
   Future<int> schedule(Ledger ledger, String today) async {
     await _init();
     await _plugin.cancelAll();
-    final bills = upcoming(ledger, today, addDays(today, 7)).take(20).toList();
+    final plan = reminderPlan(
+      ledger,
+      today,
+      silenced: ledger.prefs.silencedReminders.toSet(),
+    );
     var n = 0;
     var id = 1;
-    for (final b in bills) {
-      final due = b.dueDate ?? b.date;
-      for (final (offset, label) in [(-1, labelTomorrow), (0, labelToday)]) {
-        final d = addDays(due, offset);
-        if (compareISO(d, today) < 0) continue;
-        final at = DateTime(
-          int.parse(d.substring(0, 4)),
-          int.parse(d.substring(5, 7)),
-          int.parse(d.substring(8, 10)),
-          9,
-        );
-        if (!at.isAfter(DateTime.now())) continue;
-        await _plugin.zonedSchedule(
-          id: id++,
-          title: '${b.description.isEmpty ? 'Conta' : b.description} $label',
-          body: '${formatBRL(pendingCents(b))}. $tapHint',
-          scheduledDate: _tz(at),
-          notificationDetails: const NotificationDetails(
-            android: AndroidNotificationDetails(
-              'bills',
-              'Vencimentos',
-              channelDescription: 'Lembretes de contas a pagar',
-              importance: Importance.defaultImportance,
-              priority: Priority.defaultPriority,
-              color: Color(0xFF0B5563),
-            ),
-            iOS: DarwinNotificationDetails(),
+    for (final r in plan) {
+      final d = r.notifyOn;
+      final at = DateTime(
+        int.parse(d.substring(0, 4)),
+        int.parse(d.substring(5, 7)),
+        int.parse(d.substring(8, 10)),
+        9,
+      );
+      if (!at.isAfter(DateTime.now())) continue;
+      final text = reminderText(r);
+      await _plugin.zonedSchedule(
+        id: id++,
+        title: text.title,
+        body: text.body,
+        scheduledDate: _tz(at),
+        notificationDetails: const NotificationDetails(
+          android: AndroidNotificationDetails(
+            'bills',
+            'Vencimentos',
+            channelDescription:
+                'Lembretes de contas, recebimentos, faturas e metas',
+            importance: Importance.defaultImportance,
+            priority: Priority.defaultPriority,
+            color: Color(0xFF0B5563),
           ),
-          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-          payload: '/transaction?id=${b.id}',
-        );
-        n++;
-      }
+          iOS: DarwinNotificationDetails(),
+        ),
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        payload: r.route,
+      );
+      n++;
     }
     return n;
   }
