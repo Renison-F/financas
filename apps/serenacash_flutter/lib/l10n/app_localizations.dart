@@ -2129,19 +2129,19 @@ abstract class AppLocalizations {
   /// No description provided for @biometricLock.
   ///
   /// In pt, this message translates to:
-  /// **'Pedir biometria ao abrir'**
+  /// **'Pedir confirmação do aparelho ao abrir'**
   String get biometricLock;
 
   /// No description provided for @biometricAvailable.
   ///
   /// In pt, this message translates to:
-  /// **'Face ID / impressão digital do aparelho.'**
+  /// **'Impressão digital, rosto ou bloqueio de tela do aparelho.'**
   String get biometricAvailable;
 
   /// No description provided for @biometricNotAvailable.
   ///
   /// In pt, this message translates to:
-  /// **'Nenhuma biometria configurada neste aparelho.'**
+  /// **'Nenhuma biometria cadastrada; a confirmação usa o bloqueio de tela do aparelho.'**
   String get biometricNotAvailable;
 
   /// No description provided for @pinLock.
@@ -6847,6 +6847,173 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Não foi possível confirmar no aparelho; o bloqueio não foi ativado. Configure um bloqueio de tela ou biometria no Android e tente de novo.'**
   String get biometricNotEnabled;
+
+  /// No description provided for @openCalendar.
+  ///
+  /// In pt, this message translates to:
+  /// **'Abrir calendário'**
+  String get openCalendar;
+
+  /// No description provided for @payWith.
+  ///
+  /// In pt, this message translates to:
+  /// **'Forma de pagamento'**
+  String get payWith;
+
+  /// No description provided for @payWithAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta ou carteira'**
+  String get payWithAccount;
+
+  /// No description provided for @payWithCard.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cartão de crédito'**
+  String get payWithCard;
+
+  /// No description provided for @newAccountChip.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova conta'**
+  String get newAccountChip;
+
+  /// No description provided for @newCardChip.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo cartão'**
+  String get newCardChip;
+
+  /// No description provided for @transferNeedsTwo.
+  ///
+  /// In pt, this message translates to:
+  /// **'A transferência precisa de duas contas. Cadastre a conta de destino.'**
+  String get transferNeedsTwo;
+
+  /// No description provided for @cardPurchaseHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entra na fatura do cartão. Nenhuma conta é debitada agora; a conta só baixa quando a fatura for paga.'**
+  String get cardPurchaseHelp;
+
+  /// No description provided for @installmentsExact.
+  ///
+  /// In pt, this message translates to:
+  /// **'{first} na primeira e {rest} nas demais'**
+  String installmentsExact(String first, String rest);
+
+  /// No description provided for @bioCanceled.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirmação cancelada; o bloqueio não foi ativado.'**
+  String get bioCanceled;
+
+  /// No description provided for @bioFailedEnable.
+  ///
+  /// In pt, this message translates to:
+  /// **'O aparelho não confirmou sua identidade; o bloqueio não foi ativado.'**
+  String get bioFailedEnable;
+
+  /// No description provided for @bioNotSetUp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Este aparelho não tem bloqueio de tela nem biometria cadastrada. Cadastre nas configurações de segurança do Android e tente de novo.'**
+  String get bioNotSetUp;
+
+  /// No description provided for @bioNoHardware.
+  ///
+  /// In pt, this message translates to:
+  /// **'Este aparelho não oferece confirmação por biometria nem por bloqueio de tela. Use o PIN do aplicativo.'**
+  String get bioNoHardware;
+
+  /// No description provided for @bioLockedOut.
+  ///
+  /// In pt, this message translates to:
+  /// **'Muitas tentativas. O Android suspendeu a biometria por um tempo; aguarde e tente de novo.'**
+  String get bioLockedOut;
+
+  /// No description provided for @bioUnavailableNow.
+  ///
+  /// In pt, this message translates to:
+  /// **'O Android não conseguiu abrir a confirmação agora. Tente de novo.'**
+  String get bioUnavailableNow;
+
+  /// No description provided for @bioOpenSettings.
+  ///
+  /// In pt, this message translates to:
+  /// **'Abrir configurações'**
+  String get bioOpenSettings;
+
+  /// No description provided for @unlockNotSetUp.
+  ///
+  /// In pt, this message translates to:
+  /// **'O bloqueio de tela deste aparelho foi removido. Cadastre um bloqueio de tela ou uma biometria no Android para desbloquear.'**
+  String get unlockNotSetUp;
+
+  /// No description provided for @annualNoData.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum lançamento e nenhum orçamento em {year}.'**
+  String annualNoData(String year);
+
+  /// No description provided for @annualNoDataHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'O app só mostra o que foi registrado: um orçamento ou uma meta criados depois não valem para trás.'**
+  String get annualNoDataHint;
+
+  /// No description provided for @annualGoalsOfYear.
+  ///
+  /// In pt, this message translates to:
+  /// **'Metas em {year}'**
+  String annualGoalsOfYear(String year);
+
+  /// No description provided for @annualNoGoalsInYear.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma meta existia em {year}.'**
+  String annualNoGoalsInYear(String year);
+
+  /// No description provided for @annualGoalPast.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name}: {saved} guardados no ano · {total} acumulados até dezembro'**
+  String annualGoalPast(String name, String saved, String total);
+
+  /// No description provided for @annualGoalByDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name}: faltam {remaining} · {value}/mês até {date}'**
+  String annualGoalByDate(
+    String name,
+    String remaining,
+    String value,
+    String date,
+  );
+
+  /// No description provided for @annualGoalByYearEnd.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name}: faltam {remaining} · {value}/mês para concluir até dezembro (meta sem prazo)'**
+  String annualGoalByYearEnd(String name, String remaining, String value);
+
+  /// No description provided for @annualGoalFutureDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name}: faltam {remaining} hoje · prazo em {date}'**
+  String annualGoalFutureDate(String name, String remaining, String date);
+
+  /// No description provided for @annualGoalFutureOpen.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name}: faltam {remaining} hoje · sem prazo definido'**
+  String annualGoalFutureOpen(String name, String remaining);
+
+  /// No description provided for @annualFutureNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ano futuro: só aparece o que já está previsto nos lançamentos e o orçamento que estiver em vigor.'**
+  String get annualFutureNote;
 }
 
 class _AppLocalizationsDelegate

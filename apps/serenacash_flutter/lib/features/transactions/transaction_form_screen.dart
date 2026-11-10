@@ -122,9 +122,12 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
     setState(() => _saving = true);
     try {
       final ex = _existing;
+      // "Not paid yet" only exists for expenses and income; a value left over from another kind of
+      // entry must not turn a card purchase or a transfer into a bill.
+      final planned = _planned && _canBePlanned;
       final status = _kind == TransactionKind.cardPurchase
           ? TransactionStatus.settled
-          : _planned
+          : planned
           ? TransactionStatus.planned
           : ex?.status == TransactionStatus.partiallyPaid
           ? TransactionStatus.partiallyPaid
@@ -151,7 +154,7 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
                   : null,
               cardId: _kind == TransactionKind.cardPurchase ? _cardId : null,
               status: status,
-              dueDate: _planned ? _date : null,
+              dueDate: planned ? _date : null,
               tags: _tags,
               notes: _notes.text.trim().isEmpty ? null : _notes.text.trim(),
               merchant: _merchant.text.trim().isEmpty
@@ -177,8 +180,63 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
     }
   }
 
-  String get _categoryKind =>
-      _kind == TransactionKind.income ? 'income' : 'expense';
+  String get _categoryKind => _categoryKindOf(_kind);
+  static String _categoryKindOf(TransactionKind k) =>
+      k == TransactionKind.income ? 'income' : 'expense';
+  bool get _canBePlanned =>
+      _kind == TransactionKind.expense || _kind == TransactionKind.income;
+
+  /// Any edit clears the message of the last attempt: it described a state that no longer exists.
+  void _edit(VoidCallback change) => setState(() {
+    _error = null;
+    change();
+  });
+
+  /// Switching the kind keeps everything that still applies. An expense and a card purchase share
+  /// the same categories, so going from one to the other keeps the category too.
+  void _setKind(TransactionKind k) => _edit(() {
+    if (_categoryKindOf(k) != _categoryKind) {
+      _categoryId = null;
+      _subcategoryId = null;
+    }
+    _kind = k;
+  });
+
+  /// Creates an account without leaving the entry: the form stays underneath with what was typed.
+  Future<void> _newAccount({required bool destination}) async {
+    final id = await context.push<String>('/accounts/new');
+    if (id == null || !mounted) return;
+    _edit(() {
+      if (destination) {
+        _toAccountId = id;
+      } else {
+        _accountId = id;
+        if (_toAccountId == id) _toAccountId = null;
+      }
+    });
+  }
+
+  Future<void> _newCard() async {
+    final id = await context.push<String>('/cards/new');
+    if (id == null || !mounted) return;
+    _edit(() => _cardId = id);
+  }
+
+  Widget _choices({
+    required List<(String, String)> options,
+    required String? value,
+    required ValueChanged<String> onPick,
+    required String newLabel,
+    required VoidCallback onNew,
+  }) => Wrap(
+    spacing: 8,
+    runSpacing: 8,
+    children: [
+      for (final (id, name) in options)
+        SChip(label: name, selected: id == value, onTap: () => onPick(id)),
+      SChip(label: newLabel, icon: SIconName.plus, onTap: onNew),
+    ],
+  );
 
   /// Opens the picker; what was typed stays, because this screen keeps its state underneath.
   Future<void> _pickCategory() async {
@@ -292,18 +350,14 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
                         (TransactionKind.cardPurchase, l.card),
                       ],
                       value: _kind,
-                      onChanged: (k) => setState(() {
-                        _kind = k;
-                        _categoryId = null;
-                        _subcategoryId = null;
-                      }),
+                      onChanged: _setKind,
                     ),
                     const SizedBox(height: Spacing.md),
                   ],
                   MoneyField(
                     label: l.amount,
                     cents: _amount,
-                    onChanged: (v) => setState(() => _amount = v),
+                    onChanged: (v) => _edit(() => _amount = v),
                     autofocus: ex == null,
                     error: _error != null && (_amount == null || _amount == 0)
                         ? _error
@@ -376,45 +430,64 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
                     ],
                     const SizedBox(height: Spacing.md),
                   ],
+                  // An expense already typed can go to the card statement instead of an account
+                  // without starting over: both are the same entry with a different destination.
+                  if (ex == null &&
+                      (_kind == TransactionKind.expense ||
+                          _kind == TransactionKind.cardPurchase)) ...[
+                    Field(
+                      label: l.payWith,
+                      help: _kind == TransactionKind.cardPurchase
+                          ? l.cardPurchaseHelp
+                          : null,
+                      child: Segmented<TransactionKind>(
+                        options: [
+                          (TransactionKind.expense, l.payWithAccount),
+                          (TransactionKind.cardPurchase, l.payWithCard),
+                        ],
+                        value: _kind,
+                        onChanged: _setKind,
+                      ),
+                    ),
+                    const SizedBox(height: Spacing.md),
+                  ],
                   if (_kind == TransactionKind.cardPurchase)
                     Field(
                       label: l.card,
-                      child: cards.isEmpty
-                          ? SButton(
-                              label: l.registerCard,
-                              variant: SButtonVariant.secondary,
-                              onPressed: () => context.push('/cards/new'),
-                            )
-                          : ChipSelect<String>(
-                              options: [for (final x in cards) (x.id, x.name)],
-                              value: _cardId,
-                              onChanged: (v) => setState(() => _cardId = v),
-                            ),
+                      child: _choices(
+                        options: [for (final x in cards) (x.id, x.name)],
+                        value: _cardId,
+                        onPick: (v) => _edit(() => _cardId = v),
+                        newLabel: cards.isEmpty
+                            ? l.registerCard
+                            : l.newCardChip,
+                        onNew: _newCard,
+                      ),
                     )
                   else
                     Field(
                       label: _kind == TransactionKind.transfer
                           ? l.from
                           : l.account,
-                      child: accounts.isEmpty
-                          ? SButton(
-                              label: l.registerAccount,
-                              variant: SButtonVariant.secondary,
-                              onPressed: () => context.push('/accounts/new'),
-                            )
-                          : ChipSelect<String>(
-                              options: [
-                                for (final x in accounts) (x.id, x.name),
-                              ],
-                              value: _accountId,
-                              onChanged: (v) => setState(() => _accountId = v),
-                            ),
+                      child: _choices(
+                        options: [for (final x in accounts) (x.id, x.name)],
+                        value: _accountId,
+                        onPick: (v) => _edit(() {
+                          _accountId = v;
+                          if (_toAccountId == v) _toAccountId = null;
+                        }),
+                        newLabel: accounts.isEmpty
+                            ? l.registerAccount
+                            : l.newAccountChip,
+                        onNew: () => _newAccount(destination: false),
+                      ),
                     ),
                   const SizedBox(height: Spacing.md),
                   if (_kind == TransactionKind.transfer) ...[
                     Field(
                       label: l.to,
-                      child: ChipSelect<String>(
+                      help: accounts.length < 2 ? l.transferNeedsTwo : null,
+                      child: _choices(
                         options: [
                           for (final x in accounts.where(
                             (a) => a.id != _accountId,
@@ -422,20 +495,23 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
                             (x.id, x.name),
                         ],
                         value: _toAccountId,
-                        onChanged: (v) => setState(() => _toAccountId = v),
+                        onPick: (v) => _edit(() => _toAccountId = v),
+                        newLabel: l.newAccountChip,
+                        onNew: () => _newAccount(destination: true),
                       ),
                     ),
                     const SizedBox(height: Spacing.md),
                   ],
                   DateField(
-                    label: _planned ? l.dueDate : l.date,
+                    label: _planned && _canBePlanned ? l.dueDate : l.date,
                     value: _date,
-                    onChanged: (d) => setState(() => _date = d),
+                    onChanged: (d) => _edit(() => _date = d),
                     today: s.today,
                     todayLabel: l.today,
                     yesterdayLabel: l.yesterday,
                     tomorrowLabel: l.tomorrow,
                     invalidLabel: l.invalidDate,
+                    calendarLabel: l.openCalendar,
                   ),
                   const SizedBox(height: Spacing.md),
                   if (_kind != TransactionKind.cardPurchase &&
@@ -448,7 +524,7 @@ class _TransactionFormScreenState extends ConsumerState<TransactionFormScreen> {
                       help: _kind == TransactionKind.income
                           ? l.plannedHelpIncome
                           : l.plannedHelp,
-                      onChanged: (v) => setState(() => _planned = v),
+                      onChanged: (v) => _edit(() => _planned = v),
                     ),
                     const SizedBox(height: Spacing.md),
                   ],

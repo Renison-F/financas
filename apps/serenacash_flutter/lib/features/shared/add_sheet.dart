@@ -48,12 +48,10 @@ Future<void> showAddSheet(BuildContext context) async {
       '/transaction?kind=income&planned=1',
     ),
   ];
-  final route = await showModalBottomSheet<String>(
-    context: context,
+  final route = await showSSheet<String>(
+    context,
     // Over the whole screen, bottom bar included: this is a choice to make, not part of the tab.
     useRootNavigator: true,
-    isScrollControlled: true,
-    useSafeArea: true,
     builder: (ctx) => Padding(
       padding: const EdgeInsets.fromLTRB(Spacing.md, 0, Spacing.md, Spacing.md),
       child: SingleChildScrollView(

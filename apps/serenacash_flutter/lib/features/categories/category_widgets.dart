@@ -238,11 +238,9 @@ Future<CategoryChoice?> showCategoryPicker(
   String? noneLabel,
   Set<String> exclude = const {},
   bool allowCreate = true,
-}) => showModalBottomSheet<CategoryChoice>(
-  context: context,
+}) => showSSheet<CategoryChoice>(
+  context,
   useRootNavigator: true,
-  isScrollControlled: true,
-  useSafeArea: true,
   builder: (_) => _CategoryPickerSheet(
     kind: kind,
     selectedId: selectedId,

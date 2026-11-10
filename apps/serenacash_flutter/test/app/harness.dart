@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:serenacash/app/app.dart';
 import 'package:serenacash/app/di.dart';
@@ -38,8 +39,12 @@ Future<ByteData> _bytes(String path) async {
 }
 
 class TestApp {
-  TestApp({String now = '2026-11-04T12:00:00.000Z'}) : clock = FixedClock(now);
+  TestApp({String now = '2026-11-04T12:00:00.000Z', this.overrides = const []})
+    : clock = FixedClock(now);
   final FixedClock clock;
+
+  /// Extra provider overrides for one test (a fake device confirmation, for instance).
+  final List<Override> overrides;
   final db = AppDatabase.inMemory();
   final secrets = InMemorySecretStore();
 
@@ -50,6 +55,7 @@ class TestApp {
       clockProvider.overrideWithValue(clock),
       idGeneratorProvider.overrideWithValue(SequentialIdGenerator('t')),
       billRemindersProvider.overrideWithValue(const NoopBillReminders()),
+      ...overrides,
     ],
     child: const SerenaCashApp(),
   );

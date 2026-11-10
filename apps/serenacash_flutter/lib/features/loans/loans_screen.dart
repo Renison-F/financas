@@ -427,7 +427,10 @@ class _LoanFormScreenState extends ConsumerState<LoanFormScreen> {
         MoneyField(
           label: l.borrowed,
           cents: _principal,
-          onChanged: (v) => setState(() => _principal = v),
+          onChanged: (v) => setState(() {
+            _principal = v;
+            _error = null;
+          }),
         ),
         Row(
           children: [
@@ -439,7 +442,7 @@ class _LoanFormScreenState extends ConsumerState<LoanFormScreen> {
                   decimal: true,
                 ),
                 placeholder: '1,99',
-                onChanged: (_) => setState(() {}),
+                onChanged: (_) => setState(() => _error = null),
               ),
             ),
             const SizedBox(width: Spacing.sm),
@@ -448,7 +451,7 @@ class _LoanFormScreenState extends ConsumerState<LoanFormScreen> {
                 label: l.installments,
                 controller: _term,
                 keyboardType: TextInputType.number,
-                onChanged: (_) => setState(() {}),
+                onChanged: (_) => setState(() => _error = null),
               ),
             ),
           ],
@@ -470,6 +473,7 @@ class _LoanFormScreenState extends ConsumerState<LoanFormScreen> {
           yesterdayLabel: l.yesterday,
           tomorrowLabel: l.tomorrow,
           invalidLabel: l.invalidDate,
+          calendarLabel: l.openCalendar,
         ),
         MoneyField(
           label: l.monthlyFee,

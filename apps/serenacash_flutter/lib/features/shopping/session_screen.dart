@@ -17,43 +17,8 @@ import '../../domain/money/money.dart';
 import '../../domain/shopping/shopping.dart';
 import '../../ui/components/components.dart';
 import '../shared/format.dart';
+import 'item_review_screen.dart';
 import 'scan_result.dart';
-
-class _Draft {
-  _Draft({
-    required this.name,
-    this.brand,
-    required this.unit,
-    required this.quantity,
-    this.unitPriceCents,
-    this.barcode,
-    this.productId,
-    required this.priceSource,
-    this.confidence,
-    this.warnings = const [],
-    this.lineId,
-    this.listItemId,
-    this.discountPercent,
-    this.promo,
-    this.promoFromCents,
-  });
-  String name;
-  String? brand;
-  String unit;
-  String quantity;
-  int? unitPriceCents;
-  String? barcode;
-  String? productId;
-  String priceSource;
-  double? confidence;
-  List<String> warnings;
-  String? lineId;
-  String? listItemId;
-  double? discountPercent;
-  Promo? promo;
-  int? promoFromCents;
-  double get qty => double.tryParse(quantity.replaceAll(',', '.')) ?? 0;
-}
 
 class SessionScreen extends ConsumerStatefulWidget {
   const SessionScreen({super.key, this.id, this.listId});
@@ -65,10 +30,11 @@ class SessionScreen extends ConsumerStatefulWidget {
 
 class _SessionScreenState extends ConsumerState<SessionScreen> {
   ShoppingSession? _session;
-  _Draft? _draft;
   int? _budget;
   late final _store = TextEditingController();
   bool _finishing = false;
+  // One item is reviewed at a time; a new reading waits for the open review to close.
+  bool _reviewing = false;
   bool _inited = false;
   int _ocrCount = 0;
 
@@ -133,8 +99,8 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                 (found != null && i.productId == found.product.id),
           )
           .firstOrNull;
-      setState(
-        () => _draft = _Draft(
+      _review(
+        ItemDraft(
           name: found?.product.name ?? '',
           brand: found?.product.brand,
           unit: found?.product.defaultUnit ?? 'un',
@@ -154,8 +120,8 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     }
     final r = scan.reading;
     if (r == null) {
-      setState(
-        () => _draft = _Draft(
+      _review(
+        ItemDraft(
           name: '',
           unit: 'un',
           quantity: '1',
@@ -198,8 +164,8 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
       );
     }
     if (r.confidence < 0.75) warnings.add(l.lowConfidenceWarn);
-    setState(
-      () => _draft = _Draft(
+    _review(
+      ItemDraft(
         name: found?.product.name ?? r.name ?? '',
         unit: r.priceUnit,
         quantity: '1',
@@ -218,16 +184,19 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
       ? v.toInt().toString()
       : v.toString().replaceAll('.', ',');
 
-  Future<void> _confirmDraft() async {
-    final d = _draft;
+  /// Opens the review of one item over the cart; the item only enters the cart when confirmed there.
+  Future<void> _review(ItemDraft d) async {
+    setState(() => _reviewing = true);
+    final ok = await showItemReview(context, d);
+    if (!mounted) return;
+    // Rebuilding here also picks up a reading that arrived while the review was open.
+    setState(() => _reviewing = false);
+    if (ok) await _confirmDraft(d);
+  }
+
+  Future<void> _confirmDraft(ItemDraft d) async {
     final session = _session;
-    if (d == null ||
-        session == null ||
-        d.unitPriceCents == null ||
-        d.name.trim().isEmpty ||
-        d.qty <= 0) {
-      return;
-    }
+    if (session == null || !d.complete) return;
     var productId = d.productId;
     if (productId == null && (d.barcode != null || d.name.trim().isNotEmpty)) {
       productId = _ctl.newId();
@@ -265,7 +234,6 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
         ? updateSessionLine(session, d.lineId!, (_) => line, _ctl.nowISO())
         : addToSession(session, line, _ctl.nowISO());
     await _persist(next);
-    setState(() => _draft = null);
     unawaitedHaptic();
   }
 
@@ -281,8 +249,8 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     if (line != null) {
       await _persist(addToSession(_session!, line, _ctl.nowISO()));
     } else {
-      setState(
-        () => _draft = _Draft(
+      await _review(
+        ItemDraft(
           name: it.name,
           unit: it.unit,
           quantity: _q(it.quantity),
@@ -296,23 +264,18 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     }
   }
 
-  /// Finishing closes the cart for good, so it is confirmed first, and says so when an item is still
-  /// waiting in the confirmation panel (it would be dropped).
+  /// Finishing closes the cart for good, so it is confirmed first.
   Future<void> _confirmFinish(String total) async {
     final l = context.l10n;
-    final pending = _draft != null;
     final ok = await confirmSheet(
       context,
       title: l.finishPurchaseQ,
-      text: pending
-          ? '${l.finishPurchaseText(total)} ${l.finishPurchasePending}'
-          : l.finishPurchaseText(total),
+      text: l.finishPurchaseText(total),
       confirmLabel: l.finishConfirm,
       cancelLabel: l.cancel,
       destructive: false,
     );
     if (!ok || !mounted) return;
-    setState(() => _draft = null);
     await _finish();
   }
 
@@ -378,7 +341,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
         .where((x) => x.id == (_session?.listId ?? widget.listId))
         .firstOrNull;
     final scan = ref.watch(scanResultProvider);
-    if (scan != null && _session != null) {
+    if (scan != null && _session != null && !_reviewing) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) _consumeScan(scan, s, list);
       });
@@ -621,7 +584,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                   Spacing.md,
                   Spacing.sm,
                   Spacing.md,
-                  160,
+                  Spacing.md,
                 ),
                 children: [
                   if (session.lines.isEmpty)
@@ -643,8 +606,8 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                               padding: const EdgeInsets.all(Spacing.sm),
                               onTap: readOnly
                                   ? null
-                                  : () => setState(
-                                      () => _draft = _Draft(
+                                  : () => _review(
+                                      ItemDraft(
                                         name: line.name,
                                         brand: line.brand,
                                         unit: line.unit,
@@ -806,329 +769,79 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-      bottomSheet: readOnly
-          ? null
-          : Container(
-              color: c.bg,
-              padding: EdgeInsets.fromLTRB(
-                Spacing.md,
-                Spacing.xs,
-                Spacing.md,
-                Spacing.md + MediaQuery.paddingOf(context).bottom,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SButton(
-                          label: l.tagBtn,
-                          icon: SIconName.camera,
-                          compact: true,
-                          fullWidth: true,
-                          onPressed: () =>
-                              context.push('/shopping/scan?mode=label'),
+            if (!readOnly)
+              Container(
+                decoration: BoxDecoration(
+                  color: c.bg,
+                  border: Border(top: BorderSide(color: c.border)),
+                ),
+                padding: const EdgeInsets.fromLTRB(
+                  Spacing.md,
+                  Spacing.xs,
+                  Spacing.md,
+                  Spacing.xs,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SButton(
+                            label: l.tagBtn,
+                            icon: SIconName.camera,
+                            compact: true,
+                            fullWidth: true,
+                            onPressed: () =>
+                                context.push('/shopping/scan?mode=label'),
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: SButton(
-                          label: l.codeBtn,
-                          icon: SIconName.barcode,
-                          variant: SButtonVariant.secondary,
-                          compact: true,
-                          fullWidth: true,
-                          onPressed: () =>
-                              context.push('/shopping/scan?mode=barcode'),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: SButton(
+                            label: l.codeBtn,
+                            icon: SIconName.barcode,
+                            variant: SButtonVariant.secondary,
+                            compact: true,
+                            fullWidth: true,
+                            onPressed: () =>
+                                context.push('/shopping/scan?mode=barcode'),
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: SButton(
-                          label: l.manualBtn,
-                          icon: SIconName.plus,
-                          variant: SButtonVariant.secondary,
-                          compact: true,
-                          fullWidth: true,
-                          onPressed: () => setState(
-                            () => _draft = _Draft(
-                              name: '',
-                              unit: 'un',
-                              quantity: '1',
-                              priceSource: 'manual',
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: SButton(
+                            label: l.manualBtn,
+                            icon: SIconName.plus,
+                            variant: SButtonVariant.secondary,
+                            compact: true,
+                            fullWidth: true,
+                            onPressed: () => _review(
+                              ItemDraft(
+                                name: '',
+                                unit: 'un',
+                                quantity: '1',
+                                priceSource: 'manual',
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SButton(
-                    label: l.finishPurchase,
-                    variant: SButtonVariant.ghost,
-                    fullWidth: true,
-                    loading: _finishing,
-                    onPressed: session.lines.isEmpty
-                        ? null
-                        : () => _confirmFinish(brl(totals.totalCents)),
-                  ),
-                  if (_draft != null)
-                    _DraftSheet(
-                      draft: _draft!,
-                      hidden: hidden,
-                      onChanged: () => setState(() {}),
-                      onConfirm: _confirmDraft,
-                      onCancel: () => setState(() => _draft = null),
+                      ],
                     ),
-                ],
-              ),
-            ),
-    );
-  }
-}
-
-class _DraftSheet extends StatelessWidget {
-  const _DraftSheet({
-    required this.draft,
-    required this.hidden,
-    required this.onChanged,
-    required this.onConfirm,
-    required this.onCancel,
-  });
-  final _Draft draft;
-  final bool hidden;
-  final VoidCallback onChanged, onCancel;
-  final Future<void> Function() onConfirm;
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    final c = context.colors;
-    final d = draft;
-    final measured = units[d.unit]!.measured;
-    final ok =
-        d.unitPriceCents != null && d.name.trim().isNotEmpty && d.qty > 0;
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.sizeOf(context).height * 0.62,
-      ),
-      child: Material(
-        color: c.surface,
-        borderRadius: BorderRadius.circular(Radii.lg),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(Spacing.md),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                d.lineId != null ? l.editItemTitle : l.confirmItem,
-                style: Type.title.copyWith(color: c.text),
-              ),
-              for (final w in d.warnings)
-                Text(w, style: Type.bodySmall.copyWith(color: c.warning)),
-              if (d.confidence != null)
-                Text(
-                  l.readingConfidence((d.confidence! * 100).round()),
-                  style: Type.caption.copyWith(color: c.textMuted),
-                ),
-              const SizedBox(height: Spacing.sm),
-              STextField(
-                label: l.product,
-                controller: TextEditingController(text: d.name)
-                  ..selection = TextSelection.collapsed(offset: d.name.length),
-                placeholder: l.productNameHint,
-                autofocus: d.name.isEmpty,
-                onChanged: (v) {
-                  d.name = v;
-                  onChanged();
-                },
-              ),
-              const SizedBox(height: Spacing.sm),
-              MoneyField(
-                label: measured
-                    ? l.pricePer(units[d.unit]!.label)
-                    : l.unitPrice,
-                cents: d.unitPriceCents,
-                onChanged: (v) {
-                  if (d.priceSource == 'label_ocr' && v != d.unitPriceCents) {
-                    d.priceSource = 'manual';
-                  }
-                  d.unitPriceCents = v;
-                  onChanged();
-                },
-              ),
-              if (d.promoFromCents != null)
-                Text(
-                  l.previousTagPrice(
-                    formatBRL(d.promoFromCents!, hidden: hidden),
-                  ),
-                  style: Type.caption.copyWith(color: c.textMuted),
-                ),
-              const SizedBox(height: Spacing.sm),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    width: 120,
-                    child: STextField(
-                      label: measured
-                          ? l.quantityUnit(units[d.unit]!.label)
-                          : l.quantity,
-                      controller: TextEditingController(text: d.quantity)
-                        ..selection = TextSelection.collapsed(
-                          offset: d.quantity.length,
-                        ),
-                      keyboardType: const TextInputType.numberWithOptions(
-                        decimal: true,
-                      ),
-                      onChanged: (v) {
-                        d.quantity = v;
-                        onChanged();
-                      },
-                    ),
-                  ),
-                  if (!measured) ...[
-                    const SizedBox(width: 8),
                     SButton(
-                      label: '−',
-                      variant: SButtonVariant.secondary,
-                      compact: true,
-                      onPressed: () {
-                        d.quantity = '${(d.qty.round() - 1).clamp(1, 999)}';
-                        onChanged();
-                      },
-                    ),
-                    const SizedBox(width: 4),
-                    SButton(
-                      label: '+',
-                      variant: SButtonVariant.secondary,
-                      compact: true,
-                      onPressed: () {
-                        d.quantity = '${d.qty.round() + 1}';
-                        onChanged();
-                      },
-                    ),
-                  ],
-                ],
-              ),
-              const SizedBox(height: Spacing.sm),
-              Field(
-                label: l.unit,
-                child: Segmented<String>(
-                  options: const [
-                    ('un', 'un'),
-                    ('kg', 'kg'),
-                    ('g', 'g'),
-                    ('l', 'L'),
-                    ('ml', 'mL'),
-                  ],
-                  value: const ['un', 'kg', 'g', 'l', 'ml'].contains(d.unit)
-                      ? d.unit
-                      : 'un',
-                  onChanged: (u) {
-                    d.unit = u;
-                    onChanged();
-                  },
-                ),
-              ),
-              const SizedBox(height: Spacing.sm),
-              Field(
-                label: l.promotion,
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: [
-                    SChip(
-                      label: l.none,
-                      selected: d.promo == null && d.discountPercent == null,
-                      onTap: () {
-                        d.promo = null;
-                        d.discountPercent = null;
-                        onChanged();
-                      },
-                    ),
-                    SChip(
-                      label: l.take3pay2,
-                      selected: d.promo?.take == 3,
-                      onTap: () {
-                        d.promo = const Promo(3, 2);
-                        d.discountPercent = null;
-                        onChanged();
-                      },
-                    ),
-                    SChip(
-                      label: l.take2pay1,
-                      selected: d.promo?.take == 2,
-                      onTap: () {
-                        d.promo = const Promo(2, 1);
-                        d.discountPercent = null;
-                        onChanged();
-                      },
-                    ),
-                    SChip(
-                      label: l.off10,
-                      selected: d.discountPercent == 10,
-                      onTap: () {
-                        d.discountPercent = 10;
-                        d.promo = null;
-                        onChanged();
-                      },
-                    ),
-                    SChip(
-                      label: l.off20,
-                      selected: d.discountPercent == 20,
-                      onTap: () {
-                        d.discountPercent = 20;
-                        d.promo = null;
-                        onChanged();
-                      },
+                      label: l.finishPurchase,
+                      variant: SButtonVariant.ghost,
+                      fullWidth: true,
+                      loading: _finishing,
+                      onPressed: session.lines.isEmpty
+                          ? null
+                          : () => _confirmFinish(brl(totals.totalCents)),
                     ),
                   ],
                 ),
               ),
-              if (ok)
-                Padding(
-                  padding: const EdgeInsets.only(top: Spacing.sm),
-                  child: Text(
-                    l.subtotal(
-                      formatBRL(
-                        lineTotal(
-                          CartLine(
-                            id: 'x',
-                            name: d.name,
-                            unit: d.unit,
-                            quantity: d.qty,
-                            unitPriceCents: d.unitPriceCents!,
-                            priceSource: d.priceSource,
-                            checked: true,
-                            promo: d.promo,
-                            discountPercent: d.discountPercent,
-                          ),
-                        ).netCents,
-                        hidden: hidden,
-                      ),
-                    ),
-                    style: Type.body.copyWith(color: c.text),
-                  ),
-                ),
-              const SizedBox(height: Spacing.sm),
-              SButton(
-                label: d.lineId != null ? l.save : l.addToCart,
-                fullWidth: true,
-                onPressed: ok ? onConfirm : null,
-              ),
-              const SizedBox(height: 4),
-              SButton(
-                label: l.cancel,
-                variant: SButtonVariant.ghost,
-                fullWidth: true,
-                onPressed: onCancel,
-              ),
-            ],
-          ),
+          ],
         ),
       ),
     );

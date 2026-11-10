@@ -1133,14 +1133,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get security => 'Segurança';
 
   @override
-  String get biometricLock => 'Pedir biometria ao abrir';
+  String get biometricLock => 'Pedir confirmação do aparelho ao abrir';
 
   @override
-  String get biometricAvailable => 'Face ID / impressão digital do aparelho.';
+  String get biometricAvailable =>
+      'Impressão digital, rosto ou bloqueio de tela do aparelho.';
 
   @override
   String get biometricNotAvailable =>
-      'Nenhuma biometria configurada neste aparelho.';
+      'Nenhuma biometria cadastrada; a confirmação usa o bloqueio de tela do aparelho.';
 
   @override
   String get pinLock => 'Proteger com PIN';
@@ -4063,4 +4064,119 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get biometricNotEnabled =>
       'Não foi possível confirmar no aparelho; o bloqueio não foi ativado. Configure um bloqueio de tela ou biometria no Android e tente de novo.';
+
+  @override
+  String get openCalendar => 'Abrir calendário';
+
+  @override
+  String get payWith => 'Forma de pagamento';
+
+  @override
+  String get payWithAccount => 'Conta ou carteira';
+
+  @override
+  String get payWithCard => 'Cartão de crédito';
+
+  @override
+  String get newAccountChip => 'Nova conta';
+
+  @override
+  String get newCardChip => 'Novo cartão';
+
+  @override
+  String get transferNeedsTwo =>
+      'A transferência precisa de duas contas. Cadastre a conta de destino.';
+
+  @override
+  String get cardPurchaseHelp =>
+      'Entra na fatura do cartão. Nenhuma conta é debitada agora; a conta só baixa quando a fatura for paga.';
+
+  @override
+  String installmentsExact(String first, String rest) {
+    return '$first na primeira e $rest nas demais';
+  }
+
+  @override
+  String get bioCanceled =>
+      'Confirmação cancelada; o bloqueio não foi ativado.';
+
+  @override
+  String get bioFailedEnable =>
+      'O aparelho não confirmou sua identidade; o bloqueio não foi ativado.';
+
+  @override
+  String get bioNotSetUp =>
+      'Este aparelho não tem bloqueio de tela nem biometria cadastrada. Cadastre nas configurações de segurança do Android e tente de novo.';
+
+  @override
+  String get bioNoHardware =>
+      'Este aparelho não oferece confirmação por biometria nem por bloqueio de tela. Use o PIN do aplicativo.';
+
+  @override
+  String get bioLockedOut =>
+      'Muitas tentativas. O Android suspendeu a biometria por um tempo; aguarde e tente de novo.';
+
+  @override
+  String get bioUnavailableNow =>
+      'O Android não conseguiu abrir a confirmação agora. Tente de novo.';
+
+  @override
+  String get bioOpenSettings => 'Abrir configurações';
+
+  @override
+  String get unlockNotSetUp =>
+      'O bloqueio de tela deste aparelho foi removido. Cadastre um bloqueio de tela ou uma biometria no Android para desbloquear.';
+
+  @override
+  String annualNoData(String year) {
+    return 'Nenhum lançamento e nenhum orçamento em $year.';
+  }
+
+  @override
+  String get annualNoDataHint =>
+      'O app só mostra o que foi registrado: um orçamento ou uma meta criados depois não valem para trás.';
+
+  @override
+  String annualGoalsOfYear(String year) {
+    return 'Metas em $year';
+  }
+
+  @override
+  String annualNoGoalsInYear(String year) {
+    return 'Nenhuma meta existia em $year.';
+  }
+
+  @override
+  String annualGoalPast(String name, String saved, String total) {
+    return '$name: $saved guardados no ano · $total acumulados até dezembro';
+  }
+
+  @override
+  String annualGoalByDate(
+    String name,
+    String remaining,
+    String value,
+    String date,
+  ) {
+    return '$name: faltam $remaining · $value/mês até $date';
+  }
+
+  @override
+  String annualGoalByYearEnd(String name, String remaining, String value) {
+    return '$name: faltam $remaining · $value/mês para concluir até dezembro (meta sem prazo)';
+  }
+
+  @override
+  String annualGoalFutureDate(String name, String remaining, String date) {
+    return '$name: faltam $remaining hoje · prazo em $date';
+  }
+
+  @override
+  String annualGoalFutureOpen(String name, String remaining) {
+    return '$name: faltam $remaining hoje · sem prazo definido';
+  }
+
+  @override
+  String get annualFutureNote =>
+      'Ano futuro: só aparece o que já está previsto nos lançamentos e o orçamento que estiver em vigor.';
 }

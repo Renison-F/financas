@@ -7,6 +7,7 @@ import '../../domain/money/money.dart';
 import '../icons.dart';
 import 'buttons.dart';
 import 'chips.dart';
+import 'sheets.dart';
 
 class Field extends StatelessWidget {
   const Field({super.key, required this.label, required this.child, this.help});
@@ -265,7 +266,8 @@ class _CentsFormatter extends TextInputFormatter {
 String fmtDateBR(String iso) =>
     '${iso.substring(8, 10)}/${iso.substring(5, 7)}/${iso.substring(0, 4)}';
 
-/// Dependency-free date field: quick chips (today, yesterday, tomorrow) + typed dd/mm/aaaa.
+/// Date field: quick chips (today, yesterday, tomorrow), a calendar and typed dd/mm/aaaa. Past and
+/// future dates are both allowed: an old debt and a far due date are legitimate.
 class DateField extends StatefulWidget {
   const DateField({
     super.key,
@@ -277,12 +279,14 @@ class DateField extends StatefulWidget {
     required this.yesterdayLabel,
     required this.tomorrowLabel,
     required this.invalidLabel,
+    required this.calendarLabel,
   });
   final String label;
   final String value;
   final ValueChanged<String> onChanged;
   final String today;
   final String todayLabel, yesterdayLabel, tomorrowLabel, invalidLabel;
+  final String calendarLabel;
   @override
   State<DateField> createState() => _DateFieldState();
 }
@@ -296,6 +300,42 @@ class _DateFieldState extends State<DateField> {
     widget.onChanged(iso);
     _c.text = fmtDateBR(iso);
     setState(() => _err = null);
+  }
+
+  @override
+  void didUpdateWidget(DateField old) {
+    super.didUpdateWidget(old);
+    // The value changed from outside (another control of the form): show it, unless the user is in
+    // the middle of typing this very date.
+    if (widget.value != old.value && _c.text != fmtDateBR(widget.value)) {
+      final digits = _c.text.replaceAll(RegExp(r'\D'), '');
+      if (digits.length == 8 || digits.isEmpty) {
+        _c.text = fmtDateBR(widget.value);
+      }
+    }
+  }
+
+  static const _first = 2000, _last = 2100;
+
+  Future<void> _pick() async {
+    final v = widget.value;
+    var initial = DateTime(
+      int.parse(v.substring(0, 4)),
+      int.parse(v.substring(5, 7)),
+      int.parse(v.substring(8, 10)),
+    );
+    if (initial.year < _first) initial = DateTime(_first);
+    if (initial.year > _last) initial = DateTime(_last, 12, 31);
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: initial,
+      firstDate: DateTime(_first),
+      lastDate: DateTime(_last, 12, 31),
+      helpText: widget.label,
+    );
+    if (picked == null || !mounted) return;
+    String two(int n) => n.toString().padLeft(2, '0');
+    _set('${picked.year}-${two(picked.month)}-${two(picked.day)}');
   }
 
   void _typed(String t) {
@@ -351,6 +391,11 @@ class _DateFieldState extends State<DateField> {
             error: _err,
             semanticLabel: widget.label,
             inputFormatters: [_DateMaskFormatter()],
+            suffix: IconButton(
+              tooltip: widget.calendarLabel,
+              onPressed: _pick,
+              icon: SIcon(SIconName.calendar, color: context.colors.primary),
+            ),
           ),
         ],
       ),
@@ -509,14 +554,14 @@ Future<bool> confirmSheet(
   bool destructive = true,
 }) async {
   final c = context.colors;
-  final r = await showModalBottomSheet<bool>(
-    context: context,
-    builder: (ctx) => Padding(
-      padding: EdgeInsets.fromLTRB(
+  final r = await showSSheet<bool>(
+    context,
+    builder: (ctx) => SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(
         Spacing.lg,
         Spacing.xs,
         Spacing.lg,
-        Spacing.lg + MediaQuery.paddingOf(ctx).bottom,
+        Spacing.lg,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

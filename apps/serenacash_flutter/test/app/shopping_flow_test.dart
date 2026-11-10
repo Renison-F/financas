@@ -129,17 +129,19 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Resumo'), findsNothing);
 
-      // with an item still in the confirmation panel, the sheet warns it will be left out
+      // the review of an item is a screen of its own: cancelling it leaves the cart as it was
       await tester.tap(find.text('Manual'));
       await tester.pumpAndSettle();
       expect(find.text('Confirmar item'), findsOneWidget);
-      await tester.ensureVisible(find.text('Finalizar compra'));
+      expect(find.text('Finalizar compra'), findsNothing);
+      await tester.tap(find.text('Cancelar'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Finalizar compra'));
-      await tester.pumpAndSettle();
-      expect(find.textContaining('ficará de fora'), findsOneWidget);
+      expect(find.text('Confirmar item'), findsNothing);
+      expect(find.textContaining('35,39'), findsWidgets);
 
       // finish → summary → register expense (idempotent)
+      await tester.tap(find.text('Finalizar compra'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Finalizar'));
       await tester.pumpAndSettle();
       expect(find.text('Resumo'), findsOneWidget);
@@ -190,6 +192,7 @@ void main() {
         find.text('Produto novo: informe o nome e o preço da etiqueta.'),
         findsOneWidget,
       );
+      // a reading that arrives while an item is under review waits for that review to close
       container
           .read(scanResultProvider.notifier)
           .set(
@@ -200,6 +203,9 @@ void main() {
               ]),
             ),
           );
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Confiança da leitura'), findsNothing);
+      await tester.tap(find.text('Cancelar'));
       await tester.pumpAndSettle();
       expect(find.textContaining('Confiança da leitura'), findsOneWidget);
     },

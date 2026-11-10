@@ -238,6 +238,7 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen> {
                 yesterdayLabel: l.yesterday,
                 tomorrowLabel: l.tomorrow,
                 invalidLabel: l.invalidDate,
+                calendarLabel: l.openCalendar,
               ),
               const SizedBox(height: Spacing.sm),
               SButton(
@@ -439,6 +440,7 @@ class _GoalFormScreenState extends ConsumerState<GoalFormScreen> {
             yesterdayLabel: l.yesterday,
             tomorrowLabel: l.tomorrow,
             invalidLabel: l.invalidDate,
+            calendarLabel: l.openCalendar,
           ),
         Field(
           label: l.whereMoney,

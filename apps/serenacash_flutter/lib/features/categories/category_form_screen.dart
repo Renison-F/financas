@@ -138,10 +138,8 @@ class _CategoryFormScreenState extends ConsumerState<CategoryFormScreen> {
     final e = existing!;
     final l = context.l10n;
     final messenger = ScaffoldMessenger.maybeOf(context);
-    final decision = await showModalBottomSheet<_DeleteDecision>(
-      context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
+    final decision = await showSSheet<_DeleteDecision>(
+      context,
       builder: (_) => _DeleteSheet(category: e),
     );
     if (decision == null) return;
@@ -403,13 +401,8 @@ class _DeleteSheetState extends ConsumerState<_DeleteSheet> {
       ),
     );
 
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-        Spacing.md,
-        0,
-        Spacing.md,
-        Spacing.md + MediaQuery.viewInsetsOf(context).bottom,
-      ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(Spacing.md, 0, Spacing.md, Spacing.md),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,

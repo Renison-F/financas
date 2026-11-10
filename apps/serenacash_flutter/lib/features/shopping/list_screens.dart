@@ -443,9 +443,8 @@ class _ListDetailScreenState extends ConsumerState<ListDetailScreen> {
     );
     var price = it.estimatedUnitPriceCents;
     var unit = it.unit;
-    await showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
+    await showSSheet<void>(
+      context,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setS) => Padding(
           padding: EdgeInsets.fromLTRB(

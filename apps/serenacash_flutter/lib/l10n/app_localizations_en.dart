@@ -1129,13 +1129,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get security => 'Security';
 
   @override
-  String get biometricLock => 'Ask for biometrics on open';
+  String get biometricLock => 'Ask for device confirmation on open';
 
   @override
-  String get biometricAvailable => 'Face ID / fingerprint of the device.';
+  String get biometricAvailable =>
+      'Fingerprint, face or the device screen lock.';
 
   @override
-  String get biometricNotAvailable => 'No biometrics set up on this device.';
+  String get biometricNotAvailable =>
+      'No biometrics enrolled; the confirmation uses the device screen lock.';
 
   @override
   String get pinLock => 'Protect with PIN';
@@ -4051,4 +4053,119 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get biometricNotEnabled =>
       'Could not confirm on the device; the lock was not turned on. Set up a screen lock or biometrics in Android and try again.';
+
+  @override
+  String get openCalendar => 'Open calendar';
+
+  @override
+  String get payWith => 'Paid with';
+
+  @override
+  String get payWithAccount => 'Account or wallet';
+
+  @override
+  String get payWithCard => 'Credit card';
+
+  @override
+  String get newAccountChip => 'New account';
+
+  @override
+  String get newCardChip => 'New card';
+
+  @override
+  String get transferNeedsTwo =>
+      'A transfer needs two accounts. Add the destination account.';
+
+  @override
+  String get cardPurchaseHelp =>
+      'Goes to the card statement. No account is charged now; the account is only charged when the statement is paid.';
+
+  @override
+  String installmentsExact(String first, String rest) {
+    return '$first on the first and $rest on the others';
+  }
+
+  @override
+  String get bioCanceled =>
+      'Confirmation cancelled; the lock was not turned on.';
+
+  @override
+  String get bioFailedEnable =>
+      'The device did not confirm your identity; the lock was not turned on.';
+
+  @override
+  String get bioNotSetUp =>
+      'This device has no screen lock and no biometrics set up. Set one up in Android\'s security settings and try again.';
+
+  @override
+  String get bioNoHardware =>
+      'This device offers neither biometrics nor a screen lock. Use the app PIN.';
+
+  @override
+  String get bioLockedOut =>
+      'Too many attempts. Android suspended biometrics for a while; wait and try again.';
+
+  @override
+  String get bioUnavailableNow =>
+      'Android could not open the confirmation now. Try again.';
+
+  @override
+  String get bioOpenSettings => 'Open settings';
+
+  @override
+  String get unlockNotSetUp =>
+      'This device\'s screen lock was removed. Set up a screen lock or biometrics in Android to unlock.';
+
+  @override
+  String annualNoData(String year) {
+    return 'No entries and no budget in $year.';
+  }
+
+  @override
+  String get annualNoDataHint =>
+      'The app only shows what was recorded: a budget or a goal created later does not apply backwards.';
+
+  @override
+  String annualGoalsOfYear(String year) {
+    return 'Goals in $year';
+  }
+
+  @override
+  String annualNoGoalsInYear(String year) {
+    return 'No goal existed in $year.';
+  }
+
+  @override
+  String annualGoalPast(String name, String saved, String total) {
+    return '$name: $saved put aside in the year · $total accumulated by December';
+  }
+
+  @override
+  String annualGoalByDate(
+    String name,
+    String remaining,
+    String value,
+    String date,
+  ) {
+    return '$name: $remaining to go · $value/month until $date';
+  }
+
+  @override
+  String annualGoalByYearEnd(String name, String remaining, String value) {
+    return '$name: $remaining to go · $value/month to finish by December (goal without a deadline)';
+  }
+
+  @override
+  String annualGoalFutureDate(String name, String remaining, String date) {
+    return '$name: $remaining to go today · due $date';
+  }
+
+  @override
+  String annualGoalFutureOpen(String name, String remaining) {
+    return '$name: $remaining to go today · no deadline';
+  }
+
+  @override
+  String get annualFutureNote =>
+      'Future year: only what is already planned in the entries and the budget in force are shown.';
 }

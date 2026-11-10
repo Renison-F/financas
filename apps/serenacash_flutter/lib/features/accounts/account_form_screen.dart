@@ -133,7 +133,7 @@ class _AccountFormScreenState extends ConsumerState<AccountFormScreen> {
       unawaited(context.push('/paywall?feature=unlimited_accounts'));
       return;
     }
-    await ref
+    final saved = await ref
         .read(appControllerProvider.notifier)
         .saveAccount(
           id: existing?.id,
@@ -144,7 +144,8 @@ class _AccountFormScreenState extends ConsumerState<AccountFormScreen> {
           includeInAvailability: _include,
           color: _color,
         );
-    if (mounted) context.pop();
+    // Whoever opened this form on the way (a transfer, for instance) gets the account back.
+    if (mounted) context.pop(saved.id);
   }
 
   @override
@@ -199,6 +200,7 @@ class _AccountFormScreenState extends ConsumerState<AccountFormScreen> {
           yesterdayLabel: l.yesterday,
           tomorrowLabel: l.tomorrow,
           invalidLabel: l.invalidDate,
+          calendarLabel: l.openCalendar,
         ),
         ToggleRow(
           label: l.includeInAvailability,

@@ -379,6 +379,7 @@ class _CardDetailScreenState extends ConsumerState<CardDetailScreen> {
                   yesterdayLabel: l.yesterday,
                   tomorrowLabel: l.tomorrow,
                   invalidLabel: l.invalidDate,
+                  calendarLabel: l.openCalendar,
                 ),
                 const SizedBox(height: Spacing.sm),
                 SButton(
@@ -491,7 +492,7 @@ class _CardFormScreenState extends ConsumerState<CardFormScreen> {
       unawaited(context.push('/paywall?feature=unlimited_cards'));
       return;
     }
-    await ref
+    final saved = await ref
         .read(appControllerProvider.notifier)
         .saveCard(
           id: existing?.id,
@@ -501,7 +502,7 @@ class _CardFormScreenState extends ConsumerState<CardFormScreen> {
           dueDay: dd,
           defaultPaymentAccountId: _accountId,
         );
-    if (mounted) context.pop();
+    if (mounted) context.pop(saved.id);
   }
 
   @override
