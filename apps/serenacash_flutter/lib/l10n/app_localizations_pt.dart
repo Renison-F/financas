@@ -4880,12 +4880,25 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String dailyAverageCalendar(int n) {
-    return 'Média por dia corrido ($n dias)';
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n dias',
+      one: '1 dia',
+    );
+    return 'Média por dia corrido ($_temp0)';
   }
 
   @override
   String dailyAverageSpending(int n) {
-    return 'Média por dia com gasto ($n dias)';
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n dias',
+      one: '1 dia',
+      zero: 'nenhum dia',
+    );
+    return 'Média por dia com gasto ($_temp0)';
   }
 
   @override
@@ -4894,7 +4907,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String dailyPreviousMonth(int n, String value) {
-    return 'Nos mesmos $n dias do mês anterior: $value gastos.';
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Nos mesmos $n dias',
+      one: 'No mesmo dia',
+    );
+    return '$_temp0 do mês anterior: $value gastos.';
   }
 
   @override
@@ -4975,7 +4994,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String dailyLimitHistory(int within, int total) {
-    return 'Neste mês: dentro do limite em $within de $total dias com limite em vigor.';
+    String _temp0 = intl.Intl.pluralLogic(
+      total,
+      locale: localeName,
+      other: '$total dias',
+      one: '1 dia',
+    );
+    return 'Neste mês: dentro do limite em $within de $_temp0 com limite em vigor.';
   }
 
   @override
@@ -5551,7 +5576,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String dailyPace(String value, int days) {
-    return 'Se cada dia que falta custar a média dos dias até aqui, o mês soma $value ($days dias restantes). É uma conta sobre o que já aconteceu, não uma previsão.';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dias restantes',
+      one: '1 dia restante',
+    );
+    return 'Se cada dia que falta custar a média dos dias até aqui, o mês soma $value ($_temp0). É uma conta sobre o que já aconteceu, não uma previsão.';
   }
 
   @override

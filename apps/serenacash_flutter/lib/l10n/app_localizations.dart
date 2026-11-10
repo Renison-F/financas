@@ -8169,13 +8169,13 @@ abstract class AppLocalizations {
   /// No description provided for @dailyAverageCalendar.
   ///
   /// In pt, this message translates to:
-  /// **'Média por dia corrido ({n} dias)'**
+  /// **'Média por dia corrido ({n, plural, =1{1 dia} other{{n} dias}})'**
   String dailyAverageCalendar(int n);
 
   /// No description provided for @dailyAverageSpending.
   ///
   /// In pt, this message translates to:
-  /// **'Média por dia com gasto ({n} dias)'**
+  /// **'Média por dia com gasto ({n, plural, =0{nenhum dia} =1{1 dia} other{{n} dias}})'**
   String dailyAverageSpending(int n);
 
   /// No description provided for @dailyNoPreviousMonth.
@@ -8187,7 +8187,7 @@ abstract class AppLocalizations {
   /// No description provided for @dailyPreviousMonth.
   ///
   /// In pt, this message translates to:
-  /// **'Nos mesmos {n} dias do mês anterior: {value} gastos.'**
+  /// **'{n, plural, =1{No mesmo dia} other{Nos mesmos {n} dias}} do mês anterior: {value} gastos.'**
   String dailyPreviousMonth(int n, String value);
 
   /// No description provided for @dailyCashflow.
@@ -8313,7 +8313,7 @@ abstract class AppLocalizations {
   /// No description provided for @dailyLimitHistory.
   ///
   /// In pt, this message translates to:
-  /// **'Neste mês: dentro do limite em {within} de {total} dias com limite em vigor.'**
+  /// **'Neste mês: dentro do limite em {within} de {total, plural, =1{1 dia} other{{total} dias}} com limite em vigor.'**
   String dailyLimitHistory(int within, int total);
 
   /// No description provided for @dailyLimitNew.
@@ -9297,7 +9297,7 @@ abstract class AppLocalizations {
   /// No description provided for @dailyPace.
   ///
   /// In pt, this message translates to:
-  /// **'Se cada dia que falta custar a média dos dias até aqui, o mês soma {value} ({days} dias restantes). É uma conta sobre o que já aconteceu, não uma previsão.'**
+  /// **'Se cada dia que falta custar a média dos dias até aqui, o mês soma {value} ({days, plural, =1{1 dia restante} other{{days} dias restantes}}). É uma conta sobre o que já aconteceu, não uma previsão.'**
   String dailyPace(String value, int days);
 
   /// No description provided for @dailyViewPlanned.

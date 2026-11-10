@@ -4870,12 +4870,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String dailyAverageCalendar(int n) {
-    return 'Average per calendar day ($n days)';
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n days',
+      one: '1 day',
+    );
+    return 'Average per calendar day ($_temp0)';
   }
 
   @override
   String dailyAverageSpending(int n) {
-    return 'Average per day with spending ($n days)';
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n days',
+      one: '1 day',
+      zero: 'no day',
+    );
+    return 'Average per day with spending ($_temp0)';
   }
 
   @override
@@ -4884,7 +4897,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String dailyPreviousMonth(int n, String value) {
-    return 'In the same $n days of the previous month: $value spent.';
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'In the same $n days',
+      one: 'On the same day',
+    );
+    return '$_temp0 of the previous month: $value spent.';
   }
 
   @override
@@ -4965,7 +4984,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String dailyLimitHistory(int within, int total) {
-    return 'This month: within the limit on $within of $total days with a limit in force.';
+    String _temp0 = intl.Intl.pluralLogic(
+      total,
+      locale: localeName,
+      other: '$total days',
+      one: '1 day',
+    );
+    return 'This month: within the limit on $within of $_temp0 with a limit in force.';
   }
 
   @override
@@ -5541,7 +5566,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String dailyPace(String value, int days) {
-    return 'If each remaining day costs the average of the days so far, the month adds up to $value ($days days left). It is arithmetic on what already happened, not a forecast.';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days left',
+      one: '1 day left',
+    );
+    return 'If each remaining day costs the average of the days so far, the month adds up to $value ($_temp0). It is arithmetic on what already happened, not a forecast.';
   }
 
   @override
