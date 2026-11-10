@@ -250,6 +250,11 @@ class _PeriodBalanceCardState extends State<PeriodBalanceCard> {
               ],
             ),
           ),
+          if (_flowView)
+            Text(
+              l.timelineFlowLegend,
+              style: Type.caption.copyWith(color: c.textMuted),
+            ),
           const SizedBox(height: 6),
           if (selected == null)
             Text(

@@ -9605,6 +9605,12 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'A consulta a um catálogo aberto pela internet está desligada. Ela pode ser ligada nas Configurações.'**
   String get catalogOffHint;
+
+  /// No description provided for @timelineFlowLegend.
+  ///
+  /// In pt, this message translates to:
+  /// **'Acima da linha, o que entrou; abaixo, o que saiu. Barra cheia: aconteceu. Barra só com contorno: previsto.'**
+  String get timelineFlowLegend;
 }
 
 class _AppLocalizationsDelegate

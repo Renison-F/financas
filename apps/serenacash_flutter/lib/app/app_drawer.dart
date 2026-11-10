@@ -15,7 +15,7 @@ import 'theme/tokens.dart';
 
 /// Version and build number as in pubspec.yaml, shown in the menu so the installed build can be told
 /// apart without a computer (a test checks the two stay equal).
-const appVersion = '0.2.0 (build 3)';
+const appVersion = '0.2.0 (build 4)';
 
 class _Item {
   const _Item(this.icon, this.label, {this.route, this.tab});

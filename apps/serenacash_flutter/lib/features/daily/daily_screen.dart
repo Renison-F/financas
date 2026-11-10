@@ -315,7 +315,11 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      l.dailyMonthOf(monthLabelLong(month, locale)),
+                      l.dailyMonthOf(
+                        locale.startsWith('pt')
+                            ? monthLabelLong(month, locale).toLowerCase()
+                            : monthLabelLong(month, locale),
+                      ),
                       textAlign: TextAlign.center,
                       style: Type.rowTitle.copyWith(color: c.text),
                     ),

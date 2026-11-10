@@ -3070,5 +3070,6 @@
   "@catalogNotFound": {"placeholders": {"source": {"type": "String"}}},
   "catalogFailed": "Não foi possível consultar o catálogo {source} agora (sem internet ou serviço fora do ar). Informe o nome.",
   "@catalogFailed": {"placeholders": {"source": {"type": "String"}}},
-  "catalogOffHint": "A consulta a um catálogo aberto pela internet está desligada. Ela pode ser ligada nas Configurações."
+  "catalogOffHint": "A consulta a um catálogo aberto pela internet está desligada. Ela pode ser ligada nas Configurações.",
+  "timelineFlowLegend": "Acima da linha, o que entrou; abaixo, o que saiu. Barra cheia: aconteceu. Barra só com contorno: previsto."
 }

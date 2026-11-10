@@ -46,6 +46,10 @@ class HomeScreen extends ConsumerWidget {
     // The arrows of the header look at another month without changing what is saved: the app
     // always opens on the present.
     final thisMonth = monthKeyOf(data.today);
+    // In Portuguese a month is written in lower case inside a sentence ("voltar para novembro").
+    String inSentence(String month) => locale.startsWith('pt')
+        ? month[0].toLowerCase() + month.substring(1)
+        : month;
     final elsewhere = byMonth && data.month != thisMonth;
     void show(String month) => ref
         .read(homeMonthProvider.notifier)
@@ -115,11 +119,13 @@ class HomeScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  l.homeOtherMonthNote(period),
+                  l.homeOtherMonthNote(inSentence(period)),
                   style: Type.caption.copyWith(color: c.textMuted),
                 ),
                 SButton(
-                  label: l.homeBackToToday(monthLabelLong(thisMonth, locale)),
+                  label: l.homeBackToToday(
+                    inSentence(monthLabelLong(thisMonth, locale)),
+                  ),
                   variant: SButtonVariant.ghost,
                   compact: true,
                   onPressed: () => show(thisMonth),

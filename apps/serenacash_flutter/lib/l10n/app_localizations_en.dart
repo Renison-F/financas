@@ -5738,4 +5738,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get catalogOffHint =>
       'Looking products up in an open catalogue on the internet is off. It can be turned on in Settings.';
+
+  @override
+  String get timelineFlowLegend =>
+      'Above the line, what came in; below it, what went out. Filled bar: happened. Outlined bar: planned.';
 }

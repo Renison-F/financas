@@ -5748,4 +5748,8 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get catalogOffHint =>
       'A consulta a um catálogo aberto pela internet está desligada. Ela pode ser ligada nas Configurações.';
+
+  @override
+  String get timelineFlowLegend =>
+      'Acima da linha, o que entrou; abaixo, o que saiu. Barra cheia: aconteceu. Barra só com contorno: previsto.';
 }

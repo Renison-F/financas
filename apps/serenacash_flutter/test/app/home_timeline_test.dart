@@ -208,7 +208,7 @@ void main() {
         reason: 'os números são os de outubro',
       );
       expect(
-        find.text(_l.homeOtherMonthNote('Outubro de 2026')),
+        find.text(_l.homeOtherMonthNote('outubro de 2026')),
         findsOneWidget,
       );
       // the saved layout is untouched: this is a look, not a setting
@@ -224,7 +224,7 @@ void main() {
       expect(find.text('Dezembro de 2026'), findsOneWidget);
       expect(c.read(dashboardDataProvider)!.month, '2026-12');
 
-      await tester.tap(find.text(_l.homeBackToToday('Novembro de 2026')));
+      await tester.tap(find.text(_l.homeBackToToday('novembro de 2026')));
       await tester.pumpAndSettle();
       expect(find.text('Novembro de 2026'), findsOneWidget);
       expect(c.read(homeMonthProvider), isNull);

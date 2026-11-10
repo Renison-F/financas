@@ -260,7 +260,7 @@ class _Verdict extends StatelessWidget {
 }
 
 /// Hue, saturation and lightness sliders plus the colour code, for one colour.
-class _ColorControls extends StatelessWidget {
+class _ColorControls extends StatefulWidget {
   const _ColorControls({
     required this.color,
     required this.hex,
@@ -273,10 +273,37 @@ class _ColorControls extends StatelessWidget {
   final void Function(Color color, {bool fromField}) onChanged;
 
   @override
+  State<_ColorControls> createState() => _ColorControlsState();
+}
+
+class _ColorControlsState extends State<_ColorControls> {
+  // Hue and saturation are kept here, not read back from the colour: near white or black a colour
+  // no longer says what its hue was, and the sliders would jump while the user drags lightness.
+  late HSLColor _hsl = HSLColor.fromColor(widget.color);
+
+  @override
+  void didUpdateWidget(_ColorControls old) {
+    super.didUpdateWidget(old);
+    // A colour that came from outside (the code typed, the correction, undo) replaces the sliders.
+    if (_hsl.toColor() != widget.color) {
+      _hsl = HSLColor.fromColor(widget.color);
+    }
+  }
+
+  void _set(HSLColor next) {
+    setState(() => _hsl = next);
+    widget.onChanged(next.toColor());
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l = context.l10n;
     final c = context.colors;
-    final hsl = HSLColor.fromColor(color);
+    final hsl = _hsl;
+    final color = widget.color;
+    final hex = widget.hex;
+    final hexLabel = widget.hexLabel;
+    final onChanged = widget.onChanged;
     Widget slider(
       String label,
       double value,
@@ -290,12 +317,14 @@ class _ColorControls extends StatelessWidget {
           child: Text(label, style: Type.rowMeta.copyWith(color: c.textMuted)),
         ),
         Expanded(
+          // One control for a screen reader: its name and its value, in the unit shown.
           child: Semantics(
+            container: true,
             label: label,
-            value: shown,
             child: Slider(
               value: value.clamp(0, max),
               max: max,
+              semanticFormatterCallback: (_) => shown,
               onChanged: onValue,
             ),
           ),
@@ -354,21 +383,21 @@ class _ColorControls extends StatelessWidget {
           hsl.hue,
           360,
           '${hsl.hue.round()}°',
-          (v) => onChanged(hsl.withHue(v.clamp(0, 359.99)).toColor()),
+          (v) => _set(hsl.withHue(v.clamp(0, 359.99))),
         ),
         slider(
           l.themeSaturation,
           hsl.saturation * 100,
           100,
           '${(hsl.saturation * 100).round()}%',
-          (v) => onChanged(hsl.withSaturation(v / 100).toColor()),
+          (v) => _set(hsl.withSaturation(v / 100)),
         ),
         slider(
           l.themeLightness,
           hsl.lightness * 100,
           100,
           '${(hsl.lightness * 100).round()}%',
-          (v) => onChanged(hsl.withLightness(v / 100).toColor()),
+          (v) => _set(hsl.withLightness(v / 100)),
         ),
       ],
     );

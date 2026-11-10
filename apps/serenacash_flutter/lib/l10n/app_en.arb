@@ -3070,5 +3070,6 @@
   "@catalogNotFound": {"placeholders": {"source": {"type": "String"}}},
   "catalogFailed": "The catalogue {source} could not be reached now (no internet or service down). Enter the name.",
   "@catalogFailed": {"placeholders": {"source": {"type": "String"}}},
-  "catalogOffHint": "Looking products up in an open catalogue on the internet is off. It can be turned on in Settings."
+  "catalogOffHint": "Looking products up in an open catalogue on the internet is off. It can be turned on in Settings.",
+  "timelineFlowLegend": "Above the line, what came in; below it, what went out. Filled bar: happened. Outlined bar: planned."
 }
